@@ -1,0 +1,1450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gastrointestinal Drugs Walkthrough</title>
+<meta name="description" content="Step-by-step animated walkthrough of gastrointestinal drugs: the parietal cell and acid reducers, lining protectors, H. pylori therapy, antiemetics, laxatives, antidiarrheals, IBD drugs and pancreatic enzymes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3785;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#2F7FC1;--act3:#C4644F;--act4:#2E8A7A;--act5:#A04E8C;--act6:#D98A1C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF1F6;--grid:#D5DAE6;
+  --drug:#5B3FC4;--receptor:#1E8A84;--ligand:#D08A12;--blocked:#8B9094;
+  --na:#D9A015;--k:#B03A8C;--cl:#2E8A4A;--h2o:#3F8FD0;--ca:#5E7183;--glu:#C77A12;--urate:#9A6A12;
+  --blood:#C0392B;--plasma:#F4D9D2;--vessel:#C4644F;--smooth:#D9A07A;--smooth-edge:#A8704A;--heart:#B5303A;--heart-edge:#7E1F27;
+  --tubule:#E9DCCB;--tubule-edge:#A88B6A;--lumen:#FBF6EA;--urine:#E8C64A;--peri:#F3D6D0;
+  --renin:#2F7FC1;--angio:#C4644F;--aldo:#D98A1C;--brady:#A04E8C;--symp:#D98A1C;--ace:#2E8A7A;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --scr:#0E1A1F;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#CFE5F1;--glass:#DCE8EE;--glass-edge:#7F99A6;--fruit:#E0784A;--fruit-in:#F2B6A0;
+  --acid:#D2364B;--base:#2F7FC1;--mucus:#A7D8C2;--mucus-edge:#3F8A6A;--stomach:#EDB9AB;--stomach-edge:#B0685A;--gut:#EFCDB4;--gut-edge:#B47E5E;--stool:#8A5A34;
+  --hist:#D08A12;--ach:#2E8A4A;--gastrin:#B03A8C;--pump:#1E8A84;--pg:#D9603A;--sero:#C2417A;--dopa:#2F7FC1;--subp:#9A6A12;--cb:#5E8A2A;--musc:#2E8A4A;--h1:#D08A12;
+  --nh3:#6E8A1E;--bact:#7A9A3A;--coat:#B8A27F;--fat:#E2B93B;--bone:#E9E2D0;--bone-edge:#9C9078;--nerve:#C77A12;--brain:#E3C6DA;--brain-edge:#9A5A86;--cell:#F3E3D6;--cell-edge:#B48F78;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --acid:#F07085;--base:#6FB3EC;--mucus:#2F5A48;--mucus-edge:#7FCBA8;--stomach:#5A3530;--stomach-edge:#E09A8A;--gut:#4A3A2E;--gut-edge:#D0A07E;--stool:#C08A5A;
+  --hist:#F2B33B;--ach:#6BC293;--gastrin:#E07AC4;--pump:#5CC9C0;--pg:#F2936F;--sero:#EE7FAE;--dopa:#6FB3EC;--subp:#D9B070;--cb:#A5CF6A;--musc:#6BC293;--h1:#F2B33B;
+  --nh3:#B5CF5A;--bact:#A9C96A;--coat:#9C8A6A;--fat:#E8C64A;--bone:#4A463C;--bone-edge:#C9BEA4;--nerve:#F2A93B;--brain:#4A3346;--brain-edge:#D9A0C8;--cell:#3E3229;--cell-edge:#C9A28A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --acid:#F07085;--base:#6FB3EC;--mucus:#2F5A48;--mucus-edge:#7FCBA8;--stomach:#5A3530;--stomach-edge:#E09A8A;--gut:#4A3A2E;--gut-edge:#D0A07E;--stool:#C08A5A;
+  --hist:#F2B33B;--ach:#6BC293;--gastrin:#E07AC4;--pump:#5CC9C0;--pg:#F2936F;--sero:#EE7FAE;--dopa:#6FB3EC;--subp:#D9B070;--cb:#A5CF6A;--musc:#6BC293;--h1:#F2B33B;
+  --nh3:#B5CF5A;--bact:#A9C96A;--coat:#9C8A6A;--fat:#E8C64A;--bone:#4A463C;--bone-edge:#C9BEA4;--nerve:#F2A93B;--brain:#4A3346;--brain-edge:#D9A0C8;--cell:#3E3229;--cell-edge:#C9A28A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 11 &middot; Gastrointestinal drugs</div>
+    <h1>Gastrointestinal Drugs Walkthrough</h1>
+    <p class="sub">Watch how acid reducers, lining protectors, antiemetics, laxatives and antidiarrheals work, so their side effects and nursing checks make sense. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Use the left and right arrow keys to move between steps. Practice next in the <a href="GI-Lab.html">Gastrointestinal Drugs Lab</a>. Drugs are taught by class with one generic prototype each; this page gives no doses. Molecules, cells and organs are drawn as simple shapes, and changes that take hours or weeks are sped up so you can watch them. Always follow the prescriber, the label and your facility's protocols.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "receptor", "ligand", "blocked", "na", "k", "cl", "h2o", "ca", "glu", "urate", "blood", "plasma", "vessel", "smooth", "smooth-edge", "heart", "heart-edge", "tubule", "tubule-edge", "lumen", "urine", "peri", "renin", "angio", "aldo", "brady", "symp", "ace", "skin", "skin-edge", "body", "body-edge", "scr", "scr-ink", "scr-soft", "water", "glass", "glass-edge", "fruit", "fruit-in", "acid", "base", "mucus", "mucus-edge", "stomach", "stomach-edge", "gut", "gut-edge", "stool", "hist", "ach", "gastrin", "pump", "pg", "sero", "dopa", "subp", "cb", "musc", "h1", "nh3", "bact", "coat", "fat", "bone", "bone-edge", "nerve", "brain", "brain-edge", "cell", "cell-edge"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= module 7 drawing helpers ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.9),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* ion token. kinds: na k cl ca h2o glu urate */
+const IONLAB={na:"Na⁺",k:"K⁺",cl:"Cl⁻",ca:"Ca²⁺",glu:"Glu",urate:"UA"};
+function ion(kind,x,y,r,o){o=o||{};r=r||8;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  if(kind==="h2o"){ctx.beginPath();ctx.moveTo(x,y-r*1.3);ctx.bezierCurveTo(x+r*.95,y-r*.15,x+r*.95,y+r*.9,x,y+r*.9);ctx.bezierCurveTo(x-r*.95,y+r*.9,x-r*.95,y-r*.15,x,y-r*1.3);ctx.closePath();
+    ctx.fillStyle=C.h2o;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1;ctx.stroke();circ(x-r*.3,y,r*.22,hexA("#ffffff",.55))}
+  else{const col=C[kind]||C.ink;circ(x,y,r,col,hexA(C.ink,.45),1);
+    if(o.lab!==false&&r>=7){const t=IONLAB[kind]||"";ctx.font=`700 ${r>=10?10.5:Math.max(8,r*1.05)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(t.replace(/[⁺⁻²]/g,""),x,y+.5)}}
+  ctx.restore()}
+/* drug molecule: indigo hexagon with a short label */
+function drugMol(x,y,s,lab,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  hexPath(0,0,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.5),1.3);hexPath(0,0,s*.55,Math.PI/6);ctx.strokeStyle=hexA(inkOn(o.col||C.drug),.5);ctx.lineWidth=1;ctx.stroke();ctx.restore();
+  if(lab)label(x,y+s+11,lab,{size:12,weight:700,color:C.drug,a:o.a})}
+/* natural signal molecule (ligand): amber diamond */
+function ligand(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s,0);ctx.lineTo(0,s);ctx.lineTo(-s,0);ctx.closePath();fillStroke(o.col||C.ligand,hexA(C.ink,.5),1.2);ctx.restore()}
+/* heart that beats. o.hr beats/min, o.force 0..1.5, o.label */
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.35,y+s*.1,x-s*1.05,y-s*1.05,x,y-s*.45);ctx.bezierCurveTo(x+s*1.05,y-s*1.05,x+s*1.35,y+s*.1,x,y+s*.95);ctx.closePath()}
+function beatPhase(T,hr){return P(T*(hr||75)/60,1)}
+function heart(x,y,s,T,o){o=o||{};const hr=o.hr||75,f=o.force==null?1:o.force;const ph=beatPhase(T,hr);const sq=Math.exp(-Math.pow((ph-.18)/.09,2));const k=1-.09*f*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);ctx.fillStyle=o.col||C.heart;ctx.fill();ctx.strokeStyle=C["heart-edge"];ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-s*.15,-s*.5);ctx.quadraticCurveTo(s*.1,s*.1,-s*.05,s*.6);ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.6;ctx.stroke();
+  rr(-s*.28,-s*1.1,s*.22,s*.5,s*.1);ctx.fillStyle=o.col||C.heart;ctx.fill();rr(s*.08,-s*1.15,s*.26,s*.55,s*.12);ctx.fill();ctx.restore();
+  if(sq>.3&&o.pulse!==false)pulseRing(x,y,s*1.4,o.col||C.heart,clamp((ph-.12)/.3,0,1));return sq}
+/* artery segment (horizontal). r = lumen radius, o.flow speed, o.tone 0..1 (squeeze) */
+function artery(x,y,w,r,T,o){o=o||{};const wall=o.wall||12;const tone=o.tone==null?.5:o.tone;
+  const mcol=mix(C.smooth,C.vessel,tone);
+  rr(x,y-r-wall,w,2*(r+wall),8);ctx.fillStyle=mcol;ctx.fill();ctx.strokeStyle=C["smooth-edge"];ctx.lineWidth=1.5;ctx.stroke();
+  for(let X=x+8;X<x+w-4;X+=11){line(X,y-r-wall+2,X+4,y-r-2,hexA(C["smooth-edge"],.55),1.4);line(X,y+r+2,X+4,y+r+wall-2,hexA(C["smooth-edge"],.55),1.4)}
+  rr(x,y-r,w,2*r,Math.min(6,r));ctx.fillStyle=C.plasma;ctx.fill();
+  ctx.save();rr(x,y-r,w,2*r,Math.min(6,r));ctx.clip();const n=Math.max(4,Math.round(w/22));const sp=o.flow==null?60:o.flow;
+  for(let i=0;i<n*2;i++){const X=x+((i*w/n*.5+T*sp+rnd(i)*20)%(w+20))-10;const Y=y+(rnd(i*3+1)-.5)*1.4*Math.max(0,r-5);ell(X,Y,6,3.6,0,C.blood,hexA(C.ink,.3),.8)}ctx.restore()}
+/* fluid tank (blood volume) */
+function volTank(x,y,w,h,level,T,o){o=o||{};rr(x,y,w,h,10);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();const lh=(h-6)*clamp(level,0,1);
+  ctx.save();rr(x,y,w,h,10);ctx.clip();ctx.fillStyle=hexA(C.blood,.75);ctx.beginPath();ctx.moveTo(x,y+h-lh);for(let i=0;i<=w;i+=5)ctx.lineTo(x+i,y+h-lh+Math.sin(i/11+T*3)*2.2);ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.closePath();ctx.fill();ctx.restore();
+  rr(x,y,w,h,10);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+  for(let k=1;k<4;k++)line(x+w-10,y+h*k/4,x+w,y+h*k/4,C["ink-soft"],1.2);
+  if(o.label)txt(x+w/2,y-12,o.label,{size:12.5,weight:700,align:"center"})}
+/* BP dial, 0..240 mmHg */
+function bpDial(x,y,r,sbp,dbp,o){o=o||{};circ(x,y,r,C.panel,C["ink-soft"],2);const a0=Math.PI*.75,a1=Math.PI*2.25;const ang=v=>a0+(a1-a0)*clamp(v/240,0,1);
+  [[0,120,C.good],[120,140,C.gold],[140,240,C.bad]].forEach(b=>{ctx.beginPath();ctx.arc(x,y,r-7,ang(b[0]),ang(b[1]));ctx.strokeStyle=hexA(b[2],.6);ctx.lineWidth=6;ctx.stroke()});
+  for(let v=0;v<=240;v+=40){const a=ang(v);line(x+Math.cos(a)*(r-14),y+Math.sin(a)*(r-14),x+Math.cos(a)*(r-3),y+Math.sin(a)*(r-3),C["ink-soft"],1.5);if(r>=46)txt(x+Math.cos(a)*(r-24),y+Math.sin(a)*(r-24),String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  const a=ang(sbp);line(x,y,x+Math.cos(a)*(r-10),y+Math.sin(a)*(r-10),C.ink,3);circ(x,y,5,C.ink);
+  txt(x,y+r+13,Math.round(sbp)+"/"+Math.round(dbp)+(o.label===false?"":" mmHg"),{size:r>=46?14.5:13,mono:true,weight:700,align:"center",color:o.col||C.ink})}
+/* simplified ECG wave, t in beats */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+function ecgTrace(x,y,w,h,hr,T,col,o){o=o||{};const secs=o.secs||4;ctx.save();rr(x,y,w,h,4);ctx.clip();ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=(T-(w-i)/w*secs)*hr/60;const v=ecgWave(tt)*(o.amp||1);const Y=y+h*.68-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C.good;ctx.lineWidth=2;ctx.stroke();ctx.restore()}
+/* smooth muscle cell: spindle that shortens when contracted (c 0..1) */
+function smCell(x,y,len,c,o){o=o||{};const L=len*(1-.3*c),hgt=(o.h||16)+18*c;ctx.beginPath();ctx.moveTo(x-L/2,y);ctx.quadraticCurveTo(x,y-hgt,x+L/2,y);ctx.quadraticCurveTo(x,y+hgt,x-L/2,y);ctx.closePath();
+  fillStroke(mix(C.smooth,C.vessel,c*.8),C["smooth-edge"],1.5);ell(x,y,7,3.5,0,hexA(C["smooth-edge"],.6));
+  for(let k=-2;k<=2;k++){if(k===0)continue;const X=x+k*L*.16;line(X-4,y-hgt*.35,X+4,y+hgt*.35,hexA(C["smooth-edge"],.7),1.2)}}
+/* simple stick-free person silhouette. pose: lie, sit, stand. o.faint 0..1 (dizzy) */
+function person(x,y,s,pose,o){o=o||{};const col=o.col||C.skin,ed=C["skin-edge"];ctx.save();ctx.translate(x,y);
+  const body=(hx,hy,bw,bh,rot)=>{ctx.save();ctx.translate(hx,hy);ctx.rotate(rot||0);rr(-bw/2,0,bw,bh,bw/2);fillStroke(col,ed,1.5);ctx.restore()};
+  if(pose==="lie"){circ(-s*1.1,-s*.18,s*.22,col,ed,1.5);rr(-s*.85,-s*.36,s*1.1,s*.36,s*.16);fillStroke(col,ed,1.5);rr(s*.2,-s*.3,s*1,s*.24,s*.11);fillStroke(col,ed,1.5)}
+  else if(pose==="sit"){circ(0,-s*1.25,s*.22,col,ed,1.5);rr(-s*.2,-s*1,s*.4,s*.62,s*.16);fillStroke(col,ed,1.5);rr(-s*.2,-s*.44,s*.75,s*.22,s*.1);fillStroke(col,ed,1.5);rr(s*.4,-s*.44,s*.2,s*.55,s*.09);fillStroke(col,ed,1.5)}
+  else{const sway=(o.faint||0)*Math.sin((o.t||0)*3)*.12;ctx.rotate(sway);circ(0,-s*1.72,s*.22,col,ed,1.5);rr(-s*.2,-s*1.47,s*.4,s*.72,s*.16);fillStroke(col,ed,1.5);rr(-s*.19,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5);rr(s*.02,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5)}
+  ctx.restore()}
+/* little organ icons */
+function kidneyIcon(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(s*.2,-s*.95);ctx.bezierCurveTo(-s*1.2,-s*1.1,-s*1.2,s*1.1,s*.2,s*.95);ctx.bezierCurveTo(s*.75,s*.85,s*.55,s*.25,s*.3,0);ctx.bezierCurveTo(s*.55,-s*.25,s*.75,-s*.85,s*.2,-s*.95);ctx.closePath();
+  fillStroke(o.col||mix(C.vessel,C.panel,.25),C["heart-edge"],1.6);ctx.restore()}
+function lungIcon(x,y,s){[-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(x+sd*s*.12,y-s*.8);ctx.bezierCurveTo(x+sd*s*1.1,y-s*.9,x+sd*s*1.05,y+s*.95,x+sd*s*.18,y+s*.8);ctx.closePath();fillStroke(mix(C.angio,C.panel,.45),C["heart-edge"],1.4)});line(x,y-s*1.1,x,y-s*.3,C["ink-soft"],3)}
+function liverIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s*1.1,y-s*.2);ctx.bezierCurveTo(x-s*.6,y-s*.8,x+s*.9,y-s*.7,x+s*1.1,y-s*.4);ctx.bezierCurveTo(x+s*.6,y+s*.2,x-s*.3,y+s*.6,x-s*1.1,y-s*.2);ctx.closePath();fillStroke(mix("#8A4A2A",C.panel,isDark()?.1:.15),C["heart-edge"],1.4)}
+function adrenalIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y+s*.4);ctx.lineTo(x,y-s*.6);ctx.lineTo(x+s,y+s*.4);ctx.closePath();fillStroke(mix(C.aldo,C.panel,.3),C["heart-edge"],1.3)}
+function brainIcon(x,y,s,glw){if(glw)glow(x,y,s*1.8,C.gold,glw*.6);ell(x,y,s,s*.75,0,mix(C.brady,C.panel,.55),C["heart-edge"],1.4);ctx.beginPath();for(let k=0;k<5;k++){ctx.moveTo(x-s*.7+k*s*.32,y-s*.5);ctx.quadraticCurveTo(x-s*.55+k*s*.32,y,x-s*.7+k*s*.32,y+s*.45)}ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.2;ctx.stroke()}
+/* membrane transporter / receptor shape. kind: "tr" transporter pocket, "rec" receptor cup, "chan" channel. state "open"|"bound"|"blocked" */
+function transporter(x,y,w,h,o){o=o||{};const col=o.col||C.receptor;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);
+  rr(-w/2,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);rr(w*.08,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);
+  if(o.lab)txt(0,h/2+11,o.lab,{size:11.5,weight:700,mono:true,align:"center",color:o.labCol||C.ink});ctx.restore()}
+/* lipid bilayer, vertical (x fixed) or horizontal */
+function bilayerV(x,y0,y1,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let y=y0;y<=y1;y+=9){circ(x-5,y,3.4,col);circ(x+5,y,3.4,col)}line(x-2,y0,x-2,y1,hexA(col,.6),1);line(x+2,y0,x+2,y1,hexA(col,.6),1)}
+function bilayerH(x0,x1,y,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let x=x0;x<=x1;x+=9){circ(x,y-5,3.4,col);circ(x,y+5,3.4,col)}}
+/* small labelled chip pill on canvas */
+function tag(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12,weight:700,color:o.color||C.ink,border:col,bg:o.bg,align:o.align})}
+/* up / down arrow badge for effects (text included so colour is not the only signal) */
+function effect(x,y,t,up,o){o=o||{};const col=o.col||(up?C.bad:C.accent);const s=o.size||13;ctx.font=`700 ${s}px ${FONT}`;const w=ctx.measureText(t).width+26;
+  rr(x,y-s,w,s*2,s*.5);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.stroke();
+  const ax=x+11,ay=y;ctx.beginPath();if(up){ctx.moveTo(ax-5,ay+4);ctx.lineTo(ax,ay-5);ctx.lineTo(ax+5,ay+4)}else{ctx.moveTo(ax-5,ay-4);ctx.lineTo(ax,ay+5);ctx.lineTo(ax+5,ay-4)}ctx.closePath();ctx.fillStyle=col;ctx.fill();
+  txt(x+20,y+.5,t,{size:s,weight:700,color:C.ink});return w}
+/* grapefruit slice */
+function grapefruit(x,y,r){circ(x,y,r,C.fruit,hexA(C.ink,.4),1.5);circ(x,y,r*.82,C["fruit-in"]);for(let k=0;k<10;k++){const a=k/10*TAU;line(x,y,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,hexA(C.panel,.8),1.4)}circ(x,y,r*.12,hexA(C.panel,.9))}
+/* pill bottle with label */
+function pillBottle(x,y,s,lab,col){rr(x-s*.45,y-s*1.25,s*.9,s*1.25,s*.15);ctx.fillStyle=hexA(col||C.gold,.35);ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();rr(x-s*.52,y-s*1.5,s*1.04,s*.3,s*.08);ctx.fillStyle=C.panel;ctx.fill();ctx.stroke();
+  rr(x-s*.38,y-s*.95,s*.76,s*.5,3);ctx.fillStyle=C.panel;ctx.fill();if(lab)txt(x,y-s*.7,lab,{size:Math.max(10,s*.22),weight:700,align:"center"})}
+/* ================= module 11 drawing helpers ================= */
+const SC={};
+/* hydrogen ion: small red ball marked H+ */
+function hIon(x,y,r,a){r=r||7;if(a!=null&&a<=0)return;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);circ(x,y,r,C.acid,hexA(C.ink,.4),1);
+  if(r>=6){ctx.font=`700 ${Math.max(8,r*1.15)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(C.acid);ctx.fillText("H",x,y+.5)}ctx.restore()}
+/* bicarbonate / antacid base particle: blue rounded square marked B */
+function baseIon(x,y,r,a,lab){r=r||7;if(a!=null&&a<=0)return;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);rr(x-r,y-r,2*r,2*r,r*.4);fillStroke(C.base,hexA(C.ink,.4),1);
+  if(r>=6){ctx.font=`700 ${Math.max(8,r*1.05)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(C.base);ctx.fillText(lab||"B",x,y+.5)}ctx.restore()}
+/* small K+ ball */
+function kIon(x,y,r,a){ion("k",x,y,r||6,{a})}
+/* receptor cup on a vertical membrane. dir: -1 opens to the left, +1 to the right. state: bound ligand, blocked by drug */
+function recCup(x,y,dir,col,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(dir,1);const s=o.s||1;
+  ctx.beginPath();ctx.moveTo(-14*s,-13*s);ctx.lineTo(4*s,-13*s);ctx.lineTo(4*s,13*s);ctx.lineTo(-14*s,13*s);ctx.lineTo(-14*s,6*s);ctx.lineTo(-4*s,6*s);ctx.lineTo(-4*s,-6*s);ctx.lineTo(-14*s,-6*s);ctx.closePath();
+  fillStroke(col||C.receptor,hexA(C.ink,.45),1.2);ctx.restore();
+  if(o.blocked){drugMol(x-dir*10*(o.s||1),y,7*(o.s||1),null);}
+  else if(o.bound){ctx.save();ctx.globalAlpha*=clamp(o.bound,0,1);ligand(x-dir*9*(o.s||1),y,6*(o.s||1),{col:o.lig||C.ligand});ctx.restore()}
+  if(o.lab)txt(x+(o.labDx||0),y+(o.labDy||24),o.lab,{size:12,weight:700,mono:true,align:"center",color:o.labCol||C.ink})}
+/* horizontal-membrane receptor (cup opening upward = -1 or downward = +1) */
+function recCupH(x,y,dir,col,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(dir>0?-Math.PI/2:Math.PI/2);recCup(0,0,1,col,{s:o.s,blocked:false,bound:false});ctx.restore();
+  if(o.blocked)drugMol(x,y-dir*10*(o.s||1),7*(o.s||1),null);else if(o.bound){ctx.save();ctx.globalAlpha*=clamp(o.bound,0,1);ligand(x,y-dir*9*(o.s||1),6*(o.s||1),{col:o.lig||C.ligand});ctx.restore()}
+  if(o.lab)txt(x,y+(o.labDy||(dir>0?-26:26)),o.lab,{size:12,weight:700,mono:true,align:"center",color:o.labCol||C.ink})}
+/* proton pump (H+/K+ ATPase) sitting in a vertical membrane at x. rate 0..1 spins the rotor; blocked = drug locked on */
+function protonPump(x,y,s,T,o){o=o||{};const rate=o.blocked?0:(o.rate==null?1:o.rate);
+  rr(x-s*.7,y-s,s*1.4,s*2,s*.45);fillStroke(o.blocked?mix(C.pump,C.blocked,.7):C.pump,hexA(C.ink,.5),1.4);
+  const a=T*5*rate;ctx.save();ctx.translate(x,y);ctx.rotate(a);for(let k=0;k<3;k++){ctx.rotate(TAU/3);line(0,0,0,-s*.6,hexA(inkOn(C.pump),.75),2.2)}ctx.restore();circ(x,y,s*.18,C.panel);
+  if(o.blocked){drugMol(x+s*.95,y-s*.55,s*.42,null);line(x+s*.55,y-s*.3,x+s*.7,y-s*.4,C.drug,2.5);}
+  if(o.lab)txt(x,y+s+12,o.lab,{size:11.5,weight:700,mono:true,align:"center",color:C.ink})}
+/* epithelial lining along y (horizontal), mucus gel above it with bicarbonate */
+function lining(x0,x1,y,T,o){o=o||{};const mt=o.mucus==null?18:o.mucus;const cellH=o.cellH||34;
+  // cells
+  const n=Math.max(3,Math.round((x1-x0)/34));const cw=(x1-x0)/n;
+  for(let i=0;i<n;i++){const cx=x0+i*cw;const hurt=o.hurt&&o.hurt(cx+cw/2);rr(cx+1,y,cw-2,cellH,5);fillStroke(hurt?mix(C.cell,C.acid,.45*hurt):C.cell,C["cell-edge"],1.1);ell(cx+cw/2,y+cellH*.62,cw*.16,cellH*.14,0,hexA(C["cell-edge"],.7))}
+  // mucus
+  if(mt>0){ctx.beginPath();ctx.moveTo(x0,y);for(let X=x0;X<=x1;X+=6)ctx.lineTo(X,y-mt-2*Math.sin(X/19+T*1.3));ctx.lineTo(x1,y);ctx.closePath();ctx.fillStyle=hexA(C.mucus,.85);ctx.fill();
+    ctx.strokeStyle=C["mucus-edge"];ctx.lineWidth=1.2;ctx.stroke();
+    const nb=Math.round((x1-x0)/40*(o.bicarb==null?1:o.bicarb));for(let i=0;i<nb;i++){const q=P(T*.35+rnd(i+7),1);baseIon(x0+10+((i*40+rnd(i)*20)%(x1-x0-20)),y-q*mt*.9,4,1-q)}}
+  return y-mt}
+/* bowel tube, horizontal. motility 0..2 drives the squeeze wave; transit moves stool; water: + water into lumen, - out */
+function bowel(x,y,w,h,T,o){o=o||{};const mot=o.motility==null?1:o.motility,wall=o.wall||14;const ph=T*2.2*mot;
+  const sq=X=>mot>0?.22*Math.max(0,Math.sin((X-x)/w*TAU*1.5-ph))*Math.min(1,mot):0;
+  // wall
+  ctx.beginPath();for(let X=x;X<=x+w;X+=4){const r=h/2*(1-sq(X));const Y=y-r-wall;X===x?ctx.moveTo(X,Y):ctx.lineTo(X,Y)}
+  for(let X=x+w;X>=x;X-=4){const r=h/2*(1-sq(X));ctx.lineTo(X,y+r+wall)}ctx.closePath();fillStroke(o.wallCol||C.gut,C["gut-edge"],1.6);
+  // lumen
+  ctx.beginPath();for(let X=x;X<=x+w;X+=4){const r=h/2*(1-sq(X));X===x?ctx.moveTo(X,y-r):ctx.lineTo(X,y-r)}for(let X=x+w;X>=x;X-=4){const r=h/2*(1-sq(X));ctx.lineTo(X,y+r)}ctx.closePath();ctx.fillStyle=o.lumen||C.lumen;ctx.fill();
+  // haustra marks
+  for(let X=x+24;X<x+w;X+=46){line(X,y-h/2-wall+2,X,y-h/2-2,hexA(C["gut-edge"],.6),1.2);line(X,y+h/2+2,X,y+h/2+wall-2,hexA(C["gut-edge"],.6),1.2)}
+  return sq}
+/* a blob of stool: hard (dry, small, dark) to soft (bigger, lighter). soft 0..1 */
+function stool(x,y,r,soft,T,seed){const col=mix(mix(C.stool,"#3A2414",.35),C.stool,soft);blobPath(x,y,r*(.8+.35*soft),seed||1,T*.3,.08+.05*(1-soft));fillStroke(col,hexA(C.ink,.35),1);
+  if(soft<.4){for(let k=0;k<3;k++)circ(x-r*.3+k*r*.3,y-r*.2+((k%2)?r*.2:0),1.6,hexA("#000",.25))}else{circ(x-r*.3,y-r*.3,r*.18,hexA("#ffffff",.25))}}
+/* water drop */
+function drop(x,y,r,a){ion("h2o",x,y,r||6,{a})}
+/* glass of water */
+function glass(x,y,s,fill){ctx.beginPath();ctx.moveTo(x-s*.5,y-s);ctx.lineTo(x-s*.4,y+s*.6);ctx.lineTo(x+s*.4,y+s*.6);ctx.lineTo(x+s*.5,y-s);ctx.closePath();ctx.fillStyle=hexA(C.glass,.6);ctx.fill();
+  const lv=y+s*.6-(s*1.5)*clamp(fill==null?.8:fill,0,1);ctx.save();ctx.clip();ctx.fillStyle=hexA(C.h2o,.55);ctx.fillRect(x-s,lv,s*2,s*2);ctx.restore();
+  ctx.beginPath();ctx.moveTo(x-s*.5,y-s);ctx.lineTo(x-s*.4,y+s*.6);ctx.lineTo(x+s*.4,y+s*.6);ctx.lineTo(x+s*.5,y-s);ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.6;ctx.stroke()}
+/* tablet / capsule */
+function tablet(x,y,s,col,lab){ell(x,y,s,s*.62,0,col||C.panel,C["ink-soft"],1.4);line(x-s*.7,y,x+s*.7,y,hexA(C["ink-soft"],.6),1.2);if(lab)txt(x,y+s+10,lab,{size:12,weight:700,align:"center"})}
+function capsule(x,y,s,c1,c2){ctx.save();ctx.translate(x,y);rr(-s,-s*.42,s,s*.84,s*.42);ctx.fillStyle=c1||C.drug;ctx.fill();rr(0,-s*.42,s,s*.84,s*.42);ctx.fillStyle=c2||C.panel;ctx.fill();rr(-s,-s*.42,2*s,s*.84,s*.42);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.3;ctx.stroke();ctx.restore()}
+/* skin patch */
+function patch(x,y,s){rr(x-s,y-s*.75,2*s,s*1.5,s*.4);fillStroke(hexA(C.panel,.95),C["ink-soft"],1.5);rr(x-s*.6,y-s*.4,s*1.2,s*.8,s*.25);fillStroke(hexA(C.drug,.35),hexA(C.drug,.8),1.2)}
+/* ear seen from the side */
+function earIcon(x,y,s){ctx.beginPath();ctx.moveTo(x,y-s);ctx.bezierCurveTo(x+s*.9,y-s,x+s*.9,y+s*.1,x+s*.35,y+s*.45);ctx.bezierCurveTo(x+s*.1,y+s*.7,x+s*.2,y+s,x-s*.1,y+s);ctx.bezierCurveTo(x-s*.4,y+s,x-s*.45,y+s*.6,x-s*.35,y+s*.3);ctx.bezierCurveTo(x-s*.6,y-s*.2,x-s*.4,y-s,x,y-s);ctx.closePath();fillStroke(C.skin,C["skin-edge"],1.6);
+  ctx.beginPath();ctx.arc(x+s*.05,y-s*.2,s*.35,Math.PI*.9,Math.PI*2.1);ctx.strokeStyle=C["skin-edge"];ctx.lineWidth=1.6;ctx.stroke()}
+/* inner ear semicircular canals */
+function canals(x,y,s,T,wob){[0,1,2].forEach(k=>{ctx.save();ctx.translate(x,y);ctx.rotate(k*2.1+(wob||0)*Math.sin(T*3+k)*.3);ell(s*.45,0,s*.5,s*.3,0,null,C.dopa,3);ctx.restore()});circ(x,y,s*.25,mix(C.dopa,C.panel,.5),C.dopa,1.5)}
+/* simple stomach outline (J shape) */
+function stomachPath(x,y,s){ctx.beginPath();ctx.moveTo(x-s*.35,y-s*1.1);ctx.bezierCurveTo(x-s*.2,y-s*.7,x-s*1.0,y-s*.9,x-s*1.0,y-s*.1);ctx.bezierCurveTo(x-s*1.0,y+s*.8,x-s*.1,y+s*1.05,x+s*.6,y+s*.6);
+  ctx.bezierCurveTo(x+s*.9,y+s*.4,x+s*1.05,y+s*.2,x+s*1.15,y+s*.35);ctx.lineTo(x+s*1.15,y+s*.05);ctx.bezierCurveTo(x+s*.7,y-s*.1,x+s*.25,y+s*.35,x+s*.0,y-s*.05);ctx.bezierCurveTo(x-s*.2,y-s*.4,x+s*.05,y-s*.8,x-s*.05,y-s*1.1);ctx.closePath()}
+function stomachIcon(x,y,s,o){o=o||{};stomachPath(x,y,s);fillStroke(o.col||C.stomach,C["stomach-edge"],1.8)}
+/* brain side view + brainstem */
+function brainSide(x,y,s,o){o=o||{};ctx.beginPath();ctx.ellipse(x,y,s,s*.68,0,Math.PI*.95,Math.PI*2.18);ctx.bezierCurveTo(x+s*.75,y+s*.62,x+s*.2,y+s*.55,x+s*.05,y+s*.5);ctx.lineTo(x+s*.05,y+s*1.05);ctx.lineTo(x-s*.18,y+s*1.05);ctx.lineTo(x-s*.18,y+s*.5);ctx.bezierCurveTo(x-s*.6,y+s*.6,x-s*1.0,y+s*.4,x-s*.99,y+s*.2);ctx.closePath();
+  fillStroke(o.col||C.brain,C["brain-edge"],1.8);ctx.beginPath();for(let k=0;k<6;k++){const X=x-s*.75+k*s*.3;ctx.moveTo(X,y-s*.45);ctx.quadraticCurveTo(X+s*.12,y-s*.1,X,y+s*.25)}ctx.strokeStyle=hexA(C["brain-edge"],.45);ctx.lineWidth=1.3;ctx.stroke()}
+/* small bacterium (H. pylori) with flagella */
+function bug(x,y,s,T,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);fillStroke(C.bact,hexA(C.ink,.5),1.2);
+  for(let k=-1;k<=1;k++){ctx.beginPath();ctx.moveTo(-s,k*s*.2);for(let i=1;i<=8;i++)ctx.lineTo(-s-i*s*.22,k*s*.2+Math.sin(i*1.3+T*9+k)*s*.16);ctx.strokeStyle=hexA(C.ink,.55);ctx.lineWidth=1;ctx.stroke()}ctx.restore()}
+/* meter: horizontal bar 0..1 with label and value text */
+function meter(x,y,w,v,lab,col,o){o=o||{};txt(x,y-10,lab,{size:12.5,weight:700});rr(x,y,w,14,5);ctx.fillStyle=C.sunk;ctx.fill();rr(x,y,w*clamp(v,0,1),14,5);ctx.fillStyle=col||C.accent;ctx.fill();rr(x,y,w,14,5);ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();
+  if(o.text)txt(x+w,y-10,o.text,{size:12,mono:true,weight:700,align:"right",color:o.tcol||C.ink})}
+/* pH strip-style gauge, vertical: pH 1 (bottom, red) to 7 (top, blue) */
+function phGauge(x,y,h,ph,o){o=o||{};const w=o.w||22;const g=ctx.createLinearGradient(0,y+h,0,y);g.addColorStop(0,C.acid);g.addColorStop(.5,C.gold);g.addColorStop(1,C.base);rr(x,y,w,h,5);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();
+  for(let p=1;p<=7;p+=1){const Y=y+h-(p-1)/6*h;line(x+w,Y,x+w+5,Y,C["ink-soft"],1.2);if(p%2||p===4)txt(x+w+8,Y,String(p),{size:11,mono:true,color:C["ink-soft"]})}
+  const Y=y+h-(clamp(ph,1,7)-1)/6*h;ctx.beginPath();ctx.moveTo(x-2,Y);ctx.lineTo(x-12,Y-7);ctx.lineTo(x-12,Y+7);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();
+  txt(x+w/2,y-12,"pH "+ph.toFixed(1),{size:12.5,mono:true,weight:700,align:"center"})}
+/* ---------- the vomiting-center "control room" (shared by both pages) ----------
+   inputs: {cortex, vest, ctz, gut} 0..1 ; blocks: {d2, ht3, nk1, h1m, cb} 0..1 ; drawn in a 520 x 440 box at (x,y) scaled by s */
+const VC_PATHS={
+ cortex:{pts:[[150,62],[176,150],[214,250],[236,318]],sock:null,col:"brain-edge",lab:"Cortex: fear, smells, pain"},
+ vest:{pts:[[64,218],[118,236],[178,300],[226,334]],sock:[[112,234,"h1m","H1 · M1"]],col:"dopa",lab:"Inner ear (motion)"},
+ ctz:{pts:[[468,212],[392,240],[336,282],[278,326]],sock:[[372,248,"d2","D2"],[332,284,"ht3c","5-HT3"]],col:"sero",lab:"Blood toxins: drugs, chemo"},
+ gut:{pts:[[66,408],[142,394],[200,376],[234,352]],sock:[[142,394,"ht3","5-HT3"]],col:"nerve",lab:"Gut: vagus nerve"}};
+function vcLevel(inp,blk){const b=k=>clamp(blk[k]||0,0,1);const ht3=b("ht3");
+  const part={cortex:inp.cortex||0,vest:(inp.vest||0)*(1-.85*b("h1m")),ctz:(inp.ctz||0)*(1-.55*b("d2")-.35*ht3),gut:(inp.gut||0)*(1-.85*ht3)};
+  let raw=part.cortex*.35+part.vest+part.ctz+part.gut;raw*=(1-.55*b("nk1"))*(1-.3*b("cb"));return {raw,part}}
+function vcDiagram(x,y,s,T,inp,blk,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  brainSide(250,150,215,{});
+  // sources
+  earIcon(40,212,24);canals(60,220,12,T,inp.vest||0);
+  stomachIcon(56,410,26,{});
+  // blood vessel on right
+  rr(452,170,26,250,12);ctx.fillStyle=hexA(C.blood,.25);ctx.fill();ctx.strokeStyle=C.vessel;ctx.lineWidth=1.6;ctx.stroke();
+  for(let i=0;i<6;i++){const q=P(T*.3+i/6,1);ell(465,170+q*250,5,3,0,C.blood)}
+  // CTZ region
+  rr(300,240,108,70,10);ctx.fillStyle=hexA(C.panel,.75);ctx.fill();ctx.setLineDash([4,3]);ctx.strokeStyle=C.sero;ctx.lineWidth=1.5;ctx.stroke();ctx.setLineDash([]);
+  txt(354,300,"CTZ",{size:12,mono:true,weight:700,align:"center",color:C.ink});
+  // paths and signal dots
+  const lev=vcLevel(inp,blk);
+  Object.keys(VC_PATHS).forEach(k=>{const p=VC_PATHS[k];const L=inp[k]||0;const col=C[p.col];
+    poly(p.pts,hexA(col,.35+.4*Math.min(1,L)),3+2*L);
+    const n=Math.round(3+9*L);let blockAt=null,bfrac=0;
+    if(p.sock){p.sock.forEach(sk=>{const bk=clamp(blk[sk[2]]||0,0,1);if(bk>bfrac){bfrac=bk;blockAt=sk}})}
+    const sockQ=blockAt?(()=>{let best=0,bd=1e9;for(let i=0;i<=40;i++){const pt=along(p.pts,i/40);const d=Math.hypot(pt[0]-blockAt[0],pt[1]-blockAt[1]);if(d<bd){bd=d;best=i/40}}return best})():1;
+    for(let i=0;i<n;i++){let q=P(T*.32+i/n,1);const stopped=blockAt&&rnd(i*3.7+k.length)<bfrac*.9;let a=1;
+      if(stopped&&q>sockQ-.04){q=sockQ-.04;a=.5}const pt=along(p.pts,q);circ(pt[0],pt[1],4.2,col,hexA(C.ink,.3),1);}
+    if(p.sock)p.sock.forEach(sk=>{const bk=(blk[sk[2]]||0)>.3;circ(sk[0],sk[1],13,hexA(C.panel,.9),C.receptor,2.2);if(bk)drugMol(sk[0],sk[1],8,null);else ligand(sk[0],sk[1],5,{col:col});
+      label(sk[0],sk[1]-24,sk[3],{size:12,weight:700,mono:true,border:bk?C.drug:C.receptor})});
+  });
+
+  // vomiting center
+  const R=30+4*Math.min(1.5,lev.raw)*(.5+.5*Math.sin(T*6));glow(250,346,R*2.1,C.bad,clamp(lev.raw*.55,0,.7));
+  circ(250,346,30,mix(C.panel,C.bad,clamp(lev.raw*.5,0,.6)),C.bad,2.4);txt(250,340,"Vomiting",{size:12,weight:700,align:"center"});txt(250,354,"center",{size:12,weight:700,align:"center"});
+  // NK1 + CB1 sockets on the center
+  [[282,318,"nk1","NK1"],[216,376,"cb","CB1"]].forEach(sk=>{const bk=(blk[sk[2]]||0)>.3;circ(sk[0],sk[1],11,hexA(C.panel,.95),sk[2]==="nk1"?C.subp:C.cb,2);if(bk)drugMol(sk[0],sk[1],7,null);
+    txt(sk[0]+(sk[2]==="nk1"?16:-16),sk[1],sk[3],{size:12,weight:700,mono:true,align:sk[2]==="nk1"?"left":"right"})});
+  ctx.restore();return lev}
+/* ---------- parietal cell with three doorbells and proton pumps ----------
+   region: sources from x-118 to x, cell from x to x+w, lumen to the right of x+w. returns acid output 0..1 */
+function parietalCell(x,y,w,h,T,o){o=o||{};const hist=o.hist==null?1:o.hist,ach=o.ach==null?1:o.ach,gas=o.gas==null?1:o.gas;const h2=o.h2?1:0;const np=o.pumps||3,nb=o.blockN||0;
+  const ry=[y+h*.2,y+h*.5,y+h*.8];
+  // cell body
+  rr(x,y,w,h,22);fillStroke(C.cell,C["cell-edge"],2);ell(x+w*.62,y+h*.5,w*.13,h*.1,0,hexA(C["cell-edge"],.55));txt(x+w*.62,y+h*.5,"nucleus",{size:11,align:"center",color:C["ink-soft"]});
+  if(o.labels!==false)txt(x+w/2,y-12,"PARIETAL CELL",{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]});
+  // sources
+  const ecl=[x-86,ry[0]],nerveEnd=[x-80,ry[1]],cap=[x-92,ry[2]];
+  blobPath(ecl[0],ecl[1],20,3,T*.5,.07);fillStroke(mix(C.hist,C.panel,.6),C.hist,1.5);txt(ecl[0],ecl[1]+30,"ECL cell",{size:11.5,weight:600,align:"center"});
+  line(x-118,ry[1]-6,nerveEnd[0]+6,ry[1]-6,C.nerve,4);circ(nerveEnd[0]+12,ry[1]-6,8,mix(C.nerve,C.panel,.4),C.nerve,2);txt(x-100,ry[1]+14,"vagus nerve",{size:11.5,weight:600,align:"left"});
+  rr(x-112,ry[2]-12,42,24,10);ctx.fillStyle=hexA(C.blood,.25);ctx.fill();ctx.strokeStyle=C.vessel;ctx.lineWidth=1.4;ctx.stroke();txt(cap[0],ry[2]+24,"blood",{size:11.5,weight:600,align:"center"});
+  // messengers travelling to receptors
+  const lig=[[ecl[0]+18,ry[0],hist,C.hist,"hist"],[nerveEnd[0]+20,ry[1]-4,ach,C.ach,"ach"],[cap[0]+22,ry[2],gas,C.gastrin,"gas"]];
+  lig.forEach((L,i)=>{const n=Math.round(1+4*L[2]);const blocked=i===0&&h2;for(let k=0;k<n;k++){const q=P(T*.6+k/n+i*.13,1);const X=lerp(L[0],x-14,q);
+      if(blocked&&q>.75){const bq=(q-.75)/.25;ligand(x-14-bq*22,L[1]-8-bq*16,5,{col:L[3],a:1-bq})}else ligand(X,L[1]+Math.sin(q*8+k)*4,5,{col:L[3]})}});
+  // receptors
+  const rec=[["H2",C.receptor,hist,C.hist,h2],["M3",C.receptor,ach,C.ach,0],["CCK2",C.receptor,gas,C.gastrin,0]];
+  rec.forEach((r,i)=>recCup(x,ry[i],1,r[1],{bound:r[4]?0:(r[2]>.05?.5+.5*Math.sin(T*3+i):0),lig:r[3],blocked:!!r[4],lab:r[0]+(i===2?" (gastrin)":i===1?" (ACh)":" (histamine)"),labDx:44,labDy:-20}));
+  // inner signal: stronger when histamine adds to the others
+  const drive=clamp((hist*(1-h2)*.45+ach*.3+gas*.25)*(1+.6*hist*(1-h2)*Math.max(ach,gas)),0,1.3);
+  const sig=[ry[0],ry[1],ry[2]];sig.forEach((sy,i)=>{const a=[hist*(1-h2),ach,gas][i];if(a<.05)return;const n=2+Math.round(3*a);for(let k=0;k<n;k++){const q=P(T*.7+k/n,1);const X=lerp(x+20,x+w-26,q),Y=lerp(sy,y+h*.5,q*.6);circ(X,Y,3,hexA(C.gold,.9*(1-q*.4)))}});
+  // pumps on apical side
+  const out=clamp(drive/1.2,0,1)*(1-nb/np);
+  for(let k=0;k<np;k++){const py=y+h*(k+1)/(np+1);const blk=k<nb;protonPump(x+w,py,15,T,{rate:clamp(drive,0,1.2),blocked:blk});
+    if(!blk&&drive>.05){const nn=1+Math.round(3*drive);for(let j=0;j<nn;j++){const q=P(T*.8*Math.max(.4,drive)+j/nn+k*.2,1);hIon(x+w+18+q*70,py-8+Math.sin(q*6+j)*6,6,1-q*.6)}
+      const qk=P(T*.8+k*.3,1);kIon(x+w+80-qk*60,py+10,5,1-qk)}}
+  if(o.labels!==false){txt(x+w+10,y+h+16,"proton pumps (H⁺/K⁺ ATPase)",{size:11.5,weight:700,align:"center",color:C.ink})}
+  return out}
+
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Stomach acid",col:"act1"},
+            2:{name:"Part 2 · Acid reducers",col:"act2"},
+            3:{name:"Part 3 · Lining protectors",col:"act3"},
+            4:{name:"Part 4 · Nausea and vomiting",col:"act4"},
+            5:{name:"Part 5 · Constipation and diarrhea",col:"act5"},
+            6:{name:"Part 6 · IBD and enzymes",col:"act6"}};
+const NACT=6;
+const STEPS=[
+{act:0,scene:"map",desc:"On the left is a simple outline of a person's head and body. Inside it are a pink brain at the top, a pink J-shaped stomach in the upper belly, and a tan, looping intestine below it. Five numbered markers sit on these organs: 1 on the stomach (acid), 2 on the stomach lining, 3 on the brain (nausea), 4 on the colon (constipation and diarrhea) and 5 on the bowel wall and pancreas area (inflammation and enzymes). One marker at a time glows, and an indigo drug chip, such as PPIs or Antiemetics, slides in from the right and settles on it. On the right, six cards list the six parts of this walkthrough and light up in turn.",
+ title:"The big picture: drugs along the gut",
+ body:`<p>Gastrointestinal (GI) drugs can feel like a long list of unrelated pills. They make sense once you tie each one to <b>a place in the gut and a job</b>.</p>
+ <ul><li><b>Stomach acid:</b> drugs that make less acid (PPIs, H2 blockers) or neutralize it (antacids).</li><li><b>The lining:</b> drugs that coat or protect it (sucralfate, misoprostol), plus combination therapy for the ulcer bacterium <b>H. pylori</b>.</li><li><b>The brain's vomiting center:</b> antiemetics that block one receptor each.</li><li><b>The bowel:</b> laxatives speed things up or soften stool; antidiarrheals slow things down.</li><li><b>Inflammation and digestion:</b> IBD drugs calm the bowel wall; pancreatic enzymes replace missing digestive enzymes.</li></ul>
+ <p>For each class you will see the mechanism move, then work out the side effects and nursing checks from it.</p>`,
+ analogy:"A factory line. Each station has a job: one makes acid, one guards the walls, one sounds the alarm (vomiting), one moves product along (the bowel). Each drug class is a repair crew sent to one station.",
+ terms:[["Gastrointestinal (GI)","The digestive tract from mouth to anus, plus the liver, gallbladder and pancreas that help it."],["Prototype","One typical drug that stands for its whole class. Learn the prototype and you know most of the class."],["Antiemetic","A drug that prevents or treats nausea and vomiting."]],
+ check:null,caption:"Five stations: acid, lining, nausea, bowel, inflammation and enzymes. Each drug class works at one of them.",
+ legend:[["stomach","Stomach"],["brain","Brain"],["gut","Bowel"],["drug","Drug class","s"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"parietal",desc:"A large peach parietal cell fills the middle. On its left (blood) side are three teal receptor cups stacked top to bottom, labelled H2 (histamine), M3 (ACh) and CCK2 (gastrin). Amber diamonds of histamine drift in from a small ECL cell, green diamonds of acetylcholine from a vagus nerve ending, and magenta diamonds of gastrin from a blood vessel, and each settles into its cup. Gold signal dots then travel across the cell to three teal proton pumps on the right edge. The pump rotors spin and push red H+ balls out into the stomach space on the right, while small pink K+ balls move in. A bar at the bottom shows acid output rising as the three signals switch on one after another.",
+ title:"The parietal cell: three doorbells and one pump",
+ body:`<p>Stomach acid is made by <b>parietal cells</b> in the stomach lining. Each one is like a house with <b>three doorbells</b> on its blood side:</p>
+ <ul><li><b>Histamine</b> from nearby ECL cells rings the <b>H2 receptor</b>.</li><li><b>Acetylcholine (ACh)</b> from the vagus nerve rings the <b>M3 receptor</b>, especially when you see, smell or taste food.</li><li><b>Gastrin</b>, a hormone carried in the blood, rings the <b>CCK2 (gastrin) receptor</b> when food stretches the stomach.</li></ul>
+ <p>All three bells send their signal to the same final step: the <b>proton pump</b> (<b>H⁺/K⁺ ATPase</b>). It pushes hydrogen ions (H⁺, the acid) out into the stomach and pulls potassium (K⁺) in. Histamine also boosts the other two signals, which is why blocking it lowers acid so much.</p>
+ <p>Keep this picture: <b>H2 blockers</b> unplug one doorbell. <b>PPIs</b> break the pump itself.</p>`,
+ analogy:"Three doorbells wired to one machine. Unplug one bell and the machine still runs, just less. Break the machine and it does not matter how many bells ring.",
+ terms:[["Parietal cell","Stomach-lining cell that makes hydrochloric acid and intrinsic factor (needed to absorb vitamin B12)."],["Proton pump (H⁺/K⁺ ATPase)","The final pump that moves H⁺ into the stomach in exchange for K⁺."],["H2 receptor","The histamine receptor on parietal cells. Different from the H1 receptor involved in allergies."]],
+ check:{q:"Which step is the final, shared step for all three acid signals?",opts:[
+  ["The proton pump (H⁺/K⁺ ATPase)",1,"Yes. Histamine, ACh and gastrin all lead to the proton pump, which actually moves H⁺ into the stomach."],
+  ["The H2 receptor",0,"The H2 receptor is only one of the three doorbells (histamine). ACh and gastrin use their own receptors."],
+  ["The ECL cell",0,"The ECL cell releases histamine, one of the three signals. It is not the shared final step."],
+  ["The mucus layer",0,"Mucus protects the lining from acid; it does not make acid."]]},
+ caption:"Histamine (H2), acetylcholine (M3) and gastrin (CCK2) all switch on the same proton pump, which pushes H⁺ into the stomach.",
+ legend:[["hist","Histamine","d"],["ach","Acetylcholine","d"],["gastrin","Gastrin","d"],["pump","Proton pump"],["acid","H⁺ (acid)"]]},
+
+{act:1,scene:"balance",desc:"A large balance scale sits in the middle. The left pan holds four protective weights in green and blue, labelled mucus, bicarbonate, prostaglandins and blood flow. The right pan holds four red and grey weights labelled acid, pepsin, H. pylori and NSAIDs. Below the scale, a strip of stomach lining shows peach cells under a green mucus gel with small blue bicarbonate squares rising through it, and red H+ balls drifting down from above. In a loop, the scene first balances; then the NSAIDs and H. pylori weights drop onto the right pan, the scale tips toward damage, the mucus gel thins, and a red crater (an ulcer) opens in the lining.",
+ title:"Defenders and attackers: why ulcers form",
+ body:`<p>The stomach makes acid strong enough to dissolve food, yet it does not digest itself. That is because <b>protective factors</b> normally balance the <b>aggressive factors</b>.</p>
+ <ul><li><b>Protectors:</b> a thick <b>mucus</b> gel, <b>bicarbonate</b> (a base) trapped in it, good <b>blood flow</b>, and <b>prostaglandins</b>, which tell the lining to make more mucus and bicarbonate.</li><li><b>Attackers:</b> <b>acid</b>, the enzyme <b>pepsin</b>, the bacterium <b>H. pylori</b>, and <b>NSAIDs</b> (such as ibuprofen and aspirin), which block prostaglandin production.</li></ul>
+ <p>When the balance tips, the lining wears through and a <b>peptic ulcer</b> forms. When acid flows backward into the esophagus, it causes <b>GERD</b> (heartburn). Every drug in Parts 2 and 3 either lowers the attackers or props up the defenders.</p>`,
+ analogy:"A sea wall. Waves (acid) always hit it. The wall holds if it is thick and kept repaired (mucus and prostaglandins). Take away the repair crew (NSAIDs) or add a burrowing animal (H. pylori) and the waves break through.",
+ terms:[["Peptic ulcer","A sore that wears through the lining of the stomach or the first part of the small intestine (duodenum)."],["GERD","Gastroesophageal reflux disease: stomach acid repeatedly flows up into the esophagus."],["Prostaglandins","Local chemical messengers that, in the stomach, increase mucus, bicarbonate and blood flow."]],
+ check:{q:"Why do NSAIDs such as ibuprofen raise the risk of a stomach ulcer?",opts:[
+  ["They block prostaglandin production, so the lining makes less mucus and bicarbonate",1,"Right. NSAIDs block the COX enzymes that make prostaglandins. Without them, the lining's defenses weaken."],
+  ["They make the parietal cells pump more acid",0,"The main problem is weaker defenses, not more acid. Prostaglandins are lost."],
+  ["They kill the cells that make pepsin",0,"NSAIDs do not affect pepsin cells in this way. They reduce prostaglandins."],
+  ["They carry H. pylori into the stomach",0,"H. pylori is a separate infection. NSAIDs damage the lining by removing prostaglandins."]]},
+ caption:"Protectors (mucus, bicarbonate, prostaglandins, blood flow) against attackers (acid, pepsin, H. pylori, NSAIDs). Tip the balance and an ulcer forms.",
+ legend:[["mucus","Mucus gel"],["base","Bicarbonate","s"],["acid","H⁺ acid"],["bad","Ulcer"]]},
+
+{act:1,scene:"ulcer",desc:"The scene is split. On the left, a pink stomach outline has a red ulcer crater on its inner curve and a small bacterium (H. pylori), drawn as a green rod with wavy tails, burrowing into the mucus. A tiny cloud labelled ammonia surrounds it. On the right, a tube labelled esophagus sits above a stomach. A ring muscle at the junction, labelled lower esophageal sphincter, loosens and red H+ balls splash upward into the esophagus, where the lining turns red and a small flame label reads heartburn. Below, two short goal tags read: less acid, more protection.",
+ title:"Ulcers and GERD: what the drugs are treating",
+ body:`<p>Two common problems drive most acid-drug orders.</p>
+ <p><b>Peptic ulcer disease.</b> The main causes are <b>H. pylori</b> infection and <b>NSAID</b> use. H. pylori is a spiral bacterium that hides in the mucus. It makes an enzyme, <b>urease</b>, that turns urea into <b>ammonia</b>, a little cloud of base that shields it from acid while it damages the lining. Signs of an ulcer include burning upper belly pain and, if it bleeds, black tarry stools or vomit that looks like coffee grounds.</p>
+ <p><b>GERD.</b> The ring of muscle at the bottom of the esophagus, the <b>lower esophageal sphincter</b>, relaxes at the wrong times. Acid splashes up and burns the esophagus (heartburn). Lifestyle teaching helps: smaller meals, no lying down for 2 to 3 hours after eating, raising the head of the bed, and avoiding triggers.</p>
+ <p>Drug goals are the same for both: <b>less acid</b>, <b>more protection</b>, and, if H. pylori is present, <b>kill the bacterium</b>.</p>`,
+ analogy:"H. pylori is like a burglar wearing a protective suit (its ammonia cloud) so the acid alarm does not hurt it while it breaks into the house.",
+ terms:[["H. pylori","Helicobacter pylori, a spiral bacterium that lives in stomach mucus and causes most ulcers that are not from NSAIDs."],["Urease","H. pylori enzyme that makes ammonia, neutralizing acid right around the bacterium."],["Lower esophageal sphincter","Muscle ring between the esophagus and stomach that normally keeps acid down."]],
+ check:{q:"A patient with a known ulcer reports black, tarry stools. What should the nurse do?",opts:[
+  ["Report it promptly as a possible sign of GI bleeding and check vital signs",1,"Yes. Black, tarry stool (melena) can mean bleeding from the upper GI tract. Check for low BP, fast pulse and dizziness, and report."],
+  ["Reassure the patient that this is normal with ulcers",0,"It is not normal. Tarry black stool suggests digested blood and must be reported."],
+  ["Give an antacid and recheck tomorrow",0,"A possible bleed needs assessment and reporting now, not a delay."],
+  ["Encourage more fiber in the diet",0,"Fiber does not address possible bleeding. Assess and report."]]},
+ caption:"Ulcers: H. pylori and NSAIDs wear through the lining. GERD: a loose sphincter lets acid up into the esophagus.",
+ legend:[["bact","H. pylori"],["nh3","Ammonia cloud"],["acid","H⁺ acid"],["stomach","Stomach wall"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"ppi",desc:"Two parietal cells sit side by side. The left one, labelled Normal, has three spinning teal proton pumps on its right edge pushing a stream of red H+ balls into the stomach. In the right one, labelled With omeprazole, indigo hexagon drug molecules arrive from the blood, travel across the cell, and enter the acid space by the pumps. There the hexagons turn into an active form (a small flash), then latch onto each pump with a short bond line. The latched pumps turn grey, stop spinning and push no more H+. The three doorbell receptors on the left still receive histamine, ACh and gastrin, but the pumps stay off. A tag reads: irreversible, new pumps must be made.",
+ title:"Proton pump inhibitors: break the pump",
+ body:`<p><b>Proton pump inhibitors (PPIs)</b> are the strongest acid reducers. The prototype is <b>omeprazole</b>; <b>pantoprazole</b> is common in hospitals and comes IV. Their stem is <b>-prazole</b>.</p>
+ <p>A PPI is a <b>prodrug</b>. It is absorbed into the blood, reaches the parietal cell, and is switched on by acid right next to the pumps. The active form makes a <b>permanent (covalent) bond</b> with the pump. That pump is finished. Acid only comes back as the cell builds <b>new pumps</b>, which takes about a day or more. That is why one dose a day works, even though the drug leaves the blood within hours.</p>
+ <p>Because all three doorbells lead to this pump, PPIs reduce acid from every signal. Uses: GERD, healing ulcers, H. pylori therapy, preventing stress ulcers in very sick patients, and protecting the stomach when NSAIDs are needed.</p>
+ <p>It takes a few days of daily dosing to reach full effect, because each dose catches only the pumps that are active at that moment.</p>`,
+ analogy:"Gluing a machine's gears. The glue (the PPI) is cleaned out of the factory within hours, but the glued machines never run again. Only new machines restore production.",
+ terms:[["Proton pump inhibitor (PPI)","A drug that permanently blocks the H⁺/K⁺ ATPase. Stem: -prazole."],["Prodrug","A drug given in an inactive form that the body converts into the active form."],["Irreversible inhibition","The drug bonds permanently; the effect lasts until the body makes new protein."]],
+ check:{q:"Omeprazole leaves the blood within a few hours. Why does one daily dose still control acid all day?",opts:[
+  ["It bonds permanently to the pumps, so acid returns only as new pumps are made",1,"Yes. The effect lasts as long as the blocked pumps, not as long as the drug stays in the blood."],
+  ["It is stored in body fat and released slowly",0,"Its long effect comes from the permanent bond to the pump, not from storage."],
+  ["It blocks the H2 receptor for 24 hours",0,"Omeprazole acts on the pump, not the H2 receptor. That is famotidine's target."],
+  ["It coats the stomach with a lasting film",0,"Coating is sucralfate's mechanism. Omeprazole blocks the pump from inside."]]},
+ caption:"Omeprazole is activated by acid near the pump and bonds to it for good. Grey pumps cannot push H⁺ until new pumps are built.",
+ legend:[["pump","Working pump"],["blocked","Blocked pump"],["drug","Omeprazole","s"],["acid","H⁺ acid"]]},
+
+{act:2,scene:"ppitime",desc:"A 24-hour clock strip runs across the top with a fork-and-plate meal icon at breakfast. Below are two rows. In the top row, labelled Taken 30 to 60 minutes before breakfast, an indigo pill icon appears just before the meal icon; as breakfast arrives, many teal pumps light up and spin, and indigo drug hexagons latch onto most of them, turning them grey. A counter reads pumps blocked, about 70 percent. In the bottom row, labelled Taken at bedtime with no food, the pill appears at night when only a few pumps are awake; the drug blocks just those few and then fades away, and later at breakfast most pumps wake up unblocked. Its counter shows about 30 percent. At the bottom, a small pH line graph for each row shows the stomach staying less acidic in the top row.",
+ title:"PPI timing: before breakfast",
+ body:`<p>A PPI can only block pumps that are <b>active</b> at the moment the drug is in the blood. Pumps sit idle until food switches them on. The drug only lasts a short time in the blood.</p>
+ <p>So the classic teaching is: take the oral PPI <b>30 to 60 minutes before the first meal of the day</b> (usually breakfast). The drug arrives in the blood just as breakfast turns on the pumps, and it catches the most pumps. Taken at bedtime with no food, or long after a meal, it finds far fewer active pumps.</p>
+ <p>Other teaching: swallow delayed-release capsules or tablets <b>whole</b> (do not crush or chew), because the coating protects the drug from stomach acid until it reaches the intestine. Full relief may take several days. Report symptoms that persist, trouble swallowing, weight loss or black stools.</p>`,
+ analogy:"Catching mice with a short-lived trap. Set it right before the mice come out (breakfast) and you catch many. Set it when they are asleep and it is gone before they wake.",
+ terms:[["Delayed-release (enteric-coated)","A coating that keeps the drug intact through the acid stomach so it is absorbed in the intestine. Do not crush."],["Active pump","A proton pump that has been switched on by food signals and moved to the cell surface."],["Before breakfast","The usual instruction for once-daily oral PPIs: 30 to 60 minutes before the first meal."]],
+ check:{q:"A patient says she takes her omeprazole at bedtime and still has heartburn. What teaching fits best?",opts:[
+  ["Take it 30 to 60 minutes before breakfast so it catches the pumps food switches on",1,"Yes. PPIs block active pumps. Dosing before the first meal matches the drug's short time in the blood with the pumps' busiest time."],
+  ["Take it with a large glass of milk at bedtime",0,"Milk does not help the PPI, and bedtime is the timing problem."],
+  ["Chew the capsule so it works faster",0,"Chewing destroys the protective coating, and acid can inactivate the drug."],
+  ["Double the dose at bedtime",0,"Changing the dose is the prescriber's decision. The issue here is timing."]]},
+ caption:"Take before the first meal: the drug is in the blood just as food switches the pumps on. At bedtime, few pumps are awake to block.",
+ legend:[["pump","Active pump"],["blocked","Blocked pump"],["drug","PPI","s"],["acid","Acid level"]]},
+
+{act:2,scene:"ppirisk",desc:"Four panels sit in a two-by-two grid. Top left, labelled C. difficile, shows a stomach with few red acid balls; green rod bacteria slip through it unharmed and multiply in the colon below. Top right, labelled Fractures, shows a bone whose inner honeycomb thins as small calcium dots fail to cross from the gut wall. Bottom left, labelled Low magnesium, shows a gauge for magnesium with its needle sliding into the low zone and a muscle cramping. Bottom right, labelled Low vitamin B12, shows B12 dots stuck to food protein that cannot be freed without acid, so few cross into the blood. A timeline tag at the top reads: risks grow with long-term use.",
+ title:"PPIs long term: what less acid costs",
+ body:`<p>PPIs are generally safe in the short term. Most adverse effects come from <b>long-term use</b> and from the fact that <b>acid is useful</b>.</p>
+ <ul><li><b>C. difficile infection:</b> acid kills many swallowed bacteria. With less acid, more survive. Report frequent watery diarrhea.</li><li><b>Fractures</b> (hip, wrist, spine): long-term use is linked to weaker bones, likely from less calcium absorption.</li><li><b>Low magnesium (hypomagnesemia):</b> can cause muscle cramps, tremor and abnormal heart rhythms. Magnesium may be checked with long-term use.</li><li><b>Low vitamin B12:</b> acid frees B12 from food protein. Long-term users may need B12 checked.</li><li>Also linked to pneumonia and kidney inflammation.</li></ul>
+ <p>Nursing focus: use the lowest effective dose for the shortest time; review long-term PPIs. Stopping after long use can cause <b>rebound acid</b> for a while, so they are often tapered. Omeprazole can also weaken clopidogrel's antiplatelet effect, a known interaction to report.</p>`,
+ analogy:"Turning off a guard dog. You stop the barking (heartburn), but the dog also kept out intruders (bacteria) and helped unpack groceries (calcium, magnesium, B12).",
+ terms:[["Clostridioides difficile (C. diff)","A bacterium that causes severe watery diarrhea, especially after antibiotics or with low stomach acid."],["Hypomagnesemia","Low blood magnesium: cramps, tremor, arrhythmias."],["Rebound acid hypersecretion","Extra acid for a while after stopping a PPI, because the stomach has built up its acid machinery."]],
+ check:{q:"Which finding in a patient on a PPI for 5 years should the nurse report?",opts:[
+  ["Muscle cramps and tremor, with a low magnesium level",1,"Yes. Long-term PPI use can cause hypomagnesemia, which can lead to cramps and dangerous heart rhythms."],
+  ["Heartburn is gone",0,"That is the expected therapeutic effect, not a problem."],
+  ["Stools are formed and brown",0,"That is a normal finding."],
+  ["Appetite is good",0,"A good appetite is not an adverse effect."]]},
+ caption:"Long-term PPIs: C. diff, fractures, low magnesium and low B12. Use the lowest dose for the shortest time.",
+ legend:[["acid","Stomach acid"],["bact","Bacteria"],["bone","Bone"],["bad","Problem area"]]},
+
+{act:2,scene:"h2",desc:"A parietal cell is drawn with its three receptor cups on the left. An indigo hexagon labelled famotidine sits in the top cup, H2, so the amber histamine diamonds bounce off and drift away. The green ACh and magenta gastrin diamonds still dock in the other two cups. Fewer gold signal dots cross the cell, and the three pumps spin more slowly, pushing out a thinner stream of red H+ balls. A bar at the bottom compares acid output: normal 100 percent, with famotidine about half in this teaching model. A label points to the famotidine in the H2 cup, and a moon icon notes it works well on night-time acid.",
+ title:"H2 blockers: unplug one doorbell",
+ body:`<p><b>H2 receptor blockers</b> (stem <b>-tidine</b>) block histamine at the parietal cell's H2 receptor. The prototype is <b>famotidine</b>. Others include cimetidine.</p>
+ <p>Because histamine is only one of three doorbells, acid falls a lot but not as completely as with a PPI. The block is <b>reversible</b> and wears off as the drug leaves. H2 blockers work well on <b>night-time acid</b>, which is driven mostly by histamine, and they act faster than PPIs for occasional heartburn.</p>
+ <p>Adverse effects are usually mild: headache, dizziness, diarrhea or constipation. In <b>older adults</b> and people with <b>kidney disease</b>, the drug can build up and cause <b>confusion</b>; the dose is often reduced for poor kidney function. Cimetidine has more drug interactions (it slows liver enzymes) and can cause breast enlargement in men, which is why famotidine is preferred.</p>`,
+ analogy:"Taking the batteries out of one doorbell. Visitors can still ring the other two, so the machine runs, just less often.",
+ terms:[["H2 receptor antagonist","A drug that blocks histamine at H2 receptors on parietal cells. Stem: -tidine."],["Reversible block","The drug can let go of the receptor; the effect fades as drug levels fall."],["Nocturnal acid","Acid made at night, largely driven by histamine."]],
+ check:{q:"An 84-year-old with poor kidney function on famotidine becomes newly confused. What should the nurse consider?",opts:[
+  ["Famotidine may be building up; report the confusion so the dose can be reviewed",1,"Yes. Famotidine is cleared by the kidneys. Reduced kidney function lets it build up, and older adults are more prone to CNS effects such as confusion."],
+  ["Confusion is expected with aging and needs no report",0,"New confusion is always worth reporting; a drug cause should be looked for."],
+  ["Give famotidine more often to settle the stomach",0,"More drug would raise levels further."],
+  ["Switch to a different -tidine on your own",0,"Choosing a drug is the prescriber's call, and the class shares the kidney issue."]]},
+ caption:"Famotidine plugs the H2 receptor. Histamine bounces off; ACh and gastrin still work, so acid falls but does not stop.",
+ legend:[["hist","Histamine","d"],["ach","ACh","d"],["gastrin","Gastrin","d"],["drug","Famotidine","s"],["acid","H⁺"]]},
+
+{act:2,scene:"antacid",desc:"The inside of the stomach fills the left two-thirds. Blue square antacid particles fall in from a tablet at the top, meet red H+ balls and pair up; each pair fades into a small water drop, and a pH gauge on the side climbs from about 2 toward 4 and then slowly sinks back as the antacid is used up. On the right are two small panels. The upper one compares aluminum hydroxide, with a slow, hard stool blob in a colon labelled constipation, and magnesium hydroxide, with a fast, watery stream labelled diarrhea. The lower panel shows a clock with a two-hour gap between an antacid tablet and another pill bottle, plus a kidney icon with a caution tag.",
+ title:"Antacids: neutralize what is already there",
+ body:`<p><b>Antacids</b> do not stop acid from being made. They are <b>bases</b> that react with the acid already in the stomach, raising the pH within minutes. Relief is fast but short. Common ones: <b>aluminum hydroxide</b>, <b>magnesium hydroxide</b>, <b>calcium carbonate</b> and sodium bicarbonate.</p>
+ <ul><li><b>Aluminum</b> and <b>calcium</b> tend to cause <b>constipation</b>. <b>Magnesium</b> tends to cause <b>diarrhea</b>. Many products combine aluminum and magnesium so the effects cancel.</li><li><b>Spacing:</b> antacids bind or block absorption of many drugs (for example some antibiotics such as tetracyclines and fluoroquinolones, iron, levothyroxine). Separate them from other drugs, commonly by about 1 to 2 hours (check the specific drug).</li><li><b>Kidney disease:</b> the kidneys clear magnesium and aluminum. With poor kidney function these can build up to toxic levels, so many antacids are avoided.</li><li>Sodium bicarbonate adds sodium and can upset acid-base balance; calcium carbonate in large amounts can raise calcium.</li></ul>`,
+ analogy:"Mopping up a spill while the tap is still running. The floor is dry for a bit (fast relief), but the tap (the pumps) keeps going.",
+ terms:[["Antacid","A base that neutralizes stomach acid already present."],["Neutralization","Acid (H⁺) plus base reacting to make water and a salt, raising the pH."],["Drug spacing","Giving two drugs at different times so one does not block the other's absorption."]],
+ check:{q:"A patient takes ciprofloxacin and an antacid. What should the nurse teach?",opts:[
+  ["Take them hours apart, as directed, because the antacid can stop the antibiotic from being absorbed",1,"Yes. Antacid metals bind drugs like fluoroquinolones in the gut. Separating the doses keeps the antibiotic working."],
+  ["Take them together so the antibiotic does not upset the stomach",0,"Together, the antacid can bind the antibiotic and make it fail."],
+  ["Antacids have no drug interactions",0,"Antacids interact with many drugs by binding them or changing stomach pH."],
+  ["Switch to magnesium antacid so they can be taken together",0,"Magnesium antacids bind these drugs too."]]},
+ caption:"Antacids react with acid already in the stomach: fast, short relief. Aluminum constipates, magnesium loosens. Space them from other drugs.",
+ legend:[["base","Antacid base","s"],["acid","H⁺ acid"],["h2o","Water"],["stool","Stool"]]},
+
+/* ---------- Part 3 ---------- */
+{act:3,scene:"sucralfate",desc:"A close-up of the stomach lining runs across the bottom with a red, crater-shaped ulcer in its center. A tablet drops in from the top left. In the acid (red H+ balls around it), the tablet softens and spreads into a sticky beige paste, which flows down and settles over the ulcer crater like a bandage, while the healthy lining on either side stays mostly bare. Acid balls that reach the paste bounce off. On the right, a small timeline shows the dose given one hour before meals and at bedtime, and a second pill bottle is held back by a two-hour gap marker.",
+ title:"Sucralfate: a bandage for the ulcer",
+ body:`<p><b>Sucralfate</b> is a mucosal protectant. In acid, it turns into a <b>thick, sticky paste</b> that binds to the proteins in an ulcer crater and forms a <b>protective barrier</b>. Acid and pepsin cannot reach the raw tissue, so it can heal. Very little enters the blood.</p>
+ <ul><li><b>Timing:</b> it needs acid to form the paste, so give it on an <b>empty stomach</b>, typically 1 hour before meals and at bedtime.</li><li><b>Spacing:</b> the paste also traps other drugs. Give other drugs about 2 hours apart, and avoid antacids within about 30 minutes of sucralfate.</li><li><b>Adverse effects:</b> mostly <b>constipation</b>. It contains aluminum, so use caution in kidney disease.</li></ul>`,
+ analogy:"A liquid bandage that only sets when it touches the wound. It needs the right conditions (acid) to set, and it sticks to anything nearby, including other pills.",
+ terms:[["Mucosal protectant","A drug that physically shields the stomach lining rather than changing acid production."],["Sucralfate","An aluminum-containing compound that forms a paste over ulcers in acid."],["Empty stomach","About 1 hour before or 2 hours after a meal."]],
+ check:{q:"Which schedule is best for sucralfate in a patient who also takes digoxin?",opts:[
+  ["Sucralfate 1 hour before meals and at bedtime, digoxin at least 2 hours apart",1,"Yes. Sucralfate works best on an empty stomach and can bind digoxin, so the doses are separated."],
+  ["Sucralfate and digoxin together with breakfast",0,"Together, sucralfate can trap the digoxin, and food reduces sucralfate's effect."],
+  ["Sucralfate right after an antacid dose",0,"Antacids raise pH, and sucralfate needs acid to form its paste. Separate them by about 30 minutes."],
+  ["Sucralfate crushed into a meal",0,"Food and timing with meals reduce its effect on the ulcer."]]},
+ caption:"In acid, sucralfate becomes a paste that sticks to the ulcer base. Give it on an empty stomach and space other drugs.",
+ legend:[["coat","Sucralfate paste"],["acid","H⁺ acid"],["bad","Ulcer crater"],["mucus","Mucus"]]},
+
+{act:3,scene:"miso",desc:"Two strips of stomach lining sit one above the other. The top strip, labelled NSAID only, shows a grey COX enzyme box with an X on it; no orange prostaglandin dots come out, the green mucus gel is thin, few blue bicarbonate squares rise, and red H+ balls break through to make a red sore. The bottom strip, labelled NSAID plus misoprostol, shows indigo hexagon misoprostol molecules docking onto receptors on the lining cells in place of the missing prostaglandins; the mucus gel thickens, more bicarbonate squares rise, and the sore fades. A red warning tag on the right shows a uterus outline with contraction lines and the words: not in pregnancy.",
+ title:"Misoprostol: replacing the missing prostaglandin",
+ body:`<p>NSAIDs remove prostaglandins, and the stomach loses its repair crew. <b>Misoprostol</b> is a man-made <b>prostaglandin (E1 analog)</b>. It docks on the same receptors and puts the defenses back: <b>more mucus</b>, <b>more bicarbonate</b>, better blood flow and a little less acid. Its main use is <b>preventing NSAID-induced ulcers</b> in people who must keep taking NSAIDs.</p>
+ <ul><li><b>Adverse effects:</b> <b>diarrhea</b> and abdominal cramps are common (prostaglandins also speed up the gut).</li><li><b>Pregnancy:</b> prostaglandins make the uterus contract. Misoprostol can cause miscarriage, early birth or birth defects, so it is <b>contraindicated in pregnancy</b> (a boxed warning). People who could become pregnant need a negative pregnancy test and reliable contraception, as directed.</li></ul>`,
+ analogy:"The NSAID sends the repair crew home. Misoprostol is a stand-in crew wearing the same uniform. The catch: that uniform also opens other doors, such as the one that starts uterine contractions.",
+ terms:[["Misoprostol","A synthetic prostaglandin E1 used to prevent NSAID ulcers."],["Analog","A man-made molecule that copies a natural one and acts on the same receptor."],["Boxed warning","The strongest FDA warning on a drug label, for serious risks."]],
+ check:{q:"A 28-year-old with arthritis is prescribed an NSAID plus misoprostol. What is the most important teaching?",opts:[
+  ["Misoprostol can cause miscarriage; use reliable contraception and report a possible pregnancy",1,"Yes. Misoprostol is contraindicated in pregnancy. This is the key safety teaching for anyone who could become pregnant."],
+  ["Expect constipation; increase fiber",0,"Misoprostol more often causes diarrhea and cramps."],
+  ["Take it only when stomach pain starts",0,"It is taken regularly to prevent ulcers while on the NSAID."],
+  ["It will make the NSAID work better for joint pain",0,"Misoprostol protects the stomach; it does not change pain relief."]]},
+ caption:"Misoprostol stands in for the prostaglandins NSAIDs remove: more mucus and bicarbonate. Diarrhea is common; it is not used in pregnancy.",
+ legend:[["pg","Prostaglandin"],["drug","Misoprostol","s"],["mucus","Mucus"],["base","Bicarbonate","s"]]},
+
+{act:3,scene:"hpylori",desc:"A layer of green stomach mucus fills the middle with several green rod-shaped H. pylori bacteria swimming in it, each wrapped in a pale olive ammonia cloud. Below the scene, three or four indigo drug chips arrive one at a time: PPI, then two antibiotic chips (clarithromycin and amoxicillin), and in the second half of the loop a bismuth chip. As the PPI chip arrives, red acid balls thin out and the pH rises. As the antibiotic chips arrive, the bacteria flicker and break apart one by one. A small counter shows bacteria left dropping to zero, and a tag reads: take every dose, then test to confirm.",
+ title:"H. pylori: combination therapy",
+ body:`<p>If H. pylori is found, healing the ulcer is not enough. The bacterium must be <b>killed</b>, or the ulcer comes back. One antibiotic alone fails too often because of resistance, so treatment uses a <b>combination</b> for about 2 weeks.</p>
+ <ul><li><b>Triple therapy</b> (concept): a <b>PPI</b> plus <b>two antibiotics</b>, such as clarithromycin with amoxicillin or metronidazole.</li><li><b>Bismuth quadruple therapy</b>: a PPI, <b>bismuth</b>, and two antibiotics (tetracycline and metronidazole).</li></ul>
+ <p>Why the PPI? Raising the pH helps the antibiotics work and lets the ulcer heal. Nursing teaching: take <b>every dose</b> for the full course even if pain stops, expect side effects such as a metallic taste (metronidazole), dark stools (bismuth) or diarrhea, avoid alcohol with metronidazole, and come back for a test to confirm the infection is gone.</p>`,
+ analogy:"A team of exterminators. One alone often fails because some pests are resistant. Several at once, plus lowering their acid shield, clears the house.",
+ terms:[["Combination therapy","Using several drugs together to improve cure rates and limit resistance."],["Eradication","Complete removal of the infection, confirmed by a follow-up test."],["Bismuth","A metal compound that helps kill H. pylori and coats the lining; turns stools and tongue dark."]],
+ check:{q:"Why is H. pylori treated with several drugs at once?",opts:[
+  ["To improve cure rates and prevent antibiotic resistance, with a PPI to raise pH and help healing",1,"Yes. Single antibiotics fail too often. Two antibiotics plus a PPI (sometimes with bismuth) raise the cure rate."],
+  ["Because the PPI alone kills H. pylori",0,"A PPI does not reliably kill H. pylori. Antibiotics are needed."],
+  ["So each drug can be taken for only one day",0,"The usual course is about 2 weeks, and every dose matters."],
+  ["Because H. pylori is a virus",0,"H. pylori is a bacterium, which is why antibiotics work."]]},
+ caption:"H. pylori hides in mucus behind an ammonia cloud. A PPI plus two antibiotics (or bismuth quadruple therapy) clears it.",
+ legend:[["bact","H. pylori"],["nh3","Ammonia cloud"],["drug","Drugs","s"],["acid","H⁺ acid"]]},
+];
+STEPS.push(
+/* ---------- Part 4 ---------- */
+{act:4,scene:"vc",desc:"A side view of a pink brain fills the scene, with the brainstem running down at the bottom center. A round vomiting center sits in the brainstem. Four input wires lead into it, each carrying moving colored dots: a brown-gold wire from the cortex at the top (fear, smells, pain); a blue wire from an ear and its inner ear canals on the left, passing a socket labelled H1 and M1; a pink wire from a blood vessel on the right that passes through a dashed box labelled CTZ, with sockets labelled D2 and 5-HT3; and an orange wire from a stomach at the bottom left, the vagus nerve, passing a socket labelled 5-HT3. Two small sockets on the vomiting center are labelled NK1 and CB1. In turn, each wire brightens and fills with more dots, and the vomiting center glows red as its signal grows.",
+ title:"The vomiting center and its four inputs",
+ body:`<p>Nausea and vomiting are controlled by a <b>vomiting center</b> in the brainstem (medulla). It acts when enough signals arrive from four main inputs:</p>
+ <ul><li><b>The chemoreceptor trigger zone (CTZ)</b>, in an area where the blood-brain barrier is leaky, so it can "taste" the blood for toxins, drugs (opioids, anesthesia, chemotherapy) and waste. It uses <b>dopamine (D2)</b>, <b>serotonin (5-HT3)</b> and <b>substance P (NK1)</b> receptors.</li><li><b>The gut</b>, through the vagus nerve. Irritated gut cells (for example after chemotherapy) release <b>serotonin</b>, which fires <b>5-HT3</b> receptors on the nerve.</li><li><b>The inner ear (vestibular system)</b>, for motion sickness, using <b>histamine (H1)</b> and <b>acetylcholine (muscarinic)</b> receptors.</li><li><b>The cortex</b>: fear, pain, sights and smells, and anticipation.</li></ul>
+ <p>The secret to antiemetics: <b>match the drug's receptor to the input causing the nausea</b>.</p>`,
+ analogy:"A control room with four alarm lines. Each line has its own type of plug. To stop the alarm, you unplug the line that is ringing, not a random one.",
+ terms:[["Chemoreceptor trigger zone (CTZ)","Area in the brainstem (area postrema) that detects toxins in the blood and triggers vomiting."],["Vestibular system","Inner ear balance organs; mismatched motion signals cause motion sickness."],["5-HT3 receptor","A serotonin receptor on vagus nerve endings and in the CTZ; key in chemotherapy nausea."]],
+ check:{q:"Which input is mainly responsible for motion sickness?",opts:[
+  ["The inner ear (vestibular) input, using H1 and muscarinic receptors",1,"Yes. Motion confuses the balance organs, which signal through histamine and acetylcholine pathways."],
+  ["The CTZ sensing blood toxins",0,"The CTZ matters for drug and chemotherapy nausea. Motion sickness starts in the inner ear."],
+  ["Serotonin released from the gut",0,"Gut serotonin is key after chemotherapy, not in motion sickness."],
+  ["The proton pump",0,"The proton pump makes acid; it is not an input to the vomiting center."]]},
+ caption:"Four inputs feed the vomiting center: cortex, inner ear (H1, M1), CTZ (D2, 5-HT3) and gut vagus (5-HT3). NK1 and CB1 act at the center.",
+ legend:[["brain","Brain"],["sero","CTZ input"],["nerve","Gut vagus input"],["dopa","Inner ear input"],["receptor","Receptor socket"]]},
+
+{act:4,scene:"ondan",desc:"On the left, a strip of gut lining shows cells releasing magenta serotonin diamonds onto an orange vagus nerve ending with teal 5-HT3 receptor cups. In the first half of the loop the diamonds dock and orange signal dots race up the nerve toward a small vomiting center, which glows red. Then indigo ondansetron hexagons arrive and sit in the 5-HT3 cups; the diamonds bounce off, the nerve goes quiet and the center's glow fades. On the right, an ECG strip shows the gap between the QRS spike and the end of the T wave stretching wider, with a bracket labelled QT, and below it a small colon with a slow, dry stool labelled constipation.",
+ title:"Ondansetron: blocking serotonin (5-HT3)",
+ body:`<p><b>5-HT3 antagonists</b> (stem <b>-setron</b>), prototype <b>ondansetron</b>, block serotonin at <b>5-HT3 receptors</b> on the vagus nerve endings in the gut and in the CTZ. They are first-line for <b>chemotherapy</b> nausea and very useful <b>after surgery</b>. They do little for <b>motion sickness</b>, because that pathway does not use serotonin.</p>
+ <ul><li><b>Common effects:</b> headache, dizziness and <b>constipation</b> (serotonin also helps the gut move).</li><li><b>QT prolongation:</b> ondansetron can lengthen the QT interval, raising the risk of a dangerous rhythm (torsades de pointes). Risk is higher with <b>low potassium or magnesium</b>, heart failure, slow heart rates, and other QT-prolonging drugs. Check electrolytes and the ECG in at-risk patients, as ordered.</li><li>Rarely, serotonin syndrome when combined with other serotonin drugs.</li></ul>`,
+ analogy:"Chemotherapy makes the gut shout through a megaphone (serotonin). Ondansetron unplugs the megaphone's speaker on the nerve, so the shouting never reaches the control room.",
+ terms:[["5-HT3 antagonist","Blocks serotonin at 5-HT3 receptors. Stem: -setron."],["QT interval","ECG time from the start of the QRS to the end of the T wave; a long QT can trigger torsades de pointes."],["Torsades de pointes","A dangerous twisting ventricular rhythm linked to a long QT."]],
+ check:{q:"Before giving IV ondansetron, which lab results are most important to check in a patient with a history of a long QT?",opts:[
+  ["Potassium and magnesium",1,"Yes. Low K⁺ or Mg²⁺ add to QT prolongation. Correcting them lowers the risk, and the ECG may be checked."],
+  ["Blood glucose and A1C",0,"Glucose does not change QT risk here. Check potassium and magnesium."],
+  ["Amylase and lipase",0,"These are pancreas enzymes, not related to ondansetron's QT risk."],
+  ["Hemoglobin and platelets",0,"These are not the key safety labs for ondansetron."]]},
+ caption:"Ondansetron blocks serotonin at 5-HT3 receptors on the gut's vagus nerve and in the CTZ. Watch the QT and expect constipation.",
+ legend:[["sero","Serotonin","d"],["receptor","5-HT3 receptor"],["drug","Ondansetron","s"],["nerve","Vagus nerve"]]},
+
+{act:4,scene:"dopa",desc:"The left half shows the CTZ as a dashed box with a teal D2 receptor socket. Blue dopamine diamonds arrive from the blood and dock, sending pink signal dots to the vomiting center. Then an indigo hexagon labelled metoclopramide or prochlorperazine fills the D2 socket, the diamonds bounce away and the signal stops. The right half shows a small brain with a dark motor area labelled basal ganglia, where the same drug also blocks D2. Below it, a simple head and neck figure twists to one side with its eyes rolled up (acute dystonia), and a second figure shows small repeated mouth and tongue movements labelled tardive dyskinesia, long-term metoclopramide. A stomach at the bottom right empties faster with metoclopramide, with arrows pushing contents into the intestine.",
+ title:"Dopamine blockers: metoclopramide and prochlorperazine",
+ body:`<p><b>Dopamine (D2) antagonists</b> block D2 receptors in the CTZ. Two key drugs:</p>
+ <ul><li><b>Prochlorperazine</b> (a phenothiazine): strong antiemetic; also sedating, can lower BP and has anticholinergic effects.</li><li><b>Metoclopramide</b>: blocks D2 in the CTZ <b>and</b> is a <b>prokinetic</b>, it speeds stomach emptying. That makes it useful for <b>diabetic gastroparesis</b> (a slow stomach).</li></ul>
+ <p>Dopamine also controls movement in the brain's <b>basal ganglia</b>. Blocking it there causes <b>extrapyramidal symptoms (EPS)</b>: <b>acute dystonia</b> (sudden muscle spasms of the neck, jaw or eyes, more common in young people and with IV doses), <b>akathisia</b> (restlessness) and parkinson-like stiffness. Acute dystonia is treated with an anticholinergic such as diphenhydramine or benztropine, per order.</p>
+ <p>Metoclopramide carries a <b>boxed warning for tardive dyskinesia</b> (involuntary, often permanent movements of the face and tongue). Avoid using it for more than <b>12 weeks</b>. Because it speeds the gut, it is <b>contraindicated in bowel obstruction</b>, perforation or GI bleeding.</p>`,
+ analogy:"The same plug (D2) is used by two machines: the nausea alarm and the movement control panel. Block the plug and you quiet the alarm, but the movement panel can glitch.",
+ terms:[["Extrapyramidal symptoms (EPS)","Movement problems from blocking dopamine: dystonia, akathisia, parkinsonism."],["Tardive dyskinesia","Late, involuntary repetitive movements, often of the mouth and tongue; can be permanent."],["Prokinetic","A drug that increases movement through the upper gut."]],
+ check:{q:"Thirty minutes after IV metoclopramide, a 22-year-old's neck twists to one side and her eyes roll upward. What is the best explanation?",opts:[
+  ["An acute dystonic reaction from dopamine blockade in the basal ganglia",1,"Yes. This is an extrapyramidal reaction. Stop the drug, report, and expect an anticholinergic such as diphenhydramine per order."],
+  ["A seizure from low blood sugar",0,"The sustained twisting posture with upward eyes after a D2 blocker fits acute dystonia."],
+  ["Tardive dyskinesia",0,"Tardive dyskinesia develops after long use. This is an early (acute) reaction."],
+  ["An expected therapeutic effect",0,"This is an adverse effect and should be reported right away."]]},
+ caption:"D2 blockers quiet the CTZ but also block dopamine in the movement centers: EPS, and tardive dyskinesia with long-term metoclopramide.",
+ legend:[["dopa","Dopamine","d"],["receptor","D2 receptor"],["drug","D2 blocker","s"],["brain","Brain"]]},
+
+{act:4,scene:"motion",desc:"A small boat rocks on blue waves on the left with a person in it. Their inner ear canals wobble and send blue signal dots along a wire toward the vomiting center, past a socket labelled H1 and M1. A skin patch on the skin behind the person's ear releases indigo hexagons that travel to the socket and block it, so the dots stop and the center stays calm. On the right, a list of anticholinergic effects appears, each with a small icon: a dry mouth, a blurred eye with a wide pupil, a drowsy face, and a bladder with a stop mark. A hand with soap and water reminds the viewer to wash hands after touching the patch.",
+ title:"Motion sickness: scopolamine and antihistamines",
+ body:`<p>Motion sickness comes from the <b>inner ear</b>, which signals through <b>acetylcholine (muscarinic)</b> and <b>histamine (H1)</b> pathways. So the drugs that work are <b>anticholinergics</b> and <b>H1 antihistamines</b>.</p>
+ <ul><li><b>Scopolamine</b> (anticholinergic) comes as a <b>skin patch</b>, placed on clean, hairless skin <b>behind the ear</b>, ideally a few hours before travel. It lasts about 3 days.</li><li><b>Meclizine</b> and <b>dimenhydrinate</b> are H1 antihistamines that also have anticholinergic effects.</li></ul>
+ <p>Anticholinergic effects follow from blocking acetylcholine: <b>dry mouth</b>, <b>drowsiness</b>, <b>blurred vision</b> and wide pupils, constipation and <b>urinary retention</b>. Older adults can become confused. Use caution in <b>narrow-angle glaucoma</b> and an enlarged prostate. Teach: <b>wash hands</b> after touching the patch (drug on fingers rubbed into an eye widens the pupil), avoid driving if drowsy, and avoid alcohol.</p>`,
+ analogy:"The inner ear is sending a confusing radio message on two channels. These drugs jam both channels, but the jammer also mutes other things on the same frequency, like saliva and bladder signals.",
+ terms:[["Anticholinergic","Blocks acetylcholine at muscarinic receptors: dry mouth, blurred vision, retention, constipation, drowsiness."],["Transdermal patch","Delivers drug through the skin at a steady rate."],["H1 antihistamine","Blocks histamine at H1 receptors; many also cause drowsiness."]],
+ check:{q:"Which patient teaching is correct for a scopolamine patch?",opts:[
+  ["Place it behind the ear and wash your hands after touching it",1,"Yes. Drug left on the fingers can get in the eye and dilate the pupil, blurring vision."],
+  ["Place it on the chest and change it every few hours",0,"It goes behind the ear and usually lasts about 3 days."],
+  ["It works best for chemotherapy nausea",0,"Scopolamine targets the inner-ear pathway, so it suits motion sickness."],
+  ["Increased saliva is expected",0,"It causes dry mouth, because it blocks acetylcholine."]]},
+ caption:"Motion sickness runs through H1 and muscarinic pathways. Scopolamine and meclizine block them; expect anticholinergic effects.",
+ legend:[["dopa","Inner ear signal"],["drug","Scopolamine","s"],["receptor","H1 / M1 receptor"],["skin","Skin"]]},
+
+{act:4,scene:"chemo",desc:"A timeline runs across the scene from Day 1 to Day 5 after chemotherapy. Above it, two curves show nausea: a sharp early peak on Day 1 labelled acute, driven mostly by serotonin, and a lower, longer hump on Days 2 to 5 labelled delayed, driven mostly by substance P. Under the curve, the vomiting center icon has an NK1 socket where brown-gold substance P diamonds arrive. Then an indigo hexagon labelled aprepitant blocks the NK1 socket and the delayed hump shrinks, while an ondansetron chip blunts the early peak. A side card shows a green leaf-shaped icon labelled cannabinoids, dronabinol, with notes: for nausea that resists other drugs; can cause drowsiness, dizziness and mood changes.",
+ title:"Chemotherapy nausea: NK1 blockers and cannabinoids",
+ body:`<p>Chemotherapy nausea has two phases. The <b>acute</b> phase (first 24 hours) is driven mostly by <b>serotonin</b> from the gut. The <b>delayed</b> phase (days 2 to 5) is driven mostly by <b>substance P</b> acting at <b>NK1 receptors</b> in the brain.</p>
+ <ul><li><b>NK1 antagonists</b> (stem <b>-pitant</b>), prototype <b>aprepitant</b>, block substance P. They are combined with a 5-HT3 antagonist and a corticosteroid for highly nauseating chemotherapy. They affect liver enzymes (CYP3A4), so they interact with other drugs and can make hormonal birth control less reliable.</li><li><b>Cannabinoids</b> such as <b>dronabinol</b> activate CB1 receptors. They are used when other antiemetics fail and to boost appetite. Effects include drowsiness, dizziness, mood changes and a fast heart rate; caution with driving.</li></ul>
+ <p>Nursing: give antiemetics <b>before</b> chemotherapy and on schedule, not only once vomiting starts. Preventing nausea is much easier than stopping it.</p>`,
+ analogy:"A two-wave storm. Ondansetron is the sandbag for the first wave; aprepitant is the sandbag for the second, slower flood.",
+ terms:[["NK1 antagonist","Blocks substance P at neurokinin-1 receptors. Stem: -pitant."],["Substance P","A neurotransmitter that drives delayed nausea and vomiting."],["Delayed nausea","Nausea from about day 2 to day 5 after chemotherapy."]],
+ check:{q:"Why is an antiemetic schedule usually started before chemotherapy?",opts:[
+  ["Preventing nausea is more effective than trying to stop it once vomiting begins",1,"Yes. Antiemetics work best when the receptors are already blocked before the trigger arrives."],
+  ["Antiemetics only work on an empty stomach",0,"The reason is prevention, not stomach contents."],
+  ["Chemotherapy cannot be given unless the patient is drowsy",0,"Drowsiness is not the goal."],
+  ["To lower the chemotherapy dose",0,"Antiemetics do not change the chemotherapy dose."]]},
+ caption:"Acute chemotherapy nausea is mostly serotonin; delayed nausea is mostly substance P. Aprepitant blocks NK1. Cannabinoids help when others fail.",
+ legend:[["sero","Acute: serotonin"],["subp","Delayed: substance P","d"],["drug","Aprepitant","s"],["cb","Cannabinoid"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"bulk",desc:"Two horizontal colon segments are stacked. The top segment, labelled bulk-forming: psyllium, shows tan fiber specks in the lumen soaking up blue water drops, swelling into large soft brown stool blobs that stretch the wall; the stretch triggers a squeeze wave that moves them to the right. A glass of water next to it empties as the fiber swells. A small red warning shows a narrow tube clogged by a dry fiber lump, labelled not enough water: blockage risk. The bottom segment, labelled stool softener: docusate, shows small hard dark stool pieces; tiny drops of water and yellow fat droplets soak into them so they become softer and lighter in color, without much change in the squeeze wave.",
+ title:"Bulk-forming laxatives and stool softeners",
+ body:`<p><b>Constipation</b> means hard, infrequent stools. Laxatives work in four main ways. Start with the gentlest two.</p>
+ <p><b>Bulk-forming laxatives</b>, prototype <b>psyllium</b> (also methylcellulose), are fiber. They soak up water in the bowel and swell, making stool bigger and softer. The bigger stool stretches the bowel wall, which triggers natural squeezing (<b>peristalsis</b>). They are the most natural choice for long-term use and take 1 to 3 days to work. They must be taken with a <b>full glass of water</b> (and good fluid intake): without water they can form a lump that <b>blocks the esophagus or bowel</b>.</p>
+ <p><b>Stool softeners</b>, prototype <b>docusate</b>, act like a soap (a surfactant) that lets water and fat mix into the stool. They do not push the bowel; they make passing stool easier. They are often used to prevent <b>straining</b>, for example after surgery, after a heart attack, or with hemorrhoids.</p>`,
+ analogy:"Bulk-forming fiber is a dry sponge: give it water and it swells into a soft, easy-to-move mass. Without water, it is a dry sponge stuck in a pipe. Docusate is dish soap that helps water soak into a dried-out lump.",
+ terms:[["Bulk-forming laxative","Fiber that absorbs water to form soft, bulky stool. Take with plenty of water."],["Stool softener","Surfactant (detergent-like) laxative that lets water and fat into stool, such as docusate."],["Peristalsis","Waves of muscle squeezing that move contents through the gut."]],
+ check:{q:"What is the most important teaching for a patient starting psyllium?",opts:[
+  ["Mix it in a full glass of water and keep up fluid intake",1,"Yes. Fiber needs water to work. Without it, it can swell into a blockage."],
+  ["Take it dry to avoid bloating",0,"Taken dry, it can choke or obstruct. It must be mixed with water."],
+  ["Expect a bowel movement within 30 minutes",0,"Bulk-forming laxatives usually take 1 to 3 days."],
+  ["Stop drinking water so it works faster",0,"Less water makes it less effective and riskier."]]},
+ caption:"Psyllium soaks up water and swells, so take it with plenty of water. Docusate lets water and fat soak into hard stool.",
+ legend:[["h2o","Water"],["stool","Stool"],["fat","Fat droplet"],["gut","Bowel wall"]]},
+
+{act:5,scene:"osmotic",desc:"The left two-thirds show a colon segment. Indigo hexagon molecules of polyethylene glycol sit in the lumen and pull blue water drops in through the wall from the surrounding tissue, so the stool softens and the lumen widens. On the right, a panel labelled lactulose in liver failure shows a colon where lactulose is broken down by bacteria into acid, marked by small red H+ balls. Olive NH3 (ammonia) molecules drift from the blood into the colon, pick up an H+ and turn into NH4+ (ammonium), which cannot get back into the blood and is carried away with the stool. A small brain icon above clears from fog to clear as ammonia falls.",
+ title:"Osmotic laxatives: pull water in (and lactulose for ammonia)",
+ body:`<p><b>Osmotic laxatives</b> are molecules that stay in the bowel and <b>pull water in by osmosis</b>. More water means softer stool and more movement.</p>
+ <ul><li><b>Polyethylene glycol (PEG)</b> is a common prototype for constipation. Large volumes are used for <b>bowel prep</b> before colonoscopy.</li><li><b>Magnesium</b> salts (such as magnesium hydroxide or citrate) also work this way. Avoid them in <b>kidney disease</b>, where magnesium can build up.</li><li><b>Lactulose</b> is a sugar the body cannot absorb.</li></ul>
+ <p><b>Lactulose in hepatic encephalopathy:</b> in liver failure, ammonia (NH₃) builds up and causes confusion. Bowel bacteria break lactulose into acids. Acid turns ammonia into <b>ammonium (NH₄⁺)</b>, which is trapped in the colon and leaves with the stool. The dose is commonly adjusted to produce about <b>2 to 3 soft stools a day</b>. Watch for diarrhea, dehydration and low potassium, and check mental status and ammonia levels as ordered.</p>`,
+ analogy:"An osmotic laxative is a sponge you cannot digest: it stays in the pipe and holds on to water. Lactulose also works as a trap: it turns ammonia into a form that cannot climb back out.",
+ terms:[["Osmosis","Water moving toward the side with more dissolved particles."],["Hepatic encephalopathy","Confusion caused by ammonia and other toxins when the liver fails."],["Ammonium (NH₄⁺)","The charged form of ammonia; it cannot easily cross the gut wall, so it is excreted."]],
+ check:{q:"A patient with cirrhosis receives lactulose. Which finding shows it is working?",opts:[
+  ["Clearer thinking with about 2 to 3 soft stools a day",1,"Yes. Lactulose traps ammonia as ammonium in the colon. Less ammonia means less confusion."],
+  ["Constipation for several days",0,"Constipation would mean ammonia is not being cleared. The goal is regular soft stools."],
+  ["Ten watery stools a day",0,"Too many stools can cause dehydration and low potassium. Report it so the dose can be adjusted."],
+  ["Rising ammonia level",0,"Rising ammonia means it is not working well enough."]]},
+ caption:"Osmotic laxatives pull water into the bowel. Lactulose also turns NH₃ into trapped NH₄⁺, lowering ammonia in liver failure.",
+ legend:[["h2o","Water"],["drug","Osmotic molecule","s"],["nh3","Ammonia (NH₃)"],["acid","H⁺ acid"]]},
+
+{act:5,scene:"stim",desc:"The top half shows a colon segment with orange nerve lines in its wall. Indigo hexagons of bisacodyl or senna land on the nerves, which flash, and strong squeeze waves sweep along the wall, pushing stool quickly to the right; a cramp label pulses. The bottom left shows an opioid drug (amber diamonds) docking on teal mu receptors in the gut wall, so the squeeze waves slow almost to a stop and the stool turns dry and hard. Then indigo hexagons labelled methylnaltrexone sit in the gut mu receptors, while a dashed line marks the blood-brain barrier that keeps them out of the brain, so the pain relief icon in the brain stays on. The bottom right shows a bowel with a twisted, blocked section, a red X over a laxative pill, and the words: suspected obstruction, do not give.",
+ title:"Stimulant laxatives, opioid constipation and obstruction",
+ body:`<p><b>Stimulant laxatives</b>, prototypes <b>bisacodyl</b> and <b>senna</b>, stimulate the nerves in the bowel wall, causing strong squeezing and more fluid in the bowel. They work in hours (bisacodyl tablets overnight). Adverse effects: <b>cramping</b>, diarrhea, and with overuse, fluid and electrolyte loss (low potassium). Bisacodyl tablets are enteric-coated: swallow whole and do not take within about an hour of antacids or milk.</p>
+ <p><b>Opioid-induced constipation:</b> opioids act on <b>mu receptors in the gut</b> and slow it down. Unlike drowsiness, the body does <b>not</b> develop tolerance to this, so a laxative plan (often a stimulant, with or without a softener) usually starts with the opioid. <b>Peripherally acting mu antagonists</b> such as <b>methylnaltrexone</b> block mu receptors in the gut but do not cross into the brain, so pain relief is kept.</p>
+ <p><b>Do not give laxatives</b> when a <b>bowel obstruction</b> is suspected (belly swelling, vomiting, no stool or gas, severe cramping pain) or with undiagnosed belly pain. Pushing against a blockage can cause perforation. Report and hold.</p>`,
+ analogy:"A stimulant laxative is pressing the conveyor belt's turbo button. Opioids press the brake. And if there is a jam in the belt (an obstruction), pressing turbo just tears the belt.",
+ terms:[["Stimulant laxative","Irritates or stimulates gut nerves to increase motility, such as bisacodyl and senna."],["Peripherally acting mu antagonist","Blocks opioid receptors in the gut but not the brain, such as methylnaltrexone."],["Bowel obstruction","A blockage that stops contents moving; signs include distension, vomiting and no stool or gas."]],
+ check:{q:"A patient has abdominal distension, vomiting, and no stool or gas for 4 days. A PRN bisacodyl is ordered. What should the nurse do?",opts:[
+  ["Hold the laxative and report signs of possible bowel obstruction",1,"Yes. Stimulating a blocked bowel can cause perforation. Assess, hold and report."],
+  ["Give the bisacodyl and add a second laxative",0,"Laxatives are contraindicated if obstruction is suspected."],
+  ["Encourage a large meal to get things moving",0,"Food would add to the backup. This needs urgent assessment."],
+  ["Give it rectally instead",0,"The route does not remove the risk. Hold and report."]]},
+ caption:"Stimulants push the bowel hard; opioids slow it via gut mu receptors, and methylnaltrexone blocks those without touching pain relief. Never with suspected obstruction.",
+ legend:[["drug","Laxative / blocker","s"],["nerve","Gut nerves"],["ligand","Opioid","d"],["stool","Stool"]]},
+
+{act:5,scene:"antidiarrheal",desc:"The left side shows a colon segment with fast squeeze waves and blue water drops pouring into the lumen, so watery stool rushes to the right. Indigo hexagons of loperamide dock on teal opioid receptors in the gut wall, the squeeze waves slow, water drops move back out of the lumen into the wall, and the stool becomes more formed. On the right, a red-bordered panel shows a colon filled with green C. diff rods releasing small toxin dots; when loperamide slows the gut, the toxins pile up and the colon swells, labelled do not use: traps toxins. A lower panel shows a pink bismuth bottle, a dark-tinted tongue and a dark stool icon, labelled harmless black color, and a salicylate caution tag.",
+ title:"Antidiarrheals: loperamide and bismuth subsalicylate",
+ body:`<p><b>Loperamide</b> is an <b>opioid</b> that acts on <b>mu receptors in the gut wall</b>. It slows peristalsis, giving the bowel more time to absorb water, so stools firm up. At usual doses very little reaches the brain. Adverse effects: constipation, cramping, dizziness. Taking far more than directed can cause dangerous heart rhythms.</p>
+ <p><b>Do not use</b> loperamide for diarrhea with <b>blood</b>, high <b>fever</b>, or suspected <b>C. difficile</b> or other invasive infection. Diarrhea is helping flush out the germ and its toxins. Slowing the gut traps them and can cause <b>toxic megacolon</b>. C. diff needs testing, contact precautions and specific antibiotics.</p>
+ <p><b>Bismuth subsalicylate</b> reduces secretion and has mild antimicrobial effects. It turns the <b>tongue and stool black</b> (harmless, but teach it so it is not mistaken for bleeding). It contains <b>salicylate</b> (an aspirin relative): avoid with aspirin allergy, in children and teens with viral illness (Reye syndrome risk), and use caution with anticoagulants or other salicylates.</p>`,
+ analogy:"Loperamide is a brake on the conveyor belt. Good when the belt is just running too fast. Bad when the belt is carrying out garbage (toxins) that needs to leave.",
+ terms:[["Loperamide","An opioid that acts mainly on gut mu receptors to slow motility."],["Toxic megacolon","A dangerous swelling of the colon that can rupture; a risk when infectious diarrhea is slowed."],["Salicylate","The aspirin family of compounds."]],
+ check:{q:"A patient who recently finished antibiotics has frequent watery stools, fever and a high white blood cell count. They ask for loperamide. What should the nurse do?",opts:[
+  ["Hold off on loperamide and report possible C. diff so testing and precautions can start",1,"Yes. Slowing the gut in C. diff traps toxins and can cause toxic megacolon. Report, use contact precautions, and follow orders."],
+  ["Give loperamide to prevent dehydration",0,"Fluids prevent dehydration. Loperamide is avoided when C. diff is suspected."],
+  ["Give bismuth and loperamide together",0,"That does not address the likely infection, and slowing the gut is the danger."],
+  ["Restart the antibiotic that was just finished",0,"That is not a nursing decision and may make C. diff worse."]]},
+ caption:"Loperamide slows the gut through mu receptors so more water is absorbed. Not with bloody diarrhea or C. diff. Bismuth darkens the tongue and stool.",
+ legend:[["drug","Loperamide","s"],["receptor","Opioid receptor"],["h2o","Water"],["bact","C. diff"]]},
+
+/* ---------- Part 6 ---------- */
+{act:6,scene:"ibd",desc:"A cross-section of an inflamed bowel wall fills the left side, red and swollen, with many small white immune cells and red inflammation sparks. A four-rung ladder on the right is labelled from bottom to top: aminosalicylates, corticosteroids, immunomodulators, biologics. The rungs light up one at a time from the bottom. As each rung lights, an indigo chip naming its drug (mesalamine, prednisone, azathioprine, infliximab) drops in above the bowel wall, and the wall turns from red toward pink while the sparks and immune cells become fewer. At the top rung, Y-shaped antibodies circle the wall beside gold TNF dots. A red tag reading infection risk rises appears at the top, and the biologics rung notes TB screen first.",
+ title:"Inflammatory bowel disease drugs (brief)",
+ body:`<p><b>Inflammatory bowel disease (IBD)</b> includes <b>Crohn disease</b> and <b>ulcerative colitis</b>: the immune system keeps the bowel wall inflamed. Drugs step up in strength:</p>
+ <ul><li><b>Aminosalicylates</b> (<b>mesalamine</b>, sulfasalazine): calm inflammation right at the bowel lining, mainly for mild ulcerative colitis. Sulfasalazine contains a sulfa part (ask about sulfa allergy) and can turn urine orange-yellow.</li><li><b>Corticosteroids</b> (prednisone, <b>budesonide</b>): fast relief for <b>flares</b>, not for long-term use, because of bone loss, high glucose, infection and other steroid effects. Taper, do not stop suddenly.</li><li><b>Immunomodulators</b> (<b>azathioprine</b>, methotrexate): slow immune cell growth. Monitor blood counts and liver tests; watch for infection.</li><li><b>Biologics</b> (stem <b>-mab</b>, such as <b>infliximab</b>, which blocks TNF): powerful, given by infusion or injection. Screen for <b>tuberculosis</b> and hepatitis B before starting; watch for infections and infusion reactions; avoid live vaccines.</li></ul>`,
+ analogy:"Turning down an overactive alarm system: first a local mute button (mesalamine), then a fast master switch you cannot leave on (steroids), then slowing the guards' recruitment (immunomodulators), then cutting one key alarm wire (biologics).",
+ terms:[["Inflammatory bowel disease","Chronic immune inflammation of the bowel: Crohn disease and ulcerative colitis."],["Aminosalicylate","Anti-inflammatory drug acting in the bowel lining, such as mesalamine."],["TNF","Tumor necrosis factor, an inflammation signal blocked by drugs like infliximab."]],
+ check:{q:"Before a first infliximab infusion, which test should the nurse confirm was done?",opts:[
+  ["A tuberculosis screening test",1,"Yes. Blocking TNF can wake up latent TB, so screening is done before starting."],
+  ["A pregnancy test for every patient regardless of sex",0,"Pregnancy status matters for some patients, but TB screening is the key test before anti-TNF therapy."],
+  ["A stool softener trial",0,"That is not related to biologic safety."],
+  ["A lactose tolerance test",0,"That is unrelated to infliximab safety."]]},
+ caption:"IBD drugs step up: aminosalicylates, then steroids for flares, then immunomodulators, then biologics. Higher steps raise infection risk.",
+ legend:[["bad","Inflammation"],["drug","IBD drugs","s"],["gut","Bowel wall"],["receptor","Antibody (biologic)"]]},
+
+{act:6,scene:"pert",desc:"A small pancreas on the left has a blocked duct marked with an X, so few enzyme dots reach the small intestine. In the middle, a capsule opens in the intestine and releases tiny coated beads, which dissolve and free three kinds of enzyme shapes: yellow scissors for lipase cutting fat droplets, grey scissors for protease cutting protein chains, and blue ones for amylase cutting starch chains. The cut pieces pass through the intestine wall into the blood. Below, two stool icons compare without enzymes, a pale, greasy, floating stool labelled steatorrhea, and with enzymes, a normal brown stool. A small plate with a capsule beside it reminds that the capsule goes with every meal and snack.",
+ title:"Pancreatic enzyme replacement (brief)",
+ body:`<p>When the pancreas cannot deliver enough digestive enzymes, as in <b>cystic fibrosis</b> or <b>chronic pancreatitis</b>, food (especially fat) is not digested. Signs include greasy, pale, foul-smelling, floating stools (<b>steatorrhea</b>), gas, and weight loss.</p>
+ <p><b>Pancrelipase</b> replaces the missing <b>lipase</b> (fat), <b>protease</b> (protein) and <b>amylase</b> (starch). Teaching:</p>
+ <ul><li>Take <b>with every meal and snack</b>, because the enzymes act on the food that is in the gut at the same time.</li><li>Swallow capsules <b>whole</b>; do not crush or chew. If needed, the beads can be sprinkled on a soft acidic food such as applesauce and swallowed without chewing.</li><li>Success is fewer, more normal stools and steady weight gain.</li><li>It is made from pork pancreas, which some patients may want to know.</li></ul>`,
+ analogy:"Sending a kitchen crew along with each delivery of groceries. No crew, and the food goes through unprepared. The crew only works on whatever arrives with it.",
+ terms:[["Pancrelipase","A mix of pancreatic enzymes (lipase, protease, amylase) taken with food."],["Steatorrhea","Fatty, greasy stools from poor fat digestion."],["Exocrine pancreatic insufficiency","The pancreas does not release enough digestive enzymes."]],
+ check:{q:"Which statement shows a patient with cystic fibrosis understands pancrelipase teaching?",opts:[
+  ["I take my capsules with every meal and snack and swallow them whole",1,"Yes. Enzymes must be with the food, and the coating protects them from stomach acid."],
+  ["I take them once a day at bedtime",0,"Taken away from food, they have nothing to digest."],
+  ["I crush them into my food to help them work faster",0,"Crushing breaks the protective coating and can irritate the mouth."],
+  ["I only take them when my stools are greasy",0,"They are taken with every meal and snack to prevent poor digestion."]]},
+ caption:"Pancrelipase supplies lipase, protease and amylase. Take with every meal and snack, swallowed whole.",
+ legend:[["fat","Fat (lipase)"],["drug","Enzyme capsule","s"],["stool","Stool"],["gut","Intestine"]]},
+
+/* ---------- Finish ---------- */
+{act:0,scene:"recap",desc:"A summary board shows six colored columns, one for each part. Each column has a small drawing at the top: a parietal cell with a pump, a pump with an indigo drug locked on, a lining with a beige paste, a vomiting center with sockets, a bowel segment with stool, and an inflamed bowel with a ladder. Below each drawing, short lines list the key drugs and one nursing check. A highlight sweeps across the columns one after another, and each column's drawing animates briefly as it is highlighted.",
+ title:"Recap: mechanism first, then the nursing check",
+ body:`<p>You can now explain each GI drug class from its mechanism.</p>
+ <ul><li><b>PPIs (-prazole)</b> break the pump for good: take before breakfast; long-term risks are C. diff, fractures, low magnesium and B12.</li><li><b>H2 blockers (-tidine)</b> unplug histamine: confusion in older adults or kidney disease.</li><li><b>Antacids</b> neutralize: aluminum constipates, magnesium loosens; space other drugs; caution in kidney disease.</li><li><b>Sucralfate</b> coats ulcers: empty stomach, space other drugs. <b>Misoprostol</b> replaces prostaglandins: diarrhea, never in pregnancy.</li><li><b>Antiemetics</b> match the receptor to the cause: ondansetron (QT, constipation), D2 blockers (EPS; tardive dyskinesia with metoclopramide), scopolamine (anticholinergic), aprepitant (delayed chemo nausea).</li><li><b>Laxatives</b>: bulk with water, osmotic (lactulose traps ammonia), stimulants, softeners; never with suspected obstruction. <b>Loperamide</b>: not with bloody diarrhea or C. diff.</li></ul>
+ <p>Practice next in the Lab: run the stomach acid simulator, calm a nausea control room, and work through the case files.</p>`,
+ analogy:"Each drug is a key for one lock in the gut. Know the lock, and you know what the key opens by accident too.",
+ terms:[["-prazole / -tidine","PPI / H2 blocker name stems."],["-setron / -pitant","5-HT3 / NK1 antiemetic name stems."],["Match the cause","Choose the antiemetic whose receptor matches the input causing nausea."]],
+ check:null,caption:"Six parts, one idea: see the mechanism, then predict the side effects and the nursing check.",
+ legend:[["act1","Acid"],["act2","Acid reducers"],["act3","Protectors"],["act4","Nausea"],["act5","Bowel"],["act6","IBD and enzymes"]]}
+);
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= scenes: start, part 1, part 2 ================= */
+function chip(x,y,t,col){return chipText(x,y,t,col||C.drug)}
+function bodyOutline(cx,top,o){o=o||{};circ(cx,top+52,44,hexA(C.skin,.55),C["skin-edge"],2);rr(cx-18,top+92,36,24,6);ctx.fillStyle=hexA(C.skin,.55);ctx.fill();
+  rr(cx-86,top+112,172,320,48);ctx.fillStyle=hexA(C.skin,.4);ctx.fill();ctx.strokeStyle=C["skin-edge"];ctx.lineWidth=2;ctx.stroke()}
+function gutLoops(cx,cy,s,T){// colon frame + small bowel coil
+  const col=C.gut,ed=C["gut-edge"];ctx.lineCap="round";
+  const fr=[[cx-s*1.1,cy+s*.9],[cx-s*1.1,cy-s*.6],[cx+s*1.1,cy-s*.6],[cx+s*1.1,cy+s*.9],[cx+s*.3,cy+s*1.15]];
+  poly(fr,ed,s*.42);poly(fr,col,s*.32);
+  ctx.beginPath();for(let i=0;i<=60;i++){const a=i/60*TAU*2.6;const r=s*.55*(1-i/90);const X=cx+Math.cos(a)*r*1.1,Y=cy+s*.2+Math.sin(a)*r*.7;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+  ctx.strokeStyle=ed;ctx.lineWidth=s*.2;ctx.stroke();ctx.strokeStyle=mix(col,C.panel,.2);ctx.lineWidth=s*.13;ctx.stroke();ctx.lineCap="butt"}
+SC.map=function(T){
+  panelBox(10,10,360,460,{fill:hexA(C.panel,.6)});title(24,30,"Where GI drugs act");
+  bodyOutline(190,20);brainSide(190,66,34,{});stomachIcon(210,200,40,{});gutLoops(190,330,62,T);
+  const M=[[1,222,196,"PPIs, H2 blockers, antacids"],[2,172,232,"Sucralfate, misoprostol"],[3,180,58,"Antiemetics"],[4,124,296,"Laxatives, antidiarrheals"],[5,232,352,"IBD drugs, enzymes"]];
+  const i=Math.floor(T/2.6)%5,ph=(T%2.6)/2.6;
+  M.forEach((m,k)=>{const on=k===i;if(on)glow(m[1],m[2],34,C.gold,.6+.3*Math.sin(T*5));badge(m[1],m[2],m[0],on?C.accent:C["ink-soft"],11)});
+  const m=M[i];const q=smooth(seg(ph,.05,.5));const cxp=lerp(450,m[1]+14,q),cyp=lerp(m[2]-30,m[2]-26,q);withA(seg(ph,0,.12)*(1-seg(ph,.9,1)),()=>{ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(m[3]).width;chip(Math.min(cxp+w/2,360-w/2),cyp,m[3])});
+  panelBox(384,10,406,460);title(398,30,"Six parts");
+  const parts=[["1","Stomach acid","parietal cell, ulcers, GERD"],["2","Acid reducers","PPIs, H2 blockers, antacids"],["3","Lining protectors","sucralfate, misoprostol, H. pylori"],["4","Nausea and vomiting","5-HT3, D2, H1/M1, NK1, cannabinoids"],["5","Constipation and diarrhea","laxatives, loperamide, bismuth"],["6","IBD and enzymes","mesalamine to biologics, pancrelipase"]];
+  const j=Math.floor(T/1.6)%6;
+  parts.forEach((p,k)=>{const y=46+k*70;const on=k===j;rr(398,y,378,60,8);ctx.fillStyle=on?hexA(C["act"+(k+1)],.18):hexA(C["panel-2"],.9);ctx.fill();ctx.strokeStyle=on?C["act"+(k+1)]:C.rule;ctx.lineWidth=on?2.2:1;ctx.stroke();
+    badge(420,y+30,p[0],C["act"+(k+1)],12);txt(442,y+20,p[1],{size:14,weight:700});txt(442,y+42,p[2],{size:12.5,color:C["ink-soft"]})});
+};
+SC.parietal=function(T){
+  const L=12,t=P(T,L)*L;const hist=smooth(seg(t,.5,2)),ach=smooth(seg(t,3,4.5)),gas=smooth(seg(t,5.5,7));
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  // stomach lumen area on the right
+  rr(560,22,218,400,10);ctx.fillStyle=hexA(C.acid,.08+.12*(hist*.45+ach*.3+gas*.25));ctx.fill();txt(669,40,"STOMACH SPACE (LUMEN)",{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]});
+  txt(70,40,"BLOOD SIDE",{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]});
+  const out=parietalCell(250,60,300,340,T,{hist,ach,gas});
+  // free H+ in lumen
+  const n=Math.round(4+22*Math.min(1,out));for(let i=0;i<n;i++){const X=640+rnd(i)*130,Y=70+((rnd(i*3)*330+T*14*(.3+rnd(i*5)))%330);hIon(X,Y,6,.85)}
+  // output bar
+  meter(40,446,300,out,"Acid output",C.acid,{text:Math.round(out*100)+"%"});
+  const on=[["Histamine",hist,C.hist],["ACh",ach,C.ach],["Gastrin",gas,C.gastrin]];on.forEach((o,i)=>{const X=380+i*130;rr(X,436,118,24,12);ctx.fillStyle=o[1]>.5?hexA(o[2],.25):hexA(C["panel-2"],.9);ctx.fill();ctx.strokeStyle=o[2];ctx.lineWidth=1.5;ctx.stroke();txt(X+59,448,o[0]+(o[1]>.5?" on":" off"),{size:12,weight:700,align:"center"})});
+};
+SC.balance=function(T){
+  const L=11,t=P(T,L)*L;const bad=smooth(seg(t,4,6))*(1-smooth(seg(t,9.8,10.8)));
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  const cx=400,cy=140;// positive tilt -> right side down
+  const ang=.22*bad;
+  rr(cx-8,cy,16,140,4);ctx.fillStyle=C["ink-soft"];ctx.fill();rr(cx-60,cy+136,120,14,5);ctx.fill();
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(ang);rr(-260,-6,520,12,6);ctx.fillStyle=C.ink;ctx.fill();ctx.restore();circ(cx,cy,9,C.gold,C.ink,1.5);
+  const end=s=>[cx+Math.cos(ang)*250*s,cy+Math.sin(ang)*250*s];
+  const pans=[[-1,"PROTECTORS",[["mucus",C.mucus],["bicarbonate",C.base],["prostaglandins",C.pg],["blood flow",C.blood]],C.good],[1,"ATTACKERS",[["acid",C.acid],["pepsin",C.blocked],["H. pylori",C.bact],["NSAIDs",C.drug]],C.bad]];
+  pans.forEach(p=>{const [ex,ey]=end(p[0]);ctx.beginPath();ctx.moveTo(ex-100,ey+50);ctx.quadraticCurveTo(ex,ey+82,ex+100,ey+50);ctx.closePath();fillStroke(hexA(C.panel,.95),C["ink-soft"],1.6);
+    txt(ex,ey-26,p[1],{size:12.5,mono:true,weight:700,align:"center",color:p[3]});
+    p[2].forEach((w,k)=>{const X=ex-46+(k%2)*92,Y=ey+(k<2?6:36);withA(p[0]>0&&k>=2?.3+.7*bad:1,()=>{rr(X-44,Y-12,88,24,6);fillStroke(w[1],hexA(C.ink,.4),1.2);txt(X,Y+.5,w[0],{size:12,weight:700,align:"center",color:inkOn(w[1])})})})});
+  // lining strip
+  const muc=lerp(22,7,bad);const hurt=X=>{const d=Math.abs(X-400);return d<70?bad*(1-d/70):0};
+  const top=lining(60,740,410,T,{mucus:muc,bicarb:1-.6*bad,hurt});
+  for(let i=0;i<14;i++){const q=P(T*.4+i/14,1);const X=80+rnd(i)*640;const Y=lerp(300,top-4,q);const near=Math.abs(X-400)<70&&bad>.3;hIon(X,near?lerp(300,412,q):Y,6,near?1:1-q*.7)}
+  if(bad>.3){withA(bad,()=>{ell(400,420,55*bad,14*bad,0,hexA(C.bad,.65),C.bad,2);tag(400,462,"ulcer forms",C.bad)})}
+  else tag(400,462,"balanced: lining intact",C.good);
+};
+SC.ulcer=function(T){
+  panelBox(10,10,385,460,{fill:hexA(C.panel,.5)});title(24,30,"Peptic ulcer");panelBox(405,10,385,460,{fill:hexA(C.panel,.5)});title(419,30,"GERD");
+  // left: stomach with ulcer and bug
+  stomachIcon(190,220,120,{});stomachPath(190,220,96);ctx.fillStyle=hexA(C.mucus,.55);ctx.fill();
+  const pu=.6+.4*Math.sin(T*2);ell(150,300,22,10,.4,hexA(C.bad,.6+.2*pu),C.bad,2);lead(150,300,90,395,"ulcer crater",{color:C.bad});
+  const bx=230+12*Math.sin(T*.8),by=250+8*Math.cos(T*1.1);glow(bx,by,40,C.nh3,.55);bug(bx,by,16,T,.3+.2*Math.sin(T));label(bx+40,by-40,"ammonia cloud",{size:12,weight:700,border:C.nh3});
+  lead(bx-10,by+10,300,420,"H. pylori",{color:C.ink});
+  for(let i=0;i<10;i++){const q=P(T*.3+i/10,1);hIon(120+rnd(i)*150,170+rnd(i+3)*110,6,.5+.5*(1-q))}
+  // right: esophagus + LES
+  const ex=600;rr(ex-26,60,52,200,14);fillStroke(mix(C.stomach,C.panel,.3),C["stomach-edge"],1.8);stomachIcon(ex+20,345,80,{});
+  const open=.5+.5*Math.sin(T*1.6);const les=lerp(18,4,open);rr(ex-34,252,68,16,6);ctx.fillStyle=mix(C.pump,C.panel,.4);ctx.fill();rr(ex-les,252,les*2,16,4);ctx.fillStyle=C.lumen;ctx.fill();
+  lead(ex+34,260,712,218,"lower esophageal",{size:12,align:"center"});txt(712,238,"sphincter",{size:12,weight:600,align:"center"});
+  for(let i=0;i<8;i++){const q=P(T*.5+i/8,1);const up=open>.4;hIon(ex-10+rnd(i)*20,up?lerp(300,100,q):lerp(300,290,q),6,up?1-q*.5:.6)}
+  const burn=clamp(open,0,1);ctx.save();ctx.globalAlpha=.25+.5*burn;rr(ex-20,90,40,150,10);ctx.fillStyle=C.bad;ctx.fill();ctx.restore();
+  label(ex-90,130,"heartburn",{size:13,weight:700,border:C.bad});txt(ex-26,52,"esophagus",{size:12,weight:600,align:"right"});
+  tag(200,450,"Goal: less acid",C.accent);tag(600,450,"Goal: more protection",C.good);
+};
+SC.ppi=function(T){
+  const L=10,t=P(T,L)*L;
+  [[10,"Normal",0],[400,"With omeprazole",1]].forEach(([x,nm,dr])=>{panelBox(x,10,390,460,{stroke:dr?C.drug:C.rule,lw:dr?2:1.2});title(x+14,30,nm,dr?C.drug:null);
+    const cx=x+150,cy=80,cw=150,ch=300;let nb=0;
+    if(dr){nb=Math.min(3,Math.floor(seg(t,1.5,7.5)*3.999));}
+    rr(cx+cw,44,x+380-cx-cw,370,8);ctx.fillStyle=hexA(C.acid,dr?.06+.1*(1-nb/3):.16);ctx.fill();
+    const out=parietalCell(cx,cy,cw,ch,T,{pumps:3,blockN:nb,labels:false});
+    txt(cx+cw/2,cy-14,"parietal cell",{size:12,weight:700,align:"center",color:C["ink-soft"]});
+    if(dr){// drug path: from blood (left) across cell to pumps
+      for(let k=0;k<3;k++){const q=P(t/2.2+k/3,1);if(seg(t,0,7.5)>=1&&k>=nb)continue;const tgtY=cy+ch*(k+1)/4;const pts=[[x+20,cy+ch+10],[cx+20,cy+ch-20],[cx+cw-30,tgtY+20],[cx+cw+8,tgtY]];
+        if(k<nb)continue;const pt=along(pts,q);drugMol(pt[0],pt[1],8,null);if(q>.92)glow(cx+cw+8,tgtY,18,C.gold,.6)}
+      tag(cx+cw/2,446,"irreversible: new pumps must be made",C.drug)}
+    else tag(cx+cw/2,446,"all pumps working",C.pump);
+    meter(x+20,416,150,out,"Acid out",C.acid,{text:Math.round(out*100)+"%"});
+  });
+};
+SC.ppitime=function(T){
+  const L=12,t=P(T,L)*L;const day=t/L*24;// hours across the strip
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  const x0=170,x1=770;const X=h=>x0+(h/24)*(x1-x0);
+  // time strip
+  for(let h=0;h<=24;h+=6){line(X(h),36,X(h),44,C["ink-soft"],1.2);txt(X(h),54,(h===24?"24":String(h).padStart(2,"0"))+":00",{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  line(x0,40,x1,40,C["ink-soft"],1.5);line(X(day),30,X(day),430,hexA(C.accent,.6),2,[4,4]);
+  // meal icons
+  [8,13,19].forEach(h=>{circ(X(h),26,8,C.panel,C["ink-soft"],1.5);txt(X(h)+12,24,h===8?"breakfast":"meal",{size:11,color:C["ink-soft"]})});
+  const rows=[[80,"Taken 30 to 60 min before breakfast",7,.7],[250,"Taken at bedtime, no food",22,.3]];
+  rows.forEach(([y,nm,doseH,eff],ri)=>{panelBox(20,y,760,150,{fill:hexA(C.panel,.7)});wrapText(nm,30,y+22,130,16,{size:12.5,weight:700});
+    // pill marker
+    tablet(X(doseH),y+22,8,C.drug);
+    // drug level curve
+    const lvl=h=>{const d=((h-doseH)+24)%24;return d<4?Math.exp(-Math.pow(d-1,2)/0.8):0};
+    plotFn(lvl,0,24,x0,y+30,x1-x0,40,0,1.2,C.drug,2,null,day);txt(x0-4,y+50,"drug in blood",{size:11,align:"right",color:C.drug});
+    // pump activity
+    const act=h=>.15+[8,13,19].reduce((s,m)=>s+.85*Math.exp(-Math.pow(h-m-.7,2)/1.4),0);
+    // pumps row
+    const nP=10;const blocked=Math.round(nP*(ri===0?seg(day,8,9.2)*eff:seg(day,22,23)*eff));
+    const activeNow=act(day);for(let k=0;k<nP;k++){const px=x0+30+k*44,py=y+110;const isB=k<blocked;const awake=rnd(k*3+1)<clamp(activeNow,0,1);protonPump(px,py,11,T,{rate:isB?0:(awake?1:.08),blocked:isB});if(!isB&&awake)hIon(px+16,py-10-P(T+k*.3,1)*10,4.5,1-P(T+k*.3,1))}
+    txt(x1-6,y+82,"pumps blocked: "+Math.round(blocked/nP*100)+"%",{size:12.5,mono:true,weight:700,align:"right",color:C.drug});
+  });
+  // pH mini graphs
+  panelBox(20,410,760,58,{fill:hexA(C.panel,.7)});txt(30,428,"Stomach pH",{size:12,weight:700});txt(30,450,"(teaching curves)",{size:11,color:C["ink-soft"]});
+  const phA=h=>{const meal=[8,13,19].reduce((s,m)=>s+Math.exp(-Math.pow(h-m-.4,2)/.5),0);return 4.6+.8*meal-0.8*Math.exp(-Math.pow(h-2,2)/8)},phB=h=>{const meal=[8,13,19].reduce((s,m)=>s+Math.exp(-Math.pow(h-m-.4,2)/.5),0);return 2.2+1.4*meal+(h>22||h<6?1.6:0)};
+  plotFn(phA,0,24,x0,416,x1-x0,46,1,7,C.good,2.2,null,day);plotFn(phB,0,24,x0,416,x1-x0,46,1,7,C.bad,2.2,[5,4],day);
+  const y4=416+46-(4-1)/6*46;line(x0,y4,x1,y4,hexA(C["ink-soft"],.6),1,[2,3]);txt(x1-4,y4-7,"pH 4",{size:11,mono:true,align:"right",color:C["ink-soft"]});
+  txt(x0+4,422,"solid = before breakfast",{size:11,weight:600,color:C.good});txt(x0+170,422,"dashed = bedtime",{size:11,weight:600,color:C.bad});
+};
+SC.ppirisk=function(T){
+  const L=8,t=P(T,L)*L,f=smooth(seg(t,.5,6));
+  const pan=[[10,10,"C. difficile"],[405,10,"Fractures"],[10,245,"Low magnesium"],[405,245,"Low vitamin B12"]];
+  pan.forEach(p=>{panelBox(p[0],p[1],385,225);title(p[0]+14,p[1]+20,p[2])});
+  label(400,240,"risks grow with long-term use",{size:12.5,weight:700,border:C.drug});
+  // A: stomach with few acid, bacteria pass
+  stomachIcon(110,110,52,{});for(let i=0;i<3;i++)hIon(90+i*20,108,5);
+  for(let i=0;i<5;i++){const q=P(T*.25+i/5,1);bug(lerp(60,170,q),lerp(70,190,q),9,T,.6)}
+  bowel(200,175,180,40,T,{motility:.6});for(let i=0;i<Math.round(2+6*f);i++)bug(220+rnd(i)*150,175+(rnd(i+9)-.5)*24,8,T,rnd(i)*3);
+  txt(290,140,"bacteria multiply",{size:12,weight:600,align:"center",color:C.bad});
+  // B: bone
+  const bxx=500,byy=120;rr(bxx-90,byy-26,260,52,26);fillStroke(C.bone,C["bone-edge"],2);
+  ctx.save();rr(bxx-90,byy-26,260,52,26);ctx.clip();for(let i=0;i<40;i++){const X=bxx-80+rnd(i)*240,Y=byy-20+rnd(i+5)*40;if(rnd(i+11)>f*.75)circ(X,Y,5,null,C["bone-edge"],1.2)}ctx.restore();
+  for(let i=0;i<5;i++){const q=P(T*.4+i/5,1);const go=rnd(i+2)>f*.8;circ(500+i*30,lerp(220,go?150:190,q),4,C.ca,null);if(!go&&q>.8)crossMark(500+i*30,190,4,C.bad)}
+  txt(600,200,"less calcium absorbed",{size:12,weight:600,align:"center"});txt(430,180,"bone thins",{size:12,weight:600,color:C.bad});
+  // C: magnesium gauge + cramp
+  const mg=lerp(2.0,1.2,f);const gx=40,gy=320,gw=200;rr(gx,gy,gw,16,5);ctx.fillStyle=hexA(C.bad,.28);ctx.fill();const Xm=v=>gx+(clamp(v,1,2.6)-1)/1.6*gw;ctx.fillStyle=hexA(C.good,.45);ctx.fillRect(Xm(1.6),gy,Xm(2.4)-Xm(1.6),16);rr(gx,gy,gw,16,5);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();
+  const nx=Xm(mg);line(nx,gy-6,nx,gy+20,C.ink,3);txt(nx,gy-16,"Mg²⁺ "+(mg<1.6?"LOW":"normal"),{size:12.5,mono:true,weight:700,align:"center",color:mg<1.6?C.bad:C.ink});txt(gx,gy+30,"low",{size:11,color:C["ink-soft"]});txt(gx+gw,gy+30,"high",{size:11,align:"right",color:C["ink-soft"]});
+  const cr=f*(.5+.5*Math.sin(T*9));smCell(310,360,110,cr*.8,{});txt(310,410,f>.5?"cramps, tremor":"muscle",{size:12,weight:600,align:"center",color:f>.5?C.bad:C.ink});
+  ecgTrace(40,390,200,40,80,T,C.good);txt(40,446,"rhythm problems possible",{size:12,color:C["ink-soft"]});
+  // D: B12
+  for(let i=0;i<5;i++){const X=460+i*60,Y=320;rr(X-20,Y-10,40,20,8);fillStroke(hexA(C.gold,.35),C.gold,1.2);const freed=rnd(i+3)>f*.8;const q=P(T*.35+i*.2,1);
+    if(freed){circ(X,lerp(Y,Y+90,q),6,C.act5);}else{circ(X,Y,6,C.act5);if(q>.5)crossMark(X+14,Y-12,4,C.bad)}
+  }
+  txt(460,295,"B12 stuck to food protein",{size:12,weight:600});line(430,380,780,380,C["gut-edge"],5);txt(605,398,"gut wall",{size:11,align:"center",color:C["ink-soft"]});
+  txt(605,430,"acid frees B12; less acid, less B12 absorbed",{size:12,weight:600,align:"center"});
+};
+SC.h2=function(T){
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  rr(560,22,218,380,10);ctx.fillStyle=hexA(C.acid,.08);ctx.fill();txt(669,40,"LUMEN",{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]});
+  const out=parietalCell(250,60,300,330,T,{h2:true});
+  lead(240,126,150,40,"famotidine sits in H2",{color:C.drug,border:C.drug});
+  for(let i=0;i<8;i++){hIon(640+rnd(i)*120,70+((rnd(i*3)*300+T*12)%300),6,.8)}
+  const bx=60;meter(bx,420,250,1,"Normal acid output",C.acid,{text:"100%"});meter(bx,456,250,out,"With famotidine",C.acid,{text:Math.round(out*100)+"%"});
+  // moon
+  const mx=520,my=440;circ(mx,my,16,C.gold);circ(mx+7,my-5,14,C.panel);txt(mx+24,my,"strong on night-time acid",{size:12.5,weight:700});
+};
+/* ================= scenes: antacids, part 3, part 4 ================= */
+SC.antacid=function(T){
+  const L=10,t=P(T,L)*L;const dose=smooth(seg(t,.5,1.5));const left=1-smooth(seg(t,3,8.5));const ph=lerp(2,4.3,dose*left);
+  panelBox(10,10,520,460,{fill:hexA(C.panel,.5)});title(24,30,"Inside the stomach");
+  rr(30,60,420,330,14);ctx.fillStyle=hexA(C.acid,.06+.12*(1-dose*left));ctx.fill();ctx.strokeStyle=C["stomach-edge"];ctx.lineWidth=2;ctx.stroke();
+  tablet(240,48,14,C.base);txt(268,48,"antacid",{size:12,weight:700});
+  // H+ and base pairing
+  const nH=22;for(let i=0;i<nH;i++){const hx_=50+rnd(i)*380,hy=80+rnd(i+3)*290;const paired=rnd(i+7)<dose*left*.85;
+    if(paired){const bq=clamp((t-1-rnd(i)*1.5)/1.2,0,1);const bx=lerp(240,hx_+10,bq),by=lerp(60,hy,bq);if(bq<1){baseIon(bx,by,6);hIon(hx_,hy,6)}else drop(hx_+5,hy,6,.8)}
+    else hIon(hx_+Math.sin(T+i)*4,hy+Math.cos(T*.8+i)*4,6)}
+  phGauge(468,90,240,ph);txt(482,356,"rises fast,",{size:11.5,weight:600,align:"center"});txt(482,372,"falls back",{size:11.5,weight:600,align:"center"});
+  label(240,420,"H⁺ + base → water + salt",{size:13,weight:700,border:C.base});txt(240,450,"The pumps keep making acid, so the effect is short.",{size:12,align:"center",color:C["ink-soft"]});
+  // right top: Al vs Mg
+  panelBox(540,10,250,250);title(554,30,"Bowel effect");
+  txt(554,52,"aluminum hydroxide",{size:12,weight:700});bowel(554,92,222,26,T,{motility:.25});stool(600+P(T*.1,1)*40,92,9,.1,T,2);txt(664,126,"constipation",{size:12,weight:700,align:"center",color:C["warn-ink"]});
+  txt(554,150,"magnesium hydroxide",{size:12,weight:700});bowel(554,190,222,26,T,{motility:1.6});for(let i=0;i<5;i++){const q=P(T*.6+i/5,1);drop(560+q*210,190+(rnd(i)-.5)*10,5)}txt(664,224,"diarrhea",{size:12,weight:700,align:"center",color:C["warn-ink"]});
+  txt(664,248,"combined products balance out",{size:11.5,align:"center",color:C["ink-soft"]});
+  // right bottom: spacing + kidney
+  panelBox(540,270,250,200);title(554,290,"Spacing and kidneys");
+  line(560,340,770,340,C["ink-soft"],1.5);tablet(580,340,9,C.base);pillBottle(720,352,22,"",C.drug);
+  const sweep=P(T*.3,1);line(lerp(592,700,sweep),330,lerp(592,700,sweep),350,C.accent,2);label(646,318,"about 1 to 2 h apart",{size:12,weight:700,border:C.accent});
+  kidneyIcon(580,420,18,{});tag(670,420,"kidney disease: Mg, Al build up",C.bad,{size:11.5});
+};
+SC.sucralfate=function(T){
+  const L=10,t=P(T,L)*L;const fall=smooth(seg(t,.3,2)),spread=smooth(seg(t,2,4.5));
+  panelBox(10,10,540,460,{fill:hexA(C.panel,.5)});title(24,30,"Ulcer close-up");
+  rr(24,44,512,300,10);ctx.fillStyle=hexA(C.acid,.08);ctx.fill();
+  const top=lining(24,536,370,T,{mucus:14,hurt:X=>Math.abs(X-280)<60?1-Math.abs(X-280)/60:0});
+  // crater
+  ctx.beginPath();ctx.moveTo(210,top);ctx.quadraticCurveTo(280,top+70,350,top);ctx.closePath();ctx.fillStyle=C.bad;ctx.fill();ctx.strokeStyle=C["heart-edge"];ctx.lineWidth=2;ctx.stroke();
+  // tablet falls
+  const tx=lerp(90,180,fall),ty=lerp(70,260,fall);if(spread<.05)tablet(tx,ty,14,C.coat,"sucralfate");
+  // paste
+  if(spread>0){ctx.save();ctx.globalAlpha=.9;ctx.beginPath();const w=lerp(10,80,spread);const cy_=lerp(260,top+20,spread);ctx.moveTo(280-w,top+2);ctx.quadraticCurveTo(280,top+62*spread,280+w,top+2);ctx.quadraticCurveTo(280,lerp(cy_-20,top-14,spread),280-w,top+2);ctx.closePath();fillStroke(C.coat,mix(C.coat,C.ink,.4),1.6);ctx.restore();
+    if(spread>.8)label(280,top-38,"paste sticks to the ulcer",{size:12.5,weight:700,border:C.coat})}
+  // acid bounces
+  for(let i=0;i<12;i++){const q=P(T*.45+i/12,1);const X=60+rnd(i)*460;let Y=lerp(60,top-6,q);const onC=Math.abs(X-280)<80&&spread>.8;if(onC&&q>.8){Y=top-6-(q-.8)*120}hIon(X,Y,6,1-q*.3)}
+  // timeline
+  panelBox(560,10,230,460);title(574,30,"When to give");
+  const ev=[["before breakfast",70],["before lunch",130],["before dinner",190],["bedtime",250]];
+  line(600,60,600,270,C["ink-soft"],1.5);ev.forEach(e=>{tablet(600,e[1],8,C.coat);txt(616,e[1],e[0],{size:12.5,weight:600})});
+  txt(574,300,"empty stomach: about",{size:12,color:C["ink-soft"]});txt(574,316,"1 hour before meals",{size:12,color:C["ink-soft"]});
+  pillBottle(620,410,26,"",C.drug);const gp=.5+.5*Math.sin(T*2);rr(660,370,110,22,8);ctx.fillStyle=hexA(C.accent,.15+.15*gp);ctx.fill();ctx.strokeStyle=C.accent;ctx.lineWidth=1.5;ctx.stroke();txt(715,381,"2 h gap",{size:12.5,weight:700,align:"center"});
+  txt(574,446,"other drugs: separate",{size:12,weight:600});
+};
+SC.miso=function(T){
+  const L=10,t=P(T,L)*L;const fix=smooth(seg(t,2,6));
+  panelBox(10,10,560,460,{fill:hexA(C.panel,.5)});
+  [[18,"NSAID only",0],[244,"NSAID + misoprostol",1]].forEach(([y,nm,m])=>{title(24,y+12,nm,m?C.drug:C.bad);
+    const muc=m?lerp(6,22,fix):6;const hurtAmt=m?1-fix:1;
+    // COX box
+    rr(30,y+34,90,40,6);fillStroke(mix(C.blocked,C.panel,.4),C.blocked,1.5);txt(75,y+54,"COX",{size:13,mono:true,weight:700,align:"center"});crossMark(110,y+40,6,C.bad);drugMol(40,y+34,7,null);
+    const top=lining(140,550,y+150,T,{mucus:muc,bicarb:m?.3+fix:.3,hurt:X=>Math.abs(X-340)<50?hurtAmt*(1-Math.abs(X-340)/50):0});
+    if(m){for(let k=0;k<6;k++){const X=170+k*64;const q=clamp((t-1.5-k*.35)/1.2,0,1);const Y=lerp(y+50,y+150-6,q);if(q<1)drugMol(X,Y,7,null);else{recCupH(X,y+150+4,-1,C.receptor,{s:.7,blocked:true})}}}
+    for(let i=0;i<8;i++){const q=P(T*.5+i/8,1);const X=160+rnd(i+(m?20:0))*380;let Y=lerp(y+50,top-4,q);if(Math.abs(X-340)<50&&hurtAmt>.4)Y=lerp(y+50,y+160,q);hIon(X,Y,6,1-q*.3)}
+    if(hurtAmt>.3)withA(hurtAmt,()=>ell(340,y+156,40,9,0,hexA(C.bad,.6),C.bad,1.6));
+    txt(140,y+204,m?(fix>.6?"mucus and bicarbonate restored":"misoprostol docks on prostaglandin receptors"):"no prostaglandins: thin mucus, sore forms",{size:12.5,weight:700,color:m?C.good:C.bad})});
+  // pregnancy warning
+  panelBox(580,10,210,460,{stroke:C.bad,lw:2});title(594,30,"Boxed warning",C.bad);
+  const ux=685,uy=170,sq=.5+.5*Math.sin(T*3);ctx.beginPath();ctx.moveTo(ux-50,uy-50);ctx.quadraticCurveTo(ux-60,uy+40,ux,uy+60);ctx.quadraticCurveTo(ux+60,uy+40,ux+50,uy-50);ctx.quadraticCurveTo(ux,uy-30,ux-50,uy-50);fillStroke(mix(C.vessel,C.panel,.5),C["heart-edge"],2);
+  for(let k=0;k<3;k++){ctx.save();ctx.globalAlpha=sq*(1-k*.25);ctx.beginPath();ctx.arc(ux,uy+10,60+k*12,Math.PI*.15,Math.PI*.85);ctx.strokeStyle=C.bad;ctx.lineWidth=2;ctx.stroke();ctx.restore()}
+  txt(ux,uy+110,"uterus contracts",{size:12.5,weight:700,align:"center"});tag(ux,uy+150,"not in pregnancy",C.bad,{size:13});
+  wrapText("Diarrhea and cramps are common. Pregnancy test and contraception as directed.",596,uy+190,180,17,{size:12});
+};
+SC.hpylori=function(T){
+  const L=12,t=P(T,L)*L;const ppi=smooth(seg(t,1,2)),ab=smooth(seg(t,3,4)),bis=smooth(seg(t,7.5,8.5));
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});title(24,30,"Stomach mucus layer");
+  rr(24,44,752,288,10);ctx.fillStyle=hexA(C.mucus,.5);ctx.fill();lining(24,776,332,T,{mucus:0});
+  const nAcid=Math.round(16*(1-ppi*.7));for(let i=0;i<nAcid;i++)hIon(40+rnd(i)*720,60+((rnd(i+2)*250+T*10)%250),6,.8);
+  const kill=clamp(ab*.6+bis*.4,0,1);const n=7;let left=0;
+  for(let i=0;i<n;i++){const dead=rnd(i*4+1)<kill*1.05&&ab>0;const X=90+i*95+Math.sin(T*.7+i)*12,Y=160+Math.cos(T*.9+i*2)*50;
+    if(dead){const fd=clamp((kill-rnd(i*4+1)*.9)*3,0,1);withA(1-fd,()=>{bug(X,Y,15,T,i);for(let k=0;k<4;k++)circ(X+(k-1.5)*8*fd*3,Y+(k%2?-1:1)*8*fd*2,3,C.bact)})}
+    else{left++;glow(X,Y,34,C.nh3,.45);bug(X,Y,15,T,i)}}
+  label(700,60,"bacteria left: "+left,{size:12.5,weight:700,border:C.bact});
+  const chips=[["PPI (-prazole)",ppi,140],["clarithromycin",ab,330],["amoxicillin",ab,520],["bismuth (quadruple option)",bis,690]];
+  chips.forEach(c=>{if(c[1]<=0)return;withA(c[1],()=>chipText(c[2],398-c[1]*8,c[0],C.drug))});
+  txt(140,424,ppi>.5?"pH rises: antibiotics work better":"",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  tag(400,450,"take every dose, then test to confirm it is gone",C.accent);
+};
+SC.vc=function(T){
+  const L=12,t=P(T,L)*L;const k=Math.floor(t/3);const keys=["cortex","vest","ctz","gut"];
+  const inp={cortex:.25,vest:.25,ctz:.25,gut:.25};inp[keys[k]]=1;
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  const lev=vcDiagram(140,10,1,T,inp,{});
+  Object.keys(VC_PATHS).forEach(key=>{const p=VC_PATHS[key];const on=keys[k]===key;const pt=p.pts[0];
+    const lx=140+pt[0]+(key==="ctz"?28:key==="cortex"?0:-10),ly=10+pt[1]+(key==="cortex"?-26:key==="gut"?30:key==="vest"?-40:-30);
+    label(Math.max(80,Math.min(720,lx)),ly,p.lab,{size:12,weight:700,border:on?C[p.col]:C.rule,align:key==="ctz"?"right":"center"})});
+  const nm={cortex:"Cortex",vest:"Inner ear",ctz:"CTZ",gut:"Gut"}[keys[k]];
+  panelBox(20,30,120,80);txt(80,54,"Active input",{size:12,weight:600,align:"center",color:C["ink-soft"]});txt(80,80,nm,{size:15,weight:700,align:"center"});
+};
+SC.ondan=function(T){
+  const L=10,t=P(T,L)*L;const blk=smooth(seg(t,4,5.2))*(1-smooth(seg(t,9.4,10)));
+  panelBox(10,10,500,460,{fill:hexA(C.panel,.5)});title(24,30,"Gut lining and vagus nerve");
+  // lining cells at bottom
+  for(let i=0;i<5;i++){rr(30+i*60,330,56,90,8);fillStroke(C.cell,C["cell-edge"],1.2)}txt(170,438,"gut cells (after chemotherapy)",{size:12,weight:600,align:"center"});
+  // nerve
+  poly([[60,300],[330,300],[420,200],[440,80]],C.nerve,8);txt(470,120,"vagus",{size:12,weight:700,align:"left"});
+  const recX=[80,160,240,320];recX.forEach(x=>recCupH(x,300,1,C.receptor,{s:.8,blocked:blk>.5,lab:null}));label(200,264,"5-HT3 receptors",{size:12,weight:700,border:C.receptor});
+  for(let i=0;i<8;i++){const q=P(T*.6+i/8,1);const x=50+i*38;const tx=recX[i%4];let X=lerp(x,tx,q),Y=lerp(330,306,q);if(blk>.5&&q>.6){X=tx+(q-.6)*60;Y=306+(q-.6)*60}ligand(X,Y,5,{col:C.sero,a:blk>.5&&q>.6?1-(q-.6)/.4:1})}
+  if(blk>.2)for(let k=0;k<3;k++){const q=clamp(blk*1.2-k*.1,0,1);if(q<1)drugMol(lerp(480,recX[k],q),lerp(40,290,q),8,null)}
+  const sig=1-blk;for(let i=0;i<Math.round(6*sig);i++){const q=P(T*.8+i/6,1);const pt=along([[330,300],[420,200],[440,80]],q);circ(pt[0],pt[1],4.5,C.nerve,C.ink,1)}
+  glow(440,56,40,C.bad,.6*sig);circ(440,56,20,mix(C.panel,C.bad,.4*sig),C.bad,2);txt(440,56,"VC",{size:12,weight:700,align:"center"});
+  label(260,60,blk>.5?"ondansetron blocks: quiet":"serotonin fires the nerve",{size:12.5,weight:700,border:blk>.5?C.drug:C.sero});
+  // ECG QT
+  panelBox(520,10,270,240);title(534,30,"QT prolongation");rr(534,44,242,140,6);ctx.fillStyle=C.scr;ctx.fill();
+  const qt=lerp(.18,.3,blk);const f=p=>Math.exp(-Math.pow((p-.15)/.012,2))-Math.exp(-Math.pow((p-.18)/.012,2))*.25+Math.exp(-Math.pow((p-.12-qt*.8)/.05,2))*.32+Math.exp(-Math.pow((p-.04)/.02,2))*.12;
+  ctx.beginPath();for(let i=0;i<=230;i++){const v=f(i/230);const Y=150-v*80;i?ctx.lineTo(540+i,Y):ctx.moveTo(540+i,Y)}ctx.strokeStyle="#6BC293";ctx.lineWidth=2;ctx.stroke();
+  const qs=540+.14*230,te=540+(.12+qt*.8+.09)*230;line(qs,168,te,168,"#F2C14E",2);line(qs,162,qs,174,"#F2C14E",2);line(te,162,te,174,"#F2C14E",2);txt((qs+te)/2,176,"QT",{size:11,mono:true,weight:700,align:"center",color:"#F2C14E"});
+  txt(534,208,"check K⁺, Mg²⁺ and ECG if at risk",{size:12,weight:600});txt(534,228,blk>.5?"QT longer with the drug":"baseline QT",{size:12,color:C["ink-soft"]});
+  panelBox(520,260,270,210);title(534,280,"Constipation");bowel(540,360,230,40,T,{motility:lerp(1,.25,blk)});stool(600+P(T*lerp(.3,.06,blk),1)*120,360,13,lerp(.7,.15,blk),T,3);
+  txt(655,420,"gut slows: stool dries",{size:12,weight:600,align:"center"});txt(655,446,"headache and dizziness too",{size:12,color:C["ink-soft"],align:"center"});
+};
+function headFig(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(o.tilt||0);circ(0,0,s,C.skin,C["skin-edge"],1.6);
+  const eu=o.eyesUp||0;circ(-s*.35,-s*.15,s*.16,C.panel,C["skin-edge"],1);circ(s*.35,-s*.15,s*.16,C.panel,C["skin-edge"],1);circ(-s*.35,-s*.15-eu*s*.1,s*.08,C.ink);circ(s*.35,-s*.15-eu*s*.1,s*.08,C.ink);
+  const m=o.mouth||0;ctx.beginPath();ctx.ellipse(m*s*.12,s*.45,s*(.22+.08*Math.abs(m)),s*(.06+.06*Math.abs(m)),0,0,TAU);ctx.fillStyle=C["heart-edge"];ctx.fill();ctx.restore();
+  rr(x-s*.3,y+s*.9,s*.6,s*.7,s*.2);fillStroke(C.skin,C["skin-edge"],1.4)}
+SC.dopa=function(T){
+  const L=10,t=P(T,L)*L;const blk=smooth(seg(t,3,4));
+  panelBox(10,10,380,460,{fill:hexA(C.panel,.5)});title(24,30,"CTZ: D2 blocked");
+  rr(50,70,200,150,12);ctx.fillStyle=hexA(C.panel,.8);ctx.fill();ctx.setLineDash([5,4]);ctx.strokeStyle=C.sero;ctx.lineWidth=1.6;ctx.stroke();ctx.setLineDash([]);txt(150,90,"CTZ",{size:12.5,mono:true,weight:700,align:"center"});blobPath(130,150,34,2,T*.3,.08);fillStroke(mix(C.brain,C.panel,.3),C["brain-edge"],1.5);line(164,150,236,150,C["brain-edge"],3);txt(130,206,"area postrema: tastes the blood",{size:11.5,weight:600,align:"center"});
+  recCup(250,150,-1,C.receptor,{blocked:blk>.5,lab:"D2",labDy:-26});
+  for(let i=0;i<5;i++){const q=P(T*.5+i/5,1);let X=lerp(370,262,q),Y=150+(rnd(i)-.5)*20;let a=1;if(blk>.5&&q>.7){X=262+(q-.7)*120;Y=150-(q-.7)*140;a=1-(q-.7)/.3}ligand(X,Y,6,{col:C.dopa,a})}
+  rr(340,60,30,200,12);ctx.fillStyle=hexA(C.blood,.25);ctx.fill();ctx.strokeStyle=C.vessel;ctx.lineWidth=1.4;ctx.stroke();txt(355,276,"blood",{size:11.5,align:"center"});
+  for(let i=0;i<Math.round(6*(1-blk));i++){const q=P(T*.7+i/6,1);circ(lerp(220,120,q),lerp(150,330,q),4.5,C.sero)}
+  glow(110,350,44,C.bad,.6*(1-blk));circ(110,350,26,mix(C.panel,C.bad,.4*(1-blk)),C.bad,2);txt(110,350,"VC",{size:12.5,weight:700,align:"center"});
+  label(250,350,blk>.5?"signal stopped":"dopamine signal",{size:12.5,weight:700,border:blk>.5?C.drug:C.dopa});
+  if(blk<.5)withA(1-blk*2,()=>drugMol(lerp(30,240,smooth(seg(t,2,3))),150,9,null));
+  txt(30,420,"metoclopramide or prochlorperazine",{size:12.5,weight:700,color:C.drug});
+  // right: basal ganglia + EPS
+  panelBox(400,10,390,300);title(414,30,"Same D2 block in movement centers");
+  brainSide(510,110,70,{});ell(520,112,18,12,0,hexA(C.ink,.35),C["brain-edge"],1.5);if(blk>.5)drugMol(520,112,7,null);lead(520,112,600,62,"basal ganglia",{size:12});
+  const dy=blk*(.5+.5*Math.sin(T*1.2));headFig(500,230,24,{tilt:-.5*dy,eyesUp:dy});txt(500,296,"acute dystonia",{size:12,weight:700,align:"center",color:C.bad});
+  const td=blk;headFig(660,230,24,{mouth:td*Math.sin(T*5)});txt(660,284,"tardive dyskinesia",{size:12,weight:700,align:"center",color:C.bad});txt(660,300,"(long-term metoclopramide)",{size:11.5,align:"center",color:C["ink-soft"]});
+  // prokinetic
+  panelBox(400,320,390,150);title(414,340,"Metoclopramide also speeds emptying");
+  stomachIcon(480,410,40,{});const sp=blk;for(let i=0;i<5;i++){const q=P(T*(.15+.45*sp)+i/5,1);const pt=along([[470,410],[525,410],[560,404],[760,404]],q);circ(pt[0],pt[1],5,C.stool)}
+  bowel(560,404,210,26,T,{motility:.6+sp});if(sp>.5)arrow(600,368,700,368,C.accent,2);txt(665,456,"not if bowel obstruction",{size:12,weight:700,align:"center",color:C.bad});
+};
+function wave(x,y,w,T,amp){ctx.beginPath();for(let i=0;i<=w;i+=4){const Y=y+Math.sin(i/30+T*2)*amp;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}ctx.lineTo(x+w,y+60);ctx.lineTo(x,y+60);ctx.closePath();ctx.fillStyle=hexA(C.h2o,.5);ctx.fill()}
+SC.motion=function(T){
+  const L=10,t=P(T,L)*L;const blk=smooth(seg(t,3.5,5));
+  panelBox(10,10,500,460,{fill:hexA(C.panel,.5)});title(24,30,"Motion signal");
+  wave(20,400,480,T,8);const rock=Math.sin(T*2)*.15;ctx.save();ctx.translate(140,380);ctx.rotate(rock);ctx.beginPath();ctx.moveTo(-90,0);ctx.lineTo(90,0);ctx.lineTo(60,30);ctx.lineTo(-60,30);ctx.closePath();fillStroke(C.stool,hexA(C.ink,.5),1.5);person(0,0,40,"sit",{});ctx.restore();
+  earIcon(140,170,40);canals(150,170,16,T,1-blk*.4);patch(186,196,11);label(232,224,"patch behind the ear",{size:12,weight:700,border:C.drug,align:"left"});
+  const path=[[170,160],[260,140],[330,120],[420,96]];poly(path,hexA(C.dopa,.6),4);
+  circ(300,128,14,hexA(C.panel,.9),C.receptor,2.2);label(300,100,"H1 · M1",{size:12,weight:700,mono:true,border:blk>.5?C.drug:C.receptor});
+  for(let i=0;i<6;i++){let q=P(T*.4+i/6,1);if(blk>.5&&q>.5)q=.5;const pt=along(path,q);circ(pt[0],pt[1],4.5,C.dopa,C.ink,1)}
+  if(blk>0){for(let k=0;k<3;k++){const q=clamp(blk*1.3-k*.15,0,1);const pt=along([[186,196],[240,170],[300,128]],q);if(q<1)drugMol(pt[0],pt[1],6,null)}if(blk>.5)drugMol(300,128,8,null)}
+  glow(450,90,44,C.bad,.55*(1-blk));circ(450,90,24,mix(C.panel,C.bad,.35*(1-blk)),C.bad,2);txt(450,90,"VC",{size:12.5,weight:700,align:"center"});
+  label(320,300,blk>.5?"signal blocked: calm":"motion signal reaches the center",{size:12.5,weight:700,border:blk>.5?C.drug:C.dopa});
+  panelBox(520,10,270,460);title(534,30,"Anticholinergic effects");
+  const ef=[["dry mouth","mouth"],["blurred vision, wide pupils","eye"],["drowsiness","sleep"],["urinary retention","bladder"],["constipation","gut"]];
+  ef.forEach((e,i)=>{const y=70+i*62;const a=seg(blk,i*.12,i*.12+.3);withA(.35+.65*a,()=>{const ix=556;
+    if(e[1]==="mouth"){ell(ix,y,16,8,0,mix(C.vessel,C.panel,.3),C["heart-edge"],1.4)}
+    else if(e[1]==="eye"){ell(ix,y,17,10,0,C.panel,C["ink-soft"],1.5);circ(ix,y,8,C.act2);circ(ix,y,3+4*a,C.ink)}
+    else if(e[1]==="sleep"){circ(ix,y,13,C.skin,C["skin-edge"],1.3);line(ix-7,y-2,ix-2,y-2,C.ink,1.6);line(ix+2,y-2,ix+7,y-2,C.ink,1.6);txt(ix+16,y-12,"z",{size:13,weight:700})}
+    else if(e[1]==="bladder"){ell(ix,y,14,12,0,hexA(C.urine,.6),C["ink-soft"],1.4);line(ix,y+12,ix,y+20,C["ink-soft"],2);crossMark(ix+14,y+14,4,C.bad)}
+    else{bowel(ix-18,y,36,10,T,{motility:.2,wall:5})}
+    txt(584,y,e[0],{size:12.5,weight:600})})});
+  rr(540,385,230,70,8);ctx.fillStyle=hexA(C.h2o,.15);ctx.fill();ctx.strokeStyle=C.h2o;ctx.lineWidth=1.4;ctx.stroke();
+  for(let i=0;i<4;i++){const q=P(T*.8+i/4,1);drop(570+i*14,400+q*30,4,1-q)}txt(640,410,"wash hands after",{size:12.5,weight:700});txt(640,430,"touching the patch",{size:12.5,weight:700});
+};
+/* ================= scenes: chemo, part 5, part 6, recap ================= */
+SC.chemo=function(T){
+  const L=12,t=P(T,L)*L;const on=smooth(seg(t,4,6))*(1-smooth(seg(t,11.2,12)));
+  panelBox(10,10,560,460,{fill:hexA(C.panel,.5)});title(24,30,"Nausea after chemotherapy");
+  const gx=60,gy=60,gw=480,gh=220;line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.5);line(gx,gy,gx,gy+gh,C["ink-soft"],1.5);
+  for(let d=1;d<=5;d++){const X=gx+(d-.5)/5*gw;txt(X,gy+gh+14,"Day "+d,{size:12,mono:true,align:"center",color:C["ink-soft"]})}
+  txt(gx+6,gy-6,"nausea",{size:12,color:C["ink-soft"]});
+  const acute=d=>Math.exp(-Math.pow((d-.45)/.22,2)),delayed=d=>.55*Math.exp(-Math.pow((d-2.6)/1.1,2))*(d>.6?1:Math.max(0,(d-.2)/.4));
+  const sweep=Math.min(5,t/4*5);
+  plotFn(d=>acute(d)*(1-.75*on),0,5,gx,gy,gw,gh,0,1.1,C.sero,2.6,null,sweep);plotFn(d=>delayed(d)*(1-.7*on),0,5,gx,gy,gw,gh,0,1.1,C.subp,2.6,[6,4],sweep);
+  if(on<.5){plotFn(acute,0,5,gx,gy,gw,gh,0,1.1,hexA(C.sero,.25),1.5,null,5);plotFn(delayed,0,5,gx,gy,gw,gh,0,1.1,hexA(C.subp,.25),1.5,[6,4],5)}
+  label(gx+70,gy+14,"acute: serotonin",{size:12,weight:700,border:C.sero,align:"left"});label(gx+250,gy+gh*.42,"delayed: substance P",{size:12,weight:700,border:C.subp,align:"left"});
+  // VC with NK1 socket
+  const vx=180,vy=380;glow(vx,vy,50,C.bad,.5*(1-on));circ(vx,vy,28,mix(C.panel,C.bad,.35*(1-on)),C.bad,2);txt(vx,vy,"VC",{size:12.5,weight:700,align:"center"});
+  circ(vx+40,vy-20,12,hexA(C.panel,.95),C.subp,2.2);txt(vx+58,vy-20,"NK1",{size:12,weight:700,mono:true,align:"left"});
+  for(let i=0;i<5;i++){let q=P(T*.4+i/5,1);let X=lerp(vx+180,vx+40,q),Y=vy-20+(rnd(i)-.5)*30*(1-q);let a=1;if(on>.5&&q>.75){X=vx+40+(q-.75)*160;Y=vy-20-(q-.75)*120;a=1-(q-.75)/.25}ligand(X,Y,6,{col:C.subp,a})}
+  if(on>.05)withA(on,()=>{drugMol(vx+40,vy-20,8,null);chipText(vx+150,vy+40,"aprepitant (NK1)",C.drug);chipText(vx+150,vy+66,"ondansetron (5-HT3)",C.drug)});
+  // cannabinoid card
+  panelBox(580,10,210,460);title(594,30,"Cannabinoids");
+  const lx=685,ly=140,gl=.5+.5*Math.sin(T*2);ctx.save();ctx.translate(lx,ly);for(let k=-3;k<=3;k++){ctx.save();ctx.rotate(k*.38);ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(10,-40-12*(1-Math.abs(k)/3),0,-70+20*Math.abs(k)/3);ctx.quadraticCurveTo(-10,-40,0,0);ctx.fillStyle=mix(C.cb,C.panel,.15+.15*gl);ctx.fill();ctx.restore()}ctx.restore();line(lx,ly,lx,ly+30,C.cb,3);
+  txt(lx,ly+50,"dronabinol (CB1)",{size:12.5,weight:700,align:"center",color:C.ink});
+  wrapText("For nausea that resists other drugs; also boosts appetite.",596,ly+84,180,17,{size:12});
+  wrapText("Watch: drowsiness, dizziness, mood changes, fast heart rate. No driving if drowsy.",596,ly+160,180,17,{size:12,weight:600,color:C["warn-ink"]});
+  tag(685,440,"give antiemetics before chemo",C.accent,{size:11.5});
+};
+SC.bulk=function(T){
+  const L=10,t=P(T,L)*L;const sw=smooth(seg(t,.5,5));
+  panelBox(10,10,780,230,{fill:hexA(C.panel,.5)});title(24,30,"Bulk-forming: psyllium");
+  glass(70,130,40,1-sw*.85);txt(70,200,"full glass of water",{size:12,weight:700,align:"center"});
+  for(let i=0;i<5;i++){const q=P(T*.5+i/5,1);if(sw<.95)drop(lerp(90,170,q),lerp(120,130,q),5,(1-q)*(1-sw))}
+  const sq=bowel(150,130,460,lerp(56,80,sw),T,{motility:.3+.9*sw});
+  for(let i=0;i<4;i++){const X=180+i*110+P(T*.05*(.3+sw),1)*90;stool(X,130,lerp(12,24,sw),lerp(.2,.85,sw),T,i+1);if(sw<.6)for(let k=0;k<4;k++)circ(X-12+k*8,130+((k%2)?-8:8),2.2,C.coat)}
+  if(sw>.5)label(380,72,"stretch triggers squeezing",{size:12,weight:700,border:C.gut});
+  // warning
+  panelBox(630,40,150,180,{stroke:C.bad,lw:2});txt(705,58,"not enough water",{size:12,weight:700,align:"center",color:C.bad});
+  rr(660,80,30,120,12);fillStroke(mix(C.stomach,C.panel,.3),C["stomach-edge"],1.6);blobPath(675,140,13,4,T*.2,.1);fillStroke(C.coat,mix(C.coat,C.ink,.4),1.4);crossMark(720,140,8,C.bad);
+  txt(705,208,"blockage risk",{size:12,weight:700,align:"center",color:C.bad});
+  panelBox(10,250,780,220,{fill:hexA(C.panel,.5)});title(24,270,"Stool softener: docusate");
+  bowel(60,370,560,60,T,{motility:.5});const sf=smooth(seg(t,1,6));
+  for(let i=0;i<5;i++){const X=100+i*105+P(T*.03,1)*40;stool(X,370,lerp(11,17,sf),lerp(.1,.85,sf),T,i+5);
+    for(let k=0;k<3;k++){const q=P(T*.6+k/3+i*.2,1);const a=1-q;const ang=k*2.1+i;const r=lerp(30,4,q);if(k%2)drop(X+Math.cos(ang)*r,370+Math.sin(ang)*r*.6,4,a*(1-sf*.5));else{circ(X+Math.cos(ang)*r,370+Math.sin(ang)*r*.6,3.5,C.fat,hexA(C.ink,.3),1)}}}
+  txt(340,438,"water and fat soak in: softer stool, easier to pass",{size:12.5,weight:600,align:"center"});
+  wrapText("Used to prevent straining: after surgery, after a heart attack, with hemorrhoids.",640,320,140,17,{size:12});
+};
+SC.osmotic=function(T){
+  const L=10,t=P(T,L)*L;const pull=smooth(seg(t,.5,4));
+  panelBox(10,10,500,460,{fill:hexA(C.panel,.5)});title(24,30,"Osmotic: polyethylene glycol (PEG)");
+  rr(30,60,460,40,6);ctx.fillStyle=hexA(C.peri,.8);ctx.fill();rr(30,300,460,40,6);ctx.fill();txt(260,80,"tissue water",{size:12,weight:600,align:"center"});txt(260,320,"tissue water",{size:12,weight:600,align:"center"});
+  bowel(30,200,460,lerp(110,150,pull),T,{motility:.4+.6*pull});
+  for(let i=0;i<9;i++){const X=60+i*48;drugMol(X+Math.sin(T+i)*5,200+Math.cos(T*.8+i)*30,7,null)}
+  for(let i=0;i<14;i++){const q=P(T*.45+i/14,1);const top=i%2;const X=50+rnd(i)*420;const a=pull;if(a<.05)continue;drop(X,top?lerp(80,180,q):lerp(320,220,q),5,a*(1-q*.5))}
+  for(let i=0;i<3;i++)stool(120+i*140+P(T*.04,1)*40,200,lerp(14,22,pull),lerp(.25,.9,pull),T,i+2);
+  label(260,380,"water pulled in by osmosis",{size:13,weight:700,border:C.h2o});
+  txt(30,420,"Magnesium salts work the same way: avoid in kidney disease.",{size:12.5,weight:600});txt(30,444,"Large volumes of PEG are used for bowel prep.",{size:12.5,color:C["ink-soft"]});
+  // lactulose ammonia trap
+  panelBox(520,10,270,460,{stroke:C.nh3,lw:1.8});title(534,30,"Lactulose in liver failure");
+  const clear=smooth(seg(t,2,8));brainSide(655,90,46,{});ctx.save();ctx.globalAlpha=.65*(1-clear);ell(650,82,52,32,0,C.blocked);ctx.restore();txt(655,160,clear>.6?"thinking clears":"confused (ammonia)",{size:12,weight:700,align:"center",color:clear>.6?C.good:C.bad});
+  rr(540,190,40,240,12);ctx.fillStyle=hexA(C.blood,.25);ctx.fill();ctx.strokeStyle=C.vessel;ctx.lineWidth=1.4;ctx.stroke();txt(560,446,"blood",{size:11.5,align:"center"});
+  rr(620,190,150,240,16);fillStroke(C.lumen,C["gut-edge"],3);txt(695,446,"colon",{size:11.5,align:"center"});
+  for(let i=0;i<4;i++)hIon(640+i*35,215+((i*41)%40),6);txt(695,250,"bacteria make acid",{size:11.5,weight:600,align:"center"});
+  for(let i=0;i<5;i++){const q=P(T*.3+i/5,1);if(q<.45){const X=lerp(560,640,q/.45);txt(X,300+i*20,"NH₃",{size:12,mono:true,weight:700,color:C.nh3,align:"center"})}else{const q2=(q-.45)/.55;const X=640+q2*100,Y=290+i*18+q2*30;txt(X,Y,"NH₄⁺",{size:12,mono:true,weight:700,color:C.acid,align:"center"})}}
+  txt(695,412,"trapped, leaves in stool",{size:11.5,weight:600,align:"center"});
+};
+SC.stim=function(T){
+  const L=10,t=P(T,L)*L;const st=smooth(seg(t,1,2.5));
+  panelBox(10,10,780,220,{fill:hexA(C.panel,.5)});title(24,30,"Stimulant: bisacodyl or senna");
+  bowel(30,120,560,60,T,{motility:.4+1.6*st,wallCol:mix(C.gut,C.vessel,.15*st)});
+  for(let X=50;X<580;X+=26){const fl=st*(.5+.5*Math.sin(T*8+X));line(X,84,X+12,80,mix(C.nerve,C.gold,fl),2.4)}
+  for(let i=0;i<4;i++){const q=clamp((t-.5-i*.3)/.8,0,1);if(q<1)drugMol(lerp(300,80+i*130,q),lerp(40,84,q),7,null);else drugMol(80+i*130,84,6,null)}
+  for(let i=0;i<4;i++){const X=60+((i*140+T*lerp(10,70,st))%540);stool(X,120,14,.7,T,i+1)}
+  if(st>.5){const pu=.5+.5*Math.sin(T*6);label(650,90,"cramping",{size:13,weight:700,border:C.bad,a:.5+.5*pu})}
+  txt(700,140,"works in hours",{size:12,weight:600,align:"center"});txt(700,160,"swallow tablets whole",{size:12,align:"center",color:C["ink-soft"]});
+  // opioid + PAMORA
+  panelBox(10,240,450,230,{fill:hexA(C.panel,.5)});title(24,260,"Opioid constipation and methylnaltrexone");
+  const op=P(T,10)*10;const pam=smooth(seg(op,5,6.5));
+  bowel(30,380,300,46,T,{motility:lerp(.08,.9,pam)});stool(80+P(T*lerp(.01,.08,pam),1)*200,380,12,lerp(.15,.75,pam),T,6);
+  [80,160,240].forEach((x,k)=>{recCupH(x,348,1,C.receptor,{s:.7,blocked:pam>.5,bound:pam>.5?0:1,lig:C.ligand})});
+  if(pam<.5)for(let k=0;k<3;k++)ligand(80+k*80,336-Math.sin(T*2+k)*3,5);label(160,300,pam>.5?"gut mu receptors blocked":"opioid on gut mu receptors",{size:12,weight:700,border:pam>.5?C.drug:C.ligand});
+  line(350,280,350,460,C["ink-soft"],2,[6,5]);txt(356,456,"blood-brain barrier",{size:11,color:C["ink-soft"]});
+  brainSide(410,330,36,{});ligand(410,322,6);glow(410,322,22,C.gold,.5);txt(410,390,"pain relief kept",{size:12,weight:700,align:"center",color:C.good});
+  if(pam>.3){const q=P(T*.6,1);withA(1-q,()=>drugMol(345-q*10,300,6,null));crossMark(350,300,6,C.bad)}
+  // obstruction
+  panelBox(470,240,320,230,{stroke:C.bad,lw:2});title(484,260,"Suspected obstruction",C.bad);
+  bowel(490,340,110,50,T,{motility:.6});ctx.save();ctx.translate(620,340);ctx.rotate(Math.sin(T)*.05);ell(0,0,22,30,0,mix(C.gut,C.bad,.4),C.bad,2);for(let k=-1;k<=1;k++)line(-18,k*12,18,-k*8,C["gut-edge"],2);ctx.restore();
+  bowel(642,340,130,24,T,{motility:0});for(let i=0;i<3;i++){const q=P(T*.4+i/3,1);stool(500+q*90,340,10,.6,T,i)}
+  tablet(560,410,14,C.drug);crossMark(560,410,16,C.bad);txt(690,404,"do not give",{size:13,weight:700,align:"center",color:C.bad});
+  wrapText("distension, vomiting, no stool or gas: hold and report",600,426,180,15,{size:11.5,weight:600});
+};
+SC.antidiarrheal=function(T){
+  const L=10,t=P(T,L)*L;const lop=smooth(seg(t,3,5));
+  panelBox(10,10,480,460,{fill:hexA(C.panel,.5)});title(24,30,"Loperamide: gut opioid receptors");
+  bowel(30,200,440,90,T,{motility:lerp(1.8,.5,lop)});
+  [90,180,270,360].forEach(x=>recCupH(x,140,1,C.receptor,{s:.75,blocked:lop>.5}));label(230,96,"mu (opioid) receptors in the gut wall",{size:12,weight:700,border:C.receptor});
+  if(lop<1)for(let k=0;k<4;k++){const q=clamp(lop*1.4-k*.1,0,1);if(q>0&&q<1)drugMol(lerp(440,90+k*90,q),lerp(60,130,q),7,null)}
+  for(let i=0;i<14;i++){const q=P(T*.6+i/14,1);const X=40+rnd(i)*420;if(lop<.5)drop(X,lerp(250,210,q),5,1-q);else drop(X,lerp(200,250,q),5,1-q)}
+  txt(250,270,lop<.5?"water pours in, stool rushes":"water absorbed back, stool firms up",{size:12.5,weight:700,align:"center",color:lop<.5?C.bad:C.good});
+  for(let i=0;i<4;i++){const X=40+((i*110+T*lerp(120,25,lop))%430);if(lop<.5){for(let k=0;k<3;k++)drop(X+k*8,200+Math.sin(T*4+k)*10,5)}else stool(X,200,16,.65,T,i)}
+  txt(30,330,"Adverse effects: constipation, cramps, dizziness.",{size:12.5,weight:600});
+  txt(30,352,"Taking far more than directed: dangerous heart rhythms.",{size:12.5,color:C["ink-soft"]});
+  txt(30,380,"Avoid with blood in stool, high fever, or C. diff.",{size:12.5,weight:700,color:C.bad});
+  // C diff panel
+  panelBox(500,10,290,250,{stroke:C.bad,lw:2});title(514,30,"C. diff: do not slow the gut",C.bad);
+  const sw=lop;bowel(520,130,250,lerp(60,86,sw),T,{motility:lerp(1.2,.15,sw),wallCol:mix(C.gut,C.bad,.25*sw)});
+  for(let i=0;i<6;i++)bug(545+i*38,130+Math.sin(T+i)*12,9,T,i);
+  const nt=Math.round(6+16*sw);for(let i=0;i<nt;i++){const X=530+rnd(i)*230,Y=130+(rnd(i+4)-.5)*lerp(44,74,sw);circ(X,Y,2.6,C.bad)}
+  txt(645,222,sw>.5?"toxins pile up: colon swells":"diarrhea flushes toxins out",{size:12,weight:700,align:"center",color:C.bad});txt(645,244,"risk: toxic megacolon",{size:12,align:"center",color:C["ink-soft"]});
+  // bismuth
+  panelBox(500,270,290,200);title(514,290,"Bismuth subsalicylate");
+  pillBottle(540,380,30,"",C.gastrin);ctx.save();ctx.translate(620,360);ell(0,0,26,14,0,mix(C.vessel,C.panel,.3),C["heart-edge"],1.4);ell(0,4,16,8,0,hexA("#1A1A1A",.75*(.6+.4*Math.sin(T*1.5))));ctx.restore();
+  stool(700,362,15,.5,T,9);ctx.save();ctx.globalAlpha=.7;blobPath(700,362,15*1.07,9,T*.3,.1);ctx.fillStyle="#1A1A1A";ctx.fill();ctx.restore();
+  txt(660,404,"black tongue and stool: harmless",{size:12,weight:600,align:"center"});tag(645,440,"salicylate: aspirin allergy, children, anticoagulants",C.warn,{size:11});
+};
+SC.ibd=function(T){
+  const L=12,t=P(T,L)*L;const rung=Math.min(4,Math.floor(t/2.6));const calm=rung/4;
+  panelBox(10,10,470,460,{fill:hexA(C.panel,.5)});title(24,30,"Inflamed bowel wall");
+  const cx=245,cy=245;circ(cx,cy,170,mix(C.gut,C.bad,.55*(1-calm)),C["gut-edge"],3);circ(cx,cy,95,C.lumen,mix(C.gut,C.bad,.5*(1-calm)),6);
+  const ns=Math.round(26*(1-calm*.8));for(let i=0;i<ns;i++){const a=rnd(i)*TAU,r=105+rnd(i+3)*55;const X=cx+Math.cos(a)*r,Y=cy+Math.sin(a)*r;const fl=.5+.5*Math.sin(T*6+i);if(i%2)circ(X,Y,5,C.panel,C["ink-soft"],1.2);else{ctx.save();ctx.globalAlpha=fl;line(X-4,Y,X+4,Y,C.bad,2);line(X,Y-4,X,Y+4,C.bad,2);ctx.restore()}}
+  if(rung>=4){for(let i=0;i<6;i++){const a=T*.5+i;const X=cx+Math.cos(a)*130,Y=cy+Math.sin(a)*130;circ(X,Y,3.5,C.gold);ctx.font=`700 16px ${FONT}`;ctx.fillStyle=C.receptor;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("Y",X+8,Y-8)}}
+  const DR=["mesalamine","prednisone","azathioprine","infliximab"];if(rung>0){const q=smooth(seg(t-(rung)*2.6,0,.8));withA(1,()=>{chipText(cx,lerp(36,58,q),DR[rung-1],C.drug);arrow(cx,68,cx,82,C.drug,2)})}
+  txt(cx,cy,calm>.7?"calmer":"inflamed",{size:14,weight:700,align:"center",color:calm>.7?C.good:C.bad});
+  // ladder
+  panelBox(490,10,300,460);title(504,30,"Step-up ladder");
+  const R=[["aminosalicylates","mesalamine: soothes the lining"],["corticosteroids","prednisone, budesonide: flares only, taper"],["immunomodulators","azathioprine: check blood counts"],["biologics (-mab)","infliximab: blocks TNF; TB screen first"]];
+  line(520,70,520,440,C["ink-soft"],3);line(770,70,770,440,C["ink-soft"],3);
+  R.forEach((r,i)=>{const y=420-i*100;line(520,y,770,y,C["ink-soft"],3);const on=i<rung;const cur=i===rung-1;
+    rr(530,y-74,230,64,8);ctx.fillStyle=cur?hexA(C.drug,.16):on?hexA(C.good,.12):hexA(C["panel-2"],.9);ctx.fill();ctx.strokeStyle=cur?C.drug:C.rule;ctx.lineWidth=cur?2:1;ctx.stroke();
+    txt(542,y-56,(i+1)+". "+r[0],{size:13,weight:700});wrapText(r[1],542,y-36,210,16,{size:12,color:C["ink-soft"]})});
+  if(rung>=3)tag(640,52,"infection risk rises",C.bad);
+};
+SC.pert=function(T){
+  const L=10,t=P(T,L)*L;const op=smooth(seg(t,1,2.5));
+  panelBox(10,10,780,300,{fill:hexA(C.panel,.5)});title(24,30,"Small intestine with pancrelipase");
+  // pancreas
+  ctx.beginPath();ctx.moveTo(40,90);ctx.bezierCurveTo(80,60,150,70,190,90);ctx.bezierCurveTo(170,120,90,125,40,110);ctx.closePath();fillStroke(mix(C.gold,C.panel,.5),C.gold,1.6);txt(110,138,"pancreas",{size:12,weight:600,align:"center"});
+  line(190,95,240,150,C.gold,4);crossMark(215,122,7,C.bad);txt(150,160,"few enzymes",{size:12,weight:600,align:"center",color:C.bad});
+  bowel(230,200,540,90,T,{motility:.6});
+  // capsule
+  const cxp=270;if(op<1)capsule(cxp,200,18*(1-op*.3),C.drug,C.panel);
+  const nb=12;for(let i=0;i<nb;i++){const q=P(T*.12+i/nb,1);const X=lerp(290,760,q);const Y=200+(rnd(i)-.5)*50;if(op<.5)continue;const kind=i%3;const col=[C.fat,C.blocked,C.base][kind];
+    ctx.save();ctx.translate(X,Y);ctx.rotate(Math.sin(T*6+i)*.4);line(0,0,10,-5,col,3);line(0,0,10,5,col,3);circ(0,0,3,col);ctx.restore();
+    const fx=X+16;if(kind===0){circ(fx,Y,5*(1-q*.5),C.fat,hexA(C.ink,.3),1)}else if(kind===1){line(fx,Y-4,fx+10*(1-q),Y+4,C.stool,2.4)}else{line(fx,Y,fx+12*(1-q),Y,C.base,2.4)}}
+  txt(500,262,"lipase cuts fat, protease cuts protein, amylase cuts starch",{size:12.5,weight:700,align:"center"});
+  for(let i=0;i<5;i++){const q=P(T*.5+i/5,1);circ(400+i*70,lerp(150,90,q),3,C.fat,null);}txt(560,80,"absorbed into blood",{size:12,weight:600,align:"center"});
+  // stools
+  panelBox(10,320,500,150);title(24,340,"Stool check");
+  ell(110,410,40,18,0,mix(C.fat,C.panel,.4),C["ink-soft"],1.4);for(let k=0;k<4;k++)circ(85+k*16,402+(k%2)*10,3,hexA(C.fat,.9));txt(110,448,"without: steatorrhea",{size:12,weight:700,align:"center",color:C.bad});
+  for(let k=0;k<3;k++){const q=P(T*.8+k/3,1);line(80+k*25,388-q*14,86+k*25,380-q*14,hexA(C.h2o,1-q),2)}txt(110,372,"pale, greasy, floats",{size:11.5,align:"center",color:C["ink-soft"]});
+  stool(330,410,22,.7,T,3);txt(330,448,"with enzymes: normal",{size:12,weight:700,align:"center",color:C.good});
+  panelBox(520,320,270,150);title(534,340,"With every meal and snack");
+  circ(600,410,40,C.panel,C["ink-soft"],2);circ(600,410,28,null,C.rule,1.2);capsule(680,410,14,C.drug,C.panel);
+  txt(700,380,"swallow whole",{size:12,weight:700});txt(700,440,"do not crush",{size:12,weight:700,color:C.bad});
+};
+SC.recap=function(T){
+  panelBox(10,10,780,460,{fill:hexA(C.panel,.5)});
+  const cols=[["Acid","act1","3 doorbells, 1 pump","H2, M3, CCK2"],["Reducers","act2","PPI: before breakfast","H2: -tidine; antacids space"],["Protectors","act3","sucralfate coats","misoprostol: not pregnant"],["Nausea","act4","match the receptor","QT, EPS, anticholinergic"],["Bowel","act5","laxatives: no obstruction","loperamide: no C. diff"],["IBD, enzymes","act6","step-up ladder","pancrelipase with meals"]];
+  const j=Math.floor(T/1.8)%6;const w=124;
+  cols.forEach((c,i)=>{const x=20+i*(w+6);const on=i===j;rr(x,24,w,432,10);ctx.fillStyle=on?hexA(C[c[1]],.18):hexA(C["panel-2"],.9);ctx.fill();ctx.strokeStyle=on?C[c[1]]:C.rule;ctx.lineWidth=on?2.4:1;ctx.stroke();
+    rr(x,24,w,30,10);ctx.fillStyle=C[c[1]];ctx.fill();txt(x+w/2,40,c[0],{size:13,weight:700,align:"center",color:inkOn(C[c[1]])});
+    const cx=x+w/2,cy=140;const TT=on?T:0;
+    if(i===0){rr(cx-34,cy-44,58,88,14);fillStroke(C.cell,C["cell-edge"],1.4);protonPump(cx+24,cy,12,TT,{});hIon(cx+46,cy-10-P(TT,1)*14,5)}
+    else if(i===1){protonPump(cx,cy,18,TT,{blocked:true})}
+    else if(i===2){lining(cx-50,cx+50,cy+30,TT,{mucus:14});ctx.beginPath();ctx.moveTo(cx-24,cy+16);ctx.quadraticCurveTo(cx,cy-8,cx+24,cy+16);ctx.closePath();fillStroke(C.coat,mix(C.coat,C.ink,.4),1.2)}
+    else if(i===3){circ(cx,cy,24,mix(C.panel,C.bad,on?.3+.2*Math.sin(T*4):.2),C.bad,2);txt(cx,cy,"VC",{size:12,weight:700,align:"center"});[[-36,-24],[36,-24],[0,38]].forEach(d=>{circ(cx+d[0],cy+d[1],8,C.panel,C.receptor,2)});drugMol(cx+36,cy-24,6,null)}
+    else if(i===4){bowel(cx-52,cy,104,30,TT,{motility:1,wall:8});stool(cx-30+P(TT*.2,1)*60,cy,9,.7,TT,2)}
+    else{circ(cx,cy,36,mix(C.gut,C.bad,on?.2:.4),C["gut-edge"],2);circ(cx,cy,18,C.lumen,null)}
+    wrapText(c[2],x+10,230,w-20,17,{size:12.5,weight:700});wrapText(c[3],x+10,300,w-20,17,{size:12,color:C["ink-soft"]})});
+};
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now();
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SC[s.scene]||SC.map)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;if(!paused)T+=dt*speed;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

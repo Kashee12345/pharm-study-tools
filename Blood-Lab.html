@@ -1,0 +1,1401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blood Drugs Lab</title>
+<meta name="description" content="A clotting cascade drug bench, a warfarin INR simulator, nursing case files and sorting games for anticoagulants, antiplatelets and blood drugs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2A3580;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#C4644F;--act3:#D98A1C;--act4:#2F7FC1;--act5:#2E8A7A;--act6:#A04E8C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  /* blood pharmacology palette */
+  --ecf:#EEF0F7;--grid:#D5D9E8;
+  --drug:#5B3FC4;--rec:#1E8A8A;--lig:#C98A12;--blk:#8B9094;
+  --na:#C9A227;--k:#8A4FB8;--ca:#2E8A4F;--cl:#2F7FC1;--water:#CFE5F1;
+  --blood:#B5301F;--art:#C4382F;--vein:#3F5FA8;--myo:#D27A68;--myo-d:#8A3A2E;--lung:#EDC3BC;--fluid:#4F8FCB;
+  --liver:#A0522D;--ldl:#D98A1C;--chol:#C9A227;--enz:#A04E8C;--bnp:#2E8A7A;--aldo:#B4632A;--glu:#C4644F;
+  --no:#2F7FC1;--cgmp:#6E8A1A;--camp:#2E8A7A;--ach:#5E7F1A;--mg:#6E7F8C;
+  --body:#E9DCCB;--body-edge:#A88B6A;--skin:#EAC9A8;--skin-edge:#B9937A;--smooth:#E3B2A6;
+    --fac:#5A7DA8;--faca:#C4621F;--thr:#B5301F;--fib:#B8901A;--plt:#9A4A86;--at:#1E8A8A;--vitk:#4F8A1A;--plasmin:#2F7FC1;
+  --rbc:#C4382F;--neut:#2E7F9A;--iron:#8A4A1C;--b12:#C4644F;--epo:#2E8A4F;--tf:#B4632A;--marrow:#E8C9A0;--clot:#8E2A22;
+  --scr:#0F1A1F;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2245;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131824;--grid:#262C3A;
+  --drug:#B7A4F5;--rec:#5CC8C4;--lig:#F2B33B;--blk:#6F767B;
+  --na:#E0BE48;--k:#C29AD6;--ca:#6BC293;--cl:#5AA9E6;--water:#1F3A4A;
+  --blood:#F07A62;--art:#F27A6E;--vein:#8FA8EC;--myo:#B8695A;--myo-d:#E0A090;--lung:#5A3A38;--fluid:#8FC0EC;
+  --liver:#C98A6A;--ldl:#F2A93B;--chol:#E0BE48;--enz:#D186C0;--bnp:#5CC4B0;--aldo:#E39A5B;--glu:#E08A74;
+  --no:#5AA9E6;--cgmp:#B5CF5A;--camp:#5CC4B0;--ach:#A3C95A;--mg:#A9B7C2;
+  --body:#3E3528;--body-edge:#B39773;--skin:#5A4434;--skin-edge:#B9937A;--smooth:#6A4038;
+    --fac:#8FB0D8;--faca:#F2A35B;--thr:#F07A62;--fib:#E0BE48;--plt:#D186C0;--at:#5CC8C4;--vitk:#A3C95A;--plasmin:#5AA9E6;
+  --rbc:#F27A6E;--neut:#6CC0DA;--iron:#D9905A;--b12:#E08A74;--epo:#6BC293;--tf:#E39A5B;--marrow:#5A4632;--clot:#E0857A;
+  --scr:#081014;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2245;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131824;--grid:#262C3A;
+  --drug:#B7A4F5;--rec:#5CC8C4;--lig:#F2B33B;--blk:#6F767B;
+  --na:#E0BE48;--k:#C29AD6;--ca:#6BC293;--cl:#5AA9E6;--water:#1F3A4A;
+  --blood:#F07A62;--art:#F27A6E;--vein:#8FA8EC;--myo:#B8695A;--myo-d:#E0A090;--lung:#5A3A38;--fluid:#8FC0EC;
+  --liver:#C98A6A;--ldl:#F2A93B;--chol:#E0BE48;--enz:#D186C0;--bnp:#5CC4B0;--aldo:#E39A5B;--glu:#E08A74;
+  --no:#5AA9E6;--cgmp:#B5CF5A;--camp:#5CC4B0;--ach:#A3C95A;--mg:#A9B7C2;
+  --body:#3E3528;--body-edge:#B39773;--skin:#5A4434;--skin-edge:#B9937A;--smooth:#6A4038;
+    --fac:#8FB0D8;--faca:#F2A35B;--thr:#F07A62;--fib:#E0BE48;--plt:#D186C0;--at:#5CC8C4;--vitk:#A3C95A;--plasmin:#5AA9E6;
+  --rbc:#F27A6E;--neut:#6CC0DA;--iron:#D9905A;--b12:#E08A74;--epo:#6BC293;--tf:#E39A5B;--marrow:#5A4632;--clot:#E0857A;
+  --scr:#081014;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+/* heart drugs lab extras */
+.methods .tbtn small,.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.methods .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.methods .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.methods .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.side .sc-title{font-size:20px}
+.binhead span{min-width:0;overflow-wrap:anywhere}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 9 &middot; Anticoagulants, antiplatelets and blood drugs</div>
+    <h1>Blood Drugs Lab</h1>
+    <p class="sub">Test clotting drugs on a cascade bench, run a warfarin patient for eight weeks, work nursing cases and sort the drugs. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Clotting Drug Bench</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-inr" data-tab="inr" id="tabbtn-inr" type="button" tabindex="-1">Part 2 &middot; Warfarin INR Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: cascade drug bench -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Clotting Drug Bench</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvBench" role="img" aria-label="Clotting drug bench."></canvas></div>
+        <div class="stagebar"><button class="tbtn" type="button" id="bCut">New cut: watch a clot form</button><span class="caption" id="bCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--plt)"></i>Platelet</span>
+          <span><i class="ln" style="border-top-color:var(--fib)"></i>Fibrin</span>
+          <span><i style="background:var(--plasmin)"></i>Plasmin</span>
+          <span><i class="s" style="background:var(--faca)"></i>Active factor</span>
+          <span><i style="background:var(--drug)"></i>Drug</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Usual target zone</span>
+        </div>
+        <p class="sim-note">A teaching model with relative effects, not real drug levels or doses. Lab values are common teaching values; real targets and normal ranges vary by lab and protocol. The INR is mainly a warfarin test, and the aPTT is mainly a heparin test, so other drugs change them only a little or unreliably.</p>
+      </div>
+      <aside class="card side" aria-label="Bench controls">
+        <h3 id="bDrugLab">Pick one drug</h3>
+        <div class="methods" id="bDrugs" role="group" aria-labelledby="bDrugLab"></div>
+        <h3 id="bVesLab">Where is the clot?</h3>
+        <div class="seg4" id="bVessel" role="group" aria-labelledby="bVesLab"></div>
+        <div class="ctl"><label for="bDose">Drug effect <output id="bDoseOut" for="bDose"></output></label>
+          <input type="range" id="bDose" min="0" max="2" step="1" value="1"><div class="ticks" aria-hidden="true"><span>low</span><span>usual</span><span>too much</span></div></div>
+        <div class="ctl"><label for="bKid">Kidney function <output id="bKidOut" for="bKid"></output></label>
+          <input type="range" id="bKid" min="0" max="2" step="1" value="0"><div class="ticks" aria-hidden="true"><span>normal</span><span>severely reduced</span></div></div>
+        <label class="mode"><input type="checkbox" id="bPoor"> CYP2C19 poor metabolizer</label>
+        <div class="bar"><button class="btn" type="button" id="bRev">Give reversal agent</button></div>
+        <table class="readouts" id="bRead"><caption class="sr">Bench readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="bStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="bChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: warfarin INR simulator -->
+  <section id="tab-inr" role="tabpanel" aria-labelledby="tabbtn-inr" hidden>
+    <h2 class="gk-sr">Part 2: Warfarin INR Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvINR" role="img" aria-label="Warfarin INR simulator."></canvas></div>
+        <div class="stagebar">
+          <button class="tbtn" type="button" id="wPlay">Pause</button>
+          <button class="tbtn" type="button" id="wRestart">Restart at day 0</button>
+          <label>Speed <input type="range" id="wSpeed" min="0.5" max="4" step="0.5" value="1" aria-label="Speed, days per second"></label>
+          <span class="caption" id="wCap"></span>
+        </div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--act3)"></i>INR</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Target 2 to 3</span>
+          <span><i class="s" style="background:var(--fac)"></i>Clotting factor level</span>
+          <span><i class="ln" style="border-top-color:var(--drug)"></i>Enoxaparin bridge</span>
+          <span><i style="background:var(--gold)"></i>Event marker</span>
+        </div>
+        <p class="sim-note">One simulated day passes each second at speed 1. Doses are made-up teaching units, not milligrams; the model only shows the direction and timing of changes. Real warfarin doses are set by the prescriber, often with a dosing protocol.</p>
+      </div>
+      <aside class="card side" aria-label="Warfarin controls">
+        <div class="ctl"><label for="wDose">Daily warfarin dose (teaching units) <output id="wDoseOut" for="wDose"></output></label>
+          <input type="range" id="wDose" min="0" max="10" step="1" value="5"><div class="ticks" aria-hidden="true"><span>0</span><span>5</span><span>10</span></div></div>
+        <h3 id="wVkLab">Vitamin K in the diet, from today</h3>
+        <div class="seg3" id="wVk" role="group" aria-labelledby="wVkLab"></div>
+        <h3 id="wIxLab">Other drug, from today</h3>
+        <div class="seg3" id="wIx" role="group" aria-labelledby="wIxLab"></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="wMiss">Miss today's dose</button>
+          <button class="tbtn" type="button" id="wBridge" aria-pressed="false">Bridge with enoxaparin</button>
+        </div>
+        <h3>Reversal</h3>
+        <div class="bar">
+          <button class="btn" type="button" id="wVitK">Give vitamin K</button>
+          <button class="btn" type="button" id="wPCC">Give 4-factor PCC</button>
+        </div>
+        <table class="readouts" id="wRead"><caption class="sr">Warfarin readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="wStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="wChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="Blood-Walkthrough.html">Blood Drugs Walkthrough</a>. Patients are fictional. Drugs are named by generic name and class with no doses; simulator numbers are relative teaching units. Lab ranges are common teaching values; target ranges, hold times and reversal plans always follow the prescriber, the label and local protocol.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "rec", "lig", "blk", "na", "k", "ca", "cl", "water", "blood", "art", "vein", "myo", "myo-d", "lung", "fluid", "liver", "ldl", "chol", "enz", "bnp", "aldo", "glu", "no", "cgmp", "camp", "ach", "mg", "body", "body-edge", "skin", "skin-edge", "smooth", "fac", "faca", "thr", "fib", "plt", "at", "vitk", "plasmin", "rbc", "neut", "iron", "b12", "epo", "tf", "marrow", "clot", "scr", "trace"];
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function ngon(x,y,r,n,rot){ctx.beginPath();for(let k=0;k<=n;k++){const a=k/n*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* ================= heart pharmacology drawing kit (shared by both pages) ================= */
+function gs(x,s){return Math.exp(-x*x/(2*s*s))}
+function beatC(T,hr){const p=P(T*(hr||72)/60,1);return p<.34?Math.sin(p/.34*Math.PI):0}
+function supTxt(s){return s}
+/* stylised heart. o:{hr,size (dilation),force (squeeze depth),col,cav,label,still} returns contraction 0..1 */
+function heartPath(s){ctx.beginPath();ctx.moveTo(0,-.24*s);
+  ctx.bezierCurveTo(-.1*s,-.56*s,-.62*s,-.52*s,-.56*s,-.08*s);ctx.bezierCurveTo(-.5*s,.22*s,-.18*s,.42*s,.06*s,.62*s);
+  ctx.bezierCurveTo(.32*s,.36*s,.56*s,.16*s,.56*s,-.1*s);ctx.bezierCurveTo(.6*s,-.5*s,.1*s,-.56*s,0,-.24*s);ctx.closePath()}
+function heart(cx,cy,s,T,o){o=o||{};const hr=o.hr==null?72:o.hr;const c=o.still?0:beatC(T,hr);const size=o.size||1,force=o.force==null?1:o.force;
+  ctx.save();ctx.translate(cx,cy);
+  // great vessels
+  ctx.lineCap="round";ctx.strokeStyle=o.vcol||C.art;ctx.lineWidth=s*.13;ctx.beginPath();ctx.moveTo(.02*s,-.2*s);ctx.bezierCurveTo(.02*s,-.62*s,.36*s,-.66*s,.4*s,-.42*s);ctx.stroke();
+  ctx.strokeStyle=C.vein;ctx.lineWidth=s*.11;ctx.beginPath();ctx.moveTo(-.22*s,-.2*s);ctx.lineTo(-.24*s,-.6*s);ctx.stroke();ctx.lineCap="butt";
+  const sc=size*(1-.05*c*force);ctx.scale(sc,sc);
+  heartPath(s);ctx.fillStyle=o.col||C.myo;ctx.fill();ctx.strokeStyle=C["myo-d"];ctx.lineWidth=2.4/sc;ctx.stroke();
+  // septum hint
+  ctx.strokeStyle=hexA(C["myo-d"],.55);ctx.lineWidth=1.6/sc;ctx.beginPath();ctx.moveTo(-.02*s,-.18*s);ctx.quadraticCurveTo(.0,.2*s,.06*s,.52*s);ctx.stroke();
+  // LV cavity: bigger with dilation, squeezes with force
+  const cav=(o.cav==null?1:o.cav);const k=1-.42*c*force;
+  ell(.22*s,.06*s,.15*s*cav*(.6+.4*k),.26*s*cav*(.65+.35*k),.25,mix(C.blood,C.panel,.25),hexA(C["myo-d"],.7),1.2/sc);
+  ell(-.25*s,0,.11*s*cav*(.7+.3*k),.2*s*cav*(.7+.3*k),-.2,mix(C.vein,C.panel,.35),hexA(C["myo-d"],.6),1.2/sc);
+  ctx.restore();return c}
+/* lungs with fluid. fluid 0..1 */
+function lungs(cx,cy,s,fluid,T,o){o=o||{};const lobe=()=>{ctx.beginPath();ctx.moveTo(-s*.06,-s*.5);ctx.bezierCurveTo(s*.28,-s*.52,s*.34,s*.1,s*.3,s*.46);ctx.quadraticCurveTo(s*.1,s*.56,-s*.1,s*.46);ctx.quadraticCurveTo(-s*.14,0,-s*.06,-s*.5);ctx.closePath()};
+  [-1,1].forEach(side=>{ctx.save();ctx.translate(cx+side*s*.1,cy);ctx.scale(side,1);
+    lobe();ctx.fillStyle=C.lung;ctx.fill();ctx.save();lobe();ctx.clip();const lvl=s*.5-fluid*s*.95;ctx.fillStyle=hexA(C.fluid,.6);ctx.beginPath();ctx.moveTo(-s*.3,s*.6);
+    for(let x=-s*.3;x<=s*.4;x+=6)ctx.lineTo(x,lvl+Math.sin(x/8+T*2.4)*2);ctx.lineTo(s*.4,s*.6);ctx.closePath();ctx.fill();
+    if(fluid>.25)for(let i=0;i<10;i++){const bx=-s*.05+rnd(i+side*7)*s*.3,by=lvl+8+rnd(i*3+side)*(s*.5-lvl);circ(bx,by-P(T*.6+rnd(i),1)*14,2.2,hexA(C.panel,.8))}
+    ctx.restore();lobe();ctx.strokeStyle=C["myo-d"];ctx.lineWidth=1.8;ctx.stroke();
+    for(let k=0;k<4;k++){line(s*.02,-s*.3+k*s*.18,s*.14+k*4,-s*.22+k*s*.2,hexA(C["myo-d"],.4),1.2)}ctx.restore()});
+  line(cx,cy-s*.75,cx,cy-s*.42,C["myo-d"],5);line(cx,cy-s*.44,cx-s*.1,cy-s*.36,C["myo-d"],3.5);line(cx,cy-s*.44,cx+s*.1,cy-s*.36,C["myo-d"],3.5)}
+/* blood vessel seen from the side. r = inner radius; o:{col, wall, T, flow, n} */
+function vessel(x,y,w,r,o){o=o||{};const wall=o.wall||7;const col=o.col||C.art;
+  ctx.fillStyle=hexA(col,.12);ctx.fillRect(x,y-r,w,2*r);
+  rr(x,y-r-wall,w,wall,3);ctx.fillStyle=C.smooth;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.stroke();
+  rr(x,y+r,w,wall,3);ctx.fill();ctx.stroke();
+  for(let i=0;i<w/14;i++){const X=x+7+i*14;line(X,y-r-wall+1.5,X+5,y-r-1.5,hexA(C["myo-d"],.35),1);line(X,y+r+1.5,X+5,y+r+wall-1.5,hexA(C["myo-d"],.35),1)}
+  if(o.T!=null){const n=o.n||Math.round(w/22);ctx.save();ctx.beginPath();ctx.rect(x,y-r,w,2*r);ctx.clip();
+    for(let i=0;i<n;i++){const X=x+P(i/n+(o.T*(o.flow==null?.18:o.flow)),1)*(w+20)-10;const Y=y+(rnd(i+3)-.5)*r*1.3;ell(X,Y,Math.min(6,r*.45),Math.min(4.4,r*.32),.2,mix(C.blood,C.panel,.1),hexA(C.ink,.25),.8)}ctx.restore()}}
+/* lipid bilayer from x1 to x2 at y (horizontal). o.v for vertical at x=y param */
+function membraneH(x1,x2,y,o){o=o||{};const col=o.col||C["body-edge"];ctx.fillStyle=hexA(C.chol,.16);ctx.fillRect(x1,y-8,x2-x1,16);
+  for(let X=x1+4;X<x2;X+=8){circ(X,y-7,3,col);circ(X,y+7,3,col);line(X,y-4,X,y-1,hexA(col,.6),1);line(X,y+1,X,y+4,hexA(col,.6),1)}}
+function membraneV(x,y1,y2,o){o=o||{};const col=o.col||C["body-edge"];ctx.fillStyle=hexA(C.chol,.16);ctx.fillRect(x-8,y1,16,y2-y1);
+  for(let Y=y1+4;Y<y2;Y+=8){circ(x-7,Y,3,col);circ(x+7,Y,3,col);line(x-4,Y,x-1,Y,hexA(col,.6),1);line(x+1,Y,x+4,Y,hexA(col,.6),1)}}
+/* receptor: cup opening upward at (x,y) membrane level y. o:{on (0..1 glow), col, flip(opens downward), label} */
+function receptor(x,y,s,o){o=o||{};const col=o.col||C.rec;const d=o.flip?-1:1;ctx.save();ctx.translate(x,y);ctx.scale(1,d);
+  rr(-s*.55,-s*.2,s*1.1,s*1.1,s*.25);ctx.fillStyle=col;ctx.fill();
+  ctx.beginPath();ctx.moveTo(-s*.55,-s*.2);ctx.lineTo(-s*.55,-s*1.05);ctx.quadraticCurveTo(-s*.55,-s*1.2,-s*.38,-s*1.2);ctx.lineTo(-s*.3,-s*1.2);ctx.lineTo(-s*.3,-s*.62);
+  ctx.arc(0,-s*.62,s*.3,Math.PI,0,true);ctx.lineTo(s*.3,-s*1.2);ctx.lineTo(s*.38,-s*1.2);ctx.quadraticCurveTo(s*.55,-s*1.2,s*.55,-s*1.05);ctx.lineTo(s*.55,-s*.2);ctx.closePath();
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.45);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.on>0){ctx.globalAlpha*=clamp(o.on,0,1);circ(0,s*.35,s*.22,C.gold,hexA(C.ink,.4),1)}
+  ctx.restore()}
+/* natural ligand ball */
+function ligand(x,y,r,col,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,col||C.lig,hexA(C.ink,.45),1.2);circ(x-r*.3,y-r*.3,r*.32,hexA(C.panel,.45));
+  if(o.t){txt(x,y+.5,o.t,{size:o.fs||10,weight:700,mono:true,align:"center",color:onFill()})}ctx.restore()}
+/* drug token: violet rounded hexagon. o:{a,rot,col,t} */
+function drugTok(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  hexPath(0,0,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.55),1.3);hexPath(0,0,s*.45,Math.PI/6);fillStroke(hexA(C.panel,.55),null);ctx.restore();
+  if(o.t)txt(x,y+s+9,o.t,{size:o.fs||11,weight:700,align:"center",color:o.tc||C.ink})}
+/* enzyme pac-man facing right. o:{blocked, open (0..1), col, t(label), T} */
+function enzyme(x,y,r,o){o=o||{};const op=o.blocked?.18:(o.open==null?.35+.3*Math.abs(Math.sin((o.T||0)*5)):o.open);const col=o.blocked?mix(o.col||C.enz,C.blk,.45):(o.col||C.enz);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,op*.9,TAU-op*.9);ctx.closePath();fillStroke(col,hexA(C.ink,.5),1.4);circ(x-r*.15,y-r*.5,r*.11,C.panel);
+  if(o.blocked)drugTok(x+r*.55,y,r*.36);
+  if(o.t)txt(x,y+r+12,o.t,{size:11.5,weight:700,align:"center"})}
+/* ions */
+const IONS={na:["na","Na⁺"],k:["k","K⁺"],ca:["ca","Ca²⁺"],cl:["cl","Cl⁻"]};
+function ion(x,y,kind,r,o){o=o||{};const I=IONS[kind];r=r||7;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,C[I[0]],hexA(C.ink,.4),1);
+  if(o.lab)txt(x,y-r-7,I[1],{size:10.5,weight:700,align:"center",mono:true});ctx.restore()}
+/* Y antibody (Fab when o.fab) */
+function antibody(x,y,s,rot,col,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.lineCap="round";ctx.strokeStyle=col||C.rec;ctx.lineWidth=s*.28;
+  ctx.beginPath();if(!o.fab){ctx.moveTo(0,s*.9);ctx.lineTo(0,0)}else{ctx.moveTo(0,s*.15);ctx.lineTo(0,0)}ctx.moveTo(0,0);ctx.lineTo(-s*.55,-s*.65);ctx.moveTo(0,0);ctx.lineTo(s*.55,-s*.65);ctx.stroke();
+  ctx.strokeStyle=hexA(C.panel,.6);ctx.lineWidth=s*.08;ctx.beginPath();ctx.moveTo(-s*.42,-s*.5);ctx.lineTo(-s*.18,-s*.2);ctx.stroke();ctx.lineCap="butt";ctx.restore()}
+/* simple meter bar with label */
+function meter(x,y,w,lab,f,col,val,o){o=o||{};txt(x,y,lab,{size:12,weight:600});if(val!=null)txt(x+w,y,val,{size:12,weight:700,mono:true,align:"right",color:o.vc||C.ink});
+  rr(x,y+9,w,10,5);ctx.fillStyle=C.sunk;ctx.fill();if(o.zone){ctx.fillStyle=hexA(C.good,.3);ctx.fillRect(x+w*o.zone[0],y+9,w*(o.zone[1]-o.zone[0]),10)}
+  rr(x,y+9,Math.max(4,w*clamp(f,0,1)),10,5);ctx.fillStyle=col;ctx.fill()}
+/* dial gauge 0..1 */
+function dial(x,y,r,f,lab,val,col,o){o=o||{};ctx.beginPath();ctx.arc(x,y,r,Math.PI,TAU);ctx.strokeStyle=C.sunk;ctx.lineWidth=r*.28;ctx.stroke();
+  if(o.zone){ctx.beginPath();ctx.arc(x,y,r,Math.PI+Math.PI*o.zone[0],Math.PI+Math.PI*o.zone[1]);ctx.strokeStyle=hexA(C.good,.45);ctx.stroke()}
+  const a=Math.PI+Math.PI*clamp(f,0,1);line(x,y,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,col||C.ink,3);circ(x,y,4,col||C.ink);
+  txt(x,y+14,lab,{size:11.5,weight:700,align:"center",color:C["ink-soft"],mono:true});if(val)txt(x,y+30,val,{size:12.5,weight:700,align:"center",mono:true,color:col||C.ink})}
+/* ECG engine: one beat starting at P onset (d seconds). o:{pr,qrs,qt,st,tAmp,noP} */
+function ecgBeat(d,o){if(d<-.1||d>1.4)return 0;const pr=o.pr||.16,qrs=o.qrs||.09,qt=o.qt||.38;let v=0;
+  if(!o.noP)v+=.15*gs(d-.045,.02);
+  const k=qrs/.09,qc=pr+qrs/2;v+=-.1*gs(d-(qc-.028*k),.008*k)+(1/(.5+.5*k))*gs(d-qc,.011*k)-.25*gs(d-(qc+.026*k),.009*k);
+  if(k>1.2)v+=.25*(k-1)*gs(d-(qc+.05*k),.03);
+  const te=pr+qt;const tc=te-.085;v+=(o.tAmp==null?.3:o.tAmp)*gs(d-tc,.042);
+  if(o.st==="dig"){const s0=qc+.045*k;v+=-.13*smooth((d-s0)/.04)*(1-smooth((d-(tc-.02))/.05))}
+  return v}
+/* rhythm function: o:{hr,pr,qrs,qt,mode:'sinus'|'svt'|'flat'|'afib'|'tdp'} */
+function ecgAt(t,o){const hr=o.hr||75,RR=60/hr;
+  if(o.mode==="flat")return .01*Math.sin(t*9);
+  if(o.mode==="tdp"){const env=.55+.45*Math.sin(TAU*.45*t);return env*(.9*Math.sin(TAU*4*t)+.15*Math.sin(TAU*8*t+1))}
+  if(o.mode==="afib"){let v=.045*(Math.sin(TAU*6.3*t)+.7*Math.sin(TAU*8.9*t+1)+.5*Math.sin(TAU*4.7*t+2));const seq=o.seq||[.55,.8,.48,.92,.62,.5,.86,.7];const L=seq.reduce((a,b)=>a+b,0);
+    const tt=((t%L)+L)%L,base=t-tt;const oo=Object.assign({},o,{noP:true,pr:.02});for(let c=-1;c<=0;c++){let acc=0;for(let i=0;i<seq.length;i++){const st=base+c*L+acc;acc+=seq[i];const d=t-st;if(d>-.1&&d<1.4)v+=ecgBeat(d,oo)}}return v}
+  const k=Math.floor(t/RR);let v=0;for(let j=k-2;j<=k;j++){v+=ecgBeat(t-j*RR,o)}return v}
+/* scrolling strip on a dark monitor screen. fn(t) gives mV-ish value. o:{secs, base, amp, label, marks(t0,pxs,mid,amp)} */
+function ecgStrip(x,y,w,h,fn,T,o){o=o||{};const secs=o.secs||5;const pxs=w/secs;
+  rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();ctx.save();rr(x,y,w,h,8);ctx.clip();
+  const t0=T-secs;for(let k=Math.floor(t0/.2);k<=Math.ceil(T/.2);k++){const gx=x+(k*.2-t0)*pxs;line(gx,y,gx,y+h,"rgba(79,208,138,.14)",1)}
+  const mid=y+h*(o.base||.64),amp=h*(o.amp||.46);for(let j=-6;j<=6;j++){const gy=mid+j*pxs*.2;if(gy>y&&gy<y+h)line(x,gy,x+w,gy,"rgba(79,208,138,.14)",1)}
+  ctx.beginPath();for(let i=0;i<=w;i+=1){const t=t0+i/pxs;const yy=mid-fn(t)*amp;i?ctx.lineTo(x+i,yy):ctx.moveTo(x+i,yy)}
+  ctx.strokeStyle=o.col||"#4FD08A";ctx.lineWidth=2;ctx.lineJoin="round";ctx.stroke();glow(x+w-2,mid-fn(T)*amp,10,o.col||"#4FD08A",.8);
+  if(o.marks)o.marks(t0,pxs,mid,amp);ctx.restore();
+  if(o.label)txt(x+10,y+13,o.label,{size:11.5,mono:true,weight:700,color:"#A3B2BA"})}
+/* caliper bracket on a strip (screen coords) */
+function caliper(x1,x2,y,lab,col,side){col=col||"#F2B33B";line(x1,y,x2,y,col,2);line(x1,y-6,x1,y+6,col,2);line(x2,y-6,x2,y+6,col,2);if(side==="r")txt(x2+8,y,lab,{size:11.5,weight:700,mono:true,color:col});else txt((x1+x2)/2,y-11,lab,{size:11.5,weight:700,mono:true,align:"center",color:col})}
+/* vitals readout on dark monitor. items: [[lab,val,col,unit]] */
+function vitalsBox(x,y,w,h,items){rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();const n=items.length;const cw=w/n;
+  items.forEach((it,i)=>{const lx=x+10+i*cw;txt(lx,y+14,it[0],{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(lx,y+38,it[1],{size:20,mono:true,weight:700,color:it[2]||"#E8EEF1"});if(it[3])txt(lx,y+58,it[3],{size:10.5,mono:true,color:"#A3B2BA"})})}
+/* ventricular action potential, mV. d seconds since upstroke. o:{up (upstroke s), apd (s), plat} */
+function apVent(d,o){o=o||{};const up=o.up||.004,apd=o.apd||.3;if(d<0)return -88;if(d<up)return lerp(-88,25,smooth(d/up));
+  const d1=d-up;if(d1<.02)return lerp(25,8,smooth(d1/.02));const pe=apd*.62;if(d<pe)return lerp(8,-2,(d-up-.02)/(pe-up-.02));if(d<apd)return lerp(-2,-88,smooth((d-pe)/(apd-pe)));return -88}
+/* pacemaker (nodal) potential over time t with rate set by slope. o:{hr} returns [mV, phase] */
+function apNode(t,o){o=o||{};const hr=o.hr||72,RR=60/hr;const d=((t%RR)+RR)%RR;const up=.06,rep=.16;const p4=RR-up-rep;
+  if(d<up)return [lerp(-40,8,smooth(d/up)),0];if(d<up+rep)return [lerp(8,-62,smooth((d-up)/rep)),3];return [lerp(-62,-40,Math.pow((d-up-rep)/p4,1.3)),4]}
+/* human figure outline */
+function person(cx,cy,s,o){o=o||{};const col=o.col||C.skin,ed=o.edge||C["skin-edge"];circ(cx,cy-s*.78,s*.15,col,ed,1.5);
+  rr(cx-s*.24,cy-s*.6,s*.48,s*.72,s*.14);fillStroke(col,ed,1.5);
+  [-1,1].forEach(d=>{rr(cx+d*s*.24-(d<0?s*.1:0),cy-s*.56,s*.1,s*.6,s*.05);fillStroke(col,ed,1.3);rr(cx+d*s*.12-s*.05,cy+s*.1,s*.11,s*.75,s*.05);fillStroke(col,ed,1.3)})}
+/* LDL particle */
+function ldl(x,y,r,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,C.ldl,hexA(C.ink,.45),1);circ(x,y,r*.55,hexA(C.chol,.8));
+  ctx.beginPath();ctx.arc(x,y,r+1.5,-.6,1.1);ctx.strokeStyle=C.enz;ctx.lineWidth=2.4;ctx.stroke();ctx.restore()}
+/* pill / tablet */
+function tablet(x,y,r,col){circ(x,y,r,col||C.panel,hexA(C.ink,.5),1.3);line(x-r*.7,y,x+r*.7,y,hexA(C.ink,.35),1.2)}
+/* syringe icon */
+function syringe(x,y,s,f,col){ctx.save();ctx.translate(x,y);rr(-s,-s*.22,s*1.6,s*.44,3);fillStroke(C.panel,C["ink-soft"],1.4);ctx.fillStyle=hexA(col||C.drug,.75);ctx.fillRect(-s+2+(s*1.6-4)*(1-clamp(f,0,1)),-s*.22+2,(s*1.6-4)*clamp(f,0,1),s*.44-4);
+  line(s*.6,0,s*1.05,0,C["ink-soft"],2);line(-s-s*.5*(1-f),0,-s,0,C["ink-soft"],3);line(-s-s*.5*(1-f),-s*.25,-s-s*.5*(1-f),s*.25,C["ink-soft"],3);ctx.restore()}
+/* status tag */
+function tag(x,y,t,col,o){o=o||{};ctx.font=`700 ${o.size||11.5}px ${MONO}`;const w=ctx.measureText(t).width;rr(x-(o.align==="center"?w/2+7:0),y-10,w+14,20,10);ctx.fillStyle=col;ctx.fill();
+  ctx.fillStyle=onFill();ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(t,x-(o.align==="center"?w/2:-7),y+.5);return w+14}
+/* ================= blood pharmacology drawing kit (shared by both pages) ================= */
+/* red blood cell: biconcave disc seen at an angle */
+function rbc(x,y,r,rot,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(rot||0);
+  ell(0,0,r,r*.72,0,o.col||C.rbc,hexA(C.ink,.35),1);ell(0,0,r*.45,r*.3,0,hexA(C.panel,.28));ctx.restore()}
+/* platelet. act 0 = smooth resting disc, 1 = spiky activated */
+function platelet(x,y,r,o){o=o||{};const act=clamp(o.act==null?0:o.act,0,1);ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  const col=o.col||(o.blocked?mix(C.plt,C.blk,.55):C.plt);ctx.beginPath();const N=36,sp=o.seed||0;
+  for(let i=0;i<=N;i++){const a=i/N*TAU;const spike=act*.55*Math.pow(Math.max(0,Math.sin(a*5+sp)),6);const rad=r*(1+spike);const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad*(.78+.22*act);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+  ctx.closePath();fillStroke(col,hexA(C.ink,.4),1);for(let k=0;k<3;k++)circ(x-r*.35+k*r*.35,y+(k%2?-1:1)*r*.15,r*.13,hexA(C.panel,.55));ctx.restore()}
+/* clotting factor pill. o:{active, blocked, k (vit K badge), fade (0..1 how much is missing), w} */
+function factor(x,y,lab,o){o=o||{};const w=o.w||(lab.length>3?54:44),h=o.h||24;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  const base=o.col||(o.active?C.faca:C.fac);const col=o.blocked?mix(base,C.blk,.7):base;
+  rr(x-w/2,y-h/2,w,h,h/2);ctx.fillStyle=o.fade?mix(col,C.panel,clamp(o.fade,0,1)*.8):col;ctx.fill();ctx.strokeStyle=o.blocked?C.blk:hexA(C.ink,.45);ctx.lineWidth=1.3;if(o.fade>.3)ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+  ctx.font=`700 ${o.fs||13}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=o.fade>.45?C.ink:onFill();ctx.fillText(lab,x,y+.5);
+  if(o.k){circ(x+w/2-2,y-h/2+1,8,C.vitk,C.panel,1.5);ctx.font=`700 10px ${MONO}`;ctx.fillStyle=onFill();ctx.fillText("K",x+w/2-2,y-h/2+1.5)}
+  if(o.blocked&&o.x!==false){line(x-w/2+6,y-h/2+4,x+w/2-6,y+h/2-4,C.bad,2.4);line(x-w/2+6,y+h/2-4,x+w/2-6,y-h/2+4,C.bad,2.4)}
+  ctx.restore();return w}
+/* fibrin strand between two points with a gentle wave */
+function strand(x1,y1,x2,y2,col,lw,amp,ph){ctx.beginPath();const N=14;for(let i=0;i<=N;i++){const t=i/N;const X=lerp(x1,x2,t),Y=lerp(y1,y2,t)+Math.sin(t*Math.PI*2+(ph||0))*(amp==null?3:amp);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+  ctx.strokeStyle=col||C.fib;ctx.lineWidth=lw||2;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt"}
+/* heparin chain: a string of small violet beads. len in beads */
+function hepChain(x,y,len,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);const rot=o.rot||0;ctx.translate(x,y);ctx.rotate(rot);
+  for(let i=0;i<len;i++){const X=i*9-(len-1)*4.5,Y=Math.sin(i*.9+(o.T||0)*2)*2.5;if(i)line(X-9,Math.sin((i-1)*.9+(o.T||0)*2)*2.5,X,Y,hexA(C.drug,.8),2);}
+  for(let i=0;i<len;i++){const X=i*9-(len-1)*4.5,Y=Math.sin(i*.9+(o.T||0)*2)*2.5;circ(X,Y,3.6,C.drug,hexA(C.ink,.4),.8)}ctx.restore()}
+/* antithrombin: teal clamp shape */
+function antithrombin(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  const open=o.open==null?.5:o.open;ctx.beginPath();ctx.arc(0,0,s,open*.9,TAU-open*.9);ctx.lineTo(s*.25,0);ctx.closePath();fillStroke(o.col||C.at,hexA(C.ink,.45),1.3);
+  ctx.font=`700 ${Math.round(s*.6)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText("AT",-s*.3,0);ctx.restore()}
+/* collagen squiggles under an injury */
+function collagen(x,y,w,T){for(let i=0;i<5;i++){ctx.beginPath();for(let k=0;k<=20;k++){const X=x+k/20*w,Y=y+i*5+Math.sin(k*.9+i+(T||0)*.5)*2;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=hexA(C.tf,.75);ctx.lineWidth=1.6;ctx.stroke()}}
+/* ---- reusable hemostasis scene ----
+   A vessel seen from the side with a cut in the lower wall.
+   o: {plt 0..1 platelet plug built, fib 0..1 fibrin mesh built, lys 0..1 dissolved,
+       kind "artery"|"vein", flow speed, pltBlock (show platelets bouncing), fibBlock, plasmin (show plasmin dots), squeeze 0..1, labels}
+   returns {cx, top} of the clot for callers to label */
+function hemoScene(x,y,w,h,T,o){o=o||{};const kind=o.kind||"artery";const cy=y+h*.46,r=h*.3,wall=Math.max(8,h*.06);const cx=x+w*(o.cut||.5),gap=Math.min(70,w*.16);
+  const sq=o.squeeze||0;const rr_=r*(1-.12*sq);
+  const wallCol=kind==="vein"?C.vein:C.art;
+  // lumen
+  ctx.fillStyle=hexA(wallCol,.1);ctx.fillRect(x,cy-rr_,w,rr_*2);
+  // walls
+  rr(x,cy-rr_-wall,w,wall,3);fillStroke(C.smooth,wallCol,1.5);
+  rr(x,cy+rr_,cx-gap/2-x,wall,3);fillStroke(C.smooth,wallCol,1.5);rr(cx+gap/2,cy+rr_,x+w-cx-gap/2,wall,3);fillStroke(C.smooth,wallCol,1.5);
+  for(let i=0;i<w/16;i++){const X=x+8+i*16;if(Math.abs(X-cx)<gap/2+4)continue;line(X,cy-rr_-wall+2,X+5,cy-rr_-2,hexA(C["myo-d"],.35),1);line(X,cy+rr_+2,X+5,cy+rr_+wall-2,hexA(C["myo-d"],.35),1)}
+  // tissue below the cut
+  ctx.fillStyle=hexA(C.body,.85);ctx.fillRect(cx-gap/2,cy+rr_,gap,wall+16);collagen(cx-gap/2+2,cy+rr_+4,gap-4,T);
+  const lys=clamp(o.lys||0,0,1);const plt=clamp(o.plt||0,0,1)*(1-lys),fib=clamp(o.fib||0,0,1)*(1-lys);
+  // clot mound
+  const mh=Math.min(r*1.55,(plt*.55+fib*.75)*r*1.25),mw=gap*.6+(plt+fib)*gap*.75;
+  ctx.save();ctx.beginPath();ctx.rect(x,cy-rr_,w,rr_*2+wall+20);ctx.clip();
+  if(mh>2){ctx.beginPath();ctx.moveTo(cx-mw,cy+rr_+2);ctx.quadraticCurveTo(cx-mw*.6,cy+rr_-mh,cx,cy+rr_-mh);ctx.quadraticCurveTo(cx+mw*.6,cy+rr_-mh,cx+mw,cy+rr_+2);ctx.closePath();
+    ctx.fillStyle=hexA(kind==="vein"?C.clot:C.plt,.16+.12*fib);ctx.fill()}
+  // platelets in the plug
+  const NP=26;for(let i=0;i<NP;i++){if(i/NP>=plt)continue;const ang=rnd(i*3+1)*Math.PI,rad=(.25+.75*rnd(i*7+2));const px=cx+Math.cos(ang)*mw*.85*rad,py=cy+rr_-Math.sin(ang)*mh*.85*rad;
+    platelet(px,py,5.5,{act:.4+.6*plt,seed:i,a:o.pltBlock?.5:1})}
+  // fibrin mesh and trapped red cells
+  const NF=12;for(let i=0;i<NF;i++){if(i/NF>=fib)continue;const a1=rnd(i*5+3)*Math.PI,a2=rnd(i*11+4)*Math.PI;
+    strand(cx+Math.cos(a1)*mw*.9,cy+rr_-Math.sin(a1)*mh*.85,cx+Math.cos(a2)*mw*.9,cy+rr_-Math.sin(a2)*mh*.85,C.fib,2,2.5,i+T*.6)}
+  const NR=10;for(let i=0;i<NR;i++){if(i/NR>=fib*.95)continue;const ang=.25+rnd(i*13+5)*(Math.PI-.5),rad=.2+.65*rnd(i*17+6);rbc(cx+Math.cos(ang)*mw*.8*rad,cy+rr_-Math.sin(ang)*mh*.8*rad,6,rnd(i)*3)}
+  // flowing cells
+  const fl=o.flow==null?(kind==="vein"?.07:.2):o.flow;const n=Math.round(w/30);
+  for(let i=0;i<n;i++){const X=x+P(i/n+T*fl,1)*(w+20)-10;const Y=cy-rr_*.7+rnd(i+9)*rr_*1.2;if(Y>cy+rr_-mh*.9&&Math.abs(X-cx)<mw*.9)continue;
+    if(i%4===0)platelet(X,Y,4.5,{act:0,seed:i});else rbc(X,Y,7,rnd(i)*2+T*.3)}
+  // platelets bouncing off when blocked
+  if(o.pltBlock){for(let i=0;i<3;i++){const p=P(T*.5+i/3,1);const X=cx-40+i*30,Y=cy+rr_-mh-6-Math.sin(p*Math.PI)*24;platelet(X,Y,5,{act:0,seed:i+40,blocked:true});if(p>.35&&p<.65)drugTok(X+8,Y-8,4,{})}}
+  // plasmin cutting strands
+  if(o.plasmin){for(let i=0;i<6;i++){const p=P(T*.35+i/6,1);const ang=rnd(i*19)*Math.PI;const px=cx+Math.cos(ang)*mw*(1.2-p*.6),py=cy+rr_-Math.sin(ang)*Math.max(mh,20)*(1.1-p*.5);
+    circ(px,py,4.5,C.plasmin,hexA(C.ink,.4),1);if(p>.6)pulseRing(px,py,10,C.plasmin,(p-.6)/.4)}}
+  ctx.restore();
+  return {cx,top:cy+rr_-mh,cy,r:rr_,base:cy+rr_,mw}}
+/* ---- reusable cascade diagram ----
+   o: {block: {VII:1,IX:1,X:1,II:1,fib:1}, fade: {II:f,VII:f,IX:f,X:f} (warfarin), at: 0..1 (antithrombin boosted), atXaOnly,
+       drugs: {X:"apixaban",...} token labels, lysis 0..1, plt (draw platelet box), title} */
+const CAS_NODES={VII:[.15,.22,"VII","VIIa"],IX:[.15,.58,"IX","IXa"],X:[.43,.4,"X","Xa"],II:[.63,.62,"II","IIa"],fib:[.8,.86,"fibrinogen","fibrin"]};
+function drawCascade(x,y,w,h,T,o){o=o||{};const B=o.block||{},F=o.fade||{},D=o.drugs||{};const at=o.at||0;
+  panelBox(x,y,w,h);if(o.title!==false)title(x+12,y+18,o.title||"Clotting cascade (simplified)");
+  const pos=k=>[x+CAS_NODES[k][0]*w,y+CAS_NODES[k][1]*h];
+  const vk=k=>1-(F[k]||0);
+  const s7=vk("VII")*(B.VII?0:1),s9=vk("IX")*(B.IX?0:1);
+  const into10=clamp(.55*s7+.45*s9+.25*(s7+s9)*.5,0,1);const s10=into10*vk("X")*(B.X?.08:1)*(1-.75*at);
+  const s2=s10*vk("II")*(B.II?.08:1)*(1-.8*at*(o.atXaOnly?.3:1));const sF=s2*(B.fib?0:1);
+  const [p7x,p7y]=pos("VII"),[p9x,p9y]=pos("IX"),[p10x,p10y]=pos("X"),[p2x,p2y]=pos("II"),[pfx,pfy]=pos("fib");
+  txt(p7x,p7y-26,"tissue factor (injury)",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  txt(p9x,p9y-26,"contact (XII, XI)",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  const edges=[[p7x+50,p7y,p10x-46,p10y-6,s7],[p9x+50,p9y,p10x-46,p10y+6,s9],[p10x+40,p10y+14,p2x-26,p2y-14,s10],[p2x+24,p2y+14,pfx-6,pfy-19,s2]];
+  edges.forEach((e,i)=>{const on=e[4]>.15;const col=on?hexA(C["ink-soft"],.85):hexA(C.blk,.55);arrow(e[0],e[1],e[2],e[3],col,1.8,on?null:[4,4]);
+    const n=3;for(let k=0;k<n;k++){if(rnd(k+i*7)>e[4]*1.1)continue;const q=P(T*.45+k/n+i*.13,1);circ(lerp(e[0],e[2],q),lerp(e[1],e[3],q),3.6,i===3?C.thr:C.faca)}});
+  const node=(k,s)=>{const [px,py]=pos(k);const N=CAS_NODES[k];const blocked=!!B[k];const fade=F[k]||0;
+    if(k==="fib"){const built=sF*(1-(o.lysis||0));rr(px-52,py-16,104,32,8);fillStroke(hexA(C.fib,.18),C.fib,1.5);
+      for(let i=0;i<5;i++)if(i/5<built)strand(px-46,py-10+i*5,px+46,py-6+i*3,C.fib,1.8,2,i+T);
+      txt(px,py+28,built>.4?"fibrin mesh forms":"little fibrin forms",{size:11.5,weight:700,align:"center",color:built>.4?C.ink:C["ink-soft"]});
+      if(blocked){crossMark(px,py,9,C.bad)}return}
+    factor(px-24,py,N[2],{k:true,blocked,fade,w:N[2].length>2?40:34,x:false});
+    factor(px+24,py,N[3],{active:!blocked,col:k==="II"&&!blocked?C.thr:null,blocked,fade:Math.max(fade,blocked?0:1-s),w:N[3].length>3?48:42});
+    if(blocked&&D[k]){drugTok(px+24,py-24,8,{});label(px+38,py-24,D[k],{size:11.5,weight:700,align:"left"})}
+    if(fade>.3)txt(px,py+22,"fading",{size:11,weight:700,align:"center",color:C["warn-ink"]})};
+  node("VII",s7);node("IX",s9);node("X",s10);node("II",s2);node("fib",sF);
+  txt(p2x+52,p2y,"thrombin",{size:11.5,weight:700,color:C.thr});
+  if(at>0){withA(at,()=>{const ax=p9x+50,ay=Math.min(p2y+56,y+h-42);antithrombin(ax,ay,15,{open:.35+.15*Math.sin(T*3)});hepChain(ax+(o.atXaOnly?20:40),ay+2,o.atXaOnly?4:10,{T});
+    line(ax+4,ay-14,p10x+20,p10y+14,C.at,2,[3,3]);if(!o.atXaOnly)line(ax+12,ay-10,p2x+18,p2y+14,C.at,2,[3,3]);
+    txt(ax-16,ay+30,o.atXaOnly?"short chain: mostly Xa":"heparin + antithrombin",{size:11.5,weight:700,color:C.at})})}
+  return {s7,s9,s10,s2,sF}}
+/* close-up platelet with its receptors. o:{asp (COX blocked), p2y (P2Y12 blocked), gp (IIb/IIIa blocked), act 0..1, T} */
+function bigPlatelet(cx,cy,s,o){o=o||{};const act=o.act==null?1:o.act;ctx.save();
+  ctx.beginPath();const N=60;for(let i=0;i<=N;i++){const a=i/N*TAU;const sp=act*.22*Math.pow(Math.max(0,Math.sin(a*4+.5)),8);const X=cx+Math.cos(a)*s*(1+sp),Y=cy+Math.sin(a)*s*.72*(1+sp);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath();
+  fillStroke(hexA(C.plt,.28),C.plt,2.4);ctx.restore()}
+/* lab gauge (half dial) with zones. o:{min,max,normal:[a,b],ther:[a,b],lab,unit,fmt} */
+function labGauge(x,y,r,v,o){const f=q=>clamp((q-o.min)/(o.max-o.min),0,1);
+  ctx.beginPath();ctx.arc(x,y,r,Math.PI,TAU);ctx.strokeStyle=C.sunk;ctx.lineWidth=r*.26;ctx.stroke();
+  if(o.normal){ctx.beginPath();ctx.arc(x,y,r,Math.PI+Math.PI*f(o.normal[0]),Math.PI+Math.PI*f(o.normal[1]));ctx.strokeStyle=hexA(C["ink-soft"],.45);ctx.stroke()}
+  if(o.ther){ctx.beginPath();ctx.arc(x,y,r,Math.PI+Math.PI*f(o.ther[0]),Math.PI+Math.PI*f(o.ther[1]));ctx.strokeStyle=hexA(C.good,.65);ctx.stroke()}
+  if(o.high!=null){ctx.beginPath();ctx.arc(x,y,r,Math.PI+Math.PI*f(o.high),TAU);ctx.strokeStyle=hexA(C.bad,.55);ctx.stroke()}
+  const a=Math.PI+Math.PI*f(v);line(x,y,x+Math.cos(a)*r*.98,y+Math.sin(a)*r*.98,C.ink,3);circ(x,y,4.5,C.ink);
+  txt(x,y+16,o.lab,{size:12,weight:700,align:"center",mono:true,color:C["ink-soft"]});
+  txt(x,y+33,(o.fmt?o.fmt(v):v.toFixed(1))+(o.unit?" "+o.unit:""),{size:14,weight:700,align:"center",mono:true});
+  txt(x-r-2,y+8,String(o.min),{size:10.5,align:"center",mono:true,color:C["ink-soft"]});txt(x+r+2,y+8,String(o.max),{size:10.5,align:"center",mono:true,color:C["ink-soft"]})}
+/* risk meter: clot risk on the left, bleeding risk on the right. v -1..1 (0 = balanced) */
+function riskMeter(x,y,w,v,o){o=o||{};const h=14;rr(x,y,w,h,7);const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,hexA(C.vein,.8));g.addColorStop(.38,hexA(C.good,.6));g.addColorStop(.62,hexA(C.good,.6));g.addColorStop(1,hexA(C.bad,.85));ctx.fillStyle=g;ctx.fill();
+  ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();const px=x+w*(.5+clamp(v,-1,1)*.5);ctx.beginPath();ctx.moveTo(px,y-2);ctx.lineTo(px-7,y-12);ctx.lineTo(px+7,y-12);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();line(px,y-2,px,y+h+2,C.ink,2.5);
+  txt(x,y+h+13,o.l||"clot risk",{size:11.5,weight:700,color:C.ink});if(w>=240)txt(x+w/2,y+h+13,"balanced",{size:11.5,weight:700,align:"center",color:C.ink});txt(x+w,y+h+13,o.r||"bleeding risk",{size:11.5,weight:700,align:"right",color:C.ink})}
+/* drop of blood */
+function bdrop(x,y,s,col,a){ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);ctx.beginPath();ctx.moveTo(x,y-s);ctx.quadraticCurveTo(x+s*.8,y+s*.1,x,y+s*.6);ctx.quadraticCurveTo(x-s*.8,y+s*.1,x,y-s);ctx.closePath();ctx.fillStyle=col||C.rbc;ctx.fill();ctx.restore()}
+/* simple cup / bin */
+function cupB(x,y,w,h,f,col,lab){rr(x,y,w,h,5);ctx.fillStyle=hexA(C.panel,.9);ctx.fill();ctx.save();rr(x,y,w,h,5);ctx.clip();ctx.fillStyle=col||hexA(C.fluid,.6);ctx.fillRect(x,y+h*(1-clamp(f,0,1)),w,h);ctx.restore();
+  rr(x,y,w,h,5);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.5;ctx.stroke();if(lab)txt(x+w/2,y+h+12,lab,{size:11.5,weight:600,align:"center"})}
+/* liver outline */
+function liverShape(x,y,s,col){ctx.beginPath();ctx.moveTo(x-s,y-s*.25);ctx.bezierCurveTo(x-s*.7,y-s*.62,x+s*.6,y-s*.66,x+s,y-s*.3);ctx.bezierCurveTo(x+s*.9,y+s*.05,x+s*.2,y+s*.38,x-s*.2,y+s*.42);ctx.bezierCurveTo(x-s*.7,y+s*.45,x-s*1.05,y+s*.1,x-s,y-s*.25);ctx.closePath();fillStroke(col||mix(C.liver,C.panel,.3),C["myo-d"],1.6)}
+
+/* kidney outline */
+function kidney(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(s*.1,-s*.5);ctx.bezierCurveTo(s*.6,-s*.6,s*.62,s*.6,s*.1,s*.5);ctx.bezierCurveTo(-s*.25,s*.44,-s*.1,s*.12,-s*.18,0);ctx.bezierCurveTo(-s*.1,-s*.12,-s*.25,-s*.44,s*.1,-s*.5);ctx.closePath();
+  fillStroke(o.col||mix(C.liver,C.panel,.35),C["myo-d"],1.6);ctx.restore()}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("blood-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("blood-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+function setStatus(el,cls,t){if(el.textContent===t&&el.className==="status "+(cls||""))return;el.className="status "+(cls||"");el.textContent=t}
+function readRows(el,rows){const h=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td${r[2]?` class="${r[2]}"`:""}>${r[1]}</td></tr>`).join("");const tb=el.querySelector("tbody");if(tb.innerHTML!==h)tb.innerHTML=h}
+const r0=x=>Math.round(x);
+
+/* ================= PART 1: clotting drug bench ================= */
+const S1=makeStage("cvBench",820,520);
+const BD=[
+ ["none","No drug","","baseline"],
+ ["hep","heparin","anticoagulant","boosts antithrombin"],
+ ["enox","enoxaparin","LMWH","mostly anti-Xa"],
+ ["warf","warfarin","vitamin K antagonist","factors II, VII, IX, X fade"],
+ ["apix","apixaban","factor Xa inhibitor","blocks Xa directly"],
+ ["dabi","dabigatran","direct thrombin inhibitor","blocks thrombin"],
+ ["asa","aspirin","antiplatelet","COX-1 blocked for good"],
+ ["clop","clopidogrel","antiplatelet","P2Y12 blocked (prodrug)"],
+ ["alt","alteplase","thrombolytic","plasminogen to plasmin"]];
+const REV={hep:["Give protamine sulfate",1],enox:["Give protamine sulfate",.6],warf:["Give vitamin K and 4-factor PCC",.92],apix:["Give andexanet alfa",.9],dabi:["Give idarucizumab",1],asa:["No specific antidote",0],clop:["No specific antidote",0],alt:["Stop the infusion",0],none:["Give reversal agent",0]};
+const KIDF={enox:[1,1.5,2.2],dabi:[1,1.6,2.6],apix:[1,1.15,1.35]};
+const B={drug:"none",vessel:"artery",dose:1,kid:0,poor:false,rev:0,stopLys:null,cur:{plt:1,fib:.4,lys:0},done:new Set(),overdosed:false,msg:""};
+const BCH=["Heparin: land the aPTT in the green target zone.","Push heparin to too much, then reverse it with protamine.","Enoxaparin: see that the aPTT barely moves while the anti-Xa activity rises.","Warfarin: get the INR between 2 and 3.","Stop an artery clot with an antiplatelet.","Stop a vein clot with an anticoagulant.","Clopidogrel in a CYP2C19 poor metabolizer: see the platelets stay active.","Dissolve a formed clot with alteplase.","Severely reduced kidneys with enoxaparin or dabigatran: watch the bleeding risk climb."];
+function bBase(){return B.vessel==="artery"?{plt:1,fib:.4}:{plt:.35,fib:1}}
+function bModel(){const d=B.drug;const df=[.5,1,1.8][B.dose];const kf=KIDF[d]?KIDF[d][B.kid]:1;const e=df*kf*(1-B.rev);
+  const m={e,INR:1,aPTT:30,axa:0,pltBlock:0,fibBlock:0,lys:0,block:{},fade:{},at:0,xaOnly:false,drugs:{},fibr:1};
+  if(d==="hep"){m.aPTT=30+32*e;m.INR=1+.1*e;m.axa=.5*e;m.fibBlock=.75*e;m.at=clamp(e,0,1)}
+  if(d==="enox"){m.aPTT=30+5*e;m.INR=1+.04*e;m.axa=.75*e;m.fibBlock=.72*e;m.at=clamp(e,0,1);m.xaOnly=true}
+  if(d==="warf"){m.INR=1+1.5*Math.pow(e,1.3);m.aPTT=30+6*e;m.fibBlock=.7*e;const f=clamp(.62*e,0,.95);m.fade={II:f,VII:f,IX:f,X:f}}
+  if(d==="apix"){m.INR=1+.12*e;m.aPTT=30+4*e;m.axa=.9*e;m.fibBlock=.72*e;if(e>.05){m.block={X:1};m.drugs={X:"apixaban"}}}
+  if(d==="dabi"){m.aPTT=30+24*e;m.INR=1+.2*e;m.fibBlock=.72*e;if(e>.05){m.block={II:1};m.drugs={II:"dabigatran"}}}
+  if(d==="asa")m.pltBlock=.7*e;
+  if(d==="clop")m.pltBlock=.7*e*(B.poor?.3:1);
+  if(d==="alt"){m.lys=B.stopLys!=null?B.stopLys:clamp(.9*e,0,1);m.INR=1+.25*e*(B.stopLys!=null?.5:1);m.aPTT=30+18*e*(B.stopLys!=null?.5:1);m.fibr=1-.5*m.lys}
+  m.fibBlock=clamp(m.fibBlock,0,1);m.pltBlock=clamp(m.pltBlock,0,.92);
+  const base=bBase();m.pltT=base.plt*(1-m.pltBlock)*(1-.25*m.fibBlock);m.fibT=base.fib*(1-m.fibBlock)*(1-.2*m.pltBlock);
+  const over=Math.max(0,e-1.05);m.bleed=m.fibBlock*.6+m.pltBlock*.45+m.lys*.8+over*.9;m.pltFn=100*(1-m.pltBlock);
+  return m}
+function bClot(c){const base=B.vessel==="artery"?[.6,.4]:[.3,.7];return (base[0]*c.plt+base[1]*c.fib)*(1-c.lys)}
+function bRisk(m){return clamp(m.bleed-bClot(B.cur)*.9,-1,1)}
+function bDrugsUI(){const el=$("#bDrugs");el.innerHTML="";
+  BD.forEach(d=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.setAttribute("aria-pressed",String(B.drug===d[0]));
+    b.innerHTML=`<b>${d[1]}</b>${d[2]?` <span class="gk-sr">(</span><small>${d[2]}: ${d[3]}</small><span class="gk-sr">)</span>`:`<small>${d[3]}</small>`}`;
+    b.onclick=()=>{bSetDrug(d[0])};el.appendChild(b)})}
+function bSetDrug(k){const wasAlt=B.drug==="alt";B.msg="";B.drug=k;B.rev=0;B.stopLys=null;B.overdosed=false;
+  if(k==="alt"){const base=bBase();B.cur.plt=Math.max(B.cur.plt,base.plt*.9);B.cur.fib=Math.max(B.cur.fib,base.fib*.9);B.cur.lys=0}
+  else if(wasAlt){B.cur.lys=0}
+  $("#bDrugs").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(BD[i][0]===k)));bChanged()}
+function bChanged(){$("#bDoseOut").textContent=["low","usual","too much"][B.dose];$("#bKidOut").textContent=["normal","reduced","severely reduced"][B.kid];
+  const rv=REV[B.drug];const btn=$("#bRev");btn.textContent=rv[0];btn.disabled=B.drug==="none";a11yKey=""}
+function bStep(dt){const m=B.m=bModel();const c=B.cur;const k=1-Math.exp(-dt*.9);c.plt+=(m.pltT-c.plt)*k;c.fib+=(m.fibT-c.fib)*k;const kl=1-Math.exp(-dt*.45);c.lys+=(m.lys-c.lys)*kl}
+function bMonitor(){return {none:"no drug: normal clotting",hep:"aPTT or anti-Xa per protocol; platelets (HIT); Hgb",enox:"usually no routine clotting test; platelets, creatinine; anti-Xa in special cases",warf:"INR (common target 2 to 3); Hgb",apix:"no routine INR; creatinine, Hgb",dabi:"no routine INR; creatinine, Hgb",asa:"no routine clotting test; bleeding signs, GI symptoms",clop:"no routine clotting test; bleeding signs",alt:"neuro checks, BP, bleeding; fibrinogen per protocol"}[B.drug]}
+function bRead(){const m=B.m||bModel();const cl=bClot(B.cur);
+  readRows($("#bRead"),[["INR",m.INR.toFixed(1)],["aPTT",r0(m.aPTT)+" s"],["Anti-Xa activity",m.axa<.05?"none":m.axa.toFixed(2)+" (relative)"],["Platelet function",r0(m.pltFn)+"%"],["Clot at the cut",cl>.6?"large":cl>.35?"medium":cl>.12?"small":"almost none"],["Monitor",bMonitor(),"l"]])}
+function bCheck(){const m=B.m||bModel();const d=B.drug,D=B.done,cl=bClot(B.cur),risk=bRisk(m);
+  if(d==="hep"&&m.aPTT>=46&&m.aPTT<=80)D.add(0);
+  if(d==="hep"&&B.dose===2&&B.rev===0)B.overdosed=true;if(d==="hep"&&B.overdosed&&B.rev>=1)D.add(1);
+  if(d==="enox"&&m.axa>.5&&m.aPTT<40)D.add(2);
+  if(d==="warf"&&m.INR>=2&&m.INR<=3)D.add(3);
+  if(B.vessel==="artery"&&(d==="asa"||d==="clop")&&cl<.4)D.add(4);
+  if(B.vessel==="vein"&&["hep","enox","warf","apix","dabi"].includes(d)&&cl<.4)D.add(5);
+  if(d==="clop"&&B.poor&&m.pltFn>70)D.add(6);
+  if(d==="alt"&&B.cur.lys>.8)D.add(7);
+  if(B.kid===2&&(d==="enox"||d==="dabi")&&risk>.45)D.add(8);
+  let cls="",msg;const over=B.dose===2&&B.rev===0;
+  const M={none:["",B.vessel==="artery"?"No drug. In a fast artery the clot at the cut is mostly platelets (a white clot). Pick a drug to see what it changes.":"No drug. In a slow vein the clot is mostly fibrin with trapped red cells (a red clot). Pick a drug to see what it changes."],
+   hep:["","Heparin binds antithrombin, which then switches off thrombin and Xa. The aPTT rises; it is adjusted to the target zone per protocol. Watch platelets for HIT."],
+   enox:["","Enoxaparin's short chains mostly block Xa through antithrombin. The aPTT barely moves, so it is not used to monitor; anti-Xa activity is checked only in special cases."],
+   warf:["","Warfarin stops the liver from finishing factors II, VII, IX and X, so they fade. The INR rises; the common target is 2 to 3. This bench shows the steady state after several days."],
+   apix:["","Apixaban blocks factor Xa directly. The INR and aPTT change only a little and are not reliable, so no routine clotting test is used."],
+   dabi:["","Dabigatran blocks thrombin directly. The aPTT rises somewhat, but it is not used for routine monitoring. Kidney function matters a lot."],
+   asa:["",B.vessel==="artery"?"Aspirin blocks platelet COX-1 for good, so platelets stop clumping and the white clot stays small. Clotting tests (INR, aPTT) do not change.":"Aspirin weakens platelets, but a vein clot is mostly fibrin, so it still grows. This is why vein clots need anticoagulants."],
+   clop:["",B.poor?"In a CYP2C19 poor metabolizer, little clopidogrel is turned into its active form, so platelets keep clumping.":"Clopidogrel's active form blocks the P2Y12 receptor, so ADP cannot switch platelets on. Clotting tests do not change."],
+   alt:["warn","Alteplase turns plasminogen into plasmin, which cuts fibrin and dissolves the clot. Bleeding risk is high everywhere, including the brain."]};
+  [cls,msg]=M[d];
+  if(B.rev>0){const nm=REV[d][0].replace("Give ","");msg=d==="enox"?"Protamine only partly reverses enoxaparin; some anti-Xa effect remains.":d==="warf"?"PCC gives ready-made factors right away; vitamin K lets the liver make new ones over hours.":`${nm[0].toUpperCase()+nm.slice(1)} given. The drug effect is reversed.`;cls="good"}
+  else if(over&&d!=="none"){cls="bad";msg=(d==="hep"?`aPTT ${r0(m.aPTT)} s: above the target zone. `:d==="warf"?`INR ${m.INR.toFixed(1)}: above range. `:"")+"Too much effect: bleeding risk is high. Hold and notify per protocol. "+(REV[d][1]>0?"A reversal agent exists: "+REV[d][0].replace("Give ","")+".":d==="alt"?"Stop the infusion and notify.":"There is no specific antidote; stop the drug and give supportive care.")}
+  if(B.kid>0&&KIDF[d]&&B.rev===0){msg+=` Reduced kidney function lets ${BD.find(x=>x[0]===d)[1]} build up: the effect is stronger than the dose suggests.`;if(B.kid===2&&cls!=="bad")cls="warn"}
+  if(B.stopLys!=null&&d==="alt"){cls="";msg="Infusion stopped. No more plasmin is made, but what was dissolved stays dissolved."}
+  if(B.msg){msg=B.msg+" "+msg}
+  setStatus($("#bStatus"),cls,msg);bRead();chalUI($("#bChal"),BCH,D)}
+function bRevGive(){const d=B.drug;B.msg="";if(d==="none")return;
+  if(d==="asa"||d==="clop"){B.msg="No specific antidote: stop the drug. For serious bleeding, the team may give a platelet transfusion; new platelets from the marrow restore function over days.";bCheck();return}
+  if(d==="alt"){B.stopLys=B.cur.lys;bChanged();bCheck();return}
+  B.rev=REV[d][1];bChanged();bCheck()}
+function drawBench(now){use(S1);const T=now/1000;const m=B.m||bModel();const c=B.cur;
+  panelBox(10,10,400,300);title(24,30,B.vessel==="artery"?"Cut in an artery (fast flow)":"Cut in a vein (slow flow)");
+  hemoScene(18,38,384,240,T,{kind:B.vessel,plt:c.plt,fib:c.fib,lys:c.lys,pltBlock:m.pltBlock>.3,plasmin:c.lys>.03&&m.lys>c.lys-.02&&B.stopLys==null,flow:B.vessel==="artery"?.22:.06});
+  const dname=BD.find(x=>x[0]===B.drug)[1];if(B.drug!=="none")tag(22,294,(dname+(B.rev>0?": reversed":B.stopLys!=null?": stopped":" on board")).toUpperCase(),B.rev>0||B.stopLys!=null?C.blk:C.drug);
+  else tag(22,294,"NO DRUG",C["ink-soft"]);
+  drawCascade(420,10,390,300,T,{block:m.block,fade:m.fade,at:m.at,atXaOnly:m.xaOnly,drugs:m.drugs,lysis:c.lys,title:"Clotting cascade"});
+  if(B.drug==="asa"||B.drug==="clop"){panelBox(428,232,168,70,{fill:C.panel,stroke:C.plt,lw:2});platelet(452,266,13,{act:1-m.pltBlock,seed:3,blocked:m.pltBlock>.4});
+    txt(474,254,"platelets:",{size:11.5,weight:700});txt(474,272,B.drug==="asa"?"COX-1 blocked":"P2Y12 blocked",{size:11.5,weight:600});txt(474,288,"function "+r0(m.pltFn)+"%",{size:11.5,weight:700,mono:true})}
+  if(B.drug==="alt"){panelBox(428,232,168,70,{fill:C.panel,stroke:C.plasmin,lw:2});circ(446,256,6,C.blk);arrow(456,256,478,256,C["ink-soft"],1.4);circ(488,256,6,C.plasmin);drugTok(467,244,5,{});txt(440,280,"plasminogen to plasmin",{size:11.5,weight:700});txt(440,296,"fibrin is cut",{size:11.5,weight:600})}
+  // bottom gauges
+  panelBox(10,320,800,190);title(24,340,"Lab tests and balance");
+  labGauge(92,428,60,m.INR,{min:.5,max:6,normal:[.8,1.2],ther:[2,3],high:3,lab:"INR"});txt(92,482,"warfarin test",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  labGauge(248,428,60,m.aPTT,{min:20,max:130,normal:[25,35],ther:[46,80],high:80,lab:"aPTT (s)",fmt:x=>String(Math.round(x))});txt(248,482,"heparin test",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  meter(336,362,220,"anti-Xa activity",m.axa/1.5,C.faca,m.axa<.05?"none":m.axa.toFixed(2));
+  meter(336,404,220,"platelet function",m.pltFn/100,m.pltFn<50?C.warn:C.plt,r0(m.pltFn)+"%");
+  const cl=bClot(c);meter(336,446,220,"clot at the cut",cl,B.vessel==="artery"?C.plt:C.clot,cl>.6?"large":cl>.35?"medium":cl>.12?"small":"none");
+  txt(690,362,"Clot or bleed?",{size:12.5,weight:700,align:"center"});riskMeter(586,388,208,bRisk(m));
+  wrapText("Monitor: "+bMonitor(),586,446,214,16,{size:11.5,weight:600});
+}
+function benchA11y(){const m=B.m||bModel();const dname=BD.find(x=>x[0]===B.drug)[1];const cl=bClot(B.cur);const risk=bRisk(m);
+  const cz=cl>.6?"large":cl>.35?"medium":cl>.12?"small":"almost no";
+  const blocked=Object.keys(m.block).length?("The "+Object.keys(m.block).map(k=>k==="II"?"thrombin (IIa)":"Xa").join(" and ")+" step is greyed out with a red X and a violet drug token."):m.at>0?(m.xaOnly?"A teal antithrombin clamp with a short violet heparin chain grabs Xa.":"A teal antithrombin clamp with a long violet heparin chain grabs Xa and thrombin."):Object.keys(m.fade).length?"Factors II, VII, IX and X are pale and dashed, labelled fading.":"All steps are active.";
+  return [`Bench: ${dname}${B.rev>0?" reversed":""}, ${B.vessel}. INR ${m.INR.toFixed(1)}, aPTT ${r0(m.aPTT)} seconds, ${cz} clot.`,
+   `Left: a ${B.vessel} with a cut, showing ${cz} clot built from ${B.vessel==="artery"?"mostly purple platelets":"mostly gold fibrin threads and trapped red cells"}${B.cur.lys>.1?", with blue plasmin dots cutting the fibrin":""}${m.pltBlock>.3?", and platelets bouncing off":""}. Right: the clotting cascade. ${blocked} Bottom: the INR gauge reads ${m.INR.toFixed(1)}, the aPTT gauge reads ${r0(m.aPTT)} seconds, platelet function is ${r0(m.pltFn)} percent, and the balance meter points toward ${risk<-.33?"clot risk":risk>.33?"bleeding risk":"balanced"}.`]}
+
+/* ================= PART 2: warfarin INR simulator ================= */
+const S2=makeStage("cvINR",820,520);
+const WDAYS=56;
+const FHL={VII:.25,IX:1,X:1.67,II:2.5};
+const VKD=[["low","Low"],["steady","Steady"],["high","High"]];
+const WIX=[["none","None"],["abx","Antibiotic"],["ind","Rifampin"]];
+function wNew(){return {t:0,A:0,F:{II:1,VII:1,IX:1,X:1},vk:0,ind:0,dose:5,vkDiet:"steady",ix:"none",missed:new Set(),given:{},hist:[[0,1]],daily:[],events:[],
+  bridge:{on:false,start:null,stop:null},play:true,speed:1,done:new Set(),run:0,mark:{},nextDay:0}}
+let W=wNew();
+const WCH=["Get the INR into 2 to 3 and keep it there for 7 days in a row.","Start the antibiotic, then lower the dose to bring a high INR back into range.","Start rifampin and watch the INR fall below 2.","Change vitamin K in the diet and see the INR move the other way.","Miss two doses in a row and see the INR dip.","Push the INR above 4, then bring it under 3 with vitamin K or PCC.","Bridge with enoxaparin from day 0 until the INR is in range."];
+function wINR(F){return Math.pow(F.II*F.VII*F.X,-.76/3)}
+function wEC(){return 5.8*{low:.8,steady:1,high:1.6}[W.vkDiet]*(1+6*W.vk)}
+function wEvent(lab,short){W.events.push([W.t,lab,short]);if(W.events.length>40)W.events.shift()}
+function wSub(h){
+  const k=Math.LN2/1.6*(W.ix==="abx"?.55:1)*(1+1.2*W.ind);
+  W.A=Math.max(0,W.A-k*W.A*h);W.vk*=Math.exp(-Math.LN2*h/1.0);W.ind+=((W.ix==="ind"?1:0)-W.ind)*(1-Math.exp(-h/4));
+  const EC=wEC(),a15=Math.pow(W.A,1.5);const I=a15/(a15+Math.pow(EC,1.5));const S=1-I;
+  for(const f in W.F)W.F[f]+=(S-W.F[f])*(1-Math.exp(-Math.LN2*h/FHL[f]));
+  W.t+=h}
+function wDayStart(n){// morning INR check, then the dose
+  const inr=wINR(W.F);W.daily.push([n,inr]);
+  if(W.bridge.on&&W.bridge.stop==null&&n>=5){const L=W.daily.slice(-2);if(L.length===2&&L.every(x=>x[1]>=2)){W.bridge.stop=n;wEvent("enoxaparin stopped","B")}}
+  if(!W.missed.has(n)&&W.dose>0){W.A+=W.dose;W.given[n]=W.dose}else W.given[n]=0;
+  wCheckDaily(n,inr)}
+function wStep(dtDays){if(!W.play)return;let left=dtDays;
+  while(left>1e-9&&W.t<WDAYS){if(W.t>=W.nextDay-1e-9){wDayStart(W.nextDay);W.nextDay++}
+    const h=Math.min(.02,left,W.nextDay-W.t);wSub(h);left-=h;
+    const last=W.hist[W.hist.length-1];if(W.t-last[0]>=.1)W.hist.push([W.t,wINR(W.F)])}
+  if(W.t>=WDAYS-1e-6){W.t=WDAYS;W.play=false;wUI()}}
+function wCheckDaily(n,inr){const D=W.done,mk=W.mark;
+  mk.run=(inr>=2&&inr<=3)?(mk.run||0)+1:0;if(mk.run>=7)D.add(0);
+  if(W.ix==="abx"&&inr>3.2)mk.abxHigh=true;if(mk.abxHigh&&W.ix==="abx"&&inr>=2&&inr<=3&&W.dose<5)D.add(1);
+  if(W.ix==="ind"&&inr<2&&mk.indFrom!=null&&mk.indFrom>=2)D.add(2);
+  if(mk.dietINR!=null&&mk.dietDir){if((mk.dietDir>0&&inr<mk.dietINR-.4)||(mk.dietDir<0&&inr>mk.dietINR+.4))D.add(3)}
+  if(W.missed.has(n-1)&&W.missed.has(n-2)&&mk.missBase!=null&&inr<mk.missBase-.3)D.add(4);
+  if(inr>4)mk.over4=true;if(mk.over4&&mk.reversed&&inr<3)D.add(5);
+  if(W.bridge.start!=null&&W.bridge.start<1&&W.bridge.stop!=null)D.add(6)}
+function wUI(){$("#wDoseOut").textContent=W.dose+" units";$("#wPlay").textContent=W.play?"Pause":(W.t>=WDAYS?"Finished":"Play");$("#wBridge").setAttribute("aria-pressed",String(W.bridge.on&&W.bridge.stop==null));
+  $("#wBridge").textContent=W.bridge.on?(W.bridge.stop==null?"Enoxaparin bridge on":"Bridge finished"):"Bridge with enoxaparin";$("#wBridge").disabled=W.bridge.on&&W.bridge.stop!=null;
+  segBtns($("#wVk"),VKD,()=>W.vkDiet,k=>{if(k!==W.vkDiet){W.mark.dietINR=wINR(W.F);W.mark.dietDir=k==="high"?1:k==="low"?-1:(W.vkDiet==="high"?-1:1);W.vkDiet=k;wEvent("vitamin K "+k,"K")}a11yKey=""});
+  segBtns($("#wIx"),WIX,()=>W.ix,k=>{if(k!==W.ix){if(k==="ind")W.mark.indFrom=wINR(W.F);W.ix=k;wEvent(k==="abx"?"antibiotic started":k==="ind"?"rifampin started":"other drug stopped",k==="abx"?"A":k==="ind"?"R":"x")}a11yKey=""})}
+function wToday(){return Math.min(WDAYS-1,Math.max(0,W.nextDay-1))}
+function wProtected(inr){return (W.bridge.on&&W.bridge.stop==null)||(W.F.II<.55&&inr>=2)}
+function wRiskV(inr){let v=inr<2?-(2-inr)/1:inr>3?(inr-3)/2.5:0;if(W.bridge.on&&W.bridge.stop==null)v=Math.max(v,-.1)+.15;if(inr>=2&&W.F.II>.55&&!(W.bridge.on&&W.bridge.stop==null))v=Math.min(v,-.4);return clamp(v,-1,1)}
+function wRead(){const inr=wINR(W.F);const day=Math.floor(W.t);
+  readRows($("#wRead"),[["Day",day+" of "+WDAYS],["Today's dose",W.missed.has(wToday())?"missed":(W.given[wToday()]!=null?W.given[wToday()]:W.dose)+" units"],["INR",inr.toFixed(1)+(inr<2?" low":inr>3?" high":" in range")],["Factor II (prothrombin)",r0(W.F.II*100)+"%"],["Factor VII",r0(W.F.VII*100)+"%"],["Bridge",W.bridge.on?(W.bridge.stop==null?"enoxaparin on":"stopped day "+W.bridge.stop):"none"]]);
+  let cls="",msg;
+  if(inr>4.5)[cls,msg]=["bad",`INR ${inr.toFixed(1)}: well above range. Bleeding risk is high. Hold warfarin and notify the prescriber; check for bleeding. Vitamin K may be ordered, and PCC if there is serious bleeding.`];
+  else if(inr>3)[cls,msg]=["warn",`INR ${inr.toFixed(1)}: above range. Look for a cause (a new antibiotic, less vitamin K in food, extra doses). Report it; the dose may be held or lowered.`];
+  else if(inr<2&&W.t<5&&W.bridge.on&&W.bridge.stop==null)[cls,msg]=["",`INR ${inr.toFixed(1)}. Warfarin is still building up, but enoxaparin is covering the gap.`];
+  else if(inr<2&&W.t<5)[cls,msg]=["warn",`INR ${inr.toFixed(1)}. Warfarin takes days to work, so the patient is not yet protected. A new clot needs a bridge with heparin or enoxaparin.`];
+  else if(inr<2)[cls,msg]=["warn",`INR ${inr.toFixed(1)}: below range, so clots are more likely. Look for a cause (missed doses, more vitamin K, an inducer such as rifampin). Report it.`];
+  else if(W.F.II>.55)[cls,msg]=["",`INR ${inr.toFixed(1)} is in range, but prothrombin (factor II) is still ${r0(W.F.II*100)}%. Full protection comes once it has fallen too.`];
+  else [cls,msg]=["good",`INR ${inr.toFixed(1)}: in the 2 to 3 range. Keep the dose, the diet and other drugs steady; check the INR as ordered.`];
+  if(W.ix==="abx")msg+=" The antibiotic slows warfarin breakdown, so the INR climbs over several days.";
+  if(W.ix==="ind")msg+=" Rifampin speeds warfarin breakdown, and the effect builds over a week or more.";
+  if(W.vk>.2)msg+=" Vitamin K is letting the liver make working factors again.";
+  if(W.t>=WDAYS)msg="Day 56 reached. Press Restart to run again.";
+  setStatus($("#wStatus"),cls,msg);chalUI($("#wChal"),WCH,W.done)}
+function drawINR(now){use(S2);const T=now/1000;const inr=wINR(W.F);
+  panelBox(10,10,800,300);title(24,30,"INR over 8 weeks");txt(796,30,"day "+W.t.toFixed(1),{size:13,weight:700,mono:true,align:"right",color:C.accent});
+  const gx=60,gw=730,gy=46,gh=220;const X=d=>gx+d/WDAYS*gw;const yv=q=>gy+gh-(clamp(q,.5,6.5)-.5)/6*gh;
+  ctx.fillStyle=hexA(C.good,.18);ctx.fillRect(gx,yv(3),gw,yv(2)-yv(3));txt(gx+gw-4,yv(2.5),"target 2 to 3",{size:11.5,weight:700,align:"right",color:C.good});
+  ctx.fillStyle=hexA(C.bad,.07);ctx.fillRect(gx,gy,gw,yv(4.5)-gy);txt(gx+gw-4,gy+10,"high bleeding risk",{size:11,weight:700,align:"right",color:C.bad});
+  line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.5);line(gx,gy,gx,gy+gh,C["ink-soft"],1.5);
+  [1,2,3,4,5,6].forEach(q=>{txt(gx-8,yv(q),String(q),{size:11,mono:true,align:"right",color:C["ink-soft"]});line(gx,yv(q),gx+gw,yv(q),hexA(C.rule,.5),1)});
+  for(let d=0;d<=WDAYS;d+=7)txt(X(d),gy+gh+13,d===0?"0":"wk "+d/7,{size:11,mono:true,align:"center",color:C["ink-soft"]});
+  // bridge bar
+  if(W.bridge.on){const a=W.bridge.start,b=W.bridge.stop==null?W.t:W.bridge.stop;rr(X(a),gy+4,Math.max(4,X(b)-X(a)),8,4);ctx.fillStyle=C.drug;ctx.fill();txt(X(a)+4,gy+20,"enoxaparin",{size:11,weight:700,color:C.drug})}
+  // INR line
+  ctx.beginPath();W.hist.forEach((p,i)=>{const x=X(p[0]),y=yv(p[1]);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.strokeStyle=C.act3;ctx.lineWidth=2.5;ctx.lineJoin="round";ctx.stroke();
+  W.daily.forEach(p=>{if(p[0]%1===0)circ(X(p[0]),yv(p[1]),3.4,p[1]>3?C.bad:p[1]<2?C.vein:C.good,C.panel,1)});
+  W.missed.forEach(d=>{if(d<=W.t)crossMark(X(d),gy+gh-8,4,C.bad)});
+  W.events.forEach((e,i)=>{const x=X(e[0]);line(x,gy,x,gy+gh,hexA(C.gold,.6),1.2,[3,3]);circ(x,gy+gh-22-(i%3)*16,7,C.gold,C.panel,1.2);txt(x,gy+gh-22-(i%3)*16+.5,e[2],{size:9.5,weight:700,mono:true,align:"center",color:"#10161A"})});
+  circ(X(W.t),yv(inr),6,C.act3,C.panel,2);
+  txt(gx,gy+gh+30,"Gold markers: D dose change, K diet, A antibiotic, R rifampin, x drug stopped, V vitamin K, P PCC, B bridge. Red x on the axis: missed dose.",{size:11,weight:600,color:C["ink-soft"]});
+  // factors
+  panelBox(10,320,300,190);title(24,340,"Clotting factors (activity)");
+  [["VII","6 h"],["IX","1 day"],["X","1.7 days"],["II","2.5 days"]].forEach((f,i)=>{const y=370+i*34;const v=clamp(W.F[f[0]],0,1.2);factor(44,y,f[0],{k:true,w:40});
+    rr(74,y-7,170,14,7);ctx.fillStyle=C.sunk;ctx.fill();rr(74,y-7,Math.max(6,170*Math.min(1,v)),14,7);ctx.fillStyle=C.fac;ctx.fill();txt(250,y,r0(v*100)+"%",{size:11.5,weight:700,mono:true});txt(74,y+15,"half-life "+f[1],{size:10.5,color:C["ink-soft"]})});
+  // today
+  panelBox(320,320,250,190);title(334,340,"Today");
+  const td=wToday();const missed=W.missed.has(td);const dose=W.given[td]!=null?W.given[td]:W.dose;
+  txt(334,366,missed?"dose missed":"warfarin: "+dose+" units",{size:12.5,weight:700,color:missed?C.bad:C.ink});
+  for(let i=0;i<10;i++){const x=346+(i%5)*24,y=392+Math.floor(i/5)*24;if(i<dose&&!missed)drugTok(x,y,8,{});else{hexPath(x,y,8,Math.PI/6);ctx.setLineDash([2,3]);fillStroke(null,C.blk,1.2);ctx.setLineDash([])}}
+  ell(510,404,30,9,0,C.panel,C["ink-soft"],1.3);const nl={low:1,steady:3,high:6}[W.vkDiet];for(let i=0;i<nl;i++)ell(490+i*8,394-(i%2)*4,8,4,(i%3-1)*.5,C.vitk,hexA(C.ink,.3),1);
+  txt(510,428,"greens: "+W.vkDiet,{size:11.5,weight:700,align:"center"});
+  if(W.ix!=="none")tag(334,470,W.ix==="abx"?"ANTIBIOTIC: INHIBITOR":"RIFAMPIN: INDUCER",W.ix==="abx"?C.bad:C.vein);
+  if(W.vk>.15)tag(334,446,"VITAMIN K ON BOARD",C.vitk);
+  // INR readout and risk
+  panelBox(580,320,230,190);title(594,340,"INR now");
+  txt(594,376,inr.toFixed(1),{size:30,weight:700,mono:true,color:inr>3?C.bad:inr<2?C.vein:C.good});
+  txt(680,368,inr>3?"above range":inr<2?"below range":"in range",{size:12.5,weight:700});txt(680,386,wProtected(inr)?"protected":"not yet protected",{size:12,color:C["ink-soft"]});
+  riskMeter(596,428,198,wRiskV(inr));
+}
+function inrA11y(){const inr=wINR(W.F);const day=Math.floor(W.t);
+  return [`Warfarin simulator, day ${day}. INR ${inr.toFixed(1)}, ${inr>3?"above":inr<2?"below":"in"} the 2 to 3 range. Dose ${W.dose} units.`,
+   `A graph of INR over 8 weeks with a green band from 2 to 3. The amber INR line has reached day ${day} at ${inr.toFixed(1)}${W.events.length?", with "+W.events.length+" gold event markers ("+W.events.slice(-3).map(e=>e[1]).join(", ")+")":""}${W.bridge.on?", and a violet enoxaparin bar along the top":""}. Below, factor bars read VII ${r0(W.F.VII*100)}%, IX ${r0(W.F.IX*100)}%, X ${r0(W.F.X*100)}% and II ${r0(W.F.II*100)}%. The diet plate shows ${W.vkDiet} greens${W.ix!=="none"?", and a tag shows "+(W.ix==="abx"?"an antibiotic (inhibitor)":"rifampin (inducer)"):""}. The balance meter points toward ${wRiskV(inr)<-.33?"clot risk":wRiskV(inr)>.33?"bleeding risk":"balanced"}.`]}
+
+/* ================= PART 3: case files ================= */
+const S3=makeStage("cvCase",560,450);
+const sinus=hr=>t=>ecgAt(t,{hr});
+const CASES=[
+{name:"High INR with bleeding",who:"Rosa, 74",title:"Bleeding gums and a black stool on warfarin",
+ story:"Rosa takes warfarin for atrial fibrillation. Her INR has been steady at 2.4. Five days ago she started sulfamethoxazole-trimethoprim for a bladder infection. Today her gums bleed when she brushes, she has new bruises on her arms, and this morning she passed a black, sticky stool. Her 1700 warfarin is due.",
+ ecg:sinus(104),rhythm:"sinus tachycardia, about 104 per minute",
+ vit:[["HR","104",1],["BP","102/60",1],["SpO₂","96%",0],["Resp","20",0]],
+ mar:[["1700","warfarin (vitamin K antagonist)","PO","Due"],["0900","sulfamethoxazole-trimethoprim (antibiotic)","PO","Given"],["0900","metoprolol (beta blocker)","PO","Given"]],
+ labs:[["INR","6.8","2–3 target","H"],["Hemoglobin","9.1 g/dL","12–16","L"],["Platelets","210 ×10³/µL","150–400",""],["Creatinine","0.9 mg/dL","0.6–1.2",""]],pic:"gums",
+ legend:[["trace","ECG trace","ln"],["bad","Bleeding sign"],["drug","Warfarin"],["enz","CYP2C9 enzyme"]],
+ qs:[{q:"What most likely pushed her INR from 2.4 to 6.8?",hint:"What changed five days ago, and which liver enzyme breaks down warfarin?",opts:[
+   ["The antibiotic slowed warfarin breakdown (CYP2C9) and cut gut vitamin K, so warfarin built up",1,"Yes. Sulfamethoxazole-trimethoprim is a classic warfarin interaction. Extra INR checks are needed whenever an antibiotic is added."],
+   ["Her metoprolol blocks vitamin K",0,"Metoprolol is a beta blocker. It does not change warfarin's effect in a meaningful way."],
+   ["She is eating more green vegetables",0,"More vitamin K would LOWER the INR, not raise it."],
+   ["Her kidneys stopped clearing warfarin",0,"Warfarin is cleared mainly by the liver, and her creatinine is normal."]]},
+  {q:"Which findings together suggest serious bleeding that must be reported right away?",hint:"Look at the stool, the vital signs and the hemoglobin together.",opts:[
+   ["Black, sticky stool with a heart rate of 104, a BP of 102/60 and a hemoglobin of 9.1",1,"Right. Tarry stool (melena) suggests bleeding in the upper gut, and the fast pulse, lower BP and low hemoglobin suggest real blood loss."],
+   ["A platelet count of 210",0,"That is a normal platelet count."],
+   ["An SpO₂ of 96%",0,"That is a normal oxygen level."],
+   ["The fact that she takes metoprolol",0,"Metoprolol can blunt a fast pulse, which makes her heart rate of 104 even more worrying, but it is not itself a bleeding sign."]]},
+  {q:"What should the nurse do with the 1700 warfarin?",hint:"Think hold, report and the antidote.",opts:[
+   ["Hold it, notify the prescriber now with the INR, bleeding signs and vitals, and expect vitamin K and possibly PCC",1,"Yes. A high INR with active bleeding needs urgent reversal: PCC works in minutes, and vitamin K keeps the INR down."],
+   ["Give it; the INR is checked again next week",0,"Giving more warfarin with an INR of 6.8 and active bleeding is dangerous."],
+   ["Give protamine sulfate",0,"Protamine reverses heparin. Warfarin is reversed with vitamin K and PCC."],
+   ["Give half the dose",0,"Changing the dose is the prescriber's decision, and with active bleeding the dose must be held and reported."]]}],
+ exp:"Warfarin plus a new antibiotic can push the INR far above range. A high INR with bleeding signs means hold, report urgently, and expect vitamin K with or without PCC."},
+{name:"HIT",who:"Marcus, 58",title:"Platelets falling on day 8 of heparin",
+ story:"Marcus had hip surgery 8 days ago and gets heparin under the skin to prevent clots, plus heparin flushes for his IV line. His platelet count was 260 on admission and is 98 today. Since this morning his right calf is swollen, warm and painful.",
+ ecg:sinus(92),rhythm:"sinus rhythm, about 92 per minute",
+ vit:[["HR","92",0],["BP","132/80",0],["SpO₂","95%",0],["Temp","37.2 °C",0]],
+ mar:[["1400","heparin (anticoagulant)","subcut","Due"],["1400","heparin lock flush","IV","Due"],["0900","acetaminophen (analgesic)","PO","Given"]],
+ labs:[["Platelets","98 ×10³/µL","150–400","L"],["Platelets (admit)","260 ×10³/µL","150–400",""],["Hemoglobin","11.8 g/dL","13.5–17.5","L"],["PF4 antibody","pending","",""]],pic:"hit",
+ legend:[["plt","Platelet count","ln"],["bad","New clot"],["neut","Antibody"],["drug","Heparin"]],
+ qs:[{q:"What is the most likely explanation?",hint:"A fall of more than half, 5 to 10 days into heparin, with a new clot.",opts:[
+   ["Heparin-induced thrombocytopenia (HIT)",1,"Yes. A platelet fall of more than 50 percent 5 to 10 days after starting heparin, plus a new clot, is the classic HIT picture."],
+   ["Normal blood loss from surgery",0,"Surgery can lower platelets a little early on, but a big fall on day 8 with a new clot points to HIT."],
+   ["Too little heparin",0,"In HIT, heparin itself causes the clotting by switching platelets on."],
+   ["An aspirin allergy",0,"He is not taking aspirin, and this pattern fits HIT."]]},
+  {q:"What should the nurse do with the 1400 doses?",hint:"Which heparin products are on his MAR?",opts:[
+   ["Hold both the heparin injection AND the heparin flush, and notify the prescriber right away",1,"Right. All heparin must stop, including flushes and heparin-coated lines. Expect a non-heparin anticoagulant such as argatroban."],
+   ["Hold the injection but keep the flushes, since they are tiny amounts",0,"Even small amounts of heparin can keep HIT going. Flushes must stop too."],
+   ["Give protamine sulfate",0,"Protamine reverses heparin for bleeding. HIT is a clotting problem; heparin must stop and another anticoagulant is needed."],
+   ["Switch to enoxaparin",0,"Enoxaparin is a heparin and can cross-react with HIT antibodies."]]},
+  {q:"Which order would the nurse question?",hint:"What usually feeds the clotting in HIT?",opts:[
+   ["A platelet transfusion for a count of 98 with no bleeding",1,"Yes. Platelet transfusions are generally avoided in HIT without serious bleeding because they can add to the clotting."],
+   ["Start argatroban",0,"Argatroban, a direct thrombin inhibitor, is a usual non-heparin choice in HIT."],
+   ["Add heparin to his allergy list",0,"That is correct and important, so it is not given again."],
+   ["Ultrasound of the right leg",0,"That is a reasonable test for a suspected DVT."]]}],
+ exp:"HIT: platelets fall by more than half and clots form, usually 5 to 10 days into heparin. Stop all heparin (including flushes), notify, use a non-heparin anticoagulant, and list heparin as an allergy."},
+{name:"DOAC before surgery",who:"Helen, 69",title:"Apixaban and a knee replacement",
+ story:"Helen takes apixaban for atrial fibrillation. Her knee replacement is planned in 2 days. At her pre-op visit she asks: \"Should I take tonight's pill? And do I need those belly shots like my sister had with warfarin?\" Her kidney function is normal.",
+ ecg:t=>ecgAt(t,{mode:"afib",hr:78}),rhythm:"atrial fibrillation, rate about 78",
+ vit:[["HR","78 irreg.",0],["BP","128/76",0],["SpO₂","97%",0],["Resp","16",0]],
+ mar:[["2100","apixaban (factor Xa inhibitor)","PO","Due"],["0800","lisinopril (ACE inhibitor)","PO","Given"],["0800","atorvastatin (statin)","PO","Given"]],
+ labs:[["Creatinine","0.9 mg/dL","0.6–1.2",""],["Hemoglobin","13.4 g/dL","12–16",""],["Platelets","230 ×10³/µL","150–400",""],["INR","1.1","not used for apixaban",""]],pic:"surgery",
+ legend:[["trace","ECG trace","ln"],["drug","Apixaban level","ln"],["accent","Surgery day"]],
+ qs:[{q:"How should the nurse answer her first question?",hint:"Who sets the hold plan?",opts:[
+   ["The surgeon or prescriber decides when to stop apixaban; I will confirm their plan with you and write down when you take your last dose",1,"Yes. Hold timing depends on the drug, kidney function and the procedure's bleeding risk. The nurse confirms and documents the plan and the last dose."],
+   ["Stop it a week before every surgery",0,"There is no single rule. DOAC holds are usually shorter and are set by the prescriber."],
+   ["Never stop apixaban for surgery",0,"Most surgeries need the anticoagulant held for a short time, per the plan."],
+   ["Take a double dose tonight to stay protected",0,"Double doses raise bleeding risk and are never a way to cover a hold."]]},
+  {q:"Does she likely need enoxaparin bridging?",hint:"How fast does apixaban wear off compared with warfarin?",opts:[
+   ["Usually not: apixaban wears off within a day or two, so it can be stopped and restarted without a bridge",1,"Right. Bridging is mainly a warfarin issue because warfarin takes days to wear off and days to work again."],
+   ["Yes, everyone on any anticoagulant needs bridging",0,"Bridging is not routine for DOACs and adds bleeding risk."],
+   ["Yes, because apixaban is monitored by the INR",0,"Apixaban is not monitored with the INR."],
+   ["No, because apixaban never needs to be held",0,"It usually does need to be held; it just does not need a bridge."]]},
+  {q:"If she instead needed emergency surgery with major bleeding, which specific reversal agent fits apixaban?",hint:"Apixaban blocks factor Xa. Which agent is a decoy?",opts:[
+   ["Andexanet alfa",1,"Yes. Andexanet alfa is a decoy Xa that soaks up apixaban and rivaroxaban."],
+   ["Idarucizumab",0,"Idarucizumab reverses dabigatran, the thrombin inhibitor."],
+   ["Protamine sulfate",0,"Protamine reverses heparin."],
+   ["Vitamin K",0,"Vitamin K reverses warfarin, not apixaban."]]}],
+ exp:"DOACs before procedures: the prescriber sets the hold; the nurse confirms, records the last dose and teaches when to restart. Bridging is usually not needed. Andexanet alfa reverses Xa inhibitors; idarucizumab reverses dabigatran."},
+{name:"Iron teaching",who:"Priya, 31",title:"Starting ferrous sulfate",
+ story:"Priya has iron-deficiency anemia from heavy periods. She starts ferrous sulfate tablets today. She usually takes her calcium supplement and an antacid at breakfast with a glass of milk, and she plans to take the iron then too. She has read that iron turns stools black and is worried.",
+ ecg:sinus(96),rhythm:"sinus rhythm, about 96 per minute",
+ vit:[["HR","96",1],["BP","112/70",0],["SpO₂","98%",0],["Resp","18",0]],
+ mar:[["0700","ferrous sulfate (iron)","PO","Due"],["0800","calcium carbonate (supplement, antacid)","PO","Due"],["0800","folic acid (vitamin)","PO","Due"]],
+ labs:[["Hemoglobin","9.4 g/dL","12–16","L"],["MCV","72 fL","80–100","L"],["Ferritin","6 ng/mL","15–150","L"],["Platelets","310 ×10³/µL","150–400",""]],pic:"iron",
+ legend:[["iron","Iron"],["gold","Vitamin C"],["blk","Blockers"],["rbc","Red cell"]],
+ qs:[{q:"What is the best plan for taking the iron?",hint:"What helps iron absorption, and what blocks it?",opts:[
+   ["Take it with orange juice on an empty stomach, 1 to 2 hours apart from the calcium, antacid and milk",1,"Yes. Vitamin C helps absorption; calcium, antacids and dairy block it."],
+   ["Take everything together at breakfast with milk",0,"Calcium, antacids and milk all lower iron absorption."],
+   ["Take it with tea to settle the stomach",0,"Tea also blocks iron absorption."],
+   ["Crush it into yogurt",0,"Dairy blocks absorption; check before crushing any tablet."]]},
+  {q:"How should the nurse respond about black stools?",hint:"Expected effect or warning sign?",opts:[
+   ["Dark green or black stools are expected with iron; call if they are tarry and sticky or you feel faint",1,"Right. Iron darkens stool harmlessly. Tarry stool with dizziness or a racing heart could mean bleeding."],
+   ["Black stools mean you must stop the iron",0,"Dark stools are expected with iron and are not a reason to stop."],
+   ["Black stools never happen with iron",0,"They are a very common, expected effect."],
+   ["Take a laxative every day to prevent them",0,"The colour change is harmless. Fluids and fibre help with constipation; laxatives only if advised."]]},
+  {q:"When should she expect her hemoglobin to improve?",hint:"Building new red cells takes time.",opts:[
+   ["It starts rising over a few weeks, and the iron is continued for months to refill stores",1,"Yes. New red cells take weeks to show up, and the iron stores (ferritin) take months to refill."],
+   ["Within 24 hours",0,"Red cell production takes much longer than a day."],
+   ["Only after a year",0,"Improvement usually starts within weeks."],
+   ["Never; tablets do not work",0,"Most people respond well to oral iron. IV iron is for those who cannot absorb or tolerate it."]]}],
+ exp:"Oral iron: empty stomach with vitamin C, apart from calcium, antacids, dairy and tea; expect dark stools and some constipation; it takes weeks to raise hemoglobin and months to refill stores. Keep it away from children."},
+{name:"Enoxaparin at home",who:"Daniel, 45",title:"Going home on enoxaparin injections",
+ story:"Daniel has a new DVT in his left leg. He will go home on enoxaparin injections under the skin, and the nurse is teaching him before discharge. His kidney function is normal. He practises on a training pad and asks a lot of questions.",
+ ecg:sinus(80),rhythm:"sinus rhythm, about 80 per minute",
+ vit:[["HR","80",0],["BP","126/78",0],["SpO₂","98%",0],["Temp","36.9 °C",0]],
+ mar:[["2100","enoxaparin (low-molecular-weight heparin)","subcut","Due"],["0900","acetaminophen (analgesic)","PO","PRN"]],
+ labs:[["Platelets","240 ×10³/µL","150–400",""],["Creatinine","0.8 mg/dL","0.6–1.2",""],["Hemoglobin","14.6 g/dL","13.5–17.5",""],["aPTT","32 s","about 25–35",""]],pic:"inject",
+ legend:[["skin","Abdomen"],["accent","Injection site"],["warn","Keep-away zone","s"]],
+ qs:[{q:"Which statement shows correct technique?",hint:"Site, bubble, angle, rubbing.",opts:[
+   ["I'll inject into my belly at least 2 inches from my navel, leave the air bubble in, and not rub afterwards",1,"Yes. That matches the usual instructions for prefilled enoxaparin syringes."],
+   ["I'll push out the air bubble first, like with any shot",0,"For enoxaparin prefilled syringes, the bubble is left in unless told otherwise."],
+   ["I'll inject into my thigh muscle so it works faster",0,"Enoxaparin goes under the skin, not into muscle; IM injection can cause a large bleed."],
+   ["I'll rub the spot to spread the medicine",0,"Rubbing increases bruising."]]},
+  {q:"Which lab results will the nurse watch while he is on enoxaparin?",hint:"Which heparin side effect lowers a blood count? Which organ clears enoxaparin?",opts:[
+   ["Platelet count (for HIT) and creatinine (enoxaparin is cleared by the kidneys), plus hemoglobin",1,"Right. The aPTT barely changes with enoxaparin, so it is not the monitoring test."],
+   ["The aPTT every day",0,"Enoxaparin hardly changes the aPTT, so it is not useful for monitoring."],
+   ["The INR",0,"The INR is the warfarin test."],
+   ["Blood glucose",0,"Enoxaparin does not affect glucose."]]},
+  {q:"Which symptom should he report right away?",hint:"Think bleeding signs.",opts:[
+   ["Black, tarry stools or a bruise that keeps growing",1,"Yes. These can be signs of significant bleeding."],
+   ["A small bruise at the injection site",0,"Small bruises at the site are common and expected."],
+   ["Mild soreness in the leg with the DVT that is improving",0,"Improving symptoms are expected as the clot is controlled."],
+   ["Feeling tired after a long day",0,"Common and not a specific warning sign on its own."]]}],
+ exp:"Enoxaparin teaching: belly, 5 cm (2 inches) from the navel, alternate sides, keep the bubble, pinch, straight in, do not rub. Watch platelets, creatinine and bleeding signs; the aPTT is not used."},
+{name:"Alteplase for stroke",who:"Gloria, 66",title:"Sudden weakness: a clot buster decision",
+ story:"Gloria suddenly could not lift her right arm and her speech became slurred. She was last known well 1 hour ago. The CT scan shows no bleeding in the brain. The team plans alteplase. Her blood pressure is 196/112.",
+ ecg:sinus(88),rhythm:"sinus rhythm, about 88 per minute",
+ vit:[["HR","88",0],["BP","196/112",1],["SpO₂","96%",0],["Glucose","118 mg/dL",0]],
+ mar:[["now","alteplase (thrombolytic)","IV","Due"],["now","labetalol (BP lowering)","IV","Due"],["0900","aspirin (antiplatelet)","PO","Held"]],
+ labs:[["CT head","no bleed","",""],["Platelets","220 ×10³/µL","150–400",""],["INR","1.0","about 1",""],["Glucose","118 mg/dL","70–140",""]],pic:"stroke",
+ legend:[["trace","ECG trace","ln"],["drug","Alteplase"],["plasmin","Plasmin"],["bad","High BP","s"]],
+ qs:[{q:"What must happen before alteplase can start?",hint:"Look at her vital signs.",opts:[
+   ["Her blood pressure must be lowered below the protocol limit",1,"Yes. Very high BP raises the risk of bleeding into the brain, so it is treated first and watched closely during and after."],
+   ["Her INR must be raised to 2",0,"A higher INR would raise bleeding risk; her normal INR is good."],
+   ["Wait 24 hours to see if she improves",0,"Alteplase has a time window: the sooner, the better. Waiting loses brain tissue."],
+   ["Give her aspirin first",0,"Antiplatelets are held around alteplase because of bleeding risk."]]},
+  {q:"Twenty minutes into the infusion she has a sudden severe headache and vomits. What should the nurse do?",hint:"What is the most feared complication of a clot buster?",opts:[
+   ["Stop the infusion if protocol allows and notify the provider now; this may be bleeding in the brain",1,"Right. A sudden headache, vomiting or a worse neuro exam during alteplase suggests intracranial bleeding."],
+   ["Give acetaminophen and keep going",0,"This may be a brain bleed. It must be reported at once."],
+   ["Speed up the infusion",0,"More alteplase would worsen bleeding."],
+   ["Lay her flat and recheck in an hour",0,"An hour is far too long to wait with a possible brain bleed."]]},
+  {q:"Which order would the nurse question in the first 24 hours after alteplase?",hint:"Avoid anything that adds bleeding or a new puncture.",opts:[
+   ["An intramuscular injection and a new arterial blood gas stick",1,"Yes. New punctures can bleed badly after a thrombolytic. Anticoagulants and antiplatelets are also usually held for about a day, per protocol."],
+   ["Neuro checks every 15 minutes at first",0,"Frequent neuro checks are standard after alteplase."],
+   ["Blood pressure checks every 15 minutes at first",0,"Close BP checks are standard."],
+   ["A swallow screen before giving food or pills by mouth",0,"This is standard stroke care."]]}],
+ exp:"Alteplase dissolves clots by making plasmin. It needs a CT to rule out bleeding and BP below the protocol limit, works best early, and needs close neuro and BP checks, no new punctures, and quick action on any sign of bleeding."},
+{name:"Epoetin in kidney disease",who:"Frank, 63",title:"Hemoglobin rising fast on epoetin",
+ story:"Frank has chronic kidney disease and gets epoetin alfa with his dialysis. Two weeks ago his hemoglobin was 9.0; today it is 11.8. His blood pressure is 174/98 and he has a headache. His ferritin is low. His epoetin dose is due today.",
+ ecg:sinus(84),rhythm:"sinus rhythm, about 84 per minute",
+ vit:[["HR","84",0],["BP","174/98",1],["SpO₂","97%",0],["Temp","36.8 °C",0]],
+ mar:[["1000","epoetin alfa (ESA)","subcut","Due"],["1000","iron sucrose (IV iron)","IV","Due"],["0800","amlodipine (Ca²⁺ channel blocker)","PO","Given"]],
+ labs:[["Hemoglobin","11.8 g/dL","target per protocol","H"],["Hgb 2 weeks ago","9.0 g/dL","",""],["Ferritin","40 ng/mL","low for dialysis","L"],["Potassium","4.9 mEq/L","3.5–5.0",""]],pic:"epo",
+ legend:[["epo","EPO / epoetin"],["rbc","Red cells"],["good","Target zone","s"],["bad","Warning","s"]],
+ qs:[{q:"What should the nurse do about today's epoetin?",hint:"Look at how fast the hemoglobin rose, and the BP.",opts:[
+   ["Hold it and notify the prescriber about the fast hemoglobin rise and the high BP",1,"Yes. A rapid rise or a hemoglobin above target, especially with high BP, calls for holding and reporting per protocol."],
+   ["Give it; a higher hemoglobin is always better",0,"With ESAs, aiming for higher hemoglobin raises the risk of stroke, heart attack, clots and death."],
+   ["Double it to reach a normal hemoglobin faster",0,"ESAs are used at the lowest dose that avoids transfusion, not to reach a normal hemoglobin."],
+   ["Give it into a muscle instead",0,"The route is not the problem; the hemoglobin and BP are."]]},
+  {q:"Why is a fast rise in hemoglobin on epoetin a concern?",hint:"What happens to blood when it holds many more red cells?",opts:[
+   ["Thicker blood and higher BP raise the risk of clots, stroke and heart attack",1,"Right. That is the boxed warning for ESAs."],
+   ["It causes bleeding",0,"The main concern is clotting and high BP, not bleeding."],
+   ["It lowers potassium dangerously",0,"That is not the main ESA concern here."],
+   ["It means the drug has stopped working",0,"A fast rise means it is working strongly."]]},
+  {q:"Why is IV iron on his MAR along with epoetin?",hint:"What does the marrow need to build hemoglobin?",opts:[
+   ["New red cells need iron; low iron stores make epoetin work poorly",1,"Yes. Iron stores are checked (ferritin, transferrin saturation), and iron is often given with ESAs."],
+   ["Iron reverses epoetin",0,"Iron does not reverse epoetin; it supplies what the marrow needs."],
+   ["Iron lowers blood pressure",0,"Iron does not lower BP."],
+   ["It prevents dialysis clots",0,"That is not the purpose of iron."]]}],
+ exp:"ESAs such as epoetin are used at the lowest dose that avoids transfusion. Watch hemoglobin and BP; hold and report a fast rise or a value above target. Make sure iron stores are adequate."}];
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="${l[2]==="ln"?"border-top-color":"background"}:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI();a11yKey=""}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI();a11yKey=""};
+/* case pictures */
+function casePic(kind,x,y,w,h,T){const cx=x+w/2,cy=y+h/2+8;
+  if(kind==="gums"){// mouth with bleeding gums, CYP2C9 jammed, black stool
+    ell(x+64,y+56,40,22,0,mix(C.myo,C.panel,.3),C["myo-d"],1.6);for(let i=0;i<6;i++)rr(x+34+i*10,y+44,8,12,2),ctx.fillStyle=C.panel,ctx.fill();for(let i=0;i<4;i++)bdrop(x+40+i*16,y+64+P(T*.6+i/4,1)*14,4,C.bad,1-P(T*.6+i/4,1));
+    txt(x+64,y+94,"bleeding gums",{size:11.5,weight:700,align:"center"});
+    enzyme(x+170,y+52,18,{T,open:.12});hexPath(x+180,y+52,6,0);fillStroke(C.blk,hexA(C.ink,.5),1);for(let i=0;i<5;i++)drugTok(x+200+(i%3)*14,y+36+Math.floor(i/3)*16,5,{});txt(x+190,y+94,"antibiotic jams CYP2C9",{size:11.5,weight:700,align:"center"});
+    ell(x+64,y+128,22,10,0,"#2B3326",hexA(C.ink,.5),1);txt(x+100,y+128,"black, tarry stool",{size:11.5,weight:700,color:C.bad})}
+  else if(kind==="hit"){const gx=x+24,gy=y+20,gw=w-48,gh=56;line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.2);const pf=d=>d<4.5?260:d<8?260-162*smooth((d-4.5)/3.5):98;plotFn(pf,0,9,gx,gy,gw,gh,0,300,C.plt,2.5,null,Math.min(9,P(T,6)*11));
+    txt(gx,gy-4,"platelets, days 0 to 8",{size:11,weight:700});txt(gx+gw,gy-4,"day 8: 98",{size:11,weight:700,align:"right",color:C.bad});
+    vessel(x+30,y+110,w-60,12,{T,col:C.vein,flow:.04});ell(cx,y+110,28,10,0,hexA(C.clot,.8),C.clot,1.4);txt(cx,y+140,"new clot in the calf vein",{size:11.5,weight:700,align:"center",color:C.bad})}
+  else if(kind==="surgery"){const gx=x+20,gy=y+24,gw=w-40,gh=70;line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.2);
+    const lv=t=>{let v=0;for(let d=0;d<5;d++){if(d>=2&&d<4)continue;const dt=t-d;if(dt>=0)v+=(1-Math.exp(-dt*6))*Math.exp(-dt*Math.LN2/.5)}return v};plotFn(lv,0,5,gx,gy,gw,gh,0,1.4,C.drug,2.5);
+    const sx=gx+3/5*gw;line(sx,gy,sx,gy+gh,C.accent,2,[4,3]);txt(sx,gy-6,"surgery",{size:11,weight:700,align:"center",color:C["accent-ink"]});
+    txt(gx,gy+gh+14,"held per the surgeon's plan, then restarted",{size:11,weight:700});
+    tablet(x+40,y+136,10,C.panel);txt(x+58,y+136,"record the time of the last dose",{size:11.5,weight:700})}
+  else if(kind==="iron"){tablet(x+30,y+40,12,mix(C.iron,C.panel,.4));circ(x+72,y+40,14,C.gold,C.warn,2);txt(x+52,y+70,"iron + vitamin C",{size:11.5,weight:700,align:"center"});
+    rr(x+160,y+24,18,34,3);fillStroke(C.panel,C["ink-soft"],1.3);tablet(x+198,y+40,10,C.panel);crossMark(x+180,y+40,22,C.bad);txt(x+184,y+70,"not with milk, antacids",{size:11.5,weight:700,align:"center"});
+    ell(x+50,y+118,20,9,0,"#2B3326",hexA(C.ink,.5),1);txt(x+80,y+118,"dark stools: expected",{size:11.5,weight:700});
+    for(let i=0;i<4;i++){const q=P(T*.2+i/4,1);rbc(x+40+q*(w-80),y+142,6,q*3)}}
+  else if(kind==="inject"){rr(x+20,y+12,130,132,40);fillStroke(C.skin,C["skin-edge"],1.6);ctx.save();ctx.setLineDash([4,3]);circ(x+85,y+78,24,hexA(C.warn,.18),C.warn,1.8);ctx.restore();ell(x+85,y+78,4,5,0,C["skin-edge"]);
+    [[48,46],[122,46],[48,112],[122,112]].forEach((p,i)=>{const on=Math.floor(P(T,8)*4)===i;circ(x+p[0],y+p[1],8,on?C.accent:hexA(C.accent,.3),C.panel,1.2)});
+    syringe(x+210,y+50,26,.5+.4*Math.sin(T),C.drug);txt(x+200,y+86,"keep the bubble",{size:11.5,weight:700,align:"center"});txt(x+200,y+106,"pinch, 90°, hold",{size:11.5,weight:700,align:"center"});txt(x+200,y+126,"do not rub",{size:11.5,weight:700,align:"center",color:C.bad})}
+  else if(kind==="stroke"){ell(x+70,y+70,46,36,0,mix(C.myo,C.panel,.45),C["myo-d"],1.6);circ(x+88,y+58,8,hexA(C.clot,.9));const lys=P(T,6);for(let i=0;i<3;i++)circ(x+100+i*5,y+52+i*4,3,C.plasmin,null);
+    drugTok(x+58,y+48,6,{});txt(x+70,y+124,"clot in a brain artery",{size:11.5,weight:700,align:"center"});
+    circ(x+186,y+64,30,C.panel,C["ink-soft"],1.8);ctx.beginPath();ctx.moveTo(x+186,y+64);ctx.arc(x+186,y+64,28,-Math.PI/2,-Math.PI/2+TAU*(1/12)*(1+lys*.2));ctx.closePath();ctx.fillStyle=hexA(C.good,.45);ctx.fill();
+    txt(x+184,y+108,"1 h since last known well",{size:11.5,weight:700,align:"center"});rr(x+150,y+124,92,24,5);fillStroke(hexA(C.bad,.15),C.bad,1.4);txt(x+196,y+136,"BP 196/112",{size:11.5,weight:700,mono:true,align:"center",color:C.bad})}
+  else if(kind==="epo"){kidney(x+40,y+56,56,{});for(let i=0;i<4;i++){const q=P(T*.4+i/4,1);bdrop(x+60+q*80,y+50-Math.sin(q*Math.PI)*16,6,C.epo)}
+    rr(x+150,y+30,90,50,8);fillStroke(hexA(C.marrow,.7),C["body-edge"],1.3);txt(x+195,y+55,"marrow",{size:11.5,weight:700,align:"center"});
+    meter(x+20,y+104,220,"hemoglobin: 9.0 to 11.8 in 2 weeks",.85,C.bad,null,{zone:[.5,.72]});txt(x+20,y+142,"too fast, above target; BP 174/98",{size:11.5,weight:700,color:C.bad})}}
+function drawCase(now){use(S3);const c=CASES[CS.i];const T=now/1000;
+  panelBox(10,10,540,130);txt(22,26,c.who.toUpperCase()+" · MONITOR",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  ecgStrip(22,36,300,96,c.ecg,T,{secs:5,label:"Lead II"});
+  c.vit.forEach((v,i)=>{const y=48+i*23;rr(332,y-10,208,21,4);ctx.fillStyle=v[2]?hexA(C.warn,.16):hexA(C["panel-2"],.9);ctx.fill();if(v[2]){ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke()}
+    txt(340,y+.5,v[0],{size:12,weight:600});txt(532,y+.5,v[1]+(v[2]?" ▲":""),{size:12,weight:700,mono:true,align:"right",color:v[2]?C["warn-ink"]:C.ink})});
+  panelBox(10,148,540,118);txt(22,164,"MEDICATION ADMINISTRATION RECORD",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  const cols=[22,70,404,462];["Time","Medication (class)","Route","Status"].forEach((hh,i)=>txt(cols[i],184,hh,{size:11.5,weight:700,color:C["ink-soft"]}));line(18,193,542,193,C.rule,1);
+  c.mar.forEach((m,i)=>{const y=210+i*22;if(i===0){ctx.fillStyle=hexA(C.accent,.1);ctx.fillRect(18,y-10,524,21)}
+    txt(cols[0],y,m[0],{size:12,mono:true,weight:600});txt(cols[1],y,m[1],{size:12,weight:i===0?700:500});txt(cols[2],y,m[2],{size:12});
+    const col=m[3]==="Given"?C.good:m[3]==="Due"?C.warn:m[3]==="Held"?C.bad:C.accent;tag(cols[3],y,m[3].toUpperCase(),col,{size:11})});
+  panelBox(10,274,270,166);txt(22,290,"LAB PANEL",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  c.labs.forEach((l,i)=>{const y=314+i*30;const fl=l[3];txt(22,y,l[0],{size:12.5,weight:600});txt(232,y,l[1],{size:12.5,weight:700,mono:true,align:"right",color:fl==="H"?C.bad:fl==="L"?C["warn-ink"]:C.ink});
+    if(fl)tag(240,y,fl,fl==="H"?C.bad:C.warn,{size:11});if(l[2])txt(22,y+13,"ref "+l[2],{size:11,color:C["ink-soft"]})});
+  panelBox(290,274,260,166);txt(302,290,"WHAT IS GOING ON",{size:12,mono:true,weight:700,color:C["ink-soft"]});casePic(c.pic,290,290,260,150,T)}
+function caseA11y(){const c=CASES[CS.i];const P_={gums:"a mouth with blood dripping from the gums, a liver enzyme jammed by a grey antibiotic token with violet warfarin tokens piling up, and a black, tarry stool",
+  hit:"a small graph of platelets falling from 260 to 98 over 8 days, and a calf vein with a new dark red clot",surgery:"a graph of the apixaban level rising and falling each day, with two days held around a dashed line marked surgery, and a tablet labelled record the time of the last dose",
+  iron:"an iron tablet with an orange slice labelled iron plus vitamin C, a milk glass and antacid crossed out, a dark stool labelled expected, and red cells streaming past",inject:"a belly with a dashed keep-away ring around the navel and four rotating injection sites, and a syringe with notes: keep the bubble, pinch, 90 degrees, hold, do not rub",
+  stroke:"a brain with a clot in an artery, a violet alteplase token and blue plasmin dots, a clock showing 1 hour since last known well, and a red box reading BP 196/112",epo:"a kidney sending green EPO drops to the marrow, and a hemoglobin meter past its green target zone labelled 9.0 to 11.8 in 2 weeks, too fast, with BP 174/98"}[c.pic];
+  return [`Case ${CS.i+1}: ${c.title}.`,`Chart for ${c.who}. The monitor shows ${c.rhythm}. Vitals: `+c.vit.map(v=>`${v[0]} ${v[1]}${v[2]?" (flagged)":""}`).join(", ")+`. The medication record lists `+c.mar.map(m=>`${m[1]} ${m[2]} at ${m[0]}, ${m[3].toLowerCase()}`).join("; ")+`. Labs: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[3]==="H"?" high":l[3]==="L"?" low":""}`).join(", ")+`. The picture shows ${P_}.`]}
+
+/* ================= PART 4: sort it out ================= */
+const SROUNDS=[
+{name:"Drug to reversal agent",goal:"Match each drug with the agent that reverses it, or with no specific antidote.",
+ bins:[["prot","Protamine sulfate"],["vitk","Vitamin K (plus PCC if serious)"],["idar","Idarucizumab"],["andx","Andexanet alfa"],["none","No specific antidote: stop, support"]],
+ cards:[["heparin","prot","Protamine is positive and binds negative heparin: full reversal."],["enoxaparin","prot","Protamine only partly reverses enoxaparin."],["dalteparin","prot","An LMWH: protamine partly reverses it."],
+  ["warfarin","vitk","Vitamin K lets the liver make working factors again; PCC adds ready-made factors."],
+  ["dabigatran","idar","Idarucizumab is an antibody fragment that binds dabigatran."],
+  ["apixaban","andx","Andexanet alfa is a decoy Xa that soaks up Xa inhibitors."],["rivaroxaban","andx","Andexanet alfa reverses Xa inhibitors."],
+  ["aspirin","none","No specific antidote: platelets recover as new ones are made; platelet transfusion may be used for serious bleeding."],["clopidogrel","none","No specific antidote; the effect lasts for the platelets' lifespan."],
+  ["alteplase","none","Stop the infusion; the team may give products that replace fibrinogen."]]},
+{name:"Drug to lab monitored",goal:"Match each drug with the main lab test used to monitor it.",
+ bins:[["aptt","aPTT or anti-Xa, per protocol"],["inr","INR"],["norout","No routine clotting test (check kidneys, CBC)"],["hgb","Hemoglobin and blood pressure"],["anc","CBC with ANC"]],
+ cards:[["heparin drip","aptt","The aPTT or anti-Xa level guides heparin drip changes."],["argatroban","aptt","This IV thrombin inhibitor is adjusted by the aPTT."],
+  ["warfarin","inr","The INR, usually aiming for 2 to 3."],["warfarin plus a new antibiotic","inr","Expect extra INR checks: the INR may rise."],
+  ["apixaban","norout","No routine INR; check kidney function and blood counts."],["rivaroxaban","norout","No routine clotting test."],["dabigatran","norout","No routine INR; kidney function matters a lot."],["enoxaparin","norout","Usually no routine clotting test; platelets and creatinine are checked; anti-Xa only in special cases."],
+  ["epoetin alfa","hgb","Hemoglobin (avoid going above target) and BP."],["darbepoetin alfa","hgb","Another ESA: watch hemoglobin and BP."],
+  ["filgrastim","anc","CBC with absolute neutrophil count."],["pegfilgrastim","anc","Long-acting G-CSF: CBC with ANC."]]},
+{name:"Antiplatelet, anticoagulant or thrombolytic",goal:"Sort each drug by what it does: stops platelets, slows the clotting cascade, or dissolves a clot.",
+ bins:[["ap","Antiplatelet (platelet plug)"],["ac","Anticoagulant (clotting factors)"],["tl","Thrombolytic (dissolves clots)"]],
+ cards:[["aspirin","ap","Blocks platelet COX-1 for good."],["clopidogrel","ap","Blocks the P2Y12 receptor (prodrug)."],["prasugrel","ap","A P2Y12 inhibitor."],["ticagrelor","ap","A reversible P2Y12 inhibitor."],["eptifibatide","ap","IV glycoprotein IIb/IIIa inhibitor."],["tirofiban","ap","IV glycoprotein IIb/IIIa inhibitor."],
+  ["heparin","ac","Boosts antithrombin."],["enoxaparin","ac","LMWH: mostly anti-Xa."],["warfarin","ac","Vitamin K antagonist."],["apixaban","ac","Factor Xa inhibitor."],["rivaroxaban","ac","Factor Xa inhibitor."],["dabigatran","ac","Direct thrombin inhibitor."],["argatroban","ac","IV direct thrombin inhibitor, used in HIT."],
+  ["alteplase","tl","tPA: plasminogen to plasmin."],["tenecteplase","tl","Another tissue plasminogen activator."]]},
+{name:"Name stems",goal:"Use the ending of each generic name to find its group.",
+ bins:[["parin","-parin: heparins"],["xaban","-xaban: factor Xa inhibitors"],["gatran","-gatran: thrombin inhibitor"],["grel","-grel: P2Y12 inhibitors"],["teplase","-teplase: thrombolytics"],["poetin","-poetin: red cell stimulators"],["grastim","-grastim: white cell stimulators"]],
+ cards:[["enoxaparin","parin","-parin: a low-molecular-weight heparin."],["dalteparin","parin","-parin: another LMWH."],["apixaban","xaban","-xaban: blocks factor Xa."],["rivaroxaban","xaban","-xaban: blocks factor Xa."],["edoxaban","xaban","-xaban: blocks factor Xa."],
+  ["dabigatran","gatran","-gatran: blocks thrombin directly."],["clopidogrel","grel","-grel: blocks the P2Y12 receptor."],["prasugrel","grel","-grel: a P2Y12 inhibitor."],
+  ["alteplase","teplase","-teplase: tissue plasminogen activator."],["tenecteplase","teplase","-teplase: a thrombolytic."],["epoetin alfa","poetin","-poetin: copies erythropoietin."],["darbepoetin alfa","poetin","-poetin: a longer-acting ESA."],
+  ["filgrastim","grastim","-grastim: G-CSF for neutrophils."],["pegfilgrastim","grastim","-grastim: long-acting G-CSF."]]},
+{name:"Clue to drug group",goal:"Each card is a side effect, warning or teaching point. Put it with the drug group it belongs to.",
+ bins:[["hep","Heparins"],["warf","Warfarin"],["apl","Antiplatelets"],["thr","Thrombolytics"],["build","Blood-building drugs"]],
+ cards:[["Platelets fall by half on day 7 with a new clot","hep","HIT: stop all heparin."],["Do not expel the air bubble from the prefilled syringe","hep","Enoxaparin injection teaching."],["Reversed by positive protamine","hep","Protamine binds negative heparin."],
+  ["INR rises after an antibiotic is started","warf","CYP2C9 inhibition and less gut vitamin K."],["Keep vitamin K intake consistent","warf","Vitamin K works against warfarin."],["Avoid in pregnancy: crosses the placenta","warf","Heparins are used in pregnancy instead."],
+  ["Ringing in the ears at high doses","apl","A sign of too much aspirin."],["Less effect in CYP2C19 poor metabolizers","apl","Clopidogrel is a prodrug that needs CYP2C19."],["Do not stop after a stent without the cardiologist","apl","Dual antiplatelet therapy prevents stent clots."],
+  ["CT first to rule out a brain bleed","thr","Required before alteplase."],["Time window: the sooner the better","thr","Tissue without flow dies minute by minute."],
+  ["Dark stools are expected","build","Oral iron darkens stool."],["Lifelong injections in pernicious anemia","build","B12 needs intrinsic factor."],["Bone pain after chemotherapy","build","Filgrastim stimulates the marrow."],["Hold if hemoglobin rises above target","build","ESAs raise clot and stroke risk at high hemoglobin."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const hex=(x,y,r,c)=>`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=i/6*Math.PI*2;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ")}" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const beads=(x,y,n)=>Array.from({length:n},(_,i)=>`<circle cx="${x+i*7}" cy="${y+(i%2?2:-2)}" r="3" fill="var(--drug)"/>`).join("");
+  const plt=(x,y,r)=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.75}" fill="var(--plt)" stroke="var(--ink)" stroke-opacity=".35"/>`;
+  const pill=(x,y,t,c)=>`<rect x="${x-11}" y="${y-7}" width="22" height="14" rx="7" fill="${c||"var(--faca)"}"/><text x="${x}" y="${y+4}" font-size="9" font-family="monospace" font-weight="700" text-anchor="middle" fill="var(--panel)">${t}</text>`;
+  const fib=`<path d="M6 16 Q20 8 34 18 T52 14 M6 26 Q22 18 36 28 T52 24 M8 36 Q24 28 38 36 T52 34" stroke="var(--fib)" stroke-width="2.4" fill="none"/>`;
+  const rbcs=`<ellipse cx="16" cy="30" rx="9" ry="6" fill="var(--rbc)"/><ellipse cx="38" cy="22" rx="9" ry="6" fill="var(--rbc)"/>`;
+  switch(k){
+    case "prot":return s(`${beads(8,16,6)}<circle cx="18" cy="30" r="7" fill="var(--warn)"/><circle cx="36" cy="30" r="7" fill="var(--warn)"/><text x="18" y="34" font-size="11" text-anchor="middle" fill="var(--panel)">+</text><text x="36" y="34" font-size="11" text-anchor="middle" fill="var(--panel)">+</text>`);
+    case "vitk":return s(`<circle cx="16" cy="23" r="10" fill="var(--vitk)"/><text x="16" y="27" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" fill="var(--panel)">K</text>${pill(40,14,"II")}${pill(40,32,"X")}`);
+    case "idar":return s(`${pill(16,30,"IIa","var(--thr)")}<path d="M38 36 V24 L30 14 M38 24 L46 14" stroke="var(--neut)" stroke-width="4" fill="none" stroke-linecap="round"/>${hex(38,10,4)}`);
+    case "andx":return s(`${pill(14,23,"Xa")}<rect x="30" y="14" width="22" height="16" rx="8" fill="none" stroke="var(--blk)" stroke-dasharray="3 2" stroke-width="2"/>${hex(41,22,4)}`);
+    case "none":return s(`${plt(20,24,12)}<circle cx="42" cy="24" r="9" fill="none" stroke="var(--bad)" stroke-width="2.5"/><path d="M36 30 L48 18" stroke="var(--bad)" stroke-width="2.5"/>`);
+    case "aptt":return s(`<path d="M8 38 A20 20 0 0 1 48 38" stroke="var(--sunk)" stroke-width="7" fill="none"/><path d="M22 21 A20 20 0 0 1 38 22" stroke="var(--good)" stroke-width="7" fill="none"/><path d="M28 38 L36 22" stroke="var(--ink)" stroke-width="2.5"/>`);
+    case "inr":return s(`<rect x="4" y="14" width="48" height="12" fill="var(--good)" opacity=".35"/><polyline points="4,40 14,34 22,26 32,20 42,22 52,19" fill="none" stroke="var(--act3)" stroke-width="2.5"/><text x="28" y="11" font-size="9" font-family="monospace" text-anchor="middle" fill="var(--ink)">INR</text>`);
+    case "norout":return s(`<path d="M10 6 C34 2 38 40 12 40 C2 34 4 12 10 6Z" fill="var(--liver)" opacity=".7"/><rect x="30" y="10" width="20" height="26" rx="3" fill="var(--panel)" stroke="var(--ink-soft)"/><path d="M34 18 H46 M34 24 H46 M34 30 H42" stroke="var(--ink-soft)" stroke-width="2"/>`);
+    case "hgb":return s(`${rbcs}<rect x="4" y="38" width="48" height="5" rx="2" fill="var(--sunk)"/><rect x="4" y="38" width="32" height="5" rx="2" fill="var(--good)"/>`);
+    case "anc":return s(`<circle cx="18" cy="22" r="11" fill="var(--neut)" opacity=".25" stroke="var(--neut)"/><circle cx="14" cy="22" r="3.5" fill="var(--neut)"/><circle cx="20" cy="18" r="3.5" fill="var(--neut)"/><circle cx="22" cy="25" r="3.5" fill="var(--neut)"/><circle cx="42" cy="26" r="9" fill="var(--neut)" opacity=".25" stroke="var(--neut)"/>`);
+    case "ap":case "apl":case "grel":return s(`${plt(16,22,11)}${plt(40,24,11)}<path d="M26 23 H30" stroke="var(--fib)" stroke-width="3"/>${hex(28,10,5)}`);
+    case "ac":return s(`${fib}${hex(28,24,6)}`);
+    case "tl":case "thr":case "teplase":return s(`${fib}<circle cx="18" cy="22" r="5" fill="var(--plasmin)"/><circle cx="40" cy="30" r="5" fill="var(--plasmin)"/>`);
+    case "parin":case "hep":return s(`<path d="M6 23 A11 11 0 1 1 6 23.1 L14 23Z" fill="var(--at)"/>${beads(22,23,5)}`);
+    case "xaban":return s(`${pill(22,24,"Xa")}${hex(38,12,6)}<path d="M12 34 L32 14 M12 14 L32 34" stroke="var(--bad)" stroke-width="2"/>`);
+    case "gatran":return s(`${pill(22,24,"IIa","var(--thr)")}${hex(38,12,6)}<path d="M12 34 L32 14 M12 14 L32 34" stroke="var(--bad)" stroke-width="2"/>`);
+    case "warf":return s(`<circle cx="14" cy="26" r="9" fill="var(--blk)"/><path d="M30 26 A10 10 0 1 1 30 26.1 L38 26Z" fill="var(--enz)"/>${hex(44,24,5)}`);
+    case "poetin":return s(`<path d="M10 8 C28 6 30 40 12 40 C2 34 4 14 10 8Z" fill="var(--liver)" opacity=".6"/><path d="M34 14 q4 6 0 10 q-4 -4 0 -10Z" fill="var(--epo)"/><ellipse cx="44" cy="34" rx="8" ry="5" fill="var(--rbc)"/>`);
+    case "grastim":return s(`<circle cx="22" cy="24" r="13" fill="var(--neut)" opacity=".2" stroke="var(--neut)"/><circle cx="17" cy="24" r="4" fill="var(--neut)"/><circle cx="24" cy="19" r="4" fill="var(--neut)"/><circle cx="26" cy="28" r="4" fill="var(--neut)"/>${hex(46,12,4)}`);
+    case "build":return s(`<rect x="4" y="8" width="48" height="30" rx="8" fill="var(--marrow)" stroke="var(--body-edge)"/>${rbcs}`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in "${nm}". Clue: ${c[2].split(":")[0].split(";")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}a11yKey=""}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+
+/* ---------------- bench and INR controls ---------------- */
+$("#bDose").oninput=e=>{B.dose=+e.target.value;B.rev=0;B.stopLys=null;B.msg="";bChanged()};
+$("#bKid").oninput=e=>{B.kid=+e.target.value;B.msg="";bChanged()};
+$("#bPoor").onchange=e=>{B.poor=e.target.checked;B.msg="";bChanged()};
+$("#bRev").onclick=()=>bRevGive();
+$("#bCut").onclick=()=>{B.cur={plt:0,fib:0,lys:0};if(B.drug==="alt"){B.stopLys=null}B.msg="";a11yKey=""};
+segBtns($("#bVessel"),[["artery","Artery (fast flow)"],["vein","Vein (slow flow)"]],()=>B.vessel,k=>{B.vessel=k;const b=bBase();if(B.drug!=="alt"){B.cur.plt=Math.min(B.cur.plt,b.plt);B.cur.fib=Math.min(B.cur.fib,b.fib)}else{B.cur.plt=b.plt*.9;B.cur.fib=b.fib*.9;B.cur.lys=0}B.msg="";a11yKey=""});
+$("#wDose").oninput=e=>{W.dose=+e.target.value;wUI()};
+$("#wDose").onchange=e=>{wEvent("dose "+W.dose+" units","D");a11yKey=""};
+$("#wPlay").onclick=()=>{if(W.t>=WDAYS)return;W.play=!W.play;wUI()};
+$("#wRestart").onclick=()=>{const sp=W.speed,done=W.done;W=wNew();W.speed=sp;W.done=done;W.dose=+$("#wDose").value;wUI();a11yKey=""};
+$("#wSpeed").oninput=e=>{W.speed=+e.target.value};
+$("#wMiss").onclick=()=>{const d=wToday();if(W.missed.has(d)||W.t>=WDAYS)return;if(W.mark.missBase==null||!W.missed.has(d-1))W.mark.missBase=wINR(W.F);W.missed.add(d);if(W.given[d]){W.A=Math.max(0,W.A-W.given[d]*Math.exp(-(W.t-d)*Math.LN2/1.6));W.given[d]=0}wEvent("missed dose","M");a11yKey=""};
+$("#wBridge").onclick=()=>{if(W.bridge.on)return;W.bridge.on=true;W.bridge.start=W.t;wEvent("enoxaparin bridge started","B");wUI();a11yKey=""};
+$("#wVitK").onclick=()=>{W.vk=1;W.mark.reversed=true;wEvent("vitamin K given","V");a11yKey=""};
+$("#wPCC").onclick=()=>{for(const f in W.F)W.F[f]+=(1-W.F[f])*.85;W.vk=Math.max(W.vk,1);W.mark.reversed=true;wEvent("4-factor PCC with IV vitamin K","P");a11yKey=""};
+
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:()=>"#cvBench",f:benchA11y},inr:{cv:()=>"#cvINR",f:inrA11y},cases:{cv:()=>"#cvCase",f:caseA11y},sort:{cv:()=>null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const cv=a.cv();
+  const key=curTab+"|"+(curTab==="inr"?Math.floor(W.t/2)+"|"+W.events.length+"|"+W.dose:curTab==="sim"?lab+"|"+Math.round(bClot(B.cur)*5):lab+"|"+d);if(key===a11yKey)return;a11yKey=key;
+  if(cv&&lab)$(cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=cv?$(cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(cv)$(cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","inr","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now(),rdT=0;
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;rdT+=dt;
+  try{if(curTab==="sim"){bStep(dt);drawBench(now);if(rdT>.3){rdT=0;bCheck()}}
+    else if(curTab==="inr"){wStep(dt*W.speed);drawINR(now);if(rdT>.25){rdT=0;wRead();$("#wCap").textContent="Day "+Math.floor(W.t)+" · INR "+wINR(W.F).toFixed(1)}}
+    else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__bl={tab:k=>showTab(k),bench:o=>{if(o.drug)bSetDrug(o.drug);if(o.vessel){B.vessel=o.vessel;segBtns($("#bVessel"),[["artery","Artery (fast flow)"],["vein","Vein (slow flow)"]],()=>B.vessel,k=>{B.vessel=k})}if(o.dose!=null){B.dose=o.dose;$("#bDose").value=o.dose}if(o.kid!=null){B.kid=o.kid;$("#bKid").value=o.kid}if(o.poor!=null){B.poor=o.poor;$("#bPoor").checked=o.poor}bChanged();if(o.settle){for(let i=0;i<400;i++)bStep(.05)}bCheck();const m=bModel();return {INR:m.INR,aPTT:m.aPTT,axa:m.axa,plt:m.pltFn,clot:bClot(B.cur),risk:bRisk(m),done:[...B.done]}},
+  rev:()=>{bRevGive();for(let i=0;i<300;i++)bStep(.05);bCheck();const m=bModel();return {INR:m.INR,aPTT:m.aPTT,clot:bClot(B.cur),lys:B.cur.lys,done:[...B.done],status:$("#bStatus").textContent}},
+  w:o=>{if(o.restart)$("#wRestart").click();if(o.dose!=null){W.dose=o.dose;$("#wDose").value=o.dose}if(o.vk){W.vkDiet=o.vk}if(o.ix){if(o.ix==="ind")W.mark.indFrom=wINR(W.F);W.ix=o.ix}if(o.bridge)$("#wBridge").click();if(o.miss)$("#wMiss").click();if(o.vitk)$("#wVitK").click();if(o.pcc)$("#wPCC").click();
+    const wasPlay=W.play;W.play=true;if(o.days){for(let i=0;i<o.days*20;i++)wStep(.05)}W.play=wasPlay&&W.t<WDAYS;wUI();wRead();return {t:W.t,inr:wINR(W.F),F:Object.assign({},W.F),daily:W.daily.slice(-3),done:[...W.done],bridge:W.bridge}},
+  pause:()=>{W.play=false;wUI()},
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),caseN:()=>CASES.length,sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortN:()=>SROUNDS.length,sortDrop:(k,b)=>sDrop(k,b),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order})};
+readColors();bDrugsUI();bChanged();bCheck();wUI();wRead();caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+
+</script>
+</body>
+</html>

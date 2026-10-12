@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Endocrine and Reproductive Drugs Lab</title>
+<meta name="description" content="A 24-hour insulin and glucose simulator with insulin action curves, a thyroid feedback simulator with levothyroxine and methimazole, nursing case files, and sorting games for endocrine and reproductive drugs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3787;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#5B6BC9;--act2:#2E8A5A;--act3:#B4632A;--act4:#A04E8C;--act5:#2F7FC1;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF0F6;--grid:#D5DAE6;--glass:#DCE8EE;--glass-edge:#7F99A6;--water:#CFE5F1;
+  --drug:#5B3FC4;--receptor:#1B7F86;--ligand:#D08A12;--blocked:#8B9094;
+  --glu:#D98A1C;--ins:#B03A8C;--glut:#2E8A5A;--ketone:#7E5A1A;
+  --rapid:#C4382F;--short:#2F7FC1;--inter:#2E8A5A;--long:#7B5CC9;--endo:#7A8288;
+  --na:#D9A015;--k:#9B3FB5;--cl:#2E8A4A;--h2o:#3F8FD0;--ca:#5E7183;--lact:#A9372F;
+  --t4:#C4644F;--tsh:#2F7FC1;--trh:#7B5CC9;--iod:#8A6D12;--rad:#2E9A3A;
+  --estro:#B03A8C;--prog:#2F7FC1;--lh:#D98A1C;--egg:#E2B93B;--clot:#8A1F1F;--testo:#2E8A7A;--oxy:#A04E8C;
+  --cgmp:#2E8A5A;--no:#2F7FC1;--nitr:#C4382F;--pde:#8A6D12;
+  --bone:#E8DFC6;--bone-edge:#A8946A;--oc:#A04E8C;--ob:#2E8A7A;
+  --cell:#F4EAE0;--cell-edge:#B9937A;--nuc:#D9C6E8;--memb:#E6C96A;
+  --blood:#C0392B;--plasma:#F4D9D2;--vessel:#C4644F;--smooth:#D9A07A;--smooth-edge:#A8704A;--heart:#B5303A;--heart-edge:#7E1F27;
+  --tubule:#E9DCCB;--tubule-edge:#A88B6A;--lumen:#FBF6EA;--urine:#E8C64A;
+  --liver:#9A5A3A;--gut:#E3B07E;--gut-edge:#A8733F;--thy:#D9786A;--thy-edge:#9A3F33;--adr:#E0A84A;--adr-edge:#9A6A1A;--uterus:#E6A8B4;--uterus-edge:#A8576A;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;--sweat:#5AA9E6;
+  --mon:#0F1A20;--mon-grid:#1C2E36;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#D186C0;--act5:#5AA9E6;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --glu:#F2A93B;--ins:#E07AC4;--glut:#6BC293;--ketone:#D9AE5E;
+  --rapid:#F27A6E;--short:#5AA9E6;--inter:#6BC293;--long:#B3A1F5;--endo:#A3ACB2;
+  --na:#F2C14E;--k:#C98BE0;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--lact:#E07067;
+  --t4:#E8907A;--tsh:#5AA9E6;--trh:#A98BEF;--iod:#E0BE48;--rad:#7AD67A;
+  --estro:#E07AC4;--prog:#5AA9E6;--lh:#F2A93B;--egg:#F2D45B;--clot:#E0574A;--testo:#5CC4B0;--oxy:#D186C0;
+  --cgmp:#6BC293;--no:#5AA9E6;--nitr:#F27A6E;--pde:#E0BE48;
+  --bone:#4A4436;--bone-edge:#C9B88A;--oc:#D186C0;--ob:#5CC4B0;
+  --cell:#2A2420;--cell-edge:#B9937A;--nuc:#3E3350;--memb:#8A7A3A;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;
+  --liver:#B8785A;--gut:#6A4A2A;--gut-edge:#D9A06A;--thy:#8A3A33;--thy-edge:#E08A74;--adr:#7A5A1A;--adr-edge:#E0BE48;--uterus:#6A3A4E;--uterus-edge:#D98AA0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;--sweat:#8FC0EC;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#D186C0;--act5:#5AA9E6;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --glu:#F2A93B;--ins:#E07AC4;--glut:#6BC293;--ketone:#D9AE5E;
+  --rapid:#F27A6E;--short:#5AA9E6;--inter:#6BC293;--long:#B3A1F5;--endo:#A3ACB2;
+  --na:#F2C14E;--k:#C98BE0;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--lact:#E07067;
+  --t4:#E8907A;--tsh:#5AA9E6;--trh:#A98BEF;--iod:#E0BE48;--rad:#7AD67A;
+  --estro:#E07AC4;--prog:#5AA9E6;--lh:#F2A93B;--egg:#F2D45B;--clot:#E0574A;--testo:#5CC4B0;--oxy:#D186C0;
+  --cgmp:#6BC293;--no:#5AA9E6;--nitr:#F27A6E;--pde:#E0BE48;
+  --bone:#4A4436;--bone-edge:#C9B88A;--oc:#D186C0;--ob:#5CC4B0;
+  --cell:#2A2420;--cell-edge:#B9937A;--nuc:#3E3350;--memb:#8A7A3A;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;
+  --liver:#B8785A;--gut:#6A4A2A;--gut-edge:#D9A06A;--thy:#8A3A33;--thy-edge:#E08A74;--adr:#7A5A1A;--adr-edge:#E0BE48;--uterus:#6A3A4E;--uterus-edge:#D98AA0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;--sweat:#8FC0EC;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.segs{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.segs .tbtn{font-size:13.5px;padding:7px 10px;line-height:1.25}
+.segs.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.segs.two .tbtn{text-align:left}
+.drugs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugs .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px;display:flex;align-items:center;gap:7px}
+.drugs .tbtn small{display:block;font-size:12px;color:var(--ink-soft)}
+.toggles{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.toggles .tbtn{font-size:13.5px;padding:7px 10px}
+.explist{margin:6px 0 0;padding-left:18px;font-size:14px}
+.explist li{margin:3px 0}
+.mini{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px;font-weight:600}
+.simlow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:640px){.simlow{grid-template-columns:1fr}}
+.playrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 2px}
+.playrow input[type=range]{flex:1 1 160px;accent-color:var(--accent);min-width:120px}
+.playrow output{font-family:var(--mono);font-size:14px;font-weight:600;min-width:52px}
+.side h3{font-size:14.5px}
+@media (max-width:520px){.drugs{grid-template-columns:1fr 1fr}.segs.two{grid-template-columns:1fr}}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 12 &middot; Endocrine and reproductive drugs</div>
+    <h1>Endocrine and Reproductive Drugs Lab</h1>
+    <p class="sub">Run a 24-hour day of insulin and glucose, balance the thyroid feedback loop, work through patient cases, and sort drugs by class and risk. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Insulin Day Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-thy" data-tab="thy" id="tabbtn-thy" type="button" tabindex="-1">Part 2 &middot; Thyroid Loop</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: insulin day simulator -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Insulin Day Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Insulin and glucose simulator."></canvas></div>
+        <div class="playrow">
+          <button class="tbtn" id="simPlay" type="button">Pause the clock</button>
+          <label for="simClock">Time of day</label>
+          <input type="range" id="simClock" min="0" max="24" step="0.25" value="0">
+          <output id="simClockOut" for="simClock">06:00</output>
+        </div>
+        <div class="legend">
+          <span><i class="l" style="background:var(--glu)"></i>Blood glucose</span><span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Target 70 to 180</span>
+          <span><i class="s" style="background:var(--rapid)"></i>Rapid-acting</span><span><i class="s" style="background:var(--short)"></i>Regular</span><span><i class="s" style="background:var(--inter)"></i>NPH</span><span><i class="s" style="background:var(--long)"></i>Long-acting</span><span><i class="s" style="background:var(--endo)"></i>Own insulin</span>
+        </div>
+        <p class="sim-note">A teaching model, not a real patient. Insulin doses are relative (lower, usual, higher), never real units. Glucose values are rounded teaching numbers. Always follow the prescriber and your facility's protocol.</p>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3 class="mini">What is happening</h3>
+        <ul class="explist" id="simExplain" aria-live="polite"></ul>
+        <div class="simlow">
+          <div><h3 class="mini">The day in numbers</h3>
+          <table class="readouts" id="simRead"><caption class="sr">The day in numbers</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div>
+          <div><h3 class="mini">Challenges</h3>
+          <ul class="chal" id="simChal"></ul></div>
+        </div>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="patLab">1. The patient</h3>
+        <div class="segs" id="simType" role="group" aria-labelledby="patLab"></div>
+        <h3 id="regLab">2. Insulin plan</h3>
+        <div class="segs two" id="simReg" role="group" aria-labelledby="regLab"></div>
+        <div class="ctl"><label for="simDose">Insulin dose <output id="simDoseOut" for="simDose"></output></label>
+          <input type="range" id="simDose" min="1" max="3" step="1" value="2"><div class="ticks" aria-hidden="true"><span>lower</span><span>usual</span><span>higher</span></div></div>
+        <h3 id="lunchLab">3. Lunch</h3>
+        <div class="segs" id="simLunch" role="group" aria-labelledby="lunchLab"></div>
+        <h3 id="dayLab">4. The rest of the day</h3>
+        <div class="toggles" role="group" aria-labelledby="dayLab">
+          <button class="tbtn" type="button" id="simLate" aria-pressed="false">Breakfast late (after rapid-acting dose)</button>
+          <button class="tbtn" type="button" id="simEx" aria-pressed="false">Afternoon exercise</button>
+          <button class="tbtn" type="button" id="simSnack" aria-pressed="false">Bedtime snack</button>
+        </div>
+        <h3 id="skipLab">5. Skipped insulin dose</h3>
+        <div class="segs" id="simSkip" role="group" aria-labelledby="skipLab"></div>
+        <h3 id="oralLab">6. Add non-insulin drugs</h3>
+        <div class="drugs" id="simOrals" role="group" aria-labelledby="oralLab"></div>
+        <div class="bar"><button class="btn" type="button" id="simReset">Reset the day</button></div>
+        <p class="small">Simplified model with rounded numbers. It shows patterns and timing, not real doses.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: thyroid loop -->
+  <section id="tab-thy" role="tabpanel" aria-labelledby="tabbtn-thy" hidden>
+    <h2 class="gk-sr">Part 2: Thyroid Loop</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvThy" role="img" aria-label="Thyroid feedback simulator."></canvas></div>
+        <div class="playrow">
+          <button class="tbtn" id="thyPlay" type="button">Pause weeks</button>
+          <span class="small">Weeks run on their own. Change a setting at any time and watch the next weeks respond.</span>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--trh)"></i>TRH</span><span><i style="background:var(--tsh)"></i>TSH</span><span><i style="background:var(--t4)"></i>T4</span><span><i class="s" style="background:var(--drug)"></i>Drug</span><span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Normal range</span>
+        </div>
+        <p class="sim-note">A teaching model. Levothyroxine is set in relative dose steps, not micrograms. Normal ranges shown (free T4 about 0.8 to 1.8 ng/dL, TSH about 0.4 to 4.0 mIU/L) are common reference values; labs vary.</p>
+        <div class="status" id="thyStatus" role="status"></div>
+        <h3 class="mini">What is happening</h3>
+        <ul class="explist" id="thyExplain" aria-live="polite"></ul>
+        <div class="simlow">
+          <div><h3 class="mini">Live readouts</h3>
+          <table class="readouts" id="thyRead"><caption class="sr">Thyroid readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div>
+          <div><h3 class="mini">Challenges</h3>
+          <ul class="chal" id="thyChal"></ul></div>
+        </div>
+      </div>
+      <aside class="card side" aria-label="Thyroid controls">
+        <h3 id="condLab">1. The patient's thyroid</h3>
+        <div class="segs" id="thyCond" role="group" aria-labelledby="condLab"></div>
+        <div class="ctl"><label for="thyDose">Levothyroxine <output id="thyDoseOut" for="thyDose"></output></label>
+          <input type="range" id="thyDose" min="0" max="9" step="1" value="0"><div class="ticks" aria-hidden="true"><span>none</span><span>dose steps</span><span>9</span></div></div>
+        <h3 id="howLab">2. How levothyroxine is taken</h3>
+        <div class="segs two" id="thyHow" role="group" aria-labelledby="howLab"></div>
+        <h3 id="mmiLab">3. Methimazole</h3>
+        <div class="segs" id="thyMmi" role="group" aria-labelledby="mmiLab"></div>
+        <div class="bar"><button class="btn" type="button" id="thyReset">Start over at week 0</button></div>
+        <p class="small">Dose steps are relative. Real dosing is set by the prescriber from TSH and the patient's response.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case picture."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="Endocrine-Walkthrough.html">Endocrine and Reproductive Drugs Walkthrough</a>. Patients are fictional. The simulators use relative dose scales and rounded teaching numbers, never real doses, and the medication records say "as ordered" in place of doses. Always follow the prescriber, the label and your facility's protocol.</footer>
+
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "gold", "gold-wash", "gold-ink", "ecf", "grid", "glass", "glass-edge", "water", "drug", "receptor", "ligand", "blocked", "glu", "ins", "glut", "ketone", "rapid", "short", "inter", "long", "endo", "na", "k", "cl", "h2o", "ca", "lact", "t4", "tsh", "trh", "iod", "rad", "estro", "prog", "lh", "egg", "clot", "testo", "oxy", "cgmp", "no", "nitr", "pde", "bone", "bone-edge", "oc", "ob", "cell", "cell-edge", "nuc", "memb", "blood", "plasma", "vessel", "smooth", "smooth-edge", "heart", "heart-edge", "tubule", "tubule-edge", "lumen", "urine", "liver", "gut", "gut-edge", "thy", "thy-edge", "adr", "adr-edge", "uterus", "uterus-edge", "skin", "skin-edge", "body", "body-edge", "sweat", "mon", "mon-grid", "mon-hr", "mon-bp", "mon-sp", "mon-rr", "mon-ink"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("endo-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("endo-lab-"+k,v)}catch(e){}}};
+function fmtMin(m){if(!isFinite(m))return "never";if(m<1/60)return "< 1 s";if(m<1)return Math.round(m*60)+" s";if(m<120)return (m<10?m.toFixed(1):Math.round(m))+" min";return (m/60).toFixed(1)+" h"}
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+
+/* ================= module 12 drawing helpers ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function diamond(x,y,r){ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath()}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.92),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+function tag(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12,weight:700,color:o.color||C.ink,border:col,bg:o.bg,align:o.align,a:o.a})}
+function effect(x,y,t,up,o){o=o||{};const col=o.col||(up?C.bad:C.accent);const s=o.size||12.5;ctx.font=`700 ${s}px ${FONT}`;const w=ctx.measureText(t).width+26;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  rr(x,y-s,w,s*2,s*.5);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.stroke();
+  const ax=x+11,ay=y;ctx.beginPath();if(up){ctx.moveTo(ax-5,ay+4);ctx.lineTo(ax,ay-5);ctx.lineTo(ax+5,ay+4)}else{ctx.moveTo(ax-5,ay-4);ctx.lineTo(ax,ay+5);ctx.lineTo(ax+5,ay-4)}ctx.closePath();ctx.fillStyle=col;ctx.fill();
+  txt(x+20,y+.5,t,{size:s,weight:700,color:C.ink});ctx.restore();return w}
+/* drug chip: indigo rounded pill with a hexagon and a name */
+function chipDrug(x,y,t,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.font=`700 12.5px ${FONT}`;const w=ctx.measureText(t).width+30;
+  rr(x-w/2,y-13,w,26,13);ctx.fillStyle=o.col||C.drug;ctx.fill();hexPath(x-w/2+13,y,6.5,Math.PI/6);fillStroke(inkOn(o.col||C.drug),null);
+  ctx.fillStyle=inkOn(o.col||C.drug);ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,x+8,y+.5);ctx.restore();return w}
+/* drug molecule: indigo hexagon (small) */
+function drugMol(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);hexPath(x,y,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.5),1.2);hexPath(x,y,s*.5,Math.PI/6);ctx.strokeStyle=hexA(inkOn(o.col||C.drug),.55);ctx.lineWidth=1;ctx.stroke();ctx.restore()}
+/* glucose: small amber hexagon ring */
+function gluc(x,y,r,a){r=r||6;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);hexPath(x,y,r,0);fillStroke(C.glu,hexA(C.ink,.45),1);ctx.restore()}
+/* insulin molecule: two linked chains (A and B) */
+function insulin(x,y,s,o){o=o||{};s=s||1;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  const col=o.col||C.ins;rr(-9*s,-6*s,18*s,4.5*s,2.2*s);fillStroke(col,hexA(C.ink,.5),1);rr(-11*s,2*s,22*s,4.5*s,2.2*s);fillStroke(col,hexA(C.ink,.5),1);
+  line(-5*s,-1.5*s,-5*s,2*s,hexA(C.ink,.6),1.2);line(5*s,-1.5*s,5*s,2*s,hexA(C.ink,.6),1.2);ctx.restore()}
+/* lipid bilayer horizontal strip */
+function membraneH(x0,x1,y,o){o=o||{};const col=o.col||C.memb;ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.fillStyle=hexA(col,.35);ctx.fillRect(x0,y-7,x1-x0,14);
+  for(let x=x0+4;x<=x1;x+=9){circ(x,y-5,3.2,col);circ(x,y+5,3.2,col)}ctx.restore()}
+function membraneV(x,y0,y1,o){o=o||{};const col=o.col||C.memb;ctx.fillStyle=hexA(col,.35);ctx.fillRect(x-7,y0,14,y1-y0);for(let y=y0+4;y<=y1;y+=9){circ(x-5,y,3.2,col);circ(x+5,y,3.2,col)}}
+/* insulin receptor in a horizontal membrane (outside is up). active 0..1 */
+function insReceptor(x,y,s,active,o){o=o||{};s=s||1;const col=o.col||C.receptor;
+  [-1,1].forEach(sd=>{rr(x+sd*6*s-3*s,y-26*s,6*s,40*s,3*s);fillStroke(col,hexA(C.ink,.45),1.1);ctx.beginPath();ctx.arc(x+sd*9*s,y-28*s,7*s,0,TAU);fillStroke(col,hexA(C.ink,.45),1.1)});
+  if(active>0){glow(x,y+18*s,22*s,C.gold,.75*active);for(let k=0;k<3;k++){const yy=y+14*s+k*7*s;circ(x+(k-1)*5*s,yy,2.6*s,hexA(C.gold,active))}}}
+/* GLUT4 transporter in membrane: open 0..1 */
+function glut4(x,y,s,open,o){o=o||{};s=s||1;const col=o.col||C.glut;const g=3*s+5*s*clamp(open,0,1);
+  rr(x-g-9*s,y-11*s,9*s,22*s,3*s);fillStroke(col,hexA(C.ink,.45),1.1);rr(x+g,y-11*s,9*s,22*s,3*s);fillStroke(col,hexA(C.ink,.45),1.1)}
+/* storage vesicle carrying GLUT4 */
+function vesicle(x,y,r,col,inner){circ(x,y,r,hexA(col||C.glut,.18),col||C.glut,2);if(inner)inner(x,y)}
+/* generic cell body */
+function cellBody(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||26);fillStroke(o.fill||C.cell,o.edge||C["cell-edge"],2)}
+/* ---------- organs and glands ---------- */
+function liverShape(x,y,s,o){o=o||{};ctx.beginPath();ctx.moveTo(x-s*1.1,y-s*.2);ctx.bezierCurveTo(x-s*.6,y-s*.85,x+s*.95,y-s*.75,x+s*1.15,y-s*.42);ctx.bezierCurveTo(x+s*.6,y+s*.25,x-s*.3,y+s*.62,x-s*1.1,y-s*.2);ctx.closePath();
+  fillStroke(o.col||mix(C.liver,C.panel,isDark()?.05:.2),C["heart-edge"],1.6)}
+function kidneyShape(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(s*.2,-s*.95);ctx.bezierCurveTo(-s*1.2,-s*1.1,-s*1.2,s*1.1,s*.2,s*.95);ctx.bezierCurveTo(s*.75,s*.85,s*.55,s*.25,s*.3,0);ctx.bezierCurveTo(s*.55,-s*.25,s*.75,-s*.85,s*.2,-s*.95);ctx.closePath();
+  fillStroke(o.col||mix(C.vessel,C.panel,.3),C["heart-edge"],1.6);ctx.restore()}
+function pancreasShape(x,y,s,o){o=o||{};ctx.beginPath();ctx.moveTo(x-s*1.2,y+s*.1);ctx.bezierCurveTo(x-s*1.1,y-s*.45,x-s*.4,y-s*.3,x,y-s*.25);ctx.bezierCurveTo(x+s*.5,y-s*.2,x+s*1.1,y-s*.45,x+s*1.3,y-s*.15);ctx.bezierCurveTo(x+s*1.2,y+s*.15,x+s*.4,y+s*.2,x,y+s*.25);ctx.bezierCurveTo(x-s*.4,y+s*.35,x-s*.9,y+s*.55,x-s*1.2,y+s*.1);ctx.closePath();
+  fillStroke(o.col||mix(C.adr,C.panel,.35),C["adr-edge"],1.6);for(let i=0;i<5;i++)circ(x-s*.8+i*s*.45,y+(i%2?-.02:.06)*s,s*.07,hexA(C["adr-edge"],.6))}
+function thyroidShape(x,y,s,o){o=o||{};const col=o.col||C.thy;[-1,1].forEach(sd=>{ctx.beginPath();ctx.ellipse(x+sd*s*.55,y,s*.42,s*.78,sd*.18,0,TAU);fillStroke(col,C["thy-edge"],1.8)});rr(x-s*.5,y+s*.05,s,s*.34,s*.15);fillStroke(col,C["thy-edge"],1.6);
+  if(o.trachea!==false){for(let k=0;k<5;k++)rr(x-s*.18,y-s*.85+k*s*.38,s*.36,s*.2,s*.08);}}
+function adrenalOnKidney(x,y,s,o){o=o||{};kidneyShape(x,y+s*.6,s*.9,{});ctx.beginPath();ctx.moveTo(x-s*.7,y-s*.05);ctx.quadraticCurveTo(x-s*.1,y-s*.9,x+s*.55,y-s*.1);ctx.quadraticCurveTo(x,y+s*.05,x-s*.7,y-s*.05);ctx.closePath();fillStroke(o.col||C.adr,C["adr-edge"],1.6)}
+function brainShape(x,y,s,o){o=o||{};ell(x,y,s,s*.72,0,o.col||mix(C.oxy,C.panel,.55),C["heart-edge"],1.6);ctx.beginPath();for(let k=0;k<5;k++){ctx.moveTo(x-s*.7+k*s*.32,y-s*.5);ctx.quadraticCurveTo(x-s*.55+k*s*.32,y,x-s*.7+k*s*.32,y+s*.45)}ctx.strokeStyle=hexA(C["heart-edge"],.55);ctx.lineWidth=1.2;ctx.stroke()}
+function pituitaryShape(x,y,s,o){o=o||{};line(x,y-s*1.1,x,y-s*.5,C["heart-edge"],2.5);ell(x,y,s*.75,s*.55,0,o.col||mix(C.tsh,C.panel,.55),C["heart-edge"],1.6)}
+function stomachShape(x,y,s,o){o=o||{};ctx.beginPath();ctx.moveTo(x-s*.55,y-s*1.05);ctx.lineTo(x-s*.35,y-s*.7);ctx.bezierCurveTo(x-s*1.2,y-s*.2,x-s*.9,y+s*.95,x+s*.15,y+s*.85);ctx.bezierCurveTo(x+s*.75,y+s*.8,x+s*1.1,y+s*.45,x+s*1.25,y+s*.55);ctx.lineTo(x+s*1.3,y+s*.25);ctx.bezierCurveTo(x+s*.9,y+s*.15,x+s*.5,y+s*.35,x+s*.15,y+s*.2);ctx.bezierCurveTo(x-s*.25,y+s*.05,x-s*.15,y-s*.55,x-s*.05,y-s*.75);ctx.lineTo(x-s*.15,y-s*1.05);ctx.closePath();
+  fillStroke(o.col||C.gut,C["gut-edge"],1.8)}
+function uterusShape(x,y,s,o){o=o||{};const sq=o.squeeze||0;const k=1-.08*sq;ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.beginPath();ctx.moveTo(-s*.8,-s*.7);ctx.bezierCurveTo(-s*.85,s*.1,-s*.35,s*.45,-s*.2,s*.8);ctx.lineTo(s*.2,s*.8);ctx.bezierCurveTo(s*.35,s*.45,s*.85,s*.1,s*.8,-s*.7);ctx.quadraticCurveTo(0,-s*.95,-s*.8,-s*.7);ctx.closePath();
+  fillStroke(o.col||C.uterus,C["uterus-edge"],2);if(o.tubes!==false){[-1,1].forEach(sd=>{poly([[sd*s*.75,-s*.62],[sd*s*1.25,-s*.85],[sd*s*1.55,-s*.6]],C["uterus-edge"],3);ell(sd*s*1.55,-s*.38,s*.24,s*.16,0,mix(C.uterus,C.panel,.3),C["uterus-edge"],1.5)})}ctx.restore()}
+function boneShape(x,y,w,h,o){o=o||{};const col=o.col||C.bone,ed=C["bone-edge"];const r=h*.32;
+  [[x+r,y+r],[x+r,y+h-r],[x+w-r,y+r],[x+w-r,y+h-r]].forEach(p=>circ(p[0],p[1],r,col,ed,1.8));
+  ctx.fillStyle=col;ctx.fillRect(x+r*.6,y+h*.27,w-r*1.2,h*.46);line(x+r*1.6,y+h*.27,x+w-r*1.6,y+h*.27,ed,1.8);line(x+r*1.6,y+h*.73,x+w-r*1.6,y+h*.73,ed,1.8);circ(x+r*.8,y+h/2,r*.5,col);circ(x+w-r*.8,y+h/2,r*.5,col)}
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.35,y+s*.1,x-s*1.05,y-s*1.05,x,y-s*.45);ctx.bezierCurveTo(x+s*1.05,y-s*1.05,x+s*1.35,y+s*.1,x,y+s*.95);ctx.closePath()}
+function heart(x,y,s,T,hr,o){o=o||{};const ph=P(T*(hr||75)/60,1);const sq=Math.exp(-Math.pow((ph-.18)/.09,2));const k=1-.09*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);ctx.fillStyle=o.col||C.heart;ctx.fill();ctx.strokeStyle=C["heart-edge"];ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  if(sq>.3&&o.pulse!==false)pulseRing(x,y,s*1.4,o.col||C.heart,clamp((ph-.12)/.3,0,1))}
+/* ---------- people and equipment ---------- */
+function person(x,y,s,o){o=o||{};const col=o.col||C.skin,ed=C["skin-edge"];ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);
+  const sh=o.shake?Math.sin((o.t||0)*38)*1.6:0;ctx.translate(sh,0);
+  circ(0,-s*1.72,s*.24,col,ed,1.5);rr(-s*.22,-s*1.45,s*.44,s*.74,s*.17);fillStroke(col,ed,1.5);rr(-s*.2,-s*.76,s*.18,s*.76,s*.08);fillStroke(col,ed,1.5);rr(s*.02,-s*.76,s*.18,s*.76,s*.08);fillStroke(col,ed,1.5);
+  rr(-s*.36,-s*1.4,s*.14,s*.62,s*.07);fillStroke(col,ed,1.3);rr(s*.22,-s*1.4,s*.14,s*.62,s*.07);fillStroke(col,ed,1.3);
+  if(o.sweat){for(let i=0;i<3;i++){const p=P((o.t||0)*.7+i/3,1);sweatDrop(-s*.28+i*s*.28,-s*1.9+p*s*.4,3.4,hexA(C.sweat,1-p*.6))}}
+  ctx.restore()}
+function sweatDrop(x,y,r,col){ctx.beginPath();ctx.moveTo(x,y-r*1.8);ctx.quadraticCurveTo(x+r,y,x,y+r);ctx.quadraticCurveTo(x-r,y,x,y-r*1.8);ctx.fillStyle=col;ctx.fill()}
+function pillShape(x,y,r,col,rot,col2){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-r*1.6,-r*.7,r*3.2,r*1.4,r*.7);fillStroke(col,hexA(C.ink,.5),1.2);if(col2){ctx.save();rr(-r*1.6,-r*.7,r*3.2,r*1.4,r*.7);ctx.clip();ctx.fillStyle=col2;ctx.fillRect(0,-r,r*2,r*2);ctx.restore();rr(-r*1.6,-r*.7,r*3.2,r*1.4,r*.7);ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;ctx.stroke()}ctx.restore()}
+function vial(x,y,s,o){o=o||{};rr(x-s*.42,y-s*1.05,s*.84,s*1.25,s*.12);fillStroke(hexA(C.glass,.9),C["glass-edge"],1.6);
+  ctx.save();rr(x-s*.42,y-s*1.05,s*.84,s*1.25,s*.12);ctx.clip();const lv=o.level==null?.7:o.level;ctx.fillStyle=o.cloudy?hexA(isDark()?"#C9CED2":"#FFFFFF",.85):hexA(C.water,.75);ctx.fillRect(x-s*.42,y+s*.2-s*1.25*lv,s*.84,s*1.25*lv);
+  if(o.cloudy){for(let i=0;i<14;i++)circ(x-s*.35+rnd(i)*s*.7,y+s*.15-rnd(i+9)*s*1.1*lv,1.4,hexA(C["ink-soft"],.45))}ctx.restore();
+  rr(x-s*.3,y-s*1.3,s*.6,s*.27,s*.06);fillStroke(o.cap||C["ink-soft"],null);if(o.lab)label(x,y-s*.35,o.lab,{size:11.5,weight:700,border:o.labCol||C.rule})}
+function syringe(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const fill=clamp(o.fill==null?.5:o.fill,0,1);const bx0=-s,bx1=s*.6,bl=bx1-bx0-4;
+  rr(bx0,-s*.2,bx1-bx0,s*.4,3);fillStroke(hexA(C.glass,.95),C["glass-edge"],1.5);
+  let tot=0;if(o.layers){let xe=bx1-2;o.layers.forEach(l=>{const w=bl*l[0];rr(xe-w,-s*.2+2,w,s*.4-4,2);ctx.fillStyle=l[1];ctx.fill();xe-=w;tot+=l[0]})}else{tot=fill;rr(bx1-2-bl*fill,-s*.2+2,bl*fill,s*.4-4,2);ctx.fillStyle=hexA(o.col||C.drug,.7);ctx.fill()}
+  for(let k=1;k<8;k++)line(bx0+k*s*.2,-s*.2,bx0+k*s*.2,-s*.08,C["glass-edge"],1);
+  const st=bx1-2-bl*clamp(tot,0,1);rr(st-4,-s*.18,4,s*.36,1);ctx.fillStyle=C["ink-soft"];ctx.fill();line(st-4,0,bx0-s*.35,0,C["ink-soft"],3);rr(bx0-s*.42,-s*.2,s*.1,s*.4,2);ctx.fill();
+  line(bx1,0,s*1.15,0,C["glass-edge"],1.6);ctx.restore()}
+function ivBag(x,y,s,lab,col){rr(x-s*.45,y-s*.7,s*.9,s*1.2,s*.15);fillStroke(hexA(C.water,.8),C["glass-edge"],1.6);rr(x-s*.45,y-s*.1,s*.9,s*.6,s*.12);ctx.fillStyle=hexA(col||C.drug,.35);ctx.fill();
+  if(lab)txt(x,y-s*.38,lab,{size:11.5,weight:700,align:"center"});line(x,y+s*.5,x,y+s*.7,C["glass-edge"],2)}
+function glucometer(x,y,val,o){o=o||{};rr(x-34,y-46,68,92,10);fillStroke(C.panel,C["ink-soft"],2);rr(x-26,y-36,52,36,5);const lo=val<70,hi=val>180;fillStroke(lo?C["bad-wash"]:hi?C["warn-wash"]:C["good-wash"],lo?C.bad:hi?C.warn:C.good,1.4);
+  txt(x,y-20,String(Math.round(val)),{size:18,mono:true,weight:700,align:"center",color:lo?C.bad:hi?C["warn-ink"]:C.good});txt(x,y+12,"mg/dL",{size:11,mono:true,align:"center",color:C["ink-soft"]});
+  txt(x,y+30,lo?"LOW":hi?"HIGH":"in range",{size:11,mono:true,weight:700,align:"center",color:lo?C.bad:hi?C["warn-ink"]:C.good})}
+function clockFace(x,y,r,hours,o){o=o||{};circ(x,y,r,C.panel,C["ink-soft"],2);for(let k=0;k<12;k++){const a=k/12*TAU;line(x+Math.cos(a)*(r-6),y+Math.sin(a)*(r-6),x+Math.cos(a)*(r-2),y+Math.sin(a)*(r-2),C["ink-soft"],1.3)}
+  const h=hours%12,m=(hours%1)*60;const ah=h/12*TAU-Math.PI/2,am=m/60*TAU-Math.PI/2;line(x,y,x+Math.cos(ah)*r*.5,y+Math.sin(ah)*r*.5,C.ink,3);line(x,y,x+Math.cos(am)*r*.78,y+Math.sin(am)*r*.78,C.ink,1.8);circ(x,y,3,C.ink)}
+function waterGlass(x,y,s,level){ctx.beginPath();ctx.moveTo(x-s*.45,y-s);ctx.lineTo(x-s*.35,y);ctx.lineTo(x+s*.35,y);ctx.lineTo(x+s*.45,y-s);ctx.closePath();fillStroke(hexA(C.glass,.7),C["glass-edge"],1.6);
+  const lv=clamp(level==null?.8:level,0,1);ctx.beginPath();const yt=y-s*lv*.92;const wt=s*(.35+.1*lv*.92);ctx.moveTo(x-wt,yt);ctx.lineTo(x-s*.35,y-1);ctx.lineTo(x+s*.35,y-1);ctx.lineTo(x+wt,yt);ctx.closePath();ctx.fillStyle=hexA(C.h2o,.55);ctx.fill()}
+function thermo(x,y,h,v,col){rr(x-5,y,10,h,5);fillStroke(C.panel,C["ink-soft"],1.4);circ(x,y+h+4,8,col,C["ink-soft"],1.4);rr(x-2.5,y+h*(1-clamp(v,0,1)),5,h*clamp(v,0,1)+4,2.5);ctx.fillStyle=col;ctx.fill()}
+/* horizontal meter with normal band: v in [lo,hi] */
+function meter(x,y,w,v,lo,hi,nlo,nhi,lab,o){o=o||{};rr(x,y,w,12,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const X=q=>x+w*clamp((q-lo)/(hi-lo),0,1);
+  rr(X(nlo),y,X(nhi)-X(nlo),12,4);ctx.fillStyle=hexA(C.good,.35);ctx.fill();const xv=X(v);const out=v<nlo||v>nhi;
+  ctx.beginPath();ctx.moveTo(xv,y-2);ctx.lineTo(xv-6,y-10);ctx.lineTo(xv+6,y-10);ctx.closePath();ctx.fillStyle=out?C.bad:C.ink;ctx.fill();line(xv,y-2,xv,y+14,out?C.bad:C.ink,2.2);
+  if(lab)txt(x,y-16,lab,{size:12,weight:700});if(o.val)txt(x+w,y-16,o.val,{size:12,mono:true,weight:700,align:"right",color:out?C.bad:C.ink})}
+/* ---------- monitor and ECG ---------- */
+function pqrst(ph){return .12*gauss(ph,.12,.025)-.12*gauss(ph,.215,.008)+1*gauss(ph,.24,.012)-.25*gauss(ph,.265,.01)+.25*gauss(ph,.45,.04)}
+function ecg(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;let v=pqrst(ph);if(o.tall)v+=o.tall*gauss(ph,.45,.04);const Y=y+h*.62-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-hr"];ctx.lineWidth=o.lw||1.8;ctx.lineJoin="round";ctx.stroke()}
+function artWave(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;const v=ph<.12?ph/.12:(ph<.2?1-(ph-.12)*1.5:Math.max(0,.88-(ph-.2)*1.1)+.12*gauss(ph,.3,.03));const Y=y+h-v*h;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-bp"];ctx.lineWidth=o.lw||1.6;ctx.stroke()}
+function monitor(x,y,w,h,v,T,o){o=o||{};rr(x,y,w,h,8);ctx.fillStyle=C.mon;ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.lineWidth=1.5;ctx.stroke();
+  const gw=w-112;ctx.save();ctx.beginPath();rr(x+6,y+6,gw,h-12,4);ctx.clip();for(let gx=x+6;gx<x+6+gw;gx+=16){line(gx,y,gx,y+h,C["mon-grid"],1)}
+  const hr=Math.max(1,v.hr);const rh=(h-12)/2;
+  ecg(x+6,y+6,gw,rh,hr,T,C["mon-hr"],{tall:v.tallT||0});artWave(x+6,y+6+rh+4,gw,rh-14,hr,T,C["mon-bp"]);ctx.restore();
+  const nx=x+gw+14;const items=[["HR",Math.round(v.hr),"mon-hr",v.hrF],["BP",Math.round(v.sys)+"/"+Math.round(v.dia),"mon-bp",v.bpF],["SpO₂",Math.round(v.sp)+"%","mon-sp",v.spF]];
+  if(v.rr!=null)items.push(["RR",Math.round(v.rr),"mon-rr",v.rrF]);
+  const ih=(h-8)/items.length;items.forEach((it,i)=>{const yy=y+4+i*ih+ih/2;txt(nx,yy,it[0],{size:11,mono:true,weight:600,color:C[it[2]]});
+    txt(x+w-8,yy,String(it[1])+(it[3]==="hi"?"▲":it[3]==="lo"?"▼":""),{size:it[0]==="BP"?13.5:16,mono:true,weight:700,color:C[it[2]],align:"right"})})}
+/* ---------- insulin action profiles (hours after dose). Area = 1 per dose. Teaching shapes. ---------- */
+const INS={
+  rapid:{name:"Rapid-acting",ex:"lispro, aspart",col:"rapid",on:"about 15 min",pk:"about 1 to 2 h",dur:"about 3 to 5 h",look:"clear"},
+  short:{name:"Short-acting",ex:"regular",col:"short",on:"about 30 to 60 min",pk:"about 2 to 4 h",dur:"about 5 to 8 h",look:"clear"},
+  inter:{name:"Intermediate",ex:"NPH",col:"inter",on:"about 1 to 2 h",pk:"about 4 to 12 h",dur:"about 12 to 18 h",look:"cloudy"},
+  long:{name:"Long-acting",ex:"glargine, detemir",col:"long",on:"about 1 to 2 h",pk:"no real peak",dur:"about 24 h",look:"clear"}};
+function gam(h,k,th,lag){h-=lag;if(h<=0)return 0;return Math.pow(h,k)*Math.exp(-h/th)}
+const PROFN={};
+function profRaw(type,h){if(type==="rapid")return gam(h,2,.55,.15);if(type==="short")return gam(h,3,.85,.3);if(type==="inter")return gam(h,3,1.9,.7);
+  if(type==="long"){if(h<=0)return 0;return smooth(seg(h,0,3))*(1-smooth(seg(h,24,27)))}return 0}
+(function(){["rapid","short","inter","long"].forEach(t=>{let a=0;for(let h=0;h<40;h+=.02)a+=profRaw(t,h)*.02;PROFN[t]=1/a})})();
+function prof(type,h){return profRaw(type,h)*PROFN[type]}
+/* ---------- thyroid / misc icons ---------- */
+function t4dot(x,y,r,a){circ(x,y,r||4.5,C.t4,hexA(C.ink,.4),1);if((r||4.5)>=6)txt(x,y+.5,"T4",{size:8.5,mono:true,weight:700,align:"center",color:inkOn(C.t4)})}
+function hormoneDot(x,y,r,col,lab){circ(x,y,r,col,hexA(C.ink,.4),1);if(lab&&r>=7)txt(x,y+.5,lab,{size:Math.min(10,r*1.1),mono:true,weight:700,align:"center",color:inkOn(col)})}
+function ion(kind,x,y,r,o){o=o||{};r=r||7;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  if(kind==="h2o"){ctx.beginPath();ctx.moveTo(x,y-r*1.3);ctx.bezierCurveTo(x+r*.95,y-r*.15,x+r*.95,y+r*.9,x,y+r*.9);ctx.bezierCurveTo(x-r*.95,y+r*.9,x-r*.95,y-r*.15,x,y-r*1.3);ctx.closePath();ctx.fillStyle=C.h2o;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1;ctx.stroke()}
+  else{const col=C[kind]||C.ink;circ(x,y,r,col,hexA(C.ink,.45),1);if(r>=7){const t={na:"Na",k:"K",ca:"Ca",cl:"Cl"}[kind]||"";ctx.font=`700 ${r>=9?10:8.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(t,x,y+.5)}}
+  ctx.restore()}
+/* small bar chart pill for levels */
+function levelBar(x,y,w,h,v,col,lab,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const f=clamp(v,0,1);rr(x,y+h*(1-f),w,h*f,4);ctx.fillStyle=col;ctx.fill();
+  if(o.nlo!=null){const y1=y+h*(1-o.nhi),y2=y+h*(1-o.nlo);ctx.strokeStyle=C.good;ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.strokeRect(x-3,y1,w+6,y2-y1);ctx.setLineDash([])}
+  if(lab)txt(x+w/2,y+h+12,lab,{size:11.5,weight:700,align:"center"})}
+function plateIcon(x,y,r,a){withA(a,()=>{circ(x,y,r,C.panel,C["ink-soft"],1.6);circ(x,y,r*.62,null,hexA(C["ink-soft"],.6),1);circ(x-r*.2,y-r*.1,r*.22,C.glu);circ(x+r*.22,y+r*.15,r*.2,C.good)})}
+
+function vesselH(x0,x1,y,r,T,o){o=o||{};rr(x0,y-r-6,x1-x0,2*r+12,r);ctx.fillStyle=hexA(C.vessel,.55);ctx.fill();rr(x0,y-r,x1-x0,2*r,r);ctx.fillStyle=C.plasma;ctx.fill();
+  if(o.cells!==false){ctx.save();rr(x0,y-r,x1-x0,2*r,r);ctx.clip();const n=Math.round((x1-x0)/40);for(let i=0;i<n;i++){const X=x0+((i*40+T*(o.flow||40)+rnd(i)*20)%(x1-x0+20))-10;ell(X,y+(rnd(i*3)-.5)*r,6,3.4,0,hexA(C.blood,.75))}ctx.restore()}}
+function streamDots(pts,n,T,sp,col,r,lab,rate){for(let i=0;i<n;i++){if(rate!=null&&rnd(i*3.1)>rate)continue;const q=P(T*sp+i/n,1);const p=along(pts,q);hormoneDot(p[0],p[1],r||5,col,lab)}}
+
+function juice(x,y,s){ctx.beginPath();ctx.moveTo(x-s*.4,y-s);ctx.lineTo(x-s*.32,y);ctx.lineTo(x+s*.32,y);ctx.lineTo(x+s*.4,y-s);ctx.closePath();fillStroke(hexA(C.glass,.6),C["glass-edge"],1.5);rr(x-s*.34,y-s*.7,s*.68,s*.68,3);ctx.fillStyle=hexA(C.glu,.75);ctx.fill();line(x+s*.15,y-s*1.3,x+s*.05,y-s*.6,C.bad,2.4)}
+function scissorsIcon(x,y,s,open,o){o=o||{};ctx.save();ctx.translate(x,y);const col=o.col||C.blocked;[1,-1].forEach(sd=>{ctx.save();ctx.rotate(sd*open*.45);rr(-s*.1,-s*.1,s*1.2,s*.2,s*.1);ctx.fillStyle=col;ctx.fill();circ(-s*.35,0,s*.22,null,col,3);ctx.restore()});circ(0,0,3,C.panel);
+  if(o.jam){drugMol(s*.55,0,7)}ctx.restore()}
+function osteoclast(x,y,s,o){o=o||{};blobPath(x,y,s,x*.1,o.t||0,.08);fillStroke(o.dead?mix(C.oc,C.blocked,.8):C.oc,hexA(C.ink,.4),1.4);for(let k=0;k<3;k++)circ(x-s*.4+k*s*.4,y-s*.2,s*.16,hexA(C.panel,.7))}
+function bpDial(x,y,r,v,o){o=o||{};circ(x,y,r,C.panel,C["ink-soft"],2);const a0=Math.PI*.75,a1=Math.PI*2.25;const ang=q=>a0+(a1-a0)*clamp(q/180,0,1);
+  [[0,90,C.bad],[90,140,C.good],[140,180,C.gold]].forEach(b=>{ctx.beginPath();ctx.arc(x,y,r-6,ang(b[0]),ang(b[1]));ctx.strokeStyle=hexA(b[2],.6);ctx.lineWidth=6;ctx.stroke()});
+  const a=ang(v);line(x,y,x+Math.cos(a)*(r-9),y+Math.sin(a)*(r-9),C.ink,3);circ(x,y,4,C.ink);txt(x,y+r+12,"systolic "+Math.round(v),{size:11.5,mono:true,weight:700,align:"center",color:v<90?C.bad:C.ink})}
+/* ================= glucose model (teaching values, relative units) ================= */
+const GM={E0:62,a:.6,S:14,U0:20,R:112,thr:180,kr:.25};
+const MEALT={b:7.5,l:12,d:18,s:21.5};
+const MEALC={b:1,l:1.2,d:1.4,s:.45};
+const ORALS=[["metformin","metformin","Biguanide"],["glipizide","glipizide","Sulfonylurea"],["sitagliptin","sitagliptin","DPP-4 inhibitor"],["semaglutide","semaglutide","GLP-1 agonist"],["empagliflozin","empagliflozin","SGLT2 inhibitor"],["pioglitazone","pioglitazone","Thiazolidinedione"]];
+/* opts: {type:1|2, reg:"bb"|"nph"|"ss", dose:.75|1|1.25, lunch:"eat"|"skip"|"skipdose", late:bool, ex:bool, snack:bool, skip:"none"|"am"|"pm", orals:Set} */
+function gmDoses(o,day){/* returns [{h,type,amt,lab}] for one day starting at 06:00 + day*24, using planned glucose checks given by fn */
+  const d=[];const k=o.dose*(o.type===2?.85:1);const base=day*24;const today=day===0;
+  const skipAM=today&&o.skip==="am",skipPM=today&&o.skip==="pm";
+  const lunchSkipped=today&&o.lunch!=="eat",lunchDose=!today||o.lunch!=="skip";
+  if(o.reg==="bb"){if(!skipAM)d.push({h:base+7,type:"long",amt:31*k,lab:"glargine"});
+    if(!skipAM)d.push({h:base+7.4,type:"rapid",amt:MEALC.b*3.4*k,lab:"lispro"});
+    if(lunchDose)d.push({h:base+11.9,type:"rapid",amt:MEALC.l*3.4*k,lab:"lispro"});
+    if(!skipPM)d.push({h:base+17.9,type:"rapid",amt:MEALC.d*3.4*k,lab:"lispro"})}
+  else if(o.reg==="nph"){if(!skipAM){d.push({h:base+7,type:"inter",amt:24*k,lab:"NPH"});d.push({h:base+7,type:"short",amt:7*k,lab:"regular"})}
+    if(!skipPM){d.push({h:base+17.5,type:"inter",amt:13*k,lab:"NPH"});d.push({h:base+17.5,type:"short",amt:7*k,lab:"regular"})}}
+  return d}
+function glipEff(h){let v=0;[7.5-24,7.5].forEach(t0=>{const x=h-t0;if(x>0)v+=gam(x,2,2.2,0)/(4.4*4.4*Math.exp(-2))});return 4.6*v}
+function gmRun(o){
+  const dt=1/30;const H0=-18,H1=30;const N=Math.round((H1-H0)/dt);
+  const orals=o.orals||new Set();const has=x=>orals.has(x);const beta=o.type===2?1:0;
+  const S=GM.S*(o.type===2?.5:1)*(has("pioglitazone")?1.35:1)*(has("metformin")?1.1:1);
+  const E0=GM.E0*(o.type===2?1.12:1)*(has("metformin")?.72:1)*(has("pioglitazone")?.92:1)*(has("semaglutide")?.85:has("sitagliptin")?.93:1);
+  const incr=has("semaglutide")?1.8:has("sitagliptin")?1.3:1;
+  const th=has("semaglutide")?.95:.5,carbK=has("semaglutide")?.85:1;
+  const thr=has("empagliflozin")?75:GM.thr,kr=has("empagliflozin")?.16:GM.kr;
+  let doses=gmDoses(o,-1).concat(gmDoses(o,0));
+  const meals=[];[-1,0].forEach(day=>{const today=day===0;Object.keys(MEALT).forEach(m=>{if(m==="s"&&!o.snack)return;if(today&&m==="l"&&o.lunch!=="eat")return;let h=MEALT[m]+day*24;if(today&&m==="b"&&o.late)h+=1.25;meals.push({h,c:MEALC[m]*carbK,m})})});
+  const ssChecks=[7.4,11.9,17.9,21.5];
+  const G=new Float32Array(N+1),I=new Float32Array(N+1),Ie={rapid:new Float32Array(N+1),short:new Float32Array(N+1),inter:new Float32Array(N+1),long:new Float32Array(N+1),endo:new Float32Array(N+1)};
+  let g=o.type===2?150:130;const hourOf=i=>H0+i*dt;
+  for(let i=0;i<=N;i++){const h=hourOf(i);
+    if(o.reg==="ss"){ssChecks.forEach(c=>{[c-24,c].forEach(cc=>{if(Math.abs(h-cc)<dt/2){const today=cc>0;if(today&&((o.skip==="am"&&c===7.4)||(o.skip==="pm"&&c===17.9)))return;const amt=g>150?Math.min(14,((g-150)/50+1)*2.6)*o.dose:0;if(amt>0)doses.push({h:cc,type:"rapid",amt,lab:"correction"})}})})}
+    let it={rapid:0,short:0,inter:0,long:0};doses.forEach(d=>{if(h>=d.h)it[d.type]+=d.amt*prof(d.type,h-d.h)});
+    if(o.reg==="ss"&&h<-12){}
+    const endo=beta*(.4+.012*Math.max(0,g-90)*incr)+(has("glipizide")?beta*glipEff(h):0);
+    const Itot=it.rapid+it.short+it.inter+it.long+endo;
+    let ra=0;meals.forEach(m=>{ra+=m.c*GM.R*gam(h-m.h,2,th,.1)/(2*th*th*th)});
+    const exOn=o.ex&&h>=15&&h<16,exAfter=o.ex&&h>=16?Math.exp(-(h-16)/4):0;
+    const sens=1+(exOn?.6:0)+.45*exAfter;
+    const egp=E0/(1+GM.a*Itot);const uI=S*sens*Itot*g/100;const u0=GM.U0*g/(g+60);const ren=kr*Math.max(0,g-thr);const ex=exOn?32:0;
+    G[i]=g;I[i]=Itot;Ie.rapid[i]=it.rapid;Ie.short[i]=it.short;Ie.inter[i]=it.inter;Ie.long[i]=it.long;Ie.endo[i]=endo;
+    g=clamp(g+(egp+ra-uI-u0-ren-ex)*dt,25,520)}
+  const i0=Math.round((6-H0)/dt);const sl=a=>a.slice(i0);
+  return {dt,h0:6,G:sl(G),I:sl(I),Ie:{rapid:sl(Ie.rapid),short:sl(Ie.short),inter:sl(Ie.inter),long:sl(Ie.long),endo:sl(Ie.endo)},doses:doses.filter(d=>d.h>=6&&d.h<=30),meals:meals.filter(m=>m.h>=6)}}
+
+/* ================= PART 1: insulin day simulator ================= */
+const S1=makeStage("cvSim",820,500);
+const SIM={type:1,reg:"bb",dose:2,lunch:"eat",late:false,ex:false,snack:false,skip:"none",orals:new Set(),res:null,clock:0,play:true,done:new Set(),seen:{}};
+const REGS=[["bb","Basal-bolus"],["nph","NPH twice daily"],["ss","Sliding scale only"],["none","No insulin (pills only)"]];
+const DOSEW=["","lower","usual","higher"];const DOSEF=[0,.75,1,1.25];
+function hhmm(h){h=((h%24)+24)%24;const H=Math.floor(h),M=Math.round((h-H)*60)%60;return String(H).padStart(2,"0")+":"+String(M).padStart(2,"0")}
+function simOpts(){return {type:SIM.type,reg:SIM.reg,dose:DOSEF[SIM.dose],lunch:SIM.lunch,late:SIM.late,ex:SIM.ex,snack:SIM.snack,skip:SIM.skip,orals:SIM.orals}}
+function simAt(h){const r=SIM.res;const i=clamp(Math.round((h-6)/r.dt),0,r.G.length-1);return i}
+function simStats(){const r=SIM.res,G=r.G;let mn=1e9,mx=0,sum=0,inR=0,mnI=0;G.forEach((v,i)=>{sum+=v;if(v<mn){mn=v;mnI=i}if(v>mx)mx=v;if(v>=70&&v<=180)inR++});
+  const lows=[];let inLow=false,st=0,nad=1e9,nadI=0;G.forEach((v,i)=>{if(v<70){if(!inLow){inLow=true;st=i;nad=v;nadI=i}if(v<nad){nad=v;nadI=i}}else if(inLow){inLow=false;lows.push({st,nadI,nad,en:i})}});if(inLow)lows.push({st,nadI,nad,en:G.length-1});
+  let hiMin=0;G.forEach(v=>{if(v>250)hiMin++});
+  return {mn,mx,mnH:6+mnI*r.dt,avg:sum/G.length,tir:inR/G.length,lows,hiH:hiMin*r.dt}}
+function lowCause(L){const r=SIM.res,i=L.nadI,h=6+i*r.dt;const c={rapid:r.Ie.rapid[i],short:r.Ie.short[i],inter:r.Ie.inter[i],long:r.Ie.long[i],endo:r.Ie.endo[i]};
+  const parts=[];if(SIM.orals.has("glipizide")&&SIM.type===2&&h>8&&h<22)parts.push("glipizide is still squeezing insulin out of the beta cells");
+  if(c.inter>1.2)parts.push("the NPH dose is near its peak");if(c.rapid>.8)parts.push(SIM.lunch==="skipdose"&&h>12&&h<16?"lunch insulin was given with no lunch":SIM.late&&h<10?"rapid-acting insulin started before breakfast arrived":"rapid-acting insulin is working");if(c.short>.8)parts.push("regular insulin is near its peak");
+  if(SIM.ex&&h>15&&h<23)parts.push("exercise is still pulling glucose into muscle");if(SIM.lunch!=="eat"&&h>12&&h<18)parts.push("lunch was skipped");if(h>21&&!SIM.snack&&SIM.reg==="nph")parts.push("the evening NPH peaks overnight with no bedtime snack");
+  if(!parts.length)parts.push(SIM.dose===3?"the insulin dose is higher than this day needs":"insulin action is more than the food eaten");return {h,txt:parts.join(", and ")}}
+function simChanged(){SIM.res=gmRun(simOpts());SIM.stats=simStats();simReadUI();simStatusUI();simExplainUI();simCheck();a11yKey=""}
+function simReadUI(){const s=SIM.stats;const rows=[["Time in range (70 to 180)",Math.round(s.tir*100)+"%"],["Lowest",Math.round(s.mn)+" mg/dL at "+hhmm(s.mnH)],["Highest",Math.round(s.mx)+" mg/dL"],["Average",Math.round(s.avg)+" mg/dL"],["Lows below 70",String(s.lows.length)],["Hours above 250",s.hiH.toFixed(1)]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
+function simWarnings(){const s=SIM.stats,w=[];
+  s.lows.forEach(L=>{const c=lowCause(L);w.push(["bad",`Low: ${Math.round(L.nad)} mg/dL at ${hhmm(c.h)}. Why: ${c.txt}. Treat: about 15 g fast sugar if awake and able to swallow, recheck in 15 minutes.`])});
+  if(SIM.type===1&&SIM.reg==="none")w.push(["bad","Type 1 makes no insulin. Glucose climbs past 300 and the body burns fat into ketones: diabetic ketoacidosis (DKA) risk. Insulin is required."]);
+  else if(s.hiH>3)w.push(["warn",`High: above 250 mg/dL for about ${s.hiH.toFixed(1)} hours. Watch for thirst, frequent urination and, in type 1, ketones.`]);
+  if(SIM.orals.has("empagliflozin")&&(SIM.type===1||SIM.skip!=="none"||SIM.reg==="none"&&SIM.type===1))w.push(["warn","SGLT2 inhibitor with too little insulin: euglycemic DKA risk (ketones can build while glucose looks only mildly high)."]);
+  if(SIM.type===1&&SIM.orals.size)w.push(["warn","Oral agents do not replace insulin in type 1. Glipizide needs working beta cells, which type 1 does not have."]);
+  return w}
+function simStatusUI(){const w=simWarnings();const el=$("#simStatus");if(!w.length){el.className="status good";el.textContent="✓ No lows and no long highs in this 24-hour day.";return}
+  el.className="status "+(w.some(x=>x[0]==="bad")?"bad":"warn");el.innerHTML=w.map(x=>(x[0]==="bad"?"⚠ ":"! ")+x[1]).join("<br>")}
+function simExplainUI(){const L=[];const t=SIM.type,r=SIM.reg;
+  L.push(t===1?"Type 1: the pancreas makes no insulin, so every bit of insulin action comes from injections.":"Type 2: the pancreas still makes some insulin (grey layer), but cells resist it, so glucose runs higher.");
+  if(r==="bb")L.push("Basal-bolus: long-acting glargine at 07:00 gives a flat background layer; rapid-acting lispro with each meal adds a short hump that matches the food.");
+  if(r==="nph")L.push("NPH twice daily: NPH plus regular at 07:00 and 17:30. Each NPH dose builds a broad hump that peaks about 4 to 12 hours later, so meals must be eaten on time.");
+  if(r==="ss")L.push("Sliding scale only: no basal insulin. Correction doses are given only after a high reading (checks at meals and bedtime), so the line keeps rising and then being knocked down.");
+  if(r==="none")L.push(t===1?"No insulin: in type 1 nothing moves glucose into cells and the liver keeps releasing glucose.":"No insulin: glucose control depends on the pills chosen below and the patient's own insulin.");
+  if(SIM.lunch==="skip")L.push(r==="bb"?"Lunch skipped and its mealtime dose held: basal-bolus handles this well because the basal layer is flat.":r==="nph"?"Lunch skipped, but the morning NPH is still peaking in the afternoon: this is a classic time for a low.":"Lunch skipped.");
+  if(SIM.lunch==="skipdose")L.push("Lunch skipped but the mealtime insulin was given anyway: the insulin hump arrives with no food under it.");
+  if(SIM.late)L.push("Breakfast eaten more than an hour after the rapid-acting dose: glucose dips before the food arrives. Give rapid-acting insulin when the meal is ready.");
+  if(SIM.ex)L.push("Exercise at 15:00: working muscle takes in glucose even without insulin, and sensitivity stays higher for hours afterward, so lows can come later.");
+  if(SIM.snack)L.push("Bedtime snack: covers the overnight peak of evening NPH.");
+  if(SIM.skip!=="none")L.push(SIM.skip==="am"?(r==="bb"?"Morning glargine and breakfast lispro skipped: yesterday's basal fades and glucose climbs all day.":"Morning dose skipped: glucose climbs through the day."):"Evening dose skipped: glucose climbs after dinner and overnight.");
+  if(SIM.dose!==2)L.push(SIM.dose===3?"Higher insulin dose: lower glucose overall and more risk of lows at the peaks.":"Lower insulin dose: higher glucose overall.");
+  const ex={metformin:"Metformin: the liver releases less glucose, so the whole line sits lower. It does not add insulin.",glipizide:"Glipizide: squeezes insulin out of the beta cells for many hours whether or not food is eaten (type 2 only).",sitagliptin:"Sitagliptin: the body's own GLP-1 lasts longer, adding a little insulin when glucose is high.",
+    semaglutide:"Semaglutide: food leaves the stomach slowly (flatter, wider meal bumps), more insulin only when glucose is high, less glucagon.",empagliflozin:"Empagliflozin: the kidney spills glucose into the urine, so high readings are trimmed.",pioglitazone:"Pioglitazone: cells respond better to insulin (in real life this takes weeks)."};
+  SIM.orals.forEach(k=>L.push(ex[k]));
+  $("#simExplain").innerHTML=L.map(x=>`<li>${x}</li>`).join("")}
+const SCHAL=[["Show a low at the NPH peak by skipping lunch",()=>SIM.reg==="nph"&&SIM.lunch!=="eat"&&SIM.stats.lows.some(L=>{const h=6+L.nadI*SIM.res.dt;return h>11&&h<19})],
+  ["With basal-bolus, skip lunch and its insulin and stay out of the low zone",()=>SIM.reg==="bb"&&SIM.lunch==="skip"&&!SIM.stats.lows.length&&SIM.skip==="none"],
+  ["Give the mealtime insulin with no lunch and watch the drop",()=>SIM.reg==="bb"&&SIM.lunch==="skipdose"&&SIM.stats.mn<75],
+  ["See why a sliding scale alone fails in type 1",()=>SIM.type===1&&SIM.reg==="ss"&&SIM.stats.mx>250],
+  ["Prevent the overnight NPH dip with a bedtime snack",()=>SIM.reg==="nph"&&SIM.snack&&SIM.lunch==="eat"&&!SIM.stats.lows.length],
+  ["Find the pill that can cause a low by itself (type 2, no insulin)",()=>SIM.type===2&&SIM.reg==="none"&&SIM.orals.has("glipizide")&&SIM.stats.mn<70],
+  ["Skip the basal insulin and watch glucose climb",()=>SIM.reg==="bb"&&SIM.skip==="am"&&SIM.stats.mx>250],
+  ["Exercise and find the later dip",()=>SIM.ex&&SIM.stats.mnH>15.5&&SIM.stats.mnH<23]];
+function simCheck(){SCHAL.forEach((c,i)=>{try{if(c[1]())SIM.done.add(i)}catch(e){}});chalUI($("#simChal"),SCHAL.map(c=>c[0]),SIM.done)}
+function simControlsUI(){
+  segBtns($("#simType"),[[1,"Type 1 diabetes"],[2,"Type 2 diabetes"]],()=>SIM.type,v=>{SIM.type=v;simChanged()});
+  segBtns($("#simReg"),REGS,()=>SIM.reg,v=>{SIM.reg=v;simChanged();simSkipUI()});
+  segBtns($("#simLunch"),[["eat","Eaten"],["skip","Skipped (no lunch insulin)"],["skipdose","Skipped, insulin given anyway"]],()=>SIM.lunch,v=>{SIM.lunch=v;simChanged()});
+  simSkipUI();
+  const box=$("#simOrals");box.innerHTML="";ORALS.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.dataset.id=o[0];b.setAttribute("aria-pressed",String(SIM.orals.has(o[0])));b.innerHTML=`<span>${o[1]}<small>${o[2]}</small></span>`;
+    b.onclick=()=>{if(SIM.orals.has(o[0]))SIM.orals.delete(o[0]);else SIM.orals.add(o[0]);b.setAttribute("aria-pressed",String(SIM.orals.has(o[0])));simChanged()};box.appendChild(b)});
+  [["#simLate","late"],["#simEx","ex"],["#simSnack","snack"]].forEach(([id,k])=>{$(id).onclick=()=>{SIM[k]=!SIM[k];$(id).setAttribute("aria-pressed",String(SIM[k]));simChanged()}});
+  $("#simDose").oninput=e=>{SIM.dose=+e.target.value;$("#simDoseOut").textContent=DOSEW[SIM.dose];simChanged()};$("#simDoseOut").textContent=DOSEW[SIM.dose];
+  $("#simReset").onclick=()=>{Object.assign(SIM,{type:1,reg:"bb",dose:2,lunch:"eat",late:false,ex:false,snack:false,skip:"none"});SIM.orals=new Set();$("#simDose").value=2;["#simLate","#simEx","#simSnack"].forEach(id=>$(id).setAttribute("aria-pressed","false"));simControlsUI();simChanged()};
+  $("#simPlay").onclick=()=>{SIM.play=!SIM.play;$("#simPlay").textContent=SIM.play?"Pause the clock":"Play the clock"};
+  $("#simClock").oninput=e=>{SIM.clock=+e.target.value;$("#simClockOut").textContent=hhmm(6+SIM.clock);a11yKey=""}}
+function simSkipUI(){const lab=SIM.reg==="bb"?[["none","None"],["am","Morning glargine + lispro"],["pm","Dinner lispro"]]:SIM.reg==="nph"?[["none","None"],["am","Morning NPH + regular"],["pm","Evening NPH + regular"]]:SIM.reg==="ss"?[["none","None"],["am","Morning correction"],["pm","Dinner correction"]]:[["none","None (no insulin)"]];
+  if(SIM.reg==="none")SIM.skip="none";segBtns($("#simSkip"),lab,()=>SIM.skip,v=>{SIM.skip=v;simChanged()})}
+function simStep(dt){if(SIM.play){SIM.clock=(SIM.clock+dt*1)%24;const el=$("#simClock");el.value=SIM.clock;$("#simClockOut").textContent=hhmm(6+SIM.clock)}}
+/* ---------- drawing ---------- */
+const INSCOL={rapid:"rapid",short:"short",inter:"inter",long:"long",endo:"endo"};
+function drawSim(now){use(S1);const T=now/1000;const r=SIM.res;if(!r)return;
+  const gx=64,gw=486,gy=34,gh=210;const X=h=>gx+(h-6)/24*gw;const G=v=>gy+gh-(clamp(v,30,400)-30)/(400-30)*gh;
+  panelBox(8,8,556,262);title(20,22,"Blood glucose over 24 hours");
+  rr(gx,G(180),gw,G(70)-G(180),2);ctx.fillStyle=hexA(C.good,.14);ctx.fill();rr(gx,G(70),gw,G(30)-G(70),2);ctx.fillStyle=hexA(C.bad,.12);ctx.fill();
+  [70,180,250,400].forEach(v=>{line(gx,G(v),gx+gw,G(v),v===70?hexA(C.bad,.7):v===180?hexA(C.good,.8):hexA(C.grid,.9),1,[4,3]);txt(gx-6,G(v),String(v),{size:11,mono:true,align:"right",color:v===70?C.bad:C["ink-soft"]})});
+  txt(gx+gw-4,G(125),"target",{size:11.5,weight:600,align:"right",color:C.good});txt(gx+gw-4,G(52),"low",{size:11.5,weight:700,align:"right",color:C.bad});
+  ctx.save();ctx.translate(20,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,"mg/dL",{size:11.5,align:"center",color:C["ink-soft"]});ctx.restore();
+  ctx.beginPath();r.G.forEach((v,i)=>{const x=X(6+i*r.dt),y=G(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.strokeStyle=C.glu;ctx.lineWidth=3;ctx.lineJoin="round";ctx.stroke();
+  SIM.stats.lows.forEach(L=>{const x=X(6+L.nadI*r.dt),y=G(L.nad);circ(x,y,6,null,C.bad,2.5);label(clamp(x,gx+40,gx+gw-40),y-16,"LOW "+Math.round(L.nad),{size:11.5,weight:700,color:C.bad,border:C.bad})});
+  // insulin stack
+  panelBox(8,276,556,148);title(20,290,"Insulin action (stacked by type)");
+  const iy=300,ih=100;let mxI=0;r.I.forEach(v=>mxI=Math.max(mxI,v));const sc=Math.max(5,mxI*1.08);const Yi=v=>iy+ih-v/sc*ih;
+  const order=["endo","long","inter","short","rapid"];const N=r.G.length;const step=3;const acc=new Float32Array(N);
+  order.forEach(k=>{const arr=r.Ie[k];let any=false;for(let i=0;i<N;i++)if(arr[i]>.02){any=true;break}if(!any)return;
+    ctx.beginPath();for(let i=0;i<N;i+=step){ctx.lineTo(X(6+i*r.dt),Yi(acc[i]+arr[i]))}for(let i=N-1-((N-1)%step);i>=0;i-=step)ctx.lineTo(X(6+i*r.dt),Yi(acc[i]));ctx.closePath();ctx.fillStyle=hexA(C[INSCOL[k]],k==="endo"?.45:.7);ctx.fill();
+    for(let i=0;i<N;i++)acc[i]+=arr[i]});
+  line(gx,iy+ih,gx+gw,iy+ih,C["ink-soft"],1.2);
+  // timeline
+  for(let h=6;h<=30;h+=3){const x=X(h);line(x,iy+ih,x,iy+ih+4,C["ink-soft"],1);txt(x,iy+ih+14,hhmm(h),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  const ty=452;panelBox(8,430,556,62);txt(552,446,"meals, doses, pills",{size:11.5,weight:700,align:"right",color:C["ink-soft"]});
+  r.meals.forEach(m=>plateIcon(X(m.h),ty+20,m.m==="s"?6:8,1));
+  const seenD={};r.doses.forEach(d=>{const k=Math.round(d.h*10);const off=(seenD[k]=(seenD[k]||0)+1)-1;syringe(X(d.h)-4+off*7,ty+2-off*0,9,{rot:Math.PI/2,fill:.7,col:C[INSCOL[d.type]]})});
+  if(SIM.orals.size&&SIM.type){const x=X(7.6);pillShape(x+14,ty+22,5,C.drug);txt(x+24,ty+22,SIM.orals.size>1?SIM.orals.size+" pills":"pill",{size:11,weight:600})}
+  if(SIM.lunch!=="eat"){crossMark(X(12),ty+20,7,C.bad)}
+  if(SIM.ex){rr(X(15),ty+8,X(16)-X(15),8,4);ctx.fillStyle=C.good;ctx.fill();txt(X(15.5),ty+30,"walk",{size:11,weight:700,align:"center",color:C.good})}
+  // playhead
+  const ph=6+SIM.clock;const i=simAt(ph);const gv=r.G[i];const xp=X(ph);line(xp,gy,xp,iy+ih,hexA(C.accent,.85),2);circ(xp,G(gv),5.5,C.glu,C.panel,1.6);
+  // right column: cell + meter + person
+  panelBox(572,8,240,484);title(584,22,"At "+hhmm(ph));
+  glucometer(630,84,gv);clockFace(730,84,30,ph);
+  const Iv=r.I[i];const open=clamp(Iv/4,0,1);
+  const cy=214;rr(584,cy-24,216,132,18);ctx.fillStyle=C.cell;ctx.fill();membraneH(586,798,cy-24);txt(792,cy+94,"muscle cell",{size:11,weight:600,align:"right",color:C["ink-soft"]});
+  [640,740].forEach((dx,k)=>{const lift=open;if(lift<.25){vesicle(dx,cy+40,16,C.glut,(x,y)=>glut4(x,y,.65,0))}else glut4(dx,cy-24,1.1,lift)});
+  insReceptor(690,cy-24,.9,open);for(let k=0;k<Math.round(1+open*3);k++)insulin(690+(k-1.5)*16,cy-62-Math.sin(T*2+k)*4,.9);
+  const flow=open>.25?Math.round(2+open*6):0;for(let k=0;k<flow;k++){const q=P(T*(.4+open*.6)+k/flow,1);const dx=k%2?740:640;gluc(dx+(rnd(k)-.5)*30*q,lerp(cy-70,cy+80,q),5)}
+  for(let k=0;k<5;k++)if(k>=flow)gluc(600+k*40,cy-70+Math.sin(T*1.6+k)*6,5);
+  txt(692,cy+126,open>.5?"insulin high: doors open":open>.25?"some doors open":"little insulin: doors inside",{size:11.5,weight:700,align:"center"});
+  const low=gv<70,high=gv>250;person(640,480,46,{sweat:low,shake:low,t:T});
+  const st=low?["shaky","sweaty","confused"]:high?["thirsty","urinating more","tired"]:["feels well"];st.forEach((s,k)=>label(735,400+k*26,s,{size:11.5,weight:700,border:low?C.bad:high?C.warn:C.good}));
+}
+function simA11y(){const r=SIM.res;if(!r)return [null,""];const s=SIM.stats;
+  const reg=REGS.find(x=>x[0]===SIM.reg)[1];const lab=`Insulin day simulator: type ${SIM.type}, ${reg}. Time in range ${Math.round(s.tir*100)} percent. ${s.lows.length?s.lows.length+" low"+(s.lows.length>1?"s":"")+" today.":"No lows today."}`;
+  const ins=["rapid","short","inter","long","endo"].filter(k=>r.Ie[k].some(v=>v>.05)).map(k=>({rapid:"red rapid-acting humps",short:"blue regular humps",inter:"green NPH humps",long:"a flat purple long-acting layer",endo:"a grey layer of the patient's own insulin"}[k]));
+  const d=`A 24-hour graph from 06:00 to 06:00 shows the amber glucose line against a green target band from 70 to 180 and a red low zone below 70. Time in range is ${Math.round(s.tir*100)} percent; lowest ${Math.round(s.mn)} at ${hhmm(s.mnH)}, highest ${Math.round(s.mx)}`+(s.lows.length?`, with red LOW markers at `+s.lows.map(L=>hhmm(6+L.nadI*r.dt)).join(" and "):"")+`. Under it, the insulin action graph shows ${ins.join(", ")||"no insulin"}. Plates and syringes along the bottom mark meals and doses. A playhead sweeps across the day; the panel on the right shows a glucose meter, a clock, a muscle cell whose GLUT4 doors open when insulin is high, and a person who looks shaky and sweaty during a low.`;
+  return [lab,d]}
+
+/* ================= PART 2: thyroid loop ================= */
+const S2=makeStage("cvThy",820,470);
+const THY={cond:"hypo",dose:0,how:"empty",mmi:0,play:true,day:0,t4:.3,tsh:24,blk:0,hist:[],done:new Set(),seenOver:false,lastChange:0,changes:[]};
+const CONDS=[["normal","Normal thyroid"],["hypo","Hypothyroid (underactive)"],["graves","Hyperthyroid (Graves)"]];
+const HOWS=[["empty","Empty stomach, water only"],["food","With breakfast and coffee"],["ca","With a calcium supplement"],["fe","With an iron pill"]];
+const HOWABS={empty:1,food:.8,ca:.55,fe:.6};const MMIB=[0,.45,.65,.8];const MMIW=["Off","Low","Medium","High"];
+const KEL=Math.LN2/7;
+function thyCap(){return THY.cond==="normal"?1:THY.cond==="hypo"?.1:.2}
+function thyAuto(){return THY.cond==="graves"?2.4:0}
+function thyTarget(){/* steady-state estimate by iteration */let t4=1;for(let k=0;k<200;k++){const tsh=clamp(1.5*Math.exp(-4*(t4-1)),.02,40);const drive=Math.min(3,Math.pow(tsh/1.5,.6));const prod=(thyCap()*drive+thyAuto())*(1-MMIB[THY.mmi]);const t=prod+.18*THY.dose*HOWABS[THY.how];t4=lerp(t4,t,.3)}return t4}
+function thyInit(){THY.day=0;THY.blk=MMIB[THY.mmi];let t4=.3;THY.mmiSave=THY.mmi;const d0=THY.dose,m0=THY.mmi;THY.dose=0;THY.mmi=0;t4=thyTarget();THY.dose=d0;THY.mmi=m0;THY.blk=0;THY.t4=t4;THY.tsh=clamp(1.5*Math.exp(-4*(t4-1)),.02,40);THY.hist=[{d:0,t4:THY.t4,tsh:THY.tsh}];THY.changes=[]}
+function thyStepDays(days){const n=Math.ceil(days/.25);const h=days/n;for(let k=0;k<n;k++){THY.blk+= (MMIB[THY.mmi]-THY.blk)*h/14;
+    const drive=Math.min(3,Math.pow(THY.tsh/1.5,.6));const prod=KEL*(thyCap()*drive+thyAuto())*(1-THY.blk);const levo=KEL*.18*THY.dose*HOWABS[THY.how];
+    THY.t4+= (prod+levo-KEL*THY.t4)*h;const tgt=clamp(1.5*Math.exp(-4*(THY.t4-1)),.02,40);THY.tsh+=(tgt-THY.tsh)*h/2;THY.day+=h;
+    if(Math.floor(THY.day)!==Math.floor(THY.day-h))THY.hist.push({d:THY.day,t4:THY.t4,tsh:THY.tsh})}
+  if(THY.hist.length>140)THY.hist.splice(0,THY.hist.length-140)}
+function thyHR(){return clamp(72+42*(THY.t4-1),52,135)}
+function thyState(){const ft4=1.2*THY.t4;return ft4<.8?"low":ft4>1.8?"high":"normal"}
+function thyStep(dt){if(!THY.play)return;thyStepDays(dt*7/1.1);if(Math.floor(THY.day/7)!==THY.lastWk){THY.lastWk=Math.floor(THY.day/7);thyUI()}}
+function thyChanged(){THY.changes.push({d:THY.day,txt:thyChangeText()});if(THY.changes.length>6)THY.changes.shift();thyUI();a11yKey=""}
+function thyChangeText(){return (THY.dose?"levo "+THY.dose:"no levo")+(THY.dose&&THY.how!=="empty"?" ("+{food:"food",ca:"calcium",fe:"iron"}[THY.how]+")":"")+(THY.mmi?", methimazole "+MMIW[THY.mmi].toLowerCase():"")}
+function thyUI(){const ft4=1.2*THY.t4,tsh=THY.tsh,hr=thyHR(),st=thyState();
+  const rows=[["Week",(THY.day/7).toFixed(1)],["Free T4",ft4.toFixed(2)+" ng/dL ("+st+")"],["TSH",(tsh<.1?tsh.toFixed(2):tsh.toFixed(1))+" mIU/L ("+(tsh<.4?"low":tsh>4?"high":"normal")+")"],["Heart rate",Math.round(hr)+" /min"],["How it feels",st==="low"?"tired, cold, constipated, slow":st==="high"?"racing heart, tremor, hot, losing weight":"well"]];
+  $("#thyRead tbody").innerHTML=rows.map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+  const el=$("#thyStatus");if(st==="high"||tsh<.1){el.className="status bad";el.textContent=THY.cond==="graves"&&!THY.dose?"⚠ Hyperthyroid range: fast heart, tremor, heat intolerance. Methimazole lowers new hormone production, but stored hormone keeps coming for weeks.":"⚠ Too much thyroid hormone: TSH is suppressed and the heart rate is up. This is what an excess levothyroxine dose looks like; report palpitations or chest pain."}
+  else if(st==="low"||tsh>4){el.className="status warn";el.textContent=tsh>4&&st!=="low"?"! TSH is above normal: the pituitary is pushing a gland that is not keeping up. Check how the levothyroxine is taken and whether the dose is enough.":"! Hypothyroid range: T4 low, TSH high. The patient feels tired, cold and slow."}
+  else{el.className="status good";el.textContent="✓ Free T4 and TSH are both in the normal range."}
+  const L=[];
+  L.push(THY.cond==="hypo"?"Underactive thyroid: the gland makes about a tenth of normal, so TSH climbs as the pituitary pushes harder.":THY.cond==="graves"?"Graves disease: antibodies switch the gland on regardless of TSH, so T4 is high and TSH is pushed almost to zero.":"Normal gland: TSH and T4 balance each other through negative feedback.");
+  if(THY.dose)L.push(`Levothyroxine ${THY.dose} step${THY.dose>1?"s":""}: synthetic T4 added to the blood. With a half-life of about a week, each change takes about 6 weeks to settle.`);
+  if(THY.dose&&THY.how!=="empty")L.push({food:"Taken with breakfast and coffee: less is absorbed, so the effective dose is lower.",ca:"Taken with calcium: calcium binds levothyroxine in the gut and much less is absorbed. Separate by about 4 hours.",fe:"Taken with iron: iron binds levothyroxine in the gut. Separate by about 4 hours."}[THY.how]);
+  if(THY.mmi)L.push(`Methimazole (${MMIW[THY.mmi].toLowerCase()}): blocks thyroid peroxidase so less new hormone is made. The effect builds over weeks because stored hormone keeps being released.`);
+  if(THY.cond==="normal"&&THY.dose)L.push("Giving levothyroxine to a normal gland: feedback lowers TSH and the gland makes less of its own hormone.");
+  $("#thyExplain").innerHTML=L.map(x=>`<li>${x}</li>`).join("");thyCheck()}
+const TCHAL=[["Bring a hypothyroid patient's TSH into the normal range",()=>THY.cond==="hypo"&&THY.dose>0&&THY.tsh<=4&&THY.tsh>=.4&&THY.day>28],
+  ["Watch TSH rise again when levothyroxine is taken with calcium",()=>THY.cond==="hypo"&&THY.dose>=4&&THY.how==="ca"&&THY.tsh>4],
+  ["Give too much levothyroxine and see TSH fall below normal",()=>THY.dose>0&&THY.tsh<.4&&THY.cond!=="graves"],
+  ["Bring Graves disease into range with methimazole",()=>THY.cond==="graves"&&THY.mmi>0&&thyState()==="normal"&&THY.day>28],
+  ["Overshoot with high-dose methimazole into the low range",()=>THY.cond!=="hypo"&&THY.mmi===3&&(thyState()==="low"||THY.tsh>4)]];
+function thyCheck(){TCHAL.forEach((c,i)=>{try{if(c[1]())THY.done.add(i)}catch(e){}});chalUI($("#thyChal"),TCHAL.map(c=>c[0]),THY.done)}
+function thyControlsUI(){
+  segBtns($("#thyCond"),CONDS,()=>THY.cond,v=>{THY.cond=v;THY.dose=0;THY.mmi=0;THY.how="empty";$("#thyDose").value=0;$("#thyDoseOut").textContent=doseW();thyInit();thyControlsUI();thyUI();a11yKey=""});
+  segBtns($("#thyHow"),HOWS,()=>THY.how,v=>{THY.how=v;thyChanged()});
+  segBtns($("#thyMmi"),MMIW.map((w,i)=>[i,w]),()=>THY.mmi,v=>{THY.mmi=v;thyChanged()});
+  $("#thyDose").oninput=e=>{THY.dose=+e.target.value;$("#thyDoseOut").textContent=doseW();thyChanged()};$("#thyDoseOut").textContent=doseW();
+  $("#thyReset").onclick=()=>{thyInit();thyUI();a11yKey=""};
+  $("#thyPlay").onclick=()=>{THY.play=!THY.play;$("#thyPlay").textContent=THY.play?"Pause weeks":"Play weeks"}}
+function doseW(){return THY.dose?THY.dose+" step"+(THY.dose>1?"s":""):"none"}
+/* ---------- drawing ---------- */
+function drawThy(now){use(S2);const T=now/1000;
+  panelBox(8,8,404,454);title(20,24,CONDS.find(c=>c[0]===THY.cond)[1]);
+  const cx=150;brainShape(cx,70,40,{});txt(cx,70,"hypothalamus",{size:11.5,weight:700,align:"center"});
+  pituitaryShape(cx,160,20,{});txt(cx+30,160,"pituitary",{size:12,weight:700});
+  const g=THY.cond;const thyCol=g==="hypo"?mix(C.thy,C.panel,.5):g==="graves"?C.thy:mix(C.thy,C.panel,.15);const sz=g==="graves"?40:g==="hypo"?30:34;
+  if(g==="graves")glow(cx,300,70,C.bad,.25+.1*Math.sin(T*3));thyroidShape(cx,300,sz,{col:thyCol});txt(cx,356,"thyroid",{size:12,weight:700,align:"center"});
+  streamDots([[cx,104],[cx,138]],3,T,.45,C.trh,4.5);
+  const tr=clamp(Math.log10(THY.tsh*10+1)/2.6,.05,1);streamDots([[cx,182],[cx,264]],9,T,.5,C.tsh,5,null,tr);
+  if(g==="graves"){for(let k=0;k<4;k++){const a=k/4*TAU+T*.5;const x=cx+Math.cos(a)*62,y=300+Math.sin(a)*40;txt(x,y,"Y",{size:15,weight:700,align:"center",color:C.bad})}txt(cx-80,250,"antibodies",{size:11.5,weight:700,color:C.bad,align:"center"})}
+  if(THY.mmi){drugMol(cx+48,276,9);crossMark(cx+48,256,6,C.bad);txt(cx+66,256,"methimazole",{size:11.5,weight:700,color:C.drug})}
+  // blood vessel + T4
+  vesselH(70,396,396,14,T,{cells:false});const prodR=clamp(THY.t4/1.6,.08,1);streamDots([[cx,330],[cx,392],[396,396]],10,T,.25,C.t4,4.5,null,prodR);
+  // levo + gut
+  if(THY.dose){const ax=318,ay=286;rr(ax-48,ay-26,96,40,16);fillStroke(C.gut,C["gut-edge"],1.6);txt(ax,ay-38,"gut",{size:11.5,weight:600,align:"center"});pillShape(ax-26,ay-6,8,C.t4);
+    const abs=HOWABS[THY.how];streamDots([[ax-10,ay-6],[ax+10,ay+10],[ax+10,ay+60]],6,T,.45,C.t4,4,null,abs*.9);
+    if(THY.how!=="empty"){const col=THY.how==="ca"?(isDark()?"#D7DBDE":"#FFFFFF"):THY.how==="fe"?"#9A4A2A":C.gold;for(let k=0;k<3;k++)circ(ax+8+k*12,ay-10+Math.sin(T*2+k)*3,5,col,C["ink-soft"],1.2);txt(ax,ay+28,{food:"food binds",ca:"calcium binds",fe:"iron binds"}[THY.how],{size:11.5,weight:700,align:"center",color:C.bad})}
+    txt(ax,ay+44,"levothyroxine",{size:11.5,weight:700,align:"center",color:C.drug})}
+  // feedback
+  const fb=clamp(THY.t4/1.4,.15,1);ctx.save();ctx.globalAlpha=.3+.7*fb;ctx.beginPath();ctx.moveTo(390,380);ctx.bezierCurveTo(400,240,330,80,cx+50,74);ctx.strokeStyle=C.t4;ctx.lineWidth=1.5+3*fb;ctx.setLineDash([8,6]);ctx.stroke();ctx.setLineDash([]);ctx.restore();
+  circ(352,170,13,C.panel,C.t4,2);txt(352,171,"−",{size:17,weight:700,align:"center",color:C.t4});txt(352,196,"feedback",{size:11.5,align:"center",color:C["ink-soft"]});
+  // heart
+  heart(60,200,18,T,thyHR(),{});txt(60,232,Math.round(thyHR())+" /min",{size:12,mono:true,weight:700,align:"center",color:thyHR()>100?C.bad:C.ink});
+  meter(30,436,350,THY.tsh<=.02?.02:Math.log10(THY.tsh),-2,1.7,Math.log10(.4),Math.log10(4),"TSH (log scale)",{val:(THY.tsh<.1?THY.tsh.toFixed(2):THY.tsh.toFixed(1))+" mIU/L"});
+  // graph
+  panelBox(420,8,392,454);const wk=THY.day/7;const w0=Math.max(0,wk-16),w1=w0+16;title(432,24,"Last 16 weeks  ·  week "+wk.toFixed(1));
+  const gx=468,gw=330;const X=w=>gx+(w-w0)/16*gw;
+  const t4y=40,t4h=170;const Yt=v=>t4y+t4h-clamp(v,0,3.2)/3.2*t4h;rr(gx,Yt(1.8),gw,Yt(.8)-Yt(1.8),2);ctx.fillStyle=hexA(C.good,.15);ctx.fill();
+  [0,1,2,3].forEach(v=>{txt(gx-6,Yt(v),String(v),{size:11,mono:true,align:"right",color:C["ink-soft"]});line(gx,Yt(v),gx+gw,Yt(v),hexA(C.grid,.8),1)});txt(gx+4,t4y+8,"free T4 (ng/dL)",{size:12,weight:700});
+  const ty=240,th=170;const Yh=v=>ty+th-(Math.log10(clamp(v,.01,100))+2)/4*th;rr(gx,Yh(4),gw,Yh(.4)-Yh(4),2);ctx.fillStyle=hexA(C.good,.15);ctx.fill();
+  [.01,.1,1,10,100].forEach(v=>{txt(gx-6,Yh(v),String(v),{size:11,mono:true,align:"right",color:C["ink-soft"]});line(gx,Yh(v),gx+gw,Yh(v),hexA(C.grid,.8),1)});txt(gx+4,ty+8,"TSH (mIU/L, log scale)",{size:12,weight:700});
+  for(let w=Math.ceil(w0/2)*2;w<=w1;w+=2){const x=X(w);txt(x,ty+th+14,String(w),{size:11,mono:true,align:"center",color:C["ink-soft"]})}txt(gx+gw/2,ty+th+32,"weeks",{size:11.5,align:"center",color:C["ink-soft"]});
+  const H=THY.hist.filter(p=>p.d/7>=w0);
+  ctx.save();ctx.beginPath();rr(gx,t4y-4,gw,ty+th-t4y+8,0);ctx.clip();
+  ctx.beginPath();H.forEach((p,k)=>{const x=X(p.d/7),y=Yt(1.2*p.t4);k?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.lineTo(X(wk),Yt(1.2*THY.t4));ctx.strokeStyle=C.t4;ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();H.forEach((p,k)=>{const x=X(p.d/7),y=Yh(p.tsh);k?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.lineTo(X(wk),Yh(THY.tsh));ctx.strokeStyle=C.tsh;ctx.lineWidth=3;ctx.stroke();ctx.restore();
+  circ(X(wk),Yt(1.2*THY.t4),5,C.t4,C.panel,1.5);circ(X(wk),Yh(THY.tsh),5,C.tsh,C.panel,1.5);
+  THY.changes.forEach(c=>{const w=c.d/7;if(w<w0)return;const x=X(w);line(x,t4y,x,ty+th,hexA(C.drug,.8),1.6,[4,3]);if(wk-w<6)label(clamp(x,gx+60,gx+gw-60),t4y+t4h+16,"change: "+c.txt,{size:11,weight:700,border:C.drug});else txt(x+3,t4y+t4h+16,"change",{size:11,color:C.drug})});
+}
+function thyA11y(){const ft4=1.2*THY.t4;const lab=`Thyroid loop: ${CONDS.find(c=>c[0]===THY.cond)[1]}, levothyroxine ${doseW()}${THY.mmi?", methimazole "+MMIW[THY.mmi].toLowerCase():""}. Free T4 ${ft4.toFixed(1)}, TSH ${THY.tsh<.1?"below 0.1":THY.tsh.toFixed(1)}.`;
+  const d=`Left: the hypothalamus sends purple TRH dots to the pituitary, which sends blue TSH dots down to the thyroid; there are ${THY.tsh>4?"many":THY.tsh<.4?"almost no":"a moderate number of"} TSH dots. The thyroid sends orange T4 dots into a blood vessel, and a dashed feedback arrow with a minus sign curves back up to the brain.${THY.cond==="graves"?" Red Y-shaped antibodies circle a glowing thyroid.":""}${THY.dose?" A levothyroxine pill in the gut adds T4 dots"+(THY.how!=="empty"?", but "+{food:"food",ca:"calcium",fe:"iron"}[THY.how]+" particles bind some of them":"")+".":""}${THY.mmi?" A methimazole molecule with a red X sits on the thyroid.":""} A heart beats at ${Math.round(thyHR())} per minute. Right: two graphs over the last 16 weeks with green normal bands; free T4 is ${thyState()} and TSH is ${THY.tsh<.4?"low":THY.tsh>4?"high":"normal"}.`;
+  return [lab,d]}
+
+/* ================= PART 3: case files ================= */
+const S3=makeStage("cvCase",560,430);
+const CASES=[
+{name:"Shaky at three o'clock",who:"Linda, 58",title:"NPH and regular at 0700, then no lunch",scene:"hypo",
+ mar:[["NPH insulin","SC","0700","given","good"],["regular insulin","SC","0700","given","good"],["lunch tray","diet","1200","not eaten","bad"]],
+ v:{hr:112,sys:142,dia:84,sp:97,rr:20,hrF:"hi"},
+ labs:[["Bedside glucose","52 mg/dL",1],["Skin","cool, sweaty",1],["Hands","tremor",1],["Mental status","confused but answers",1],["Swallow","able to swallow",0],["Potassium","4.1 mEq/L",0]],
+ story:"Linda takes NPH and regular insulin at 0700. She skipped lunch before a test. At 1500 she is shaky, sweaty and a little confused, but she is awake and can swallow.",
+ legend:[["glu","Blood glucose","s"],["inter","NPH action"],["bad","Low zone","s"]],
+ qs:[{q:"Why is Linda's glucose low at 1500?",hint:"Which insulin given at 0700 is working hardest about 8 hours later?",opts:[
+   ["The morning NPH is near its peak and she ate no lunch",1,"Yes. NPH peaks about 4 to 12 hours after the dose. With no food to match it, glucose falls."],
+   ["The regular insulin is just starting to work",0,"Regular insulin starts in 30 to 60 minutes and peaks at about 2 to 4 hours, so by 1500 it is mostly done."],
+   ["Her glucose is high and she feels unwell from that",0,"The meter reads 52 mg/dL. Shaky, sweaty and confused fit hypoglycemia."],
+   ["She is having an allergic reaction to insulin",0,"Allergy would cause hives or swelling, not low glucose with sweating and tremor."]]},
+  {q:"What should the nurse do first?",hint:"She is awake and can swallow.",opts:[
+   ["Give about 15 g of fast-acting carbohydrate, such as juice, and recheck glucose in 15 minutes",1,"Right. The rule of 15: fast sugar by mouth when the person can swallow, then recheck and repeat if still low, per protocol."],
+   ["Give glucagon by injection",0,"Glucagon is for a person who cannot swallow safely. Linda can, so oral fast sugar is quicker and simpler."],
+   ["Hold everything and wait for the dinner tray",0,"Waiting lets glucose fall further. Treat now."],
+   ["Give her scheduled afternoon insulin early",0,"More insulin would make the low worse."]]},
+  {q:"Before the juice arrives, Linda becomes unresponsive. What now?",hint:"What is unsafe to give an unresponsive person?",opts:[
+   ["Nothing by mouth; give glucagon or IV dextrose per order, turn her on her side, and call for help",1,"Yes. An unresponsive person could choke on juice. Glucagon makes the liver release stored glucose; IV dextrose works directly."],
+   ["Pour the juice slowly into her mouth",0,"She could aspirate. Nothing by mouth when a person cannot protect the airway."],
+   ["Give regular insulin IV",0,"Insulin would lower glucose further."],
+   ["Recheck glucose in an hour",0,"An unresponsive low needs treatment now."]]}],
+ exp:"NPH peaks hours after the dose. A missed meal at the peak is a classic hypoglycemia trigger. Awake and able to swallow: about 15 g fast sugar and recheck in 15 minutes. Unresponsive: glucagon or IV dextrose, nothing by mouth."},
+
+{name:"Scan with contrast",who:"Thomas, 66",title:"Metformin and a CT scan with iodinated contrast",scene:"contrast",
+ mar:[["metformin","PO","0800","due","warn"],["CT abdomen with contrast","radiology","1000","scheduled","warn"]],
+ v:{hr:78,sys:136,dia:82,sp:98,rr:16},
+ labs:[["Glucose","142 mg/dL",0],["Creatinine","1.4 mg/dL",1],["eGFR","48 mL/min",1],["Potassium","4.4 mEq/L",0],["Allergies","none known",0]],
+ story:"Thomas has type 2 diabetes and takes metformin. He is scheduled for a CT scan with iodinated contrast this morning. His kidney function is mildly reduced.",
+ legend:[["drug","Metformin"],["gold","Contrast dye"],["lact","Lactic acid","s"]],
+ qs:[{q:"What should the nurse do about the 0800 metformin?",hint:"Contrast and the kidneys: what does the protocol usually say?",opts:[
+   ["Follow the facility protocol, which usually means holding metformin around the scan, and confirm with the provider",1,"Yes. Metformin is commonly held at the time of or before iodinated contrast, especially with reduced kidney function, and restarted after kidney function is rechecked."],
+   ["Give a double dose so glucose stays controlled during the scan",0,"There is no reason to increase it, and it could raise the risk if the kidneys are injured."],
+   ["Give it as usual; contrast does not matter",0,"Contrast can injure the kidneys, and metformin is cleared by the kidneys."],
+   ["Replace it with glipizide today",0,"Nurses do not substitute drugs, and glipizide adds hypoglycemia risk while he is not eating before the scan."]]},
+  {q:"Why is metformin held around iodinated contrast?",hint:"Follow the path: contrast, kidney, metformin level, acid.",opts:[
+   ["Contrast can injure the kidneys, metformin can build up, and lactic acidosis can follow",1,"Right. That chain is the reason for the protocol."],
+   ["Metformin makes the contrast dye cause allergic reactions",0,"Metformin does not change contrast allergy risk."],
+   ["Metformin causes severe hypoglycemia during scans",0,"Metformin alone rarely causes lows. The concern is lactic acidosis."],
+   ["Metformin blocks the CT image",0,"Metformin has no effect on the image."]]},
+  {q:"After the scan, which symptoms should Thomas report right away?",hint:"Lactic acidosis signs are vague.",opts:[
+   ["Unusual muscle pain, trouble breathing, unusual sleepiness or belly pain",1,"Yes. These can be signs of lactic acidosis, which is rare but serious."],
+   ["A mild metallic taste",0,"A metallic taste is a common, harmless metformin effect."],
+   ["Feeling hungry before lunch",0,"That is normal."],
+   ["Passing more urine after the IV fluids",0,"That is expected after IV fluids."]]}],
+ exp:"Metformin lowers liver glucose output and is cleared by the kidneys. Iodinated contrast can injure the kidneys, so per protocol metformin is held around the scan and restarted after kidney function is rechecked, to avoid lactic acidosis."},
+
+{name:"TSH creeping up",who:"Karen, 62",title:"Levothyroxine taken with calcium and coffee",scene:"levoca",
+ mar:[["levothyroxine","PO","0730","with breakfast","warn"],["calcium carbonate","PO","0730","with breakfast","warn"]],
+ v:{hr:60,sys:128,dia:80,sp:98,rr:14},
+ labs:[["TSH (now)","8.9 mIU/L",1],["TSH (last year)","2.1 mIU/L",0],["Free T4","0.8 ng/dL",0],["Fatigue","more tired lately",1],["Dose","unchanged",0]],
+ story:"Karen has taken the same levothyroxine dose for years. Last spring she started a calcium supplement and now takes both with breakfast and coffee. She feels tired, and her TSH has risen.",
+ legend:[["t4","Levothyroxine (T4)"],["ca","Calcium"],["tsh","TSH"]],
+ qs:[{q:"What is the most likely reason Karen's TSH rose?",hint:"Her dose did not change. What did?",opts:[
+   ["Calcium and breakfast are binding the levothyroxine, so less is absorbed",1,"Yes. Less T4 reaches the blood, so the pituitary pushes harder and TSH rises."],
+   ["Her thyroid has started overproducing hormone",0,"Overproduction would push TSH down, not up."],
+   ["Levothyroxine stops working after a few years",0,"It keeps working. The problem is absorption."],
+   ["Calcium raises TSH directly",0,"Calcium works by lowering levothyroxine absorption in the gut."]]},
+  {q:"What should the nurse teach?",hint:"Empty stomach, and space the minerals.",opts:[
+   ["Take levothyroxine on waking with water, 30 to 60 minutes before breakfast, and take calcium about 4 hours later",1,"Right. That restores steady absorption."],
+   ["Take both together at bedtime with milk",0,"Milk contains calcium, so this still binds the drug."],
+   ["Stop the calcium and double the levothyroxine",0,"Changing doses is the provider's decision, and spacing usually fixes the problem."],
+   ["Take levothyroxine only on days she feels tired",0,"It must be taken every day at a consistent time."]]},
+  {q:"Three months after she fixes the timing, Karen has palpitations, tremor and heat intolerance. What does this suggest?",hint:"Now the same dose is fully absorbed.",opts:[
+   ["She may now be getting too much thyroid hormone; report it so TSH can be checked",1,"Yes. If the dose was raised while absorption was poor, it may now be too high. Too much looks like hyperthyroidism."],
+   ["Normal adjustment; ignore it",0,"Palpitations and tremor are signs of excess thyroid hormone and should be reported."],
+   ["She needs more calcium",0,"Calcium is not the cause of these symptoms."],
+   ["The thyroid has become more underactive",0,"Underactivity causes tiredness and cold intolerance, the opposite."]]}],
+ exp:"Levothyroxine is absorbed best on an empty stomach. Calcium, iron and food bind it. A rising TSH on a steady dose often means an absorption problem. Too much hormone looks like hyperthyroidism."},
+
+{name:"New bone medicine",who:"Maria, 70",title:"Starting alendronate for osteoporosis",scene:"alend",
+ mar:[["alendronate","PO","0600","weekly, new","warn"],["calcium + vitamin D","PO","1300","daily","good"]],
+ v:{hr:74,sys:132,dia:78,sp:97,rr:16},
+ labs:[["Bone density","osteoporosis",1],["Calcium","9.4 mg/dL",0],["Vitamin D","adequate",0],["Dental","extraction planned",1],["Swallowing","new heartburn",1]],
+ story:"Maria started weekly alendronate. She says she takes it with her morning coffee and then lies back down for a while. She now has heartburn and pain when swallowing, and she has a tooth extraction scheduled.",
+ legend:[["drug","Alendronate"],["oc","Osteoclast"],["bad","Esophagus irritation","s"]],
+ qs:[{q:"Which instruction is correct for alendronate?",hint:"Think about the esophagus and about how little is absorbed.",opts:[
+   ["On waking, with a full glass of plain water, stay upright at least 30 minutes, and wait 30 minutes before food, drinks or other medicines",1,"Yes. That protects the esophagus and allows the small amount that is absorbed to get in."],
+   ["With coffee and breakfast to protect the stomach",0,"Coffee and food block absorption almost completely."],
+   ["At bedtime so it works overnight",0,"Lying down raises the risk of the pill irritating the esophagus."],
+   ["With the calcium tablet so they work together",0,"Calcium blocks alendronate absorption. Take calcium later in the day."]]},
+  {q:"What best explains Maria's heartburn and pain on swallowing?",hint:"What happens when she lies down after the pill?",opts:[
+   ["Esophagitis: the pill is irritating her esophagus because she lies down after taking it; report it and reinforce staying upright",1,"Right. This is the reason for the upright rule. New pain on swallowing should be reported."],
+   ["Normal side effect; ignore it",0,"Esophagitis can lead to ulcers. It needs reporting."],
+   ["A heart attack from calcium",0,"Her symptoms fit esophageal irritation and began after starting alendronate."],
+   ["Jaw osteonecrosis",0,"That affects the jawbone, not swallowing."]]},
+  {q:"What should Maria tell her dentist?",hint:"There is a rare but serious bone risk in the jaw.",opts:[
+   ["That she takes alendronate, because of the rare risk of jaw osteonecrosis after dental surgery",1,"Yes. The dentist and prescriber can plan around the extraction."],
+   ["Nothing; bone drugs do not matter for dental work",0,"Bisphosphonates matter for invasive dental work."],
+   ["That she should stop calcium before the extraction",0,"Calcium is not the issue here."],
+   ["That she needs extra fluoride",0,"Fluoride is not related to this risk."]]}],
+ exp:"Alendronate stops osteoclasts. Take it on waking with plain water, stay upright 30 minutes, and wait before eating. Report heartburn or painful swallowing (esophagitis), and tell the dentist because of the rare jaw osteonecrosis risk."},
+
+{name:"Pill plus a TB drug",who:"Jasmine, 24",title:"Combined oral contraceptive and rifampin",scene:"rifampin",
+ mar:[["ethinyl estradiol + progestin","PO","2100","daily, home","good"],["rifampin","PO","0800","new","warn"]],
+ v:{hr:76,sys:116,dia:72,sp:99,rr:14},
+ labs:[["Indication","latent TB",0],["Smoking","none",0],["Pregnancy test","negative",0],["Liver tests","normal",0],["Calf","no pain",0]],
+ story:"Jasmine takes a combined hormonal contraceptive pill. She has just been started on rifampin for latent tuberculosis.",
+ legend:[["estro","Hormone level"],["blocked","Liver enzymes"],["good","Level needed to block ovulation","l"]],
+ qs:[{q:"What is the concern with rifampin and her pill?",hint:"Rifampin changes the liver's enzymes.",opts:[
+   ["Rifampin speeds up the liver's breakdown of the hormones, so levels may drop too low to prevent ovulation",1,"Yes. Rifampin is a strong enzyme inducer."],
+   ["Rifampin makes the pill raise blood pressure dangerously",0,"The key problem is lower hormone levels and possible pill failure."],
+   ["The pill stops rifampin from working against TB",0,"The interaction mainly lowers the contraceptive hormones."],
+   ["There is no interaction",0,"This is a well-known, important interaction."]]},
+  {q:"What should the nurse teach?",hint:"How does she stay protected?",opts:[
+   ["Use a backup barrier method or another method while on rifampin and for a time after, as advised by the provider",1,"Right. A barrier method covers the gap; the provider may recommend a method not affected by enzyme inducers."],
+   ["Take two pills a day instead of one",0,"Patients should not double hormonal doses on their own."],
+   ["Stop the pill until TB treatment ends",0,"That leaves her unprotected. She needs a backup or alternative method."],
+   ["Take the pill and rifampin 12 hours apart to avoid the interaction",0,"Spacing does not help; the enzyme effect lasts all day."]]},
+  {q:"Which symptom needs immediate reporting while she is on the pill?",hint:"Remember ACHES.",opts:[
+   ["Sudden pain and swelling in one calf",1,"Yes. That could be a deep vein thrombosis, a clot risk from estrogen."],
+   ["Mild breast tenderness in the first month",0,"Common and usually settles."],
+   ["Light spotting between periods early on",0,"Common in the first months."],
+   ["Orange-red urine",0,"That is an expected, harmless rifampin effect."]]}],
+ exp:"Rifampin induces liver enzymes and lowers contraceptive hormone levels, so a backup or alternative method is needed. Estrogen raises clot risk: ACHES warning signs need urgent reporting."},
+
+{name:"Potassium falling",who:"Kevin, 19",title:"DKA on an IV regular insulin infusion",scene:"dka",
+ mar:[["regular insulin infusion","IV pump","since 0200","running","good"],["0.9% sodium chloride","IV","since 0130","running","good"]],
+ v:{hr:108,sys:112,dia:68,sp:98,rr:22,hrF:"hi",tallT:-.2},
+ labs:[["Glucose","248 mg/dL (was 540)",1],["Potassium","3.1 mEq/L (was 4.9)",1],["Ketones","present, falling",1],["ECG","flat T waves",1],["Muscles","weak",1]],
+ story:"Kevin has type 1 diabetes and came in with diabetic ketoacidosis. Four hours into the insulin infusion, his glucose is falling, but his potassium has dropped from 4.9 to 3.1 mEq/L and he feels weak.",
+ legend:[["k","Potassium"],["ins","Insulin"],["receptor","Sodium-potassium pump"]],
+ qs:[{q:"Why did Kevin's potassium fall?",hint:"Insulin opens more than the glucose door.",opts:[
+   ["Insulin drives potassium into the cells (plus losses in the urine), so the blood level drops",1,"Yes. That shift is expected once insulin runs, which is why potassium is checked often in DKA."],
+   ["The IV saline contains no potassium, which removes it",0,"Saline dilutes a little, but the main cause is insulin moving potassium into cells."],
+   ["DKA always causes high potassium, so this is a lab error",0,"Potassium is often normal or high at first in DKA, then falls with insulin. This fits."],
+   ["Glucose binds potassium in the blood",0,"Glucose does not bind potassium."]]},
+  {q:"What should the nurse do?",hint:"Low potassium plus ECG changes.",opts:[
+   ["Report it now and follow the DKA protocol for potassium replacement; protocols often hold insulin if potassium is below about 3.3",1,"Right. Potassium must be replaced, and low levels can cause dangerous rhythms."],
+   ["Increase the insulin rate to fix the glucose faster",0,"More insulin would push potassium even lower."],
+   ["Give oral potassium only at the next meal",0,"This needs prompt replacement under the protocol, not later."],
+   ["Stop all IV fluids",0,"Fluids are still needed in DKA."]]},
+  {q:"Which insulin is in Kevin's IV infusion?",hint:"Only one insulin is routinely given IV.",opts:[
+   ["Regular insulin",1,"Yes. Regular is the insulin used IV."],["NPH insulin",0,"NPH is cloudy and only given under the skin."],["Glargine",0,"Long-acting insulin is given under the skin, never IV."],["Lispro mixed with NPH",0,"Mixes are given under the skin, not IV."]]}],
+ exp:"Insulin moves potassium into cells. During IV insulin for DKA, potassium is checked often and replaced per protocol. Regular is the only insulin given IV."},
+
+{name:"Chest pain after sildenafil",who:"Robert, 61",title:"Nitroglycerin ordered after sildenafil",scene:"pde5",
+ mar:[["sildenafil","PO, home","last night","taken","bad"],["nitroglycerin","SL","PRN","ordered","warn"]],
+ v:{hr:96,sys:108,dia:68,sp:96,rr:18},
+ labs:[["Chest pain","pressure, 6 of 10",1],["Troponin","pending",0],["ECG","no ST elevation",0],["History","stable angina",0],["Last sildenafil","about 12 hours ago",1]],
+ story:"Robert comes to the emergency department with chest pressure. Nitroglycerin is ordered as needed. When asked, he says he took sildenafil about 12 hours ago.",
+ legend:[["no","Nitric oxide"],["cgmp","cGMP"],["drug","Sildenafil"],["bad","Low BP zone","s"]],
+ qs:[{q:"What should the nurse do about the nitroglycerin?",hint:"Two drugs that both raise cGMP.",opts:[
+   ["Hold it and tell the provider right away that he took sildenafil within the last 24 hours",1,"Yes. Together they can cause severe, possibly fatal hypotension. The provider will choose another treatment."],
+   ["Give it; his blood pressure is fine right now",0,"The drop can be sudden and severe even from a normal starting pressure."],
+   ["Give half a tablet",0,"Any nitrate is contraindicated here."],
+   ["Give it with a fluid bolus",0,"Fluids do not make the combination safe."]]},
+  {q:"Why is this combination so dangerous?",hint:"Think about the bathtub: tap and drain.",opts:[
+   ["The nitrate adds nitric oxide while sildenafil blocks cGMP breakdown, so cGMP soars and vessels relax everywhere",1,"Right. Massive vasodilation drops blood pressure sharply."],
+   ["Both drugs speed up the heart until it fails",0,"The main effect is profound vasodilation and hypotension."],
+   ["They form a toxic compound in the stomach",0,"The interaction is pharmacodynamic, in the blood vessels."],
+   ["Sildenafil blocks nitroglycerin, so the chest pain gets worse",0,"The danger is too much effect, not too little."]]}],
+ exp:"PDE-5 inhibitors and nitrates both raise cGMP. Together they cause severe hypotension. Always ask about sildenafil (within 24 hours) or tadalafil (within 48 hours) before giving a nitrate, per protocol."}];
+
+/* ---------- drawing ---------- */
+function caseScene(c,x,y,w,h,t){const cx=x+w/2;
+  if(c.scene==="hypo"){glucometer(x+56,y+60,52);const gx=x+110,gw=118;line(gx,y+110,gx+gw,y+110,C["ink-soft"],1);txt(gx,y+18,"NPH action",{size:11.5,weight:700});
+    ctx.beginPath();for(let i=0;i<=gw;i++){const hh=i/gw*14;const v=prof("inter",hh);ctx.lineTo(gx+i,y+110-v*560)}ctx.lineTo(gx+gw,y+110);ctx.lineTo(gx,y+110);ctx.closePath();ctx.fillStyle=hexA(C.inter,.45);ctx.fill();
+    const px=gx+8/14*gw;line(px,y+30,px,y+112,C.bad,1.6,[3,3]);txt(px,y+124,"1500",{size:11,mono:true,weight:700,align:"center",color:C.bad});txt(gx,y+124,"0700",{size:11,mono:true,align:"left",color:C["ink-soft"]});
+    person(x+70,y+300,62,{sweat:true,shake:true,t});juice(x+170,y+262,36);label(x+170,y+282,"15 g fast sugar",{size:11.5,weight:700,border:C.glu});clockFace(x+170,y+316,16,3.25);txt(x+170,y+338,"recheck 15 min",{size:11,align:"center"})}
+  else if(c.scene==="contrast"){circ(cx-40,y+60,40,null,C["ink-soft"],10);txt(cx-40,y+116,"CT",{size:11.5,weight:700,align:"center"});syringe(x+196,y+52,26,{rot:Math.PI*.75,fill:.7,col:C.gold});
+    for(let i=0;i<5;i++){const q=P(t*.6+i/5,1);circ(lerp(x+190,cx,q),lerp(y+80,y+168,q),3.5,C.gold)}
+    kidneyShape(cx,y+190,34,{col:mix(mix(C.vessel,C.panel,.3),C.blocked,.6)});txt(cx,y+232,"kidney stressed",{size:11.5,weight:700,align:"center",color:C.bad});
+    rr(x+16,y+250,w-32,44,10);fillStroke(C.plasma,C.vessel,1.4);for(let i=0;i<10;i++)drugMol(x+34+(i%7)*28,y+262+Math.floor(i/7)*18+Math.sin(t*2+i)*2,6.5);
+    meter(x+20,y+322,w-40,.5+2.5*P(t*.1,1),0,4,.5,2.2,"lactic acid",{val:""})}
+  else if(c.scene==="levoca"){rr(x+14,y+40,w-28,60,26);fillStroke(C.gut,C["gut-edge"],2);rr(x+14,y+52,w-28,36,16);ctx.fillStyle=C.lumen;ctx.fill();txt(x+20,y+28,"gut",{size:11.5,weight:600});
+    for(let i=0;i<6;i++){const q=P(t*.2+i/6,1);const xx=lerp(x+20,x+w-20,q);t4dot(xx,y+70,6);if(i%2===0)circ(xx+11,y+70,6,isDark()?"#D7DBDE":"#FFFFFF",C["ink-soft"],1.3)}
+    label(cx,y+120,"calcium binds T4: less absorbed",{size:11.5,weight:700,border:C.bad});
+    rr(x+30,y+150,28,36,4);fillStroke(C.panel,C["ink-soft"],1.4);ctx.fillStyle="#6A4A2A";ctx.fillRect(x+33,y+158,22,24);txt(x+44,y+198,"coffee",{size:11.5,align:"center"});pillShape(x+110,y+168,9,C.t4);txt(x+110,y+198,"levo",{size:11.5,align:"center"});circ(x+170,y+168,11,isDark()?"#D7DBDE":"#FFFFFF",C["ink-soft"],1.4);txt(x+170,y+198,"calcium",{size:11.5,align:"center"});
+    pituitaryShape(x+60,y+260,22,{});const n=8;for(let i=0;i<n;i++){const q=P(t*.6+i/n,1);hormoneDot(x+60,lerp(y+280,y+330,q),4.5,C.tsh)}txt(x+120,y+250,"pituitary pushes:",{size:11.5,weight:700});txt(x+120,y+268,"TSH 8.9 (high)",{size:12,mono:true,weight:700,color:C.bad})}
+  else if(c.scene==="alend"){person(x+60,y+250,70,{rot:.0});ctx.beginPath();ctx.moveTo(x+60,y+130);ctx.lineTo(x+60,y+190);ctx.strokeStyle=hexA(C.bad,.6+.3*Math.sin(t*3));ctx.lineWidth=6;ctx.stroke();txt(x+60,y+270,"stay upright",{size:11.5,weight:700,align:"center"});
+    waterGlass(x+150,y+130,40,.85);txt(x+150,y+148,"full glass water",{size:11.5,align:"center"});clockFace(x+190,y+50,22,(t*.15)%1*.5);txt(x+190,y+84,"30 min",{size:11.5,weight:700,align:"center"});
+    ctx.save();ctx.translate(x+170,y+230);ctx.beginPath();ctx.moveTo(-30,-10);ctx.quadraticCurveTo(0,30,40,20);ctx.lineTo(40,6);ctx.quadraticCurveTo(10,10,-14,-16);ctx.closePath();fillStroke(C.bone,C["bone-edge"],1.6);for(let k=0;k<3;k++){rr(-6+k*13,-2+k*4,9,12,3);fillStroke(C.panel,C["bone-edge"],1)}ctx.restore();txt(x+170,y+272,"tell the dentist",{size:11.5,weight:700,align:"center"});
+    ctx.fillStyle=C.bone;ctx.fillRect(x+14,y+300,w-28,40);line(x+14,y+300,x+w-14,y+300,C["bone-edge"],2);osteoclast(cx,y+284,16,{t,dead:true});for(let k=0;k<8;k++)drugMol(x+26+k*26,y+297,4.5)}
+  else if(c.scene==="rifampin"){rr(x+14,y+20,w-28,120,18);fillStroke(mix(C.liver,C.panel,.6),C["heart-edge"],1.6);txt(cx,y+34,"liver cell",{size:11.5,weight:700,align:"center"});
+    const n=4+Math.round(4*smooth(P(t*.15,1)));for(let i=0;i<n;i++)scissorsIcon(x+40+(i%4)*50,y+70+Math.floor(i/4)*40,12,.3+.3*Math.abs(Math.sin(t*4+i)));
+    pillShape(x+50,y+164,9,"#C4502F");txt(x+70,y+164,"rifampin: more enzymes",{size:11.5,weight:700});
+    const gx=x+20,gw=w-40,gy=y+200,gh=110;line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.2);line(gx,gy+gh*.45,gx+gw,gy+gh*.45,C.good,1.6,[5,4]);txt(gx+gw,gy+gh*.45-10,"needed level",{size:11,weight:600,align:"right",color:C.good});
+    plotFn(d=>d<3?.8:lerp(.8,.28,smooth(seg(d,3,7))),0,10,gx,gy,gw,gh,0,1,C.estro,3);txt(gx,gy-6,"hormone level",{size:11.5,weight:600,color:C["ink-soft"]});label(cx,gy+gh+20,"backup method needed",{size:11.5,weight:700,border:C.bad})}
+  else if(c.scene==="dka"){ivBag(x+40,y+56,56,"Regular",C.short);txt(x+40,y+102,"IV insulin",{size:11.5,align:"center"});
+    meter(x+90,y+40,140,3.1,2,6.5,3.5,5,"potassium",{val:"3.1"});label(x+160,y+80,"low",{size:11.5,weight:700,border:C.bad});
+    rr(x+14,y+130,w-28,90,18);ctx.fillStyle=C.cell;ctx.fill();membraneH(x+16,x+w-16,y+130);ctx.save();ctx.translate(cx,y+130);rr(-16,-18,32,36,10);fillStroke(C.receptor,hexA(C.ink,.45),1.2);ctx.restore();
+    for(let i=0;i<6;i++){const q=P(t*.5+i/6,1);ion("k",cx+(rnd(i)-.5)*80*q,lerp(y+108,y+206,q),6.5)}
+    rr(x+14,y+240,w-28,70,6);ctx.fillStyle=C.mon;ctx.fill();ctx.save();rr(x+14,y+240,w-28,70,6);ctx.clip();ecg(x+18,y+244,w-36,62,108,t,C["mon-hr"],{tall:-.2});ctx.restore();txt(x+22,y+254,"flat T waves",{size:11,mono:true,weight:600,color:C["mon-ink"]});txt(cx,y+330,"insulin pushes K⁺ into cells",{size:11.5,weight:700,align:"center"})}
+  else if(c.scene==="pde5"){pillShape(x+50,y+40,10,"#5B8FD9");txt(x+50,y+62,"sildenafil",{size:11.5,weight:700,align:"center"});pillShape(x+170,y+40,10,C.nitr);txt(x+170,y+62,"nitroglycerin",{size:11.5,weight:700,align:"center"});crossMark(x+170,y+40,14,C.bad);
+    for(let i=0;i<10;i++){const a=rnd(i)*TAU,r=12+rnd(i+1)*34;hormoneDot(cx+Math.cos(a)*r*1.6,y+124+Math.sin(a)*r*.5,4.5,C.cgmp)}txt(cx,y+170,"cGMP would soar",{size:11.5,weight:700,align:"center"});
+    const sb=lerp(108,62,smooth(P(t*.2,1)));bpDial(cx,y+250,50,sb);label(cx,y+326,"severe hypotension risk",{size:11.5,weight:700,border:C.bad})}}
+function drawCase(now){use(S3);const c=CASES[CS.i];const t=now/1000;
+  const mh=30+c.mar.length*24;panelBox(10,10,540,mh);title(22,24,"Medication administration record");
+  c.mar.forEach((m,i)=>{const yy=44+i*24;txt(22,yy,m[0],{size:12.5,weight:700});txt(212,yy,m[1],{size:12,color:C["ink-soft"]});txt(270,yy,"as ordered",{size:12,color:C["ink-soft"]});txt(344,yy,m[2],{size:12,mono:true,weight:600});
+    const col=m[4]==="bad"?C.bad:m[4]==="warn"?C["warn-ink"]:C.good;chipL(436,yy,m[3],col)});
+  const y1=10+mh+8;
+  monitor(10,y1,290,118,c.v,t);
+  const ly=y1+128,lh=430-ly-10;panelBox(10,ly,290,lh);title(22,ly+16,"Labs and assessment");
+  c.labs.forEach((l,i)=>{const yy=ly+40+i*((lh-48)/Math.max(5,c.labs.length));txt(22,yy,l[0],{size:12.5,weight:600});txt(290,yy,l[1]+(l[2]?" ▲":""),{size:12.5,weight:700,align:"right",color:l[2]?C["warn-ink"]:C.ink})});
+  const hh=430-y1-10;panelBox(310,y1,240,hh);ctx.save();ctx.beginPath();rr(311,y1+1,238,hh-2,7);ctx.clip();const sc=Math.min(1,hh/346);ctx.translate(310+120*(1-sc),y1+2);ctx.scale(sc,sc);caseScene(c,0,0,240,346,t);ctx.restore()}
+function caseA11y(){const c=CASES[CS.i];const v=c.v;
+  const SC={hypo:"a glucose meter reading 52, low; a small graph of NPH action from 0700 with a dashed line at 1500 near its peak; a sweaty, shaking person; and a juice glass labelled 15 g fast sugar with a clock for a 15 minute recheck",
+    contrast:"a CT scanner ring and a syringe of yellow contrast flowing to a greyed kidney labelled kidney stressed; indigo metformin hexagons crowd a blood vessel; and a lactic acid meter",
+    levoca:"a gut tube where orange T4 dots travel paired with white calcium tablets; a label says calcium binds T4, less absorbed; coffee, the levothyroxine pill and calcium are shown together; and the pituitary sends many blue TSH dots, labelled TSH 8.9 high",
+    alend:"a standing person with a reddened esophagus; a full glass of water and a 30 minute clock; a jaw with teeth labelled tell the dentist; and a bone surface coated with indigo alendronate where an osteoclast has stopped",
+    rifampin:"a liver cell filling with grey enzyme scissors after a rifampin pill; below, a graph shows the pink hormone level falling below a dashed green line labelled needed level, with a label backup method needed",
+    dka:"an IV bag of regular insulin; a potassium meter reading 3.1, low; a body cell with a pump drawing purple potassium dots inside; and an ECG strip with flat T waves",
+    pde5:"a sildenafil pill and a nitroglycerin tablet crossed out in red; green cGMP dots crowd the middle; and a blood pressure dial whose needle sweeps down into the red zone, labelled severe hypotension risk"}[c.scene];
+  const d=`Case ${CS.i+1}, ${c.who}. Medication record: `+c.mar.map(m=>`${m[0]}, ${m[1]}, as ordered, ${m[2]}, ${m[3]}`).join("; ")+`. Monitor: heart rate ${v.hr}, blood pressure ${v.sys} over ${v.dia}, oxygen ${v.sp} percent${v.rr?", respiratory rate "+v.rr:""}. Labs and assessment: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[2]?" (abnormal)":""}`).join(", ")+`. Picture: ${SC}.`;
+  return [`Case ${CS.i+1}: ${c.title}.`,d]}
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+
+/* ================= PART 4: sort it out ================= */
+const SROUNDS=[
+{name:"Insulin by timing",goal:"Put each insulin or insulin fact in the box for its onset and peak category.",
+ bins:[["rapid","Rapid-acting"],["short","Short-acting (regular)"],["inter","Intermediate (NPH)"],["long","Long-acting"]],
+ cards:[["lispro","rapid","Rapid-acting: onset about 15 minutes, peak about 1 to 2 hours."],["aspart","rapid","Rapid-acting: given right before a meal."],["Onset about 15 minutes: the meal must be ready","rapid","Rapid-acting insulin starts almost at once."],["Lasts about 3 to 5 hours","rapid","Short duration: one meal's worth."],
+  ["regular insulin","short","Short-acting: onset 30 to 60 minutes, peak about 2 to 4 hours."],["The only insulin given IV","short","Regular insulin is the IV insulin, for example in DKA."],
+  ["NPH","inter","Intermediate-acting: onset 1 to 2 hours, peak about 4 to 12 hours."],["Cloudy; roll gently before drawing up","inter","NPH is the cloudy insulin."],["Broad peak about 4 to 12 hours after the dose","inter","That broad peak is when lows happen if a meal is missed."],
+  ["glargine","long","Long-acting: about 24 hours with no real peak."],["detemir","long","Long-acting basal insulin."],["No real peak; never mixed with other insulins","long","Glargine and detemir give a flat background and are not mixed."]]},
+{name:"Drug to name stem",goal:"Match each drug to its name stem and class.",
+ bins:[["gliptin","-gliptin: DPP-4 inhibitor"],["glutide","-glutide: GLP-1 agonist"],["gliflozin","-gliflozin: SGLT2 inhibitor"],["glitazone","-glitazone: thiazolidine\u00ADdione"],["su","gli- ... -ide: sulfonyl\u00ADurea"],["dronate","-dronate: bisphos\u00ADphonate"],["afil","-afil: PDE-5 inhibitor"]],
+ cards:[["sitagliptin","gliptin","-gliptin: blocks DPP-4 so GLP-1 lasts longer."],["linagliptin","gliptin","Another DPP-4 inhibitor."],["semaglutide","glutide","-glutide: GLP-1 receptor agonist."],["liraglutide","glutide","GLP-1 agonist, injected daily."],["dulaglutide","glutide","GLP-1 agonist, injected weekly."],
+  ["empagliflozin","gliflozin","-gliflozin: glucose out in the urine."],["dapagliflozin","gliflozin","SGLT2 inhibitor."],["canagliflozin","gliflozin","SGLT2 inhibitor."],["pioglitazone","glitazone","-glitazone: insulin sensitizer; heart failure warning."],
+  ["glipizide","su","Sulfonylurea: squeezes insulin out of beta cells."],["glyburide","su","Sulfonylurea; long acting, higher low risk in older adults."],["glimepiride","su","Sulfonylurea."],
+  ["alendronate","dronate","-dronate: bisphosphonate; upright 30 minutes."],["risedronate","dronate","Another bisphosphonate."],["sildenafil","afil","-afil: PDE-5 inhibitor; never with nitrates."],["tadalafil","afil","Longer-acting PDE-5 inhibitor."]]},
+{name:"Hypoglycemia risk on its own",goal:"Used by itself, can this drug cause hypoglycemia?",
+ bins:[["yes","Yes: can cause lows by itself"],["no","Rarely causes lows by itself"]],
+ cards:[["insulin glargine","yes","Any insulin can cause lows."],["insulin lispro","yes","Rapid-acting insulin without food causes lows quickly."],["NPH insulin","yes","Lows at the NPH peak, especially with missed meals."],["glipizide","yes","Releases insulin whether or not glucose is high."],["glyburide","yes","Sulfonylurea; long-lasting lows, especially in older adults."],["glimepiride","yes","Sulfonylurea."],
+  ["metformin","no","Lowers liver glucose output; does not add insulin."],["sitagliptin","no","Glucose-dependent: works only when glucose is high."],["semaglutide","no","Glucose-dependent; lows mainly when combined with insulin or a sulfonylurea."],["empagliflozin","no","Removes glucose in urine; rarely causes lows alone."],["pioglitazone","no","Improves sensitivity; rarely causes lows alone."]]},
+{name:"Mechanism and adverse effect to class",goal:"Which diabetes drug class does each statement describe?",
+ bins:[["met","Metformin"],["su","Sulfonylurea"],["dpp","DPP-4 inhibitor"],["glp","GLP-1 agonist"],["sglt","SGLT2 inhibitor"],["tzd","Thiazolidine\u00ADdione"]],
+ cards:[["Turns down liver glucose output","met","Metformin's main action."],["Hold around iodinated contrast per protocol","met","Kidney injury could let metformin build up: lactic acidosis."],["Nausea and diarrhea at the start; take with meals","met","GI upset is the most common metformin effect."],
+  ["Closes the beta cell's potassium channel","su","That triggers insulin release regardless of glucose."],["Lows if a meal is skipped; weight gain","su","Glucose-independent insulin release."],
+  ["Blocks the enzyme that breaks down the body's GLP-1","dpp","DPP-4 inhibitors keep natural GLP-1 active longer."],["A pill with a modest, weight-neutral effect","dpp","Sitagliptin and similar."],
+  ["Slows stomach emptying; weight loss","glp","Fuller longer: a GLP-1 agonist effect."],["Thyroid C-cell tumor warning","glp","Avoid with a personal or family history of medullary thyroid cancer or MEN 2."],["Report severe belly pain going to the back","glp","Possible pancreatitis."],
+  ["Glucose leaves in the urine","sglt","Blocking SGLT2 in the proximal tubule."],["Genital yeast infections and dehydration","sglt","Sugar and water in the urine."],["Ketoacidosis with near-normal glucose","sglt","Euglycemic DKA."],
+  ["Acts on PPAR-gamma in the nucleus; slow onset","tzd","Changes gene activity over weeks."],["Fluid retention; heart failure warning","tzd","Pioglitazone holds salt and water."]]},
+{name:"Teach, monitor or hold: which drug?",goal:"Match each nursing point with the drug it belongs to.",
+ bins:[["levo","Levothyroxine"],["mmi","Methimazole or PTU"],["hc","Hydrocortisone"],["ddavp","Desmopressin"],["alen","Alendronate"],["chc","Combined pill"],["sil","Sildenafil"]],
+ cards:[["Empty stomach, 30 to 60 minutes before breakfast","levo","Food lowers absorption."],["Separate from calcium and iron by about 4 hours","levo","Minerals bind it in the gut."],["Palpitations and heat intolerance mean the dose may be too high","levo","Too much looks like hyperthyroidism."],
+  ["Report sore throat or fever right away","mmi","Possible agranulocytosis."],["Liver injury warning; used in the first trimester","mmi","That is PTU."],
+  ["Increase the dose during illness or surgery","hc","Stress dosing prevents adrenal crisis."],["Never stop suddenly; wear medical ID","hc","Adrenal crisis risk."],
+  ["Check serum sodium; report headache or confusion","ddavp","Water retention can cause hyponatremia."],["Follow the fluid limits you were given","ddavp","Too much water plus desmopressin dilutes sodium."],
+  ["Stay upright 30 minutes with a full glass of water","alen","Protects the esophagus."],["Tell the dentist before dental surgery","alen","Rare jaw osteonecrosis."],
+  ["Not for smokers aged 35 or older","chc","High risk of clots, stroke and heart attack."],["Teach ACHES warning signs","chc","Signs of clots and stroke."],["Use a backup method while on rifampin","chc","Enzyme inducers lower hormone levels."],
+  ["Never with nitroglycerin","sil","Severe hypotension."],["Erection lasting more than 4 hours: seek care","sil","Priapism."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const curve=(d,col)=>s(`<path d="M4 40 H52" stroke="var(--ink-soft)" stroke-width="1.5"/><path d="${d}" fill="none" stroke="var(${col})" stroke-width="3" stroke-linecap="round"/>`);
+  const hexg=(x,y,c)=>`<polygon points="${x-6},${y} ${x-3},${y-5.2} ${x+3},${y-5.2} ${x+6},${y} ${x+3},${y+5.2} ${x-3},${y+5.2}" fill="var(${c||"--drug"})" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const gl=(x,y)=>`<polygon points="${x-5},${y} ${x-2.5},${y-4.3} ${x+2.5},${y-4.3} ${x+5},${y} ${x+2.5},${y+4.3} ${x-2.5},${y+4.3}" fill="var(--glu)" stroke="var(--ink)" stroke-opacity=".45"/>`;
+  const pill=(x,y,c)=>`<rect x="${x-10}" y="${y-5}" width="20" height="10" rx="5" fill="var(${c})" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const M={
+    rapid:curve("M6 40 Q12 6 18 30 T30 40","--rapid"),short:curve("M6 40 Q16 8 24 30 T38 40","--short"),inter:curve("M6 40 Q22 6 38 28 T52 40","--inter"),long:curve("M6 40 Q10 22 16 22 H48 Q51 22 52 40","--long"),
+    gliptin:s(`<path d="M14 23 L34 14 M14 23 L34 32" stroke="var(--blocked)" stroke-width="4" stroke-linecap="round"/><circle cx="12" cy="23" r="5" fill="none" stroke="var(--blocked)" stroke-width="3"/>${hexg(40,23)}`),
+    glutide:s(`<circle cx="16" cy="23" r="5" fill="var(--glut)"/><circle cx="26" cy="20" r="5" fill="var(--glut)"/><circle cx="36" cy="23" r="5" fill="var(--glut)"/><circle cx="26" cy="22" r="15" fill="none" stroke="var(--drug)" stroke-width="2.4"/>`),
+    gliflozin:s(`<path d="M8 10 H40 Q48 10 48 18 V40" fill="none" stroke="var(--tubule-edge)" stroke-width="8"/>${gl(20,10)}${gl(48,30)}<path d="M40 40 h16" stroke="var(--urine)" stroke-width="4"/>`),
+    glitazone:s(`<circle cx="28" cy="23" r="19" fill="var(--cell)" stroke="var(--cell-edge)" stroke-width="2"/><circle cx="28" cy="23" r="8" fill="var(--nuc)" stroke="var(--ink)" stroke-opacity=".4"/>${hexg(28,23)}`),
+    su:s(`<circle cx="28" cy="25" r="17" fill="var(--cell)" stroke="var(--ins)" stroke-width="2"/><rect x="16" y="6" width="9" height="5" rx="2" fill="var(--ins)"/><rect x="30" y="2" width="9" height="5" rx="2" fill="var(--ins)"/><path d="M8 25 h6 M42 25 h6" stroke="var(--ink-soft)" stroke-width="3"/>`),
+    dronate:s(`<rect x="4" y="26" width="48" height="16" fill="var(--bone)" stroke="var(--bone-edge)"/>${hexg(14,22)}${hexg(28,22)}${hexg(42,22)}`),
+    afil:s(`<path d="M10 23 L30 14 M10 23 L30 32" stroke="var(--pde)" stroke-width="4" stroke-linecap="round"/>${hexg(36,23)}<circle cx="48" cy="14" r="4" fill="var(--cgmp)"/><circle cx="48" cy="30" r="4" fill="var(--cgmp)"/>`),
+    yes:s(`<path d="M4 12 H52" stroke="var(--good)" stroke-dasharray="3 3"/><path d="M4 32 H52" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M6 14 Q24 14 30 40 Q36 20 50 22" fill="none" stroke="var(--glu)" stroke-width="3"/>`),
+    no:s(`<path d="M4 12 H52" stroke="var(--good)" stroke-dasharray="3 3"/><path d="M4 32 H52" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M6 18 Q20 10 30 22 T50 18" fill="none" stroke="var(--glu)" stroke-width="3"/>`),
+    met:s(`<path d="M6 22 Q16 6 44 12 Q50 22 30 34 Q12 38 6 22Z" fill="var(--liver)" stroke="var(--heart-edge)"/>${hexg(28,22)}`),
+    dpp:s(`<path d="M12 23 L32 14 M12 23 L32 32" stroke="var(--blocked)" stroke-width="4" stroke-linecap="round"/>${hexg(40,23)}`),
+    glp:s(`<path d="M14 6 L18 12 Q4 22 12 36 Q26 44 46 34 L48 28 Q36 30 30 24 Q24 18 26 10 L24 6Z" fill="var(--gut)" stroke="var(--gut-edge)"/><circle cx="47" cy="31" r="3" fill="none" stroke="var(--drug)" stroke-width="2"/>`),
+    sglt:s(`<rect x="14" y="4" width="26" height="36" rx="4" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="16" y="20" width="22" height="18" fill="var(--urine)" opacity=".7"/>${gl(22,28)}${gl(32,32)}`),
+    tzd:s(`<path d="M20 4 L20 30 Q14 40 18 42 H38 Q40 36 32 32 L32 4Z" fill="var(--skin)" stroke="var(--skin-edge)"/><circle cx="24" cy="36" r="3" fill="var(--h2o)"/><circle cx="31" cy="38" r="3" fill="var(--h2o)"/>`),
+    levo:s(`${pill(28,24,"--t4")}<path d="M12 40 H44" stroke="var(--ink-soft)"/><text x="28" y="14" font-size="9" text-anchor="middle" fill="var(--ink)" font-family="monospace">T4</text>`),
+    mmi:s(`<ellipse cx="18" cy="24" rx="10" ry="16" fill="var(--thy)" stroke="var(--thy-edge)"/><ellipse cx="38" cy="24" rx="10" ry="16" fill="var(--thy)" stroke="var(--thy-edge)"/>${hexg(28,24)}<path d="M40 6 L50 16 M50 6 L40 16" stroke="var(--bad)" stroke-width="3"/>`),
+    hc:s(`<path d="M8 20 Q20 2 32 18 Q24 22 8 20Z" fill="var(--adr)" stroke="var(--adr-edge)"/><path d="M12 22 C2 30 10 44 24 40 C30 38 28 30 24 26 Z" fill="var(--vessel)" opacity=".7"/>${pill(42,32,"--drug")}`),
+    ddavp:s(`<rect x="8" y="4" width="14" height="38" rx="7" fill="var(--lumen)" stroke="var(--tubule-edge)"/><rect x="30" y="4" width="18" height="38" rx="8" fill="var(--plasma)" stroke="var(--vessel)"/><path d="M22 20 h8" stroke="var(--h2o)" stroke-width="3"/><circle cx="40" cy="14" r="4" fill="var(--na)"/><circle cx="40" cy="32" r="4" fill="var(--na)"/>`),
+    alen:s(`<circle cx="18" cy="8" r="5" fill="var(--skin)" stroke="var(--skin-edge)"/><rect x="13" y="14" width="10" height="26" rx="4" fill="var(--skin)" stroke="var(--skin-edge)"/><path d="M36 10 L40 40 H48 L52 10Z" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="39" y="20" width="11" height="18" fill="var(--h2o)" opacity=".5"/>`),
+    chc:s(`<rect x="6" y="8" width="44" height="30" rx="5" fill="var(--panel)" stroke="var(--ink-soft)"/>${[0,1,2,3].map(i=>`<circle cx="${14+i*9}" cy="18" r="3.4" fill="var(--estro)"/><circle cx="${14+i*9}" cy="29" r="3.4" fill="var(--prog)"/>`).join("")}`),
+    sil:s(`${pill(16,14,"--nitr")}<path d="M8 6 L24 22 M24 6 L8 22" stroke="var(--bad)" stroke-width="2.5"/><circle cx="40" cy="28" r="12" fill="var(--panel)" stroke="var(--ink-soft)"/><path d="M40 28 L32 34" stroke="var(--bad)" stroke-width="2.5"/>`)};
+  return M[k]||s(`<circle cx="28" cy="23" r="12" fill="var(--accent-wash)" stroke="var(--accent)"/>`)}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI()}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+/* drag: a ghost follows the pointer; drop on a bin */
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+const A11Y={sim:{cv:"#cvSim",f:simA11y},thy:{cv:"#cvThy",f:thyA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","thy","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="sim"){simStep(dt);drawSim(now)}else if(curTab==="thy"){thyStep(dt);drawThy(now)}else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__en={tab:k=>showTab(k),sim:o=>{Object.keys(o).forEach(k=>{if(k==="orals")SIM.orals=new Set(o.orals);else SIM[k]=o[k]});simControlsUI();$("#simDose").value=SIM.dose;["late","ex","snack"].forEach(k=>$("#sim"+k[0].toUpperCase()+k.slice(1)).setAttribute("aria-pressed",String(SIM[k])));simChanged();
+    const s=SIM.stats;return {tir:Math.round(s.tir*100),min:Math.round(s.mn),minH:hhmm(s.mnH),max:Math.round(s.mx),lows:s.lows.length,done:[...SIM.done]}},
+  clock:h=>{SIM.clock=h;SIM.play=false;$("#simClock").value=h;$("#simClockOut").textContent=hhmm(6+h);$("#simPlay").textContent="Play the clock"},
+  thy:o=>{if(o.cond){THY.cond=o.cond;THY.dose=0;THY.mmi=0;THY.how="empty";thyInit()}["dose","how","mmi"].forEach(k=>{if(o[k]!=null)THY[k]=o[k]});thyControlsUI();$("#thyDose").value=THY.dose;$("#thyDoseOut").textContent=doseW();if(o.weeks)thyStepDays(o.weeks*7);thyUI();THY.play=o.play!==false;
+    return {wk:+(THY.day/7).toFixed(1),ft4:+(1.2*THY.t4).toFixed(2),tsh:+THY.tsh.toFixed(2),hr:Math.round(thyHR()),done:[...THY.done]}},
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),
+  n:()=>({cases:CASES.length,rounds:SROUNDS.length})};
+readColors();simControlsUI();simChanged();thyInit();thyControlsUI();thyUI();caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

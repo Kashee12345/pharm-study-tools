@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Heart Drugs Lab</title>
+<meta name="description" content="Heart failure and digoxin simulators, an antiarrhythmic ECG simulator, nursing case files and sorting games for heart drugs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2A3580;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#C4644F;--act3:#D98A1C;--act4:#2F7FC1;--act5:#2E8A7A;--act6:#A04E8C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  /* heart pharmacology palette */
+  --ecf:#EEF0F7;--grid:#D5D9E8;
+  --drug:#5B3FC4;--rec:#1E8A8A;--lig:#C98A12;--blk:#8B9094;
+  --na:#C9A227;--k:#8A4FB8;--ca:#2E8A4F;--cl:#2F7FC1;--water:#CFE5F1;
+  --blood:#B5301F;--art:#C4382F;--vein:#3F5FA8;--myo:#D27A68;--myo-d:#8A3A2E;--lung:#EDC3BC;--fluid:#4F8FCB;
+  --liver:#A0522D;--ldl:#D98A1C;--chol:#C9A227;--enz:#A04E8C;--bnp:#2E8A7A;--aldo:#B4632A;--glu:#C4644F;
+  --no:#2F7FC1;--cgmp:#6E8A1A;--camp:#2E8A7A;--ach:#5E7F1A;--mg:#6E7F8C;
+  --body:#E9DCCB;--body-edge:#A88B6A;--skin:#EAC9A8;--skin-edge:#B9937A;--smooth:#E3B2A6;
+  --scr:#0F1A1F;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2245;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131824;--grid:#262C3A;
+  --drug:#B7A4F5;--rec:#5CC8C4;--lig:#F2B33B;--blk:#6F767B;
+  --na:#E0BE48;--k:#C29AD6;--ca:#6BC293;--cl:#5AA9E6;--water:#1F3A4A;
+  --blood:#F07A62;--art:#F27A6E;--vein:#8FA8EC;--myo:#B8695A;--myo-d:#E0A090;--lung:#5A3A38;--fluid:#8FC0EC;
+  --liver:#C98A6A;--ldl:#F2A93B;--chol:#E0BE48;--enz:#D186C0;--bnp:#5CC4B0;--aldo:#E39A5B;--glu:#E08A74;
+  --no:#5AA9E6;--cgmp:#B5CF5A;--camp:#5CC4B0;--ach:#A3C95A;--mg:#A9B7C2;
+  --body:#3E3528;--body-edge:#B39773;--skin:#5A4434;--skin-edge:#B9937A;--smooth:#6A4038;
+  --scr:#081014;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2245;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131824;--grid:#262C3A;
+  --drug:#B7A4F5;--rec:#5CC8C4;--lig:#F2B33B;--blk:#6F767B;
+  --na:#E0BE48;--k:#C29AD6;--ca:#6BC293;--cl:#5AA9E6;--water:#1F3A4A;
+  --blood:#F07A62;--art:#F27A6E;--vein:#8FA8EC;--myo:#B8695A;--myo-d:#E0A090;--lung:#5A3A38;--fluid:#8FC0EC;
+  --liver:#C98A6A;--ldl:#F2A93B;--chol:#E0BE48;--enz:#D186C0;--bnp:#5CC4B0;--aldo:#E39A5B;--glu:#E08A74;
+  --no:#5AA9E6;--cgmp:#B5CF5A;--camp:#5CC4B0;--ach:#A3C95A;--mg:#A9B7C2;
+  --body:#3E3528;--body-edge:#B39773;--skin:#5A4434;--skin-edge:#B9937A;--smooth:#6A4038;
+  --scr:#081014;--trace:#4FD08A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+/* heart drugs lab extras */
+.methods .tbtn small,.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.methods .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.methods .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.methods .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.side .sc-title{font-size:20px}
+.binhead span{min-width:0;overflow-wrap:anywhere}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 8 &middot; Heart failure, angina, arrhythmia and lipid drugs</div>
+    <h1>Heart Drugs Lab</h1>
+    <p class="sub">Treat a failing heart, watch a digoxin level rise and fall, fix rhythm strips, work nursing cases and sort the drugs. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Heart Failure and Digoxin Simulators</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-rhy" data-tab="rhy" id="tabbtn-rhy" type="button" tabindex="-1">Part 2 &middot; Rhythm Strip Lab</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: simulators -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Heart Failure and Digoxin Simulators</h2>
+    <div class="subtabs" role="group" aria-label="Choose a simulator">
+      <button class="tbtn" type="button" id="modeHF" aria-pressed="true">Heart failure simulator</button>
+      <button class="tbtn" type="button" id="modeDig" aria-pressed="false">Digoxin level simulator</button>
+    </div>
+
+    <div id="hfPane" class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvHF" role="img" aria-label="Heart failure simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="hfCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--myo)"></i>Heart muscle</span>
+          <span><i style="background:var(--fluid)"></i>Extra fluid (lungs, legs)</span>
+          <span><i class="ln" style="border-top-color:var(--good)"></i>Healthy heart curve</span>
+          <span><i class="ln" style="border-top-color:var(--bad)"></i>This heart's curve</span>
+          <span><i style="background:var(--drug)"></i>Drug on board</span>
+        </div>
+        <p class="sim-note">A teaching model with relative numbers, not real drug effects or doses. Preload is how full the ventricle is before it squeezes; afterload is the pressure it pushes against; contractility is how hard it squeezes.</p>
+      </div>
+      <aside class="card side" aria-label="Heart failure controls">
+        <div class="ctl"><label for="hfSev">How weak is the heart? <output id="hfSevOut" for="hfSev"></output></label>
+          <input type="range" id="hfSev" min="0" max="2" step="1" value="1"><div class="ticks" aria-hidden="true"><span>mild</span><span>severe</span></div></div>
+        <h3 id="hfDrugLab">Add or remove drugs</h3>
+        <div class="modes" id="hfDrugs" role="group" aria-labelledby="hfDrugLab"></div>
+        <div class="bar"><button class="tbtn" type="button" id="hfReset">Stop all drugs</button></div>
+        <table class="readouts" id="hfRead"><caption class="sr">Patient readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="hfStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="hfChal"></ul>
+      </aside>
+    </div>
+
+    <div id="digPane" class="grid" hidden>
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvDig" role="img" aria-label="Digoxin level simulator."></canvas></div>
+        <div class="stagebar">
+          <button class="tbtn" type="button" id="digPlay">Pause</button>
+          <button class="tbtn" type="button" id="digRestart">Restart at day 0</button>
+          <span class="caption" id="digCap"></span>
+        </div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--drug)"></i>Digoxin level</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Usual range</span>
+          <span><i class="s" style="background:var(--bad-wash);border-color:var(--bad)"></i>Toxic zone (moves with K⁺)</span>
+          <span><i style="background:var(--gold)"></i>A daily dose</span>
+        </div>
+        <p class="sim-note">One tablet a day, in made-up teaching units. The usual range drawn here, about 0.5 to 2 ng/mL, is a common lab reference; heart failure care often aims for the lower part. Hollow dots mark the level just before each dose, which is when real levels are drawn. Not a dosing tool.</p>
+      </div>
+      <aside class="card side" aria-label="Digoxin controls">
+        <div class="ctl"><label for="digDose">Daily dose (teaching units) <output id="digDoseOut" for="digDose"></output></label>
+          <input type="range" id="digDose" min="1" max="4" step="1" value="2"><div class="ticks" aria-hidden="true"><span>half</span><span>double</span></div></div>
+        <div class="ctl"><label for="digKid">Kidney function <output id="digKidOut" for="digKid"></output></label>
+          <input type="range" id="digKid" min="0" max="3" step="1" value="0"><div class="ticks" aria-hidden="true"><span>normal</span><span>severely reduced</span></div></div>
+        <div class="ctl"><label for="digK">Blood potassium (K⁺) <output id="digKOut" for="digK"></output></label>
+          <input type="range" id="digK" min="2.6" max="5.4" step="0.1" value="4.2"><div class="ticks" aria-hidden="true"><span>2.6</span><span>normal 3.5 to 5.0</span><span>5.4</span></div></div>
+        <h3 id="digIxLab">Other drug added</h3>
+        <div class="seg4" id="digIx" role="group" aria-labelledby="digIxLab"></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="digHold" aria-pressed="false">Hold doses from today</button>
+          <button class="btn" type="button" id="digFab">Give digoxin immune fab</button>
+        </div>
+        <table class="readouts" id="digRead"><caption class="sr">Digoxin readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="digStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="digChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: rhythm strip lab -->
+  <section id="tab-rhy" role="tabpanel" aria-labelledby="tabbtn-rhy" hidden>
+    <h2 class="gk-sr">Part 2: Rhythm Strip Lab</h2>
+    <div class="casechips" id="rScen" role="group" aria-label="Choose a rhythm"></div>
+    <div class="meter"><span>Rhythm <b id="rN">1</b> of <b id="rT">6</b></span><span>Fixed <b id="rSolved">0</b></span><span>First try <b id="rFirst">0</b></span></div>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvRhy" role="img" aria-label="Rhythm strip."></canvas></div>
+        <div class="stagebar"><span class="caption" id="rCap"></span></div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--trace)"></i>ECG trace</span>
+          <span><i class="ln" style="border-top-color:var(--drug)"></i>Action potential</span>
+          <span><i class="s" style="background:var(--gold-wash);border-color:var(--gold)"></i>Phase the drug changes</span>
+          <span><i style="background:var(--gold)"></i>Moment the drug is given</span>
+        </div>
+      </div>
+      <aside class="card side" aria-label="Rhythm controls">
+        <div class="sc-n" id="rWho"></div>
+        <h2 class="sc-title" id="rTitle"></h2>
+        <p class="story" id="rStory"></p>
+        <h3 id="rDrugLab">Give one drug</h3>
+        <div class="methods" id="rDrugs" role="group" aria-labelledby="rDrugLab"></div>
+        <div class="fb" id="rFb" role="status"></div>
+        <div class="hintbox" id="rNurse" hidden></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="rHint">Hint</button>
+          <button class="tbtn" type="button" id="rReset">Start this strip again</button>
+          <button class="btn" type="button" id="rNext">Next rhythm &rarr;</button>
+        </div>
+        <div class="hintbox" id="rHintBox" role="status" hidden></div>
+        <p class="calm">Teaching strips, drawn to show the idea. Real decisions follow the provider's orders and advanced life support protocols.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="Heart-Walkthrough.html">Heart Drugs Walkthrough</a>. Patients are fictional. Drugs are named by generic name and class with no doses; simulator numbers are relative teaching units. Hold limits are examples of common orders; always follow the prescriber, the label and local protocol.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "rec", "lig", "blk", "na", "k", "ca", "cl", "water", "blood", "art", "vein", "myo", "myo-d", "lung", "fluid", "liver", "ldl", "chol", "enz", "bnp", "aldo", "glu", "no", "cgmp", "camp", "ach", "mg", "body", "body-edge", "skin", "skin-edge", "smooth", "scr", "trace"];
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function ngon(x,y,r,n,rot){ctx.beginPath();for(let k=0;k<=n;k++){const a=k/n*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* ================= heart pharmacology drawing kit (shared by both pages) ================= */
+function gs(x,s){return Math.exp(-x*x/(2*s*s))}
+function beatC(T,hr){const p=P(T*(hr||72)/60,1);return p<.34?Math.sin(p/.34*Math.PI):0}
+function supTxt(s){return s}
+/* stylised heart. o:{hr,size (dilation),force (squeeze depth),col,cav,label,still} returns contraction 0..1 */
+function heartPath(s){ctx.beginPath();ctx.moveTo(0,-.24*s);
+  ctx.bezierCurveTo(-.1*s,-.56*s,-.62*s,-.52*s,-.56*s,-.08*s);ctx.bezierCurveTo(-.5*s,.22*s,-.18*s,.42*s,.06*s,.62*s);
+  ctx.bezierCurveTo(.32*s,.36*s,.56*s,.16*s,.56*s,-.1*s);ctx.bezierCurveTo(.6*s,-.5*s,.1*s,-.56*s,0,-.24*s);ctx.closePath()}
+function heart(cx,cy,s,T,o){o=o||{};const hr=o.hr==null?72:o.hr;const c=o.still?0:beatC(T,hr);const size=o.size||1,force=o.force==null?1:o.force;
+  ctx.save();ctx.translate(cx,cy);
+  // great vessels
+  ctx.lineCap="round";ctx.strokeStyle=o.vcol||C.art;ctx.lineWidth=s*.13;ctx.beginPath();ctx.moveTo(.02*s,-.2*s);ctx.bezierCurveTo(.02*s,-.62*s,.36*s,-.66*s,.4*s,-.42*s);ctx.stroke();
+  ctx.strokeStyle=C.vein;ctx.lineWidth=s*.11;ctx.beginPath();ctx.moveTo(-.22*s,-.2*s);ctx.lineTo(-.24*s,-.6*s);ctx.stroke();ctx.lineCap="butt";
+  const sc=size*(1-.05*c*force);ctx.scale(sc,sc);
+  heartPath(s);ctx.fillStyle=o.col||C.myo;ctx.fill();ctx.strokeStyle=C["myo-d"];ctx.lineWidth=2.4/sc;ctx.stroke();
+  // septum hint
+  ctx.strokeStyle=hexA(C["myo-d"],.55);ctx.lineWidth=1.6/sc;ctx.beginPath();ctx.moveTo(-.02*s,-.18*s);ctx.quadraticCurveTo(.0,.2*s,.06*s,.52*s);ctx.stroke();
+  // LV cavity: bigger with dilation, squeezes with force
+  const cav=(o.cav==null?1:o.cav);const k=1-.42*c*force;
+  ell(.22*s,.06*s,.15*s*cav*(.6+.4*k),.26*s*cav*(.65+.35*k),.25,mix(C.blood,C.panel,.25),hexA(C["myo-d"],.7),1.2/sc);
+  ell(-.25*s,0,.11*s*cav*(.7+.3*k),.2*s*cav*(.7+.3*k),-.2,mix(C.vein,C.panel,.35),hexA(C["myo-d"],.6),1.2/sc);
+  ctx.restore();return c}
+/* lungs with fluid. fluid 0..1 */
+function lungs(cx,cy,s,fluid,T,o){o=o||{};const lobe=()=>{ctx.beginPath();ctx.moveTo(-s*.06,-s*.5);ctx.bezierCurveTo(s*.28,-s*.52,s*.34,s*.1,s*.3,s*.46);ctx.quadraticCurveTo(s*.1,s*.56,-s*.1,s*.46);ctx.quadraticCurveTo(-s*.14,0,-s*.06,-s*.5);ctx.closePath()};
+  [-1,1].forEach(side=>{ctx.save();ctx.translate(cx+side*s*.1,cy);ctx.scale(side,1);
+    lobe();ctx.fillStyle=C.lung;ctx.fill();ctx.save();lobe();ctx.clip();const lvl=s*.5-fluid*s*.95;ctx.fillStyle=hexA(C.fluid,.6);ctx.beginPath();ctx.moveTo(-s*.3,s*.6);
+    for(let x=-s*.3;x<=s*.4;x+=6)ctx.lineTo(x,lvl+Math.sin(x/8+T*2.4)*2);ctx.lineTo(s*.4,s*.6);ctx.closePath();ctx.fill();
+    if(fluid>.25)for(let i=0;i<10;i++){const bx=-s*.05+rnd(i+side*7)*s*.3,by=lvl+8+rnd(i*3+side)*(s*.5-lvl);circ(bx,by-P(T*.6+rnd(i),1)*14,2.2,hexA(C.panel,.8))}
+    ctx.restore();lobe();ctx.strokeStyle=C["myo-d"];ctx.lineWidth=1.8;ctx.stroke();
+    for(let k=0;k<4;k++){line(s*.02,-s*.3+k*s*.18,s*.14+k*4,-s*.22+k*s*.2,hexA(C["myo-d"],.4),1.2)}ctx.restore()});
+  line(cx,cy-s*.75,cx,cy-s*.42,C["myo-d"],5);line(cx,cy-s*.44,cx-s*.1,cy-s*.36,C["myo-d"],3.5);line(cx,cy-s*.44,cx+s*.1,cy-s*.36,C["myo-d"],3.5)}
+/* blood vessel seen from the side. r = inner radius; o:{col, wall, T, flow, n} */
+function vessel(x,y,w,r,o){o=o||{};const wall=o.wall||7;const col=o.col||C.art;
+  ctx.fillStyle=hexA(col,.12);ctx.fillRect(x,y-r,w,2*r);
+  rr(x,y-r-wall,w,wall,3);ctx.fillStyle=C.smooth;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.stroke();
+  rr(x,y+r,w,wall,3);ctx.fill();ctx.stroke();
+  for(let i=0;i<w/14;i++){const X=x+7+i*14;line(X,y-r-wall+1.5,X+5,y-r-1.5,hexA(C["myo-d"],.35),1);line(X,y+r+1.5,X+5,y+r+wall-1.5,hexA(C["myo-d"],.35),1)}
+  if(o.T!=null){const n=o.n||Math.round(w/22);ctx.save();ctx.beginPath();ctx.rect(x,y-r,w,2*r);ctx.clip();
+    for(let i=0;i<n;i++){const X=x+P(i/n+(o.T*(o.flow==null?.18:o.flow)),1)*(w+20)-10;const Y=y+(rnd(i+3)-.5)*r*1.3;ell(X,Y,Math.min(6,r*.45),Math.min(4.4,r*.32),.2,mix(C.blood,C.panel,.1),hexA(C.ink,.25),.8)}ctx.restore()}}
+/* lipid bilayer from x1 to x2 at y (horizontal). o.v for vertical at x=y param */
+function membraneH(x1,x2,y,o){o=o||{};const col=o.col||C["body-edge"];ctx.fillStyle=hexA(C.chol,.16);ctx.fillRect(x1,y-8,x2-x1,16);
+  for(let X=x1+4;X<x2;X+=8){circ(X,y-7,3,col);circ(X,y+7,3,col);line(X,y-4,X,y-1,hexA(col,.6),1);line(X,y+1,X,y+4,hexA(col,.6),1)}}
+function membraneV(x,y1,y2,o){o=o||{};const col=o.col||C["body-edge"];ctx.fillStyle=hexA(C.chol,.16);ctx.fillRect(x-8,y1,16,y2-y1);
+  for(let Y=y1+4;Y<y2;Y+=8){circ(x-7,Y,3,col);circ(x+7,Y,3,col);line(x-4,Y,x-1,Y,hexA(col,.6),1);line(x+1,Y,x+4,Y,hexA(col,.6),1)}}
+/* receptor: cup opening upward at (x,y) membrane level y. o:{on (0..1 glow), col, flip(opens downward), label} */
+function receptor(x,y,s,o){o=o||{};const col=o.col||C.rec;const d=o.flip?-1:1;ctx.save();ctx.translate(x,y);ctx.scale(1,d);
+  rr(-s*.55,-s*.2,s*1.1,s*1.1,s*.25);ctx.fillStyle=col;ctx.fill();
+  ctx.beginPath();ctx.moveTo(-s*.55,-s*.2);ctx.lineTo(-s*.55,-s*1.05);ctx.quadraticCurveTo(-s*.55,-s*1.2,-s*.38,-s*1.2);ctx.lineTo(-s*.3,-s*1.2);ctx.lineTo(-s*.3,-s*.62);
+  ctx.arc(0,-s*.62,s*.3,Math.PI,0,true);ctx.lineTo(s*.3,-s*1.2);ctx.lineTo(s*.38,-s*1.2);ctx.quadraticCurveTo(s*.55,-s*1.2,s*.55,-s*1.05);ctx.lineTo(s*.55,-s*.2);ctx.closePath();
+  ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=hexA(C.ink,.45);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.on>0){ctx.globalAlpha*=clamp(o.on,0,1);circ(0,s*.35,s*.22,C.gold,hexA(C.ink,.4),1)}
+  ctx.restore()}
+/* natural ligand ball */
+function ligand(x,y,r,col,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,col||C.lig,hexA(C.ink,.45),1.2);circ(x-r*.3,y-r*.3,r*.32,hexA(C.panel,.45));
+  if(o.t){txt(x,y+.5,o.t,{size:o.fs||10,weight:700,mono:true,align:"center",color:onFill()})}ctx.restore()}
+/* drug token: violet rounded hexagon. o:{a,rot,col,t} */
+function drugTok(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  hexPath(0,0,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.55),1.3);hexPath(0,0,s*.45,Math.PI/6);fillStroke(hexA(C.panel,.55),null);ctx.restore();
+  if(o.t)txt(x,y+s+9,o.t,{size:o.fs||11,weight:700,align:"center",color:o.tc||C.ink})}
+/* enzyme pac-man facing right. o:{blocked, open (0..1), col, t(label), T} */
+function enzyme(x,y,r,o){o=o||{};const op=o.blocked?.18:(o.open==null?.35+.3*Math.abs(Math.sin((o.T||0)*5)):o.open);const col=o.blocked?mix(o.col||C.enz,C.blk,.45):(o.col||C.enz);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,op*.9,TAU-op*.9);ctx.closePath();fillStroke(col,hexA(C.ink,.5),1.4);circ(x-r*.15,y-r*.5,r*.11,C.panel);
+  if(o.blocked)drugTok(x+r*.55,y,r*.36);
+  if(o.t)txt(x,y+r+12,o.t,{size:11.5,weight:700,align:"center"})}
+/* ions */
+const IONS={na:["na","Na⁺"],k:["k","K⁺"],ca:["ca","Ca²⁺"],cl:["cl","Cl⁻"]};
+function ion(x,y,kind,r,o){o=o||{};const I=IONS[kind];r=r||7;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,C[I[0]],hexA(C.ink,.4),1);
+  if(o.lab)txt(x,y-r-7,I[1],{size:10.5,weight:700,align:"center",mono:true});ctx.restore()}
+/* Y antibody (Fab when o.fab) */
+function antibody(x,y,s,rot,col,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.lineCap="round";ctx.strokeStyle=col||C.rec;ctx.lineWidth=s*.28;
+  ctx.beginPath();if(!o.fab){ctx.moveTo(0,s*.9);ctx.lineTo(0,0)}else{ctx.moveTo(0,s*.15);ctx.lineTo(0,0)}ctx.moveTo(0,0);ctx.lineTo(-s*.55,-s*.65);ctx.moveTo(0,0);ctx.lineTo(s*.55,-s*.65);ctx.stroke();
+  ctx.strokeStyle=hexA(C.panel,.6);ctx.lineWidth=s*.08;ctx.beginPath();ctx.moveTo(-s*.42,-s*.5);ctx.lineTo(-s*.18,-s*.2);ctx.stroke();ctx.lineCap="butt";ctx.restore()}
+/* simple meter bar with label */
+function meter(x,y,w,lab,f,col,val,o){o=o||{};txt(x,y,lab,{size:12,weight:600});if(val!=null)txt(x+w,y,val,{size:12,weight:700,mono:true,align:"right",color:o.vc||C.ink});
+  rr(x,y+9,w,10,5);ctx.fillStyle=C.sunk;ctx.fill();if(o.zone){ctx.fillStyle=hexA(C.good,.3);ctx.fillRect(x+w*o.zone[0],y+9,w*(o.zone[1]-o.zone[0]),10)}
+  rr(x,y+9,Math.max(4,w*clamp(f,0,1)),10,5);ctx.fillStyle=col;ctx.fill()}
+/* dial gauge 0..1 */
+function dial(x,y,r,f,lab,val,col,o){o=o||{};ctx.beginPath();ctx.arc(x,y,r,Math.PI,TAU);ctx.strokeStyle=C.sunk;ctx.lineWidth=r*.28;ctx.stroke();
+  if(o.zone){ctx.beginPath();ctx.arc(x,y,r,Math.PI+Math.PI*o.zone[0],Math.PI+Math.PI*o.zone[1]);ctx.strokeStyle=hexA(C.good,.45);ctx.stroke()}
+  const a=Math.PI+Math.PI*clamp(f,0,1);line(x,y,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,col||C.ink,3);circ(x,y,4,col||C.ink);
+  txt(x,y+14,lab,{size:11.5,weight:700,align:"center",color:C["ink-soft"],mono:true});if(val)txt(x,y+30,val,{size:12.5,weight:700,align:"center",mono:true,color:col||C.ink})}
+/* ECG engine: one beat starting at P onset (d seconds). o:{pr,qrs,qt,st,tAmp,noP} */
+function ecgBeat(d,o){if(d<-.1||d>1.4)return 0;const pr=o.pr||.16,qrs=o.qrs||.09,qt=o.qt||.38;let v=0;
+  if(!o.noP)v+=.15*gs(d-.045,.02);
+  const k=qrs/.09,qc=pr+qrs/2;v+=-.1*gs(d-(qc-.028*k),.008*k)+(1/(.5+.5*k))*gs(d-qc,.011*k)-.25*gs(d-(qc+.026*k),.009*k);
+  if(k>1.2)v+=.25*(k-1)*gs(d-(qc+.05*k),.03);
+  const te=pr+qt;const tc=te-.085;v+=(o.tAmp==null?.3:o.tAmp)*gs(d-tc,.042);
+  if(o.st==="dig"){const s0=qc+.045*k;v+=-.13*smooth((d-s0)/.04)*(1-smooth((d-(tc-.02))/.05))}
+  return v}
+/* rhythm function: o:{hr,pr,qrs,qt,mode:'sinus'|'svt'|'flat'|'afib'|'tdp'} */
+function ecgAt(t,o){const hr=o.hr||75,RR=60/hr;
+  if(o.mode==="flat")return .01*Math.sin(t*9);
+  if(o.mode==="tdp"){const env=.55+.45*Math.sin(TAU*.45*t);return env*(.9*Math.sin(TAU*4*t)+.15*Math.sin(TAU*8*t+1))}
+  if(o.mode==="afib"){let v=.045*(Math.sin(TAU*6.3*t)+.7*Math.sin(TAU*8.9*t+1)+.5*Math.sin(TAU*4.7*t+2));const seq=o.seq||[.55,.8,.48,.92,.62,.5,.86,.7];const L=seq.reduce((a,b)=>a+b,0);
+    const tt=((t%L)+L)%L,base=t-tt;const oo=Object.assign({},o,{noP:true,pr:.02});for(let c=-1;c<=0;c++){let acc=0;for(let i=0;i<seq.length;i++){const st=base+c*L+acc;acc+=seq[i];const d=t-st;if(d>-.1&&d<1.4)v+=ecgBeat(d,oo)}}return v}
+  const k=Math.floor(t/RR);let v=0;for(let j=k-2;j<=k;j++){v+=ecgBeat(t-j*RR,o)}return v}
+/* scrolling strip on a dark monitor screen. fn(t) gives mV-ish value. o:{secs, base, amp, label, marks(t0,pxs,mid,amp)} */
+function ecgStrip(x,y,w,h,fn,T,o){o=o||{};const secs=o.secs||5;const pxs=w/secs;
+  rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();ctx.save();rr(x,y,w,h,8);ctx.clip();
+  const t0=T-secs;for(let k=Math.floor(t0/.2);k<=Math.ceil(T/.2);k++){const gx=x+(k*.2-t0)*pxs;line(gx,y,gx,y+h,"rgba(79,208,138,.14)",1)}
+  const mid=y+h*(o.base||.64),amp=h*(o.amp||.46);for(let j=-6;j<=6;j++){const gy=mid+j*pxs*.2;if(gy>y&&gy<y+h)line(x,gy,x+w,gy,"rgba(79,208,138,.14)",1)}
+  ctx.beginPath();for(let i=0;i<=w;i+=1){const t=t0+i/pxs;const yy=mid-fn(t)*amp;i?ctx.lineTo(x+i,yy):ctx.moveTo(x+i,yy)}
+  ctx.strokeStyle=o.col||"#4FD08A";ctx.lineWidth=2;ctx.lineJoin="round";ctx.stroke();glow(x+w-2,mid-fn(T)*amp,10,o.col||"#4FD08A",.8);
+  if(o.marks)o.marks(t0,pxs,mid,amp);ctx.restore();
+  if(o.label)txt(x+10,y+13,o.label,{size:11.5,mono:true,weight:700,color:"#A3B2BA"})}
+/* caliper bracket on a strip (screen coords) */
+function caliper(x1,x2,y,lab,col,side){col=col||"#F2B33B";line(x1,y,x2,y,col,2);line(x1,y-6,x1,y+6,col,2);line(x2,y-6,x2,y+6,col,2);if(side==="r")txt(x2+8,y,lab,{size:11.5,weight:700,mono:true,color:col});else txt((x1+x2)/2,y-11,lab,{size:11.5,weight:700,mono:true,align:"center",color:col})}
+/* vitals readout on dark monitor. items: [[lab,val,col,unit]] */
+function vitalsBox(x,y,w,h,items){rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();const n=items.length;const cw=w/n;
+  items.forEach((it,i)=>{const lx=x+10+i*cw;txt(lx,y+14,it[0],{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(lx,y+38,it[1],{size:20,mono:true,weight:700,color:it[2]||"#E8EEF1"});if(it[3])txt(lx,y+58,it[3],{size:10.5,mono:true,color:"#A3B2BA"})})}
+/* ventricular action potential, mV. d seconds since upstroke. o:{up (upstroke s), apd (s), plat} */
+function apVent(d,o){o=o||{};const up=o.up||.004,apd=o.apd||.3;if(d<0)return -88;if(d<up)return lerp(-88,25,smooth(d/up));
+  const d1=d-up;if(d1<.02)return lerp(25,8,smooth(d1/.02));const pe=apd*.62;if(d<pe)return lerp(8,-2,(d-up-.02)/(pe-up-.02));if(d<apd)return lerp(-2,-88,smooth((d-pe)/(apd-pe)));return -88}
+/* pacemaker (nodal) potential over time t with rate set by slope. o:{hr} returns [mV, phase] */
+function apNode(t,o){o=o||{};const hr=o.hr||72,RR=60/hr;const d=((t%RR)+RR)%RR;const up=.06,rep=.16;const p4=RR-up-rep;
+  if(d<up)return [lerp(-40,8,smooth(d/up)),0];if(d<up+rep)return [lerp(8,-62,smooth((d-up)/rep)),3];return [lerp(-62,-40,Math.pow((d-up-rep)/p4,1.3)),4]}
+/* human figure outline */
+function person(cx,cy,s,o){o=o||{};const col=o.col||C.skin,ed=o.edge||C["skin-edge"];circ(cx,cy-s*.78,s*.15,col,ed,1.5);
+  rr(cx-s*.24,cy-s*.6,s*.48,s*.72,s*.14);fillStroke(col,ed,1.5);
+  [-1,1].forEach(d=>{rr(cx+d*s*.24-(d<0?s*.1:0),cy-s*.56,s*.1,s*.6,s*.05);fillStroke(col,ed,1.3);rr(cx+d*s*.12-s*.05,cy+s*.1,s*.11,s*.75,s*.05);fillStroke(col,ed,1.3)})}
+/* LDL particle */
+function ldl(x,y,r,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);circ(x,y,r,C.ldl,hexA(C.ink,.45),1);circ(x,y,r*.55,hexA(C.chol,.8));
+  ctx.beginPath();ctx.arc(x,y,r+1.5,-.6,1.1);ctx.strokeStyle=C.enz;ctx.lineWidth=2.4;ctx.stroke();ctx.restore()}
+/* pill / tablet */
+function tablet(x,y,r,col){circ(x,y,r,col||C.panel,hexA(C.ink,.5),1.3);line(x-r*.7,y,x+r*.7,y,hexA(C.ink,.35),1.2)}
+/* syringe icon */
+function syringe(x,y,s,f,col){ctx.save();ctx.translate(x,y);rr(-s,-s*.22,s*1.6,s*.44,3);fillStroke(C.panel,C["ink-soft"],1.4);ctx.fillStyle=hexA(col||C.drug,.75);ctx.fillRect(-s+2+(s*1.6-4)*(1-clamp(f,0,1)),-s*.22+2,(s*1.6-4)*clamp(f,0,1),s*.44-4);
+  line(s*.6,0,s*1.05,0,C["ink-soft"],2);line(-s-s*.5*(1-f),0,-s,0,C["ink-soft"],3);line(-s-s*.5*(1-f),-s*.25,-s-s*.5*(1-f),s*.25,C["ink-soft"],3);ctx.restore()}
+/* status tag */
+function tag(x,y,t,col,o){o=o||{};ctx.font=`700 ${o.size||11.5}px ${MONO}`;const w=ctx.measureText(t).width;rr(x-(o.align==="center"?w/2+7:0),y-10,w+14,20,10);ctx.fillStyle=col;ctx.fill();
+  ctx.fillStyle=onFill();ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(t,x-(o.align==="center"?w/2:-7),y+.5);return w+14}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("heart-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("heart-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+function setStatus(el,cls,t){el.className="status "+(cls||"");el.textContent=t}
+function readRows(el,rows){el.querySelector("tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td${r[2]?` class="${r[2]}"`:""}>${r[1]}</td></tr>`).join("")}
+const r0=x=>Math.round(x);
+
+/* ================= PART 1a: heart failure simulator ================= */
+const S1=makeStage("cvHF",820,500);
+const HFD=[
+ ["diu","Loop diuretic","furosemide","removes extra salt and water: lower preload"],
+ ["ace","ACE inhibitor","lisinopril","blocks angiotensin II and aldosterone: lower afterload, less remodeling"],
+ ["bb","Beta blocker (HF-approved)","metoprolol succinate","slows the rate and shields the heart from norepinephrine"],
+ ["dig","Digoxin","digoxin","a little stronger squeeze, slower AV node"],
+ ["nit","Nitrate","nitroglycerin","widens veins: lower preload"],
+ ["ino","IV inotrope (hospital)","dobutamine","beta-1 push: much stronger squeeze, faster rate"]];
+const HF={sev:1,on:{},months:false,cur:null,base:null,done:new Set(),lastMsg:""};
+const HFCH=["Clear the lung congestion (lung fluid under 30%).","Clear the congestion and keep the systolic BP at 90 or above.","Stack enough preload and afterload reducers to drop the systolic BP under 90. This is why BP is checked before each dose.","Run digoxin together with the loop diuretic and find the low-potassium warning.","Bring the heart rate under 80 without the inotrope.","Use an ACE inhibitor and a beta blocker, then jump ahead 3 months and watch the squeeze improve."];
+function hfModel(on,sev,months){const c0=[.75,.6,.45][sev],p0=[.74,.82,.9][sev],a0=[.66,.75,.84][sev],h0=[88,96,104][sev],n0=[.6,.75,.9][sev];
+  let c=c0,p=p0,a=a0,hr=h0,n=n0,K=4.2,risk=.1,dil=.35+.25*sev;
+  if(on.diu){p-=.26;K-=.8;n+=.08}
+  if(on.ace){a-=.2;p-=.06;K+=.4;n-=.25;if(months){c+=.06;dil-=.12}}
+  if(on.bb){hr-=22;n-=.2;if(months){c+=.1;dil-=.15}else c-=.03}
+  if(on.dig){c+=.12;hr-=8;risk+=.1}
+  if(on.nit){p-=.2;a-=.05}
+  if(on.ino){c+=.28;hr+=14;a-=.1;risk+=.35}
+  c=clamp(c,.2,1.1);p=clamp(p,.22,1);a=clamp(a,.3,1);hr=clamp(hr,48,140);n=clamp(n,.05,1);dil=clamp(dil,0,1);
+  if(on.dig&&K<3.5)risk+=.35;
+  const SV=150*c*(1-Math.exp(-3.2*p))/(1+1.4*a),CO=SV*hr/1000,raw=CO*(4+28*a),MAP=(raw>92?92+(raw-92)*.3:92+(raw-92)*.5)-120*Math.max(0,.4-p),PP=20+SV*.4;
+  const SBP=MAP+PP*.6,DBP=MAP-PP*.4,lung=clamp((p-.42-.25*c)/.35,0,1),legs=clamp((p-.5)/.4,0,1);
+  return {c,p,a,hr,n,K,risk:clamp(risk,0,1),dil,SV,CO,SBP,DBP,lung,legs}}
+function hfSV(c,a,p){return 150*c*(1-Math.exp(-3.2*p))/(1+1.4*a)}
+function hfTarget(){return hfModel(HF.on,HF.sev,HF.months)}
+function hfDrugsUI(){const el=$("#hfDrugs");el.innerHTML="";
+  HFD.forEach(d=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.setAttribute("aria-pressed",String(!!HF.on[d[0]]));
+    b.innerHTML=`<b>${d[1]}</b> (${d[2]})<small>${d[3]}</small>`;b.onclick=()=>{HF.on[d[0]]=!HF.on[d[0]];b.setAttribute("aria-pressed",String(!!HF.on[d[0]]));hfChanged()};el.appendChild(b)});
+  const m=document.createElement("button");m.type="button";m.className="tbtn";m.id="hfMonths";m.setAttribute("aria-pressed",String(HF.months));
+  m.innerHTML=`<b>Jump ahead 3 months</b><small>see slow, long-term effects of the drugs that block neurohormones</small>`;m.onclick=()=>{HF.months=!HF.months;m.setAttribute("aria-pressed",String(HF.months));hfChanged()};el.appendChild(m)}
+function hfChanged(){const sevN=["mild","moderate","severe"][HF.sev];$("#hfSevOut").textContent=sevN;HF.tgt=hfTarget();HF.base=hfModel({},HF.sev,false);if(!HF.cur)HF.cur=Object.assign({},HF.tgt);hfCheck();a11yKey=""}
+function hfRead(){const m=HF.cur,t=HF.tgt;
+  readRows($("#hfRead"),[["Stroke volume (per beat)",r0(t.SV)+" mL"],["Cardiac output",t.CO.toFixed(1)+" L/min"],["Blood pressure",r0(t.SBP)+"/"+r0(t.DBP)+" mm Hg"],["Heart rate",r0(t.hr)+" /min"],["Potassium (K⁺)",t.K.toFixed(1)+" mEq/L"+(t.K<3.5?" low":t.K>5?" high":"")],["Lung fluid",r0(t.lung*100)+"%"],["Leg swelling",r0(t.legs*100)+"%"]])}
+function hfCheck(){const t=HF.tgt,on=HF.on,d=HF.done,st=$("#hfStatus");const n=Object.keys(on).filter(k=>on[k]).length;
+  if(t.lung<.3)d.add(0);if(t.lung<.3&&t.SBP>=90)d.add(1);if(t.SBP<90)d.add(2);if(on.dig&&on.diu&&t.K<3.5)d.add(3);if(t.hr<80&&!on.ino)d.add(4);if(on.ace&&on.bb&&HF.months)d.add(5);
+  let cls="",msg;
+  if(t.SBP<90)[cls,msg]=["bad",`Systolic BP ${r0(t.SBP)}: too low. Too much preload and afterload reduction at once. The patient may be dizzy and fall. Nurses check BP before these drugs and hold or call per the order.`];
+  else if(on.dig&&t.K<3.5)[cls,msg]=["bad",`K⁺ ${t.K.toFixed(1)} is low because of the loop diuretic. Low K⁺ lets more digoxin bind the pump, so toxicity and arrhythmias become more likely. Check K⁺ and report it.`];
+  else if(on.ino)[cls,msg]=["warn","The inotrope makes the squeeze much stronger, but the rate rises and arrhythmias become more likely. It is a short-term IV drug in the hospital, on a continuous monitor."+(HF.months?" Long-term inotropes do not help people live longer.":"")];
+  else if(on.bb&&!HF.months)[cls,msg]=["warn","Day 1 of the beta blocker: the rate falls and the squeeze can dip a little at first. That is why it is started low and raised slowly. Jump ahead 3 months to see the payoff."];
+  else if(n===0)[cls,msg]=["",HF.sev===0?"No drugs yet. A mildly weak heart: some fluid backs up. Add a drug to see what it changes.":"No drugs yet. The weak ventricle is overfilled, fluid backs up into the lungs and legs, and the body's alarm hormones squeeze the arteries. Add a drug."];
+  else if(t.lung<.3)[cls,msg]=["good",`Lungs clearer (fluid ${r0(t.lung*100)}%), BP ${r0(t.SBP)}/${r0(t.DBP)}. Keep watching daily weight, K⁺, BP and heart rate.`];
+  else [cls,msg]=["",`Lung fluid ${r0(t.lung*100)}%. ${on.diu?"":"A loop diuretic is the main drug for removing fluid. "}Keep adjusting.`];
+  if(HF.months&&!(on.ace||on.bb)&&cls!=="bad")msg+=" Three months have passed, but without drugs that block the alarm hormones the heart keeps remodeling.";
+  setStatus(st,cls,msg);hfRead();chalUI($("#hfChal"),HFCH,d)}
+function hfStep(dt){const c=HF.cur,t=HF.tgt;const k=1-Math.exp(-dt*1.6);for(const key in t)c[key]+=(t[key]-c[key])*k}
+/* patient figure */
+function hfBody(x,y,T,m){panelBox(x,y,240,480);title(x+12,y+18,"Patient");
+  const cx=x+120;const sk=C.skin,ed=C["skin-edge"];
+  // legs with ankle swelling
+  [-1,1].forEach(s=>{const lx=cx+s*24;rr(lx-13,y+300,26,140,10);fillStroke(sk,ed,1.5);
+    const sw=m.legs;if(sw>.02){ell(lx,y+412,13+sw*7,20+sw*5,0,mix(sk,C.fluid,.22*sw+.05),ed,1.5);for(let i=0;i<3;i++)circ(lx-6+i*6,y+412,1.6+sw,hexA(C["skin-edge"],.5*sw))}
+    ell(lx+s*6,y+446,20,9,0,sk,ed,1.5)});
+  // arms
+  [-1,1].forEach(s=>{ctx.save();ctx.translate(cx+s*56,y+120);ctx.rotate(-s*.12);rr(-10,0,20,150,10);fillStroke(sk,ed,1.5);ctx.restore()});
+  // torso
+  rr(cx-56,y+110,112,200,26);fillStroke(sk,ed,1.8);
+  // neck with jugular vein
+  rr(cx-14,y+86,28,30,6);fillStroke(sk,ed,1.5);const jv=2+m.p*6;line(cx+6,y+88,cx+6,y+116,hexA(C.vein,.35+.6*clamp((m.p-.5)/.4,0,1)),jv);
+  circ(cx,y+62,28,sk,ed,1.8);
+  // lungs and heart
+  lungs(cx,y+190,104,m.lung*.9,T);
+  heart(cx+14,y+236,40,T,{hr:m.hr,force:m.c,size:1+.2*m.dil});
+  // kidneys
+  [-1,1].forEach(s=>{ell(cx+s*34,y+286,7,11,s*.2,hexA(C.liver,.55),hexA(C.ink,.3),1)});
+  if(HF.on.diu){for(let i=0;i<4;i++){const p=P(T*.9+i*.25,1);circ(cx+(i%2?8:-8),y+300+p*60,3,hexA(C.fluid,1-p))}txt(cx,y+372,"more urine",{size:11.5,weight:700,align:"center",color:C["ink-soft"]})}
+  // labels
+  const lz=m.lung>.45?"crackles, short of breath":m.lung>.2?"some crackles":"clear";lead(cx-34,y+204,x+16,y+150,"Lungs: "+lz,{align:"left",size:11.5});
+  lead(cx+6,y+100,x+150,y+84,m.p>.72?"Neck veins: full":"Neck veins: flat",{align:"left",size:11.5});
+  lead(cx+24,y+412,x+150,y+470-12,m.legs>.4?"Ankles: swollen":m.legs>.12?"Ankles: mild":"Ankles: normal",{align:"left",size:11.5})}
+/* heart panel */
+function hfHeart(x,y,T,m){panelBox(x,y,290,300);title(x+12,y+18,"Heart and vessels");
+  const cx=x+140,cy=y+160;
+  // preload: vein filling
+  const vr=6+m.p*10;vessel(x+16,y+66,94,vr,{col:C.vein,T,flow:.2});txt(x+16,y+36,"Vein: preload",{size:12,weight:700});txt(x+16,y+66+vr+18,m.p>.7?"overfilled":m.p>.45?"filled":"low",{size:11.5,color:C["ink-soft"],weight:600});
+  // afterload: artery radius shrinks as afterload rises
+  const ar=5+(1-m.a)*12;vessel(x+186,y+66,94,ar,{col:C.art,T,flow:.3});txt(x+280,y+36,"Artery: afterload",{size:12,weight:700,align:"right"});txt(x+280,y+66+ar+18,m.a>.65?"squeezed tight":m.a>.48?"moderate":"relaxed",{size:11.5,color:C["ink-soft"],weight:600,align:"right"});
+  const k=heart(cx,cy+18,112,T,{hr:m.hr,force:clamp(m.c,0,1.1),size:1+.25*m.dil,cav:1+.25*m.dil});
+  // drug chips at their targets
+  const chips=[];if(HF.on.dig)chips.push(["digoxin","dig"]);if(HF.on.ino)chips.push(["dobutamine","ino"]);if(HF.on.bb)chips.push(["metoprolol","bb"]);
+  chips.forEach((c,i)=>{const a=-2.4+i*.9+Math.sin(T*1.5+i)*.05;drugTok(cx+Math.cos(a)*78,cy+18+Math.sin(a)*70+20,8,{})});
+  if(chips.length)txt(cx,y+272,"On the heart: "+chips.map(c=>c[0]).join(", "),{size:11.5,weight:700,align:"center",color:C.drug});
+  if(HF.on.nit){drugTok(x+60,y+66,7,{})}if(HF.on.ace){drugTok(x+232,y+66,7,{})}
+  const sq=m.c>.8?"strong":m.c>.55?"fair":"weak";txt(cx,y+290,"Squeeze: "+sq+"  ·  rate "+r0(m.hr)+" /min",{size:12,weight:700,align:"center"})}
+/* Frank-Starling panel */
+function hfStarling(x,y,m){panelBox(x,y,250,300);title(x+12,y+18,"Frank-Starling curve");
+  const gx=x+46,gy=y+40,gw=188,gh=200;line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);line(gx,gy,gx,gy+gh,C["ink-soft"],1.4);
+  txt(gx+gw/2,gy+gh+16,"preload (filling) →",{size:11.5,align:"center",color:C["ink-soft"]});
+  ctx.save();ctx.translate(gx-30,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,"stroke volume →",{size:11.5,align:"center",color:C["ink-soft"]});ctx.restore();
+  // congestion zone
+  const cz=gx+gw*.72;ctx.fillStyle=hexA(C.fluid,.14);ctx.fillRect(cz,gy,gx+gw-cz,gh);txt(cz+4,gy+gh-10,"congestion",{size:11,weight:700,color:C["ink-soft"]});
+  const X=p=>gx+gw*clamp((p-.15)/.9,0,1),Y=sv=>gy+gh-gh*clamp(sv/90,0,1);
+  plotFn(p=>hfSV(1,.5,p),.15,1.05,gx,gy,gw,gh,0,90,C.good,2.4);
+  plotFn(p=>hfSV(m.c,m.a,p),.15,1.05,gx,gy,gw,gh,0,90,C.bad,2.4);
+  txt(X(.42),Y(hfSV(1,.5,.42))-14,"healthy",{size:11.5,weight:700,align:"right",color:C.good});
+  txt(X(.42)+6,Y(hfSV(m.c,m.a,.42))+16,"this heart",{size:11.5,weight:700,align:"left",color:C.bad});
+  const b=HF.base;circ(X(b.p),Y(b.SV),6,C.panel,C["ink-soft"],2);
+  if(Math.hypot(X(b.p)-X(m.p),Y(b.SV)-Y(m.SV))>14)arrow(X(b.p),Y(b.SV),X(m.p)+(X(b.p)>X(m.p)?8:-8),Y(m.SV),hexA(C.drug,.8),2);
+  circ(X(m.p),Y(m.SV),7,C.drug,C.panel,2);
+  txt(x+12,y+282,"○ before drugs   ● now",{size:11.5,weight:600,color:C["ink-soft"]})}
+/* monitor + meters */
+function hfMonitor(x,y,T,m){panelBox(x,y,550,170);title(x+12,y+18,"Monitor and checks");
+  const lowBP=m.SBP<90;
+  vitalsBox(x+12,y+30,260,64,[["HR",r0(m.hr),"#4FD08A","/min"],["BP",r0(m.SBP)+"/"+r0(m.DBP),lowBP?"#F07A62":"#E8EEF1","mm Hg"],["SV",r0(m.SV),"#8FC0EC","mL"]]);
+  ecgStrip(x+12,y+100,260,60,t=>ecgAt(t,{hr:m.hr,st:HF.on.dig?"dig":null}),T,{secs:4,label:"Lead II"});
+  const mx=x+290,mw=246;
+  meter(mx,y+36,mw,"Lung fluid",m.lung,C.fluid,r0(m.lung*100)+"%");
+  meter(mx,y+68,mw,"Alarm hormones (RAAS, SNS)",m.n,C.aldo,m.n>.6?"high":m.n>.35?"medium":"low");
+  meter(mx,y+100,mw,"Potassium (K⁺)",(m.K-2.5)/3,m.K<3.5||m.K>5?C.bad:C.good,m.K.toFixed(1),{zone:[(3.5-2.5)/3,(5-2.5)/3]});
+  meter(mx,y+132,mw,"Arrhythmia risk",m.risk,m.risk>.5?C.bad:m.risk>.3?C.warn:C.good,m.risk>.5?"high":m.risk>.3?"raised":"low")}
+function drawHF(now){use(S1);const T=now/1000;const m=HF.cur;
+  hfBody(10,10,T,m);hfHeart(260,10,T,m);hfStarling(560,10,m);hfMonitor(260,320,T,m);
+  $("#hfCap").textContent=`Stroke volume ${r0(m.SV)} mL, BP ${r0(m.SBP)}/${r0(m.DBP)}, heart rate ${r0(m.hr)}. Lung fluid ${r0(m.lung*100)}%.`}
+function hfA11y(){const t=HF.tgt;const on=HFD.filter(d=>HF.on[d[0]]).map(d=>d[2]);
+  return [`Heart failure simulator: ${on.length?"on "+on.join(", "):"no drugs"}. Stroke volume ${r0(t.SV)} mL, blood pressure ${r0(t.SBP)} over ${r0(t.DBP)}, heart rate ${r0(t.hr)}.`,
+   `Left: a patient figure. The lungs are ${t.lung>.45?"half filled with blue fluid":t.lung>.2?"partly filled with blue fluid":"mostly clear"}, the neck vein is ${t.p>.72?"full":"flat"} and the ankles are ${t.legs>.4?"swollen":t.legs>.12?"a little swollen":"normal"}. Middle: a beating heart that is ${t.dil>.5?"enlarged":"near normal size"} with a ${t.c>.8?"strong":t.c>.55?"fair":"weak"} squeeze; the vein above it is ${t.p>.7?"overfilled":"less full"} and the artery is ${t.a>.65?"squeezed narrow":"relaxed and wider"}. Right: a Frank-Starling graph with a green healthy curve, a red curve for this heart, a hollow dot before drugs and a violet dot now. Bottom: a monitor and bars for lung fluid, alarm hormones, potassium ${t.K.toFixed(1)} and arrhythmia risk.`]}
+
+/* ================= PART 1b: digoxin level simulator ================= */
+const S1b=makeStage("cvDig",820,520);
+const DAYS=21,DT=.02;
+const KIDN=[["normal",1.6],["mildly reduced",2.6],["moderately reduced",3.6],["severely reduced",5]];
+const IXD=[["none","None"],["amio","Amiodarone"],["vera","Verapamil"]];
+const DG={dose:2,kid:0,K:4.2,ix:"none",hold:null,fab:null,day:0,play:true,curve:null,done:new Set()};
+const DGCH=["Keep the level inside the usual range through day 21 with normal kidneys and normal K⁺.","Lower kidney function and watch the level climb into the toxic zone.","Drop K⁺ under 3.5 and see toxicity at a level that is usually fine.","Add amiodarone and see the digoxin level rise.","When the level is toxic, give digoxin immune fab.","Hold doses when the apical pulse is under 60."];
+function dgThalf(){let h=KIDN[DG.kid][1];if(DG.ix==="amio")h*=1.7;if(DG.ix==="vera")h*=1.5;return h}
+function dgThresh(){return 2-Math.max(0,3.5-DG.K)*.6}
+function dgCurve(){const k=Math.LN2/dgThalf(),ka=2.5,D=.24*DG.dose;let A=0,L=0;const out=[];const n=Math.round(DAYS/DT);
+  for(let i=0;i<=n;i++){const t=i*DT;const day=Math.round(t*1000)/1000;
+    if(Math.abs(day-Math.round(day))<1e-6&&day<DAYS){const dd=Math.round(day);if(!(DG.hold!=null&&dd>=DG.hold)&&!(DG.fab!=null&&dd>=DG.fab))A+=D}
+    out.push(L);const dA=-ka*A,dL=ka*A-k*L;A+=dA*DT;L+=dL*DT;if(DG.fab!=null&&t>=DG.fab)L*=Math.exp(-14*DT)}
+  return out}
+function dgLevel(day){const c=DG.curve;const i=clamp(day/DT,0,c.length-1);const i0=Math.floor(i),f=i-i0;return lerp(c[i0],c[Math.min(c.length-1,i0+1)],f)}
+function dgState(day){const L=dgLevel(day),th=dgThresh(),tox=L/th;let hr=84;if(L>.5)hr=84-clamp((L-.5)/1.5,0,1)*14;if(tox>1)hr=clamp(66-(tox-1)*40,38,60);
+  const bigem=tox>1.05,block=tox>1.4,dig=L>.6,pr=tox>1?.24+.04*clamp(tox-1,0,1):L>.6?.18:.16;return {L,th,tox,hr,bigem,block,dig,pr}}
+function dgECG(t,s){const RR=60/s.hr;const k=Math.floor(t/RR);let v=0;
+  for(let j=k-2;j<=k;j++){const d=t-j*RR;if(d<-.1||d>1.4)continue;
+    if(s.block&&((j%3)+3)%3===2){v+=.15*gs(d-.045,.02);continue}
+    if(s.bigem&&((j%2)+2)%2===1){const e=d-.1;v+=-.12*gs(e-.0,.02)+.95*gs(e-.06,.035)-.55*gs(e-.15,.04)-.32*gs(e-.38,.07);continue}
+    v+=ecgBeat(d,{pr:s.pr,st:s.dig?"dig":null,tAmp:s.dig?.18:.3})}return v}
+function dgUI(){$("#digDoseOut").textContent=["0.5×","1× (usual)","1.5×","2×"][DG.dose-1];$("#digKidOut").textContent=KIDN[DG.kid][0];
+  $("#digKOut").textContent=DG.K.toFixed(1)+" mEq/L"+(DG.K<3.5?" (low)":DG.K>5?" (high)":"");
+  $("#digHold").setAttribute("aria-pressed",String(DG.hold!=null));$("#digHold").textContent=DG.hold!=null?`Doses held from day ${DG.hold} (resume)`:"Hold doses from today";
+  $("#digPlay").textContent=DG.play?"Pause":(DG.day>=DAYS?"Play again":"Play")}
+function dgChanged(){DG.curve=dgCurve();dgUI();a11yKey=""}
+function dgRead(){const s=dgState(DG.day);const zone=s.tox>1?"toxic":s.L>2?"above range":s.L>=.5?"in usual range":"below range";
+  readRows($("#digRead"),[["Day",DG.day.toFixed(1)],["Digoxin level",s.L.toFixed(2)+" ng/mL ("+zone+")"],["Toxic line now",s.th.toFixed(2)+" ng/mL"],["Apical pulse",r0(s.hr)+" /min"+(s.bigem?", irregular":"")],["Half-life in this patient","about "+dgThalf().toFixed(1)+" days"]]);
+  const d=DG.done,st=$("#digStatus");const fullRun=DG.day>=DAYS-.05;
+  if(fullRun&&DG.kid===0&&DG.K>=3.5&&DG.hold==null&&DG.fab==null){let ok=true;for(let t=6;t<=DAYS-.5;t+=.25){const L=dgLevel(t);if(L<.5||L>2){ok=false;break}}if(ok)d.add(0)}
+  if(DG.kid>=2&&s.tox>1)d.add(1);if(DG.K<3.5&&s.tox>1&&s.L<=2)d.add(2);if(DG.ix==="amio"&&s.L>1.3)d.add(3);
+  let cls="",msg;
+  if(DG.fab!=null&&DG.day>=DG.fab)[cls,msg]=["good","Digoxin immune fab binds free digoxin in the blood, so it can no longer reach the pumps. The rhythm settles within hours. Watch K⁺ closely, because it can drop as the pumps start working again."];
+  else if(s.tox>1)[cls,msg]=["bad",`Toxic. Watch for nausea and vomiting, poor appetite, blurred or yellow-green vision with halos, confusion, and a slow or irregular pulse. Hold the dose, report, get a level and K⁺, and keep the patient on a monitor.${s.L<=2?" Notice the level is not above 2: low K⁺ made a usual level toxic.":""}`];
+  else if(s.L>2)[cls,msg]=["warn","Above the usual range. Report it; toxicity is likely if anything else tips the balance, such as low K⁺."];
+  else if(s.hr<60)[cls,msg]=["warn",`Apical pulse ${r0(s.hr)}. A common order is to hold digoxin and notify the prescriber when the apical pulse is under 60.`];
+  else if(s.L>=.5)[cls,msg]=["good",`In the usual range. Steady state takes about 4 to 5 half-lives: here, about ${r0(dgThalf()*4.5)} days.`];
+  else [cls,msg]=["","Below the usual range. Digoxin builds up slowly because of its long half-life."];
+  setStatus(st,cls,msg);chalUI($("#digChal"),DGCH,d)}
+function dgStep(dt){if(!DG.play)return;DG.day=Math.min(DAYS,DG.day+dt*1.0);if(DG.day>=DAYS){DG.play=false;dgUI()}}
+/* drawing */
+function drawDig(now){use(S1b);const T=now/1000;const s=dgState(DG.day);s.fabbed=DG.fab!=null&&DG.day>=DG.fab+.1;DG.lastState=s;
+  // graph
+  panelBox(10,10,800,300);title(22,28,"Digoxin level over three weeks");
+  const gx=64,gy=44,gw=726,gh=226,ymax=4;const X=d=>gx+gw*d/DAYS,Y=v=>gy+gh-gh*clamp(v/ymax,0,1);
+  ctx.fillStyle=hexA(C.good,.16);ctx.fillRect(gx,Y(2),gw,Y(.5)-Y(2));
+  ctx.fillStyle=hexA(C.bad,.14);ctx.fillRect(gx,gy,gw,Y(s.th)-gy);line(gx,Y(s.th),gx+gw,Y(s.th),C.bad,1.6,[6,4]);
+  txt(gx+gw-6,Y(s.th)-10,"toxic zone"+(s.th<2?" (lowered by low K⁺)":""),{size:11.5,weight:700,align:"right",color:C.bad});
+  txt(gx+gw-6,Y(.5)-10,"usual range 0.5 to 2",{size:11.5,weight:700,align:"right",color:C.good});
+  for(let v=0;v<=ymax;v++){line(gx-4,Y(v),gx,Y(v),C["ink-soft"],1.2);txt(gx-8,Y(v),String(v),{size:11.5,align:"right",mono:true,color:C["ink-soft"]})}
+  ctx.save();ctx.translate(24,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,"ng/mL",{size:11.5,align:"center",color:C["ink-soft"]});ctx.restore();
+  line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);line(gx,gy,gx,gy+gh,C["ink-soft"],1.4);
+  for(let d=0;d<=DAYS;d+=3)txt(X(d),gy+gh+14,"day "+d,{size:11.5,align:"center",color:C["ink-soft"]});
+  // doses
+  for(let d=0;d<DAYS;d++){const held=(DG.hold!=null&&d>=DG.hold)||(DG.fab!=null&&d>=DG.fab);const x=X(d),y=gy+gh-8;if(held)circ(x,y,4,C.panel,C.gold,1.6);else circ(x,y,4,C.gold,hexA(C.ink,.4),1)}
+  // curve to cursor
+  plotFn(t=>dgLevel(t),0,DAYS,gx,gy,gw,gh,0,ymax,hexA(C.drug,.18),2,[4,4]);
+  plotFn(t=>dgLevel(t),0,DAYS,gx,gy,gw,gh,0,ymax,C.drug,3,null,DG.day);
+  for(let d=1;d<=Math.floor(DG.day);d++){const v=dgLevel(d-.001);circ(X(d),Y(v),3.2,C.panel,C.drug,1.6)}
+  if(DG.fab!=null){const x=X(DG.fab);line(x,gy,x,gy+gh,C.rec,1.6,[3,3]);label(x,gy+12,"fab given",{size:11.5,weight:700,color:C.rec})}
+  if(DG.hold!=null){const x=X(DG.hold);line(x,gy,x,gy+gh,C.gold,1.6,[3,3]);label(x,gy+34,"doses held",{size:11.5,weight:700,color:C["gold-ink"]})}
+  const cx=X(DG.day);line(cx,gy,cx,gy+gh,hexA(C.ink,.35),1.2);circ(cx,Y(s.L),6,C.drug,C.panel,2);
+  label(clamp(cx,gx+60,gx+gw-60),Y(s.L)-18>gy+10?Y(s.L)-18:Y(s.L)+18,s.L.toFixed(2)+" ng/mL",{size:12,weight:700,mono:true,border:C.drug});
+  // ECG
+  panelBox(10,320,330,190);title(22,338,"Monitor");
+  ecgStrip(22,350,306,96,t=>dgECG(t,s),T,{secs:4,label:"Lead II"});
+  vitalsBox(22,452,306,50,[["Apical",r0(s.hr)+"/min",s.hr<60?"#F07A62":"#4FD08A"],["Rhythm",s.block?"block":s.bigem?"PVCs":s.dig?"scooped ST":"normal",s.tox>1?"#F2B33B":"#E8EEF1"]]);
+  // pump inset
+  panelBox(350,320,210,190);title(362,338,"Na⁺/K⁺ pumps");
+  const occ=s.L/(s.L+.9*(DG.K/4.2));const nOn=Math.round(occ*5);membraneH(362,548,420);
+  for(let i=0;i<5;i++){const px=378+i*38;rr(px-11,402,22,36,6);fillStroke(i<nOn?mix(C.rec,C.blk,.5):C.rec,hexA(C.ink,.4),1.2);
+    if(i<nOn)drugTok(px,394,7,{});else{const p=P(T*.7+i*.21,1);ion(px,392-p*16,"k",5,{a:1-p})}}
+  txt(455,456,`${nOn} of 5 blocked by digoxin`,{size:11.5,weight:700,align:"center"});
+  wrapText(DG.K<3.5?"Low K⁺: fewer K⁺ ions compete, so more digoxin binds.":"K⁺ and digoxin compete for the same spot.",366,478,186,15,{size:11.5,color:C["ink-soft"]});
+  // symptoms
+  panelBox(570,320,240,190);title(582,338,"Signs of toxicity");
+  const on=s.tox>.92;const S=[["Nausea, vomiting, poor appetite","n"],["Yellow-green vision, halos","v"],["Confusion, weakness","c"],["Slow or irregular pulse","p"]];
+  S.forEach((q,i)=>{const y=362+i*36;const lit=on&&(i<3?s.tox>.92+i*.05:s.hr<60||s.bigem);rr(580,y-14,220,30,6);ctx.fillStyle=lit?hexA(C.bad,.16):hexA(C["panel-2"],.9);ctx.fill();if(lit){ctx.strokeStyle=C.bad;ctx.lineWidth=1.3;ctx.stroke()}
+    if(q[1]==="v"){circ(596,y+1,8,C.panel,lit?C.gold:C["ink-soft"],lit?3:1.3);circ(596,y+1,3,C.ink)}else if(q[1]==="n"){ell(596,y+2,8,6,0,lit?mix(C.panel,C.cgmp,.4):C.panel,C["ink-soft"],1.3)}else if(q[1]==="c"){circ(596,y+1,8,C.panel,C["ink-soft"],1.3);txt(596,y+1,"?",{size:11.5,weight:700,align:"center"})}else{heart(596,y+3,16,T,{hr:s.hr,still:false})}
+    txt(612,y+1,q[0],{size:11.5,weight:lit?700:500,color:lit?C.ink:C["ink-soft"]})});
+  $("#digCap").textContent=`Day ${DG.day.toFixed(1)}: level ${s.L.toFixed(2)} ng/mL, apical pulse ${r0(s.hr)}.`}
+function digA11y(){const s=DG.lastState||dgState(DG.day);const zone=s.tox>1?"in the toxic zone":s.L>2?"above the usual range":s.L>=.5?"in the usual range":"below the usual range";
+  const db=Math.round(DG.day*2)/2;
+  return [`Digoxin simulator, day ${db}. Level ${s.L.toFixed(1)} nanograms per mL, ${zone}. Apical pulse ${r0(s.hr)}.`,
+   `A graph shows the violet digoxin level rising in a saw-tooth pattern with one gold dose dot per day, ${zone} at day ${db}. A green band marks the usual range from 0.5 to 2, and a red dashed toxic line sits at ${s.th.toFixed(1)}${s.th<2?", lowered because potassium is low":""}. Below, the monitor shows ${s.block?"dropped beats from heart block":s.bigem?"extra wide beats (PVCs) between normal beats":s.dig?"a scooped ST segment, the usual digoxin effect":"a normal rhythm"}, ${Math.round(s.L/(s.L+.9*(DG.K/4.2))*5)} of 5 sodium-potassium pumps carry a digoxin token, and the toxicity signs are ${s.tox>.92?"lit up in red":"not lit"}.`]}
+
+/* ================= PART 2: rhythm strip lab ================= */
+const S2=makeStage("cvRhy",760,480);
+const INF=1e9;
+const RDR=[["ado","Adenosine","AV node blocker","Opens K⁺ channels in the AV node, so the node goes silent for a few seconds.","node","ado"],
+ ["atr","Atropine","Anticholinergic","Blocks muscarinic receptors, so the vagus nerve can no longer brake the SA and AV nodes.","node","atr"],
+ ["met","Metoprolol","Class II · beta blocker","Blocks beta-1 receptors. Phase 4 rises more slowly and the AV node conducts more slowly.","node","beta"],
+ ["dil","Diltiazem","Class IV · Ca²⁺ channel blocker","Blocks L-type Ca²⁺ channels in the SA and AV nodes: slower phase 0, slower conduction.","node","ca"],
+ ["amio","Amiodarone","Class III · K⁺ channel blocker","Blocks K⁺ channels (and some Na⁺, Ca²⁺ and beta). Phase 3 lasts longer, so the QT lengthens.","vent","k"],
+ ["lido","Lidocaine","Class Ib · Na⁺ channel blocker","Blocks fast Na⁺ channels, mostly in damaged, fast-firing ventricular cells. Phase 0 is less steep.","vent","na"],
+ ["dig","Digoxin","Na⁺/K⁺ pump inhibitor","Raises vagal tone at the AV node. Conduction slows, but over hours, not seconds.","node","dig"],
+ ["mg","Magnesium sulfate","Membrane stabilizer","Calms the cell membrane and stops early afterdepolarizations in phase 2 and 3.","vent","mg"]];
+const B="BASE";
+const RSC=[
+{name:"SVT",who:"Ben, 34",title:"A racing, regular heartbeat",story:"Ben's heart suddenly started racing. The monitor shows a regular, narrow-complex rhythm at about 180 with no visible P waves. BP 118/76, alert and talking. Vagal maneuvers did not work.",
+ base:{kind:"svt",hr:180,bp:"118/76",name:"SVT at 180"},ap:"node",
+ hint:"The fast loop runs through the AV node. Which drug stops the AV node for a few seconds?",
+ d:{ado:[2,"Right. Adenosine opens K⁺ channels in the AV node and blocks it for a few seconds, which breaks the re-entry loop. The flat line is expected; adenosine's half-life is under 10 seconds.",[[1.2,B],[4.2,{base:"flat",bp:"112/70",name:"brief pause"}],[INF,{kind:"n",hr:82,bp:"120/78",name:"sinus rhythm at 82"}]],"Give it as a rapid IV push over 1 to 2 seconds into a large vein close to the heart, followed right away by a fast saline flush. Warn the patient first: brief chest pressure, flushing or a feeling of doom is common. Record a strip during the push."],
+  atr:[0,"Atropine removes the vagal brake on the SA and AV nodes, so the rate climbs. The rate is already too fast.",[[2,B],[INF,{kind:"svt",hr:196,bp:"108/70",name:"SVT faster at 196"}]]],
+  met:[1,"A beta blocker slows the AV node and is sometimes used if adenosine fails, but the first drug for stable SVT after vagal maneuvers is adenosine. Here the rate only slows a little.",[[3,B],[INF,{kind:"svt",hr:164,bp:"106/68",name:"SVT at 164"}]]],
+  dil:[1,"Diltiazem (class IV) can slow or stop SVT and is a second-line choice. Adenosine comes first. Here the rate only slows a little and the BP drifts down.",[[3,B],[INF,{kind:"svt",hr:160,bp:"100/64",name:"SVT at 160"}]]],
+  amio:[0,"Amiodarone is not a first-line drug for typical SVT. It acts slowly and has many toxicities.",[[INF,B]]],
+  lido:[0,"Lidocaine blocks Na⁺ channels in ventricular tissue. It does not touch the AV node loop that drives this SVT.",[[INF,B]]],
+  dig:[0,"Digoxin slows AV conduction over hours. That is far too slow for this.",[[INF,B]]],
+  mg:[0,"Magnesium is the drug for torsades de pointes, not a regular narrow-complex SVT.",[[INF,B]]]}},
+{name:"Slow and dizzy",who:"Ruth, 76",title:"A slow pulse and low blood pressure",story:"Ruth feels dizzy and nearly fainted. The monitor shows sinus bradycardia at 38 with a P wave before every QRS. BP 82/50, skin cool and pale. This is symptomatic bradycardia.",
+ base:{kind:"n",hr:38,bp:"82/50",pr:.18,name:"sinus bradycardia at 38"},ap:"node",
+ hint:"The vagus nerve slows the SA node through muscarinic receptors. Which drug blocks them?",
+ d:{atr:[2,"Right. Atropine blocks muscarinic receptors on the SA and AV nodes. The vagus nerve can no longer brake them, so phase 4 rises faster and the rate climbs.",[[1.5,B],[2,{kind:"n",hr:56,bp:"94/58",name:"sinus at 56"}],[INF,{kind:"n",hr:78,bp:"112/70",name:"sinus at 78"}]],"Give IV per protocol and watch the rate and BP. If atropine does not work, pacing or other drug infusions per protocol come next. Expect dry mouth, flushing, blurred vision and urinary retention."],
+  met:[0,"A beta blocker slows the SA node even more. The rate and BP fall further.",[[2,B],[INF,{kind:"n",hr:30,bp:"70/40",pr:.2,name:"sinus at 30"}]]],
+  dil:[0,"A calcium channel blocker slows the SA and AV nodes and widens arteries, so the rate and BP fall further.",[[2,B],[INF,{kind:"n",hr:31,bp:"68/40",pr:.22,name:"sinus at 31"}]]],
+  dig:[0,"Digoxin slows the AV node by raising vagal tone. That is the wrong direction.",[[3,B],[INF,{kind:"n",hr:34,bp:"78/48",pr:.22,name:"sinus at 34"}]]],
+  ado:[0,"Adenosine blocks the AV node and causes a pause. In a slow rhythm that is dangerous.",[[1,B],[3,{base:"flat",bp:"60/36",name:"pause"}],[INF,B]]],
+  amio:[0,"Amiodarone also slows the SA and AV nodes (it has beta and calcium blocking actions), so it would make this worse.",[[2.5,B],[INF,{kind:"n",hr:33,bp:"76/46",name:"sinus at 33"}]]],
+  lido:[0,"Lidocaine does not speed the SA node. It is for ventricular rhythms.",[[INF,B]]],
+  mg:[0,"Magnesium does not raise the heart rate.",[[INF,B]]]}},
+{name:"AFib, fast",who:"George, 68",title:"Atrial fibrillation with a fast ventricular rate",story:"George has palpitations. The monitor shows an irregularly irregular rhythm at about 150 with no P waves, only a wavy baseline. BP 124/80. His heart squeeze is normal. The goal right now is rate control.",
+ base:{kind:"af",hr:150,bp:"124/80",name:"AFib at 150"},ap:"node",
+ hint:"You want fewer impulses through the AV node. Two classes do this quickly: one blocks beta-1 receptors, one blocks L-type calcium channels.",
+ d:{dil:[2,"Right. Diltiazem (class IV) blocks L-type Ca²⁺ channels in the AV node, so fewer impulses pass and the rate drops. The rhythm stays AFib; the goal was rate control.",[[2.5,B],[INF,{kind:"af",hr:86,bp:"116/74",name:"AFib at 86"}]],"Check BP and pulse before and after. Watch for hypotension and heart block, and avoid it when the heart squeeze is weak. In AFib, anticoagulation is also considered to prevent stroke."],
+  met:[2,"Right. Metoprolol (class II) blocks beta-1 receptors, so the AV node conducts fewer impulses and the rate drops. The rhythm is still AFib, now at a safer rate.",[[2.5,B],[INF,{kind:"af",hr:84,bp:"114/72",name:"AFib at 84"}]],"Check the apical pulse and BP; hold and notify per order if they are too low. Use caution with asthma. In AFib, anticoagulation is also considered to prevent stroke."],
+  dig:[1,"Digoxin does slow the AV node, but its effect builds over hours. It is mainly used for rate control when heart failure or low BP rules out other drugs. Here the rate falls only a little.",[[4,B],[INF,{kind:"af",hr:122,bp:"122/78",name:"AFib at 122"}]]],
+  ado:[0,"Adenosine blocks the AV node for a few seconds. The rate slows briefly and the fibrillation waves show clearly, then the fast rate returns. It does not treat AFib.",[[1.2,B],[3,{kind:"af",hr:40,bp:"120/78",name:"brief slowing"}],[INF,B]]],
+  atr:[0,"Atropine removes vagal braking, so even more impulses pass the AV node.",[[2,B],[INF,{kind:"af",hr:170,bp:"118/76",name:"AFib at 170"}]]],
+  amio:[1,"Amiodarone can control the rate or convert AFib in some patients, but it is not the usual first drug for rate control because of its toxicities.",[[4,B],[INF,{kind:"af",hr:118,bp:"118/76",name:"AFib at 118"}]]],
+  lido:[0,"Lidocaine acts on ventricular Na⁺ channels. It has no useful effect on the AV node.",[[INF,B]]],
+  mg:[0,"Magnesium is for torsades. It will not control this rate.",[[INF,B]]]}},
+{name:"VT with a pulse",who:"Marcus, 58",title:"A wide, fast, regular rhythm",story:"Marcus had a heart attack two years ago. The monitor shows a wide-complex regular tachycardia at about 170: monomorphic ventricular tachycardia. He has a pulse, BP 104/68, and is awake.",
+ base:{kind:"vt",hr:170,bp:"104/68",name:"VT at 170"},ap:"vent",
+ hint:"This rhythm comes from the ventricles, not the AV node. Look for drugs that act on ventricular K⁺ or Na⁺ channels.",
+ d:{amio:[2,"Right. Amiodarone is mainly class III: it blocks K⁺ channels, so phase 3 and the refractory period last longer and the re-entry circuit cannot keep going. The QT is longer afterward.",[[3,B],[INF,{kind:"n",hr:84,qt:.46,bp:"118/74",name:"sinus at 84, longer QT"}]],"Keep him on a continuous monitor and check BP during the infusion. For long-term use, monitor the lungs, thyroid, liver and eyes, and watch interactions: it raises digoxin and warfarin levels. If the pulse is lost, start CPR and defibrillate."],
+  lido:[2,"Yes. Lidocaine (class Ib) blocks fast Na⁺ channels, mostly in damaged ventricular tissue, so phase 0 is less steep and the circuit stops. It is an alternative to amiodarone for stable VT.",[[3,B],[INF,{kind:"n",hr:84,bp:"116/74",name:"sinus at 84"}]],"Watch for central nervous system toxicity: numb lips, ringing ears, confusion or seizures. Keep him on a monitor."],
+  ado:[0,"Adenosine works on the AV node. This wide-complex rhythm comes from the ventricles, so it does not stop.",[[INF,B]]],
+  dil:[0,"A calcium channel blocker can drop the BP dangerously in VT and does not fix a ventricular rhythm.",[[2,B],[INF,{kind:"vt",hr:170,bp:"78/46",name:"VT at 170, BP falling"}]]],
+  met:[0,"A beta blocker is used later to help prevent arrhythmias, but it is not the drug to stop active VT.",[[INF,B]]],
+  atr:[0,"Atropine acts on the SA and AV nodes. It does not stop a ventricular rhythm.",[[INF,B]]],
+  dig:[0,"Digoxin toxicity can cause ventricular arrhythmias. It is never the treatment for VT.",[[INF,B]]],
+  mg:[0,"Magnesium is for torsades, a polymorphic VT with a long QT. This VT is monomorphic.",[[INF,B]]]}},
+{name:"Torsades",who:"Elena, 49",title:"A twisting, wide rhythm",story:"Elena takes a QT-prolonging drug. Her K⁺ and Mg²⁺ are low. Her earlier strip showed a long QT. Now the monitor shows runs of polymorphic VT whose QRS height twists up and down around the baseline: torsades de pointes. She still has a pulse, BP 86/52.",
+ base:{base:"tdp",bp:"86/52",name:"torsades de pointes"},ap:"vent",
+ hint:"Torsades is triggered by early afterdepolarizations in a long QT. One IV mineral stops them.",
+ d:{mg:[2,"Right. IV magnesium sulfate stabilizes the membrane and stops the early afterdepolarizations that trigger torsades, even when the Mg²⁺ level is normal.",[[3,B],[INF,{kind:"n",hr:76,qt:.5,bp:"112/70",name:"sinus at 76, QT still long"}]],"Stop QT-prolonging drugs, correct K⁺ and Mg²⁺, and watch the QTc. During magnesium, check BP, breathing and deep tendon reflexes. Torsades without a pulse needs defibrillation."],
+  amio:[0,"Amiodarone lengthens the QT even more, which feeds torsades.",[[INF,B]]],
+  lido:[0,"Magnesium is the first drug for torsades. Lidocaine does not fix the long QT trigger.",[[INF,B]]],
+  ado:[0,"Adenosine acts on the AV node. Torsades comes from the ventricles.",[[INF,B]]],
+  dil:[0,"A calcium channel blocker would lower the BP further and does not stop torsades.",[[2,B],[INF,{base:"tdp",bp:"70/40",name:"torsades, BP falling"}]]],
+  met:[0,"A beta blocker is not the treatment for active torsades.",[[INF,B]]],
+  atr:[0,"Atropine acts on the nodes. It will not stop torsades.",[[INF,B]]],
+  dig:[0,"Digoxin does not stop torsades and can add to ventricular irritability.",[[INF,B]]]}}];
+const RS={i:0,gives:[],beats:[],nextT:0,T:0,solved:{},first:{},wrong:{},last:null,hintOn:false};
+function rRegimeAt(t){const sc=RSC[RS.i];let g=null;for(const x of RS.gives)if(x.t<=t)g=x;if(!g)return sc.base;
+  let acc=g.t;for(const seg_ of sc.d[g.drug][2]){if(t<acc+seg_[0])return seg_[1]===B?sc.base:seg_[1];acc+=seg_[0]}return sc.base}
+const AFSEQ=[.82,1.25,.9,1.32,.7,1.12,.95,1.22,.76,1.06];
+function rGen(tEnd){let n=0;while(RS.nextT<tEnd&&n++<4000){const r=rRegimeAt(RS.nextT);if(r.base==="tdp"||r.base==="flat"){RS.nextT+=.05;continue}
+    RS.beats.push({t:RS.nextT,r});const RR=60/r.hr;RS.nextT+=r.kind==="af"?RR*AFSEQ[RS.beats.length%AFSEQ.length]:RR}
+  while(RS.beats.length&&RS.beats[0].t<RS.T-9)RS.beats.shift()}
+function rShape(r,d){if(r.kind==="vt")return -.15*gs(d-.02,.025)+1.0*gs(d-.09,.045)-.7*gs(d-.19,.05)-.28*gs(d-.3,.05);
+  if(r.kind==="svt")return ecgBeat(d,{noP:true,pr:.02,qt:.24,tAmp:.25});if(r.kind==="af")return ecgBeat(d,{noP:true,pr:.02,qt:.34});return ecgBeat(d,{pr:r.pr||.16,qt:r.qt||.38})}
+function rECG(t){const r=rRegimeAt(t);let v=0;
+  if(r.base==="tdp")v+=ecgAt(t,{mode:"tdp"});else if(r.base==="flat")v+=.01*Math.sin(t*9);else if(r.kind==="af")v+=.045*(Math.sin(TAU*6.3*t)+.7*Math.sin(TAU*8.9*t+1)+.5*Math.sin(TAU*4.7*t+2));
+  for(const b of RS.beats){const d=t-b.t;if(d>-.1&&d<1.2)v+=rShape(b.r,d)}return v}
+function rReset(){RS.gives=[];RS.beats=[];RS.nextT=RS.T-8;RS.last=null;rGen(RS.T+1);$("#rFb").className="fb";$("#rNurse").hidden=true;$("#rHintBox").hidden=true;rDrugBtns();a11yKey=""}
+function rUI(){const sc=RSC[RS.i];
+  $("#rScen").innerHTML=RSC.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===RS.i}" data-i="${i}">${i+1}. ${k.name}${RS.solved[i]?'<span class="ok" aria-label="fixed">✓</span>':""}</button>`).join("");
+  $("#rScen").querySelectorAll("button").forEach(b=>b.onclick=()=>{RS.i=+b.dataset.i;rUI()});
+  $("#rN").textContent=RS.i+1;$("#rT").textContent=RSC.length;$("#rSolved").textContent=Object.keys(RS.solved).length;$("#rFirst").textContent=Object.keys(RS.first).length;
+  $("#rWho").textContent=`Rhythm ${RS.i+1} · ${sc.who}`;$("#rTitle").textContent=sc.title;$("#rStory").textContent=sc.story;
+  $("#rNext").textContent=RS.i===RSC.length-1?"Back to rhythm 1 →":"Next rhythm →";rReset()}
+function rDrugBtns(){const el=$("#rDrugs");el.innerHTML="";RDR.forEach(d=>{const b=document.createElement("button");b.type="button";b.className="tbtn";const g=RS.last===d[0];
+  const res=RS.tried&&RS.tried[RS.i]&&RS.tried[RS.i][d[0]];if(res!=null)b.classList.add(res===2?"right":"wrong");
+  b.setAttribute("aria-pressed",String(g));b.innerHTML=`<b>${d[1]}</b><br><small>${d[2]}</small>`;b.onclick=()=>rGive(d[0]);el.appendChild(b)})}
+function rGive(k){const sc=RSC[RS.i];const o=sc.d[k];RS.tried=RS.tried||{};RS.tried[RS.i]=RS.tried[RS.i]||{};RS.tried[RS.i][k]=o[0];
+  RS.gives.push({t:RS.T+.15,drug:k});RS.last=k;RS.beats=RS.beats.filter(b=>b.t<RS.T+.15);RS.nextT=Math.max(RS.T+.15,RS.beats.length?RS.beats[RS.beats.length-1].t+.25:RS.T+.15);rGen(RS.T+1);
+  const fb=$("#rFb"),nm=RDR.find(d=>d[0]===k)[1];
+  if(o[0]===2){fb.className="fb show ok";fb.textContent="✓ "+o[1];if(!RS.solved[RS.i]){RS.solved[RS.i]=1;if(!RS.wrong[RS.i])RS.first[RS.i]=1}const n=$("#rNurse");n.hidden=false;n.innerHTML=`<b>Nursing care with ${nm.toLowerCase()}.</b> ${o[3]}`}
+  else{RS.wrong[RS.i]=1;fb.className="fb show no";fb.textContent=(o[0]===1?"Not the best first choice. ":"Not quite. ")+o[1]+(RS.gives.length>1?"":" (Pick another drug to try again; the earlier one is stopped for this practice.)");$("#rNurse").hidden=true}
+  $("#rSolved").textContent=Object.keys(RS.solved).length;$("#rFirst").textContent=Object.keys(RS.first).length;
+  $("#rScen").querySelectorAll("button").forEach((b,i)=>{if(RS.solved[i]&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="fixed">✓</span>')});rDrugBtns();a11yKey=""}
+/* action potential panel */
+function nodeAP(t,o){const RR=60/o.hr;const d=((t%RR)+RR)%RR;const up=o.up||.07,rep=.17;const p4=Math.max(.05,RR-up-rep);
+  if(o.silentAfter!=null&&t>o.silentAfter)return [-68,4];
+  if(d<up)return [lerp(-42,6,smooth(d/up)),0];if(d<up+rep)return [lerp(6,-62,smooth((d-up)/rep)),3];return [lerp(-62,-42,Math.pow((d-up-rep)/p4,1.2)),4]}
+function ventAP(t,o){const RR=1.0;const d=((t-.12)%RR+RR)%RR;let v=apVent(d,{up:o.up||.004,apd:o.apd||.28});
+  if(o.ead){const a=o.apd||.28;v+=22*gs(d-a*.86,.022)}return v}
+function rDrawAP(x,y,w,h,T){const sc=RSC[RS.i];const dk=RS.last;const dr=dk?RDR.find(d=>d[0]===dk):null;const kind=dr?dr[4]:sc.ap;const eff=dr?dr[5]:null;
+  panelBox(x,y,w,h);title(x+12,y+18,kind==="node"?"Nodal cell action potential":"Ventricular cell action potential");
+  const gx=x+46,gy=y+46,gw=w-60,gh=h-86,secs=2;const Y=v=>gy+gh-(v+95)/(135)*gh;
+  for(const v of [-90,-40,0,30]){if(v===30)continue;line(gx-4,Y(v),gx,Y(v),C["ink-soft"],1.2);txt(gx-8,Y(v),String(v),{size:11.5,mono:true,align:"right",color:C["ink-soft"]})}
+  txt(gx-8,gy-12,"mV",{size:11.5,mono:true,align:"right",color:C["ink-soft"]});line(gx,gy,gx,gy+gh,C["ink-soft"],1.2);line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.2);
+  let f0,f1,hl=null,hlab="";const baseHR=sc.base.hr||150;
+  if(kind==="node"){const hr0=clamp(baseHR,40,150)*0.6+30;f0=t=>nodeAP(t,{hr:hr0})[0];
+    if(eff==="beta"||eff==="dig"){f1=t=>nodeAP(t,{hr:hr0*.7})[0];hl=4;hlab=eff==="dig"?"slower AV conduction (vagal)":"phase 4 rises more slowly"}
+    else if(eff==="ca"){f1=t=>nodeAP(t,{hr:hr0*.75,up:.16})[0];hl=0;hlab="phase 0 (Ca²⁺ in) slower"}
+    else if(eff==="atr"){f1=t=>nodeAP(t,{hr:Math.min(150,hr0*1.5)})[0];hl=4;hlab="phase 4 rises faster"}
+    else if(eff==="ado"){f1=t=>nodeAP(t,{hr:hr0,silentAfter:.75})[0];hl="ado";hlab="K⁺ out: node held quiet"}
+    else f1=null}
+  else{const ead=sc.base.base==="tdp";f0=t=>ventAP(t,{ead});
+    if(eff==="k"){f1=t=>ventAP(t,{apd:.38});hl=3;hlab="phase 3 longer: longer QT"}
+    else if(eff==="na"){f1=t=>ventAP(t,{up:.03});hl=0;hlab="phase 0 less steep"}
+    else if(eff==="mg"){f1=t=>ventAP(t,{});hl=2;hlab="afterdepolarizations stopped"}
+    else f1=null}
+  // highlight band
+  if(hl!=null){let a=0,b=0;if(kind==="node"){if(hl===4){a=.3;b=.75}else if(hl===0){a=.0;b=.18}else{a=.75;b=2}}else{if(hl===0){a=.1;b=.17}else if(hl===2){a=.14;b=.36}else{a=.3;b=.55}}
+    ctx.fillStyle=hexA(C.gold,.22);ctx.fillRect(gx+gw*a/secs,gy,gw*(b-a)/secs,gh);label(clamp(gx+gw*(a+b)/2/secs,gx+100,gx+gw-100),gy+12,hlab,{size:11.5,weight:700,color:C["gold-ink"]})}
+  plotFn(f0,0,secs,gx,gy,gw,gh,-95,40,f1?hexA(C["ink-soft"],.8):C.drug,2,f1?[5,4]:null);
+  if(f1)plotFn(f1,0,secs,gx,gy,gw,gh,-95,40,C.drug,2.6);
+  const cur=P(T*.5,1)*secs;const f=f1||f0;circ(gx+gw*cur/secs,Y(f(cur)),5,C.drug,C.panel,1.5);
+  txt(gx,y+h-14,f1?"dashed: before the drug   solid: with the drug":(dr?"this drug does not change this cell much":"before any drug"),{size:11.5,color:C["ink-soft"],weight:600})}
+function rDrawCard(x,y,w,h,T){panelBox(x,y,w,h);const dk=RS.last;const dr=dk?RDR.find(d=>d[0]===dk):null;title(x+12,y+18,dr?"Drug given":"Pick a drug");
+  if(!dr){wrapText("Choose one drug from the list. The strip shows what it does, and this panel shows where it acts on the cell.",x+14,y+48,w-28,17,{size:12.5,color:C["ink-soft"]});
+    drugTok(x+w/2,y+150,18,{});return}
+  txt(x+14,y+44,dr[1],{size:16,weight:700});tag(x+14,y+68,dr[2],C.drug);
+  const yy=wrapText(dr[3],x+14,y+96,w-28,16,{size:12.5});
+  // channel picture
+  const my=y+h-46;membraneH(x+14,x+w-14,my);const cx=x+w/2;const e=dr[5];
+  const chCol={na:C.na,k:C.k,ca:C.ca,beta:C.rec,atr:C.rec,ado:C.k,dig:C.rec,mg:C.mg}[e]||C.rec;
+  rr(cx-14,my-20,28,40,7);fillStroke(chCol,hexA(C.ink,.45),1.3);
+  if(e==="ado"){for(let i=0;i<3;i++){const p=P(T*.8+i/3,1);ion(cx,my-12-p*34,"k",5,{a:1-p})}txt(cx+22,my-34,"K⁺ out",{size:11.5,weight:700})}
+  else if(e==="atr"){drugTok(cx,my-26,8,{});const p=P(T*.6,1);ligand(cx+30-Math.sin(p*Math.PI)*10,my-46+Math.sin(p*Math.PI)*14,6,C.ach);txt(cx+40,my-46,"ACh bounces off",{size:11.5,weight:700})}
+  else if(e==="mg"){for(let i=0;i<3;i++)circ(cx-40+i*40,my-30+Math.sin(T*2+i)*3,6,C.mg,hexA(C.ink,.4),1);txt(cx+22,my+30,"Mg²⁺ calms the membrane",{size:11.5,weight:700,align:"center"})}
+  else{drugTok(cx,my-6,9,{});const ionK=e==="na"?"na":e==="k"?"k":e==="ca"?"ca":null;if(ionK){for(let i=0;i<3;i++)ion(cx-30+i*30,my-34+Math.sin(T*3+i)*3,ionK,5,{lab:i===1})}
+    blockSign(cx+24,my-24,9)}}
+function drawRhy(now){use(S2);const T=RS.T;const sc=RSC[RS.i];rGen(T+1);
+  panelBox(10,10,740,214);title(22,28,"Monitor · lead II");
+  const r=rRegimeAt(T);const g=RS.gives.length?RS.gives[RS.gives.length-1]:null;
+  ecgStrip(22,40,590,172,rECG,T,{secs:6,amp:.36,base:.58,marks:(t0,pxs,mid)=>{if(g&&g.t>t0&&g.t<T){const x=22+(g.t-t0)*pxs;line(x,40,x,212,"rgba(242,179,59,.7)",2,[5,4]);circ(x,52,6,"#F2B33B");txt(x+9,52,RDR.find(d=>d[0]===g.drug)[1]+" given",{size:11.5,weight:700,color:"#F2B33B"})}}});
+  const hrTxt=r.base==="tdp"?"~220":r.base==="flat"?"0":String(r.hr);
+  vitalsBox(620,40,120,172,[]);txt(632,58,"HR",{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(632,86,hrTxt,{size:26,mono:true,weight:700,color:r.base==="flat"?"#F2B33B":"#4FD08A"});
+  txt(632,122,"BP",{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(632,146,r.bp,{size:20,mono:true,weight:700,color:"#E8EEF1"});
+  wrapText(r.name,632,180,104,15,{size:11.5,mono:true,weight:600,color:"#F2B33B"});
+  rDrawAP(10,232,440,238,now/1000);rDrawCard(460,232,290,238,now/1000);
+  $("#rCap").textContent=`Now: ${r.name}${r.bp?", BP "+r.bp:""}.`}
+function rhyA11y(){const sc=RSC[RS.i];const r=rRegimeAt(RS.T);const dr=RS.last?RDR.find(d=>d[0]===RS.last):null;
+  const shape={svt:"narrow, regular, fast complexes with no P waves",n:"normal-looking beats, each with a P wave, QRS and T wave",af:"irregular narrow complexes with a wavy baseline and no P waves",vt:"wide, tall, regular complexes"}[r.kind]||(r.base==="tdp"?"wide complexes whose height swells and shrinks, twisting around the baseline":"a flat line with no beats");
+  return [`Rhythm strip: ${r.name}${r.bp?", blood pressure "+r.bp:""}.`,`${sc.who}. The green trace scrolls left to right on a dark monitor and shows ${shape}.${dr?` A gold dashed line marks when ${dr[1].toLowerCase()} was given.`:""} Below left, an action potential graph for a ${(dr?dr[4]:sc.ap)==="node"?"nodal":"ventricular"} cell${dr?", dashed before the drug and solid violet with it, with the changed phase shaded gold":""}. Below right, ${dr?`a card for ${dr[1]} (${dr[2]}) with a drawing of where it acts on the membrane`:"a prompt to pick a drug"}.`]}
+
+/* ================= PART 3: case files ================= */
+const S3=makeStage("cvCase",560,450);
+function adenLoop(t){const L=12,u=((t%L)+L)%L;if(u<3)return ecgAt(t,{hr:188,noP:true,pr:.02,qt:.24,tAmp:.25});if(u<3.4)return ecgAt(t,{hr:188,noP:true,pr:.02,qt:.24,tAmp:.25})*smooth((3.4-u)/.4);if(u<8)return .01*Math.sin(t*9);return ecgBeat(((u-8)%(60/84)),{})}
+const CASES=[
+{name:"Digoxin toxicity",who:"Walter, 81",title:"Nausea, yellow vision and a slow, irregular pulse",
+ story:"Walter has heart failure and atrial fibrillation. He takes digoxin and furosemide. For two days he has had nausea and no appetite, and he says lights have yellow-green halos around them. His apical pulse is 52 and irregular. His 0900 medicines are due.",
+ ecg:t=>dgECG(t,{hr:52,bigem:true,dig:true,pr:.26}),rhythm:"slow, with an extra wide beat after every normal one",
+ vit:[["HR (apical)","52 irregular",1],["BP","104/62",0],["SpO₂","95%",0],["Resp","18",0]],
+ mar:[["0900","digoxin (cardiac glycoside)","PO","Due"],["0900","furosemide (loop diuretic)","PO","Due"],["0900","lisinopril (ACE inhibitor)","PO","Due"]],
+ labs:[["K⁺","3.0 mEq/L","3.5–5.0","L"],["Digoxin","2.4 ng/mL","0.5–2.0","H"],["Creatinine","1.8 mg/dL","0.6–1.2","H"],["Na⁺","138 mEq/L","135–145",""]],pic:"halo",
+ legend:[["trace","ECG trace","ln"],["bad","Abnormal value","s"],["gold","Yellow-green halo"]],
+ qs:[{q:"Which group of findings points to digoxin toxicity?",hint:"Think gut, eyes and heart rhythm.",opts:[
+   ["Nausea and poor appetite, yellow-green halos, and a slow, irregular pulse",1,"Yes. These are the classic early signs: GI upset, vision changes and dysrhythmias."],
+   ["A dry cough and lip swelling",0,"Those point to an ACE inhibitor (bradykinin builds up), not digoxin."],
+   ["A pounding headache and flushing",0,"Those are typical nitrate effects from widened blood vessels."],
+   ["Muscle aches and dark urine",0,"Those suggest statin-related muscle injury."]]},
+  {q:"Which lab result most likely tipped him into toxicity, and why?",hint:"Which ion competes with digoxin at the Na⁺/K⁺ pump?",opts:[
+   ["K⁺ 3.0: with less K⁺ competing, more digoxin binds the Na⁺/K⁺ pump",1,"Right. Hypokalemia, often from a loop diuretic, raises digoxin's effect. His high creatinine also slows digoxin clearance by the kidneys."],
+   ["Na⁺ 138: high sodium blocks digoxin clearance",0,"138 is a normal sodium. The key problem is the low potassium."],
+   ["The creatinine alone; potassium does not matter for digoxin",0,"The kidneys matter (digoxin is cleared by them), but potassium matters a lot: low K⁺ makes toxicity more likely even at usual levels."],
+   ["None; his level is the only thing that matters",0,"The level matters, but low K⁺, low Mg²⁺ and poor kidney function all make toxicity more likely."]]},
+  {q:"What should the nurse do with the 0900 digoxin?",hint:"Look at his pulse, symptoms and level together.",opts:[
+   ["Hold it and notify the prescriber with the apical pulse, symptoms, K⁺ and digoxin level",1,"Yes. A pulse under 60 with toxicity signs and a high level means hold and report. Expect a monitor, K⁺ replacement, and digoxin immune fab if there are dangerous arrhythmias."],
+   ["Give it, because the pulse is above 50",0,"A common hold limit is under 60, and he also has toxicity signs and a high level."],
+   ["Give half the tablet",0,"Nurses do not change a dose on their own. Hold and report."],
+   ["Give it with the furosemide and recheck the pulse tomorrow",0,"More digoxin plus more K⁺ loss would make toxicity worse."]]}],
+ exp:"Digoxin has a narrow therapeutic index. Low K⁺, poor kidneys and interacting drugs push it into toxicity. Check the apical pulse for a full minute before each dose, hold per order, and know the antidote: digoxin immune fab binds free digoxin."},
+
+{name:"Nitrate + PDE-5",who:"Daniel, 63",title:"Chest pain after a PDE-5 inhibitor",
+ story:"Daniel has stable angina and has sublingual nitroglycerin at home. He comes in with chest pain at rest. While you prepare the nitroglycerin ordered for chest pain, he mentions he took sildenafil, a PDE-5 inhibitor, last night.",
+ ecg:t=>ecgAt(t,{hr:98}),rhythm:"sinus rhythm at 98",
+ vit:[["HR","98",1],["BP","132/84",0],["SpO₂","97%",0],["Pain","6 of 10",1]],
+ mar:[["PRN","nitroglycerin (nitrate)","SL","Ordered"],["STAT","aspirin (antiplatelet)","PO chew","Given"],["0900","metoprolol (beta blocker)","PO","Due"]],
+ labs:[["Troponin","pending","",""],["K⁺","4.1 mEq/L","3.5–5.0",""],["Hgb","14.2 g/dL","13.5–17.5",""],["Glucose","108 mg/dL","70–110",""]],pic:"pde5",
+ legend:[["no","Nitric oxide","c"],["cgmp","cGMP","c"],["drug","Drug","c"]],
+ qs:[{q:"What should the nurse do before giving the nitroglycerin?",hint:"Some drug pairs are contraindicated even when the patient is in pain.",opts:[
+   ["Hold the nitroglycerin and tell the provider about the sildenafil right away",1,"Yes. Nitrates are contraindicated after a PDE-5 inhibitor (commonly within 24 hours for sildenafil, longer for some others). The provider will choose another plan."],
+   ["Give it now; chest pain comes first",0,"Giving it can cause a sudden, severe drop in blood pressure. Report first."],
+   ["Give half a tablet to be safe",0,"Any nitrate dose is risky here, and nurses do not change doses on their own."],
+   ["Give it and recheck the BP in an hour",0,"The BP can crash within minutes."]]},
+  {q:"Why is this combination dangerous?",hint:"Follow cGMP: one drug makes more, the other stops its breakdown.",opts:[
+   ["Nitrates raise cGMP through nitric oxide, and PDE-5 inhibitors stop cGMP breakdown, so vessels relax too much and BP crashes",1,"Right. Both drugs push the same pathway, so the effect stacks into severe hypotension."],
+   ["Sildenafil blocks nitroglycerin, so the chest pain gets worse",0,"The problem is the opposite: the effects add up."],
+   ["Both drugs raise the heart rate dangerously",0,"A reflex fast heart rate can happen, but the main danger is severe hypotension."],
+   ["Sildenafil damages the liver, so the nitrate builds up",0,"The interaction is in the blood vessel wall (cGMP), not the liver."]]},
+  {q:"Later, which home teaching about sublingual nitroglycerin is correct?",hint:"Think position, where the tablet goes, timing, and when to call for help.",opts:[
+   ["Sit down, put one tablet under the tongue, and call emergency services if the pain is not better or is worse 5 minutes after the first tablet",1,"Yes. Then follow the repeat-dose plan he was given (often every 5 minutes, up to 3 doses). Expect a headache; keep tablets in the original dark glass bottle."],
+   ["Swallow the tablet with water",0,"Sublingual tablets must dissolve under the tongue. Swallowed, much of the drug is destroyed by the liver first."],
+   ["Keep tablets in a pill organizer in the bathroom",0,"Light, heat and moisture weaken nitroglycerin. Keep it in its original dark glass bottle."],
+   ["Take one tablet every hour until the pain stops",0,"Pain that is not better 5 minutes after the first tablet needs emergency help."]]}],
+ exp:"Nitrates lower preload by widening veins, which lowers the heart's oxygen demand. Ask about PDE-5 inhibitors every time, check BP before doses, expect headache, and use a nitrate-free interval with patches to prevent tolerance."},
+
+{name:"Statin myopathy",who:"Rosa, 66",title:"Aching thighs and tea-coloured urine",
+ story:"Rosa started simvastatin two months ago for high LDL, and gemfibrozil, a fibrate, was added last month for high triglycerides. She drinks grapefruit juice every morning. Now her thighs ache, she feels weak climbing stairs, and her urine looks like tea.",
+ ecg:t=>ecgAt(t,{hr:84}),rhythm:"sinus rhythm at 84",
+ vit:[["HR","84",0],["BP","128/76",0],["Temp","37.1 °C",0],["Urine","dark brown",1]],
+ mar:[["2100","simvastatin (statin)","PO","Due"],["0800","gemfibrozil (fibrate)","PO","Given"],["0800","metformin (antidiabetic)","PO","Given"]],
+ labs:[["CK","9,800 U/L","about 30–200","H"],["Creatinine","1.6 mg/dL","0.6–1.2","H"],["ALT","48 U/L","under 40","H"],["Urine","myoglobin +","negative","H"]],pic:"muscle",
+ legend:[["myo","Muscle fibre","s"],["blood","Myoglobin leaking","c"],["bad","Abnormal value","s"]],
+ qs:[{q:"What is the most likely problem?",hint:"Muscle pain plus dark urine plus a very high CK.",opts:[
+   ["Statin-related muscle injury that may be rhabdomyolysis: damaged muscle releases myoglobin, which darkens urine and can harm the kidneys",1,"Yes. A CK this high with dark urine and a rising creatinine is a serious muscle injury."],
+   ["A simple urinary tract infection",0,"A UTI would not raise CK or cause muscle pain and weakness."],
+   ["Normal soreness from exercise",0,"Normal soreness does not raise CK into the thousands or turn urine brown."],
+   ["Liver failure from the statin",0,"Her ALT is only a little high. The main problem is muscle."]]},
+  {q:"What should the nurse do about the 2100 simvastatin?",hint:"Stop the likely cause and report.",opts:[
+   ["Hold it and report the muscle pain, dark urine, CK and creatinine to the prescriber right away",1,"Right. Expect the statin (and fibrate) to be stopped, IV fluids, and close kidney monitoring."],
+   ["Give it at bedtime as scheduled",0,"Continuing the statin keeps injuring muscle."],
+   ["Give it in the morning instead",0,"Changing the time does not stop muscle injury."],
+   ["Tell her mild aches are normal and to keep taking it",0,"Aches with dark urine and a high CK are not mild. Report them."]]},
+  {q:"Which factors raised her risk?",hint:"Look at what else she takes and drinks.",opts:[
+   ["The fibrate together with the statin, and grapefruit juice, which raises simvastatin levels",1,"Yes. Fibrates add muscle risk, and grapefruit blocks the liver enzyme that breaks down some statins, such as simvastatin."],
+   ["Metformin",0,"Metformin is not a typical cause of statin muscle injury."],
+   ["Taking the statin at night",0,"Evening dosing is normal for short-acting statins like simvastatin, because the body makes the most cholesterol at night."],
+   ["Her blood pressure",0,"Her BP is normal and does not cause muscle injury."]]}],
+ exp:"Statins block HMG-CoA reductase in the liver. Teach patients to report unexplained muscle pain, weakness or dark urine, check liver enzymes at baseline and if symptoms appear, and review grapefruit and fibrate interactions."},
+
+{name:"Amiodarone",who:"Frank, 72",title:"A new cough on a long-term antiarrhythmic",
+ story:"Frank has taken amiodarone for 8 months to prevent dangerous arrhythmias. He also takes warfarin and digoxin. For a few weeks he has had a dry cough and gets short of breath walking. He is tired, has gained weight and always feels cold.",
+ ecg:t=>ecgAt(t,{hr:56,qt:.5}),rhythm:"sinus rhythm at 56 with a long QT",
+ vit:[["HR","56",1],["BP","118/72",0],["SpO₂","91%",1],["Resp","22",1]],
+ mar:[["0900","amiodarone (class III)","PO","Due"],["1700","warfarin (anticoagulant)","PO","Due"],["0900","digoxin (cardiac glycoside)","PO","Due"]],
+ labs:[["TSH","9.2 mIU/L","0.4–4.0","H"],["ALT","92 U/L","under 40","H"],["INR","4.1","2–3 goal","H"],["Digoxin","2.2 ng/mL","0.5–2.0","H"]],pic:"amio",
+ legend:[["lung","Lung","s"],["bad","Scarring and abnormal values","s"],["enz","Thyroid","c"]],
+ qs:[{q:"The new cough and breathlessness are most concerning for what?",hint:"Amiodarone has a well-known toxicity in the lungs.",opts:[
+   ["Amiodarone lung toxicity (inflammation and scarring)",1,"Yes. Pulmonary toxicity can be serious. Report it; expect a chest X-ray and lung tests."],
+   ["An ACE inhibitor cough",0,"He is not on an ACE inhibitor, and that cough does not cause low oxygen."],
+   ["Normal aging",0,"New breathlessness with SpO₂ 91% is not normal aging."],
+   ["Anxiety",0,"The low oxygen saturation points to a real lung problem."]]},
+  {q:"His TSH is high and he feels cold and tired. Why?",hint:"Amiodarone is rich in iodine.",opts:[
+   ["Amiodarone can cause hypothyroidism (or sometimes hyperthyroidism) because of its iodine content",1,"Right. Thyroid tests are checked at baseline and regularly."],
+   ["Digoxin causes low thyroid function",0,"The thyroid effect here comes from amiodarone."],
+   ["Warfarin damages the thyroid",0,"Warfarin does not cause thyroid disease."],
+   ["The TSH is normal for his age",0,"9.2 is above the usual range and fits his symptoms."]]},
+  {q:"Why are his INR and digoxin level both high?",hint:"Amiodarone slows the removal of several other drugs.",opts:[
+   ["Amiodarone raises warfarin and digoxin levels, so prescribers usually lower those doses when amiodarone is added",1,"Yes. Watch for bleeding and digoxin toxicity, and report both results."],
+   ["He must be taking extra pills",0,"Possible, but there is a known interaction that explains both."],
+   ["The lab results are always high in winter",0,"Season does not explain these values."],
+   ["Low thyroid function lowers INR",0,"That does not explain the high values."]]}],
+ exp:"Amiodarone is a class III K⁺ channel blocker with a very long half-life. Monitor lungs, thyroid, liver, eyes and skin (sun sensitivity), the QT interval, and interactions with warfarin and digoxin."},
+
+{name:"Adenosine pause",who:"Aisha, 27",title:"A flat line after the push",
+ story:"Aisha came in with SVT at 188. Vagal maneuvers did not work, so adenosine was ordered. Right after the rapid push and flush, the monitor shows a flat line for about 5 seconds. She says her chest felt tight. Then a normal rhythm appears.",
+ ecg:adenLoop,rhythm:"SVT at 188, then a flat pause of about 5 seconds, then sinus rhythm at 84, repeating",
+ vit:[["HR","188 → 84",1],["BP","116/74",0],["SpO₂","98%",0],["Resp","18",0]],
+ mar:[["STAT","adenosine (AV node blocker)","IV push","Given"],["STAT","normal saline flush","IV","Given"],["PRN","acetaminophen (analgesic)","PO","Ordered"]],
+ labs:[["K⁺","4.0 mEq/L","3.5–5.0",""],["Mg²⁺","2.0 mg/dL","1.7–2.2",""],["TSH","1.8 mIU/L","0.4–4.0",""],["Troponin","negative","",""]],pic:"pause",
+ legend:[["trace","ECG trace","ln"],["drug","Adenosine","c"],["fluid","Saline flush","c"]],
+ qs:[{q:"What does the flat line most likely mean?",hint:"How long does adenosine last?",opts:[
+   ["An expected brief pause: adenosine blocks the AV node for a few seconds, and its half-life is under 10 seconds",1,"Yes. A short pause is the drug working. Keep watching the monitor; it passes on its own."],
+   ["Cardiac arrest: start CPR now",0,"A few seconds of pause right after adenosine is expected. Assess her: she is awake and talking."],
+   ["Give atropine right away",0,"The pause ends on its own within seconds as adenosine is cleared."],
+   ["The drug failed",0,"The SVT broke and a normal rhythm returned: it worked."]]},
+  {q:"How should adenosine be given?",hint:"It is cleared within seconds, so it has to reach the heart fast.",opts:[
+   ["Rapid IV push over 1 to 2 seconds into a large vein close to the heart, followed right away by a fast saline flush",1,"Right. Given slowly, it is broken down before it reaches the heart."],
+   ["Slowly over 5 minutes",0,"It would be cleared before it reached the AV node."],
+   ["As an intramuscular shot",0,"It must reach the heart in seconds. It is given IV."],
+   ["Mixed into a large IV bag and run over an hour",0,"Too slow. It is a rapid push with a flush."]]},
+  {q:"What should the nurse tell her before the push?",hint:"Prepare her for what she will feel.",opts:[
+   ["She may feel chest pressure, flushing or shortness of breath for a few seconds, and her heart may pause briefly; it passes quickly",1,"Yes. Warning her first lowers fear and helps her stay still."],
+   ["She will feel nothing at all",0,"Most people feel something brief and unpleasant. Tell her honestly."],
+   ["She will need to stay in bed for a day afterward",0,"Effects last seconds."],
+   ["She must hold her breath for a minute",0,"That is not part of giving adenosine."]]}],
+ exp:"Adenosine is the drug for stable narrow-complex SVT after vagal maneuvers. Rapid push, rapid flush, a strip running, and a calm warning for the patient."},
+
+{name:"Heart failure, wet",who:"Grace, 74",title:"Weight up and short of breath at night",
+ story:"Grace has heart failure with a weak squeeze. She takes lisinopril, metoprolol succinate and furosemide. Over two days her weight went up 1.8 kg (4 lb). She wakes up short of breath, has crackles in both lungs and swollen ankles. IV furosemide is ordered.",
+ ecg:t=>ecgAt(t,{hr:102}),rhythm:"sinus tachycardia at 102",
+ vit:[["HR","102",1],["BP","142/88",1],["SpO₂","90%",1],["Weight","+1.8 kg / 2 days",1]],
+ mar:[["NOW","furosemide (loop diuretic)","IV","Due"],["0900","lisinopril (ACE inhibitor)","PO","Due"],["0900","metoprolol succinate (beta blocker)","PO","Due"]],
+ labs:[["BNP","980 pg/mL","under 100","H"],["K⁺","3.3 mEq/L","3.5–5.0","L"],["Na⁺","134 mEq/L","135–145","L"],["Creatinine","1.1 mg/dL","0.6–1.2",""]],pic:"scale",
+ legend:[["fluid","Extra fluid","c"],["bad","Abnormal value","s"],["bnp","BNP (stretch hormone)","c"]],
+ qs:[{q:"What does her weight gain mean?",hint:"Fat does not build up that fast.",opts:[
+   ["Fluid retention. Daily weight is the best home measure of fluid, and fast gains are reported per her plan",1,"Yes. A common rule is to report about 1 to 1.5 kg (2 to 3 lb) in a day or 2 kg (5 lb) in a week, but follow her own plan."],
+   ["She is eating more",0,"Gaining 1.8 kg in 2 days is fluid, not food."],
+   ["The scale is wrong",0,"Her crackles, swelling and high BNP all agree: this is fluid."],
+   ["It is muscle from walking more",0,"Muscle does not build that fast, and she is less active, not more."]]},
+  {q:"After IV furosemide, what should the nurse watch most closely?",hint:"A loop diuretic removes water and electrolytes.",opts:[
+   ["Urine output, weight, BP (including when she stands) and K⁺",1,"Right. Expect a lot of urine; watch for low BP, dizziness and low K⁺. Her K⁺ is already low."],
+   ["Her blood glucose only",0,"Glucose can rise a little, but fluid, BP and K⁺ matter most."],
+   ["Nothing; diuretics have no side effects",0,"Loop diuretics often cause low K⁺, low BP and dehydration."],
+   ["Her temperature every 15 minutes",0,"Temperature is not the main concern with a diuretic."]]},
+  {q:"Which home teaching helps most?",hint:"Same time, same scale, same clothes.",opts:[
+   ["Weigh every morning after urinating, before breakfast, on the same scale; limit salt; take the diuretic in the morning",1,"Yes. Morning dosing avoids waking up at night to urinate."],
+   ["Weigh once a month",0,"Too rare to catch fluid building up."],
+   ["Drink as much water as possible",0,"Many people with heart failure have a fluid or salt limit. Follow her plan."],
+   ["Take the diuretic at bedtime",0,"She would be up all night urinating."]]}],
+ exp:"Heart failure drugs aim at congestion (diuretics) and at the neurohormones that make failure worse (ACE inhibitors or ARBs or ARNI, HF-approved beta blockers, aldosterone antagonists, SGLT2 inhibitors). Daily weight, BP, heart rate and K⁺ guide the plan."},
+
+{name:"Lipid drugs",who:"Linda, 59",title:"A resin, a flush and a thyroid pill that stopped working",
+ story:"Linda has high LDL. She started cholestyramine, a bile acid sequestrant, and takes it with her morning pills, including her thyroid pill. She also started niacin and gets hot, red and itchy after each dose. Her TSH, which was normal, is now high.",
+ ecg:t=>ecgAt(t,{hr:74}),rhythm:"sinus rhythm at 74",
+ vit:[["HR","74",0],["BP","124/78",0],["Skin","flushed, itchy",1],["Temp","36.9 °C",0]],
+ mar:[["0800","cholestyramine (bile acid sequestrant)","PO","Given"],["0800","levothyroxine (thyroid hormone)","PO","Given"],["2100","niacin (vitamin B3)","PO","Due"]],
+ labs:[["LDL","162 mg/dL","under 100","H"],["HDL","38 mg/dL","over 50","L"],["Triglycerides","240 mg/dL","under 150","H"],["TSH","7.8 mIU/L","0.4–4.0","H"]],pic:"resin",
+ legend:[["gold","Resin beads","c"],["chol","Bile acids","c"],["drug","Other pills","c"]],
+ qs:[{q:"Why did her thyroid pill stop working?",hint:"The resin grabs things in the gut.",opts:[
+   ["The bile acid sequestrant binds other drugs in the gut, so less thyroid hormone is absorbed",1,"Yes. Take other drugs about 1 hour before or 4 to 6 hours after the resin, per the label and pharmacist."],
+   ["Niacin destroys thyroid hormone",0,"Niacin's main problems are flushing, itching, and effects on the liver, glucose and uric acid."],
+   ["Her thyroid pill is too old",0,"The timing with the resin explains it."],
+   ["High LDL raises TSH",0,"The change started when the resin was added."]]},
+  {q:"What helps with the niacin flushing?",hint:"The flush comes from prostaglandins that widen skin blood vessels.",opts:[
+   ["Take it with food, avoid hot drinks and alcohol near the dose, and ask whether aspirin 30 minutes before is right for her",1,"Right. The flushing is uncomfortable but usually harmless and often lessens over time."],
+   ["Stop all lipid drugs",0,"There are simple ways to reduce flushing. Changes are the prescriber's decision."],
+   ["Take it with a hot coffee",0,"Hot drinks make flushing worse."],
+   ["It means a severe allergy every time",0,"Flushing is an expected effect. Swelling of the face or trouble breathing would be different and urgent."]]},
+  {q:"Her prescriber plans to add atorvastatin. How do statins lower LDL?",hint:"Follow the liver cell: less cholesterol made inside means what on the surface?",opts:[
+   ["They block HMG-CoA reductase in the liver, so the liver makes more LDL receptors and pulls LDL out of the blood",1,"Yes. That is why statins are the first-line LDL drug."],
+   ["They bind bile acids in the gut",0,"That is the bile acid sequestrant."],
+   ["They block cholesterol absorption in the intestine",0,"That is ezetimibe."],
+   ["They are antibodies that save LDL receptors",0,"That is a PCSK9 inhibitor."]]}],
+ exp:"Each lipid class acts at a different spot: statins (liver enzyme), ezetimibe (gut absorption), PCSK9 inhibitors (save LDL receptors), fibrates (triglycerides), niacin (flushing), bile acid sequestrants (bind bile acids and other drugs)."}];
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="${l[2]==="ln"?"border-top-color":"background"}:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+/* case pictures */
+function casePic(kind,x,y,w,h,T){const cx=x+w/2,cy=y+h/2+8;
+  if(kind==="halo"){// a lamp seen with halos, and an eye
+    for(let i=3;i>=1;i--){circ(cx-40,cy-6,10+i*13+Math.sin(T*2+i)*2,null,hexA(i%2?C.gold:C.cgmp,.75),3)}circ(cx-40,cy-6,10,C["gold-wash"],C.gold,2);
+    ell(cx+62,cy-6,30,16,0,C.panel,C["ink-soft"],1.6);circ(cx+62,cy-6,11,mix(C.cgmp,C.gold,.5));circ(cx+62,cy-6,5,C.ink);
+    txt(cx,y+h-14,"lights look yellow-green with halos",{size:11.5,weight:700,align:"center"})}
+  else if(kind==="pde5"){drugTok(x+24,y+26,8,{});txt(x+38,y+26,"nitrate: more cGMP",{size:11.5,weight:700});enzyme(x+24,y+124,10,{blocked:true,T});txt(x+40,y+124,"PDE-5 blocked: cGMP not broken down",{size:11.5,weight:700});
+    vessel(x+14,y+72,w-28,20,{col:C.art,T,flow:.3});
+    for(let i=0;i<16;i++){const px=x+26+rnd(i)*(w-52),py=y+72+(rnd(i+5)-.5)*30;circ(px,py,3.2,C.cgmp)}
+    dial(x+w-34,y+h-12,14,.15,"",null,C.bad);txt(x+14,y+h-10,"vessels relax too much: BP crashes",{size:11.5,weight:700,color:C.bad})}
+  else if(kind==="muscle"){for(let r=0;r<3;r++){const yy=y+40+r*24;rr(x+16,yy,w-32,18,9);fillStroke(C.myo,C["myo-d"],1.3);for(let k=0;k<12;k++)line(x+28+k*18,yy+3,x+28+k*18,yy+15,hexA(C["myo-d"],.5),1.2)}
+    crossMark(cx-30,y+72,7,C.bad);crossMark(cx+50,y+96,7,C.bad);for(let i=0;i<8;i++){const p=P(T*.4+i/8,1);circ(cx-30+i*6,y+80+p*50,3,hexA(C.blood,1-p*.6))}
+    rr(cx+60,y+h-58,40,46,4);fillStroke(hexA(C.glass||C.panel,.6),C["ink-soft"],1.4);ctx.fillStyle=mix(C.liver,"#3A1E10",.35);ctx.fillRect(cx+62,y+h-40,36,26);txt(cx-20,y+h-26,"tea-coloured urine",{size:11.5,weight:700,align:"center"})}
+  else if(kind==="amio"){lungs(cx-40,cy+2,92,0,T);for(let i=0;i<9;i++){const a=rnd(i)*TAU;poly([[cx-40+Math.cos(a)*20,cy+6+Math.sin(a)*24],[cx-40+Math.cos(a)*30+6,cy+6+Math.sin(a)*30]],C.bad,1.6)}
+    ell(cx+64,cy-24,13,10,-.3,C.enz,hexA(C.ink,.4),1);ell(cx+86,cy-24,13,10,.3,C.enz,hexA(C.ink,.4),1);txt(cx+75,cy-2,"thyroid",{size:11.5,weight:700,align:"center"});
+    ell(cx+76,cy+38,26,15,.1,C.liver,hexA(C.ink,.4),1);txt(cx+76,cy+64,"liver",{size:11.5,weight:700,align:"center"})}
+  else if(kind==="pause"){syringe(x+60,y+48,26,.3+.7*(1-P(T*.3,1)),C.drug);txt(x+60,y+76,"adenosine: rapid push",{size:11.5,weight:700,align:"center"});
+    syringe(x+w-70,y+48,26,.6,C.fluid);txt(x+w-70,y+76,"then a fast flush",{size:11.5,weight:700,align:"center"});
+    const p=P(T/12*1,1);const pause=p>3/12&&p<8/12;circ(cx,y+h-40,22,C.panel,pause?C.gold:C["ink-soft"],2.5);line(cx,y+h-40,cx+Math.cos(T*2-Math.PI/2)*16,y+h-40+Math.sin(T*2-Math.PI/2)*16,C.ink,2);
+    txt(cx+34,y+h-40,pause?"pause: expected":"rhythm",{size:11.5,weight:700,color:pause?C["gold-ink"]:C.ink})}
+  else if(kind==="scale"){rr(cx+20,y+h-46,100,30,8);fillStroke(C["panel-2"],C["ink-soft"],1.5);rr(cx+36,y+h-42,68,20,4);fillStroke(C.scr,null);txt(cx+70,y+h-32,"+1.8 kg",{size:13,weight:700,mono:true,align:"center",color:"#F2B33B"});
+    person(x+60,y+78,64,{});ell(x+53,y+122,8+2*Math.sin(T),6,0,hexA(C.fluid,.6));ell(x+67,y+122,8+2*Math.sin(T),6,0,hexA(C.fluid,.6));lead(x+60,y+56,x+100,y+40,"crackles",{size:11.5,align:"left"});lead(x+68,y+122,x+100,y+86,"ankle swelling",{size:11.5,align:"left"})}
+  else if(kind==="resin"){rr(x+14,cy-30,w-28,60,30);fillStroke(hexA(C.body,.9),C["body-edge"],1.6);txt(x+22,y+28,"gut",{size:11.5,weight:700});
+    for(let i=0;i<5;i++){const gx=x+40+i*44+Math.sin(T+i)*3,gy=cy+Math.cos(T*1.3+i)*6;circ(gx,gy,10,C.gold,hexA(C.ink,.4),1);circ(gx+9,gy-8,3.4,C.chol);if(i%2)drugTok(gx-10,gy+8,5,{})}
+    txt(cx,y+h-14,"resin grabs bile acids and other pills",{size:11.5,weight:700,align:"center"})}}
+function drawCase(now){use(S3);const c=CASES[CS.i];const T=now/1000;
+  // monitor
+  panelBox(10,10,540,130);txt(22,26,c.who.toUpperCase()+" · MONITOR",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  ecgStrip(22,36,300,96,c.ecg,T,{secs:5,label:"Lead II"});
+  c.vit.forEach((v,i)=>{const y=48+i*23;rr(332,y-10,208,21,4);ctx.fillStyle=v[2]?hexA(C.warn,.16):hexA(C["panel-2"],.9);ctx.fill();if(v[2]){ctx.strokeStyle=C.warn;ctx.lineWidth=1.2;ctx.stroke()}
+    txt(340,y+.5,v[0],{size:12,weight:600});txt(532,y+.5,v[1]+(v[2]?" ▲":""),{size:12,weight:700,mono:true,align:"right",color:v[2]?C["warn-ink"]:C.ink})});
+  // MAR
+  panelBox(10,148,540,118);txt(22,164,"MEDICATION ADMINISTRATION RECORD",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  const cols=[22,82,362,452];["Time","Medication (class)","Route","Status"].forEach((h,i)=>txt(cols[i],184,h,{size:11.5,weight:700,color:C["ink-soft"]}));line(18,193,542,193,C.rule,1);
+  c.mar.forEach((m,i)=>{const y=210+i*22;if(i===0){ctx.fillStyle=hexA(C.accent,.1);ctx.fillRect(18,y-10,524,21)}
+    txt(cols[0],y,m[0],{size:12,mono:true,weight:600});txt(cols[1],y,m[1],{size:12,weight:i===0?700:500});txt(cols[2],y,m[2],{size:12});
+    const col=m[3]==="Given"?C.good:m[3]==="Due"?C.warn:C.accent;tag(cols[3],y,m[3].toUpperCase(),col,{size:11})});
+  // labs
+  panelBox(10,274,270,166);txt(22,290,"LAB PANEL",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  c.labs.forEach((l,i)=>{const y=314+i*30;const fl=l[3];txt(22,y,l[0],{size:12.5,weight:600});txt(196,y,l[1],{size:12.5,weight:700,mono:true,align:"right",color:fl==="H"?C.bad:fl==="L"?C["warn-ink"]:C.ink});
+    if(fl)tag(204,y,fl==="H"?"H":"L",fl==="H"?C.bad:C.warn,{size:11});if(l[2])txt(22,y+13,"ref "+l[2],{size:11,color:C["ink-soft"]})});
+  // picture
+  panelBox(290,274,260,166);txt(302,290,"WHAT IS GOING ON",{size:12,mono:true,weight:700,color:C["ink-soft"]});casePic(c.pic,290,284,260,156,T)}
+function caseA11y(){const c=CASES[CS.i];const P_={halo:"a light surrounded by yellow-green halo rings and an eye",pde5:"a widened blood vessel crowded with green cGMP dots, a nitrate token, a blocked PDE-5 enzyme and a BP dial pointing to crash",muscle:"striped muscle fibres with red crosses where they are damaged, red myoglobin drops leaking out and a cup of tea-coloured urine",amio:"lungs with red scar lines, a thyroid gland and a liver",pause:"an adenosine syringe being pushed, a saline flush syringe and a clock that turns gold during the expected pause",scale:"a figure standing on a scale that reads plus 1.8 kg, with blue fluid at the ankles",resin:"a section of gut where gold resin beads grab bile acids and other pill tokens"}[c.pic];
+  return [`Case ${CS.i+1}: ${c.title}.`,`Chart for ${c.who}. The monitor shows ${c.rhythm}. Vitals: `+c.vit.map(v=>`${v[0]} ${v[1]}${v[2]?" (flagged)":""}`).join(", ")+`. The medication record lists `+c.mar.map(m=>`${m[1]} ${m[2]} at ${m[0]}, ${m[3].toLowerCase()}`).join("; ")+`. Labs: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[3]==="H"?" high":l[3]==="L"?" low":""}`).join(", ")+`. The picture shows ${P_}.`]}
+
+/* ================= PART 4: sort it out ================= */
+const SROUNDS=[
+{name:"Name stems",goal:"Use the ending of each generic name to put it in its drug class.",
+ bins:[["pril","ACE inhibitor (-pril)"],["sartan","ARB (-sartan)"],["olol","Beta blocker (-olol, -ilol)"],["dipine","Ca²⁺ channel blocker (-dipine)"],["statin","Statin (-statin)"]],
+ cards:[["lisinopril","pril","-pril: blocks the angiotensin-converting enzyme."],["enalapril","pril","-pril: an ACE inhibitor."],["ramipril","pril","-pril: an ACE inhibitor."],
+  ["losartan","sartan","-sartan: blocks the angiotensin II receptor."],["valsartan","sartan","-sartan: an ARB (also paired with sacubitril as an ARNI)."],
+  ["metoprolol","olol","-olol: a beta-1 selective blocker."],["bisoprolol","olol","-olol: a beta-1 selective blocker approved for heart failure."],["carvedilol","olol","-ilol: blocks beta and alpha-1 receptors; approved for heart failure."],
+  ["amlodipine","dipine","-dipine: relaxes arteries; used for angina and high BP."],["nifedipine","dipine","-dipine: a dihydropyridine Ca²⁺ channel blocker."],
+  ["atorvastatin","statin","-statin: blocks HMG-CoA reductase."],["rosuvastatin","statin","-statin: a high-intensity statin."],["simvastatin","statin","-statin: often taken in the evening; grapefruit raises its level."]]},
+{name:"Antiarrhythmic classes",goal:"Put each drug in its Vaughan Williams class, or in the box for important drugs outside the four classes.",
+ bins:[["c1","Class I: Na⁺ channel blockers"],["c2","Class II: beta blockers"],["c3","Class III: K⁺ channel blockers"],["c4","Class IV: Ca²⁺ channel blockers"],["cx","Other rhythm drugs"]],
+ cards:[["lidocaine","c1","Class Ib: blocks fast Na⁺ channels in ventricular tissue."],["procainamide","c1","Class Ia: blocks Na⁺ channels."],["flecainide","c1","Class Ic: a strong Na⁺ channel blocker."],
+  ["esmolol","c2","A short-acting IV beta blocker."],["metoprolol","c2","Blocks beta-1 receptors at the SA and AV nodes."],["propranolol","c2","A nonselective beta blocker."],
+  ["amiodarone","c3","Mainly blocks K⁺ channels and prolongs phase 3."],["sotalol","c3","A beta blocker that also blocks K⁺ channels; counted as class III."],["dofetilide","c3","A pure K⁺ channel blocker; watch the QT."],
+  ["diltiazem","c4","Blocks L-type Ca²⁺ channels in the AV node."],["verapamil","c4","Blocks L-type Ca²⁺ channels; can cause constipation."],
+  ["adenosine","cx","Briefly blocks the AV node by opening K⁺ channels."],["atropine","cx","Blocks muscarinic receptors to speed a slow heart."],["digoxin","cx","Inhibits the Na⁺/K⁺ pump and raises vagal tone."],["magnesium sulfate","cx","Stops torsades de pointes."]]},
+{name:"Which drug did that?",goal:"Match each side effect or warning to the drug class that causes it.",
+ bins:[["dig","Digoxin"],["nit","Nitrates"],["acei","ACE inhibitors"],["stat","Statins"],["amio","Amiodarone"],["other","Other heart drugs"]],
+ cards:[["Yellow-green halos around lights","dig","A classic digoxin toxicity sign."],["Toxicity more likely with low K⁺","dig","Less K⁺ competing means more digoxin binds the pump."],
+  ["Throbbing headache after a dose","nit","Widened blood vessels in the head."],["Dangerous with sildenafil","nit","Both raise cGMP: severe hypotension."],["Tolerance without a nightly break","nit","Patches need a nitrate-free interval."],
+  ["Dry, nagging cough","acei","Bradykinin builds up because ACE also breaks it down."],["Lip and tongue swelling","acei","Angioedema: an emergency."],
+  ["Muscle pain and dark urine","stat","Myopathy that can progress to rhabdomyolysis."],["Grapefruit raises the level of some","stat","Grapefruit blocks the liver enzyme that breaks down some statins."],
+  ["Lung scarring and thyroid changes","amio","Monitor lungs, thyroid, liver and eyes."],["Blue-grey skin and sun sensitivity","amio","Teach sunscreen and covering up."],
+  ["A few seconds of flat line","other","Adenosine: an expected brief pause."],["Genital yeast infections","other","SGLT2 inhibitors (-gliflozin) put sugar in the urine."],["High K⁺","other","Aldosterone antagonists such as spironolactone hold on to K⁺."],["Hot flushing and itching","other","Niacin widens skin blood vessels."]]},
+{name:"Hold it and call",goal:"Each finding is a common reason to hold a drug and notify the prescriber, per order. Put it with the drug.",
+ bins:[["dig","Digoxin"],["bb","Beta blocker"],["nit","Nitroglycerin"],["spiro","Spironolactone"],["stat","Statin"],["acei","ACE inhibitor"]],
+ cards:[["Apical pulse under 60 with nausea and halos","dig","Slow pulse plus toxicity signs."],["K⁺ 3.0 with a digoxin level above range","dig","Low K⁺ raises digoxin toxicity."],
+  ["Apical pulse 48 and a new wheeze","bb","Beta blockade slows the heart and can tighten airways."],["New second-degree heart block","bb","Slower AV conduction from beta blockade."],
+  ["Took a PDE-5 inhibitor last night","nit","Both raise cGMP: severe hypotension."],["Systolic BP 84 before a dose","nit","Nitrates lower BP further."],
+  ["K⁺ 5.8","spiro","An aldosterone antagonist keeps K⁺ in the body."],["Painful breast enlargement in a man","spiro","An anti-androgen effect of spironolactone."],
+  ["Unexplained muscle pain, CK very high","stat","Possible statin myopathy."],["Liver enzymes far above normal with jaundice","stat","Statins can affect the liver."],
+  ["Swollen lips and tongue","acei","Angioedema: an emergency."],["Pregnant","acei","ACE inhibitors and ARBs can harm the fetus."]]},
+{name:"Lipid toolbox",goal:"Match each statement to the lipid drug class it describes.",
+ bins:[["st","Statins"],["ez","Ezetimibe"],["pcsk","PCSK9 inhibitors (-mab)"],["fib","Fibrates"],["nia","Niacin"],["bas","Bile acid sequestrants"]],
+ cards:[["Blocks HMG-CoA reductase in the liver","st","The liver makes more LDL receptors."],["First-line drug to lower LDL","st","The biggest LDL drop and outcome benefit."],
+  ["Blocks cholesterol absorption in the gut","ez","Stops dietary and biliary cholesterol uptake."],["Often added to a statin for more LDL lowering","ez","A common add-on."],
+  ["Injected antibody that saves LDL receptors","pcsk","Stops PCSK9 from marking receptors for destruction."],["evolocumab, alirocumab","pcsk","The -mab ending means antibody."],
+  ["Lowers triglycerides the most","fib","Fibrates act on PPAR-alpha."],["gemfibrozil, fenofibrate","fib","Fibrates; myopathy risk rises with statins."],
+  ["Causes flushing; aspirin before may help","nia","Prostaglandin-driven flushing."],["Can raise glucose and uric acid","nia","Watch in diabetes and gout."],
+  ["Take other drugs 1 hour before or 4 to 6 hours after","bas","The resin binds other drugs in the gut."],["cholestyramine, colesevelam","bas","Bile acid sequestrants; constipation is common."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const hex=(x,y,r,c)=>`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=i/6*Math.PI*2;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ")}" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const mem=`<rect x="2" y="28" width="52" height="8" fill="var(--chol)" opacity=".35"/>`;
+  const chan=(c)=>`${mem}<rect x="22" y="20" width="12" height="24" rx="4" fill="${c}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const heart=`<path d="M28 40 C10 28 6 18 14 12 C20 8 26 12 28 16 C30 12 36 8 42 12 C50 18 46 28 28 40Z" fill="var(--myo)" stroke="var(--myo-d)" stroke-width="1.5"/>`;
+  switch(k){
+    case "pril":return s(`<path d="M8 23 A12 12 0 1 1 8 23.1 L18 23 Z" fill="var(--enz)"/>${hex(26,23,6)}<circle cx="44" cy="14" r="4" fill="var(--lig)"/><circle cx="48" cy="30" r="4" fill="var(--lig)" opacity=".5"/>`);
+    case "sartan":return s(`${mem}<path d="M20 30 V14 H24 V24 A4 4 0 0 0 32 24 V14 H36 V30Z" fill="var(--rec)"/>${hex(28,20,5)}<circle cx="46" cy="10" r="4" fill="var(--lig)"/>`);
+    case "olol":case "c2":case "bb":return s(`${mem}<path d="M20 30 V14 H24 V24 A4 4 0 0 0 32 24 V14 H36 V30Z" fill="var(--rec)"/>${hex(28,20,5)}<circle cx="10" cy="10" r="4" fill="var(--lig)"/><text x="40" y="16" font-size="10" font-family="monospace" fill="var(--ink)">β1</text>`);
+    case "dipine":case "c4":return s(`${chan("var(--ca)")}${hex(28,22,5)}<circle cx="12" cy="12" r="3.5" fill="var(--ca)"/><circle cx="44" cy="12" r="3.5" fill="var(--ca)"/>`);
+    case "statin":case "st":case "stat":return s(`<rect x="4" y="6" width="48" height="34" rx="8" fill="var(--liver)" opacity=".35"/><path d="M14 23 A9 9 0 1 1 14 23.1 L22 23Z" fill="var(--enz)"/>${hex(30,23,5)}<rect x="40" y="10" width="8" height="26" rx="3" fill="var(--rec)"/>`);
+    case "c1":return s(`${chan("var(--na)")}${hex(28,22,5)}<circle cx="12" cy="12" r="3.5" fill="var(--na)"/>`);
+    case "c3":return s(`${chan("var(--k)")}${hex(28,22,5)}<circle cx="44" cy="12" r="3.5" fill="var(--k)"/>`);
+    case "cx":return s(`<polyline points="2,26 12,26 16,10 20,40 24,26 34,26 38,26 54,26" fill="none" stroke="var(--good)" stroke-width="2.5"/>${hex(46,12,5)}`);
+    case "dig":return s(`${mem}<rect x="18" y="18" width="20" height="26" rx="5" fill="var(--rec)" opacity=".7"/>${hex(28,14,6)}<circle cx="10" cy="12" r="3.5" fill="var(--k)"/>`);
+    case "nit":return s(`<rect x="2" y="12" width="52" height="22" fill="var(--art)" opacity=".18"/><rect x="2" y="8" width="52" height="4" fill="var(--smooth)"/><rect x="2" y="34" width="52" height="4" fill="var(--smooth)"/><circle cx="16" cy="23" r="3" fill="var(--no)"/><circle cx="28" cy="23" r="3" fill="var(--cgmp)"/><circle cx="40" cy="23" r="3" fill="var(--cgmp)"/>`);
+    case "acei":return s(`<path d="M10 23 A12 12 0 1 1 10 23.1 L20 23 Z" fill="var(--enz)"/>${hex(28,23,6)}<circle cx="46" cy="20" r="3" fill="var(--warn)"/><circle cx="48" cy="30" r="3" fill="var(--warn)"/>`);
+    case "amio":return s(`<path d="M10 8 C22 6 24 30 20 40 C12 40 6 34 8 20Z" fill="var(--lung)" stroke="var(--myo-d)"/><path d="M46 8 C34 6 32 30 36 40 C44 40 50 34 48 20Z" fill="var(--lung)" stroke="var(--myo-d)"/><path d="M12 22 L18 28 M40 18 L44 26" stroke="var(--bad)" stroke-width="2"/>`);
+    case "other":return s(`${heart}${hex(44,10,5)}`);
+    case "spiro":return s(`<path d="M18 6 C6 10 6 36 18 40 C26 42 30 34 26 23 C30 12 26 4 18 6Z" fill="var(--liver)"/><circle cx="40" cy="16" r="5" fill="var(--k)"/><circle cx="44" cy="30" r="5" fill="var(--k)"/>${hex(28,23,5)}`);
+    case "ez":return s(`<rect x="2" y="26" width="52" height="16" rx="6" fill="var(--body)" stroke="var(--body-edge)"/><rect x="22" y="22" width="12" height="10" rx="3" fill="var(--rec)"/>${hex(28,16,5)}<circle cx="12" cy="12" r="4" fill="var(--chol)"/>`);
+    case "pcsk":return s(`${mem}<rect x="24" y="18" width="8" height="18" rx="3" fill="var(--rec)"/><path d="M42 30 V20 L36 12 M42 20 L48 12" stroke="var(--drug)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="12" cy="14" r="5" fill="var(--ldl)"/>`);
+    case "fib":return s(`<circle cx="16" cy="18" r="9" fill="var(--gold)" opacity=".8"/><circle cx="34" cy="26" r="7" fill="var(--gold)" opacity=".5"/><circle cx="46" cy="14" r="4" fill="var(--gold)" opacity=".3"/>`);
+    case "nia":return s(`<circle cx="22" cy="22" r="12" fill="var(--skin)" stroke="var(--skin-edge)"/><circle cx="16" cy="26" r="3" fill="var(--bad)" opacity=".5"/><circle cx="28" cy="26" r="3" fill="var(--bad)" opacity=".5"/><path d="M40 10 q4 6 0 12 q-4 6 0 12 M48 10 q4 6 0 12 q-4 6 0 12" stroke="var(--warn)" stroke-width="2" fill="none"/>`);
+    case "bas":return s(`<rect x="2" y="10" width="52" height="28" rx="14" fill="var(--body)" stroke="var(--body-edge)"/><circle cx="18" cy="24" r="7" fill="var(--gold)"/><circle cx="38" cy="24" r="7" fill="var(--gold)"/><circle cx="24" cy="18" r="2.5" fill="var(--chol)"/>${hex(44,18,3.5)}`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}a11yKey=""}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+
+/* ---------------- simulator controls ---------------- */
+let simMode="hf";
+function setSim(m){simMode=m;$("#modeHF").setAttribute("aria-pressed",String(m==="hf"));$("#modeDig").setAttribute("aria-pressed",String(m==="dig"));$("#hfPane").hidden=m!=="hf";$("#digPane").hidden=m!=="dig";fitAll();a11yKey=""}
+$("#modeHF").onclick=()=>setSim("hf");$("#modeDig").onclick=()=>setSim("dig");
+$("#hfSev").oninput=e=>{HF.sev=+e.target.value;hfChanged()};
+$("#hfReset").onclick=()=>{HF.on={};HF.months=false;hfDrugsUI();hfChanged()};
+$("#digDose").oninput=e=>{DG.dose=+e.target.value;dgChanged()};
+$("#digKid").oninput=e=>{DG.kid=+e.target.value;dgChanged()};
+$("#digK").oninput=e=>{DG.K=+e.target.value;dgChanged()};
+$("#digPlay").onclick=()=>{if(DG.day>=DAYS)DG.day=0;DG.play=!DG.play;dgUI()};
+$("#digRestart").onclick=()=>{DG.day=0;DG.hold=null;DG.fab=null;DG.play=true;dgChanged()};
+$("#digHold").onclick=()=>{if(DG.hold!=null)DG.hold=null;else{const s=dgState(DG.day);if(s.hr<60)DG.done.add(5);DG.hold=Math.ceil(DG.day-1e-6)}dgChanged()};
+$("#digFab").onclick=()=>{const s=dgState(DG.day);if(DG.fab!=null){setStatus($("#digStatus"),"","Fab has already been given in this run. Restart to try again.");return}
+  if(s.tox<=1){setStatus($("#digStatus"),"warn","Digoxin immune fab is for serious toxicity: dangerous arrhythmias, very high levels or severe symptoms. The level is not in the toxic zone now.");return}
+  DG.fab=DG.day;DG.done.add(4);if(!DG.play&&DG.day<DAYS)DG.play=true;dgChanged()};
+segBtns($("#digIx"),IXD,()=>DG.ix,k=>{DG.ix=k;dgChanged()});
+$("#rHint").onclick=()=>{const hb=$("#rHintBox");hb.hidden=false;hb.textContent="Hint: "+RSC[RS.i].hint};
+$("#rReset").onclick=()=>rReset();$("#rNext").onclick=()=>{RS.i=(RS.i+1)%RSC.length;rUI()};
+
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={sim:{cv:()=>simMode==="hf"?"#cvHF":"#cvDig",f:()=>simMode==="hf"?hfA11y():digA11y()},rhy:{cv:()=>"#cvRhy",f:rhyA11y},cases:{cv:()=>"#cvCase",f:caseA11y},sort:{cv:()=>null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const cv=a.cv();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(cv&&lab)$(cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=cv?$(cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(cv)$(cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","rhy","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S1b,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now(),rdT=0;
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="sim"){if(simMode==="hf"){hfStep(dt);drawHF(now)}else{dgStep(dt);drawDig(now);rdT+=dt;if(rdT>.25){rdT=0;dgRead()}}}
+    else if(curTab==="rhy"){RS.T+=dt;drawRhy(now)}
+    else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__hl={tab:k=>showTab(k),sim:m=>setSim(m),hf:o=>{if(o.sev!=null){HF.sev=o.sev;$("#hfSev").value=o.sev}if(o.on)HF.on=Object.assign({},o.on);if(o.months!=null)HF.months=o.months;hfDrugsUI();hfChanged();HF.cur=Object.assign({},HF.tgt)},hfState:()=>({tgt:HF.tgt,done:[...HF.done]}),
+  dig:o=>{Object.assign(DG,o);$("#digDose").value=DG.dose;$("#digKid").value=DG.kid;$("#digK").value=DG.K;segBtns($("#digIx"),IXD,()=>DG.ix,k=>{DG.ix=k;dgChanged()});dgChanged();dgRead()},digState:()=>{const s=dgState(DG.day);return {L:s.L,tox:s.tox,hr:s.hr,done:[...DG.done]}},
+  rhy:i=>{RS.i=i;rUI()},rGive:k=>rGive(k),rAdv:s=>{RS.T+=s},rState:()=>({reg:rRegimeAt(RS.T),solved:Object.keys(RS.solved).length}),
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order})};
+readColors();hfDrugsUI();hfChanged();dgChanged();dgRead();rUI();caseUI();sLoad(0);setSim("hf");fitAll();requestAnimationFrame(frame);
+
+})();
+
+</script>
+</body>
+</html>

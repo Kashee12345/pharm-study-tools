@@ -1,0 +1,1467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neurologic Drugs Walkthrough</title>
+<meta name="description" content="Step-by-step animated walkthrough of neurologic drugs and anesthesia: antiseizure drugs, Parkinson and Alzheimer drugs, muscle relaxants, migraine drugs, general and local anesthetics, neuromuscular blockers and moderate sedation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B378A;--accent-wash:#E2E5F6;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#C4644F;--act3:#2F7FC1;--act4:#2E8A7A;--act5:#A04E8C;--act6:#D98A1C;--act7:#5E7F1A;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A600F;
+  /* pharmacology: neuro palette */
+  --ecf:#EEF0F6;--grid:#D3D8E6;--scr:#0F1A20;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#5B3FB8;--drug2:#8A5ACB;--receptor:#1F7F95;--ligand:#D98A1C;--blocked:#8B9094;
+  --na:#C9A00C;--cl:#3E9A4E;--ca:#C4508A;--k:#5E6E7A;
+  --gaba:#2E9C7A;--glu:#C4382F;--dopa:#D2691E;--ach:#2F6FD0;--ser:#A04E8C;--epi:#7E9A2A;
+  --nrn:#E9DCCB;--nrn-edge:#A88B6A;--myelin:#F2E6C2;--myelin-edge:#B9A160;--mem:#C9A227;
+  --muscle:#D9827A;--muscle-edge:#A3473F;--sr:#E8C9E0;--liver:#B5653A;--gum:#E59AA6;--skin:#EAC9A8;--skin-edge:#B9937A;
+  --blood:#C4382F;--vessel:#E8B7B0;--heat:#E0563A;--cold:#2F7FC1;--bbb:#7F99A6;--brain:#E8D2D8;--brain-edge:#A3707E;--o2:#4F8FCB;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2346;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131826;--grid:#262E44;--scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#B39BF2;--drug2:#C9A8F0;--receptor:#5CC0D6;--ligand:#F2A93B;--blocked:#6F767B;
+  --na:#F0CC4A;--cl:#6BC26E;--ca:#E68AB8;--k:#A9B7C2;
+  --gaba:#4FD0A8;--glu:#F07A62;--dopa:#F2A060;--ach:#6FA3F0;--ser:#D186C0;--epi:#B5CF5A;
+  --nrn:#3E3528;--nrn-edge:#B39773;--myelin:#4A4430;--myelin-edge:#9C8A5A;--mem:#E0BE48;
+  --muscle:#6E3A36;--muscle-edge:#E07A74;--sr:#4A3446;--liver:#D98A6A;--gum:#B86A78;--skin:#5A4434;--skin-edge:#B9937A;
+  --blood:#F07A62;--vessel:#4A2A2A;--heat:#F27A5E;--cold:#5AA9E6;--bbb:#8FA9B6;--brain:#3F2E36;--brain-edge:#C99AA8;--o2:#8FC0EC;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2346;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131826;--grid:#262E44;--scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#B39BF2;--drug2:#C9A8F0;--receptor:#5CC0D6;--ligand:#F2A93B;--blocked:#6F767B;
+  --na:#F0CC4A;--cl:#6BC26E;--ca:#E68AB8;--k:#A9B7C2;
+  --gaba:#4FD0A8;--glu:#F07A62;--dopa:#F2A060;--ach:#6FA3F0;--ser:#D186C0;--epi:#B5CF5A;
+  --nrn:#3E3528;--nrn-edge:#B39773;--myelin:#4A4430;--myelin-edge:#9C8A5A;--mem:#E0BE48;
+  --muscle:#6E3A36;--muscle-edge:#E07A74;--sr:#4A3446;--liver:#D98A6A;--gum:#B86A78;--skin:#5A4434;--skin-edge:#B9937A;
+  --blood:#F07A62;--vessel:#4A2A2A;--heat:#F27A5E;--cold:#5AA9E6;--bbb:#8FA9B6;--brain:#3F2E36;--brain-edge:#C99AA8;--o2:#8FC0EC;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+</style>
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 5 &middot; Neurologic drugs and anesthesia</div>
+    <h1>Neurologic Drugs Walkthrough</h1>
+    <p class="sub">See how drugs calm an overexcited brain, rebalance dopamine and acetylcholine, relax muscles and switch off pain and awareness for surgery. Each side effect follows from the mechanism. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Use the left and right arrow keys to move between steps. Practice next in the <a href="Neuro-Lab.html">Neurologic Drugs Lab</a>. Drugs are named by generic name and class only; this page gives no doses. Channels, receptors and molecules are drawn as simple shapes, and fast events are slowed down (slow ones sped up) so you can watch them. Always follow the prescriber, the label and your facility's protocol.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "grid", "scr", "scr-ink", "scr-soft", "drug", "drug2", "receptor", "ligand", "blocked", "na", "cl", "ca", "k", "gaba", "glu", "dopa", "ach", "ser", "epi", "nrn", "nrn-edge", "myelin", "myelin-edge", "mem", "muscle", "muscle-edge", "sr", "liver", "gum", "skin", "skin-edge", "blood", "vessel", "heat", "cold", "bbb", "brain", "brain-edge", "o2"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= neuro pharmacology drawing helpers ================= */
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function ngon(x,y,r,n,rot){ctx.beginPath();for(let k=0;k<=n;k++){const a=k/n*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function capsulePill(x,y,s,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.panel;ctx.fill();ctx.save();rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col;ctx.fillRect(-s,-s,s,2*s);ctx.restore();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.stroke();ctx.restore()}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+function fillPoly(pts,col){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();if(col){ctx.fillStyle=col;ctx.fill()}}
+
+/* drug molecules: shape tells the class, colour is drug (indigo/violet) unless given */
+function drugMol(x,y,s,o){o=o||{};const sh=o.shape||"hex";const col=o.col||C.drug;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  if(sh==="hex"){hexPath(0,0,s,0);fillStroke(col,hexA(C.ink,.55),1.3);hexPath(0,0,s*.45,0);fillStroke(hexA(C.panel,.35))}
+  else if(sh==="dia"){ctx.beginPath();ctx.moveTo(0,-s*1.1);ctx.lineTo(s,0);ctx.lineTo(0,s*1.1);ctx.lineTo(-s,0);ctx.closePath();fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="pent"){ngon(0,0,s,5,-Math.PI/2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="tri"){ngon(0,0,s*1.1,3,-Math.PI/2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="sq"){rr(-s*.85,-s*.85,s*1.7,s*1.7,2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="ring"){circ(0,0,s,null,col,s*.55);circ(0,0,s*1.25,null,hexA(C.ink,.35),1)}
+  else if(sh==="star"){ctx.beginPath();for(let k=0;k<10;k++){const a=k/10*TAU-Math.PI/2,r=k%2?s*.48:s*1.1;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();fillStroke(col,hexA(C.ink,.55),1.2)}
+  else{circ(0,0,s,col,hexA(C.ink,.55),1.3)}
+  ctx.restore()}
+/* natural messengers */
+function nt(kind,x,y,s,a){s=s||4.5;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);
+  if(kind==="gaba"){circ(x,y,s,C.gaba,hexA(C.ink,.4),1)}
+  else if(kind==="glu"){ngon(x,y,s*1.15,3,-Math.PI/2);fillStroke(C.glu,hexA(C.ink,.4),1)}
+  else if(kind==="dopa"){ngon(x,y,s*1.05,5,-Math.PI/2);fillStroke(C.dopa,hexA(C.ink,.4),1)}
+  else if(kind==="ach"){circ(x,y,s,C.ach,hexA(C.ink,.4),1)}
+  else if(kind==="ser"){rr(x-s,y-s,s*2,s*2,1.5);fillStroke(C.ser,hexA(C.ink,.4),1)}
+  else if(kind==="epi"){ngon(x,y,s*1.1,4,0);fillStroke(C.epi,hexA(C.ink,.4),1)}
+  ctx.restore()}
+/* ions: small circle with a sign drawn as strokes (colour is not the only cue) */
+function ion(kind,x,y,a,r){r=r||5;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);const col={na:C.na,cl:C.cl,ca:C.ca,k:C.k}[kind]||C.na;
+  circ(x,y,r,col,hexA(C.ink,.45),1);const c=isDark()?"#10161A":"#fff";line(x-r*.5,y,x+r*.5,y,c,1.4);if(kind!=="cl")line(x,y-r*.5,x,y+r*.5,c,1.4);ctx.restore()}
+
+/* lipid bilayer, horizontal, outside above */
+function bilayer(x1,x2,y,th,o){o=o||{};th=th||22;ctx.fillStyle=hexA(C.mem,.18);ctx.fillRect(x1,y-th/2,x2-x1,th);
+  for(let X=x1+4;X<x2;X+=9){circ(X,y-th/2+3,3.4,C.mem);circ(X,y+th/2-3,3.4,C.mem);line(X-1,y-th/2+6,X-1,y-2,hexA(C.mem,.8),1);line(X+1,y-th/2+6,X+1,y-2,hexA(C.mem,.8),1);line(X-1,y+2,X-1,y+th/2-6,hexA(C.mem,.8),1);line(X+1,y+2,X+1,y+th/2-6,hexA(C.mem,.8),1)}
+  if(o.labels){txt(x1+4,y-th/2-10,o.out||"Outside the cell",{size:12,color:C["ink-soft"]});txt(x1+4,y+th/2+11,o.in||"Inside the cell",{size:12,color:C["ink-soft"]})}}
+/* voltage-gated sodium channel in a horizontal membrane. open 0..1, inact 0..1, drug 0..1 */
+function naChannel(x,y,s,o){o=o||{};const open=clamp(o.open||0,0,1),inact=clamp(o.inact||0,0,1);const gap=s*(.12+.28*open);const col=o.col||C.receptor;
+  [-1,1].forEach(d=>{rr(x+d*(gap/2)+(d<0?-s*.62:0),y-s*.85,s*.62,s*1.7,s*.22);fillStroke(mix(col,C.panel,.15),mix(col,C.ink,.35),1.5)});
+  // inactivation ball on a chain, inside (below)
+  if(!o.noBall){const bx=x+lerp(s*.75,0,inact),by=y+lerp(s*1.25,s*.95,inact);poly([[x+s*.55,y+s*.8],[lerp(x+s*.8,bx,.5),by+s*.25],[bx,by]],mix(col,C.ink,.3),1.6);circ(bx,by,s*.22,mix(col,C.ink,.25))}
+  if(o.drug>0)drugMol(x,y+s*.55,s*.3,{a:o.drug,shape:o.shape||"hex",col:o.dcol});
+  if(o.lab)txt(x,y-s*1.1,o.lab,{size:12,weight:600,align:"center"})}
+/* GABA-A receptor (side view). gaba 0..1 bound, bz 0..1 benzodiazepine, barb 0..1 barbiturate/propofol, open 0..1 */
+function gabaA(x,y,s,o){o=o||{};const open=clamp(o.open||0,0,1);const gap=s*(.1+.32*open);const col=C.receptor;
+  [-1,1].forEach(d=>{const X=x+d*(gap/2)+(d<0?-s*.75:0);rr(X,y-s*1.05,s*.75,s*2,s*.25);fillStroke(mix(col,C.panel,.3),mix(col,C.ink,.35),1.5);
+    // GABA pocket notch
+    circ(x+d*(gap/2+s*.38),y-s*1.05,s*.17,C.ecf,mix(col,C.ink,.35),1.2)});
+  if(o.gaba>0){[-1,1].forEach(d=>nt("gaba",x+d*(gap/2+s*.38),y-s*1.05,s*.15,o.gaba))}
+  if(o.bz>0){circ(x-gap/2-s*.75,y-s*.55,s*.16,C.ecf,mix(col,C.ink,.35),1.2);drugMol(x-gap/2-s*.75,y-s*.55,s*.16,{shape:"dia",a:o.bz})}
+  if(o.barb>0){drugMol(x+gap/2+s*.75,y+s*.05,s*.17,{shape:"sq",a:o.barb,col:C.drug2})}
+  if(o.lab)txt(x,y-s*1.45,o.lab,{size:12,weight:600,align:"center"})}
+/* generic receptor (cup shape opening upward), with optional bound ligand or drug */
+function receptor(x,y,s,o){o=o||{};const col=o.col||C.receptor;ctx.beginPath();ctx.moveTo(x-s,y-s*.9);ctx.lineTo(x-s*.55,y-s*.9);ctx.lineTo(x-s*.55,y-s*.25);ctx.arc(x,y-s*.25,s*.55,Math.PI,0,true);ctx.lineTo(x+s*.55,y-s*.9);ctx.lineTo(x+s,y-s*.9);ctx.lineTo(x+s,y+s*.9);ctx.lineTo(x-s,y+s*.9);ctx.closePath();
+  fillStroke(o.off?mix(C.blocked,C.panel,.3):mix(col,C.panel,.2),mix(o.off?C.blocked:col,C.ink,.35),1.4);
+  if(o.glow)glow(x,y+s*.2,s*1.6,col,.35*o.glow);
+  if(o.lab)txt(x,y+s*1.25,o.lab,{size:12,weight:600,align:"center"})}
+
+/* a neuron: soma, dendrites to the left, axon to the right to x2 */
+function neuron(x,y,r,x2,T,o){o=o||{};const fire=o.fire||0;const col=o.col||C.nrn,ed=o.edge||C["nrn-edge"];
+  for(let k=0;k<5;k++){const a=Math.PI*.55+k*.22+Math.sin(k*2.1)*.05;const L=r*(1.7+rnd(k+3)*.6);poly([[x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8],[x+Math.cos(a)*L*.6,y+Math.sin(a)*L*.6+Math.sin(T*.6+k)*1.5],[x+Math.cos(a+.15)*L,y+Math.sin(a+.15)*L]],ed,3.2)}
+  for(let k=0;k<3;k++){const a=-Math.PI*.55-k*.25;const L=r*(1.6+rnd(k+9)*.5);poly([[x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8],[x+Math.cos(a-.1)*L,y+Math.sin(a-.1)*L]],ed,3)}
+  rr(x+r*.6,y-r*.16,x2-x-r*.6,r*.32,r*.16);fillStroke(col,ed,1.6);
+  blobPath(x,y,r,1.1,T*.3,.05);fillStroke(col,ed,2);circ(x-r*.1,y,r*.35,mix(col,ed,.35));
+  if(fire>0)glow(x,y,r*1.8,o.glowCol||C.na,.45*fire);
+  // terminal knobs
+  [-1,0,1].forEach(d=>{line(x2,y,x2+r*.6,y+d*r*.5,ed,2.4);circ(x2+r*.65,y+d*r*.5,r*.18,col,ed,1.4)})}
+/* travelling action potential pulse along an axon from xa to xb at y; p 0..1 */
+function apPulse(xa,xb,y,p,col,blocked){const X=lerp(xa,xb,p);if(blocked!=null&&X>blocked)return;glow(X,y,16,col||C.na,.9);circ(X,y,4,col||C.na)}
+
+/* chemical synapse: presynaptic bulb above, cleft, postsynaptic membrane below */
+function synapse(x,y,w,o){o=o||{};const col=C.nrn,ed=C["nrn-edge"];
+  ctx.beginPath();ctx.moveTo(x-w*.18,y-150);ctx.lineTo(x-w*.18,y-110);ctx.bezierCurveTo(x-w*.5,y-100,x-w*.5,y-18,x-w*.3,y-12);ctx.lineTo(x+w*.3,y-12);ctx.bezierCurveTo(x+w*.5,y-18,x+w*.5,y-100,x+w*.18,y-110);ctx.lineTo(x+w*.18,y-150);ctx.closePath();fillStroke(col,ed,2);
+  const g=o.gap||40;rr(x-w*.5,y+g,w,64,14);fillStroke(col,ed,2);
+  if(o.label!==false){txt(x+w*.36,y-120,o.pre||"Sending neuron",{size:12,color:C["ink-soft"]});txt(x+w*.5-6,y+g+52,o.post||"Receiving neuron",{size:12,color:C["ink-soft"],align:"right"})}
+  return {top:y-12,bot:y+g,x,w}}
+function vesicle(x,y,r,kind,n,T){circ(x,y,r,hexA(C.panel,.75),C["nrn-edge"],1.3);for(let i=0;i<(n||4);i++){const a=i/(n||4)*TAU+T*.4;nt(kind,x+Math.cos(a)*r*.45,y+Math.sin(a)*r*.45,r*.24)}}
+
+/* scrolling trace helpers */
+function eegVal(t,sev){const n=.16*Math.sin(TAU*9.7*t)+.12*Math.sin(TAU*6.1*t+1.3)+.09*Math.sin(TAU*17.3*t+.4)+.07*Math.sin(TAU*3.3*t+2);
+  const ph=P(t,1/3);const sw=Math.exp(-Math.pow((ph-.12)/.03,2))*1.35-Math.exp(-Math.pow((ph-.22)/.05,2))*.35-Math.sin(ph*Math.PI)*.45;return lerp(n,sw,clamp(sev,0,1))}
+function scopeBox(x,y,w,h,ttl){rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.save();rr(x,y,w,h,8);ctx.clip();ctx.strokeStyle="rgba(120,160,170,.16)";ctx.lineWidth=1;for(let gx=x+20;gx<x+w;gx+=20){ctx.beginPath();ctx.moveTo(gx,y);ctx.lineTo(gx,y+h);ctx.stroke()}for(let gy=y+20;gy<y+h;gy+=20){ctx.beginPath();ctx.moveTo(x,gy);ctx.lineTo(x+w,gy);ctx.stroke()}ctx.restore();
+  if(ttl)txt(x+10,y+13,ttl,{size:12,mono:true,weight:600,color:"#C5D3DA"})}
+/* draw an EEG trace: sevFn(t) gives seizure severity at time t; window of win seconds ending at T */
+function eegTrace(x,y,w,h,T,sevFn,o){o=o||{};const win=o.win||4;ctx.save();rr(x,y,w,h,6);ctx.clip();ctx.beginPath();
+  for(let i=0;i<=w;i+=1.5){const t=T-win+i/w*win;const v=eegVal(t,sevFn(t));const Y=y+h/2-v*h*.32;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=o.col||"#7FE0B0";ctx.lineWidth=1.8;ctx.lineJoin="round";ctx.stroke();ctx.restore()}
+/* ECG wave for monitors */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+(p>.28&&p<.31?-(p-.28)/.03*.12:0)+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+/* bedside monitor: o {hr,sbp,dbp,spo2,rr,temp,etco2} */
+function monitor(x,y,w,h,o,T){rr(x,y,w,h,10);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.stroke();
+  const ex=x+12,ew=w*.55,ey=y+14,eh=h*.36;ctx.save();rr(ex,ey,ew,eh,4);ctx.clip();ctx.beginPath();const hr=o.hr||75;
+  for(let i=0;i<=ew;i++){const tt=(T||0)*hr/60-(ew-i)/ew*2.5;const v=ecgWave(tt);const Y=ey+eh*.7-v*eh*.55;i?ctx.lineTo(ex+i,Y):ctx.moveTo(ex+i,Y)}ctx.strokeStyle="#4FD08A";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const vx=x+w*.62;const item=(lx,ly,lab,val,col,unit)=>{txt(lx,ly,lab,{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(lx,ly+21,val,{size:21,mono:true,weight:700,color:col});if(unit)txt(lx,ly+40,unit,{size:11.5,mono:true,color:"#A3B2BA"})};
+  item(vx,y+14,"HR",String(Math.round(hr)),"#4FD08A","/min");
+  if(o.sbp)item(vx,y+14+h*.34,"BP",Math.round(o.sbp)+"/"+Math.round(o.dbp),"#F2A3C9",null);
+  const by=y+h*.55;const items=[["SpO₂",o.spo2!=null?o.spo2+"%":"--","#6FC3F0"],["RR",o.rr!=null?String(o.rr):"--","#E8EEF1"],[o.etco2!=null?"EtCO₂":"Temp",o.etco2!=null?String(o.etco2):(o.temp||"--"),"#F2B33B"]];
+  items.forEach((it,i)=>{const lx=x+12+i*(w*.55/3);txt(lx,by+10,it[0],{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(lx,by+32,it[1],{size:17,mono:true,weight:700,color:it[2]})});
+  if(o.etco2!=null&&o.temp)item(vx,y+14+h*.66,"Temp",o.temp,"#F2B33B",null)}
+
+/* simple patient figure; o.tremor (0..1), o.sleep, o.rigid, o.col */
+function person(x,y,s,T,o){o=o||{};const sk=o.skin||C.skin,ed=C["skin-edge"];const tr=(o.tremor||0)*Math.sin(T*TAU*5)*s*.06;const sw=o.sway?Math.sin(T*2.2)*s*.12*o.sway:0;
+  ctx.save();ctx.translate(x+sw,y);if(o.lean)ctx.rotate(o.lean);
+  rr(-s*.32,-s*1.1,s*.64,s*1.0,s*.18);fillStroke(o.shirt||mix(C.accent,C.panel,.55),hexA(C.ink,.35),1.2);
+  line(-s*.16,-s*.1,-s*.2-sw*.2,s*.75,ed,s*.16);line(s*.16,-s*.1,s*.2,s*.75,ed,s*.16);
+  const hy=o.rigid?-s*.4:-s*.35;line(-s*.3,-s*.95,-s*.48,hy+tr,ed,s*.13);line(s*.3,-s*.95,s*.48+(o.reach||0),hy-tr,ed,s*.13);
+  circ(-s*.5,hy+tr+s*.04,s*.09,sk,ed,1);circ(s*.5+(o.reach||0),hy-tr+s*.04,s*.09,sk,ed,1);
+  circ(0,-s*1.32,s*.26,sk,ed,1.4);
+  if(o.sleep){line(-s*.12,-s*1.33,-s*.04,-s*1.33,C.ink,1.5);line(s*.04,-s*1.33,s*.12,-s*1.33,C.ink,1.5)}else{circ(-s*.09,-s*1.35,s*.035,C.ink);circ(s*.09,-s*1.35,s*.035,C.ink)}
+  ctx.restore()}
+/* eye with optional nystagmus (jerky drift and snap back) */
+function eye(x,y,r,T,ny){ell(x,y,r,r*.62,0,"#FFFFFF",hexA(C.ink,.5),1.5);const ph=P(T*2.4,1);const dx=ny?(ph<.8?lerp(-.35,.35,ph/.8):lerp(.35,-.35,(ph-.8)/.2))*r:Math.sin(T*.6)*r*.1;
+  ctx.save();ell(x,y,r,r*.62,0);ctx.clip();circ(x+dx,y,r*.42,"#5B7FA8");circ(x+dx,y,r*.2,"#10161A");circ(x+dx-r*.1,y-r*.1,r*.07,"#FFFFFF");ctx.restore()}
+/* seesaw: tilt>0 means the right side is lower (heavier) */
+function seesaw(x,y,w,tilt,lab){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-22,y+40);ctx.lineTo(x+22,y+40);ctx.closePath();fillStroke(C["panel-2"],C["ink-soft"],1.5);
+  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);rr(-w/2,-6,w,10,4);fillStroke(C.sunk,C["ink-soft"],1.5);ctx.restore();
+  const L=[x-Math.cos(tilt)*w*.42,y-Math.sin(tilt)*w*.42],R=[x+Math.cos(tilt)*w*.42,y+Math.sin(tilt)*w*.42];return {L,R}}
+function pan(px,py,w,items,kind,lab){rr(px-w/2,py-8,w,10,4);fillStroke(C.panel,C["ink-soft"],1.3);
+  for(let i=0;i<items;i++){const col=i%6,row=Math.floor(i/6);nt(kind,px-w/2+10+col*(w-20)/5,py-16-row*12,5)}
+  if(lab)txt(px,py+18,lab,{size:12.5,weight:700,align:"center"})}
+/* syringe: tip at (x,y) pointing in angle rot */
+function syringe(x,y,s,rot,fill,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);line(0,0,s*.55,0,C["ink-soft"],1.6);rr(s*.55,-s*.16,s*1.2,s*.32,3);fillStroke(hexA(C.panel,.85),C["ink-soft"],1.4);
+  ctx.fillStyle=hexA(col||C.drug,.75);ctx.fillRect(s*.58,-s*.12,s*1.14*clamp(fill==null?.7:fill,0,1),s*.24);line(s*1.75,0,s*2.1,0,C["ink-soft"],3);line(s*2.1,-s*.2,s*2.1,s*.2,C["ink-soft"],3);ctx.restore()}
+function ivBag(x,y,s,lab,col,lvl){rr(x-s*.45,y-s*1.2,s*.9,s*1.2,s*.2);fillStroke(hexA(C.panel,.85),C["ink-soft"],1.5);ctx.save();rr(x-s*.45,y-s*1.2,s*.9,s*1.2,s*.2);ctx.clip();ctx.fillStyle=hexA(col||C.o2,.35);const L=(lvl==null?.8:lvl)*s*1.2;ctx.fillRect(x-s*.45,y-L,s*.9,L);ctx.restore();
+  line(x,y,x,y+s*.35,C["ink-soft"],2);if(lab)txt(x,y-s*.6,lab,{size:12,weight:700,align:"center"})}
+/* gauge: semicircle meter, f 0..1 */
+function gauge(x,y,r,f,lab,col,zones){ctx.beginPath();ctx.arc(x,y,r,Math.PI,0);ctx.strokeStyle=C.sunk;ctx.lineWidth=10;ctx.stroke();
+  if(zones)zones.forEach(z=>{ctx.beginPath();ctx.arc(x,y,r,Math.PI+z[0]*Math.PI,Math.PI+z[1]*Math.PI);ctx.strokeStyle=hexA(z[2],.55);ctx.lineWidth=10;ctx.stroke()});
+  const a=Math.PI+clamp(f,0,1)*Math.PI;line(x,y,x+Math.cos(a)*(r-4),y+Math.sin(a)*(r-4),col||C.ink,3);circ(x,y,4,col||C.ink);if(lab)txt(x,y+16,lab,{size:12,weight:600,align:"center"})}
+/* horizontal level bar with a target window */
+function levelBar(x,y,w,f,lo,hi,lab,col){rr(x,y,w,14,7);fillStroke(C.sunk);if(lo!=null){rr(x+w*lo,y,w*(hi-lo),14,3);fillStroke(hexA(C.good,.3),C.good,1.2)}rr(x,y,w*clamp(f,0,1),14,7);fillStroke(hexA(col||C.drug,.75));
+  if(lab)txt(x,y-10,lab,{size:12,weight:600})}
+/* striated skeletal muscle fiber, contr 0..1 shortens the sarcomeres */
+function muscleFiber(x,y,w,h,contr,o){o=o||{};const sh=1-.18*clamp(contr,0,1);const W2=w*sh;const x0=x+(w-W2)/2;rr(x0,y,W2,h,h/2);fillStroke(o.col||C.muscle,C["muscle-edge"],1.6);
+  ctx.save();rr(x0,y,W2,h,h/2);ctx.clip();const n=Math.round(w/14);for(let i=0;i<n;i++){const X=x0+(i+.5)*W2/n;line(X,y,X,y+h,hexA(C["muscle-edge"],.55),i%2?1:2.2)}ctx.restore()}
+/* skull/brain side outline */
+function brainShape(x,y,s,fill){ctx.beginPath();ctx.moveTo(x-s,y+s*.1);ctx.bezierCurveTo(x-s*1.05,y-s*.7,x-s*.3,y-s*.95,x+s*.15,y-s*.85);ctx.bezierCurveTo(x+s*.85,y-s*.8,x+s*1.1,y-s*.25,x+s*.95,y+s*.2);ctx.bezierCurveTo(x+s*.9,y+s*.5,x+s*.5,y+s*.55,x+s*.25,y+s*.45);
+  ctx.bezierCurveTo(x+s*.1,y+s*.75,x-s*.15,y+s*.7,x-s*.2,y+s*.5);ctx.bezierCurveTo(x-s*.6,y+s*.55,x-s*.95,y+s*.45,x-s,y+s*.1);ctx.closePath();fillStroke(fill||C.brain,C["brain-edge"],2);
+  ctx.save();ctx.clip();ctx.strokeStyle=hexA(C["brain-edge"],.5);ctx.lineWidth=1.6;for(let k=0;k<7;k++){ctx.beginPath();const sx=x-s*.8+k*s*.27;ctx.moveTo(sx,y-s*.8);ctx.bezierCurveTo(sx+s*.15,y-s*.4,sx-s*.12,y-s*.1,sx+s*.08,y+s*.3);ctx.stroke()}ctx.restore()}
+/* axis frame for a mini graph */
+function axes(x,y,w,h,xl,yl){line(x,y+h,x+w,y+h,C["ink-soft"],1.4);line(x,y,x,y+h,C["ink-soft"],1.4);if(xl)txt(x+w,y+h+14,xl,{size:12,color:C["ink-soft"],align:"right"});if(yl){ctx.save();ctx.translate(x-12,y+h/2);ctx.rotate(-Math.PI/2);txt(0,0,yl,{size:12,color:C["ink-soft"],align:"center"});ctx.restore()}}
+function band(x,y,w,h,v0,v1,lo,hi,col){const Y1=y+h-(hi-v0)/(v1-v0)*h,Y2=y+h-(lo-v0)/(v1-v0)*h;ctx.fillStyle=hexA(col||C.good,.16);ctx.fillRect(x,Y1,w,Y2-Y1);line(x,Y1,x+w,Y1,hexA(col||C.good,.7),1,[4,3]);line(x,Y2,x+w,Y2,hexA(col||C.good,.7),1,[4,3])}
+/* liver lobe */
+function liverShape(x,y,s,col){ctx.beginPath();ctx.moveTo(x-s,y-s*.2);ctx.bezierCurveTo(x-s*.9,y-s*.75,x+s*.3,y-s*.8,x+s,y-s*.45);ctx.bezierCurveTo(x+s*1.1,y-s*.1,x+s*.4,y+s*.45,x-s*.2,y+s*.5);ctx.bezierCurveTo(x-s*.75,y+s*.5,x-s*1.05,y+s*.2,x-s,y-s*.2);ctx.closePath();fillStroke(col||C.liver,mix(col||C.liver,C.ink,.35),2)}
+/* neuromuscular junction: nerve terminal above a muscle fiber with receptors */
+function nmj(x,y,w,o){o=o||{};ctx.beginPath();ctx.moveTo(x-12,y-130);ctx.lineTo(x-12,y-90);ctx.bezierCurveTo(x-w*.45,y-80,x-w*.45,y-14,x-w*.3,y-10);ctx.lineTo(x+w*.3,y-10);ctx.bezierCurveTo(x+w*.45,y-14,x+w*.45,y-80,x+12,y-90);ctx.lineTo(x+12,y-130);ctx.closePath();fillStroke(C.nrn,C["nrn-edge"],2);
+  muscleFiber(x-w*.75,y+16,w*1.5,64,o.contr||0);if(o.labels!==false){txt(x+20,y-118,"Motor nerve ending",{size:12,color:C["ink-soft"]});txt(x+w*.75,y+96,"Skeletal muscle fiber",{size:12,color:C["ink-soft"],align:"right"})}}
+/* capillary segment; constrict 0..1 narrows it */
+function capillary(x1,x2,y,h,constrict,T,o){o=o||{};const hh=h*(1-.6*clamp(constrict,0,1));rr(x1,y-hh/2-4,x2-x1,hh+8,hh/2+4);fillStroke(C.vessel,mix(C.blood,C.ink,.2),1.8);
+  const n=Math.round((x2-x1)/26);const sp=(o.flow==null?1:o.flow)*(1-.65*clamp(constrict,0,1));for(let i=0;i<n;i++){const X=x1+((i*26+T*60*sp)%(x2-x1));ell(X,y+Math.sin(i*1.7)*hh*.15,8,Math.min(5,hh*.35),0,C.blood,null)}}
+/* clock face for times of day; hour 0..24 */
+function dayClock(x,y,r,hour){circ(x,y,r,C.panel,C["ink-soft"],1.6);for(let k=0;k<12;k++){const a=k/12*TAU-Math.PI/2;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.4)}
+  const h=hour%12,m=(hour%1)*60;const ah=h/12*TAU-Math.PI/2,am=m/60*TAU-Math.PI/2;line(x,y,x+Math.cos(ah)*r*.5,y+Math.sin(ah)*r*.5,C.ink,3);line(x,y,x+Math.cos(am)*r*.75,y+Math.sin(am)*r*.75,C.ink,1.8);circ(x,y,3,C.ink)}
+function thermometer(x,y,h,f,lab){rr(x-6,y,12,h,6);fillStroke(C.panel,C["ink-soft"],1.3);const L=(h-10)*clamp(f,0,1);rr(x-3,y+h-L-2,6,L,3);fillStroke(mix(C.cold,C.heat,f));circ(x,y+h+4,9,mix(C.cold,C.heat,f),C["ink-soft"],1.3);if(lab)txt(x,y-12,lab,{size:12,weight:600,align:"center"})}
+/* MAR-style medication row on canvas */
+function marRow(x,y,w,cols,o){o=o||{};const h=o.h||30;rr(x,y,w,h,4);fillStroke(o.fill||hexA(C["panel-2"],.95),C.rule,1.1);let X=x+8;cols.forEach((c,i)=>{txt(X,y+h/2,c[0],{size:c[2]||12.5,weight:c[3]||500,mono:!!c[4],color:c[5]||C.ink});X+=c[1]})}
+
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Seizures",col:"act1"},
+            2:{name:"Part 2 · Parkinson disease",col:"act2"},
+            3:{name:"Part 3 · Alzheimer, MG, MS",col:"act3"},
+            4:{name:"Part 4 · Muscle and migraine",col:"act4"},
+            5:{name:"Part 5 · General anesthesia",col:"act5"},
+            6:{name:"Part 6 · Local, blockers, sedation",col:"act6"}};
+const NACT=6;
+const STEPS=[
+{act:0,scene:"map",desc:"On the left, a side view of a pink brain sits on top of a spinal cord. A nerve leaves the spinal cord and runs right to a striped red muscle. Six numbered spots glow one at a time: spot 1 on the outer brain surface, spot 2 deep in the middle of the brain, spot 3 low on the side of the brain near the memory area, spot 4 on a blood vessel on the brain surface and on the spinal cord, spot 5 over the whole brain with a dimming wave, and spot 6 where the nerve meets the muscle. A small violet drug shape flies to each glowing spot. On the right, six numbered cards for the six parts of this walkthrough light up one at a time with a coloured border.",
+ title:"The big picture: drugs that tune nerves and muscles",
+ body:`<p>Nerves talk with <b>electrical signals</b> (ions rushing through channels) and <b>chemical messengers</b> called <b>neurotransmitters</b>. Almost every drug in this module works by turning one of those up or down at a <b>channel</b>, a <b>receptor</b> or an <b>enzyme</b>.</p>
+ <p>Once you can picture where a drug acts, its side effects stop being a list to memorize. A drug that quiets brain cells makes people sleepy. A drug that raises acetylcholine slows the heart. A drug that blocks nerve signals can block the good ones too.</p>
+ <p>This walkthrough has six parts:</p>
+ <ol><li><b>Seizures:</b> calming overexcited neurons.</li><li><b>Parkinson disease:</b> rebalancing dopamine and acetylcholine.</li><li><b>Alzheimer disease, myasthenia gravis and MS.</b></li><li><b>Muscle relaxants and migraine drugs.</b></li><li><b>General anesthesia</b> and malignant hyperthermia.</li><li><b>Local anesthetics, neuromuscular blockers and moderate sedation.</b></li></ol>`,
+ analogy:"Think of the nervous system as a sound board. Each drug class grabs one slider: some turn the volume down, some turn one channel up, and a few mute a whole section for surgery.",
+ terms:[["Neurotransmitter","A chemical messenger one nerve cell releases to signal the next cell."],["Ion channel","A protein tunnel in the membrane that lets charged particles (ions) through when it opens."],["Receptor","A protein a messenger or drug binds to, which then changes what the cell does."]],
+ check:null,caption:"Six places neurologic and anesthetic drugs act, from the brain surface to the nerve-muscle junction.",
+ legend:[["brain","Brain"],["nrn","Spinal cord and nerve"],["muscle","Muscle"],["drug","Drug","d"],["accent","Current part","s"]]},
+
+/* ---------- Part 1: seizures ---------- */
+{act:1,scene:"seizure",desc:"Five tan neurons sit in a row across the top. Under them is a dark monitor screen with a green EEG brain-wave line. For the first few seconds the neurons glow yellow now and then, out of step, and the EEG line is small and wiggly; a label reads Normal. Then the left neuron starts flashing fast, the flashing spreads to its neighbours until all five flash together, and the EEG line turns into tall, sharp, repeating spikes; the label reads Seizure. At the bottom, a balance shows a red Go side (glutamate and sodium) and a green Stop side (GABA and chloride); during the seizure the red side drops and the balance tips toward Go. After a while the flashing settles and the balance levels again.",
+ title:"What a seizure is: go signals beat stop signals",
+ body:`<p>A neuron fires when <b>sodium ions (Na⁺)</b> rush in through <b>voltage-gated sodium channels</b>. The main <b>"go"</b> messenger in the brain is <b>glutamate</b>. The main <b>"stop"</b> messenger is <b>GABA</b>, which opens channels that let <b>chloride (Cl⁻)</b> in and make the cell harder to fire.</p>
+ <p>A <b>seizure</b> is a burst of abnormal, too-fast, too-synchronized firing. A small group of neurons starts firing in lockstep and the burst can spread. The <b>EEG</b> (brain-wave recording) shows tall, sharp spikes.</p>
+ <p><b>Epilepsy</b> means repeated unprovoked seizures. Antiseizure drugs do not cure the cause. They <b>tip the balance back</b> in one of three ways: block sodium channels, boost GABA, or reduce glutamate release.</p>`,
+ analogy:"A seizure is like a stadium wave that gets out of control: one section stands up, the next copies, and soon the whole stadium is jumping in time. Antiseizure drugs either make people slower to stand (sodium block) or louder ushers telling them to sit (GABA).",
+ terms:[["Seizure","A sudden burst of abnormal, synchronized electrical activity in the brain."],["Glutamate","The main excitatory (go) neurotransmitter in the brain."],["GABA","The main inhibitory (stop) neurotransmitter; it opens chloride channels."]],
+ check:{q:"Which change would make a neuron LESS likely to fire?",opts:[
+  ["More chloride entering through GABA-activated channels",1,"Yes. Chloride is negative, so letting more in pushes the inside more negative and the cell needs a bigger push to fire."],
+  ["More sodium channels opening",0,"Sodium rushing in is what makes a neuron fire, so more open channels make firing easier, not harder."],
+  ["More glutamate released onto the cell",0,"Glutamate is the brain's main go signal. More of it makes firing more likely."],
+  ["Faster recovery of sodium channels after each spike",0,"Faster recovery lets the neuron fire again sooner, which supports the rapid bursts seen in seizures."]]},
+ caption:"Normal firing is scattered; in a seizure, neurons fire fast and together and the EEG shows tall spikes.",
+ legend:[["nrn","Neuron"],["na","Firing (sodium in)"],["glu","Go: glutamate, sodium"],["gaba","Stop: GABA, chloride"]]},
+
+{act:1,scene:"nablock",desc:"The picture is split into two halves. Each half shows a yellow cell membrane with three teal sodium channels and a dark trace below of the cell's voltage. On the left, labelled No drug, the channels open and close quickly, gold sodium ions with plus signs stream down through them, and the trace shows a rapid train of tall spikes. On the right, labelled Sodium channel blocker, violet hexagon drug molecules drift down and lock onto channels that have just closed after firing (the inactivated ones). Fewer ions get through, and the trace shows one or two normal spikes and then the fast train stops. A small caption under the right trace reads normal single signals still pass.",
+ title:"Sodium channel blockers: phenytoin and carbamazepine",
+ body:`<p>After a sodium channel opens, it snaps into an <b>inactivated</b> state for a moment before it can open again. <b>Phenytoin</b> and <b>carbamazepine</b> (and lamotrigine) bind to the channel in that inactivated state and <b>hold it there longer</b>.</p>
+ <p>That matters most for neurons firing very fast, because their channels are inactivated over and over. So the drug <b>cuts off high-frequency bursts</b> (the seizure) while ordinary, slower signals mostly still get through. This is called <b>use-dependent</b> block.</p>
+ <p>Because sodium channels also run nerve signals in the cerebellum and eye-movement centres, too much drug causes <b>nystagmus</b> (jerky eye movements), <b>ataxia</b> (unsteady walking), double vision and drowsiness.</p>`,
+ analogy:"Picture a revolving door that has to pause after each turn. The drug makes the pause longer. A few people walking through barely notice, but a crowd trying to rush through gets slowed right down.",
+ terms:[["Inactivated state","The brief closed-and-locked state a sodium channel enters right after opening."],["Use-dependent block","Stronger blocking of channels that are being used a lot, as in a seizure."],["Nystagmus","Involuntary jerky eye movements; an early sign of too much phenytoin."]],
+ check:{q:"Why can phenytoin stop a seizure without stopping all normal brain activity?",opts:[
+  ["It binds best to sodium channels that are firing over and over, as in a seizure",1,"Right. The drug holds channels in the inactivated state, and rapidly firing neurons have many channels in that state."],
+  ["It only enters the part of the brain where the seizure starts",0,"The drug spreads through the whole brain. Its selectivity comes from use-dependent block, not location."],
+  ["It blocks GABA receptors",0,"Blocking GABA would make seizures worse. Phenytoin acts on sodium channels."],
+  ["It destroys the neurons that start the seizure",0,"Antiseizure drugs do not destroy neurons; they change how channels behave."]]},
+ caption:"Sodium channel blockers hold channels in the inactivated state, so fast bursts stop but single signals pass.",
+ legend:[["receptor","Sodium channel"],["na","Sodium ions (Na⁺)"],["drug","Phenytoin (blocker)","d"],["mem","Cell membrane"]]},
+
+{act:1,scene:"phenytoin",desc:"On the left is a graph of phenytoin blood level going up as the dose goes up. The curve is flat at first, then bends sharply upward. A narrow green band across the middle is labelled target range. A violet dot climbs the curve: below the band a small lightning bolt flashes for seizure risk, inside the band a check mark shows, and above the band a cartoon eye jerks side to side (nystagmus) and a small person sways (ataxia). On the right are two panels. The top panel shows pink gums slowly growing down over white teeth, labelled gingival hyperplasia. The bottom panel shows two IV bags: the one labelled normal saline has a clear line with a check mark; the one labelled dextrose has white crystals forming in the line and a red X.",
+ title:"Phenytoin up close: a narrow window",
+ body:`<p>Phenytoin has a <b>narrow therapeutic index</b>: the level that controls seizures is close to the level that causes toxicity. On top of that, the liver enzymes that clear it <b>saturate</b>, so a small dose increase can make the blood level jump. Levels are checked often; a common total-level target range is about <b>10 to 20 mcg/mL</b> (the lab and prescriber set the exact range).</p>
+ <p><b>Toxicity signs</b> come in order: <b>nystagmus</b>, then <b>ataxia</b>, slurred speech, confusion and sedation. Hold the next dose and report. Phenytoin is also highly <b>protein bound</b>, so a patient with low albumin can be toxic at a "normal" total level.</p>
+ <p>Long-term use causes <b>gingival hyperplasia</b> (gum overgrowth): teach careful brushing, flossing and regular dental visits. IV phenytoin is mixed <b>only in normal saline</b> (it forms crystals in dextrose), given <b>slowly</b> with cardiac monitoring because a fast push can cause <b>low blood pressure and dysrhythmias</b>, and the line is flushed with saline before and after.</p>`,
+ analogy:"It is like filling a cup under a fast tap. For a while the drain keeps up, but once the drain is full, a little more water makes the cup overflow fast.",
+ terms:[["Narrow therapeutic index","Little room between a helpful level and a toxic level."],["Gingival hyperplasia","Overgrowth of gum tissue; a long-term effect of phenytoin."],["Protein binding","Drug carried on albumin is inactive; low albumin leaves more free, active drug."],["Ataxia","Unsteady, uncoordinated movement."]],
+ check:{q:"A patient getting IV phenytoin has only a dextrose (D5W) line running. What should the nurse do?",opts:[
+  ["Flush with normal saline and give the phenytoin through a saline line",1,"Yes. Phenytoin precipitates (forms crystals) in dextrose, so it is given with normal saline only, with saline flushes before and after."],
+  ["Give it quickly through the dextrose line to limit contact time",0,"Giving it fast is itself dangerous (low blood pressure and dysrhythmias), and it still crystallizes in dextrose."],
+  ["Mix it into the dextrose bag as a slow drip",0,"Phenytoin will precipitate in a dextrose solution."],
+  ["Give it intramuscularly instead",0,"Phenytoin is not given IM because absorption is erratic and it damages tissue."]]},
+ caption:"Phenytoin's levels jump steeply, its safe range is narrow, and it has unique gum and IV rules.",
+ legend:[["drug","Phenytoin level"],["good","Target range","s"],["gum","Gum tissue"],["bad","Not compatible","s"]]},
+
+{act:1,scene:"carba",desc:"A large brown liver cell fills the middle. Inside it are teal enzyme shapes like open mouths. Violet carbamazepine molecules flow in from the left, and as they arrive the cell builds more and more enzyme mouths; a counter shows the enzyme number rising. Other drug molecules flow in from the top: an amber one labelled birth control pill, a red one labelled warfarin, and violet carbamazepine itself. The extra enzymes chew them up faster. On the right, three level bars for those drugs fall from inside a green target band to below it. At the bottom, three warning tags read serious rash (SJS), low sodium, and low blood counts.",
+ title:"Carbamazepine and enzyme induction",
+ body:`<p><b>Carbamazepine</b> blocks sodium channels like phenytoin. It is also a strong <b>enzyme inducer</b>: it tells liver cells to make more of the <b>CYP450 enzymes</b> that break down drugs.</p>
+ <p>More enzymes means <b>other drugs are cleared faster</b> and can stop working: hormonal <b>birth control</b> (pregnancy risk), <b>warfarin</b> (clot risk), and many more. Carbamazepine even speeds up its own breakdown over the first weeks (<b>autoinduction</b>), so levels can fall after a good start. Grapefruit juice does the opposite and can raise its level.</p>
+ <p>Watch for <b>serious skin reactions</b> such as <b>Stevens-Johnson syndrome</b> (risk is higher with a certain gene, HLA-B*1502, found more often in people of Asian ancestry), <b>low blood counts</b> (check the CBC, report fever, sore throat, bruising) and <b>low sodium</b>. Phenytoin and phenobarbital are enzyme inducers too.</p>`,
+ analogy:"Enzyme induction is like a restaurant hiring extra dishwashers. Every plate (drug) that comes back is cleaned away faster, including plates that were supposed to stay out longer.",
+ terms:[["Enzyme inducer","A drug that makes the liver produce more drug-metabolizing enzymes."],["CYP450","The liver enzyme family that breaks down many drugs."],["Stevens-Johnson syndrome (SJS)","A rare, severe skin and mucous membrane reaction with blistering; stop the drug and report at once."]],
+ check:{q:"A patient starting carbamazepine uses an oral contraceptive. What should the nurse teach?",opts:[
+  ["The pill may work less well; use a backup or discuss another method with the prescriber",1,"Right. Carbamazepine induces liver enzymes that clear the hormones faster, so the contraceptive can fail."],
+  ["The pill will make carbamazepine toxic",0,"The main problem runs the other way: carbamazepine lowers the contraceptive's level."],
+  ["No interaction is expected",0,"This is one of the best-known enzyme induction interactions."],
+  ["Take the two drugs 12 hours apart to avoid the interaction",0,"Spacing doses does not help, because the problem is more liver enzymes, which stay high all day."]]},
+ caption:"Carbamazepine builds more liver enzymes, so other drugs, and carbamazepine itself, are cleared faster.",
+ legend:[["liver","Liver cell"],["receptor","CYP450 enzyme"],["drug","Carbamazepine","d"],["ligand","Other drugs"]]},
+
+{act:1,scene:"benzo",desc:"Two teal GABA-A receptor channels sit in a yellow membrane at the top. The left one is labelled GABA alone: small green GABA dots land on top, the channel opens a little now and then, and a few green chloride ions with minus signs drop through. The right one is labelled GABA plus benzodiazepine: a violet diamond drug sits in a side pocket, the channel opens more often, and many more chloride ions pour through. Under each, a voltage dial swings further negative on the right side. At the bottom, a dark monitor shows an EEG with continuous tall seizure spikes and a timer counting past 5 minutes, labelled status epilepticus. A syringe labelled IV lorazepam pushes in, and the spikes shrink to a calm, small wave.",
+ title:"GABA enhancers: benzodiazepines and phenobarbital",
+ body:`<p><b>Benzodiazepines</b> (lorazepam, diazepam, midazolam; stems <b>-azepam</b>, <b>-azolam</b>) bind a side pocket on the <b>GABA-A receptor</b>. They do not open it alone; they make GABA <b>open the chloride channel more often</b>. More Cl⁻ in means a quieter neuron.</p>
+ <p><b>Status epilepticus</b> is a seizure lasting <b>5 minutes or more</b>, or seizures back to back without waking. It is an emergency: protect the airway, give oxygen, and give an <b>IV benzodiazepine (lorazepam)</b> first, per protocol; a longer-acting antiseizure drug follows.</p>
+ <p><b>Phenobarbital</b> (a barbiturate) keeps the same channel open <b>longer</b>. Both cause <b>sedation and respiratory depression</b>, more so with alcohol or opioids. Monitor <b>respiratory rate, oxygen saturation and level of consciousness</b>. <b>Flumazenil</b> reverses benzodiazepines but can trigger seizures, so it is used with great care.</p>`,
+ analogy:"GABA is the hand that opens a gate. A benzodiazepine is a helper who makes that hand open the gate more often. A barbiturate props the gate open longer each time.",
+ terms:[["GABA-A receptor","A chloride channel that opens when GABA binds; the target of benzodiazepines and barbiturates."],["Status epilepticus","A seizure of 5 minutes or more, or repeated seizures without recovery between them."],["Flumazenil","A benzodiazepine antagonist used to reverse sedation; it can provoke seizures."]],
+ check:{q:"After IV lorazepam for status epilepticus, which assessment is the priority?",opts:[
+  ["Respiratory rate, airway and oxygen saturation",1,"Yes. Benzodiazepines boost inhibition everywhere, including the breathing centres, so breathing is the top concern."],
+  ["Blood glucose only",0,"Glucose is checked in seizures, but after a benzodiazepine the most urgent risk is respiratory depression."],
+  ["Gum health",0,"Gum overgrowth is a long-term phenytoin effect, not an emergency concern."],
+  ["Urine colour",0,"Urine colour is not a priority here. Breathing is."]]},
+ caption:"Benzodiazepines make GABA open the chloride channel more often; IV lorazepam is first-line for status epilepticus.",
+ legend:[["receptor","GABA-A receptor"],["gaba","GABA"],["cl","Chloride ions (Cl⁻)"],["drug","Benzodiazepine","d"]]},
+
+{act:1,scene:"valproate",desc:"On the left, a stretch of yellow neuron membrane holds three targets: a teal sodium channel, a pink calcium channel and a green GABA-making enzyme. A violet pentagon labelled valproate visits each in turn: the sodium channel narrows, the calcium channel narrows, and more green GABA dots appear. On the right, three warning panels light up one after another: a brown liver with a rising bar labelled liver enzymes (LFTs), a small curled fetus with a red mark on its spine labelled neural tube defects, and a row of tiny platelets that thins out, labelled low platelets.",
+ title:"Valproate: broad but with big warnings",
+ body:`<p><b>Valproate</b> (valproic acid) works three ways: it blocks <b>sodium channels</b>, blocks a type of <b>calcium channel</b> (T-type), and <b>raises GABA</b>. That makes it a <b>broad-spectrum</b> drug for many seizure types, and it is also used for bipolar disorder and migraine prevention.</p>
+ <p>Its <b>boxed warnings</b> follow its reach: <b>liver toxicity</b> (highest risk in young children), <b>pancreatitis</b>, and <b>birth defects</b>, especially <b>neural tube defects</b>. Monitor <b>liver function tests</b>, <b>platelets</b> (it can lower them and cause bleeding) and drug levels.</p>
+ <p>Teach patients to report <b>yellow skin or eyes, dark urine, severe stomach pain, vomiting</b>, or easy bruising. People who could become pregnant need a talk with the prescriber, reliable contraception and <b>folic acid</b>.</p>`,
+ analogy:"Valproate is a multitool: knife, screwdriver and pliers in one. Handy for many jobs, but you have to watch your fingers on every blade.",
+ terms:[["Broad-spectrum antiseizure drug","Works for many seizure types, not just one."],["Neural tube defect","A birth defect of the spine or brain, such as spina bifida, from the early weeks of pregnancy."],["Pancreatitis","Inflammation of the pancreas; severe belly pain and vomiting."]],
+ check:{q:"Which finding in a patient on valproate should the nurse report right away?",opts:[
+  ["Yellowing of the eyes with dark urine",1,"Yes. These suggest liver injury, a boxed warning for valproate."],
+  ["Mild weight gain over months",0,"Weight gain is a common, non-urgent effect. Jaundice is the urgent one."],
+  ["A slight hand tremor",0,"Tremor is a common side effect worth mentioning, but liver signs are urgent."],
+  ["Thicker hair",0,"Valproate is linked to hair thinning, not thickening, and neither is an emergency."]]},
+ caption:"Valproate hits sodium channels, calcium channels and GABA, which explains its breadth and its warnings.",
+ legend:[["receptor","Sodium channel"],["ca","Calcium channel"],["gaba","GABA"],["drug","Valproate","d"]]},
+
+{act:1,scene:"leve",desc:"The left half shows a tan nerve ending above a narrow gap. Inside it are round vesicles full of red glutamate triangles, each vesicle with a small teal protein tag labelled SV2A. In the first few seconds many vesicles fuse and red triangles spill across the gap. Then violet levetiracetam molecules attach to the SV2A tags and far fewer triangles are released. The right half shows a staircase graph labelled lamotrigine: a slow, gentle staircase line rising over weeks with a check mark, and a steep fast line with a red patch of skin rash appearing beside it and the label stop and report any rash.",
+ title:"Levetiracetam and lamotrigine",
+ body:`<p><b>Levetiracetam</b> binds a protein on synaptic vesicles called <b>SV2A</b> and <b>reduces release</b> of excitatory messengers. It works for many seizure types, comes as oral or IV, and has <b>few drug interactions</b>. It is cleared by the <b>kidneys</b>, so kidney function matters. Watch for <b>drowsiness</b> and <b>mood or behaviour changes</b> such as irritability or depression.</p>
+ <p><b>Lamotrigine</b> blocks sodium channels and calms glutamate release. Its key danger is a <b>serious rash</b>, including <b>Stevens-Johnson syndrome</b>. The risk rises when the dose is <b>increased too fast</b> or when it is combined with <b>valproate</b> (which raises lamotrigine levels). So it is started low and raised slowly over weeks.</p>
+ <p>For all antiseizure drugs, monitor <b>mood and thoughts of self-harm</b>; this is a class-wide warning.</p>`,
+ analogy:"Levetiracetam is like putting a slower spring on the vending machine: each press drops fewer snacks. Lamotrigine is a drug you introduce to the body slowly, like a pet to a new home.",
+ terms:[["SV2A","A protein on synaptic vesicles; levetiracetam binds it and reduces release."],["Titration","Raising a dose slowly in steps to reach the target safely."],["Renal clearance","Removal of a drug by the kidneys; reduced kidney function raises levels."]],
+ check:{q:"A patient who started lamotrigine three weeks ago reports a new red rash. What should the nurse do?",opts:[
+  ["Advise holding the next dose and report the rash to the prescriber promptly",1,"Yes. A new rash on lamotrigine can be the start of Stevens-Johnson syndrome, so it is reported at once."],
+  ["Reassure the patient that rashes are normal and continue",0,"Any rash on lamotrigine needs prompt evaluation, because SJS can start this way."],
+  ["Double the dose to get past the rash faster",0,"A faster dose increase raises the rash risk."],
+  ["Add valproate to reduce the rash",0,"Valproate raises lamotrigine levels and increases the rash risk."]]},
+ caption:"Levetiracetam turns down vesicle release at SV2A; lamotrigine must be raised slowly because of rash risk.",
+ legend:[["nrn","Nerve ending"],["glu","Glutamate"],["receptor","SV2A protein"],["drug","Drug","d"]]},
+
+{act:1,scene:"stopping",desc:"A graph shows a drug level over several weeks with a green target band and a dashed red line lower down labelled seizure threshold. The level runs steadily inside the band. Then the picture shows two paths. A red line labelled stopped suddenly drops fast below the dashed line, and a small EEG strip beside it bursts into tall spikes with the label rebound seizures. A green line labelled tapered by the prescriber eases down slowly over many days, and its EEG stays calm. Along the bottom, three icons sit in a row: a blood tube labelled check levels, a pill organizer labelled same time every day, and a folic acid bottle with a small pregnancy symbol labelled plan pregnancy.",
+ title:"Never stop suddenly: levels, adherence and pregnancy",
+ body:`<p>Stopping an antiseizure drug <b>abruptly</b> can cause <b>rebound seizures</b> or even <b>status epilepticus</b>, even in someone who has been seizure-free for years. Drugs are <b>tapered</b> by the prescriber. Teach patients not to stop or skip doses, and to call if they cannot take pills (for example, vomiting).</p>
+ <p><b>Therapeutic drug monitoring</b>: levels of phenytoin, carbamazepine, valproate and phenobarbital are checked, usually as a <b>trough</b> (just before a dose). Toxicity or seizures, new drugs, pregnancy, and liver or kidney changes are all reasons to recheck.</p>
+ <p><b>Pregnancy</b>: uncontrolled seizures are dangerous for parent and baby, so the drug is not just stopped. Plan pregnancy with the prescriber, take <b>folic acid</b>, and remember enzyme inducers weaken hormonal birth control. Also teach: <b>medical ID</b>, follow local <b>driving</b> rules, avoid alcohol, and report mood changes.</p>`,
+ analogy:"Stopping suddenly is like yanking the brakes off a car going downhill. Tapering is easing off the brake slowly, so the car never runs away.",
+ terms:[["Taper","Lowering a dose gradually over time instead of stopping all at once."],["Trough level","The lowest drug level, drawn just before the next dose."],["Rebound","A return of symptoms, often worse, when a drug is stopped."]],
+ check:{q:"A patient seizure-free for two years wants to stop phenytoin because they feel fine. What is the best response?",opts:[
+  ["Explain that stopping suddenly can trigger seizures, and that any change should be a slow taper planned with the prescriber",1,"Right. Feeling well means the drug is working; abrupt stopping risks rebound seizures and status epilepticus."],
+  ["Agree, since two seizure-free years means epilepsy is cured",0,"Being seizure-free on the drug does not mean the risk is gone."],
+  ["Suggest skipping every other dose first",0,"Skipping doses drops levels unevenly and can trigger seizures. Changes must be planned by the prescriber."],
+  ["Suggest switching to a herbal remedy",0,"Herbal products do not replace antiseizure drugs, and some interact with them."]]},
+ caption:"Abrupt stopping drops the level below the seizure threshold; a planned taper does not.",
+ legend:[["good","Target range","s"],["bad","Stopped suddenly"],["accent","Tapered"],["drug","Drug level"]]},
+
+/* ---------- Part 2: Parkinson disease ---------- */
+{act:2,scene:"pdbalance",desc:"On the left, a small side view of a brain shows a dark spot deep inside labelled substantia nigra, with an orange path running up to a region labelled striatum. On the right, a seesaw holds orange dopamine pentagons on its left pan and blue acetylcholine circles on its right pan. At first the pans hold equal amounts and the beam is level, and a person figure below stands still. Then the dark spot fades, orange pentagons disappear one by one, the seesaw tips down toward the blue acetylcholine side, and the person's hand starts to shake and their posture stoops. Labels appear: tremor, rigidity, slow movement.",
+ title:"Parkinson disease: dopamine and acetylcholine out of balance",
+ body:`<p>Smooth movement needs a balance in the <b>striatum</b> (part of the basal ganglia) between <b>dopamine</b> (which tends to inhibit) and <b>acetylcholine (ACh)</b> (which tends to excite).</p>
+ <p>In <b>Parkinson disease</b>, dopamine-making neurons in the <b>substantia nigra</b> slowly die. Dopamine falls, so ACh is <b>relatively too strong</b>. That gives the main signs: <b>resting tremor</b>, <b>rigidity</b>, <b>bradykinesia</b> (slow movement) and poor balance.</p>
+ <p>So drug therapy has two levers: <b>add dopamine power</b> (levodopa, dopamine agonists, drugs that slow dopamine breakdown) or <b>reduce ACh power</b> (anticholinergics). None of them stop the neurons from dying.</p>`,
+ analogy:"Picture a seesaw with dopamine on one side and acetylcholine on the other. Parkinson disease takes weights off the dopamine side. You can add dopamine weights back, or take some ACh weights off.",
+ terms:[["Substantia nigra","A small midbrain area whose neurons make dopamine for the striatum."],["Bradykinesia","Slowness of movement."],["Striatum","Part of the basal ganglia where dopamine and acetylcholine balance controls movement."]],
+ check:{q:"Why can an anticholinergic drug help Parkinson symptoms?",opts:[
+  ["It lowers the effect of acetylcholine, which is relatively too strong when dopamine is low",1,"Yes. Bringing the ACh side down helps rebalance the seesaw, especially for tremor."],
+  ["It makes the substantia nigra grow new neurons",0,"No drug for Parkinson disease regrows the lost neurons."],
+  ["It turns acetylcholine into dopamine",0,"The body does not convert ACh into dopamine. The drug simply blocks ACh receptors."],
+  ["It raises acetylcholine to match dopamine",0,"Raising ACh would tip the balance further the wrong way."]]},
+ caption:"Losing dopamine neurons tips the striatum's balance toward acetylcholine, giving tremor and stiffness.",
+ legend:[["dopa","Dopamine"],["ach","Acetylcholine"],["brain","Brain"],["nrn","Substantia nigra"]]},
+
+{act:2,scene:"levodopa",desc:"Two lanes run left to right, from a gut on the left, through a red blood vessel, to a grey wall labelled blood-brain barrier, and into a pink brain area on the right. In the top lane, labelled levodopa alone, violet levodopa pentagons travel in the blood; teal enzyme mouths in the blood turn most of them into orange dopamine before the wall, and those orange shapes bounce off the wall, with small icons for nausea and low blood pressure appearing. Only a few reach the brain. In the bottom lane, labelled levodopa plus carbidopa, small violet squares (carbidopa) sit on the enzyme mouths and block them, so most violet levodopa shapes cross the wall and turn orange inside the brain. A counter on the right of each lane shows how many reach the brain: few on top, many below.",
+ title:"Levodopa with carbidopa: getting dopamine into the brain",
+ body:`<p>Dopamine itself <b>cannot cross the blood-brain barrier</b>. Its precursor, <b>levodopa</b>, can: it rides an amino acid transporter into the brain, where an enzyme (dopa decarboxylase) turns it into dopamine.</p>
+ <p>The problem is that the same enzyme is in the gut and blood. Without help, most levodopa becomes dopamine <b>outside</b> the brain, where it causes <b>nausea and vomiting</b>, <b>orthostatic hypotension</b> and a fast heart, and never reaches the target. <b>Carbidopa</b> blocks that enzyme <b>outside the brain only</b> (it cannot cross the barrier). More levodopa reaches the brain, and the peripheral side effects drop.</p>
+ <p>Levodopa-carbidopa is the most effective drug for movement symptoms. Watch for <b>orthostatic hypotension</b> (rise slowly), <b>dyskinesias</b> (writhing movements), <b>hallucinations</b> and confusion. Urine and sweat may darken, which is harmless. Do not combine with <b>nonselective MAO inhibitors</b> (dangerous rise in blood pressure).</p>`,
+ analogy:"Levodopa is a letter that has to be posted inside the castle. Without carbidopa, guards outside the wall open most letters early. Carbidopa ties up the outside guards so the letters reach the castle sealed.",
+ terms:[["Levodopa","A dopamine precursor that crosses the blood-brain barrier and becomes dopamine in the brain."],["Carbidopa","Blocks the conversion of levodopa to dopamine outside the brain."],["Blood-brain barrier","Tight capillary walls that keep many substances, including dopamine, out of the brain."],["Dyskinesia","Involuntary writhing or jerking movements, often at peak levodopa levels."]],
+ check:{q:"Why is carbidopa combined with levodopa?",opts:[
+  ["It stops levodopa from being turned into dopamine before it reaches the brain",1,"Right. That lets more levodopa reach the brain and cuts nausea and low blood pressure."],
+  ["Carbidopa crosses into the brain and becomes dopamine",0,"Carbidopa does not cross the blood-brain barrier; that is why it works only outside the brain."],
+  ["Carbidopa blocks acetylcholine",0,"That is what anticholinergics such as benztropine do."],
+  ["It speeds up levodopa's breakdown to prevent dyskinesia",0,"Carbidopa slows peripheral breakdown, so more levodopa reaches the brain."]]},
+ caption:"Carbidopa blocks the enzyme outside the brain, so levodopa crosses the barrier and becomes dopamine inside.",
+ legend:[["drug","Levodopa","d"],["dopa","Dopamine"],["receptor","Converting enzyme"],["bbb","Blood-brain barrier"]]},
+
+{act:2,scene:"onoff",desc:"A graph runs across a day from 6 in the morning to 10 at night. A green band across the middle is labelled ON (good control); below it is a shaded zone labelled OFF (tremor, stiffness) and above it a zone labelled dyskinesia. Small violet pill marks along the bottom show four dose times, and a drumstick icon at noon marks a high-protein lunch. An orange line traces the dopamine effect: in early disease it stays smoothly inside the band; then the picture switches to advanced disease, where the line spikes up after each dose and sags into OFF before the next one (wearing off), the noon dose barely rises because of the protein meal, and one sudden drop is marked on-off. A cursor moves across the day, and a person figure on the right shakes when the line is in OFF, stands steady in the band, and writhes when the line is above it.",
+ title:"Wearing off, on-off and the protein problem",
+ body:`<p>Early on, surviving neurons <b>store</b> dopamine made from levodopa, so the effect is smooth all day. As more neurons are lost, the brain cannot buffer it. The effect starts to follow each dose: <b>peaks</b> (with <b>dyskinesias</b>) and <b>troughs</b> where symptoms return before the next dose. That is <b>wearing off</b>.</p>
+ <p>The <b>on-off phenomenon</b> is sudden, sometimes unpredictable switching between moving well ("on") and freezing or stiffness ("off"). Fixes include smaller, more frequent doses, extended-release forms, or adding a <b>COMT inhibitor</b>, <b>MAO-B inhibitor</b> or <b>dopamine agonist</b>.</p>
+ <p><b>Protein</b> matters: amino acids from a high-protein meal compete with levodopa for absorption and for the transporter into the brain. Teach patients to take doses <b>on time</b>, often 30 to 60 minutes before meals, and to <b>spread protein</b> through the day instead of one large protein meal. Never stop levodopa suddenly: a severe rigid, feverish reaction can occur.</p>`,
+ analogy:"Early Parkinson disease is like a house with a water tank: the supply stays steady between deliveries. Later, the tank is gone, and the taps only run when the truck arrives.",
+ terms:[["Wearing off","Symptoms returning before the next dose is due, as each dose lasts a shorter time."],["On-off phenomenon","Sudden switches between good movement (on) and poor movement (off)."],["Large neutral amino acids","Protein building blocks that compete with levodopa for transport."]],
+ check:{q:"A patient's tremor returns every afternoon after a large high-protein lunch taken with his levodopa-carbidopa. What should the nurse suggest?",opts:[
+  ["Take the dose before the meal and spread protein more evenly through the day",1,"Yes. Protein competes with levodopa for absorption and entry into the brain, so separating them and spreading protein helps."],
+  ["Stop the afternoon dose",0,"Skipping doses makes symptoms worse and abrupt changes are risky."],
+  ["Eat all daily protein at lunch to get it over with",0,"A big protein load at one time blocks that dose even more."],
+  ["Take the dose with a glass of milk",0,"Milk adds protein, which is the problem here."]]},
+ caption:"As disease advances, each dose wears off sooner, protein blunts doses, and on-off switching appears.",
+ legend:[["dopa","Dopamine effect"],["good","ON window","s"],["drug","Dose time","d"],["warn","Protein meal","s"]]},
+
+{act:2,scene:"pdboost",desc:"A tan nerve ending sits above a gap with teal dopamine receptors below. Three helpers light up in turn. First, violet stars labelled pramipexole (dopamine agonist) drop straight into the receptors and the receiving cell glows, even with few orange dopamine pentagons around. Second, a teal enzyme mouth labelled MAO-B that has been chewing up orange dopamine in the gap gets a violet plug labelled MAO-B inhibitor, and dopamine pentagons build up. Third, a side panel shows a red blood vessel where a teal mouth labelled COMT chews up violet levodopa; a violet plug labelled entacapone blocks it, and a levodopa level bar beside it stays up longer.",
+ title:"Boosting dopamine: agonists, MAO-B and COMT inhibitors",
+ body:`<p><b>Dopamine agonists</b> (<b>pramipexole</b>, ropinirole) bind dopamine receptors <b>directly</b>, so they do not need dying neurons to make dopamine. Side effects: <b>sudden sleep attacks</b> (warn about driving), <b>impulse-control problems</b> (gambling, shopping, eating), <b>hallucinations</b>, orthostatic hypotension, nausea and leg swelling.</p>
+ <p><b>MAO-B inhibitors</b> (<b>selegiline</b>, rasagiline; stem <b>-giline</b>) block the enzyme that breaks down dopamine in the brain, so dopamine lasts longer. Avoid combining with <b>meperidine</b> and some antidepressants (risk of serotonin syndrome); at higher doses, tyramine-rich foods can raise blood pressure.</p>
+ <p><b>COMT inhibitors</b> (<b>entacapone</b>; stem <b>-capone</b>) block an enzyme that breaks down levodopa in the blood, so each dose lasts longer. They work <b>only with levodopa</b>. Expect more dyskinesia, diarrhea and harmless brownish-orange urine.</p>`,
+ analogy:"If the dopamine bucket is leaking, you can pour water straight on the plants (agonist), plug the hole in the bucket (MAO-B inhibitor), or slow the leak in the delivery hose (COMT inhibitor).",
+ terms:[["Dopamine agonist","A drug that activates dopamine receptors directly."],["MAO-B","An enzyme that breaks down dopamine in the brain."],["COMT","An enzyme that breaks down levodopa (and dopamine) outside the brain."]],
+ check:{q:"Which teaching point is most important for a patient starting pramipexole?",opts:[
+  ["You may fall asleep suddenly during daily activities, so be careful with driving and report it",1,"Yes. Sleep attacks are a key safety risk with dopamine agonists, along with impulse-control problems."],
+  ["Take it only with levodopa or it will not work",0,"That describes COMT inhibitors like entacapone. Agonists act on receptors directly."],
+  ["Your urine will turn green",0,"Harmless urine colour change is linked to levodopa and entacapone, and it is brownish, not green."],
+  ["Eat more aged cheese",0,"Tyramine cautions apply to MAO inhibitors, and they never involve eating more."]]},
+ caption:"Agonists act on dopamine receptors directly; MAO-B and COMT inhibitors slow the breakdown of dopamine and levodopa.",
+ legend:[["dopa","Dopamine"],["receptor","Receptor or enzyme"],["drug","Drug","d"],["blood","Blood vessel"]]},
+
+{act:2,scene:"anticho",desc:"The left side shows the dopamine and acetylcholine seesaw tipped toward blue acetylcholine circles, with a trembling person figure below. Violet drug shapes labelled benztropine land on the blue side and cover some of the acetylcholine circles, which turn grey with an X; the seesaw rises back toward level and the person's tremor calms. On the right, five small icons light up one by one with labels: dry mouth, blurred vision, urinary retention (a full bladder), constipation, and confusion in older adults, under the title anticholinergic effects.",
+ title:"Anticholinergics: benztropine",
+ body:`<p><b>Benztropine</b> blocks <b>muscarinic acetylcholine receptors</b> in the brain, lowering the ACh side of the seesaw. It helps <b>tremor</b> most. It is also used for movement side effects caused by antipsychotic drugs.</p>
+ <p>Because it blocks ACh <b>everywhere</b>, it causes classic <b>anticholinergic effects</b>: <b>dry mouth</b>, <b>blurred vision</b>, <b>urinary retention</b>, <b>constipation</b>, fast heart rate, less sweating (overheating risk) and <b>confusion or memory problems</b>, especially in older adults, who often avoid these drugs.</p>
+ <p>Avoid in <b>narrow-angle glaucoma</b> and use caution with an enlarged prostate. Teach: sugar-free gum and sips of water, fibre and fluids, avoid overheating, and report trouble passing urine.</p>
+ <p><b>For any patient with Parkinson disease, avoid dopamine blockers.</b> Many <b>antipsychotics</b> (for example haloperidol) and the antinausea drug <b>metoclopramide</b> block dopamine receptors. They tip the seesaw back toward acetylcholine and can make Parkinson symptoms much worse. Question these orders and check with the prescriber.</p>`,
+ analogy:"Benztropine is like turning down the volume on one speaker so the room sounds balanced again, except it turns down every speaker on that circuit, including the ones for saliva, bladder and gut.",
+ terms:[["Anticholinergic","Blocks acetylcholine at muscarinic receptors."],["Urinary retention","Not being able to empty the bladder fully."],["Narrow-angle glaucoma","A type of glaucoma in which pupil dilation can block fluid drainage and raise eye pressure."]],
+ check:{q:"An older adult on benztropine has not passed urine for 8 hours and has lower belly fullness. What is the likely cause?",opts:[
+  ["Urinary retention from blocked acetylcholine at the bladder",1,"Yes. ACh helps the bladder muscle contract; blocking it can cause retention. Assess the bladder and report."],
+  ["Too much dopamine",0,"Excess dopamine causes dyskinesia or hallucinations, not retention."],
+  ["Enzyme induction",0,"Enzyme induction is a liver effect of drugs like carbamazepine."],
+  ["Dehydration from too much saliva",0,"Benztropine causes dry mouth, not extra saliva."]]},
+ caption:"Blocking acetylcholine rebalances the seesaw, but the same block causes dry mouth, retention and confusion.",
+ legend:[["dopa","Dopamine"],["ach","Acetylcholine"],["blocked","Blocked receptor","s"],["drug","Benztropine","d"]]},
+
+/* ---------- Part 3: Alzheimer, MG, MS ---------- */
+{act:3,scene:"donepezil",desc:"Two synapses sit side by side. Each has a tan nerve ending at the top releasing blue acetylcholine dots into a gap, with teal receptors below and teal scissor-like enzymes labelled acetylcholinesterase in the gap. On the left, labelled Alzheimer disease, few dots are released and the scissors cut most of them before they reach a receptor, so the receiving cell barely glows. On the right, labelled with donepezil, violet drug shapes sit on the scissors and jam them, the blue dots stay longer, more receptors fill, and the receiving cell glows. Along the bottom, a heart with a slowing pulse line is labelled slow heart rate, and a stomach icon is labelled nausea and diarrhea.",
+ title:"Alzheimer disease: cholinesterase inhibitors",
+ body:`<p>In <b>Alzheimer disease</b>, neurons that use <b>acetylcholine</b> for memory and attention are lost. <b>Cholinesterase inhibitors</b> (<b>donepezil</b>, rivastigmine, galantamine) block <b>acetylcholinesterase</b>, the enzyme that breaks down ACh, so the ACh that is released lasts longer.</p>
+ <p>They give a <b>modest</b> improvement in memory and daily function for a while. They do <b>not</b> stop the disease. Families should know what to expect.</p>
+ <p>More ACh in the body also means more "rest and digest" effects: <b>nausea, vomiting, diarrhea</b>, weight loss, and <b>bradycardia</b> with fainting and falls. Check the <b>pulse</b>, report a slow rate or dizziness, and use caution with heart block, asthma or ulcers. The same mechanism treats myasthenia gravis and reverses some muscle-paralyzing drugs, as you will see.</p>`,
+ analogy:"Acetylcholinesterase is a cleaner who sweeps messages off the floor right after they land. The drug sends the cleaner on a break, so the few messages left get read.",
+ terms:[["Acetylcholinesterase (AChE)","The enzyme that breaks down acetylcholine in the synapse."],["Cholinesterase inhibitor","A drug that blocks AChE so acetylcholine lasts longer."],["Bradycardia","A slow heart rate, usually below 60 beats per minute."]],
+ check:{q:"A patient on donepezil reports dizziness, and the apical pulse is 50. What explains this?",opts:[
+  ["More acetylcholine at the heart slows the heart rate",1,"Right. Acetylcholine acts on the heart through the vagus nerve to slow it. Report the pulse and dizziness; falls are a risk."],
+  ["Donepezil blocks acetylcholine",0,"It does the opposite: it stops ACh from being broken down."],
+  ["Low dopamine",0,"Donepezil does not act on dopamine."],
+  ["Too much glutamate",0,"Glutamate relates to memantine's target, not heart rate."]]},
+ caption:"Donepezil jams acetylcholinesterase so acetylcholine lasts longer; extra ACh also slows the heart and stirs the gut.",
+ legend:[["ach","Acetylcholine"],["receptor","Receptor and enzyme"],["drug","Donepezil","d"],["nrn","Nerve ending"]]},
+
+{act:3,scene:"memantine",desc:"A teal NMDA receptor channel sits in a yellow membrane. In the first phase, labelled background noise, a few red glutamate triangles keep drifting onto it and pink calcium ions with plus signs trickle through the open channel into the cell, where a small damage meter rises. In the second phase, a violet memantine molecule sits in the channel pore and the trickle stops; the damage meter falls. In the third phase, labelled real signal, a burst of many glutamate triangles arrives, the memantine molecule briefly pops out, a strong flash of calcium enters, and a green check appears, then memantine slips back in.",
+ title:"Memantine: quieting glutamate noise",
+ body:`<p><b>Memantine</b> is an <b>NMDA receptor antagonist</b>. NMDA receptors are glutamate-gated channels that let <b>calcium</b> into neurons and are important for learning.</p>
+ <p>In Alzheimer disease there is thought to be a constant low-level <b>glutamate "noise"</b> that lets in too much calcium and harms neurons. Memantine sits loosely in the channel and blocks that steady trickle, but it <b>pops out</b> during a strong, real signal. That is why it can be used without blocking learning completely.</p>
+ <p>It is used for <b>moderate to severe</b> Alzheimer disease, often together with donepezil. Side effects are usually mild: <b>dizziness, headache, confusion</b> and constipation. It is cleared by the kidneys, so kidney problems may need a dose change.</p>`,
+ analogy:"Memantine is like a doorstop that keeps a door from rattling open in every small draft, but gets pushed aside when someone really walks through.",
+ terms:[["NMDA receptor","A glutamate receptor channel that lets calcium into neurons."],["Excitotoxicity","Nerve damage from too much glutamate stimulation and calcium entry."],["Antagonist","A drug that blocks a receptor or channel instead of activating it."]],
+ check:{q:"How does memantine's action differ from donepezil's?",opts:[
+  ["Memantine blocks NMDA glutamate channels; donepezil raises acetylcholine by blocking its breakdown",1,"Yes. They act on two different messenger systems, which is why they can be used together."],
+  ["Both block acetylcholinesterase",0,"Only donepezil blocks acetylcholinesterase."],
+  ["Memantine raises dopamine",0,"Memantine does not target dopamine."],
+  ["Memantine cures Alzheimer disease",0,"No current drug in this module cures Alzheimer disease; these drugs ease symptoms."]]},
+ caption:"Memantine blocks the steady calcium trickle through NMDA channels but steps aside for strong signals.",
+ legend:[["receptor","NMDA receptor"],["glu","Glutamate"],["ca","Calcium ions"],["drug","Memantine","d"]]},
+
+{act:3,scene:"mgms",desc:"The left half shows a nerve ending over a striped muscle fiber, labelled myasthenia gravis. Y-shaped antibodies cover many of the teal acetylcholine receptors, so few blue ACh dots can bind and a strength bar is low. Then violet drug shapes labelled pyridostigmine jam the teal scissor enzymes in the gap, more blue ACh dots crowd in, they bind the free receptors, the muscle shortens and the strength bar rises. The right half, labelled multiple sclerosis, shows a nerve fiber wrapped in cream myelin segments. Blue immune cells bump into the myelin and leave gaps. A violet shield labelled immunomodulator appears around the fiber and most immune cells bounce away, so fewer new gaps form.",
+ title:"Myasthenia gravis and multiple sclerosis in brief",
+ body:`<p>In <b>myasthenia gravis (MG)</b>, antibodies attack <b>acetylcholine receptors</b> at the nerve-muscle junction, causing weakness that worsens with use (droopy eyelids, double vision, trouble swallowing). <b>Pyridostigmine</b>, a cholinesterase inhibitor, lets ACh build up and use the receptors that are left. Give it <b>on time</b>, often before meals so chewing and swallowing are easier. Too little causes a <b>myasthenic crisis</b>; too much causes a <b>cholinergic crisis</b> (sweating, drooling, cramps, slow pulse, weakness). <b>Atropine</b> blocks excess muscarinic effects. (Module 3 covers these autonomic drugs.)</p>
+ <p>In <b>multiple sclerosis (MS)</b>, the immune system strips <b>myelin</b> in the brain and spinal cord. <b>Disease-modifying therapies</b> (interferon beta, glatiramer, oral agents, and monoclonal antibodies, stem <b>-mab</b>) <b>calm the immune attack</b> to cut relapses and slow damage. They do not cure MS. Watch for <b>infections</b>, flu-like symptoms with interferons, injection-site reactions, and liver and blood count changes. Relapses are often treated with a short course of corticosteroids.</p>`,
+ analogy:"In MG, someone has put tape over most of the doorbells; pyridostigmine makes more visitors ring the bells that still work. In MS, a crowd keeps scraping insulation off wires; immunomodulators calm the crowd.",
+ terms:[["Myasthenia gravis","An autoimmune disease in which antibodies block acetylcholine receptors at muscles."],["Cholinergic crisis","Too much acetylcholine effect from excess cholinesterase inhibitor."],["Disease-modifying therapy","A long-term drug for MS that reduces immune attacks on myelin."]],
+ check:{q:"Why is pyridostigmine timed before meals for a person with myasthenia gravis?",opts:[
+  ["So muscle strength for chewing and swallowing peaks during the meal",1,"Yes. Timing the dose to meals lowers the risk of choking and aspiration."],
+  ["Because food destroys pyridostigmine completely",0,"Timing is about when strength is needed, not destruction by food."],
+  ["To prevent gingival hyperplasia",0,"That is a phenytoin effect."],
+  ["Because it causes sleep attacks",0,"Sleep attacks are linked to dopamine agonists."]]},
+ caption:"In MG, more acetylcholine wins at the remaining receptors; in MS, immunomodulators calm the attack on myelin.",
+ legend:[["ach","Acetylcholine"],["receptor","ACh receptor"],["myelin","Myelin"],["drug","Drug","d"]]},
+
+/* ---------- Part 4: muscle relaxants and migraine ---------- */
+{act:4,scene:"central",desc:"A cross-section of the spinal cord sits in the middle, shaped like a grey butterfly in a cream circle. A sensory nerve comes in from a striped muscle on the right, connects inside the cord, and a motor neuron sends signals back out to the muscle. At first, gold signal dots race around the loop quickly and the muscle twitches and stays bunched up, labelled spasm. Then violet drug shapes labelled baclofen settle on the motor neuron, the signal dots slow down, and the muscle lengthens and relaxes. On the left, a sleepy person figure with closed eyes is labelled main side effect: drowsiness, and a warning tag reads do not stop baclofen suddenly.",
+ title:"Centrally acting muscle relaxants: cyclobenzaprine and baclofen",
+ body:`<p><b>Cyclobenzaprine</b> acts in the brainstem to reduce <b>muscle spasm</b> from strains and injuries. It is used short-term. It is chemically related to tricyclic antidepressants, so it causes <b>drowsiness</b>, <b>dizziness</b> and <b>anticholinergic effects</b> (dry mouth, constipation, urinary retention) and is a poor choice for many older adults.</p>
+ <p><b>Baclofen</b> activates <b>GABA-B receptors</b> in the spinal cord and quiets the motor neurons that cause <b>spasticity</b> in conditions like MS and spinal cord injury. Side effects: drowsiness, weakness, dizziness.</p>
+ <p>Both add to the effects of other <b>CNS depressants</b> (alcohol, opioids, benzodiazepines). Baclofen must <b>never be stopped suddenly</b>: withdrawal can cause hallucinations, seizures, high fever and severe rebound spasticity, especially with a baclofen pump. Teach: no driving until you know how it affects you, avoid alcohol, rise slowly.</p>`,
+ analogy:"The spinal reflex loop is like a microphone too close to a speaker, causing screeching feedback. Baclofen turns down the amplifier so the feedback stops.",
+ terms:[["Spasm","A sudden involuntary muscle contraction, often after injury."],["Spasticity","Stiff, tight muscles from damage to brain or spinal cord pathways."],["GABA-B receptor","An inhibitory receptor in the spinal cord; baclofen activates it."]],
+ check:{q:"A patient with a spinal cord injury has run out of baclofen for two days and now has fever, agitation and severe stiffness. What does this suggest?",opts:[
+  ["Baclofen withdrawal, which needs urgent care",1,"Yes. Abrupt baclofen withdrawal can cause fever, hallucinations, seizures and rebound spasticity. Report at once."],
+  ["Normal muscle healing",0,"These are danger signs, not healing."],
+  ["Too much baclofen",0,"Too much baclofen causes sedation and weakness, not fever and rigidity."],
+  ["An expected effect of cyclobenzaprine",0,"The patient was taking baclofen, and these signs fit withdrawal."]]},
+ caption:"Baclofen quiets spinal motor neurons, breaking the spasm loop; drowsiness is the main side effect.",
+ legend:[["nrn","Spinal cord and nerves"],["na","Nerve signals"],["muscle","Muscle"],["drug","Baclofen","d"]]},
+
+{act:4,scene:"dantrolene",desc:"A close-up of a skeletal muscle cell is shown twice. In each, a nerve signal arrives at the top, travels down a tube into the cell, and reaches a teal channel in the wall of a pink storage sac (the sarcoplasmic reticulum). On the left, labelled without dantrolene, the channel opens, many pink calcium ions with plus signs pour out, and the striped filaments below slide together and shorten. On the right, labelled with dantrolene, a violet drug shape sits in the channel, only a few calcium ions escape, and the filaments stay relaxed. At the bottom, a small brown liver icon is labelled check liver tests with long-term use.",
+ title:"Dantrolene: relaxing muscle from inside the fiber",
+ body:`<p><b>Dantrolene</b> works <b>directly in skeletal muscle</b>, not in the brain or spinal cord. Muscle contraction starts when calcium is released from the <b>sarcoplasmic reticulum (SR)</b> through a channel called the <b>ryanodine receptor (RyR1)</b>. Dantrolene blocks that release, so the fiber contracts less.</p>
+ <p>It is used by mouth for <b>spasticity</b> (spinal cord injury, cerebral palsy, MS, stroke) and <b>IV as the rescue drug for malignant hyperthermia</b> (Part 5).</p>
+ <p>Side effects follow from weaker muscles: <b>muscle weakness</b>, drowsiness, dizziness and diarrhea. Long-term oral use carries a boxed warning for <b>liver injury</b>, so <b>liver function tests</b> are monitored and patients report jaundice, dark urine or belly pain. Teach sun protection, since it can cause photosensitivity.</p>`,
+ analogy:"Contraction is like a dam releasing water to turn a mill wheel. Dantrolene narrows the floodgates, so less water (calcium) gets out and the wheel slows.",
+ terms:[["Sarcoplasmic reticulum (SR)","The calcium storage network inside a muscle fiber."],["Ryanodine receptor (RyR1)","The channel that releases calcium from the SR; dantrolene blocks it."],["Direct-acting relaxant","A muscle relaxant that acts in the muscle itself."]],
+ check:{q:"Where does dantrolene act?",opts:[
+  ["Inside skeletal muscle, blocking calcium release from the sarcoplasmic reticulum",1,"Right. That is why it can stop the runaway muscle activity of malignant hyperthermia."],
+  ["In the spinal cord at GABA-B receptors",0,"That is baclofen."],
+  ["At the nerve-muscle junction, blocking acetylcholine receptors",0,"That describes neuromuscular blockers such as rocuronium."],
+  ["In the brainstem, like cyclobenzaprine",0,"Dantrolene acts in the muscle itself, not the brain."]]},
+ caption:"Dantrolene blocks calcium release from the sarcoplasmic reticulum, so muscle fibers contract less.",
+ legend:[["muscle","Muscle filaments"],["sr","Sarcoplasmic reticulum"],["ca","Calcium ions"],["drug","Dantrolene","d"]]},
+
+{act:4,scene:"triptan",desc:"On the left, a red blood vessel on the brain surface is wide and pulsing, with a tan nerve fiber labelled trigeminal nerve ending beside it releasing small magenta dots labelled inflammatory peptides (CGRP) and jagged pain marks. Violet triptan molecules arrive and dock on teal receptors labelled 5-HT1B on the vessel wall and 5-HT1D on the nerve ending. The vessel narrows to normal width, the peptide dots stop, and the pain marks fade. On the right, a heart with a red coronary artery is shown; triptan molecules also land there and the artery narrows, with a warning label: not for people with coronary artery disease, and a chest-pain icon.",
+ title:"Migraine: triptans",
+ body:`<p>During a <b>migraine</b>, the <b>trigeminal nerve</b> releases inflammatory peptides such as <b>CGRP</b> around blood vessels on the brain's surface, and those vessels widen. <b>Triptans</b> (<b>sumatriptan</b>; stem <b>-triptan</b>) are <b>serotonin 5-HT1B/1D agonists</b>: 5-HT1B on the vessel <b>narrows</b> it, and 5-HT1D on the nerve <b>reduces peptide release</b>.</p>
+ <p>They <b>stop an attack</b>; they do not prevent future ones. Teach to take it <b>at the first sign</b> of headache, and to limit how often it is used, because frequent use can cause <b>medication overuse headache</b>.</p>
+ <p>Because they can also <b>narrow coronary arteries</b>, triptans are <b>contraindicated</b> in <b>coronary artery disease</b>, prior heart attack or stroke, and uncontrolled high blood pressure. Common effects: <b>chest or throat tightness</b>, tingling, flushing and dizziness. Report true chest pain. Combining with other serotonin drugs needs care (serotonin syndrome).</p>`,
+ analogy:"A migraine is like a garden hose that has swollen and is leaking irritating chemicals. A triptan tightens the hose and shuts off the leak, but it tightens other hoses too, including the heart's.",
+ terms:[["Triptan","A serotonin 5-HT1B/1D agonist that stops migraine attacks."],["CGRP","Calcitonin gene-related peptide, released by the trigeminal nerve in migraine."],["Medication overuse headache","Rebound headaches from using acute headache drugs too often."]],
+ check:{q:"Which patient should NOT receive sumatriptan?",opts:[
+  ["A patient with a history of angina and coronary artery disease",1,"Right. Triptans can narrow coronary arteries, so they are contraindicated in coronary artery disease."],
+  ["A patient whose migraine started 10 minutes ago",0,"Early in an attack is the best time to take a triptan."],
+  ["A patient with seasonal allergies",0,"Allergies are not a contraindication."],
+  ["A patient who had a migraine last month",0,"Past migraines are why it is prescribed."]]},
+ caption:"Triptans narrow swollen brain-surface vessels and quiet the trigeminal nerve, but can narrow coronary arteries too.",
+ legend:[["blood","Blood vessel"],["ser","Inflammatory peptides"],["receptor","5-HT1B/1D receptor"],["drug","Triptan","d"]]},
+
+/* ---------- Part 5: general anesthesia ---------- */
+{act:5,scene:"general",desc:"On the left, a pink brain gradually dims as a violet anesthetic level bar beside it fills. Under it, a horizontal stage ruler from I to IV has a moving pointer: Stage I analgesia, Stage II excitement (shaded orange, the pointer moves through quickly), Stage III surgical anesthesia (shaded green, the pointer stops here), and Stage IV medullary depression (shaded red, danger). Four checkboxes tick on as the pointer moves: unconscious, no memory, no pain response, no movement. On the right, two routes are drawn: a face mask with violet vapour labelled inhaled (-flurane), and a syringe with milky white liquid going into an IV labelled propofol. A small monitor shows blood pressure and breathing rate drifting down.",
+ title:"General anesthesia: inhaled agents and propofol",
+ body:`<p><b>General anesthesia</b> aims for four things: <b>unconsciousness</b>, <b>amnesia</b>, <b>analgesia</b> (no pain response) and <b>immobility</b>. No single drug does all of it well, so <b>balanced anesthesia</b> combines drugs: an IV induction drug, an inhaled agent, an opioid and often a neuromuscular blocker.</p>
+ <p>The classic <b>stages</b>: I <b>analgesia</b>; II <b>excitement</b> (irregular breathing, vomiting and airway spasm risk; passed through quickly); III <b>surgical anesthesia</b> (the goal); IV <b>medullary depression</b> (breathing and circulation fail: an overdose).</p>
+ <p><b>Inhaled agents</b> (sevoflurane, desflurane; stem <b>-flurane</b>) and <b>propofol</b> both boost inhibitory signalling, largely through GABA-A. Propofol is a milky IV emulsion that works within about a minute and wears off quickly. It causes <b>hypotension</b> and <b>respiratory depression</b>, gives <b>no pain relief</b>, and supports bacterial growth, so strict aseptic handling is required. After surgery, nurses watch the <b>airway</b>, breathing, blood pressure, nausea, temperature and pain.</p>`,
+ analogy:"General anesthesia is like dimming a theatre in steps: house lights down (memory and awareness), stage lights down (pain response), then the actors stand still (no movement). Turn the dimmer too far and the building's power fails (stage IV).",
+ terms:[["Balanced anesthesia","Using several drugs together, each for part of the anesthetic goal."],["Propofol","A fast IV anesthetic; causes low blood pressure and apnea and gives no analgesia."],["Stage IV anesthesia","Medullary depression: breathing and circulation fail."]],
+ check:{q:"A patient is sedated with a propofol infusion. Why does the patient still need separate pain medicine for a painful procedure?",opts:[
+  ["Propofol causes unconsciousness but has no analgesic effect",1,"Right. Propofol does not block pain pathways, so an analgesic (often an opioid) is added."],
+  ["Propofol makes pain worse",0,"It does not worsen pain; it simply does not treat it."],
+  ["Propofol wears off in a few seconds",0,"Propofol is short-acting, but the infusion keeps it going. The issue is the lack of analgesia."],
+  ["Pain medicine prevents malignant hyperthermia",0,"Pain medicine does not prevent malignant hyperthermia."]]},
+ caption:"Anesthetic level rises through the stages to surgical anesthesia; inhaled agents and propofol get it there.",
+ legend:[["drug","Anesthetic","d"],["warn","Stage II","s"],["good","Stage III","s"],["bad","Stage IV","s"]]},
+
+{act:5,scene:"mh",desc:"On the left, a muscle fiber close-up shows a teal calcium channel on a pink storage sac marked with a small gene tag. Violet vapour labelled sevoflurane and a drug labelled succinylcholine arrive; the faulty channel opens wide, pink calcium ions flood out, the striped filaments clench, and red heat waves and grey CO2 bubbles rise from the fiber. On the right, a dark monitor shows EtCO2 rising first, then heart rate rising, then temperature rising, each number turning orange. Then a syringe labelled IV dantrolene appears, a violet drug shape sits in the channel, the calcium stops pouring, the filaments relax, and the monitor numbers settle back toward normal.",
+ title:"Malignant hyperthermia: recognize it and give dantrolene",
+ body:`<p><b>Malignant hyperthermia (MH)</b> is a rare, inherited reaction (often a <b>RYR1</b> gene change) triggered by <b>inhaled anesthetics</b> (-fluranes) and <b>succinylcholine</b>. The faulty calcium channel opens and stays open, flooding muscle with calcium. Muscles clench and burn fuel nonstop.</p>
+ <p><b>Early signs</b>: a <b>rising end-tidal CO2</b> despite more breathing, <b>tachycardia</b>, <b>muscle rigidity</b> (jaw rigidity is a warning). Then <b>high temperature</b> (often a later sign), high potassium, acidosis, dysrhythmias and dark urine from muscle breakdown.</p>
+ <p><b>Response</b> (per protocol): stop the trigger, call for help and the MH cart, give 100% oxygen, give <b>IV dantrolene</b> (repeat as ordered), cool the patient, treat high potassium and dysrhythmias, and watch urine output. Before surgery, ask about <b>family history of problems with anesthesia</b>.</p>`,
+ analogy:"It is like a jammed-open fire hydrant flooding the street with calcium. Dantrolene is the crew that shuts the valve; cooling and oxygen clean up the street.",
+ terms:[["Malignant hyperthermia","An inherited, life-threatening muscle reaction to certain anesthetics."],["End-tidal CO2 (EtCO2)","Carbon dioxide at the end of each breath; rises early in MH."],["Trigger agent","A drug that can set off MH: inhaled anesthetics and succinylcholine."]],
+ check:{q:"During surgery with sevoflurane, the EtCO2 rises sharply and the jaw is rigid. Which drug should the team prepare?",opts:[
+  ["IV dantrolene",1,"Yes. These are early signs of malignant hyperthermia; dantrolene stops calcium release from the SR."],
+  ["More succinylcholine to relax the jaw",0,"Succinylcholine is itself an MH trigger and would make it worse."],
+  ["A triptan",0,"Triptans are migraine drugs and have no role here."],
+  ["Neostigmine",0,"Neostigmine reverses nondepolarizing blockers; it does not treat MH."]]},
+ caption:"In MH, a faulty channel floods muscle with calcium; dantrolene closes it while the team cools and oxygenates.",
+ legend:[["ca","Calcium ions"],["sr","Sarcoplasmic reticulum"],["heat","Heat"],["drug","Dantrolene","d"]]},
+
+/* ---------- Part 6: local anesthesia, blockers, sedation ---------- */
+{act:6,scene:"local",desc:"Two horizontal nerve fibers run across the picture, each with a capillary below it. Gold pain signals travel from left to right along each fiber. In the middle of each fiber, violet lidocaine molecules diffuse in from an injection site and slip inside the fiber to sit in teal sodium channels; where they sit, the gold signal stops, marked with a block sign. In the top lane, labelled lidocaine alone, the capillary is wide, red blood cells flow fast, and they carry drug molecules away; a timer bar labelled block time is short. In the bottom lane, labelled lidocaine with epinephrine, small olive epinephrine shapes squeeze the capillary narrower, blood flows slowly, the drug stays near the nerve, and the block time bar is about twice as long.",
+ title:"Local anesthetics: lidocaine and epinephrine",
+ body:`<p><b>Local anesthetics</b> (<b>lidocaine</b>, bupivacaine; stem <b>-caine</b>) enter the nerve fiber and <b>block sodium channels from the inside</b>. With no sodium rush, the action potential cannot pass, so the pain message never reaches the brain. Small pain fibers are blocked first, then temperature, touch, pressure and finally movement; feeling comes back in reverse order.</p>
+ <p><b>Epinephrine</b> is often added. It <b>narrows nearby blood vessels</b>, so the drug is carried away more slowly. The block <b>lasts longer</b>, less drug reaches the blood (lower toxicity risk) and there is less bleeding. Epinephrine-containing solutions have traditionally been avoided in end areas such as fingers, toes, nose, ears and penis; follow your protocol.</p>
+ <p>Local anesthetics work poorly in <b>infected, acidic tissue</b> because less drug can enter the nerve. Nursing care: protect the numb area from injury, assess sensation and movement as the block wears off, and after numbing the throat, keep the patient <b>NPO until the gag reflex returns</b>.</p>`,
+ analogy:"Lidocaine is a roadblock on the nerve highway. Epinephrine narrows the exit ramps nearby so the roadblock crew cannot be driven away as fast.",
+ terms:[["Local anesthetic","A drug that blocks nerve conduction in one area without loss of consciousness."],["Vasoconstriction","Narrowing of blood vessels; epinephrine causes it."],["Gag reflex","The protective throat reflex; it must return before eating after throat numbing."]],
+ check:{q:"Why is epinephrine often added to lidocaine?",opts:[
+  ["It narrows local blood vessels, so the block lasts longer and less drug reaches the bloodstream",1,"Yes. Slower removal from the site means a longer block and lower systemic levels."],
+  ["It makes lidocaine block potassium channels",0,"Lidocaine blocks sodium channels; epinephrine does not change the target."],
+  ["It speeds up the removal of lidocaine",0,"It does the opposite by narrowing vessels."],
+  ["It reverses the numbness at the end",0,"Epinephrine prolongs numbness; it does not reverse it."]]},
+ caption:"Lidocaine blocks sodium channels inside the nerve; epinephrine narrows vessels so the block lasts longer.",
+ legend:[["nrn","Nerve fiber"],["na","Pain signal"],["drug","Lidocaine","d"],["epi","Epinephrine"]]},
+
+{act:6,scene:"last",desc:"On the left, a tall vertical level bar labelled lidocaine in the blood slowly fills from the bottom. Beside it, a ladder of warning signs lights up in order as the level climbs: numb lips and tongue tingling, metallic taste, ringing in the ears, dizziness and agitation, seizures, then slow heart and low blood pressure, then dysrhythmia and arrest, with the upper rungs in red. A person figure in the middle shows these signs: lines around the mouth, then shaking. On the right, a response panel lists steps that tick on one by one: stop the injection, call for help, oxygen and airway, benzodiazepine for seizures, lipid emulsion per protocol. A small bag of milky lipid emulsion shows yellow droplets soaking up violet drug molecules from the blood.",
+ title:"Local anesthetic toxicity: recognize and respond",
+ body:`<p>If too much local anesthetic reaches the blood (a large amount, a very vascular site, or an accidental injection into a vessel), it blocks sodium channels in the <b>brain</b> and <b>heart</b>. This is <b>local anesthetic systemic toxicity (LAST)</b>.</p>
+ <p>The <b>brain</b> usually shows it first: <b>numbness around the mouth, tingling tongue, metallic taste, ringing in the ears</b>, dizziness, confusion and agitation, then <b>seizures</b> and drowsiness. The <b>heart</b> follows: slow heart rate, <b>dysrhythmias</b>, low blood pressure, even cardiac arrest. Bupivacaine is especially hard on the heart.</p>
+ <p><b>Respond</b> per protocol: <b>stop</b> injecting, <b>call for help</b>, support the <b>airway</b> with oxygen, treat seizures (often a <b>benzodiazepine</b>), and give <b>lipid emulsion</b>, which acts like a sponge that pulls the drug out of tissues. Monitor the heart closely.</p>`,
+ analogy:"The early signs are smoke alarms going off in the brain before the fire reaches the heart. Lipid emulsion is a sponge thrown into the bloodstream to soak up the spill.",
+ terms:[["LAST","Local anesthetic systemic toxicity: brain and heart effects from too much drug in the blood."],["Circumoral numbness","Numbness or tingling around the mouth; an early sign of toxicity."],["Lipid emulsion therapy","IV fat emulsion that binds the drug and pulls it away from heart and brain."]],
+ check:{q:"During a procedure with lidocaine, a patient says, 'My lips are tingling and I taste metal.' What should the nurse do first?",opts:[
+  ["Stop the injection and alert the provider; these are early signs of toxicity",1,"Right. Early brain signs come before seizures and heart effects, so stopping and getting help early matters."],
+  ["Reassure the patient; this means the block is working",0,"A working local block numbs the procedure area, not the lips with a metal taste."],
+  ["Give more lidocaine to finish quickly",0,"More drug would raise the level further."],
+  ["Offer a glass of water",0,"Water will not help, and the patient may be about to seize."]]},
+ caption:"As the blood level climbs, brain signs come first, then heart signs; stop, call for help and use lipid emulsion per protocol.",
+ legend:[["drug","Drug level","d"],["warn","Brain signs","s"],["bad","Heart signs","s"],["gold","Lipid emulsion"]]},
+
+{act:6,scene:"nmb",desc:"Two nerve-muscle junctions sit side by side over striped muscle fibers. On the left, labelled succinylcholine (depolarizing), violet drug shapes sit in the teal acetylcholine receptors like acetylcholine would; the muscle fiber flickers with small twitches labelled fasciculations, then goes limp and stays limp because the drug is not broken down by the scissor enzyme. On the right, labelled rocuronium (nondepolarizing), violet drug shapes sit in the receptors as blockers; blue acetylcholine dots bounce off, there are no twitches, and the fiber is limp. Below each is a strength bar falling to zero. Along the bottom, a brain icon with an open eye has a label: these drugs give no sedation and no pain relief.",
+ title:"Neuromuscular blockers: succinylcholine and rocuronium",
+ body:`<p><b>Neuromuscular blockers</b> paralyse skeletal muscle at the <b>nicotinic acetylcholine receptor</b>. They are used for intubation, surgery and some ventilated ICU patients. The patient <b>cannot breathe</b> without a ventilator.</p>
+ <p><b>Succinylcholine</b> is <b>depolarizing</b>: it activates the receptor like ACh, causing brief <b>fasciculations</b> (twitches), then the fiber stays depolarized and limp. It starts in about a minute and lasts minutes because <b>plasma cholinesterase</b> breaks it down. Risks: <b>hyperkalemia</b> (avoid after major burns, crush injury, some nerve-muscle diseases), <b>malignant hyperthermia</b>, slow heart rate and muscle aches.</p>
+ <p><b>Rocuronium</b> (and vecuronium; stem <b>-curonium</b>) is <b>nondepolarizing</b>: it sits in the receptor and blocks ACh without activating it. Crucially, these drugs give <b>no sedation and no pain relief</b>. A paralysed patient can be awake and in pain, so sedation and analgesia must be given and checked.</p>`,
+ analogy:"Succinylcholine is like holding a doorbell button down until the bell burns out and goes silent. Rocuronium is like taping over the button so no one can press it.",
+ terms:[["Depolarizing blocker","Activates the receptor first (twitches), then leaves the fiber unable to fire: succinylcholine."],["Nondepolarizing blocker","Blocks the receptor without activating it: rocuronium, vecuronium."],["Fasciculations","Brief, visible muscle twitches."]],
+ check:{q:"A patient on a ventilator is receiving a rocuronium infusion. Which statement by a student nurse needs correcting?",opts:[
+  ["\"Since the patient is paralysed, they cannot feel pain or be aware.\"",1,"Right, this needs correcting. Neuromuscular blockers have no sedative or pain-relieving effect, so the patient needs sedation and analgesia."],
+  ["\"The patient depends on the ventilator to breathe.\"",0,"This is correct; the diaphragm is paralysed too."],
+  ["\"I will protect the eyes, since the patient cannot blink.\"",0,"This is correct eye care for paralysed patients."],
+  ["\"Rocuronium blocks acetylcholine at the muscle.\"",0,"This is correct: it is a nondepolarizing blocker."]]},
+ caption:"Succinylcholine activates then disables the receptor; rocuronium simply blocks it. Neither sedates.",
+ legend:[["receptor","Nicotinic ACh receptor"],["ach","Acetylcholine"],["drug","Blocker","d"],["muscle","Muscle fiber"]]},
+
+{act:6,scene:"reversal",desc:"The left half shows a nerve-muscle junction with violet rocuronium shapes in the receptors. Violet neostigmine shapes jam the teal scissor enzymes in the gap, blue acetylcholine dots build up, push the rocuronium out of the receptors, and the muscle fiber tightens. A small heart icon beside it is labelled glycopyrrolate protects the heart rate. The right half shows a blood vessel where violet rings labelled sugammadex wrap around single rocuronium shapes and carry them away, so the receptors empty. Along the bottom, a train-of-four monitor shows four twitch bars that return one by one from zero of four to four of four.",
+ title:"Reversing blockade: neostigmine and sugammadex",
+ body:`<p><b>Neostigmine</b> is a cholinesterase inhibitor. It lets ACh build up so ACh <b>outcompetes</b> a nondepolarizing blocker at the receptor. Extra ACh also slows the heart and increases secretions, so it is given with <b>glycopyrrolate</b> (or atropine), which blocks those muscarinic effects. Neostigmine does <b>not</b> reverse succinylcholine.</p>
+ <p><b>Sugammadex</b> is a ring-shaped molecule that <b>wraps around rocuronium or vecuronium</b> in the blood and holds it, so it leaves the receptors. It works fast. It can make <b>hormonal contraceptives</b> less effective for a while, so teach a backup method as directed.</p>
+ <p>A <b>train-of-four</b> nerve stimulator checks recovery: four twitches mean much better recovery than none. Muscles recover in reverse order (the diaphragm first, small muscles last), so in recovery watch <b>breathing, swallowing, head lift and grip</b> for leftover weakness.</p>`,
+ analogy:"Neostigmine floods the room with the real key-holders so they push the fake keys out of the locks. Sugammadex is a magnet that pulls the fake keys out of the room.",
+ terms:[["Neostigmine","A cholinesterase inhibitor used to reverse nondepolarizing blockers."],["Sugammadex","A drug that encapsulates rocuronium or vecuronium to reverse them."],["Train-of-four","Four quick nerve stimulations used to measure how much block remains."]],
+ check:{q:"Why is glycopyrrolate given with neostigmine?",opts:[
+  ["To block the slow heart rate and secretions caused by extra acetylcholine",1,"Yes. Neostigmine raises ACh everywhere; glycopyrrolate blocks the muscarinic effects while the nicotinic effect at the muscle does its job."],
+  ["To speed up paralysis",0,"The goal at this point is to end paralysis."],
+  ["To encapsulate rocuronium",0,"That is sugammadex."],
+  ["To prevent malignant hyperthermia",0,"Glycopyrrolate has no role in MH."]]},
+ caption:"Neostigmine lets acetylcholine outcompete the blocker; sugammadex wraps the blocker up and carries it off.",
+ legend:[["drug","Drugs","d"],["ach","Acetylcholine"],["receptor","Receptor and enzyme"],["good","Twitch returns","s"]]},
+
+{act:6,scene:"sedation",desc:"Across the top runs a sedation scale from minimal, to moderate (shaded green, the goal), to deep, to general anesthesia (shaded red). A pointer drifts along it. Below, a patient figure lies on a stretcher with two syringes labelled midazolam and fentanyl going into an IV. When the pointer is in moderate, a speech bubble from a nurse says open your eyes and the patient's eyes open. A dark monitor at the right shows oxygen saturation and a capnography wave of square breath shapes. When the pointer slides into deep, the patient no longer responds, the capnography waves flatten and slow, and an orange alarm label appears. A tray at the bottom shows flumazenil and naloxone labelled reversal agents at the bedside, oxygen and suction.",
+ title:"Moderate sedation: awake enough to answer",
+ body:`<p><b>Moderate (procedural) sedation</b> is a drug-induced calm in which the patient <b>still responds on purpose</b> to voice or light touch and keeps their <b>own airway and breathing</b>. A common combination is <b>midazolam</b> (a benzodiazepine: calm and amnesia) with <b>fentanyl</b> (an opioid: pain relief; opioids are covered in Module 6).</p>
+ <p>Sedation is a <b>continuum</b>. The same drugs can slide a patient into <b>deep sedation</b> or general anesthesia, where breathing fails. So a nurse dedicated to monitoring watches <b>level of consciousness, oxygen saturation, capnography (exhaled CO2), breathing, heart rate and blood pressure</b> throughout.</p>
+ <p>Have ready at the bedside: <b>oxygen, suction, airway equipment</b> and the reversal agents <b>flumazenil</b> (benzodiazepines) and <b>naloxone</b> (opioids). Before: consent, fasting status, airway and history. After: the patient meets recovery criteria and goes home with a responsible adult, no driving that day.</p>`,
+ analogy:"Moderate sedation is like dozing on a train: you can still hear your stop announced and get up. Deep sedation is sleeping through every stop.",
+ terms:[["Moderate sedation","Depressed consciousness with purposeful response to voice or light touch and an unassisted airway."],["Capnography","Continuous measurement of exhaled CO2; flags slow or absent breathing early."],["Reversal agent","A drug that blocks another drug's effect, such as naloxone for opioids."]],
+ check:{q:"During moderate sedation with midazolam and fentanyl, the capnography waveform flattens and the patient does not respond to voice. What is the nurse's first action?",opts:[
+  ["Stimulate the patient, open the airway and support breathing, and call for help; prepare reversal agents",1,"Yes. The patient has slid into deeper sedation with poor breathing. Airway and breathing come first, then reversal as ordered."],
+  ["Give more midazolam so the patient stays comfortable",0,"More sedative would deepen the problem."],
+  ["Document and recheck in 15 minutes",0,"A flat capnography wave is an emergency that needs action now."],
+  ["Give dantrolene",0,"Dantrolene treats malignant hyperthermia, not over-sedation."]]},
+ caption:"Moderate sedation keeps the patient responsive with their own airway; monitoring catches a slide into deep sedation.",
+ legend:[["good","Moderate (goal)","s"],["bad","Too deep","s"],["drug","Sedatives","d"],["o2","Capnography"]]},
+
+{act:0,scene:"recap",desc:"The same brain, spinal cord, nerve and muscle from the start are drawn on the left, now with small violet drug shapes resting at every site and short labels: sodium channel and GABA for seizures, dopamine and acetylcholine for Parkinson disease, acetylcholine and glutamate for Alzheimer disease, spinal cord and muscle calcium for relaxants, the brain surface vessel for triptans, the whole brain for anesthesia, and the nerve and junction for local anesthetics and blockers. On the right, six summary cards light up one after another with a coloured border, one for each part.",
+ title:"Recap: one mechanism, many consequences",
+ body:`<p><b>Seizures:</b> sodium channel blockers (phenytoin, carbamazepine, lamotrigine) and GABA enhancers (benzodiazepines, phenobarbital); valproate and levetiracetam are broad. Watch levels and toxicity, never stop suddenly, and plan pregnancy.</p>
+ <p><b>Parkinson disease:</b> add dopamine power (levodopa-carbidopa, agonists, MAO-B and COMT inhibitors) or lower acetylcholine (benztropine). Watch orthostatic hypotension, dyskinesia, wearing off and protein timing.</p>
+ <p><b>Alzheimer, MG, MS:</b> cholinesterase inhibitors raise ACh (slow pulse, GI upset); memantine quiets glutamate; MS drugs calm the immune attack.</p>
+ <p><b>Muscle and migraine:</b> baclofen and cyclobenzaprine sedate; dantrolene blocks muscle calcium; triptans narrow vessels (not with coronary disease).</p>
+ <p><b>Anesthesia and sedation:</b> general anesthetics and propofol depress breathing and blood pressure; watch for MH; local anesthetics block sodium channels (epinephrine prolongs, toxicity starts in the brain); neuromuscular blockers paralyse without sedating; moderate sedation needs constant monitoring and reversal agents at hand.</p>`,
+ analogy:"Every drug here is a hand on one control of the nervous system's sound board. Know which control it grabs, and you can predict both the music and the noise.",
+ terms:[["Mechanism first","Knowing where a drug acts lets you predict its effects and side effects."],["Narrow therapeutic index","Phenytoin is the classic example in this module; levels guide dosing."],["Reversal agents","Flumazenil, naloxone, neostigmine with glycopyrrolate, sugammadex, dantrolene, lipid emulsion."]],
+ check:null,caption:"Six parts, one idea: where the drug acts explains what it does and what to watch.",
+ legend:[["act1","Seizures"],["act2","Parkinson"],["act3","Alzheimer, MG, MS"],["act4","Muscle, migraine"],["act5","General anesthesia"],["act6","Local, blockers, sedation"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+window.addEventListener("resize",fit);
+
+/* ================= shared scene pieces ================= */
+const SPOTS=[{n:1,x:180,y:84,name:"1 · Brain surface: seizures"},{n:2,x:208,y:160,name:"2 · Deep brain: Parkinson disease"},{n:3,x:132,y:178,name:"3 · Memory area: Alzheimer disease"},
+  {n:4,x:276,y:112,name:"4 · Vessel and spinal cord: migraine, relaxants"},{n:5,x:150,y:128,name:"5 · Whole brain: anesthesia"},{n:6,x:330,y:378,name:"6 · Nerve and muscle: local, blockers"}];
+function bodyMap(T,hl,o){o=o||{};
+  // spinal cord and nerve to muscle
+  rr(196,200,30,236,14);fillStroke(C.nrn,C["nrn-edge"],2);for(let y=214;y<430;y+=22)line(200,y,222,y,hexA(C["nrn-edge"],.5),1);
+  poly([[226,350],[270,356],[318,370]],C["nrn-edge"],4);
+  muscleFiber(318,352,82,52,.3+.3*Math.max(0,Math.sin(T*2)));
+  brainShape(195,148,104);
+  // surface vessel for migraine
+  poly([[246,76],[262,92],[272,112],[288,124],[296,140]],C.blood,3);
+  if(hl===3)glow(211,300,40,C.accent,.35);
+  if(hl===4){ctx.save();brainShape(195,148,104,"rgba(0,0,0,0)");ctx.clip();const wv=P(T,2.2);ctx.fillStyle=hexA(C.drug,.22);ctx.fillRect(70+wv*260-60,0,120,260);ctx.restore()}
+  SPOTS.forEach((s,i)=>{const on=hl===i||o.all;if(on){pulseRing(s.x,s.y,24,C.accent,P(T,1.2));circ(s.x,s.y,16,null,C.accent,2.5)}
+    badge(s.x,s.y,s.n,on?C.accent:C["ink-soft"],10);
+    if(on&&!o.all)label(24,452,s.name,{size:12.5,weight:700,border:C.accent,align:"left"})})}
+
+/* ================= start map ================= */
+function sceneMap(T){
+  panelBox(12,12,392,456);title(26,32,"Where these drugs act");
+  const L=2.4,hl=Math.floor(T/L)%6,p=P(T,L);bodyMap(T,hl);
+  const s=SPOTS[hl];const sx=hl%2?24:392,sy=hl<3?24:456;const f=smooth(seg(p,.05,.6));drugMol(lerp(sx,s.x+14,f),lerp(sy,s.y-12,f),7,{rot:T*2*(1-f),shape:["hex","pent","dia","star","sq","ring"][hl]});
+  const parts=[["Seizures","act1","Sodium channel blockers, GABA enhancers"],["Parkinson disease","act2","Levodopa-carbidopa, agonists, benztropine"],["Alzheimer, MG, MS","act3","Donepezil, memantine, immunomodulators"],
+    ["Muscle and migraine","act4","Baclofen, dantrolene, triptans"],["General anesthesia","act5","Inhaled agents, propofol, malignant hyperthermia"],["Local, blockers, sedation","act6","Lidocaine, rocuronium, moderate sedation"]];
+  parts.forEach((pt,i)=>{const x=412,y=12+i*76.5,w=376,h=70;const l=i===hl;panelBox(x,y,w,h,{stroke:l?C[pt[1]]:C.rule,lw:l?2.6:1.2,fill:hexA(C.panel,l?.98:.7)});
+    badge(x+22,y+h/2,i+1,C[pt[1]],12);txt(x+44,y+24,pt[0],{size:14,weight:700});txt(x+44,y+46,pt[2],{size:12.5,color:C["ink-soft"]})});
+}
+
+/* ================= Part 1: seizures ================= */
+const SZL=12;
+function szSev(t){const c=P(t,SZL)*SZL;if(c<4)return 0;if(c<5.6)return smooth((c-4)/1.6);if(c<9)return 1;if(c<10.6)return 1-smooth((c-9)/1.6);return 0}
+function sceneSeizure(T){
+  panelBox(12,12,776,190);title(26,32,"Five cortical neurons");
+  const c=P(T,SZL)*SZL;const sev=szSev(T);
+  for(let i=0;i<5;i++){const x=90+i*145,y=118;
+    let fire=0;const on=c>4+i*.32&&c<9.6;
+    if(on&&sev>.05){fire=Math.pow(1-P(T,.34),3)}else{const ph=P(T*.55+rnd(i+3),1);fire=ph<.12?1-ph/.12:0}
+    neuron(x,y,20,x+78,T,{fire});
+    const pp=on&&sev>.05?P(T,.34):P(T*.55+rnd(i+3),1)*1.2;if(pp<1)apPulse(x+20,x+78,y,pp,C.na)}
+  const seiz=sev>.5;chipText(724,32,seiz?"SEIZURE":"NORMAL",seiz?C.bad:C.good);
+  scopeBox(12,212,776,120,"EEG (brain waves)");eegTrace(16,226,768,102,T,szSev,{win:5});
+  // balance
+  panelBox(12,342,776,126);title(26,360,"Go versus stop");
+  const tilt=-.22*sev;const s=seesaw(400,410,360,tilt);
+  pan(s.L[0],s.L[1]-6,110,4+Math.round(sev*6),"glu","");pan(s.R[0],s.R[1]-6,110,5,"gaba","");
+  txt(36,420,"GO: glutamate, Na⁺",{size:13,weight:700,color:mix(C.glu,C.ink,.15)});txt(764,420,"STOP: GABA, Cl⁻",{size:13,weight:700,color:mix(C.gaba,C.ink,.3),align:"right"});
+}
+/* sodium channel block: two halves */
+function naState(t,period,opend,inactd){const ph=P(t,period)*period;if(ph<opend)return {open:1,inact:0};if(ph<opend+inactd)return {open:0,inact:1-(ph-opend)/inactd*.3};return {open:0,inact:Math.max(0,.7-(ph-opend-inactd)*3)}}
+function sceneNaBlock(T){
+  const CY=5,SP=.5,NB=7;
+  [0,1].forEach(k=>{const x0=12+k*394;panelBox(x0,12,382,456);title(x0+14,32,k?"Sodium channel blocker":"No drug",k?C.drug:null);
+    bilayer(x0+10,x0+372,150,24,{labels:k===0});
+    // outside sodium
+    for(let i=0;i<10;i++)ion("na",x0+30+rnd(i+k*7)*320,70+rnd(i+20)*40+Math.sin(T+i)*3,.8);
+    const c=P(T,CY)*CY;const sIdx=Math.floor(c/SP);const inBurst=sIdx<NB;const since=c-sIdx*SP;
+    const ok=k===0?inBurst:(inBurst&&sIdx<2);
+    [150,235,320].forEach((cx,j)=>{const X=x0+cx;let st={open:0,inact:0};
+      if(inBurst){if(since<.15&&ok)st={open:1,inact:0};else if(since<.5)st={open:0,inact:ok?1-(since-.15)/.35*.4:1};else st={open:0,inact:.3}}
+      const drug=k===1?clamp(inBurst?(sIdx+since/SP)/1.6:1-(c-NB*SP)/1.2,0,1):0;
+      naChannel(X,150,26,Object.assign({drug,shape:"hex"},st));
+      if(st.open>0){for(let q=0;q<3;q++){const f=P(T*3+q/3+j*.2,1);ion("na",X+Math.sin(q*2)*3,lerp(110,196,f),1-f*.3)}}
+      if(k===1&&drug>.2&&j===1&&inBurst&&sIdx>=2)lead(X+12,166,X+60,212,"held inactivated",{size:12})});
+    // voltage trace
+    scopeBox(x0+15,250,352,150,"Voltage inside the cell");
+    ctx.save();rr(x0+15,250,352,150,8);ctx.clip();ctx.beginPath();
+    for(let i=0;i<=340;i+=1.5){const t=T-4+i/340*4;const cc=P(t,CY)*CY;let v=0;
+      for(let s=0;s<NB;s++){const okS=k===0||s<2;const d=cc-s*SP;if(d>-.05&&d<.3){v+=okS?Math.exp(-Math.pow((d-.04)/.03,2))*1:Math.exp(-Math.pow((d-.04)/.05,2))*.15}}
+      const Y=372-v*96;i?ctx.lineTo(x0+21+i,Y):ctx.moveTo(x0+21+i,Y)}
+    ctx.strokeStyle="#7FE0B0";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+    txt(x0+24,388,"time →",{size:12,color:"#C5D3DA"});
+    wrapText(k?"The first signals pass. The drug grabs the channels as they inactivate, and the fast burst stops.":"Channels open, inactivate and reset again and again, so the burst keeps going.",x0+16,420,350,17,{size:12.5,color:C.ink})});
+}
+/* phenytoin: steep level curve, gums, IV compatibility */
+function phenyLevel(d){return clamp(.18*d/(1.02-d),0,1.05)}
+function lightning(x,y,s,col){fillPoly([[x-s*.2,y-s],[x+s*.45,y-s],[x+s*.05,y-s*.1],[x+s*.5,y-s*.1],[x-s*.35,y+s],[x-s*.05,y+s*.05],[x-s*.5,y+s*.05]],col)}
+function scenePhenytoin(T){
+  panelBox(12,12,420,456);title(26,32,"Phenytoin level as the dose goes up");
+  const gx=70,gy=56,gw=340,gh=230;axes(gx,gy,gw,gh,"Dose (relative) →","Blood level");
+  band(gx,gy,gw,gh,0,1,.4,.65,C.good);txt(gx+8,gy+gh-(.525)*gh,"target range",{size:12,weight:700,color:C.good});
+  plotFn(phenyLevel,0,.95,gx,gy,gw*.95,gh,0,1,C.drug,2.6);
+  const tri=1-Math.abs(1-2*P(T,10));const d=.35+.53*smooth(tri);const L=phenyLevel(d);const X=gx+gw*d,Y=gy+gh-clamp(L,0,1)*gh;circ(X,Y,7,C.drug,C.panel,2);
+  const zone=L<.4?0:L<=.65?1:2;
+  const icons=[["Below range","seizure risk"],["In range","seizures controlled"],["Above range","nystagmus, ataxia"]];
+  icons.forEach((ic,i)=>{const x=40+i*130,y=330;const on=i===zone;withA(on?1:.32,()=>{panelBox(x,y,118,124,{stroke:on?[C.warn,C.good,C.bad][i]:C.rule,lw:on?2.4:1.2,fill:hexA(C.panel,.95)});
+      if(i===0)lightning(x+59,y+40,22,C.gold);else if(i===1)checkMark(x+59,y+40,16,C.good);else{eye(x+40,y+38,16,T,on);person(x+90,y+70,30,T,{sway:on?1:0})}
+      txt(x+59,y+86,ic[0],{size:12.5,weight:700,align:"center"});txt(x+59,y+104,ic[1],{size:12,align:"center",color:C["ink-soft"]})})});
+  // gums
+  panelBox(444,12,344,212);title(458,32,"Long-term: gingival hyperplasia");
+  const g=smooth(seg(P(T,9),.1,.7));
+  for(let i=0;i<6;i++){const x=476+i*48;rr(x,92,40,72,8);fillStroke("#F4F1EA",hexA(C.ink,.35),1.2)}
+  ctx.beginPath();ctx.moveTo(462,60);ctx.lineTo(774,60);const ge=100+g*30;ctx.lineTo(774,ge-4);for(let i=6;i>=0;i--){const x=470+i*48;ctx.quadraticCurveTo(x+24,ge+16+g*6,x,ge-4)}ctx.closePath();fillStroke(C.gum,mix(C.gum,C.ink,.35),1.5);
+  txt(616,190,"Teach: brush, floss, dental visits",{size:12.5,weight:600,align:"center"});
+  // IV compatibility
+  panelBox(444,236,344,232);title(458,256,"IV phenytoin: saline only, give slowly");
+  [["Normal saline",530,1],["Dextrose (D5W)",704,0]].forEach(b=>{ivBag(b[1],362,50,"",b[2]?C.o2:C.ligand,.7);txt(b[1],286,b[0],{size:12.5,weight:700,align:"center"});
+    line(b[1],380,b[1],440,C["ink-soft"],3);
+    if(b[2]){for(let k=0;k<3;k++){const f=P(T*.8+k/3,1);circ(b[1],370+f*70,3,hexA(C.o2,.8))}checkMark(b[1]+30,420,10,C.good)}
+    else{const n=Math.floor(seg(P(T,6),.1,.8)*9);for(let k=0;k<n;k++){rr(b[1]-5+rnd(k)*8-4,380+k*7,6,6,1);fillStroke("#FFFFFF",hexA(C.ink,.5),1)}crossMark(b[1]+30,420,8,C.bad);txt(b[1]+40,446,"crystals",{size:12,color:C.bad,align:"center"})}});
+}
+/* carbamazepine: enzyme induction */
+function pacman(x,y,r,t,col){const m=.25+.2*Math.abs(Math.sin(t*5));ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,m,TAU-m);ctx.closePath();fillStroke(col||C.receptor,mix(col||C.receptor,C.ink,.35),1.3);circ(x+r*.1,y-r*.5,r*.12,C.panel)}
+function sceneCarba(T){
+  panelBox(12,12,540,456);title(26,32,"Liver cell");
+  const ind=smooth(seg(P(T,14),.05,.6));
+  blobPath(282,250,190,2.2,T*.2,.04);ctx.save();ctx.scale(1,1);ctx.restore();ctx.fillStyle=mix(C.liver,C.panel,.75);ctx.fill();ctx.strokeStyle=C.liver;ctx.lineWidth=2.5;ctx.stroke();
+  circ(282,250,30,mix(C.liver,C.panel,.45),C.liver,1.5);txt(282,250,"nucleus",{size:12,align:"center",weight:600});
+  const POS=[[200,175],[282,160],[364,175],[180,250],[384,250],[200,325],[282,340],[364,325],[282,205]];const n=3+Math.round(ind*6);
+  for(let i=0;i<n;i++){const a=i<3?1:clamp((ind*6-(i-3))*1.5,0,1);withA(a,()=>pacman(POS[i][0],POS[i][1],15,T+i,C.receptor))}
+  txt(40,440,"Liver enzymes (CYP450): "+n,{size:13,weight:700,mono:true});
+  // carbamazepine entering from the left
+  for(let i=0;i<4;i++){const p=P(T*.3+i/4,1);const tg=POS[(i*2)%n];const X=lerp(40,tg[0]-12,smooth(p)),Y=lerp(240+i*12-18,tg[1],smooth(p));drugMol(X,Y,7,{a:p<.85?1:1-(p-.85)/.15,shape:"hex"})}
+  // other drugs from top: pill hormone, warfarin
+  [["ligand","birth control",120],["blood","warfarin",440]].forEach((d,j)=>{for(let i=0;i<3;i++){const p=P(T*(.25+ind*.25)+i/3+j*.17,1);const tg=POS[(i+j*3+1)%n];const X=lerp(d[2],tg[0]+10,smooth(p)),Y=lerp(60,tg[1]-8,smooth(p));withA(p<.85?1:1-(p-.85)/.15,()=>circ(X,Y,6,C[d[0]],hexA(C.ink,.45),1))}
+    label(d[2],64,d[1],{size:12,weight:600})});
+  label(70,212,"carbamazepine",{size:12,weight:600,color:C.drug});
+  // level bars
+  panelBox(564,12,224,300);title(578,32,"Drug levels");
+  [["Hormonal birth control"],["Warfarin"],["Carbamazepine itself"]].forEach((b,i)=>{const y=82+i*76;const f=lerp(.62,.3,ind*(i===2?.8:1));levelBar(580,y,190,f,.45,.78,b[0],i===0?C.ligand:i===1?C.blood:C.drug);
+    if(f<.45)txt(580,y+30,"below range: may fail",{size:12,color:C.bad,weight:600})});
+  // warning tags
+  panelBox(564,324,224,144);title(578,344,"Also watch for");
+  ["Serious rash (SJS)","Low sodium","Low blood counts"].forEach((t,i)=>chipL(578,374+i*30,t,C.warn))}
+/* benzodiazepine at GABA-A */
+function sceneBenzo(T){
+  [0,1].forEach(k=>{const x0=12+k*394,cx=x0+191;panelBox(x0,12,382,300);title(x0+14,32,k?"GABA + benzodiazepine":"GABA alone",k?C.drug:null);
+    bilayer(x0+10,x0+372,140,24,{labels:k===0});
+    const per=k?1.1:2.4,win=k?.75:.45;const ph=P(T+k*.3,per)*per;const open=ph<win?Math.sin(ph/win*Math.PI):0;const g=ph<win+.2?1:0;
+    gabaA(cx,140,40,{open,gaba:g,bz:k});
+    for(let i=0;i<8;i++)ion("cl",x0+40+rnd(i+k*5)*300,62+rnd(i+9)*26,.8);
+    if(open>.15){for(let q=0;q<(k?4:2);q++){const f=P(T*1.6+q/(k?4:2),1);ion("cl",cx+Math.sin(q*3)*3,lerp(100,200,f),1-f*.2)}}
+    if(k)lead(cx-70,118,x0+40,64,"benzodiazepine site",{size:12});
+    const vf=k?.2:.42;gauge(cx,262,34,vf+.03*Math.sin(T*3),null,C.drug,[[0,.3,C.gaba],[.7,1,C.glu]]);txt(cx,284,k?"more negative: quieter":"resting",{size:12,weight:600,align:"center"});
+    txt(cx-56,250,"−",{size:16,weight:700,align:"center"});txt(cx+56,250,"+",{size:16,weight:700,align:"center"})});
+  // status epilepticus strip
+  const L=12,c=P(T,L)*L;const sevF=t=>{const cc=P(t,L)*L;return cc<6.5?1:cc<9.5?1-smooth((cc-6.5)/3):0};
+  scopeBox(12,322,600,146,"Status epilepticus: EEG");eegTrace(16,338,592,126,T,sevF,{win:5});
+  panelBox(624,322,164,146);const mins=c<6.5?Math.min(5,c*.9).toFixed(1):"5+";txt(706,346,c<6.5?"Seizing for":"Lorazepam given",{size:12.5,weight:700,align:"center"});
+  txt(706,372,c<6.5?mins+" min":"",{size:18,weight:700,mono:true,align:"center",color:C.bad});
+  const push=seg(c,6,7);syringe(650,420,40,0,1-push*.8,C.drug);txt(706,452,"IV lorazepam",{size:12.5,weight:600,align:"center"});
+}
+/* valproate: three targets and three warnings */
+function fetus(x,y,s,mark){ctx.beginPath();ctx.arc(x,y,s,Math.PI*.2,Math.PI*1.75);ctx.strokeStyle=mix(C.skin,C.ink,.3);ctx.lineWidth=s*.55;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt";circ(x+s*.55,y-s*.85,s*.5,C.skin,C["skin-edge"],1.4);
+  ctx.beginPath();ctx.arc(x,y,s*1.27,Math.PI*.35,Math.PI*1.6);ctx.strokeStyle=hexA(C.bad,mark?.9:.0);ctx.setLineDash([3,3]);ctx.lineWidth=2;ctx.stroke();ctx.setLineDash([]);if(mark)circ(x-s*1.25,y+s*.1,5,C.bad)}
+function sceneValproate(T){
+  panelBox(12,12,470,456);title(26,32,"Valproate: three actions");
+  const L=9,c=P(T,L)*L,seq=Math.floor(c/3);bilayer(22,472,250,24,{labels:true});
+  const blockNa=c>1.4,blockCa=c>4.4,moreG=smooth(seg(c,6.4,8));
+  const oNa=blockNa?.1:.5+.5*Math.sin(T*4),oCa=blockCa?.1:.5+.5*Math.sin(T*4+1);
+  naChannel(170,250,26,{open:oNa,lab:"Sodium channel",drug:blockNa?1:0,shape:"pent"});
+  naChannel(290,250,26,{open:oCa,col:C.ca,lab:"Calcium channel",drug:blockCa?1:0,shape:"pent",noBall:true});
+  if(oNa>.6)for(let q=0;q<2;q++){const f=P(T*2+q/2,1);ion("na",170,lerp(205,295,f))}
+  if(oCa>.6)for(let q=0;q<2;q++){const f=P(T*2+q/2+.3,1);ion("ca",290,lerp(205,295,f))}
+  [["1","Blocks sodium channels"],["2","Blocks T-type calcium channels"],["3","Raises GABA"]].forEach((it,i)=>{const on=i===seq;badge(40,66+i*34,it[0],on?C.drug:C["ink-soft"],11);txt(60,66+i*34,it[1],{size:13,weight:on?700:500,color:on?C.ink:C["ink-soft"]})});
+  // GABA pool
+  rr(345,300,110,90,12);fillStroke(hexA(C.gaba,.12),C.gaba,1.5);txt(400,410,"GABA made",{size:12,weight:600,align:"center"});
+  const ng=4+Math.round(moreG*8);for(let i=0;i<ng;i++)nt("gaba",360+(i%4)*26,320+Math.floor(i/4)*24+Math.sin(T*2+i)*2,6);
+  // valproate molecule visiting
+  const tg=[[170,214],[290,214],[400,290]][seq];const pr=smooth(seg(c-seq*3,0,1.2));const from=seq===0?[300,150]:[[170,214],[290,214]][seq-1];
+  drugMol(lerp(from[0],tg[0],pr),lerp(from[1],tg[1]-20,pr),11,{shape:"pent"});label(lerp(from[0],tg[0],pr),lerp(from[1],tg[1]-20,pr)-24,"valproate",{size:12,weight:700,color:C.drug});
+  // warnings
+  const W=[["Liver injury","check LFTs"],["Neural tube defects","plan pregnancy, folic acid"],["Low platelets","bruising, bleeding"]];const lit=Math.floor(P(T,9)*3);
+  W.forEach((w,i)=>{const y=12+i*154,on=i===lit;panelBox(494,y,294,146,{stroke:on?C.bad:C.rule,lw:on?2.5:1.2,fill:hexA(C.panel,.95)});
+    txt(512,y+22,w[0],{size:14,weight:700});txt(512,y+42,w[1],{size:12.5,color:C["ink-soft"]});
+    if(i===0){liverShape(600,y+96,58,C.liver);rr(690,y+60,22,70,4);fillStroke(C.sunk);const f=on?.3+.6*smooth(seg(P(T,9)*3-i,0,.8)):.3;rr(690,y+130-70*f,22,70*f,4);fillStroke(f>.6?C.bad:C.warn);txt(701,y+138,"LFT",{size:12,align:"center",weight:600})}
+    if(i===1){fetus(620,y+96,26,on)}
+    if(i===2){const k=on?Math.round(14-10*smooth(seg(P(T,9)*3-i,0,.8))):14;for(let j=0;j<14;j++)if(j<k)ell(530+(j%7)*34,y+80+Math.floor(j/7)*30,9,5,rnd(j)*2,mix(C.gold,C.panel,.2),hexA(C.ink,.35),1)}})}
+/* levetiracetam + lamotrigine */
+function sceneLeve(T){
+  panelBox(12,12,392,456);title(26,32,"Levetiracetam at SV2A");
+  const sy=synapse(208,280,240,{pre:"Nerve ending",post:"Next neuron"});
+  const L=10,c=P(T,L)*L,drug=smooth(seg(c,3.5,4.6));
+  const V=[[160,180],[205,165],[250,180],[180,222],[232,222]];
+  V.forEach((v,i)=>{vesicle(v[0],v[1],15,"glu",4,T+i);rr(v[0]+10,v[1]-16,9,7,2);fillStroke(C.receptor);if(drug>0)drugMol(v[0]+20,v[1]-22,5.5,{a:drug,shape:"hex"})});
+  [120,165,210,255,300].forEach(x=>receptor(x,sy.bot+10,11,{}));
+  const rate=lerp(9,2,drug);for(let i=0;i<9;i++){if(i>=rate)continue;const p=P(T*.9+i/9,1);nt("glu",150+i*14+Math.sin(i)*6,lerp(sy.top-6,sy.bot+2,p),5.5,1-p*.3)}
+  label(206,74,drug>.5?"less glutamate released":"many vesicles release",{size:12.5,weight:700,border:drug>.5?C.drug:null});
+  lead(258,174,340,112,"SV2A",{size:12});
+  // lamotrigine titration
+  panelBox(416,12,372,456);title(430,32,"Lamotrigine: raise the dose slowly");
+  const gx=460,gy=70,gw=300,gh=210;axes(gx,gy,gw,gh,"Weeks →","Dose");
+  const pr=seg(P(T,8),0,.75);
+  ctx.save();ctx.beginPath();ctx.rect(gx,gy-10,gw*pr,gh+20);ctx.clip();
+  const steps=[];for(let k=0;k<=6;k++){steps.push([gx+k*gw/6,gy+gh-k*gh/7]);steps.push([gx+(k+1)*gw/6,gy+gh-k*gh/7])}poly(steps,C.good,3);
+  poly([[gx,gy+gh],[gx+gw*.12,gy+gh*.3],[gx+gw*.3,gy+gh*.12]],C.bad,3,[6,4]);ctx.restore();
+  label(gx+gw*.72,gy+gh*.55,"slow: safer",{size:12.5,weight:700,color:C.good});label(gx+gw*.33,gy+18,"too fast: rash risk",{size:12.5,weight:700,color:C.bad});
+  // skin with rash
+  const r=smooth(seg(P(T,8),.25,.6));rr(470,320,140,120,14);fillStroke(C.skin,C["skin-edge"],1.5);for(let k=0;k<14;k++)withA(r,()=>circ(486+rnd(k)*110,336+rnd(k+5)*88,4+rnd(k+9)*4,hexA(C.bad,.75)));
+  txt(470,452,"skin",{size:12,color:C["ink-soft"]});
+  wrapText("Stop and report any new rash. It can be the start of Stevens-Johnson syndrome.",626,340,150,18,{size:12.5,weight:600});}
+/* never stop suddenly */
+function sceneStopping(T){
+  panelBox(12,12,776,290);title(26,32,"Drug level over weeks");
+  const gx=70,gy=50,gw=690,gh=200;axes(gx,gy,gw,gh,"Weeks →","Level");band(gx,gy,gw,gh,0,1,.45,.75,C.good);txt(gx+8,gy+gh-.73*gh+10,"target range",{size:12,weight:700,color:C.good});
+  const pr=seg(P(T,10),0,.8);const xb=.42;
+  const base=t=>.6+.05*Math.sin(t*60);
+  plotFn(base,0,xb,gx,gy,gw*xb,gh,0,1,C.drug,2.4,null,pr<xb?pr:null);
+  if(pr>xb){const f=x=>x<xb+.03?lerp(.6,.06,(x-xb)/.03):.06;plotFn(f,xb,1,gx+gw*xb,gy,gw*(1-xb),gh,0,1,C.bad,2.6,null,pr);
+    const g=x=>lerp(.6,.08,clamp((x-xb)/(1-xb),0,1))+.03*Math.sin(x*60);plotFn(g,xb,1,gx+gw*xb,gy,gw*(1-xb),gh,0,1,C.accent,2.6,[7,4],pr);
+    label(gx+gw*.56,gy+gh-.12*gh,"stopped suddenly",{size:12.5,weight:700,color:C.bad});label(gx+gw*.74,gy+gh-.42*gh,"tapered by the prescriber",{size:12.5,weight:700,color:C.accent})}
+  const abrupt=pr>xb+.06?1:0;
+  scopeBox(12,312,382,70,"After a sudden stop");eegTrace(16,328,374,52,T,()=>abrupt,{win:4});if(abrupt)chipText(330,326,"rebound seizures",C.bad);
+  scopeBox(406,312,382,70,"After a slow taper");eegTrace(410,328,374,52,T,()=>0,{win:4});
+  // icons
+  panelBox(12,392,776,76);
+  // blood tube
+  rr(40,404,16,48,7);fillStroke(hexA(C.panel,.8),C["ink-soft"],1.4);rr(42,424,12,26,5);fillStroke(C.blood);rr(38,400,20,9,2);fillStroke(C.accent);txt(68,428,"Check levels (trough)",{size:12.5,weight:600});
+  // pill organizer
+  for(let i=0;i<4;i++){rr(290+i*22,412,18,26,3);fillStroke(C.panel,C["ink-soft"],1.2);circ(299+i*22,425,4,C.drug)}txt(384,428,"Same time every day",{size:12.5,weight:600});
+  // folic acid
+  rr(552,408,22,36,4);fillStroke(C.panel,C["ink-soft"],1.3);rr(552,420,22,12,1);fillStroke(C.gold);fetus(600,428,9,false);txt(624,428,"Plan pregnancy, folic acid",{size:12.5,weight:600});
+}
+
+/* ================= Part 2: Parkinson disease ================= */
+function achDot(x,y,s,blocked){if(blocked){circ(x,y,s,C.blocked,hexA(C.ink,.4),1);line(x-s*.6,y-s*.6,x+s*.6,y+s*.6,C.ink,1.4);line(x-s*.6,y+s*.6,x+s*.6,y-s*.6,C.ink,1.4)}else nt("ach",x,y,s)}
+function scenePDBalance(T){
+  panelBox(12,12,300,456);title(26,32,"Inside the brain");
+  const p=P(T,14);const loss=smooth(seg(p,.12,.5))*(1-smooth(seg(p,.92,1)));
+  brainShape(160,170,120);
+  // striatum and nigra
+  ell(150,150,30,20,.3,hexA(C.dopa,.25),C.dopa,1.5);txt(150,112,"striatum",{size:12,weight:600,align:"center"});
+  ell(190,214,16,9,0,mix(C.ink,C.brain,loss*.85),C.ink,1);
+  poly([[190,212],[176,186],[158,160]],hexA(C.dopa,1-loss*.8),3,[5,3]);for(let i=0;i<3;i++){const f=P(T*.6+i/3,1);withA(1-loss,()=>nt("dopa",lerp(190,158,f),lerp(212,160,f),4.5))}
+  lead(190,214,120,300,"substantia nigra",{size:12.5});
+  if(loss>.5)label(160,340,"dopamine neurons lost",{size:12.5,weight:700,color:C.bad});
+  txt(30,400,"Fewer dopamine signals reach",{size:12.5});txt(30,420,"the striatum, so acetylcholine",{size:12.5});txt(30,440,"is relatively too strong.",{size:12.5});
+  panelBox(324,12,464,456);title(338,32,"The movement seesaw");
+  const s=seesaw(556,160,380,.24*loss);
+  pan(s.L[0],s.L[1]-6,120,Math.round(6-5*loss),"dopa","");pan(s.R[0],s.R[1]-6,120,6,"ach","");
+  txt(s.L[0],s.L[1]+26,"Dopamine",{size:13,weight:700,align:"center",color:mix(C.dopa,C.ink,.3)});txt(s.R[0],s.R[1]+26,"Acetylcholine",{size:13,weight:700,align:"center",color:mix(C.ach,C.ink,.2)});
+  person(556,412,62,T,{tremor:loss,lean:.16*loss,rigid:loss>.5});
+  if(loss>.55){["tremor","rigidity","slow movement"].forEach((t,i)=>chipL(636,320+i*30,t,C.warn))}
+  label(556,250,loss>.5?"Parkinson disease: tipped toward ACh":"Balanced: smooth movement",{size:13,weight:700,border:loss>.5?C.warn:C.good})}
+function sceneLevodopa(T){
+  [0,1].forEach(k=>{const y0=12+k*230,cy=y0+120;panelBox(12,y0,776,220);title(26,y0+20,k?"Levodopa + carbidopa":"Levodopa alone",k?C.drug:null);
+    // gut
+    ctx.beginPath();for(let i=0;i<=30;i++){const f=i/30;const X=30+f*70,Y=cy+Math.sin(f*TAU*2)*30;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=mix(C.gum,C.ink,.2);ctx.lineWidth=14;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt";txt(64,cy+56,"gut",{size:12,align:"center",color:C["ink-soft"]});
+    rr(104,cy-38,452,76,30);fillStroke(hexA(C.vessel,.9),mix(C.blood,C.ink,.15),1.6);txt(330,cy-48,"blood",{size:12,color:C["ink-soft"],align:"center"});
+    // BBB wall
+    for(let j=0;j<6;j++){rr(560,cy-80+j*27,18,25,3);fillStroke(C.bbb,mix(C.bbb,C.ink,.4),1)}txt(569,y0+204,"blood-brain barrier",{size:12,align:"center",color:C["ink-soft"]});
+    ell(670,cy,90,72,0,C.brain,C["brain-edge"],2);txt(670,cy-60,"brain",{size:12,weight:600,align:"center"});
+    [260,410].forEach(ex=>{pacman(ex,cy+22,13,T+ex,C.receptor);if(k)drugMol(ex+4,cy+18,6,{shape:"sq"})});
+    const N=12;let reached=0;
+    for(let i=0;i<N;i++){const p=P(T*.16+i/N,1);let x=lerp(80,740,p);const conv=k?(i%4===0):(i%4!==0);const cx0=i%2?260:410;
+      if(conv){if(x>cx0){if(x>548){const back=x-548;x=548-back*.6;withA(1-clamp(back/120,0,1),()=>nt("dopa",x,cy-10+Math.sin(i)*12,6))}else nt("dopa",x,cy-10+Math.sin(i)*12,6)}else drugMol(x,cy-10+Math.sin(i)*12,6,{shape:"pent"})}
+      else{if(x>740)x=740;const yy=cy-10+Math.sin(i)*12;if(x>620){nt("dopa",Math.min(x,720),yy,6);reached++}else if(x>586){drugMol(x,yy,6,{shape:"pent"})}else drugMol(x,yy,6,{shape:"pent"});if(x>590&&x<720)reached++}}
+    panelBox(704,y0+12,78,40,{fill:hexA(C.panel,.95)});txt(743,y0+32,k?"many in":"few in",{size:12.5,weight:700,align:"center",color:k?C.good:C.bad});
+    if(!k){chipL(410,y0+196,"nausea",C.warn);chipL(490,y0+196,"low BP",C.warn)}
+    else lead(266,cy+10,214,y0+196,"carbidopa blocks the enzyme",{size:12})});
+}
+/* on-off across a day */
+function pdEffect(h,adv){if(!adv)return .56+.05*Math.sin(h*1.3);const D=[7,11,15,19];let v=.08;
+  D.forEach(d=>{let A=.95,u=h-d;if(d===11){A=.42;u-=.5}if(u>0)v+=A*(u/.6)*Math.exp(1-u/.6)});if(h>17.1&&h<17.8)v=Math.min(v,.15);return v}
+function sceneOnOff(T){
+  panelBox(12,12,580,456);const adv=Math.floor(T/12)%2===1;title(26,32,adv?"Advanced disease: one day":"Early disease: one day");
+  const gx=70,gy=60,gw=500,gh=300;axes(gx,gy,gw,gh,"",null);
+  const v0=0,v1=1.1;const Y=v=>gy+gh-(v-v0)/(v1-v0)*gh;
+  ctx.fillStyle=hexA(C.warn,.13);ctx.fillRect(gx,Y(.35),gw,Y(0)-Y(.35));ctx.fillStyle=hexA(C.ser,.12);ctx.fillRect(gx,Y(1.1),gw,Y(.8)-Y(1.1));band(gx,gy,gw,gh,v0,v1,.35,.8,C.good);
+  txt(gx+gw-6,Y(.57),"ON",{size:13,weight:700,color:C.good,align:"right"});txt(gx+gw-6,Y(.17),"OFF: tremor, stiffness",{size:12.5,weight:700,color:C["warn-ink"],align:"right"});txt(gx+gw-6,Y(.95),"dyskinesia",{size:12.5,weight:700,color:mix(C.ser,C.ink,.2),align:"right"});
+  const hr=6+16*P(T,12);const X=h=>gx+(h-6)/16*gw;
+  [6,10,14,18,22].forEach(h=>txt(X(h),gy+gh+16,(h>12?h-12:h)+(h>=12?" pm":" am"),{size:12,align:"center",color:C["ink-soft"]}));
+  [7,11,15,19].forEach(h=>{drugMol(X(h),gy+gh-12,5.5,{shape:"pent"})});
+  // drumstick for protein lunch
+  const dx=X(11.5),dy=gy+gh-36;circ(dx,dy,9,mix(C.liver,C.panel,.3),mix(C.liver,C.ink,.3),1.2);line(dx+6,dy+6,dx+16,dy+16,C["ink-soft"],3);
+  if(adv)label(dx,dy-20,"protein lunch",{size:12,weight:600});
+  plotFn(h=>pdEffect(h,adv),6,22,gx,gy,gw,gh,v0,v1,C.dopa,2.8,null,hr);
+  line(X(hr),gy,X(hr),gy+gh,C["ink-soft"],1.2,[4,3]);
+  if(adv&&hr>10.6)label(X(10.4),Y(.12),"wearing off",{size:12,weight:700,border:C.warn});if(adv&&hr>17.4)label(X(17.4),Y(.42)-18,"on-off",{size:12,weight:700,border:C.bad});
+  const v=pdEffect(hr,adv);const st=v<.35?0:v<=.8?1:2;
+  panelBox(604,12,184,456);title(618,32,"Right now");dayClock(696,96,40,hr);
+  person(696,320,76,T,{tremor:st===0?1:0,lean:st===0?.15:0,sway:st===2?1.4:0,rigid:st===0});
+  const lab=["OFF","ON","Dyskinesia"][st];chipText(696,404,lab,[C.warn,C.good,C.ser][st]);
+  wrapText(["Tremor and stiffness are back.","Moving well.","Extra writhing movements at peak."][st],616,430,164,17,{size:12.5,align:"left"});
+  txt(696,160,adv?"advanced":"early",{size:12.5,weight:700,align:"center",color:C["ink-soft"]})}
+/* agonists, MAO-B and COMT */
+function sceneBoost(T){
+  const L=12,c=P(T,L)*L,ph=Math.floor(c/4);
+  panelBox(12,12,520,456,{stroke:ph<2?C.accent:C.rule,lw:ph<2?2.2:1.2});title(26,32,ph===0?"1. Dopamine agonist: pramipexole":"2. MAO-B inhibitor: selegiline",C.drug);
+  const sy=synapse(230,260,250,{pre:"Dopamine neuron",post:"Striatum neuron"});
+  const RX=[150,200,250,300,350];RX.forEach((x,i)=>{const ag=ph===0?smooth(seg(c-i*.3,.4,1.4)):0;receptor(x,sy.bot+10,12,{glow:ag});if(ag>0)drugMol(x,sy.bot-2+lerp(-50,10,ag),7,{shape:"star",a:Math.min(1,ag*2)})});
+  if(ph===0&&c>2)glow(230,sy.bot+50,90,C.dopa,.35);
+  // glial cell with MAO-B
+  blobPath(440,250,46,3.1,T*.3,.06);fillStroke(hexA(C.sunk,.8),C["ink-soft"],1.5);txt(440,306,"glial cell",{size:12,align:"center",color:C["ink-soft"]});
+  pacman(426,250,14,T,C.receptor);txt(440,214,"MAO-B",{size:12,weight:700,align:"center"});const inh=ph===1?smooth(seg(c-4,.3,1.2)):0;if(inh>0)drugMol(428,248,7,{a:inh,shape:"dia"});
+  const nd=ph===1?4+Math.round(inh*8):4;for(let i=0;i<nd;i++){const p=P(T*.5+i/nd,1);let x=170+i*24%180,y=lerp(sy.top-4,sy.bot,p);if(ph!==1&&i%2&&p>.5){x=lerp(x,420,(p-.5)*2);y=lerp(y,250,(p-.5)*2)}nt("dopa",x,y,5.5)}
+  if(ph===1)label(240,90,"dopamine lasts longer",{size:12.5,weight:700,border:C.drug});
+  if(ph===0)label(240,90,"stars act on receptors directly",{size:12.5,weight:700,border:C.drug});
+  [["1","Agonist: acts on dopamine receptors directly"],["2","MAO-B inhibitor: slows dopamine breakdown"],["3","COMT inhibitor: each levodopa dose lasts longer"]].forEach((it,i)=>{const on=i===ph;badge(40,388+i*28,it[0],on?C.drug:C["ink-soft"],11);txt(60,388+i*28,it[1],{size:13,weight:on?700:500,color:on?C.ink:C["ink-soft"]})});
+  // COMT panel
+  panelBox(544,12,244,456,{stroke:ph===2?C.accent:C.rule,lw:ph===2?2.2:1.2});title(558,32,"3. COMT inhibitor",C.drug);txt(558,52,"entacapone (with levodopa)",{size:12.5,color:C["ink-soft"]});
+  rr(560,100,212,90,40);fillStroke(C.vessel,mix(C.blood,C.ink,.15),1.6);txt(666,90,"blood",{size:12,align:"center",color:C["ink-soft"]});
+  pacman(666,160,14,T,C.receptor);txt(666,208,"COMT",{size:12,weight:700,align:"center"});const ci=ph===2?smooth(seg(c-8,.3,1.2)):0;if(ci>0)drugMol(668,158,7,{a:ci,shape:"dia"});
+  for(let i=0;i<5;i++){const p=P(T*.3+i/5,1);let x=lerp(570,770,p),a=1;if(ci<.5&&x>650&&i%2===0){a=1-clamp((x-650)/40,0,1)}withA(a,()=>drugMol(x,130+(i%3)*10,6,{shape:"pent"}))}
+  txt(560,250,"Levodopa level",{size:12.5,weight:600});axes(570,264,200,140,"hours →",null);
+  plotFn(t=>Math.exp(-t/1.2)*t*2.2,0,6,570,264,200,140,0,1,C.drug,2,[5,4]);if(ci>0)withA(ci,()=>plotFn(t=>Math.exp(-t/2)*t*1.6,0,6,570,264,200,140,0,1,C.drug,2.8));
+  if(ci>.5)txt(670,430,"lasts longer",{size:12.5,weight:700,color:C.drug,align:"center"});else txt(670,430,"dashed: without the inhibitor",{size:12,color:C["ink-soft"],align:"center"})}
+/* benztropine */
+function iconMouth(x,y){ctx.beginPath();ctx.ellipse(x,y,22,11,0,0,TAU);fillStroke(mix(C.gum,C.panel,.3),mix(C.gum,C.ink,.4),1.5);line(x-16,y,x+16,y,mix(C.gum,C.ink,.4),1.5)}
+function iconBladder(x,y,f){ctx.beginPath();ctx.ellipse(x,y,20,22,0,0,TAU);fillStroke(mix(C.gold,C.panel,.6),C["ink-soft"],1.5);ctx.save();ctx.beginPath();ctx.ellipse(x,y,20,22,0,0,TAU);ctx.clip();ctx.fillStyle=hexA(C.gold,.7);ctx.fillRect(x-22,y+22-44*f,44,44*f);ctx.restore();line(x,y+22,x,y+34,C["ink-soft"],3)}
+function iconGut(x,y){ctx.beginPath();for(let i=0;i<=40;i++){const f=i/40;const X=x-22+f*44,Y=y+Math.sin(f*TAU*2)*12;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=mix(C.gum,C.ink,.2);ctx.lineWidth=7;ctx.stroke();blockSign(x+18,y-14,8,C.bad)}
+function iconHead(x,y){circ(x,y,20,C.skin,C["skin-edge"],1.5);txt(x+22,y-18,"?",{size:18,weight:700,color:C.warn})}
+function sceneAnticho(T){
+  panelBox(12,12,440,456);title(26,32,"Benztropine lowers the ACh side");
+  const b=smooth(seg(P(T,10),.15,.6));const s=seesaw(232,170,340,.24-.2*b);
+  pan(s.L[0],s.L[1]-6,110,1,"dopa","");rr(s.R[0]-55,s.R[1]-14,110,10,4);fillStroke(C.panel,C["ink-soft"],1.3);
+  for(let i=0;i<6;i++){const bl=i<Math.round(b*4);achDot(s.R[0]-45+(i%6)*18,s.R[1]-22,5,bl);if(bl)drugMol(s.R[0]-45+(i%6)*18,s.R[1]-36,4.5,{shape:"tri"})}
+  txt(s.L[0],s.L[1]+24,"Dopamine (low)",{size:12.5,weight:700,align:"center"});txt(s.R[0],s.R[1]+24,"ACh, some blocked",{size:12.5,weight:700,align:"center"});
+  person(232,410,62,T,{tremor:1-b*.85,lean:.1*(1-b)});label(232,290,b>.5?"tremor eases":"tremor",{size:12.5,weight:700,border:b>.5?C.good:C.warn});
+  panelBox(464,12,324,456);title(478,32,"Anticholinergic effects");
+  const lit=Math.floor(P(T,10)*5);const items=[["Dry mouth",iconMouth],["Blurred vision",(x,y)=>{ctx.save();ctx.filter="blur(1.5px)";eye(x,y,20,T,false);ctx.restore()}],["Urinary retention",(x,y)=>iconBladder(x,y,.9)],["Constipation",iconGut],["Confusion in older adults",iconHead]];
+  items.forEach((it,i)=>{const y=58+i*80;const on=i<=lit;withA(on?1:.35,()=>{panelBox(476,y,300,70,{stroke:i===lit?C.warn:C.rule,lw:i===lit?2.4:1.2,fill:hexA(C.panel,.95)});it[1](520,y+35);txt(560,y+35,it[0],{size:13.5,weight:700})})})}
+
+/* ================= Part 3: Alzheimer, MG, MS ================= */
+function heartShape(x,y,s,col){ctx.beginPath();ctx.moveTo(x,y+s*.9);ctx.bezierCurveTo(x-s*1.4,y,x-s*.8,y-s,x,y-s*.35);ctx.bezierCurveTo(x+s*.8,y-s,x+s*1.4,y,x,y+s*.9);ctx.closePath();fillStroke(col||C.blood,mix(col||C.blood,C.ink,.35),1.5)}
+function sceneDonepezil(T){
+  [0,1].forEach(k=>{const x0=12+k*394,cx=x0+191;panelBox(x0,12,382,370);title(x0+14,32,k?"With donepezil":"Alzheimer disease",k?C.drug:null);
+    const sy=synapse(cx,230,230,{pre:"Sending",post:"Receiving",gap:56});const EX=[cx-60,cx,cx+60];
+    const RX=[cx-80,cx-40,cx,cx+40,cx+80];let bound=0;
+    const n=6;for(let i=0;i<n;i++){const p=P(T*.55+i/n,1);const x=cx-70+i*28;const eaten=!k&&i%3!==0&&p>.45;if(eaten){withA(1-(p-.45)*4,()=>nt("ach",x,lerp(sy.top-4,sy.bot,.45),5))}else{nt("ach",x,lerp(sy.top-4,sy.bot,p),5);if(p>.8)bound++}}
+    EX.forEach(ex=>{pacman(ex,(sy.top+sy.bot)/2+1,9,T+ex,C.receptor);if(k)drugMol(ex+2,(sy.top+sy.bot)/2-2,5,{shape:"dia"})});
+    RX.forEach((x,i)=>receptor(x,sy.bot+10,10,{glow:k?1:.2}));
+    glow(cx,sy.bot+34,60,C.ach,k?.4:.08);txt(cx,350,k?"ACh lasts longer: stronger signal":"Enzyme cuts most ACh first",{size:12.5,weight:700,align:"center"});
+    lead(EX[2]+8,(sy.top+sy.bot)/2,x0+340,(sy.top+sy.bot)/2-40,"AChE",{size:12})});
+  panelBox(12,392,776,76);title(26,410,"Extra ACh elsewhere");
+  const beat=Math.pow(1-P(T,1.25),6);heartShape(60,442,14*(1+.12*beat),C.blood);
+  ctx.beginPath();for(let i=0;i<=200;i++){const tt=T-2.5+i/200*2.5;const v=ecgWave(tt*.8);const Y=446-v*16;i?ctx.lineTo(90+i,Y):ctx.moveTo(90+i,Y)}ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();
+  txt(300,442,"slow heart rate, fainting",{size:12.5,weight:600});
+  ell(520,442,20,14,0,mix(C.gum,C.panel,.3),mix(C.gum,C.ink,.4),1.5);txt(550,442,"nausea, diarrhea",{size:12.5,weight:600})}
+function sceneMemantine(T){
+  panelBox(12,12,580,456);const L=12,c=P(T,L)*L;const ph=c<4?0:c<8?1:c<10?2:3;
+  title(26,32,["Background glutamate noise","Memantine plugs the pore","A real signal arrives","Memantine slips back in"][ph]);
+  bilayer(22,582,250,26,{labels:true});const cx=300;
+  const out=ph===2?smooth(seg(c,8,8.5))*(1-smooth(seg(c,9.5,10))):0;const md=ph===0?0:ph===1?smooth(seg(c,4,5)):1;
+  naChannel(cx,250,44,{open:ph===2?1:.55,col:C.receptor,lab:"NMDA receptor",noBall:true});
+  if(md>0)drugMol(cx,lerp(150,250,md)-out*70,10,{shape:"hex"});
+  const ng=ph===2?10:3;for(let i=0;i<ng;i++){const p=P(T*(ph===2?1.2:.4)+i/ng,1);nt("glu",cx-120+i*(240/ng)+Math.sin(i)*10,lerp(70,190,p),6,1-p*.4)}
+  const flow=ph===0?2:ph===2&&out>.5?6:0;for(let q=0;q<flow;q++){const f=P(T*1.5+q/flow,1);ion("ca",cx+Math.sin(q*2)*6,lerp(200,330,f),1-f*.3,6)}
+  if(ph===2&&out>.5){glow(cx,370,80,C.ca,.4);checkMark(cx+90,380,12,C.good)}
+  label(cx,430,["Calcium trickles in all the time","Trickle blocked","Strong signal: memantine pops out","Back to blocking the noise"][ph],{size:13,weight:700,border:ph===1||ph===3?C.drug:ph===2?C.good:C.warn});
+  panelBox(604,12,184,456);title(618,32,"Calcium damage");const dm=ph===0?.3+.5*seg(c,0,4):ph===1?.8-.6*seg(c,4,8):.2;
+  rr(670,70,40,320,8);fillStroke(C.sunk);rr(670,70+320*(1-dm),40,320*dm,8);fillStroke(dm>.55?C.bad:C.warn);txt(690,410,dm>.55?"rising":"low",{size:13,weight:700,align:"center"})}
+function antibody(x,y,s,col){line(x,y,x,y+s,col,3);line(x,y,x-s*.6,y-s*.6,col,3);line(x,y,x+s*.6,y-s*.6,col,3)}
+function sceneMGMS(T){
+  const L=10,c=P(T,L)*L,on=smooth(seg(c,4.5,5.5));
+  panelBox(12,12,392,456);title(26,32,"Myasthenia gravis");
+  nmj(206,232,210,{contr:.2+.6*on,labels:false});txt(226,114,"motor nerve ending",{size:12,color:C["ink-soft"]});txt(310,328,"muscle fiber",{size:12,color:C["ink-soft"],align:"right"});const cl=(232-10+232+16)/2;
+  const RX=[130,168,206,244,282];RX.forEach((x,i)=>{receptor(x,232+22,10,{});if(i%2===0)antibody(x,232+4,12,C.ach)});
+  [168,244].forEach(ex=>{pacman(ex,cl+2,8,T+ex,C.receptor);if(on>0)drugMol(ex+2,cl-1,5,{shape:"dia",a:on})});
+  const n=4+Math.round(on*6);for(let i=0;i<n;i++){const p=P(T*.6+i/n,1);nt("ach",140+i*16%140,lerp(212,250,p),4.5)}
+  levelBar(40,360,300,.25+.55*on,null,null,"Muscle strength",C.good);
+  txt(40,404,on>.5?"Pyridostigmine: more ACh at free receptors":"Antibodies (Y) cover many receptors",{size:12.5,weight:600});
+  if(on>.5)label(206,96,"pyridostigmine",{size:12.5,weight:700,color:C.drug});
+  panelBox(416,12,372,456);title(430,32,"Multiple sclerosis");
+  const y=200;line(440,y,770,y,C["nrn-edge"],5);
+  for(let i=0;i<6;i++){const x=446+i*55;const dmg=(i===1||i===4)?1:(i===2?(1-on)*seg(c,1,4):0);withA(1-dmg*.85,()=>{rr(x,y-16,46,32,14);fillStroke(C.myelin,C["myelin-edge"],1.4)})}
+  if(on>0){ctx.save();ctx.globalAlpha*=on;rr(434,y-46,344,92,40);ctx.strokeStyle=C.drug;ctx.lineWidth=3;ctx.setLineDash([8,5]);ctx.stroke();ctx.setLineDash([]);ctx.restore();label(606,y-58,"immunomodulator",{size:12.5,weight:700,color:C.drug})}
+  for(let i=0;i<4;i++){const p=P(T*.35+i/4,1);const x=460+i*85;let yy=lerp(400,y+30,smooth(seg(p,0,.6)));if(on>.5&&p>.6)yy=lerp(y+30,400,seg(p,.6,1));circ(x,yy,13,hexA(C.ach,.6),C.ach,1.5);for(let k=0;k<6;k++){const a=k/6*TAU;line(x+Math.cos(a)*13,yy+Math.sin(a)*13,x+Math.cos(a)*17,yy+Math.sin(a)*17,C.ach,1.5)}}
+  txt(440,300,on>.5?"Fewer immune attacks on myelin":"Immune cells strip myelin",{size:12.5,weight:600});txt(440,440,"immune cells",{size:12,color:C["ink-soft"]})}
+
+/* ================= Part 4: muscle relaxants and migraine ================= */
+function sceneCentral(T){
+  panelBox(12,12,228,456);title(26,32,"What to watch");
+  person(126,230,78,T,{sleep:true,lean:.08});txt(156,108,"z",{size:16,weight:700,color:C["ink-soft"]});txt(172,92,"z",{size:20,weight:700,color:C["ink-soft"]});
+  txt(126,302,"Main side effect:",{size:12.5,align:"center"});txt(126,320,"drowsiness",{size:13.5,weight:700,align:"center"});
+  panelBox(26,340,200,116,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.9)});wrapText("Do not stop baclofen suddenly: seizures, fever, rebound spasm.",38,362,180,18,{size:12.5,weight:600});
+  panelBox(252,12,536,456);const c=P(T,12)*12,drug=smooth(seg(c,4,6))*(1-smooth(seg(c,11,12)));title(266,32,drug>.5?"With baclofen: the loop quiets":"Spasm: the reflex loop fires and fires",drug>.5?C.drug:null);
+  const cx=420,cy=230;circ(cx,cy,104,C.myelin,C["myelin-edge"],2);
+  ctx.beginPath();ctx.moveTo(cx,cy-10);ctx.bezierCurveTo(cx+30,cy-90,cx+70,cy-70,cx+40,cy-10);ctx.bezierCurveTo(cx+80,cy+30,cx+70,cy+80,cx+10,cy+40);ctx.bezierCurveTo(cx-70,cy+80,cx-80,cy+30,cx-40,cy-10);ctx.bezierCurveTo(cx-70,cy-70,cx-30,cy-90,cx,cy-10);ctx.closePath();fillStroke(mix(C.blocked,C.panel,.45),C.blocked,1.5);
+  txt(cx,cy+122,"spinal cord (cross-section)",{size:12,align:"center",color:C["ink-soft"]});
+  const contr=drug>.5?.15:.75+.25*Math.sin(T*22);muscleFiber(620,290,150,56,contr);txt(695,366,drug>.5?"relaxed":"spasm",{size:13,weight:700,align:"center",color:drug>.5?C.good:C.warn});
+  const path=[[640,300],[560,240],[470,180],[440,210],[462,268],[560,318],[640,320]];poly(path,C["nrn-edge"],3);
+  circ(462,268,13,C.nrn,C["nrn-edge"],2);txt(462,246,"",{});lead(462,268,360,330,"motor neuron",{size:12});
+  const per=lerp(.7,2.6,drug),n=drug>.5?1:4;for(let i=0;i<n;i++){const p=P(T/per+i/n,1);const q=along(path,p);glow(q[0],q[1],12,C.na,.9);circ(q[0],q[1],4,C.na)}
+  if(drug>0)for(let i=0;i<3;i++)drugMol(452+i*12,286-Math.abs(i-1)*8,5.5,{a:drug,shape:"hex"});
+  if(drug>.5)label(470,312,"baclofen (GABA-B)",{size:12.5,weight:700,color:C.drug});
+  txt(270,440,"Cyclobenzaprine acts higher up, in the brainstem.",{size:12.5,color:C["ink-soft"]})}
+function sarcomere(cx,y,w,contr){const half=w/2*(1-.25*contr);line(cx-half,y-34,cx-half,y+34,C["muscle-edge"],3);line(cx+half,y-34,cx+half,y+34,C["muscle-edge"],3);
+  for(let r=0;r<4;r++){const yy=y-24+r*16;rr(cx-w*.22,yy-3,w*.44,6,3);fillStroke(C["muscle-edge"]);line(cx-half,yy+5,cx-half+w*.36,yy+5,C.muscle,2.4);line(cx+half,yy+5,cx+half-w*.36,yy+5,C.muscle,2.4)}}
+function muscleCell(x0,T,dan,o){o=o||{};const cx=x0+191;const L=4,c=P(T,L)*L;
+  line(x0+20,80,x0+362,80,C["muscle-edge"],4);rr(cx-8,80,16,120,4);fillStroke(hexA(C.muscle,.3),C["muscle-edge"],1.5);txt(x0+24,66,"muscle cell membrane",{size:12,color:C["ink-soft"]});
+  if(c<.9){const p=c/.9;const X=p<.6?lerp(x0+30,cx,p/.6):cx,Y=p<.6?80:lerp(80,190,(p-.6)/.4);glow(X,Y,14,C.na,.9);circ(X,Y,4,C.na)}
+  rr(x0+40,200,302,56,24);fillStroke(C.sr,mix(C.ca,C.ink,.25),1.6);txt(x0+50,246,"sarcoplasmic reticulum",{size:12,color:C.ink});
+  const opn=o.flood!=null?o.flood:(c>.9&&c<2.4?1:0);const gate=dan?.15:opn;naChannel(cx,200,20,{open:gate,col:C.receptor,noBall:true});if(o.tag){chipText(cx+56,180,"RYR1",C.warn)}
+  if(dan)drugMol(cx,192,6,{shape:"hex"});
+  for(let i=0;i<10;i++)ion("ca",x0+60+(i%5)*55,214+Math.floor(i/5)*20,.75);
+  const nca=dan?(opn?1:0):(opn?(o.many?10:6):0);for(let q=0;q<nca;q++){const f=P(T*1.3+q/nca,1);ion("ca",cx+Math.sin(q*1.9)*40*f,lerp(225,330,f),1-f*.25)}
+  const contr=dan?.1:(o.flood!=null?o.flood:smooth(opn?seg(c,1,1.6):1-seg(c,2.4,3.4)));sarcomere(cx,350,240,contr);txt(cx,406,contr>.5?"filaments slide: contraction":"filaments relaxed",{size:12.5,weight:600,align:"center"});return contr}
+function sceneDantrolene(T){
+  [0,1].forEach(k=>{const x0=12+k*394;panelBox(x0,12,382,416);title(x0+14,32,k?"With dantrolene":"Without dantrolene",k?C.drug:null);muscleCell(x0,T,k)});
+  panelBox(12,438,776,30);liverShape(40,453,14,C.liver);txt(64,453,"Long-term oral dantrolene: check liver function tests; report jaundice or dark urine.",{size:12.5,weight:600})}
+function sceneTriptan(T){
+  const p=P(T,10);const eff=smooth(seg(p,.3,.6))*(1-smooth(seg(p,.92,1)));
+  panelBox(12,12,530,456);title(26,32,eff>.5?"Triptan on board":"Migraine attack");
+  ctx.fillStyle=hexA(C.brain,.6);ctx.fillRect(22,280,510,178);txt(40,446,"brain surface",{size:12,color:C["ink-soft"]});
+  const w=lerp(74,38,eff)+(1-eff)*4*Math.sin(T*6);rr(30,240-w/2,500,w,w/2);fillStroke(C.vessel,mix(C.blood,C.ink,.2),2);
+  for(let i=0;i<7;i++){const X=40+((i*72+T*50)%480);ell(X,240,12,Math.min(8,w*.25),0,C.blood)}
+  // nerve ending
+  poly([[60,60],[180,90],[260,140],[300,180]],C["nrn-edge"],5);circ(300,184,12,C.nrn,C["nrn-edge"],2);txt(60,52,"trigeminal nerve",{size:12,color:C["ink-soft"]});
+  receptor(310,170,9,{});txt(340,160,"5-HT1D",{size:12,weight:600});receptor(170,240-w/2-6,10,{});receptor(400,240-w/2-6,10,{});txt(400,240-w/2-30,"5-HT1B",{size:12,weight:600,align:"center"});
+  if(eff<.5){for(let i=0;i<6;i++){const f=P(T*.6+i/6,1);nt("ser",300+Math.sin(i*2)*30*f,lerp(196,240-w/2-4,f),4.5,(1-f)*(1-eff*2))}
+    for(let i=0;i<3;i++){const x=110+i*150;poly([[x,320],[x+10,306],[x+20,322],[x+30,304],[x+40,320]],C.bad,2.5)}label(250,360,"swollen vessel, inflammation, pain",{size:12.5,weight:700,border:C.bad})}
+  else label(250,360,"vessel narrows, peptide release stops",{size:12.5,weight:700,border:C.good});
+  [[170,240-w/2-14],[400,240-w/2-14],[310,158]].forEach((tg,i)=>{const q=smooth(seg(p,.2+i*.04,.45+i*.04))*(1-smooth(seg(p,.92,1)));if(q>0)drugMol(lerp(480,tg[0],q),lerp(60,tg[1],q),7,{shape:"tri",a:Math.min(1,q*3)})});
+  panelBox(554,12,234,456,{stroke:eff>.5?C.bad:C.rule,lw:eff>.5?2.2:1.2});title(568,32,"Also in the heart");
+  const b=Math.pow(1-P(T,1),5);heartShape(670,170,62*(1+.05*b),mix(C.blood,C.panel,.25));
+  ctx.beginPath();ctx.moveTo(668,132);ctx.bezierCurveTo(646,160,660,196,700,214);ctx.strokeStyle=mix(C.blood,C.ink,.25);ctx.lineWidth=lerp(8,3,eff);ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt";lead(652,170,590,270,"coronary artery",{size:12});
+  if(eff>.3)drugMol(664,150,6,{shape:"tri",a:eff});
+  wrapText("Triptans can narrow coronary arteries. Not for people with coronary artery disease, prior heart attack or stroke, or uncontrolled high blood pressure.",568,330,206,17,{size:12.5,weight:600});
+  if(eff>.5){circ(610,300,10,C.bad);txt(626,300,"report chest pain",{size:12.5,weight:700,color:C.bad})}}
+
+/* ================= Part 5: general anesthesia ================= */
+function sceneGeneral(T){
+  const c=P(T,12)*12;const lv=c<6?smooth(c/6)*.62:c<10?.62:.62*(1-smooth((c-10)/2));
+  panelBox(12,12,460,456);title(26,32,"Anesthetic level in the brain");
+  brainShape(185,160,100);brainShape(185,160,100,hexA(C.scr,lv*.5));
+  rr(380,60,30,190,8);fillStroke(C.sunk);rr(380,60+190*(1-lv/.8),30,190*lv/.8,8);fillStroke(hexA(C.drug,.8));txt(395,266,"level",{size:12,align:"center",weight:600});
+  const sx=40,sw=420,sy=300;const Z=[["I","analgesia",0,.2,C.sunk],["II","excitement",.2,.4,C.warn],["III","surgical",.4,.75,C.good],["IV","medullary",.75,1,C.bad]];
+  Z.forEach(z=>{rr(sx+sw*z[2],sy,sw*(z[3]-z[2])-3,30,4);fillStroke(hexA(z[4],.35),z[4],1.2);txt(sx+sw*(z[2]+z[3])/2,sy+15,z[0],{size:13,weight:700,align:"center"});txt(sx+sw*(z[2]+z[3])/2,sy+44,z[1],{size:12,align:"center",color:C["ink-soft"]})});
+  const px=sx+sw*lv/.8*.8+sw*0;const pX=sx+sw*clamp(lv/.62*.58,0,1);ctx.beginPath();ctx.moveTo(pX,sy-4);ctx.lineTo(pX-8,sy-16);ctx.lineTo(pX+8,sy-16);ctx.closePath();fillStroke(C.ink);
+  const goals=[["Unconscious",.3],["No memory",.15],["No pain response",.45],["No movement",.55]];
+  goals.forEach((g,i)=>{const x=40+(i%2)*210,y=380+Math.floor(i/2)*36;const ok=lv>=g[1]*.62/.58;rr(x,y-10,20,20,4);fillStroke(C.panel,C["ink-soft"],1.4);if(ok)checkMark(x+10,y,7,C.good);txt(x+30,y,g[0],{size:13,weight:600})});
+  panelBox(484,12,304,270);title(498,32,"Two routes");
+  // mask and vapour
+  circ(540,110,26,C.skin,C["skin-edge"],1.5);rr(556,104,30,26,8);fillStroke(hexA(C.o2,.3),C["ink-soft"],1.5);line(586,117,640,117,C["ink-soft"],3);
+  for(let i=0;i<4;i++){const f=P(T*.6+i/4,1);withA(1-f,()=>circ(lerp(640,592,f),117+Math.sin(f*6+i)*5,5,hexA(C.drug,.5)))}
+  txt(650,104,"inhaled",{size:12.5,weight:700});txt(650,124,"(-flurane)",{size:12.5,color:C["ink-soft"]});
+  syringe(520,210,46,0,.7,"#F4F1EA");txt(520,240,"IV propofol (milky white)",{size:12.5,weight:700});
+  const sbp=Math.round(lerp(126,96,lv/.62)),dbp=Math.round(lerp(78,56,lv/.62)),rr_=Math.round(lerp(14,6,lv/.62));
+  monitor(484,292,304,176,{hr:Math.round(lerp(80,68,lv/.62)),sbp,dbp,spo2:lv>.4?99:98,rr:rr_,temp:"36.6"},T)}
+function sceneMH(T){
+  const c=P(T,12)*12;const trig=seg(c,.5,1.5),flood=c<1.5?0:c<7?smooth(seg(c,1.5,2.5)):1-smooth(seg(c,7.5,9.5));const dan=c>7&&c<12;
+  panelBox(12,12,430,456);title(26,32,dan?"Dantrolene closes the channel":"Trigger: the faulty channel floods",dan?C.drug:null);
+  // trigger clouds
+  if(c<7){for(let i=0;i<4;i++){const f=P(T*.4+i/4,1);withA(trig*(1-f),()=>circ(60+i*40,100-f*30,8,hexA(C.drug,.45)))}label(110,60,"sevoflurane",{size:12,weight:600,a:trig});drugMol(310,60,7,{shape:"dia",a:trig});label(310,40,"succinylcholine",{size:12,weight:600,a:trig})}
+  rr(60,200,330,56,24);fillStroke(C.sr,mix(C.ca,C.ink,.25),1.6);txt(70,246,"storage sac (SR)",{size:12});
+  naChannel(225,200,22,{open:flood,col:C.receptor,noBall:true});chipText(290,174,"RYR1 gene change",C.warn);if(dan)drugMol(225,192,6.5,{shape:"hex",a:smooth(seg(c,7,7.6))});
+  const nca=Math.round(flood*12);for(let q=0;q<nca;q++){const f=P(T*1.2+q/nca,1);ion("ca",225+Math.sin(q*1.7)*90*f,lerp(226,320,f),1-f*.2)}
+  sarcomere(225,370,260,flood);if(flood>.3){for(let i=0;i<4;i++){const x=90+i*90,f=P(T*.8+i*.25,1);withA(flood*(1-f),()=>{poly([[x,330-f*60],[x+6,320-f*60],[x,310-f*60],[x+6,300-f*60]],C.heat,2.5)})}
+    for(let i=0;i<3;i++){const f=P(T*.5+i/3,1);withA(flood*(1-f),()=>{circ(360,420-f*60,14,null,C["ink-soft"],1.5);txt(360,420-f*60,"CO₂",{size:12,align:"center",weight:600})})}}
+  if(c>6.6&&c<8.5){syringe(196,168,36,-Math.PI*.75,1-seg(c,6.8,7.6),C.drug);label(130,110,"IV dantrolene",{size:12.5,weight:700,color:C.drug})}
+  txt(225,446,flood>.5?"muscle clenched and burning fuel":"relaxed",{size:12.5,weight:700,align:"center",color:flood>.5?C.bad:C.good});
+  const et=Math.round(38+34*flood),hr=Math.round(82+56*smooth(seg(c,2,5))*(1-smooth(seg(c,8,10)))),tp=(37+1.6*smooth(seg(c,4,7))*(1-.6*smooth(seg(c,9,12)))).toFixed(1);
+  monitor(454,12,334,190,{hr,sbp:Math.round(118+10*flood),dbp:72,spo2:Math.round(99-4*flood),rr:"vent",etco2:et,temp:tp+" °C"},T);
+  panelBox(454,212,334,256);title(468,232,"Order of signs and steps");
+  const sig=[["EtCO₂ rising (early)",2],["Heart rate rising",3],["Rigid muscles",3.5],["Temperature rising (often later)",5]];sig.forEach((s,i)=>{const on=c>s[1]&&c<10;txt(474,258+i*22,(on?"▲ ":"· ")+s[0],{size:12.5,weight:on?700:500,color:on?C["warn-ink"]:C["ink-soft"]})});
+  const st=[["Stop trigger, call for help",6],["100% oxygen",6.4],["IV dantrolene",7],["Cool, treat potassium",8]];st.forEach((s,i)=>{const on=c>s[1];const y=360+i*24;rr(472,y-9,18,18,3);fillStroke(C.panel,C["ink-soft"],1.2);if(on)checkMark(481,y,6,C.good);txt(498,y,s[0],{size:12.5,weight:600})})}
+
+/* ================= Part 6: local, blockers, sedation ================= */
+function sceneLocal(T){
+  const c=P(T,12);
+  [0,1].forEach(k=>{const y0=12+k*230,ny=y0+86;panelBox(12,y0,776,220);title(26,y0+20,k?"Lidocaine with epinephrine":"Lidocaine alone",k?C.drug:null);
+    const active=k?c<.85:c<.42;const fade=k?1-smooth(seg(c,.78,.9)):1-smooth(seg(c,.35,.47));
+    rr(30,ny-11,600,22,11);fillStroke(C.nrn,C["nrn-edge"],1.6);txt(36,ny-22,"pain fiber",{size:12,color:C["ink-soft"]});
+    for(let i=0;i<4;i++){const X=340+i*30;naChannel(X,ny,9,{open:active?0:.5,col:C.receptor});if(active)drugMol(X,ny+4,4,{shape:"hex",a:fade})}
+    for(let i=0;i<14;i++){const a=rnd(i+k*20)*TAU,d=20+rnd(i+3)*50;drugMol(385+Math.cos(a)*d*1.3,ny+40+Math.sin(a)*d*.35,4.5,{shape:"hex",a:fade*.8})}
+    const cst=k?.7:0;capillary(250,560,y0+170,30,cst,T,{flow:1});if(k){for(let i=0;i<4;i++)nt("epi",280+i*80,y0+142,5.5)}
+    const leave=k?2:6;for(let i=0;i<leave;i++){const f=P(T*(k?.25:.6)+i/leave,1);withA(fade*(1-f),()=>drugMol(lerp(380,560,f),lerp(ny+50,y0+170,Math.min(1,f*3)),4.5,{shape:"hex"}))}
+    for(let i=0;i<2;i++){const p=P(T*.45+i/2,1);const stopX=active?330:null;apPulse(30,630,ny,p,C.na,stopX)}
+    if(active)blockSign(330,ny-30,11,C.bad);
+    txt(650,y0+60,"block time",{size:12.5,weight:600});rr(650,y0+74,120,14,7);fillStroke(C.sunk);rr(650,y0+74,120*(k?.85:.42),14,7);fillStroke(C.drug);txt(650,y0+104,k?"about twice as long":"shorter",{size:12.5,weight:700});
+    txt(650,y0+128,active?"numb":"feeling returns",{size:12.5,weight:700,color:active?C.good:C.warn});
+    txt(570,y0+196,k?"vessels narrowed: drug stays":"blood carries drug away",{size:12,color:C["ink-soft"],align:"right"})})}
+function sceneLAST(T){
+  const c=P(T,14)*14;const f=c<8?smooth(c/8)*.92:.92-.6*smooth((c-8)/4);
+  panelBox(12,12,420,456);title(26,32,"Drug level in the blood rises");
+  rr(40,50,34,400,10);fillStroke(C.sunk);rr(40,50+400*(1-f),34,400*f,10);fillStroke(hexA(C.drug,.8));
+  const R=[["Numb lips, tingling tongue",.12,0],["Metallic taste",.2,0],["Ringing in the ears",.28,0],["Dizziness, agitation",.38,0],["Seizures",.52,1],["Slow heart, low blood pressure",.66,2],["Dysrhythmia, arrest",.8,2]];
+  R.forEach((r,i)=>{const y=430-i*58;const on=f>r[1];line(74,50+400*(1-r[1]),90,y,C.rule,1);panelBox(92,y-18,300,36,{stroke:on?[C.warn,C.warn,C.bad][r[2]]:C.rule,lw:on?2.2:1,fill:hexA(on?(r[2]===2?C["bad-wash"]:C["warn-wash"]):C.panel,.95)});txt(104,y,r[0],{size:12.5,weight:on?700:500,color:on?C.ink:C["ink-soft"]})});
+  txt(100,30+6,"",{});
+  panelBox(444,12,344,456);title(458,32,"Respond per protocol");
+  person(520,250,80,T,{tremor:f>.52?1:0});if(f>.12){for(let i=0;i<3;i++)line(506+i*6,138,504+i*7,146,C.bad,1.5)}
+  const steps=[["Stop the injection",2.5],["Call for help",3],["Oxygen, airway",3.6],["Benzodiazepine for seizures",4.6],["Lipid emulsion",6.5]];
+  steps.forEach((s,i)=>{const y=96+i*30;const on=c>s[1];rr(588,y-9,18,18,3);fillStroke(C.panel,C["ink-soft"],1.2);if(on)checkMark(597,y,6,C.good);txt(612,y,s[0],{size:12.5,weight:600})});
+  const lip=smooth(seg(c,6.5,7.5));ivBag(616,410,56,"",C.gold,.8);txt(616,328,"lipid emulsion",{size:12.5,weight:700,align:"center"});
+  for(let i=0;i<6;i++){const a=i/6*TAU+T;const X=716+Math.cos(a)*30,Y=390+Math.sin(a)*30;circ(X,Y,9,hexA(C.gold,.55),C.gold,1.2);const g=lip*(c<12?1:1);if(g>0)drugMol(lerp(X+40,X,g),lerp(Y+30,Y,g),3.5,{shape:"hex",a:g})}
+  if(lip>.5)txt(716,446,"soaks up drug",{size:12.5,weight:700,align:"center"})}
+function sceneNMB(T){
+  const c=P(T,10)*10;
+  [0,1].forEach(k=>{const x0=12+k*394,cx=x0+191;panelBox(x0,12,382,370);title(x0+14,32,k?"Rocuronium (nondepolarizing)":"Succinylcholine (depolarizing)",C.drug);
+    const bind=smooth(seg(c,.3,1.6));const fas=!k&&c>1.6&&c<4?.6*Math.abs(Math.sin(T*30))*rnd(Math.floor(T*12)):0;
+    nmj(cx,220,200,{contr:fas,labels:false});txt(cx+20,98,"motor nerve ending",{size:12,color:C["ink-soft"]});const RX=[cx-80,cx-40,cx,cx+40,cx+80];RX.forEach(x=>{receptor(x,220+22,10,{off:k&&bind>.5});drugMol(x,lerp(150,232,bind),5.5,{shape:k?"sq":"dia"})});
+    pacman(cx-60,226,7,T,C.receptor);pacman(cx+60,226,7,T+1,C.receptor);
+    if(k){for(let i=0;i<4;i++){const p=P(T*.8+i/4,1);const y=p<.6?lerp(170,228,p/.6):lerp(228,190,(p-.6)/.4);nt("ach",cx-60+i*40,y,4.5)}}
+    if(fas>0)label(cx,120,"fasciculations",{size:12.5,weight:700,border:C.warn});
+    const str=1-smooth(seg(c,k?1:3,k?2.5:4.5));levelBar(x0+30,330,320,str,null,null,"Muscle strength",C.good);
+    txt(x0+30,366,k?"Blocks ACh: no twitches":"Activates, then stays on: not cut by AChE",{size:12.5,weight:600})});
+  panelBox(12,392,776,76);brainShape(60,430,30);eye(60,428,10,T,false);
+  txt(110,420,"Neither drug causes sleep or blocks pain.",{size:13.5,weight:700});txt(110,442,"A paralysed patient can be awake and hurting: give sedation and analgesia.",{size:12.5})}
+function sceneReversal(T){
+  const c=P(T,10)*10,rev=smooth(seg(c,1.5,6));
+  panelBox(12,12,392,370);title(26,32,"Neostigmine (+ glycopyrrolate)",C.drug);
+  nmj(206,220,200,{contr:rev*.6,labels:false});const RX=[126,166,206,246,286];
+  RX.forEach((x,i)=>{receptor(x,242,10,{});const out=rev>(i+1)/6;if(!out)drugMol(x,232,5.5,{shape:"sq"});else drugMol(x+20*i%40-20,lerp(232,150,clamp((rev-(i+1)/6)*4,0,1)),5.5,{shape:"sq",a:.6})});
+  [146,266].forEach(ex=>{pacman(ex,226,7,T+ex,C.receptor);drugMol(ex+2,223,4.5,{shape:"dia",a:smooth(seg(c,.5,1.5))})});
+  const n=3+Math.round(rev*9);for(let i=0;i<n;i++){const p=P(T*.7+i/n,1);nt("ach",120+(i*23)%175,lerp(176,236,p),4.5)}
+  heartShape(340,330,14,C.blood);txt(240,330,"glycopyrrolate:",{size:12,weight:600,align:"right"});txt(240,348,"protects heart rate",{size:12,align:"right"});
+  panelBox(416,12,372,370);title(430,32,"Sugammadex",C.drug);
+  rr(436,100,332,90,40);fillStroke(C.vessel,mix(C.blood,C.ink,.15),1.6);txt(602,92,"blood",{size:12,align:"center",color:C["ink-soft"]});
+  for(let i=0;i<5;i++){const p=P(T*.15+i/5,1);const x=lerp(450,760,p),y=128+(i%3)*14;drugMol(x,y,5.5,{shape:"sq"});if(rev>.2)drugMol(x,y,10,{shape:"ring",a:rev})}
+  muscleFiber(450,300,304,56,rev*.5);txt(602,374,"muscle fiber",{size:12,color:C["ink-soft"],align:"center"});[530,566,602,638,674].forEach((x,i)=>{receptor(x,292,9,{});if(rev<(i+1)/6)drugMol(x,284,5,{shape:"sq"});else{const f=clamp((rev-(i+1)/6)*4,0,1);drugMol(x,lerp(284,200,f),5,{shape:"sq",a:1-f});if(f>.2)drugMol(x,lerp(284,200,f),10,{shape:"ring",a:1-f})}});
+  txt(436,218,"Rings wrap rocuronium and pull it",{size:12.5,weight:600});txt(436,236,"off the receptors.",{size:12.5,weight:600});
+  panelBox(12,392,776,76);title(26,410,"Train-of-four twitch monitor");
+  const tw=Math.min(4,Math.floor(rev*4.6));for(let i=0;i<4;i++){const x=300+i*60;const on=i<tw;rr(x,452-(on?38:4),30,on?38:4,3);fillStroke(on?C.good:C.blocked)}
+  txt(560,432,tw+" of 4 twitches",{size:15,weight:700,mono:true})}
+function capno(t,rate,amp){const per=60/rate;const p=P(t,per);return p<.08?amp*p/.08:p<.5?amp*(1+.06*(p-.08)/.42):p<.58?amp*(1-(p-.5)/.08):0}
+function stretcher(x,y,T,awake){rr(x,y,240,14,6);fillStroke(C.sunk,C["ink-soft"],1.4);line(x+20,y+14,x+20,y+50,C["ink-soft"],3);line(x+220,y+14,x+220,y+50,C["ink-soft"],3);
+  rr(x+50,y-26,170,26,12);fillStroke(mix(C.accent,C.panel,.6),hexA(C.ink,.35),1.2);circ(x+30,y-16,16,C.skin,C["skin-edge"],1.4);
+  if(awake){circ(x+24,y-20,2.4,C.ink);circ(x+34,y-20,2.4,C.ink)}else{line(x+20,y-19,x+27,y-19,C.ink,1.5);line(x+31,y-19,x+38,y-19,C.ink,1.5)}}
+function sceneSedation(T){
+  const c=P(T,12)*12;const lv=c<6?.38:c<7.5?lerp(.38,.62,smooth((c-6)/1.5)):c<9.5?.62:lerp(.62,.38,smooth((c-9.5)/2));
+  panelBox(12,12,776,92);title(26,30,"Sedation continuum");const Z=[["minimal",0,.25,C.sunk],["moderate (goal)",.25,.5,C.good],["deep",.5,.75,C.warn],["general anesthesia",.75,1,C.bad]];
+  Z.forEach(z=>{rr(30+740*z[1],46,740*(z[2]-z[1])-4,26,4);fillStroke(hexA(z[3],.35),z[3],1.2);txt(30+740*(z[1]+z[2])/2,59,z[0],{size:12.5,weight:700,align:"center"})});
+  const px=30+740*lv;ctx.beginPath();ctx.moveTo(px,80);ctx.lineTo(px-8,96);ctx.lineTo(px+8,96);ctx.closePath();fillStroke(C.ink);
+  panelBox(12,114,440,240);const deep=lv>.5;stretcher(60,250,T,!deep);
+  syringe(330,170,30,Math.PI*.8,.6,C.drug);txt(320,140,"midazolam",{size:12,weight:600});syringe(400,190,30,Math.PI*.8,.6,C.drug2);txt(380,160,"fentanyl",{size:12,weight:600});
+  poly([[314,186],[260,214],[210,228]],C["ink-soft"],1.5,[4,3]);rr(70,140,150,36,10);fillStroke(C.panel,C["ink-soft"],1.3);txt(145,158,"\"Open your eyes\"",{size:12.5,weight:600,align:"center"});
+  txt(60,330,deep?"No response: too deep":"Responds to voice: moderate",{size:13,weight:700,color:deep?C.bad:C.good});
+  rr(462,114,326,240,10);ctx.fillStyle=C.scr;ctx.fill();txt(474,132,"SpO₂",{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(474,158,(deep?Math.round(lerp(98,89,seg(c,7,9.5))):98)+"%",{size:22,mono:true,weight:700,color:"#6FC3F0"});
+  txt(600,132,"RR",{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(600,158,String(deep?6:14),{size:22,mono:true,weight:700,color:"#E8EEF1"});
+  txt(474,190,"Capnography (exhaled CO₂)",{size:12,mono:true,weight:600,color:"#A3B2BA"});
+  ctx.save();rr(470,200,310,140,6);ctx.clip();ctx.beginPath();for(let i=0;i<=300;i++){const t=T-8+i/300*8;const cc=P(t,12)*12;const d=cc>6.5&&cc<10;const v=capno(t,d?6:14,d?.4:1);const Y=330-v*100;i?ctx.lineTo(474+i,Y):ctx.moveTo(474+i,Y)}ctx.strokeStyle="#F2B33B";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  if(deep&&c>7)chipText(720,132,"ALARM",C.warn);
+  panelBox(12,364,776,104);title(26,384,"At the bedside");
+  [["flumazenil","reverses benzodiazepines"],["naloxone","reverses opioids"],["oxygen and suction",""],["airway equipment",""]].forEach((it,i)=>{const x=40+i*190;rr(x,400,22,40,4);fillStroke(C.panel,C["ink-soft"],1.3);rr(x,414,22,12,1);fillStroke(i<2?C.accent:C.o2);txt(x+30,412,it[0],{size:12.5,weight:700});if(it[1])txt(x+30,432,it[1],{size:12,color:C["ink-soft"]})})}
+function sceneRecap(T){
+  panelBox(12,12,392,456);title(26,32,"Where each drug acts");bodyMap(T,-1,{all:true});
+  [[168,66,"hex"],[205,150,"pent"],[140,190,"dia"],[272,92,"tri"],[230,120,"sq"],[330,378,"ring"]].forEach(d=>drugMol(d[0]+16,d[1]-14,6,{shape:d[2]}));
+  const parts=[["Seizures","act1","Na⁺ block, GABA boost; levels; never stop suddenly"],["Parkinson disease","act2","More dopamine or less ACh; protein, wearing off"],["Alzheimer, MG, MS","act3","More ACh (slow pulse); memantine; calm immunity"],
+    ["Muscle and migraine","act4","Baclofen sedates; dantrolene; triptans not in CAD"],["General anesthesia","act5","Stages; propofol drops BP; MH needs dantrolene"],["Local, blockers, sedation","act6","Lidocaine + epi; paralysis is not sedation"]];
+  const lit=Math.floor(P(T,14)*7);
+  parts.forEach((pt,i)=>{const x=412,y=12+i*76.5,w=376,h=70;const l=i<=lit;panelBox(x,y,w,h,{stroke:l?C[pt[1]]:C.rule,lw:l?2.5:1.2,fill:hexA(C.panel,l?.97:.6)});
+    withA(l?1:.45,()=>{badge(x+22,y+h/2,i+1,C[pt[1]],12);txt(x+44,y+24,pt[0],{size:14,weight:700});txt(x+44,y+46,pt[2],{size:12.5,color:C["ink-soft"]})})})}
+
+/* ---------------- loop ---------------- */
+let T=0,last=performance.now();
+const SCENES={map:sceneMap,seizure:sceneSeizure,nablock:sceneNaBlock,phenytoin:scenePhenytoin,carba:sceneCarba,benzo:sceneBenzo,valproate:sceneValproate,leve:sceneLeve,stopping:sceneStopping,
+  pdbalance:scenePDBalance,levodopa:sceneLevodopa,onoff:sceneOnOff,pdboost:sceneBoost,anticho:sceneAnticho,donepezil:sceneDonepezil,memantine:sceneMemantine,mgms:sceneMGMS,
+  central:sceneCentral,dantrolene:sceneDantrolene,triptan:sceneTriptan,general:sceneGeneral,mh:sceneMH,local:sceneLocal,last:sceneLAST,nmb:sceneNMB,reversal:sceneReversal,sedation:sceneSedation,recap:sceneRecap};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneRecap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;if(!paused)T+=dt*speed;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

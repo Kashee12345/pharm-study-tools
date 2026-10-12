@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pharmacokinetics Lab</title>
+<meta name="description" content="Pharmacokinetics lab: a drug level simulator with routes, doses, half-life, loading doses, missed doses, kidney and liver function and enzyme interactions; fictional nursing case files; sorting games; and a blood-draw timing game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E6EE;--panel:#F8F9FC;--panel-2:#EEF0F6;--sunk:#D6DAE6;
+  --ink:#10161A;--ink-soft:#56606F;--ink-faint:#566570;--rule:#C4C9D8;--rule-soft:#D9DDE8;
+  --accent:#3A49A8;--accent-ink:#2C3888;--accent-wash:#E2E5F6;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#5B3FC4;--act2:#C4644F;--act3:#C27A12;--act4:#2F7FC1;--act5:#2E8A7A;--act6:#A04E8C;--act7:#5E7F1A;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7E6410;
+  /* pharmacology palette */
+  --ecf:#EEF0F7;--grid:#D5D9E6;
+  --drug:#5B3FC4;--drug2:#8A3FB0;--receptor:#1E8A8A;--ligand:#C77A12;--blocked:#8B9094;--metab:#7F8A57;
+  --enzyme:#1E9C7A;--albumin:#2F7FC1;--plasma:#F4DCD9;--vessel:#B3403A;--vein:#5C5FA8;
+  --liver:#9A4B3A;--kidney:#A0507A;--gut:#D19A4E;--stomach:#E0AE8A;--bile:#8A9A2A;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--fat:#F2E3B3;--muscle:#C9786E;--body:#E9DCCB;--body-edge:#A88B6A;
+  --membrane:#C9A227;--water:#CFE5F1;--acid:#D0457A;--base:#3F6DB3;--fetus:#E8A0A0;--lung:#E7B7B4;--milk:#F7F3E8;
+  --win:#DCEFE2;--mec:#2F6F4F;--tox:#A9372F;--pill:#FFFFFF;--coat:#E9C46A;--glass:#DCE8EE;--glass-edge:#7F99A6;
+  --scr:#10161A;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C3CBFA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#B9A6F5;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#2A3440;
+  --drug:#B9A6F5;--drug2:#D79AF0;--receptor:#5CC4C4;--ligand:#F2B04B;--blocked:#7A8187;--metab:#B5C27E;
+  --enzyme:#4FD0A8;--albumin:#6FB1EC;--plasma:#3A2226;--vessel:#E07067;--vein:#9A9EEA;
+  --liver:#D28A72;--kidney:#DA8DB5;--gut:#E8BC70;--stomach:#B98A6A;--bile:#C2D25A;
+  --skin:#5A4434;--skin-edge:#B9937A;--fat:#4A4030;--muscle:#8A4A44;--body:#3E3528;--body-edge:#B39773;
+  --membrane:#E0BE48;--water:#1F3A4A;--acid:#F08AB0;--base:#7FA6E6;--fetus:#B86A6A;--lung:#6A4044;--milk:#3A3830;
+  --win:#17301F;--mec:#6BC293;--tox:#E07067;--pill:#E8EEF1;--coat:#C9A44A;--glass:#1E2C34;--glass-edge:#7F99A6;
+  --scr:#0A0F12;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C3CBFA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#B9A6F5;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#2A3440;
+  --drug:#B9A6F5;--drug2:#D79AF0;--receptor:#5CC4C4;--ligand:#F2B04B;--blocked:#7A8187;--metab:#B5C27E;
+  --enzyme:#4FD0A8;--albumin:#6FB1EC;--plasma:#3A2226;--vessel:#E07067;--vein:#9A9EEA;
+  --liver:#D28A72;--kidney:#DA8DB5;--gut:#E8BC70;--stomach:#B98A6A;--bile:#C2D25A;
+  --skin:#5A4434;--skin-edge:#B9937A;--fat:#4A4030;--muscle:#8A4A44;--body:#3E3528;--body-edge:#B39773;
+  --membrane:#E0BE48;--water:#1F3A4A;--acid:#F08AB0;--base:#7FA6E6;--fetus:#B86A6A;--lung:#6A4044;--milk:#3A3830;
+  --win:#17301F;--mec:#6BC293;--tox:#E07067;--pill:#E8EEF1;--coat:#C9A44A;--glass:#1E2C34;--glass-edge:#7F99A6;
+  --scr:#0A0F12;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+/* PK lab extras */
+.side{padding:14px 16px}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.seg.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.seg.s3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg .tbtn{font-size:13.5px;line-height:1.2;padding:8px 4px;text-align:center}
+.ctl .hint{font-size:12.5px;color:var(--ink-soft);font-weight:400}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;margin:10px 0 4px}
+.toggle input{accent-color:var(--accent);width:18px;height:18px}
+.evbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.evbtns .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.zone{font-weight:700}
+.zone.low{color:var(--warn-ink)}.zone.ok{color:var(--good)}.zone.hi{color:var(--bad)}
+.tl-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.tl-row label{font-weight:600;font-size:14.5px}
+.tl-row input[type=range]{flex:1 1 240px;accent-color:var(--accent)}
+.tl-row output{font-family:var(--mono);font-weight:600;color:var(--accent-ink);min-width:150px}
+.nudge{display:flex;gap:6px;flex-wrap:wrap}
+.scchips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.scchips .casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+h3.ql{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+@media (min-width:901px){#tab-sim .grid>.stage,#tab-draw .grid>.stage{position:sticky;top:8px}}
+#tab-cases .case{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){#tab-cases .case{grid-template-columns:1fr}}
+.binhead span{overflow-wrap:break-word;min-width:0}
+.bins{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 1 &middot; Pharmacokinetics: how the body handles drugs</div>
+    <h1>Pharmacokinetics Lab</h1>
+    <p class="sub">Run a drug level simulator, work through nursing case files, sort routes and interactions, and time a blood draw. Every number is a made-up teaching number. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Drug Level Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 2 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 3 &middot; Sort It Out</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-draw" data-tab="draw" id="tabbtn-draw" type="button" tabindex="-1">Part 4 &middot; Time the Blood Draw</button>
+  </div>
+
+  <!-- PART 1: simulator -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Drug Level Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Drug level simulator."></canvas></div>
+        <div class="stagebar">
+          <button class="tbtn" type="button" id="simPlay">Pause the clock</button>
+          <button class="tbtn" type="button" id="simRestart">Run again from hour 0</button>
+          <span class="caption" id="simCap"></span>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--drug)"></i>Drug in the blood</span>
+          <span><i style="background:var(--metab)"></i>Metabolite (changed by the liver)</span>
+          <span><i style="background:var(--enzyme)"></i>Liver enzymes</span>
+          <span><i class="s" style="background:var(--win);border-color:var(--mec)"></i>Therapeutic range</span>
+          <span><i class="ln" style="border-top-color:var(--tox)"></i>Toxic level</span>
+          <span><i class="ln" style="border-top-color:var(--mec)"></i>Minimum effective level (MEC)</span>
+        </div>
+        <p class="sim-note">A teaching model of one made-up drug. Dose sizes are relative units and levels are teaching numbers, not real doses or lab values. The clock runs about 12 hours per second. Dots under the time axis are doses: a big dot is a loading dose, an open circle is a skipped dose, and a double ring is a doubled dose.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="routeLab">Route</h3>
+        <div class="seg s4" id="simRoute" role="group" aria-labelledby="routeLab"></div>
+        <div class="ctl"><label for="simDose">Dose size <output id="simDoseOut" for="simDose"></output></label>
+          <input type="range" id="simDose" min="1" max="10" step="1" value="5"><div class="ticks" aria-hidden="true"><span>small</span><span>large</span></div></div>
+        <h3 id="tauLab">Give a dose every</h3>
+        <div class="seg s4" id="simTau" role="group" aria-labelledby="tauLab"></div>
+        <div class="ctl"><label for="simHalf">Half-life in a healthy adult <output id="simHalfOut" for="simHalf"></output></label>
+          <input type="range" id="simHalf" min="2" max="24" step="1" value="12"><div class="ticks" aria-hidden="true"><span>short</span><span>long</span></div></div>
+        <h3 id="clrLab">This drug leaves the body mainly through the</h3>
+        <div class="seg" id="simClr" role="group" aria-labelledby="clrLab"></div>
+        <div class="ctl"><label for="simKid">Kidney function <output id="simKidOut" for="simKid"></output></label>
+          <input type="range" id="simKid" min="10" max="100" step="5" value="100"><div class="ticks" aria-hidden="true"><span>failing</span><span>normal</span></div></div>
+        <div class="ctl"><label for="simLiv">Liver function <output id="simLivOut" for="simLiv"></output></label>
+          <input type="range" id="simLiv" min="20" max="100" step="5" value="100"><div class="ticks" aria-hidden="true"><span>severe disease</span><span>normal</span></div></div>
+        <h3 id="enzLab">Another drug that changes liver enzymes</h3>
+        <div class="seg s3" id="simEnz" role="group" aria-labelledby="enzLab"></div>
+        <label class="toggle"><input type="checkbox" id="simLoad"> Start with a loading dose</label>
+        <h3>During the run</h3>
+        <div class="evbtns">
+          <button class="tbtn" type="button" id="simMiss">Skip the next dose</button>
+          <button class="tbtn" type="button" id="simDouble">Double the next dose</button>
+        </div>
+        <div class="bar"><button class="tbtn" type="button" id="simReset">Back to the usual plan</button></div>
+        <table class="readouts" id="simRead"><caption class="sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="simChal"></ul>
+        <p class="small">Simplified one-compartment model with rounded numbers. Real drugs differ, and real dose changes are made by the prescriber and pharmacist.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 2: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+        <p class="sim-note">The chart shows a medication administration record (MAR) line, the bedside monitor, the lab panel and a trend graph. Patients are fictional and numbers are teaching values.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 3: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 3: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+
+  <!-- PART 4: blood draw timing -->
+  <section id="tab-draw" role="tabpanel" aria-labelledby="tabbtn-draw" hidden>
+    <h2 class="gk-sr">Part 4: Time the Blood Draw</h2>
+    <div class="scchips" id="dChips" role="group" aria-label="Choose a scenario"></div>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvDraw" role="img" aria-label="Blood draw timeline."></canvas></div>
+        <div class="tl-row">
+          <label for="dTime">Draw the blood at</label>
+          <input type="range" id="dTime" min="0" max="40" step="0.25" value="2">
+          <output id="dTimeOut" for="dTime"></output>
+        </div>
+        <div class="nudge" role="group" aria-label="Move the draw time">
+          <button class="tbtn" type="button" id="dMinus">&minus; 15 min</button>
+          <button class="tbtn" type="button" id="dPlus">+ 15 min</button>
+          <button class="tbtn" type="button" id="dMinusH">&minus; 1 hour</button>
+          <button class="tbtn" type="button" id="dPlusH">+ 1 hour</button>
+        </div>
+      </div>
+      <aside class="card side" aria-label="Blood draw scenario">
+        <div class="sc-n" id="dN"></div>
+        <h2 class="sc-title" id="dTitle"></h2>
+        <p class="story" id="dStory"></p>
+        <p class="goal"><b class="h">Your job</b><span id="dGoal"></span></p>
+        <div class="bar">
+          <button class="btn" type="button" id="dCheck">Draw blood here</button>
+          <button class="tbtn" type="button" id="dHint">Hint</button>
+          <button class="tbtn" type="button" id="dShow">Show answer</button>
+          <button class="tbtn" type="button" id="dNext">Next scenario &rarr;</button>
+        </div>
+        <div class="msg" id="dMsg" role="status"></div>
+        <h3 class="ql">Why the timing matters</h3>
+        <p class="small" id="dWhy"></p>
+        <p class="small">Timing rules here are the common general rules. Always follow the order and your facility's protocol for each drug.</p>
+      </aside>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="PK-Walkthrough.html">Pharmacokinetics Walkthrough</a>. Patients are fictional. Drugs are named by generic name only. Dose sizes are relative units, and drug levels, ranges and times are rounded teaching values, not dosing guidance. Always follow the prescriber's order, your facility's policy and the drug label.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "drug2", "receptor", "ligand", "blocked", "metab", "enzyme", "albumin", "plasma", "vessel", "vein", "liver", "kidney", "gut", "stomach", "bile", "skin", "skin-edge", "fat", "muscle", "body", "body-edge", "membrane", "water", "acid", "base", "fetus", "lung", "milk", "win", "mec", "tox", "pill", "coat", "glass", "glass-edge", "scr"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= pharmacology drawing helpers ================= */
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function crossMark(x,y,s,col,lw){line(x-s,y-s,x+s,y+s,col||C.bad,lw||3);line(x-s,y+s,x+s,y-s,col||C.bad,lw||3)}
+function checkMark(x,y,s,col,lw){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,lw||3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+function fillPoly(pts,f,s,lw){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();fillStroke(f,s,lw)}
+/* drug molecule: a small hexagon. o.met: metabolite (grey-green, with a water-loving tail); o.ion: "+"/"-" charge; o.col; o.a */
+function drugDot(x,y,r,o){o=o||{};r=r||6;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  const col=o.col||(o.met?C.metab:o.pro?C.blocked:C.drug);
+  hexPath(x,y,r,o.rot||0);fillStroke(col,hexA(C.ink,.55),1);
+  if(!o.met&&!o.pro)circ(x-r*.3,y-r*.3,r*.28,hexA(C.panel,.5));
+  if(o.met){line(x+r*.8,y,x+r*1.7,y,C.albumin,2);circ(x+r*1.9,y,r*.42,C.albumin)}
+  if(o.ion){ctx.font=`700 ${Math.max(9,r*1.5)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(o.ion,x,y+.5)}
+  ctx.restore()}
+/* tablet seen from above */
+function tablet(x,y,r,col,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  circ(x+1.5,y+2,r,hexA(C.ink,.15));circ(x,y,r,col||C.pill,hexA(C.ink,.55),1.4);
+  if(o.coat)circ(x,y,r,null,C.coat,3);
+  if(!o.noScore)line(x-r*.6,y,x+r*.6,y,hexA(C.ink,.35),1.4);
+  if(o.lab)txt(x,y+(o.noScore?0:r*.45),o.lab,{size:Math.max(9,r*.55),mono:true,weight:700,align:"center"});ctx.restore()}
+function capsule(x,y,s,col,rot,a){ctx.save();ctx.globalAlpha*=a==null?1:a;ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.pill;ctx.fill();ctx.save();rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col||C.drug;ctx.fillRect(-s,-s,s,2*s);ctx.restore();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.stroke();ctx.restore()}
+/* syringe pointing along angle ang (needle tip at x,y) */
+function syringe(x,y,len,ang,fill,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(ang);
+  const bl=len*.55,bw=len*.16,nd=len*.3;line(0,0,-nd,0,C["ink-soft"],1.8);
+  rr(-nd-bl,-bw/2,bl,bw,3);ctx.fillStyle=hexA(C.glass,.9);ctx.fill();
+  const f=clamp(fill==null?1:fill,0,1);if(f>0){ctx.fillStyle=hexA(o.col||C.drug,.75);ctx.fillRect(-nd-bl*f,-bw/2+2,bl*f-2,bw-4)}
+  ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.4;rr(-nd-bl,-bw/2,bl,bw,3);ctx.stroke();
+  const px=-nd-bl*f-2;line(px,0,-nd-bl-len*.18,0,C["ink-soft"],3);line(-nd-bl-len*.18,-bw*.45,-nd-bl-len*.18,bw*.45,C["ink-soft"],3);
+  line(px,-bw/2+2,px,bw/2-2,C["ink-soft"],3);ctx.restore()}
+/* CYP enzyme: a "pac-man" that opens and closes. o.blocked: grey with a plug */
+function enzyme(x,y,r,t,o){o=o||{};const open=o.blocked?.08:(.25+.22*Math.abs(Math.sin(t*(o.rate||5))));const a0=(o.dir||0);
+  ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,a0+open,a0+TAU-open);ctx.closePath();fillStroke(o.blocked?C.blocked:(o.col||C.enzyme),hexA(C.ink,.5),1.2);
+  circ(x+Math.cos(a0-1.6)*r*.45,y+Math.sin(a0-1.6)*r*.45,r*.13,hexA(C.ink,.7));
+  if(o.blocked){const px=x+Math.cos(a0)*r*.7,py=y+Math.sin(a0)*r*.7;rr(px-r*.3,py-r*.3,r*.6,r*.6,2);fillStroke(o.plug||C.gold,hexA(C.ink,.5),1)}}
+/* albumin carrier protein with some drug on board */
+function albumin(x,y,r,t,load,o){o=o||{};blobPath(x,y,r,o.seed||2.2,t,.09);ctx.fillStyle=hexA(C.albumin,.35);ctx.fill();ctx.strokeStyle=C.albumin;ctx.lineWidth=2;ctx.stroke();
+  for(let i=0;i<(load||0);i++){const a=i/(Math.max(load,1))*TAU+.4;drugDot(x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,r*.36,{col:o.col})}}
+/* simple organ shapes */
+function liverShape(x,y,s,col,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(-60,-6);ctx.bezierCurveTo(-58,-34,10,-40,58,-26);ctx.bezierCurveTo(70,-22,66,-8,52,0);ctx.bezierCurveTo(30,14,8,26,-26,30);ctx.bezierCurveTo(-52,32,-62,16,-60,-6);ctx.closePath();
+  ctx.restore();fillStroke(col||C.liver,hexA(C.ink,.45),1.5)}
+function kidneyShape(x,y,s,flip,col){ctx.save();ctx.translate(x,y);ctx.scale(flip?-s:s,s);ctx.beginPath();ctx.moveTo(4,-26);ctx.bezierCurveTo(-22,-30,-24,30,4,26);ctx.bezierCurveTo(12,24,12,12,6,8);ctx.bezierCurveTo(2,4,2,-4,6,-8);ctx.bezierCurveTo(12,-12,14,-24,4,-26);ctx.closePath();ctx.restore();
+  fillStroke(col||C.kidney,hexA(C.ink,.45),1.5)}
+function heartShape(x,y,s,t){const b=1+.06*Math.max(0,Math.sin((t||0)*7.5));ctx.save();ctx.translate(x,y);ctx.scale(s*b,s*b);ctx.beginPath();ctx.moveTo(0,10);ctx.bezierCurveTo(-18,-2,-16,-18,-6,-18);ctx.bezierCurveTo(-2,-18,0,-15,0,-12);ctx.bezierCurveTo(0,-15,2,-18,6,-18);ctx.bezierCurveTo(16,-18,18,-2,0,10);ctx.closePath();ctx.restore();fillStroke(C.vessel,hexA(C.ink,.45),1.2)}
+function stomachShape(x,y,s,col){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(-6,-30);ctx.bezierCurveTo(-30,-26,-34,10,-14,24);ctx.bezierCurveTo(0,34,26,26,30,10);ctx.bezierCurveTo(32,2,24,0,18,6);ctx.bezierCurveTo(10,14,-2,12,-4,0);ctx.bezierCurveTo(-6,-10,2,-22,4,-30);ctx.closePath();ctx.restore();fillStroke(col||C.stomach,hexA(C.ink,.45),1.4)}
+function gutCoil(x,y,w,h,col,lw){ctx.beginPath();const rows=3;for(let r=0;r<rows;r++){const yy=y+r*h/(rows-1)*.9;if(r%2===0){ctx.moveTo(x,yy);ctx.bezierCurveTo(x+w*.3,yy-8,x+w*.7,yy+8,x+w,yy)}else{ctx.moveTo(x+w,yy);ctx.bezierCurveTo(x+w*.7,yy-8,x+w*.3,yy+8,x,yy)}}
+  ctx.strokeStyle=col||C.gut;ctx.lineWidth=lw||9;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt"}
+function bladderShape(x,y,s,fill){ctx.beginPath();ctx.ellipse(x,y,14*s,11*s,0,0,TAU);fillStroke(hexA(C.gold,.25+.5*clamp(fill||0,0,1)),hexA(C.ink,.45),1.3)}
+function lungShape(x,y,s,flip){ctx.save();ctx.translate(x,y);ctx.scale(flip?-s:s,s);ctx.beginPath();ctx.moveTo(4,-30);ctx.bezierCurveTo(-18,-26,-22,20,-18,30);ctx.bezierCurveTo(-8,34,6,28,8,20);ctx.lineTo(8,-26);ctx.closePath();ctx.restore();fillStroke(C.lung,hexA(C.ink,.4),1.3)}
+/* human figure, front view. Returns key landmarks */
+function bodyFigure(cx,top,s,o){o=o||{};const S=v=>v*s;
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;
+  const fill=hexA(C.body,.75),edge=C["body-edge"];
+  [-1,1].forEach(d=>{ctx.beginPath();ctx.moveTo(cx+d*S(38),top+S(64));ctx.quadraticCurveTo(cx+d*S(66),top+S(74),cx+d*S(68),top+S(130));ctx.lineTo(cx+d*S(70),top+S(200));ctx.quadraticCurveTo(cx+d*S(63),top+S(208),cx+d*S(56),top+S(200));ctx.lineTo(cx+d*S(52),top+S(132));ctx.quadraticCurveTo(cx+d*S(50),top+S(104),cx+d*S(40),top+S(96));ctx.closePath();fillStroke(fill,edge,1.6);
+    ctx.beginPath();ctx.moveTo(cx+d*S(4),top+S(212));ctx.lineTo(cx+d*S(38),top+S(204));ctx.lineTo(cx+d*S(34),top+S(332));ctx.lineTo(cx+d*S(10),top+S(332));ctx.closePath();fillStroke(fill,edge,1.6)});
+  ctx.beginPath();ctx.moveTo(cx-S(44),top+S(66));ctx.quadraticCurveTo(cx,top+S(54),cx+S(44),top+S(66));ctx.quadraticCurveTo(cx+S(46),top+S(150),cx+S(40),top+S(212));ctx.quadraticCurveTo(cx,top+S(224),cx-S(40),top+S(212));ctx.quadraticCurveTo(cx-S(46),top+S(150),cx-S(44),top+S(66));ctx.closePath();fillStroke(fill,edge,1.6);
+  rr(cx-S(9),top+S(46),S(18),S(14),3);fillStroke(fill,null);
+  circ(cx,top+S(26),S(23),fill,edge,1.6);
+  ctx.restore();
+  return {mouth:[cx,top+S(36)],heart:[cx+S(8),top+S(90)],liver:[cx-S(16),top+S(122)],stomach:[cx+S(18),top+S(126)],gut:[cx,top+S(172)],kidneyL:[cx-S(30),top+S(150)],kidneyR:[cx+S(30),top+S(150)],bladder:[cx,top+S(202)],arm:[cx-S(62),top+S(170)],armR:[cx+S(62),top+S(170)],thigh:[cx+S(24),top+S(250)],thighL:[cx-S(24),top+S(280)],lungs:[cx,top+S(88)],belly:[cx-S(12),top+S(184)],head:[cx,top+S(20)]}}
+function personIcon(x,y,s,col,a){withA(a==null?1:a,()=>{circ(x,y-s*1.3,s*.55,col);ctx.beginPath();ctx.moveTo(x-s*.85,y+s*.9);ctx.quadraticCurveTo(x-s*.85,y-s*.55,x,y-s*.55);ctx.quadraticCurveTo(x+s*.85,y-s*.55,x+s*.85,y+s*.9);ctx.closePath();ctx.fillStyle=col;ctx.fill()})}
+function lockIcon(x,y,s,col){ctx.beginPath();ctx.arc(x,y-s*.3,s*.45,Math.PI,0);ctx.strokeStyle=col||C["ink-soft"];ctx.lineWidth=s*.18;ctx.stroke();rr(x-s*.65,y-s*.3,s*1.3,s*1,s*.15);fillStroke(col||C["ink-soft"],null);circ(x,y+s*.15,s*.14,C.panel)}
+function clockFace(x,y,r,f,col){circ(x,y,r,C.panel,C["ink-soft"],1.4);if(f>0){ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r-3,-Math.PI/2,-Math.PI/2+TAU*clamp(f,0,1));ctx.closePath();ctx.fillStyle=hexA(col||C.accent,.45);ctx.fill()}
+  const a=-Math.PI/2+TAU*f;line(x,y,x+Math.cos(a)*(r-4),y+Math.sin(a)*(r-4),C.ink,2);circ(x,y,2,C.ink)}
+/* lipid bilayer, horizontal, gap: list of x positions with a channel gap */
+function bilayer(x,y,w,o){o=o||{};const n=Math.floor(w/9);for(let i=0;i<n;i++){const X=x+i*9+4;
+  line(X-1.5,y-9,X-1.5,y-2,hexA(C.membrane,.8),1.2);line(X+1.5,y-9,X+1.5,y-2,hexA(C.membrane,.8),1.2);line(X-1.5,y+2,X-1.5,y+9,hexA(C.membrane,.8),1.2);line(X+1.5,y+2,X+1.5,y+9,hexA(C.membrane,.8),1.2);
+  circ(X,y-11,3.6,C.membrane);circ(X,y+11,3.6,C.membrane)}}
+/* graph frame for concentration vs time. returns mapping fns */
+function cGraph(x,y,w,h,tMax,cMax,o){o=o||{};const pl=o.padL||44;if(!o.noBox)panelBox(x-pl,y-26,w+pl+14,h+(o.padB||60),{fill:hexA(C.panel,.95)});
+  const X=t=>x+t/tMax*w,Y=c=>y+h-clamp(c,0,cMax)/cMax*h;
+  if(o.mec!=null&&o.tox!=null){ctx.fillStyle=hexA(C.good,.14);ctx.fillRect(x,Y(o.tox),w,Y(o.mec)-Y(o.tox));ctx.fillStyle=hexA(C.bad,.10);ctx.fillRect(x,y,w,Y(o.tox)-y)}
+  ctx.strokeStyle=C.grid;ctx.lineWidth=1;for(let i=1;i<=4;i++){const yy=y+h*i/5;ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke()}
+  line(x,y,x,y+h,C["ink-soft"],1.6);line(x,y+h,x+w,y+h,C["ink-soft"],1.6);
+  if(o.mec!=null){line(x,Y(o.mec),x+w,Y(o.mec),C.mec,2,[6,4]);if(!o.noBandLabels)txt(x+w-4,Y(o.mec)+10,"MEC",{size:11.5,weight:700,mono:true,align:"right",color:C.mec})}
+  if(o.tox!=null){line(x,Y(o.tox),x+w,Y(o.tox),C.tox,2,[6,4]);if(!o.noBandLabels)txt(x+w-4,Y(o.tox)-10,"Toxic level",{size:11.5,weight:700,mono:true,align:"right",color:C.tox})}
+  if(o.yl)txt(x-10,y-12,o.yl,{size:11.5,mono:true,weight:600,color:C["ink-soft"]});
+  if(o.xl)txt(x+w,y+h+(o.xly||40),o.xl,{size:11.5,mono:true,weight:600,color:C["ink-soft"],align:"right"});
+  return {X,Y}}
+/* one-compartment drug level after a single dose. route: iv (ka=Infinity) or ka value */
+function cOne(t,D,k,ka,F){if(t<0)return 0;if(!isFinite(ka))return D*F*Math.exp(-k*t);if(Math.abs(ka-k)<1e-6)ka+=1e-3;return D*F*ka/(ka-k)*(Math.exp(-k*t)-Math.exp(-ka*t))}
+function cMulti(t,doses,k,ka,F){let s=0;for(const d of doses){if(d[0]<=t)s+=cOne(t-d[0],d[1],k,ka,F)}return s}
+function beaker(x,y,w,h,level,col){ctx.save();rr(x,y,w,h,8);ctx.clip();ctx.fillStyle=hexA(C.glass,.5);ctx.fillRect(x,y,w,h);const lh=h*clamp(level,0,1);ctx.fillStyle=col||hexA(C.drug,.35);ctx.fillRect(x,y+h-lh,w,lh);ctx.restore();rr(x,y,w,h,8);ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=2;ctx.stroke()}
+function arrowHead(x,y,ang,col,s){s=s||8;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-s*Math.cos(ang-.45),y-s*Math.sin(ang-.45));ctx.lineTo(x-s*Math.cos(ang+.45),y-s*Math.sin(ang+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+/* a flowing vessel: dots move along a polyline path; n dots, speed (fraction/s) */
+function flowDots(path,n,t,speed,draw){for(let i=0;i<n;i++){const p=P(t*speed+i/n,1);const q=along(path,p);draw(q[0],q[1],i,p)}}
+function vesselPath(path,w,col){poly(path,col||hexA(C.vessel,.35),w||10)}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("pk-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("pk-lab-"+k,v)}catch(e){}}};
+function fmtMin(m){if(!isFinite(m))return "never";if(m<1/60)return "< 1 s";if(m<1)return Math.round(m*60)+" s";if(m<120)return (m<10?m.toFixed(1):Math.round(m))+" min";return (m/60).toFixed(1)+" h"}
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+/* ================= PART 1: drug level simulator ================= */
+const S1=makeStage("cvSim",800,520);
+const TMAX=144,DT=0.05,MEC=4,TOX=10,YMAX=20,SC=1.6,SPEED=12;
+const ROUTES=[["iv","IV"],["im","IM"],["po","Oral"],["sl","Under the tongue"]];
+const ROUTE_NAME={iv:"IV push",im:"IM injection",po:"oral tablet",sl:"under the tongue (sublingual)"};
+const TAUS=[[6,"6 h"],[8,"8 h"],[12,"12 h"],[24,"24 h"]];
+const DEF={route:"po",D:5,tau:12,th:12,kid:true,R:100,liv:100,enz:"none",load:false};
+const SIM=Object.assign({},DEF,{now:0,running:true,mods:{},model:null,done:new Set(),maxSeen:0});
+function kidWord(r){return r>=85?"normal":r>=60?"mildly low":r>=30?"moderately low":"severely low"}
+function livWord(r){return r>=85?"normal":r>=60?"mild disease":r>=40?"moderate disease":"severe disease"}
+function simModel(){const o=SIM;const kb=Math.LN2/o.th;const fr=o.kid?.8:.2;const ef=o.enz==="ind"?2.5:o.enz==="inh"?.4:1;const h=(o.liv/100)*ef;
+  const kr=kb*fr*(o.R/100),kh=kb*(1-fr)*h,k=kr+kh;const Eb=.4,E=Eb*h/(Eb*h+(1-Eb));
+  const F={iv:1,im:1,sl:.9,po:1-E}[o.route];const ka={iv:Infinity,im:1.6,sl:3,po:.9}[o.route];
+  const ldf=Math.min(4,1/(1-Math.exp(-kb*o.tau)));
+  const doses=[];let i=0;for(let t=0;t<TMAX-1e-6;t+=o.tau,i++){let a=o.D,kind="dose";if(i===0&&o.load){a=o.D*ldf;kind="load"}
+    const m=o.mods[i];if(m==="miss"){a=0;kind="miss"}else if(m==="double"){a*=2;kind="double"}doses.push({t,a,kind,i})}
+  const n=Math.round(TMAX/DT);const c=new Float32Array(n+1);
+  for(let s=0;s<=n;s++){const t=s*DT;let v=0;for(const d of doses){if(d.t<=t&&d.a>0)v+=cOne(t-d.t,d.a,k,ka,F)}c[s]=v*SC}
+  return {k,kr,kh,ka,F,E,h,ldf,doses,c,th:Math.LN2/k,ss:4.5*Math.LN2/k}}
+function lvl(t){const M=SIM.model;const s=clamp(t/DT,0,M.c.length-1);const i=Math.floor(s),f=s-i;return i>=M.c.length-1?M.c[M.c.length-1]:M.c[i]*(1-f)+M.c[i+1]*f}
+function depot(t){const M=SIM.model;if(!isFinite(M.ka))return 0;let a=0;for(const d of M.doses){if(d.t<=t&&d.a>0)a+=d.a*Math.exp(-M.ka*(t-d.t))}return a}
+function zoneOf(v){return v<MEC?"low":v>TOX?"hi":"ok"}
+const ZONE_TXT={low:"below the MEC: not enough to work",ok:"in the therapeutic range",hi:"above the toxic level"};
+function rangeMinMax(t0,t1){const M=SIM.model;let mn=1e9,mx=-1;for(let s=Math.max(0,Math.round(t0/DT));s<=Math.min(M.c.length-1,Math.round(t1/DT));s++){const v=M.c[s];if(v<mn)mn=v;if(v>mx)mx=v}return [mn,mx]}
+function simRebuild(restart){SIM.model=simModel();if(restart){SIM.now=0;SIM.running=true;SIM.mods={};SIM.model=simModel()}simUI();simRead();a11yKey=""}
+function simChanged(){simRebuild(true);simStatus()}
+/* controls */
+function simUI(){segBtns($("#simRoute"),ROUTES,()=>SIM.route,v=>{SIM.route=v;simChanged()});
+  segBtns($("#simTau"),TAUS,()=>SIM.tau,v=>{SIM.tau=v;simChanged()});
+  segBtns($("#simClr"),[[true,"Kidneys"],[false,"Liver"]],()=>SIM.kid,v=>{SIM.kid=v;simChanged()});
+  segBtns($("#simEnz"),[["none","None"],["ind","Inducer"],["inh","Inhibitor"]],()=>SIM.enz,v=>{SIM.enz=v;simChanged()});
+  $("#simDose").value=SIM.D;$("#simHalf").value=SIM.th;$("#simKid").value=SIM.R;$("#simLiv").value=SIM.liv;$("#simLoad").checked=SIM.load;
+  $("#simDoseOut").textContent=SIM.D+(SIM.D===1?" unit":" units");$("#simHalfOut").textContent=SIM.th+" h";
+  $("#simKidOut").textContent=SIM.R+"% ("+kidWord(SIM.R)+")";$("#simLivOut").textContent=SIM.liv+"% ("+livWord(SIM.liv)+")";
+  $("#simPlay").textContent=SIM.running?"Pause the clock":(SIM.now>=TMAX?"Run again":"Resume the clock");
+  const nx=nextDose();$("#simMiss").disabled=!nx;$("#simDouble").disabled=!nx}
+[["#simDose","D"],["#simHalf","th"],["#simKid","R"],["#simLiv","liv"]].forEach(([id,key])=>{$(id).addEventListener("input",e=>{SIM[key]=+e.target.value;simChanged()})});
+$("#simLoad").onchange=e=>{SIM.load=e.target.checked;simChanged()};
+$("#simPlay").onclick=()=>{if(SIM.now>=TMAX){simRebuild(true)}else SIM.running=!SIM.running;simUI();simStatus()};
+$("#simRestart").onclick=()=>{simRebuild(true);simStatus()};
+$("#simReset").onclick=()=>{Object.assign(SIM,DEF);simChanged()};
+function nextDose(){const M=SIM.model;if(!M)return null;return M.doses.find(d=>d.t>SIM.now+1e-6)||null}
+function simEvent(kind){const d=nextDose();if(!d)return;SIM.mods[d.i]=SIM.mods[d.i]===kind?undefined:kind;if(!SIM.mods[d.i])delete SIM.mods[d.i];
+  if(!SIM.running&&SIM.now<TMAX)SIM.running=true;simRebuild(false);
+  const m=SIM.mods[d.i];simMsg("",m?`The dose at hour ${d.t} will be ${m==="miss"?"skipped (open circle on the time axis)":"doubled (double ring on the time axis)"}. Watch the curve when the clock gets there.`:`The dose at hour ${d.t} is back to normal.`)}
+$("#simMiss").onclick=()=>simEvent("miss");$("#simDouble").onclick=()=>simEvent("double");
+function simMsg(cls,t){const s=$("#simStatus");s.className="status"+(cls?" "+cls:"");s.textContent=t}
+function simStatus(){const M=SIM.model;const v=lvl(SIM.now);const z=zoneOf(v);
+  if(SIM.now<=0.01){simMsg("",`Clock at hour 0. ${ROUTE_NAME[SIM.route][0].toUpperCase()+ROUTE_NAME[SIM.route].slice(1)}, ${SIM.D} units every ${SIM.tau} hours${SIM.load?", starting with a loading dose":""}. About ${Math.round(M.F*100)}% of each dose reaches the blood.`);return}
+  if(SIM.now>=TMAX){const [mn,mx]=rangeMinMax(TMAX-24,TMAX);const zz=mn<MEC&&mx>TOX?"swings above and below the range":mx>TOX?"peaks above the toxic level":mn<MEC?"troughs below the MEC":"stays in the therapeutic range";
+    simMsg(mx>TOX?"bad":mn<MEC?"warn":"good",`Run finished. Over the last day the level ${zz} (lowest ${mn.toFixed(1)}, highest ${mx.toFixed(1)}). `+(M.ss>TMAX?"Steady state was not reached yet: the half-life is too long for this 6-day run.":"Steady state was reached at about hour "+Math.round(M.ss)+"."));return}
+  simMsg(z==="hi"?"bad":z==="low"?"warn":"good",`Hour ${Math.floor(SIM.now)}: level ${v.toFixed(1)}, ${ZONE_TXT[z]}.`)}
+function simRead(){const M=SIM.model;const v=lvl(SIM.now);const z=zoneOf(v);
+  const done=M.doses.filter(d=>d.t+SIM.tau<=SIM.now+1e-6);let pk="not yet",tr="not yet";
+  if(done.length){const d=done[done.length-1];const [mn,mx]=rangeMinMax(d.t,d.t+SIM.tau);pk=mx.toFixed(1);tr=mn.toFixed(1)}
+  const rows=[["Clock",`hour ${Math.floor(SIM.now)} (day ${Math.min(6,Math.floor(SIM.now/24)+1)})`],["Drug level now",`<span class="zone ${z}">${v.toFixed(1)} · ${z==="ok"?"in range":z==="hi"?"toxic":"too low"}</span>`],
+    ["Last full interval","peak "+pk+" · trough "+tr],["Half-life in this patient",M.th.toFixed(1)+" h"],["Steady state at about",M.ss>TMAX?"after day 6":"hour "+Math.round(M.ss)],
+    ["Reaches the blood",Math.round(M.F*100)+"%"],["Loading dose",SIM.load?(SIM.D*M.ldf).toFixed(1)+" units ("+M.ldf.toFixed(1)+"× usual)":"off"]];
+  $("#simRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("");
+  $("#simCap").textContent=`Hour ${Math.floor(SIM.now)} · level ${v.toFixed(1)} · ${ZONE_TXT[z]}`}
+/* challenges */
+const SIM_CHAL=[
+  "Run the usual plan to the end: the last day sits inside the therapeutic range.",
+  "Turn on the loading dose: the level is in range by hour 3 and stays there through the first dose interval.",
+  "For a kidney-cleared drug, lower kidney function to 50% or less and watch peaks cross the toxic line.",
+  "Fix that patient: with kidney function at 40% or less, end the run with the whole last day in range (try a smaller dose or a longer interval).",
+  "For a liver-cleared drug, add an enzyme inducer and watch the level fall below the MEC.",
+  "For a liver-cleared drug, add an enzyme inhibitor and watch the level climb past the toxic line.",
+  "After hour 48, skip a dose and catch the level dropping below the MEC.",
+  "Double a dose and catch the spike above the toxic line.",
+  "Switch to IV and find a dose that keeps the whole last day in range (no first-pass loss means a smaller dose)."];
+function simCheck(){const M=SIM.model,o=SIM,now=SIM.now,end=now>=TMAX;const add=i=>{if(!SIM.done.has(i)){SIM.done.add(i);simChalUI();simMsg("good","Challenge done: "+SIM_CHAL[i])}};
+  const lastIn=()=>{const [mn,mx]=rangeMinMax(TMAX-24,TMAX);return mn>=MEC&&mx<=TOX};
+  const mxNow=rangeMinMax(0,now)[1];
+  if(end&&lastIn()&&!Object.keys(o.mods).length)add(0);
+  if(o.load&&now>=o.tau){const [mn,mx]=rangeMinMax(3,o.tau);const mx2=rangeMinMax(0,o.tau)[1];if(mn>=MEC&&mx2<=TOX)add(1)}
+  if(o.kid&&o.R<=50&&mxNow>TOX)add(2);
+  if(end&&o.kid&&o.R<=40&&lastIn())add(3);
+  if(!o.kid&&o.enz==="ind"&&now>24&&rangeMinMax(24,now)[0]<MEC)add(4);
+  if(!o.kid&&o.enz==="inh"&&mxNow>TOX)add(5);
+  M.doses.forEach(d=>{if(d.kind==="miss"&&d.t>=48&&now>d.t&&rangeMinMax(d.t,now)[0]<MEC)add(6);if(d.kind==="double"&&now>d.t&&rangeMinMax(d.t,Math.min(now,d.t+o.tau))[1]>TOX)add(7)});
+  if(end&&o.route==="iv"&&lastIn())add(8)}
+function simChalUI(){chalUI($("#simChal"),SIM_CHAL,SIM.done)}
+function simStep(dt){if(!SIM.running)return;const before=SIM.now;SIM.now=Math.min(TMAX,SIM.now+dt*SPEED);
+  if(SIM.now>=TMAX){SIM.running=false;simUI();simStatus()}
+  else if(Math.floor(before/2)!==Math.floor(SIM.now/2)||zoneOf(lvl(before))!==zoneOf(lvl(SIM.now)))simStatus();
+  const nd=nextDose();const can=!!nd;if($("#simMiss").disabled===can){$("#simMiss").disabled=!can;$("#simDouble").disabled=!can}
+  simCheck()}
+/* ---------- drawing ---------- */
+function drawSim(now){use(S1);const tt=now/1000;const M=SIM.model;const t=SIM.now;const v=lvl(t);const z=zoneOf(v);
+  /* body panel */
+  panelBox(6,6,248,508,{fill:hexA(C.panel,.92)});title(18,24,"Where the drug is now");
+  const cx=130,top=50,s=1.15,S=q=>q*s;const L=bodyFigure(cx,top,s);
+  const liverP=[cx-S(16),top+S(122)],kidL=[cx-S(32),top+S(152)],kidR=[cx+S(32),top+S(152)],bl=[cx,top+S(204)],heart=[cx+S(6),top+S(88)],stom=[cx+S(20),top+S(124)],gut=[cx,top+S(174)];
+  /* vessels */
+  const loop=[heart,[cx+S(24),top+S(104)],kidR,[cx+S(14),top+S(196)],[cx-S(14),top+S(196)],kidL,[cx-S(26),top+S(136)],liverP,[cx-S(4),top+S(100)],heart];
+  vesselPath(loop,6,hexA(C.vessel,.28));
+  /* organs */
+  stomachShape(stom[0],stom[1],.52,hexA(C.stomach,.95));gutCoil(gut[0]-S(28),gut[1]-S(12),S(56),S(24),hexA(C.gut,.9),7);
+  liverShape(liverP[0],liverP[1],.42,mix(C.liver,C.blocked,1-SIM.liv/100*.9-.1));
+  const kc=mix(C.kidney,C.blocked,clamp((100-SIM.R)/110,0,.85));kidneyShape(kidL[0],kidL[1],.55,false,kc);kidneyShape(kidR[0],kidR[1],.55,true,kc);
+  const elimAll=(()=>{let given=0;M.doses.forEach(d=>{if(d.t<=t)given+=d.a*M.F});const inBody=v/SC+depot(t)*M.F;return given>0?clamp((given-inBody)/given,0,1):0})();
+  bladderShape(bl[0],bl[1],1,elimAll*.9);heartShape(heart[0],heart[1],.8,tt);
+  /* enzymes in liver */
+  const nEnz=SIM.enz==="ind"?5:Math.max(1,Math.round(3*SIM.liv/100));
+  for(let i=0;i<nEnz;i++){const ex=nEnz===1?liverP[0]:liverP[0]-15+i*30/(nEnz-1),ey=liverP[1]+(i%2?5:-4);enzyme(ex,ey,5.2,tt*(SIM.enz==="ind"?1.6:1),{blocked:SIM.enz==="inh"})}
+  /* route-specific depot and absorption */
+  const dep=depot(t),flux=isFinite(M.ka)?M.ka*dep:0;
+  const nAbs=clamp(Math.round(flux*M.F*SC*1.1),0,12);
+  if(SIM.route==="po"){const portal=[stom,gut,[cx-S(8),top+S(152)],liverP];const toH=[liverP,[cx-S(2),top+S(104)],heart];
+    for(let i=0;i<Math.min(10,Math.round(dep*1.6));i++)drugDot(stom[0]-6+rnd(i)*14,stom[1]-6+rnd(i+9)*12,3.4);
+    if(dep>.4)tablet(stom[0]+4,stom[1]-2,6,C.pill,{a:clamp(dep/SIM.D,0,1),noScore:true});
+    const nIn=clamp(Math.round(flux*SC*1.1),0,12);flowDots(portal,nIn,tt,.45,(x,y)=>drugDot(x,y,3.2));
+    flowDots(toH,nAbs,tt+.3,.5,(x,y)=>drugDot(x,y,3.2));
+    lead(gut[0]-S(30),gut[1]+4,20,gut[1]+28,"gut",{size:11.5,a:1});
+  }else if(SIM.route==="sl"){const m=L.mouth;const p=[m,[cx+S(6),top+S(56)],[cx+S(8),top+S(72)],heart];
+    if(dep>.3){tablet(m[0],m[1]+1,4.5,C.pill,{a:clamp(dep/SIM.D,.2,1),noScore:true})}
+    flowDots(p,nAbs,tt,.6,(x,y)=>drugDot(x,y,3.2));lead(m[0]-8,m[1],m[0]-34,m[1]-26,"sublingual",{size:11.5});
+  }else if(SIM.route==="im"){const site=[cx-S(58),top+S(96)];const p=[site,[cx-S(44),top+S(76)],[cx-S(10),top+S(76)],heart];
+    if(dep>.05){blobPath(site[0],site[1],4+Math.min(8,dep*1.4),3.1,tt,.12);ctx.fillStyle=hexA(C.drug,.35);ctx.fill()}
+    flowDots(p,nAbs,tt,.55,(x,y)=>drugDot(x,y,3.2));lead(site[0]-2,site[1]-6,18,site[1]-52,"IM site",{size:11.5,align:"left"});
+  }else{const bag=[cx+S(92),top+S(18)];rr(bag[0]-11,bag[1]-16,22,30,5);fillStroke(hexA(C.glass,.9),C["glass-edge"],1.4);
+    ctx.fillStyle=hexA(C.drug,.45);ctx.fillRect(bag[0]-9,bag[1]-2,18,14);
+    const vein=[[bag[0],bag[1]+14],[bag[0],top+S(150)],[cx+S(64),top+S(150)],[cx+S(56),top+S(92)],[cx+S(22),top+S(78)],heart];poly(vein.slice(0,3),C["glass-edge"],1.6);
+    const recent=M.doses.filter(d=>d.a>0&&t>=d.t&&t<d.t+.5).length;if(recent)flowDots(vein,10,tt,.9,(x,y)=>drugDot(x,y,3.2));
+    txt(bag[0],bag[1]-24,"IV",{size:11.5,mono:true,weight:700,align:"center",color:C["ink-soft"]})}
+  /* blood dots on the loop */
+  const nB=clamp(Math.round(v*2.2),0,44);flowDots(loop,nB,tt,.07,(x,y,i)=>drugDot(x+(rnd(i)-.5)*4,y+(rnd(i+3)-.5)*4,3.3));
+  /* elimination streams */
+  const nR=clamp(Math.round(M.kr*v/SC*SC*14),0,9);flowDots([kidR,[cx+S(12),top+S(196)],bl],nR,tt,.55,(x,y)=>drugDot(x,y,2.8));
+  const nH=clamp(Math.round((M.kh*v+(SIM.route==="po"?M.E*flux*SC:0))*14),0,9);flowDots([liverP,kidL,[cx-S(12),top+S(196)],bl],nH,tt+.5,.5,(x,y)=>drugDot(x,y,2.8,{met:true}));
+  lead(liverP[0]-26,liverP[1]-4,16,liverP[1]-34,"liver",{size:11.5,align:"left"});lead(kidR[0]+10,kidR[1],234,kidR[1]+30,"kidney",{size:11.5,align:"right"});
+  lead(bl[0]+14,bl[1],234,bl[1]+22,"urine",{size:11.5,align:"right"});
+  /* level readout */
+  const zc=z==="ok"?C.good:z==="hi"?C.tox:C["warn-ink"];
+  txt(20,472,"Level now",{size:12,mono:true,weight:600,color:C["ink-soft"]});txt(20,494,v.toFixed(1),{size:22,mono:true,weight:700});
+  if(z==="ok")checkMark(96,494,7,zc,3);else if(z==="hi")crossMark(96,494,6,zc,3);else{line(96,486,96,497,zc,3);circ(96,503,1.8,zc)}
+  wrapText(z==="ok"?"in the therapeutic range":z==="hi"?"above the toxic level":"below the MEC",110,486,136,15,{size:12.5,weight:700,color:zc});
+  /* graph panel */
+  panelBox(262,6,532,508,{fill:hexA(C.panel,.92)});title(276,24,"Drug level in the blood");
+  txt(780,24,"hour "+Math.floor(t)+" · day "+Math.min(6,Math.floor(t/24)+1),{size:12.5,mono:true,weight:700,align:"right",color:C["accent-ink"]});
+  const gx=318,gy=52,gw=452,gh=300;const X=q=>gx+q/TMAX*gw,Y=q=>gy+gh-clamp(q,0,YMAX)/YMAX*gh;
+  ctx.fillStyle=hexA(C.good,.14);ctx.fillRect(gx,Y(TOX),gw,Y(MEC)-Y(TOX));ctx.fillStyle=hexA(C.bad,.09);ctx.fillRect(gx,gy,gw,Y(TOX)-gy);
+  for(let d=24;d<TMAX;d+=24)line(X(d),gy,X(d),gy+gh,C.grid,1);
+  [0,5,10,15,20].forEach(q=>{if(q)line(gx,Y(q),gx+gw,Y(q),hexA(C.grid,.7),1);txt(gx-8,Y(q),String(q),{size:11.5,mono:true,align:"right",color:C["ink-soft"]})});
+  line(gx,gy,gx,gy+gh,C["ink-soft"],1.6);line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.6);
+  line(gx,Y(MEC),gx+gw,Y(MEC),C.mec,2,[6,4]);line(gx,Y(TOX),gx+gw,Y(TOX),C.tox,2,[6,4]);
+  txt(gx+gw-4,Y(MEC)+11,"MEC",{size:11.5,mono:true,weight:700,align:"right",color:C.mec});txt(gx+gw-4,Y(TOX)-10,"Toxic level",{size:11.5,mono:true,weight:700,align:"right",color:C.tox});
+  label(gx+60,Y((MEC+TOX)/2),"therapeutic range",{size:11.5,weight:600,color:C.good,border:hexA(C.good,.6)});
+  ctx.save();ctx.translate(276,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,"level (teaching units)",{size:11.5,mono:true,weight:600,align:"center",color:C["ink-soft"]});ctx.restore();
+  for(let d=0;d<=TMAX;d+=24)txt(X(d),gy+gh+14,String(d),{size:11.5,mono:true,align:"center",color:C["ink-soft"]});
+  txt(gx+gw,gy+gh+64,"hours since the first dose",{size:11.5,mono:true,weight:600,align:"right",color:C["ink-soft"]});
+  /* steady state marker */
+  if(M.ss<=TMAX){const sx=X(M.ss);line(sx,gy+18,sx,gy+gh,C.accent,1.5,[4,4]);label(Math.min(sx,gx+gw-90),gy+10,"steady state ≈ 4-5 half-lives",{size:11.5,weight:600,color:C["accent-ink"],border:C.accent})}
+  /* future curve faint, past curve solid */
+  ctx.save();ctx.beginPath();ctx.rect(gx,gy-4,gw,gh+8);ctx.clip();
+  const nPx=Math.max(2,Math.round(gw*t/TMAX));ctx.beginPath();for(let i=0;i<=nPx;i++){const q=t*i/nPx;const xx=X(q),yy=Y(lvl(q));i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}
+  ctx.strokeStyle=C.drug;ctx.lineWidth=2.6;ctx.lineJoin="round";ctx.stroke();ctx.restore();
+  if(v>YMAX)label(X(t)-6,gy+8,"off the scale",{size:11.5,weight:700,color:C.tox,align:"right"});
+  /* now cursor */
+  line(X(t),gy,X(t),gy+gh,hexA(C.ink,.35),1.2,[3,3]);circ(X(t),Y(v),5.5,C.drug,C.panel,2);
+  /* dose markers */
+  const dy=gy+gh+36;txt(gx-8,dy,"doses",{size:11.5,mono:true,align:"right",color:C["ink-soft"]});
+  M.doses.forEach(d=>{const x=X(d.t);const past=d.t<=t;withA(past?1:.4,()=>{
+    if(d.kind==="miss"){circ(x,dy,5.5,C.panel,C.drug,2)}
+    else if(d.kind==="double"){circ(x,dy,8.5,null,C.drug,2);circ(x,dy,5,C.drug)}
+    else if(d.kind==="load"){circ(x,dy,8,C.drug,C.panel,1.5)}else circ(x,dy,5,C.drug)});
+    if(past&&t-d.t<1&&d.a>0)pulseRing(x,dy,16,C.drug,clamp(t-d.t,0,1))});
+  /* info chips */
+  const iy=446;const chips=[["half-life here",M.th.toFixed(1)+" h"],["steady state",M.ss>TMAX?"after day 6":"≈ hour "+Math.round(M.ss)],["reaches blood",Math.round(M.F*100)+"%"]];
+  chips.forEach((c,i)=>{const x=276+i*172;panelBox(x,iy,162,54,{fill:hexA(C["panel-2"],.95),stroke:C["rule-soft"]});txt(x+10,iy+16,c[0],{size:11.5,mono:true,weight:600,color:C["ink-soft"]});txt(x+10,iy+37,c[1],{size:16,mono:true,weight:700})});
+}
+function simA11y(){const M=SIM.model;const v=lvl(SIM.now);const z=zoneOf(v);const vb=Math.round(v);
+  const lab=`Drug level simulator: hour ${Math.floor(SIM.now/6)*6}, level about ${vb}, ${ZONE_TXT[z]}. ${ROUTE_NAME[SIM.route]}, every ${SIM.tau} hours, half-life ${M.th.toFixed(0)} hours.`;
+  const d=`Left: a body outline with the gut, liver, heart, kidneys and bladder. Purple hexagon dots are drug in the blood; ${vb>8?"many":vb>3?"a moderate number of":"only a few"} circle the loop of blood vessels now. `+
+    (SIM.route==="po"?"Dots leave the stomach and gut, pass the liver first, and some turn into green-grey metabolites there before the rest reach the heart. ":SIM.route==="iv"?"Each dose runs from the IV bag straight into a vein and on to the heart. ":SIM.route==="im"?"Each dose sits as a purple pool in the arm muscle and seeps into the blood. ":"Each tablet dissolves under the tongue and its drug goes straight to the heart, skipping the liver. ")+
+    `${SIM.enz==="ind"?"There are extra green enzymes in the liver (inducer). ":SIM.enz==="inh"?"The liver enzymes are grey and plugged (inhibitor). ":""}Dots drain from the kidney to the bladder${SIM.R<60?", only slowly because kidney function is low":""}. `+
+    `Right: a graph of drug level over 6 days. The green band between the MEC line (4) and the toxic line (10) is the therapeutic range. The purple curve has reached hour ${Math.floor(SIM.now)} and is ${ZONE_TXT[z]}${M.ss<=TMAX?"; a dashed line marks steady state at about hour "+Math.round(M.ss):""}.`;
+  return [lab,d]}
+/* ================= PART 2: case files ================= */
+const S2=makeStage("cvCase",640,560);
+const CASES=[
+{name:"Ruth: weak kidneys",who:"Ruth, 81 · medical unit",title:"The dose did not change. The level did.",
+ story:"Ruth takes digoxin for heart failure and furosemide for fluid. She has had vomiting and diarrhea for two days and has barely been drinking. Today food makes her feel sick and she says the lights have yellow-green halos around them. Her 0900 doses are due.",
+ mar:[["digoxin","PO","daily 0900",["g","g","g","due"]],["furosemide","PO","daily 0900",["g","g","g","due"]]],
+ vit:{hr:50,bp:"104/62",rr:16,spo2:96,temp:"36.8",flag:{hr:"LOW"}},
+ labs:[["Digoxin level","2.6 ng/mL","0.5-2.0","H"],["Creatinine","2.0 mg/dL","0.6-1.2","H"],["BUN","36 mg/dL","7-20","H"],["Potassium","3.1 mEq/L","3.5-5.0","L"]],
+ trend:{type:"series",title:"Digoxin level, last 4 days",lo:.5,hi:2,max:3.2,pts:[1.2,1.5,2.0,2.6],xl:["day 1","day 2","day 3","today"],unit:"ng/mL",note:"creatinine rising each day"},
+ legend:[["good","Normal or in range","s"],["bad","High flag","s"],["warn","Low flag","s"]],
+ qs:[{q:"Why did Ruth's digoxin level climb even though her dose did not change?",hint:"Which organ removes most digoxin from the body, and what did two days of vomiting do to it?",opts:[
+   ["Dehydration lowered her kidney function. Digoxin is cleared mainly by the kidneys, so its half-life got longer and the drug built up.",true,"Right. Less filtering means slower removal. Each daily dose now adds on top of drug that has not left yet, so the level rises."],
+   ["Vomiting made her absorb more of each tablet.",false,"Vomiting tends to lose drug, not absorb more. The rise comes from slower removal, as her creatinine shows."],
+   ["Her liver enzymes were induced and made the drug stronger.",false,"Induced enzymes speed up breakdown and lower levels. Digoxin is cleared mostly by the kidneys anyway."],
+   ["Digoxin always rises after the third day of use.",false,"A stable dose with healthy kidneys reaches a steady state. The level rose because her kidney function fell."]]},
+  {q:"Her 0900 digoxin is due. What should the nurse do first?",hint:"Slow pulse, nausea, vision changes and a high level all point the same way.",opts:[
+   ["Hold the dose, count the apical pulse for one full minute, and report the findings and labs to the prescriber.",true,"Right. These are signs of digoxin toxicity. Digoxin is commonly held if the apical pulse is below 60, per order or protocol, and the prescriber needs the level, creatinine and potassium."],
+   ["Give it with crackers to settle her stomach.",false,"Nausea and halos here are warning signs of toxicity, not a stomach upset to treat with food."],
+   ["Give half the dose.",false,"The nurse does not change a dose on their own. Hold it and report so the prescriber can decide."],
+   ["Give it and recheck the level tomorrow.",false,"Giving more drug to a patient with toxic signs and a high level could cause a dangerous rhythm."]]},
+  {q:"Why does her low potassium matter here?",hint:"Think about the furosemide and how digoxin acts on heart cells.",opts:[
+   ["Low potassium makes the heart more sensitive to digoxin, so toxicity is more likely even at the same level.",true,"Right. Low K+ increases digoxin's effect on heart muscle cells. Loop diuretics like furosemide lower potassium, so this pair needs K+ checks."],
+   ["Low potassium lowers the digoxin level.",false,"It does not lower the level. It makes the heart react more strongly to the digoxin that is there."],
+   ["Potassium has nothing to do with digoxin.",false,"Low potassium is one of the best-known risk factors for digoxin toxicity."],
+   ["Low potassium means she needs more digoxin.",false,"The opposite. Low K+ raises the risk of toxicity."]]}],
+ exp:"Drugs cleared by the kidneys build up when kidney function falls, even at the same dose. Digoxin has a narrow therapeutic range, so watch the apical pulse, potassium, creatinine and early signs like nausea and vision changes. For serious toxicity, an antidote (digoxin immune fab) can bind the drug."},
+
+{name:"Marcus: an inducer",who:"Marcus, 52 · anticoagulation clinic",title:"Same warfarin, lower INR",
+ story:"Marcus takes warfarin for atrial fibrillation. Ten days ago another clinic started rifampin for latent tuberculosis. His warfarin dose has not changed and he says he has not missed a pill, but today his INR is 1.4. His goal range is 2 to 3.",
+ mar:[["warfarin","PO","daily 1700",["g","g","g","due"]],["rifampin","PO","daily 0800",["g","g","g","g"]]],
+ vit:{hr:78,bp:"128/80",rr:16,spo2:98,temp:"36.9",flag:{}},
+ labs:[["INR","1.4","2.0-3.0","L"],["Hemoglobin","14.6 g/dL","13.5-17.5",""],["Platelets","240 K/µL","150-400",""]],
+ trend:{type:"series",title:"INR over the last 2 weeks",lo:2,hi:3,max:4,pts:[2.6,2.5,1.9,1.4],xl:["2 wk ago","10 days","5 days","today"],unit:"",mark:[1,"rifampin started"]},
+ legend:[["good","In range","s"],["warn","Low flag","s"],["accent","Rifampin start","s"]],
+ qs:[{q:"What best explains the falling INR?",hint:"Is rifampin an enzyme inducer or an inhibitor?",opts:[
+   ["Rifampin induces liver CYP450 enzymes, so warfarin is broken down faster and its level falls.",true,"Right. More enzymes means faster metabolism. A lower warfarin level means less anticoagulant effect, so the INR drops."],
+   ["Rifampin damages the kidneys, which clear warfarin.",false,"Warfarin is cleared by liver metabolism, and weaker kidneys would raise levels, not lower them."],
+   ["He must be eating less vitamin K.",false,"Less vitamin K would make the INR go up, not down."],
+   ["Rifampin is an inhibitor that blocks warfarin from working.",false,"Rifampin is a classic inducer. Inducers lower the level of the other drug."]]},
+  {q:"With an INR of 1.4, what is Marcus most at risk for right now?",hint:"A low INR means blood clots more easily than the goal.",opts:[
+   ["A blood clot, such as a stroke from atrial fibrillation.",true,"Right. Below the goal range he is under-protected. Report the INR so the prescriber can adjust the plan."],
+   ["Serious bleeding.",false,"Bleeding risk rises with a high INR. His is low."],
+   ["High potassium.",false,"Neither drug causes this here. The concern is clotting."],
+   ["Liver failure from warfarin.",false,"That is not what a low INR signals. The danger is a clot."]]},
+  {q:"His rifampin course ends next month. What should the nurse teach?",hint:"What happens to the extra enzymes after the inducer stops?",opts:[
+   ["The INR may climb over the next few weeks as the extra enzymes fade, so keep every INR check and report bleeding.",true,"Right. When an inducer stops, metabolism slows back down. If the warfarin dose was raised, the level can rise too high."],
+   ["Stop warfarin when rifampin stops.",false,"Warfarin is still needed for atrial fibrillation. Only the prescriber changes it."],
+   ["Nothing changes once rifampin stops.",false,"Enzyme levels return to normal over weeks, so warfarin levels change again."],
+   ["Take an extra warfarin tablet on the last rifampin day.",false,"Never adjust warfarin on your own. INR checks guide any change."]]}],
+ exp:"Enzyme inducers (rifampin, carbamazepine, phenytoin, St. John's wort) speed up metabolism and lower other drugs' levels. Starting or stopping an inducer changes warfarin's effect, so the INR is checked more often. Tell every prescriber and pharmacist about every drug and supplement."},
+
+{name:"Elena: an inhibitor",who:"Elena, 63 · outpatient visit",title:"Bleeding gums after a new prescription",
+ story:"Elena takes warfarin after a blood clot in her leg. Four days ago she started fluconazole, an azole antifungal, for a yeast infection. Today her gums bled when she brushed and she has new bruises on her arms. Her 1700 warfarin dose is due.",
+ mar:[["warfarin","PO","daily 1700",["g","g","g","due"]],["fluconazole","PO","daily 0900",["g","g","g","g"]]],
+ vit:{hr:96,bp:"112/70",rr:18,spo2:97,temp:"37.0",flag:{}},
+ labs:[["INR","4.8","2.0-3.0","H"],["Hemoglobin","11.6 g/dL","12.0-15.5","L"],["Platelets","230 K/µL","150-400",""]],
+ trend:{type:"series",title:"INR over the last week",lo:2,hi:3,max:5.5,pts:[2.5,2.6,3.4,4.8],xl:["1 wk ago","5 days","2 days","today"],unit:"",mark:[1,"fluconazole started"]},
+ legend:[["good","In range","s"],["bad","High flag","s"],["accent","Fluconazole start","s"]],
+ qs:[{q:"Why did her INR rise?",hint:"Azole antifungals are on the inhibitor list.",opts:[
+   ["Fluconazole inhibits the liver enzymes that break down warfarin, so warfarin builds up.",true,"Right. Blocked enzymes mean slower metabolism and a higher level, so the INR climbs and bleeding risk rises."],
+   ["Fluconazole is an inducer.",false,"Inducers lower the other drug's level. A rising INR points to an inhibitor."],
+   ["Fluconazole adds vitamin K.",false,"Extra vitamin K would lower the INR, not raise it."],
+   ["Her kidneys are clearing warfarin faster.",false,"Faster clearance would lower the INR. Warfarin is cleared by the liver."]]},
+  {q:"What should the nurse do about the 1700 warfarin dose?",hint:"INR well above goal plus signs of bleeding.",opts:[
+   ["Hold it, assess for other bleeding (urine, stool, headache or confusion), and report the INR and findings to the prescriber.",true,"Right. A high INR with active bleeding means the prescriber needs to decide on holding doses or reversal."],
+   ["Give it; a little gum bleeding is expected.",false,"New bleeding with an INR of 4.8 is a warning sign, not an expected effect."],
+   ["Give half the dose.",false,"Dose changes come from the prescriber. Hold and report."],
+   ["Give it with a vitamin K-rich salad.",false,"Never treat a high INR by changing diet on your own. Report it."]]},
+  {q:"If the prescriber orders a reversal agent for warfarin, which one fits?",hint:"Warfarin blocks the recycling of one vitamin.",opts:[
+   ["Vitamin K (phytonadione)",true,"Right. Vitamin K lets the liver make clotting factors again, which brings the INR down over hours."],
+   ["Protamine sulfate",false,"Protamine reverses heparin, not warfarin."],
+   ["Naloxone",false,"Naloxone reverses opioids."],
+   ["Flumazenil",false,"Flumazenil reverses benzodiazepines."]]}],
+ exp:"Enzyme inhibitors (azole antifungals, clarithromycin, grapefruit juice and others) slow metabolism and raise other drugs' levels. With warfarin that means a high INR and bleeding. Hold, assess, report, and know that vitamin K is warfarin's reversal agent."},
+
+{name:"Darnell: missed doses",who:"Darnell, 29 · emergency department",title:"Three days without a refill",
+ story:"Darnell takes phenytoin for a seizure disorder. He ran out three days ago and could not get a refill. This morning he had a seizure at work. Now awake and alert, he asks: \"If I miss a pill, can I just take two the next time to catch up?\"",
+ mar:[["phenytoin (home)","PO","as ordered",["m","m","m","due"]]],
+ vit:{hr:102,bp:"138/86",rr:18,spo2:96,temp:"37.3",flag:{hr:"HIGH"}},
+ labs:[["Phenytoin level","4 mcg/mL","10-20","L"],["Albumin","4.2 g/dL","3.5-5.0",""],["Glucose","96 mg/dL","70-99",""]],
+ trend:{type:"series",title:"Phenytoin level (teaching estimate)",lo:10,hi:20,max:24,pts:[14,9,6,4],xl:["last dose","day 1","day 2","today"],unit:"mcg/mL",note:"no doses taken"},
+ legend:[["good","Therapeutic range","s"],["warn","Low flag","s"],["drug","Missed dose","s"]],
+ qs:[{q:"What best explains this morning's seizure?",hint:"What happens to a drug level when no new doses come in?",opts:[
+   ["With no doses for three days, the level fell below the minimum effective level.",true,"Right. Each half-life removes half of what is left. After several half-lives without a dose, too little drug remains to prevent seizures."],
+   ["The drug built up to a toxic level.",false,"His level is low, not high. No doses were taken."],
+   ["His liver made extra phenytoin.",false,"The body does not make phenytoin. The level fell because doses stopped."],
+   ["He is allergic to phenytoin.",false,"An allergy would show as a rash or reaction, not a low level and a breakthrough seizure."]]},
+  {q:"How should the nurse answer his question about taking two pills?",hint:"Phenytoin has a narrow therapeutic range.",opts:[
+   ["Do not double up unless the prescriber or pharmacist says to. Phenytoin has a narrow range, and a double dose can push the level into the toxic zone (unsteady walking, double vision, drowsiness).",true,"Right. At higher levels phenytoin's breakdown enzymes become saturated, so the level can jump much more than expected."],
+   ["Yes, doubling up safely restores the level.",false,"For a narrow-range drug, a doubled dose can overshoot into toxicity."],
+   ["Yes, as long as he takes them with food.",false,"Food does not make a double dose safe."],
+   ["He should also skip the next dose to make up for it.",false,"Skipping more doses would lower the level again and risk another seizure."]]},
+  {q:"Which plan best prevents another gap?",hint:"Think practical: refills, reminders and who to call.",opts:[
+   ["Refill before running out, use a pill organizer and phone alarms, and call the pharmacist or prescriber if a refill is a problem.",true,"Right. Steady doses keep a steady level. Never stop an antiseizure drug suddenly."],
+   ["Stop the medicine once he has been seizure-free for a month.",false,"Stopping suddenly can cause seizures. Only the prescriber plans a taper."],
+   ["Take it only when he feels a seizure coming.",false,"Phenytoin works by keeping a steady level. It does not work as an as-needed drug."],
+   ["Move all his doses to bedtime on his own.",false,"Changing the schedule without the prescriber can cause highs and lows in the level."]]}],
+ exp:"Missed doses let the level drift below the MEC, and doubled doses can overshoot. Phenytoin is a narrow therapeutic index drug, so steady dosing and level checks matter. Teach refills, reminders and who to call."},
+
+{name:"Grace: trough timing",who:"Grace, 70 · medical unit",title:"A \"trough\" that came back high",
+ story:"Grace is getting IV vancomycin every 12 hours for a serious skin infection. The 0600 dose was hung on time and runs over about an hour. The lab drew her \"trough\" level at 0630. The result is flagged high and the team asks whether to change the dose.",
+ mar:[["vancomycin","IV","q12h 0600/1800",["g","g","run","due"]]],
+ vit:{hr:88,bp:"124/76",rr:18,spo2:97,temp:"37.9",flag:{temp:"HIGH"}},
+ labs:[["Vancomycin level (drawn 0630)","high","by order","H"],["Creatinine","0.9 mg/dL","0.6-1.2",""],["WBC","13.2 K/µL","4.5-11.0","H"]],
+ trend:{type:"curve",title:"Vancomycin level over the last day (teaching curve)",draw:24.5,ok:[35.5,36]},
+ legend:[["drug","Drug level","s"],["bad","Blood drawn at 0630","s"],["good","Correct trough time","s"]],
+ qs:[{q:"Why should this result not be trusted as a trough?",hint:"Look at where the red draw mark sits on the curve.",opts:[
+   ["It was drawn 30 minutes into the infusion, so it caught the level rising toward its peak, not the lowest point.",true,"Right. A trough is the lowest level, just before the next dose. A sample drawn during the infusion looks falsely high."],
+   ["Troughs are always high on day two.",false,"Timing, not the day, explains this result."],
+   ["Her kidneys must be failing.",false,"Her creatinine is normal. The draw time is the problem."],
+   ["The lab mixed up the tube.",false,"Possible in theory, but the draw time already explains the high result."]]},
+  {q:"When should a trough level be drawn?",hint:"\"Trough\" means the lowest point.",opts:[
+   ["Just before the next dose (commonly within about 30 minutes before), once the drug is near steady state, per protocol.",true,"Right. That is the lowest level of the dosing interval. Many protocols time it before the third or fourth dose."],
+   ["Right after the infusion ends.",false,"That timing is near the peak, not the trough."],
+   ["Any time of day.",false,"Levels change through the interval, so timing matters."],
+   ["Six hours after any dose.",false,"That is mid-interval. A trough is drawn just before the next dose."]]},
+  {q:"What else should the nurse watch while Grace is on vancomycin?",hint:"Think kidneys, ears and the infusion itself.",opts:[
+   ["Kidney function (creatinine, urine output), hearing, and flushing or itching of the upper body if it runs in too fast.",true,"Right. Vancomycin can harm the kidneys and, rarely, hearing. Infusing it slowly helps prevent the flushing reaction."],
+   ["The INR.",false,"Vancomycin does not need INR monitoring."],
+   ["Blood glucose only.",false,"Glucose is not the main concern with vancomycin."],
+   ["Nothing once the level is in range.",false,"Kidney function and side effects still need watching."]]}],
+ exp:"Peak and trough levels mean something only if they are drawn at the right time. A trough is drawn just before the next dose; a peak is drawn after the dose has had time to absorb and distribute, timed by protocol. Write the exact draw and dose times on the lab slip."},
+
+{name:"Tomás: the wrong route",who:"Tomás, 58 · cardiac step-down",title:"Chest pain that did not ease",
+ story:"Tomás has angina. At 1410 he had chest pain, and the nurse gave a sublingual nitroglycerin tablet. A few minutes later he says, \"I swallowed it with water like my other pills.\" His pain is still 6 out of 10.",
+ marNote:"1410 today: tablet given, but the patient swallowed it instead of letting it dissolve.",mar:[["nitroglycerin","SL","PRN chest pain",["","","","1410"]]],
+ vit:{hr:98,bp:"148/92",rr:20,spo2:96,temp:"36.8",flag:{bp:"HIGH"}},
+ labs:[["Chest pain score","6 / 10","0","H"],["Troponin","pending","","" ],["Potassium","4.2 mEq/L","3.5-5.0",""]],
+ trend:{type:"two",title:"Nitroglycerin reaching the heart (teaching curves)"},
+ legend:[["drug","Under the tongue","s"],["blocked","Swallowed","s"],["good","Effective range","s"]],
+ qs:[{q:"Why did swallowing the tablet give so little relief?",hint:"Where does blood from the gut go first?",opts:[
+   ["Swallowed drug goes from the gut to the liver first, and the liver breaks down most nitroglycerin before it reaches the heart (first-pass effect).",true,"Right. Under the tongue, the drug enters veins that go straight to the heart and skips the liver."],
+   ["Nitroglycerin only works IV.",false,"Sublingual, spray, patch and ointment forms all work. The swallowed route is the problem."],
+   ["He must be allergic.",false,"An allergy would show as a reaction, not just a weak effect."],
+   ["The tablet is enteric-coated.",false,"Sublingual tablets are made to dissolve fast in the mouth, not coated for the gut."]]},
+  {q:"What should the nurse teach before the next tablet?",hint:"Sublingual means under the tongue.",opts:[
+   ["Sit down, place it under the tongue, and let it dissolve completely without chewing or swallowing.",true,"Right. Sitting helps because the drug can make blood pressure drop and cause dizziness."],
+   ["Chew it and swallow with water.",false,"Swallowing sends it through the liver first, which is what went wrong."],
+   ["Swallow it whole with food.",false,"Same first-pass problem, and food slows it even more."],
+   ["Rub it on the skin of the chest.",false,"Tablets are not made for the skin. Patches and ointments are separate forms."]]},
+  {q:"Which finding should make the nurse hold the next dose and call?",hint:"Nitroglycerin widens blood vessels.",opts:[
+   ["Systolic blood pressure below the protocol limit (often 90), or use of an erectile dysfunction drug such as sildenafil in the past day or two.",true,"Right. Both can lead to a dangerous drop in blood pressure."],
+   ["A mild headache.",false,"Headache is a common, expected effect of vessel widening."],
+   ["A warm, flushed face.",false,"Flushing is also an expected effect."],
+   ["Heart rate of 98.",false,"A slightly fast rate alone is not the hold reason here. Check BP and drug history."]]}],
+ exp:"Route changes how much drug reaches the blood. Nitroglycerin has a large first-pass effect, so it is given under the tongue, as a spray, patch, ointment or IV. Check blood pressure before each dose and ask about erectile dysfunction drugs."},
+
+{name:"Bea: low albumin",who:"Bea, 76 · rehab unit",title:"A normal level with toxic signs",
+ story:"Bea takes phenytoin for seizures. She has eaten poorly for weeks and her albumin is low. Today she is drowsy, her eyes flick side to side when she looks sideways (nystagmus), and she nearly fell walking to the bathroom. Her total phenytoin level is in the usual range.",
+ mar:[["phenytoin","PO","as ordered, 2100",["g","g","g","due"]]],
+ vit:{hr:76,bp:"122/74",rr:16,spo2:97,temp:"36.6",flag:{}},
+ labs:[["Phenytoin (total)","15 mcg/mL","10-20",""],["Albumin","2.2 g/dL","3.5-5.0","L"],["Free phenytoin","sent","","" ]],
+ trend:{type:"free",title:"Bound vs free phenytoin (teaching picture)"},
+ legend:[["albumin","Albumin carrying drug","s"],["drug","Free (active) drug","s"]],
+ qs:[{q:"Why does Bea look toxic when her total level is normal?",hint:"Which part of the drug is active: bound or free?",opts:[
+   ["Low albumin leaves fewer binding sites, so more of the drug is free and active, even though the total is normal.",true,"Right. Only free drug reaches the brain and acts. The total level hides the extra free drug."],
+   ["Her total level is actually too low.",false,"It is in the usual range. The free part is the issue."],
+   ["She is having an allergic reaction.",false,"Nystagmus, unsteady gait and drowsiness are classic signs of too much phenytoin effect."],
+   ["Phenytoin does not bind to proteins.",false,"Phenytoin is highly bound to albumin, which is why low albumin matters."]]},
+  {q:"What should the nurse do first?",hint:"She nearly fell.",opts:[
+   ["Put fall precautions in place and report the neurologic signs and low albumin to the prescriber before the next dose.",true,"Right. Safety first, then the prescriber can review a free level and the dose."],
+   ["Give an extra dose because the total level is not high.",false,"She already shows signs of too much drug effect."],
+   ["Encourage her to walk alone to build strength.",false,"She is unsteady and at high fall risk."],
+   ["Ignore the signs because the lab is normal.",false,"Treat the patient, not just the number."]]},
+  {q:"What else can raise free phenytoin?",hint:"Think about two drugs competing for the same carrier.",opts:[
+   ["Adding another highly protein-bound drug that pushes phenytoin off albumin, such as valproic acid.",true,"Right. That is a displacement interaction. The free fraction rises, so the effect rises."],
+   ["Drinking more water.",false,"Fluid intake does not change protein binding here."],
+   ["Taking it with food.",false,"Food can change absorption a little, but not binding to albumin."],
+   ["Adding a drug that does not bind proteins.",false,"A drug with no protein binding has nothing to compete for."]]}],
+ exp:"Only free (unbound) drug acts. Low albumin (malnutrition, liver disease, kidney disease, older age) or a displacing drug raises the free fraction, so a normal total level can still mean toxicity for highly bound drugs like phenytoin and warfarin."}
+];
+/* ---------- drawing ---------- */
+const MON={bg:"#0B1418",edge:"#2C3A42",hr:"#4FE08A",bp:"#F0F3F5",sp:"#5CD0F0",rr:"#F2D14B",tp:"#F0F3F5",lab:"#A3B2BA",bad:"#FF8A80",warn:"#FFC27A"};
+function ecg(ph){ph=ph-Math.floor(ph);return ph<.06?Math.sin(ph/.06*Math.PI)*.12:ph<.1?0:ph<.12?-.15:ph<.15?1:ph<.18?-.3:ph<.3?0:ph<.42?Math.sin((ph-.3)/.12*Math.PI)*.25:0}
+function slotMark(x,y,k,tt){if(k==="g"){checkMark(x,y,7,C.good,3)}else if(k==="m"){circ(x,y,9,null,C.bad,2);txt(x,y+.5,"M",{size:11.5,mono:true,weight:700,align:"center",color:C.bad})}
+  else if(k==="due"){pulseRing(x,y,18,C.accent,P(tt,1.6));rr(x-18,y-10,36,20,10);fillStroke(C["accent-wash"],C.accent,1.5);txt(x,y+.5,"due",{size:11.5,mono:true,weight:700,align:"center",color:C["accent-ink"]})}
+  else if(k==="run"){rr(x-22,y-10,44,20,10);fillStroke(C["accent-wash"],C.accent,1.5);txt(x,y+.5,"running",{size:11,mono:true,weight:700,align:"center",color:C["accent-ink"]})}
+  else if(k==="note"){txt(x,y+.5,"swallowed",{size:11.5,mono:true,weight:700,align:"center",color:C["warn-ink"]})}
+  else if(k){txt(x,y+.5,k,{size:12,mono:true,weight:700,align:"center"});checkMark(x+26,y,5,C.good,2.4)}}
+function drawCase(now){use(S2);const tt=now/1000;const c=CASES[CS.i];const W2=640;
+  /* MAR */
+  panelBox(8,8,W2-16,116,{fill:hexA(C.panel,.95)});title(20,26,"Medication record (MAR)");txt(W2-14,26,"teaching record · no doses",{size:11.5,mono:true,align:"right",color:C["ink-soft"]});
+  const cols=["day 1","day 2","day 3","today"];const sx=[380,442,504,582];
+  txt(20,48,"Medication",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(170,48,"Route",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(218,48,"Schedule",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});
+  cols.forEach((h,i)=>txt(sx[i],48,h,{size:11.5,mono:true,weight:700,align:"center",color:C["ink-soft"]}));
+  c.mar.forEach((r,j)=>{const y=76+j*32;line(16,y-16,W2-16,y-16,C["rule-soft"],1);txt(20,y,r[0],{size:14,weight:700});txt(170,y,r[1],{size:13,mono:true,weight:600});txt(218,y,r[2],{size:13});
+    r[3].forEach((k,i)=>slotMark(sx[i],y,k,tt))});
+  if(c.marNote)wrapText(c.marNote,20,100,W2-40,15,{size:12.5,weight:700,color:C["warn-ink"]});
+  /* monitor */
+  const mx=8,my=132,mw=308,mh=190;rr(mx,my,mw,mh,8);ctx.fillStyle=MON.bg;ctx.fill();ctx.strokeStyle=MON.edge;ctx.lineWidth=2;ctx.stroke();
+  txt(mx+12,my+16,"BEDSIDE MONITOR",{size:11.5,mono:true,weight:700,color:MON.lab});
+  const V=c.vit;const hrRate=V.hr/60;const TW=170;
+  ctx.save();rr(mx+10,my+30,TW,62,4);ctx.clip();ctx.beginPath();for(let i=0;i<=TW;i++){const ph=(tt-(TW-i)/TW*2.2)*hrRate;const yy=my+70-ecg(ph)*34;i?ctx.lineTo(mx+10+i,yy):ctx.moveTo(mx+10,yy)}ctx.strokeStyle=MON.hr;ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  ctx.save();rr(mx+10,my+104,TW,40,4);ctx.clip();ctx.beginPath();for(let i=0;i<=TW;i++){const ph=(tt-(TW-i)/TW*2.2)*hrRate;const f=ph-Math.floor(ph);const yy=my+136-(f<.3?Math.sin(f/.3*Math.PI/2):Math.max(0,Math.cos((f-.3)/.7*Math.PI/2)))*24;i?ctx.lineTo(mx+10+i,yy):ctx.moveTo(mx+10,yy)}ctx.strokeStyle=MON.sp;ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const big=(x,y,lab,val,col,fl)=>{txt(x,y,lab,{size:11.5,mono:true,weight:700,color:col});txt(x,y+22,val,{size:22,mono:true,weight:700,color:col});if(fl)txt(x,y+44,fl,{size:11.5,mono:true,weight:700,color:fl==="LOW"?MON.warn:MON.bad})};
+  big(mx+192,my+32,"HR",String(V.hr),MON.hr,V.flag.hr);big(mx+250,my+32,"SpO2",V.spo2+"%",MON.sp,V.flag.spo2);
+  big(mx+192,my+104,"BP",V.bp,MON.bp,V.flag.bp);
+  txt(mx+12,my+172,"RR "+V.rr,{size:13,mono:true,weight:700,color:MON.rr});txt(mx+80,my+172,"Temp "+V.temp+" °C"+(V.flag.temp?" "+V.flag.temp:""),{size:13,mono:true,weight:700,color:V.flag.temp?MON.bad:MON.tp});
+  if(Math.floor(tt*hrRate*2)%2===0)circ(mx+222,my+38,4,MON.hr);
+  /* labs */
+  const lx=324,ly=132,lw=308;panelBox(lx,ly,lw,190,{fill:hexA(C.panel,.95)});title(lx+12,ly+18,"Lab panel");
+  txt(lx+10,ly+40,"Test",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(lx+146,ly+40,"Result",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(lx+230,ly+40,"Range",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});
+  c.labs.forEach((r,j)=>{const y=ly+70+j*36;line(lx+8,y-18,lx+lw-8,y-18,C["rule-soft"],1);
+    const fc=r[3]==="H"?C.bad:r[3]==="L"?C["warn-ink"]:C.ink;if(r[3]){rr(lx+5,y-16,lw-10,32,4);ctx.fillStyle=hexA(r[3]==="H"?C.bad:C.warn,.12);ctx.fill()}
+    const lines=r[0].length>18?2:1;wrapText(r[0],lx+10,y-(lines-1)*7,132,14,{size:13,weight:600});txt(lx+146,y,r[1],{size:13,mono:true,weight:700,color:fc});txt(lx+230,y,r[2],{size:11.5,mono:true,color:C["ink-soft"]});
+    if(r[3])txt(lx+lw-12,y,r[3],{size:13,mono:true,weight:700,align:"right",color:fc})});
+  /* trend */
+  const tx=8,ty=330,tw=W2-16,th=222;panelBox(tx,ty,tw,th,{fill:hexA(C.panel,.95)});title(tx+12,ty+18,c.trend.title);
+  const T_=c.trend;const gx=tx+56,gy=ty+44,gw=tw-80,gh=th-90;const prog=clamp((tt%9)/3,0,1);
+  if(T_.type==="series"){const Y=v=>gy+gh-clamp(v/T_.max,0,1)*gh,X=i=>gx+30+i*(gw-60)/(T_.pts.length-1);
+    ctx.fillStyle=hexA(C.good,.15);ctx.fillRect(gx,Y(T_.hi),gw,Y(T_.lo)-Y(T_.hi));line(gx,Y(T_.hi),gx+gw,Y(T_.hi),C.mec,1.5,[5,4]);line(gx,Y(T_.lo),gx+gw,Y(T_.lo),C.mec,1.5,[5,4]);
+    txt(gx-8,Y(T_.hi),String(T_.hi),{size:11.5,mono:true,align:"right",color:C.good});txt(gx-8,Y(T_.lo),String(T_.lo),{size:11.5,mono:true,align:"right",color:C.good});
+    line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);
+    if(T_.mark){const mx_=(X(T_.mark[0]-1)+X(T_.mark[0]))/2+((X(1)-X(0))*.2);line(mx_,gy,mx_,gy+gh,C.accent,2,[4,3]);label(mx_+6,gy+gh-12,T_.mark[1],{size:11.5,weight:700,color:C["accent-ink"],align:"left",border:C.accent})}
+    if(T_.note)txt(tx+tw-12,ty+18,T_.note,{size:11.5,mono:true,color:C["ink-soft"],align:"right"});
+    const n=T_.pts.length;const upto=prog*(n-1);ctx.beginPath();for(let i=0;i<n;i++){if(i>upto+1e-6){const f=upto-(i-1);ctx.lineTo(lerp(X(i-1),X(i),f),lerp(Y(T_.pts[i-1]),Y(T_.pts[i]),f));break}i?ctx.lineTo(X(i),Y(T_.pts[i])):ctx.moveTo(X(i),Y(T_.pts[i]))}ctx.strokeStyle=C.drug;ctx.lineWidth=2.6;ctx.stroke();
+    T_.pts.forEach((v,i)=>{if(i<=upto+1e-6){const out=v>T_.hi||v<T_.lo;circ(X(i),Y(v),5,out?(v>T_.hi?C.bad:C.warn):C.drug,C.panel,1.5);label(X(i),Y(v)-16,String(v)+(T_.unit&&i===n-1?" "+T_.unit:""),{size:12,weight:700,color:out?(v>T_.hi?C.bad:C["warn-ink"]):C.ink})}
+      txt(X(i),gy+gh+16,T_.xl[i],{size:11.5,mono:true,align:"center",color:C["ink-soft"]})});
+    if(prog>=1){const i=n-1;pulseRing(X(i),Y(T_.pts[i]),18,C.accent,P(tt,1.4))}}
+  else if(T_.type==="curve"){const tm=40,k=Math.LN2/7,Y=v=>gy+gh-clamp(v/.42,0,1)*gh,X=t=>gx+t/tm*gw;
+    const lv=t=>{let s=0;[0,12,24,36].forEach(d=>{if(t>d){const u=t-d;s+=u<1?(1-Math.exp(-k*u))/(k)*.18:(1-Math.exp(-k))/k*.18*Math.exp(-k*(u-1))}});return s};
+    line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);[0,12,24,36].forEach(d=>{rr(X(d),gy+gh-5,X(d+1)-X(d),5,1);ctx.fillStyle=hexA(C.albumin,.8);ctx.fill();txt(X(d),gy+gh+16,{0:"0600 yest.",12:"1800",24:"0600 today",36:"1800"}[d],{size:11.5,mono:true,align:"center",color:C["ink-soft"]})});
+    plotFn(lv,0,tm,gx,gy,gw,gh,0,.42,C.drug,2.6,null,prog*tm);
+    const dx=X(T_.draw);line(dx,gy-6,dx,gy+gh,C.bad,2,[4,3]);circ(dx,Y(lv(T_.draw)),6,C.bad,C.panel,2);label(dx-10,gy-4,"drawn 0630, during the infusion",{size:11.5,weight:700,color:C.bad,align:"right",border:C.bad});
+    if(prog>=1){const ox=X(35.75);ctx.fillStyle=hexA(C.good,.25);ctx.fillRect(X(35.5),gy,X(36)-X(35.5),gh);label(ox-6,gy+gh-26,"trough: just before next dose",{size:11.5,weight:700,color:C.good,align:"right",border:C.good});circ(ox,Y(lv(35.9)),5,C.good,C.panel,1.5)}}
+  else if(T_.type==="two"){const tm=30,Y=v=>gy+gh-clamp(v,0,1.1)/1.1*gh,X=t=>gx+t/tm*gw;const sl=t=>t<=0?0:1.0*(Math.exp(-.12*t)-Math.exp(-1.2*t))/.72,po=t=>t<=0?0:.12*(Math.exp(-.12*t)-Math.exp(-.35*t))/.33;
+    ctx.fillStyle=hexA(C.good,.15);ctx.fillRect(gx,Y(1.05),gw,Y(.35)-Y(1.05));line(gx,Y(.35),gx+gw,Y(.35),C.mec,1.5,[5,4]);txt(gx+gw-4,Y(.35)-10,"works above this line",{size:11.5,mono:true,align:"right",color:C.good});
+    line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.4);[0,10,20,30].forEach(m=>txt(X(m),gy+gh+16,m+" min",{size:11.5,mono:true,align:"center",color:C["ink-soft"]}));
+    plotFn(sl,0,tm,gx,gy,gw,gh,0,1.1,C.drug,2.8,null,prog*tm);plotFn(po,0,tm,gx,gy,gw,gh,0,1.1,C.blocked,2.6,[7,4],prog*tm);
+    label(X(5.5),Y(sl(4))-14,"under the tongue",{size:11.5,weight:700,color:C["accent-ink"],align:"left",border:C.accent});label(X(12),Y(.12)-18,"swallowed: lost to first pass",{size:11.5,weight:700,color:C["ink-soft"],align:"left"})}
+  else if(T_.type==="free"){[["Normal albumin",.1,gx-30],["Bea: low albumin",.25,gx+gw/2]].forEach(([nm,fr,x0],j)=>{txt(x0,gy+2,nm,{size:13,weight:700});
+    const nA=j?2:6;for(let i=0;i<nA;i++)albumin(x0+24+i*44,gy+44,15,tt+i,3);const nF=j?7:2;for(let i=0;i<nF;i++){drugDot(x0+14+i*36+Math.sin(tt*2+i)*4,gy+92+Math.cos(tt*1.6+i)*4,5)}
+    txt(x0,gy+gh+20,Math.round(fr*100)+"% free (teaching number)",{size:12,mono:true,weight:700,color:j?C.bad:C.good})})}
+}
+function caseA11y(){const c=CASES[CS.i];const V=c.vit;
+  const lab=`Case ${CS.i+1}, ${c.who}: MAR, monitor with heart rate ${V.hr} and blood pressure ${V.bp}, lab panel and trend graph.`;
+  const flagged=c.labs.filter(r=>r[3]).map(r=>`${r[0]} ${r[1]} flagged ${r[3]==="H"?"high":"low"}`).join("; ");
+  const T_=c.trend;const tr=T_.type==="series"?`The trend graph plots ${T_.title.toLowerCase()} as a purple line: ${T_.pts.join(", ")}, with a green band for the range ${T_.lo} to ${T_.hi}${T_.mark?" and a dashed line where "+T_.mark[1]:""}.`:
+    T_.type==="curve"?"The trend graph shows the vancomycin level rising during each infusion and falling between doses. A red dashed line marks the 0630 draw, near the top of a rise. A green band just before the next dose marks the correct trough time.":
+    T_.type==="two"?"The trend graph compares two curves: under the tongue rises quickly into the green effective band within minutes; swallowed (grey, dashed) stays low because the liver removes most of it first.":
+    "The picture compares normal albumin, with many blue albumin carriers holding most drug, to Bea's low albumin, with few carriers and many more free purple drug molecules.";
+  return [lab,`The MAR lists ${c.mar.map(r=>r[0]+" "+r[1]+" "+r[2]).join(" and ")}. The dark bedside monitor shows a moving heart tracing, heart rate ${V.hr}, SpO2 ${V.spo2} percent, blood pressure ${V.bp}, respiratory rate ${V.rr} and temperature ${V.temp} degrees. Flagged labs: ${flagged||"none"}. ${tr}`]}
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+/* ================= PART 3: sorting rounds ================= */
+const SROUNDS=[
+{name:"Route and onset",goal:"Sort each route or dosage form by how fast its drug usually starts to work.",
+ bins:[["now","Immediate: straight into a vein"],["min","Minutes"],["slow","About 30 to 60 minutes or more"],["hours","Slow and steady over hours to days"]],
+ cards:[["IV push","now","No absorption step: the whole dose enters the blood at once, so onset is immediate."],
+  ["IV infusion started","now","Into the vein: it starts acting as soon as it runs in."],
+  ["Sublingual tablet","min","Under the tongue: thin, blood-rich tissue absorbs it in minutes and it skips the liver."],
+  ["Inhaled medicine","min","Lungs: a huge, thin surface with rich blood flow, so it acts in minutes."],
+  ["IM injection","min","Muscle: good blood flow, usually acting within minutes."],
+  ["Subcutaneous injection","min","Fat layer: less blood flow than muscle, so a bit slower, but still minutes."],
+  ["Oral tablet","slow","Swallowed: must dissolve, be absorbed by the gut and pass the liver first."],
+  ["Enteric-coated tablet","slow","Coated: it does not dissolve until it reaches the small intestine, which delays onset."],
+  ["Extended-release capsule","hours","Built to release slowly: a steady level over many hours."],
+  ["Transdermal patch","hours","Through skin: slow, steady absorption for a day or more."]]},
+{name:"Inducer or inhibitor?",goal:"Does this drug or situation speed up liver enzymes (inducer) or slow them down (inhibitor)? Think about what happens to the other drug's level.",
+ bins:[["ind","Inducer: other drug's level falls"],["inh","Inhibitor: other drug's level rises"]],
+ cards:[["rifampin","ind","Classic inducer: it makes more CYP enzymes, so other drugs are broken down faster."],
+  ["carbamazepine","ind","An inducer: it can even speed up its own breakdown over the first weeks."],
+  ["phenytoin","ind","An inducer of liver enzymes as well as a narrow-range drug itself."],
+  ["St. John's wort","ind","Herbal inducer: it can make birth control pills and other drugs fail."],
+  ["Grapefruit juice","inh","Inhibits gut wall enzymes (CYP3A4), so more of some drugs gets absorbed."],
+  ["fluconazole (azole antifungal)","inh","Azole antifungals inhibit CYP enzymes and raise levels of drugs like warfarin."],
+  ["clarithromycin","inh","A macrolide antibiotic that inhibits CYP3A4."],
+  ["\"Birth control pill may fail\"","ind","Lower hormone levels: the enzyme speed-up broke the hormones down faster."],
+  ["\"Statin muscle damage risk goes up\"","inh","Higher statin level: slowed breakdown let the statin build up."],
+  ["\"INR drops on warfarin\"","ind","Lower warfarin level: faster breakdown means less anticoagulant effect."]]},
+{name:"Which ADME step?",goal:"Put each event in the step of the drug's trip where it happens: absorption, distribution, metabolism or excretion.",
+ bins:[["A","Absorption"],["D","Distribution"],["M","Metabolism"],["E","Excretion"]],
+ cards:[["Drug crosses the gut wall into the blood","A","Getting in: moving from the site of giving into the blood is absorption."],
+  ["Enteric coat dissolves in the small intestine","A","Getting in: the coating controls where absorption starts."],
+  ["Lipid-soluble drug slips through cell membranes","A","Getting in: fat-soluble, uncharged drugs cross membranes easily."],
+  ["Drug binds to albumin in the plasma","D","Moving around: protein binding is part of how drug is carried and shared out."],
+  ["Drug crosses the blood-brain barrier","D","Moving around: reaching tissues, including the brain, is distribution."],
+  ["Drug crosses the placenta to the fetus","D","Moving around: the fetus is one of the places drug can be carried."],
+  ["CYP450 enzymes change the drug","M","Changing: liver enzymes convert drugs, usually into easier-to-remove forms."],
+  ["A prodrug is switched on","M","Changing: metabolism turns an inactive prodrug into the active drug."],
+  ["First-pass effect in the liver","M","Changing: the liver breaks down part of an oral dose before it reaches the body."],
+  ["Glomerular filtration of free drug","E","Leaving: the kidney filters drug into the urine."],
+  ["Drug passes into breast milk","E","Leaving: breast milk is one exit route, which matters for the infant."],
+  ["Anesthetic gas is breathed out","E","Leaving: the lungs remove gases and alcohol."]]},
+{name:"Narrow range: what to watch",goal:"These narrow therapeutic index drugs need close watching. Match each monitoring point to its drug.",
+ bins:[["dig","digoxin"],["lith","lithium"],["warf","warfarin"],["phen","phenytoin"],["vanc","vancomycin, gentamicin"],["theo","theophylline"]],
+ cards:[["Count the apical pulse for a full minute","dig","Heart rate: digoxin slows the heart, and it is commonly held below 60 per protocol."],
+  ["Low potassium raises toxicity risk","dig","Potassium: low K+ makes the heart more sensitive to digoxin."],
+  ["Low sodium or dehydration makes the level rise","lith","Salt and water: the kidney holds onto lithium when sodium and fluid are low."],
+  ["Fine hand tremor; check the blood level","lith","Tremor is a common lithium effect; worsening tremor or confusion can mean toxicity."],
+  ["INR checks; watch for bleeding","warf","INR: it measures warfarin's effect on clotting factors."],
+  ["Vitamin K is the reversal agent","warf","Vitamin K: warfarin works by blocking vitamin K recycling."],
+  ["Unsteady gait and nystagmus","phen","Brain signs: these are classic signs of too much phenytoin."],
+  ["Gum overgrowth: teach good oral care","phen","Gums: gum overgrowth is a well-known long-term effect of phenytoin."],
+  ["Peak and trough levels, creatinine and hearing","vanc","Kidneys and ears: these drugs can harm both, so levels are timed and kidneys watched."],
+  ["Restlessness, fast heart rate, seizures at high levels","theo","Stimulant signs: theophylline excites the heart and brain when the level runs high."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const dot=(x,y,r)=>`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=i/6*Math.PI*2;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ")}" fill="var(--drug)"/>`;
+  const map={
+  now:`<rect x="20" y="3" width="16" height="20" rx="3" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="22" y="12" width="12" height="9" fill="var(--drug)" opacity=".6"/><path d="M28 23 V40 H50" stroke="var(--glass-edge)" fill="none" stroke-width="2"/><path d="M6 40 H50" stroke="var(--vessel)" stroke-width="5" opacity=".5"/>${dot(42,40,3.5)}`,
+  min:`<circle cx="28" cy="24" r="17" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><path d="M28 24 L28 12" stroke="var(--ink)" stroke-width="2.5"/><path d="M28 24 L36 28" stroke="var(--ink)" stroke-width="2"/><path d="M28 7 A17 17 0 0 1 43 16 L28 24 Z" fill="var(--drug)" opacity=".4"/>`,
+  slow:`<ellipse cx="28" cy="24" rx="16" ry="12" fill="var(--stomach)" stroke="var(--ink-soft)"/><circle cx="24" cy="24" r="6" fill="var(--pill)" stroke="var(--ink-soft)"/><path d="M44 24 C50 24 50 36 40 38" stroke="var(--gut)" stroke-width="4" fill="none"/>`,
+  hours:`<rect x="10" y="12" width="36" height="20" rx="4" fill="var(--coat)" stroke="var(--ink-soft)"/>${dot(18,22,3)}${dot(28,22,3)}${dot(38,22,3)}<path d="M8 40 C20 38 36 36 50 36" stroke="var(--drug)" stroke-width="2.5" fill="none"/>`,
+  ind:`<path d="M10 24 A10 10 0 1 1 10 25 Z" fill="var(--enzyme)"/><path d="M28 24 A10 10 0 1 1 28 25 Z" fill="var(--enzyme)"/><path d="M46 24 A9 9 0 1 1 46 25 Z" fill="var(--enzyme)"/><path d="M44 42 L50 34 L54 42 Z" fill="var(--warn)"/><text x="6" y="44" font-size="10" fill="var(--ink)" font-family="monospace">level ↓</text>`,
+  inh:`<circle cx="18" cy="22" r="10" fill="var(--blocked)"/><rect x="24" y="18" width="7" height="7" fill="var(--gold)"/>${dot(42,14,3.5)}${dot(46,24,3.5)}${dot(40,32,3.5)}<text x="6" y="44" font-size="10" fill="var(--ink)" font-family="monospace">level ↑</text>`,
+  A:`<rect x="4" y="18" width="48" height="6" fill="var(--membrane)"/>${dot(18,10,4)}${dot(30,34,4)}<path d="M18 14 L28 30" stroke="var(--ink-soft)" stroke-width="1.5"/><text x="40" y="12" font-size="13" font-weight="700" fill="var(--ink)" font-family="monospace">A</text>`,
+  D:`<circle cx="22" cy="24" r="10" fill="var(--albumin)" opacity=".45" stroke="var(--albumin)"/>${dot(32,20,3.5)}${dot(12,30,3.5)}<text x="40" y="12" font-size="13" font-weight="700" fill="var(--ink)" font-family="monospace">D</text>`,
+  M:`<path d="M20 24 L36 16 A16 16 0 1 0 36 32 Z" fill="var(--enzyme)"/>${dot(42,24,4)}<text x="42" y="44" font-size="13" font-weight="700" fill="var(--ink)" font-family="monospace">M</text>`,
+  E:`<path d="M24 6 C8 6 8 40 24 40 C30 40 30 30 26 26 C24 24 24 22 26 20 C30 16 30 6 24 6 Z" fill="var(--kidney)"/><path d="M26 40 L32 44" stroke="var(--gold)" stroke-width="3"/><text x="40" y="12" font-size="13" font-weight="700" fill="var(--ink)" font-family="monospace">E</text>`,
+  dig:`<path d="M28 40 C10 28 8 14 18 10 C24 8 28 14 28 16 C28 14 32 8 38 10 C48 14 46 28 28 40 Z" fill="var(--vessel)"/><path d="M6 26 H18 L22 18 L26 34 L30 26 H50" stroke="var(--ink)" stroke-width="1.6" fill="none"/>`,
+  lith:`<rect x="10" y="10" width="36" height="28" rx="4" fill="var(--water)" stroke="var(--ink-soft)"/><text x="16" y="30" font-size="14" font-weight="700" fill="var(--ink)" font-family="monospace">Na+</text>`,
+  warf:`<circle cx="18" cy="24" r="9" fill="var(--vessel)"/><circle cx="34" cy="20" r="7" fill="var(--vessel)" opacity=".7"/><text x="10" y="44" font-size="10" font-weight="700" fill="var(--ink)" font-family="monospace">INR</text>`,
+  phen:`<circle cx="28" cy="22" r="14" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><circle cx="24" cy="22" r="5" fill="var(--ink)"/><path d="M14 40 L22 36 L30 40 L38 36 L46 40" stroke="var(--ink-soft)" stroke-width="2" fill="none"/>`,
+  vanc:`<rect x="12" y="4" width="16" height="26" rx="3" fill="var(--vessel)" opacity=".75"/><rect x="12" y="4" width="16" height="6" fill="var(--drug)"/><path d="M40 14 C50 18 50 30 40 34 C46 28 46 20 40 14 Z" fill="var(--skin-edge)"/>`,
+  theo:`<path d="M10 30 C14 10 20 10 22 24 C24 36 30 36 34 20 C36 10 42 12 46 30" stroke="var(--receptor)" stroke-width="3" fill="none"/><path d="M28 4 L22 18 H30 L24 32" stroke="var(--gold)" stroke-width="2.5" fill="none"/>`};
+  return s(map[k]||"")}
+
+/* ================= PART 4: time the blood draw ================= */
+const S4=makeStage("cvDraw",800,420);
+const DRAWS=[
+ {name:"Vancomycin trough",drug:"vancomycin",route:"iv",tau:12,inf:1,doses:[0,12,24,36],tmax:40,win:[35.5,36],target:"trough",th:7,
+  story:"Grace gets IV vancomycin every 12 hours. Each dose runs over about 1 hour. The order: draw a trough level before the fourth dose (hour 36), when she is near steady state.",
+  goal:"Set the draw time for the trough before the fourth dose, then press Draw blood here.",
+  hint:"\"Trough\" means the lowest point. Where is the curve lowest, just before which dose?",
+  why:"A trough shows the lowest level in the dosing interval. Drawn too early, it reads falsely high and could lead to a dose being cut when it did not need to be. It is commonly drawn within about 30 minutes before the next dose."},
+ {name:"Gentamicin peak",drug:"gentamicin",route:"iv",tau:8,inf:.5,doses:[0,8,16,24],tmax:28,win:[16.75,17.5],target:"peak",th:2.5,
+  story:"Sam gets IV gentamicin, an aminoglycoside, every 8 hours. Each dose runs over 30 minutes. The order: draw a peak level after the third dose, which starts at hour 16.",
+  goal:"Set the draw time for the peak after the third dose, then press Draw blood here.",
+  hint:"A peak is drawn after the infusion has finished and the drug has had a short time to spread out, often about 30 minutes after the infusion ends.",
+  why:"A peak checks that the level is high enough to kill the bacteria. Drawn during the infusion, it reads falsely high; drawn hours later, falsely low. Many protocols draw it about 30 minutes after a 30-minute infusion ends."},
+ {name:"Gentamicin trough",drug:"gentamicin",route:"iv",tau:8,inf:.5,doses:[0,8,16,24],tmax:28,win:[23.5,24],target:"trough",th:2.5,
+  story:"Same patient, same gentamicin. The next order: a trough level before the fourth dose at hour 24.",
+  goal:"Set the draw time for the trough before the fourth dose, then press Draw blood here.",
+  hint:"The trough is the lowest point, right before the next dose goes in.",
+  why:"For aminoglycosides, a trough that stays high means the drug is not clearing between doses. That raises the risk of kidney and hearing damage, so the prescriber may space the doses out."},
+ {name:"Digoxin level",drug:"digoxin",route:"po",tau:24,inf:0,doses:[0,24],tmax:30,win:[6,24],target:"level",th:36,
+  story:"Ruth takes oral digoxin once a day at hour 0. The prescriber wants a digoxin level. After a dose, digoxin takes several hours to move from the blood into the tissues where it acts.",
+  goal:"Pick a draw time that gives a true reading, then press Draw blood here.",
+  hint:"Blood levels right after a dose are high because the drug has not yet spread into the tissues. Wait at least 6 to 8 hours, or draw just before the next dose.",
+  why:"Digoxin distributes slowly into heart and muscle tissue. A level drawn in the first few hours after a dose looks falsely high. It is drawn at least 6 to 8 hours after the dose, often just before the next one."},
+ {name:"Lithium level",drug:"lithium",route:"po",tau:12,inf:0,doses:[0,12,24],tmax:28,win:[11,12],target:"level",th:20,
+  story:"Jordan takes lithium twice a day. The evening dose is at hour 0 (2100). The order: a lithium level in the morning, before the morning dose at hour 12 (0900).",
+  goal:"Set the draw time for the morning lithium level, then press Draw blood here.",
+  hint:"Lithium levels are usually drawn about 12 hours after the last dose, before the next one.",
+  why:"Lithium ranges were set using samples taken about 12 hours after the last dose. A sample drawn sooner reads higher than the true trough and could lead to a wrong dose change."}];
+const DR={i:0,t:2,res:{},shown:false};
+function drLevel(sc,t){const k=Math.LN2/sc.th;let s=0;sc.doses.forEach(d=>{if(t<=d)return;const u=t-d;
+  if(sc.route==="po"){const ka=1.2;s+=ka/(ka-k)*(Math.exp(-k*u)-Math.exp(-ka*u))}
+  else if(u<sc.inf){s+=(1-Math.exp(-k*u))/(k*sc.inf)}else s+=(1-Math.exp(-k*sc.inf))/(k*sc.inf)*Math.exp(-k*(u-sc.inf))});return s}
+function drMax(sc){let m=0;for(let t=0;t<=sc.tmax;t+=.05)m=Math.max(m,drLevel(sc,t));return m}
+function drFmt(sc,t){const h=Math.floor(t),m=Math.round((t-h)*60);return `hour ${h}${m?":"+String(m).padStart(2,"0"):""}`}
+function drUI(){const sc=DRAWS[DR.i];$("#dChips").innerHTML=DRAWS.map((d,i)=>`<button type="button" class="casechip" aria-pressed="${i===DR.i}" data-i="${i}">${i+1}. ${d.name}${DR.res[i]?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#dChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{DR.i=+b.dataset.i;DR.t=1;DR.shown=false;$("#dMsg").className="msg";drUI();a11yKey=""});
+  $("#dN").textContent=`Scenario ${DR.i+1} of ${DRAWS.length} · ${sc.drug}`;$("#dTitle").textContent=sc.name;$("#dStory").textContent=sc.story;$("#dGoal").textContent=sc.goal;$("#dWhy").textContent=sc.why;
+  const r=$("#dTime");r.max=sc.tmax;r.value=DR.t;drOut()}
+function drOut(){const sc=DRAWS[DR.i];$("#dTime").value=DR.t;$("#dTimeOut").textContent=drFmt(sc,DR.t);$("#dTime").setAttribute("aria-valuetext",drFmt(sc,DR.t))}
+function drSet(t){const sc=DRAWS[DR.i];DR.t=clamp(Math.round(t*4)/4,0,sc.tmax);drOut();a11yKey=""}
+$("#dTime").addEventListener("input",e=>drSet(+e.target.value));
+$("#dMinus").onclick=()=>drSet(DR.t-.25);$("#dPlus").onclick=()=>drSet(DR.t+.25);$("#dMinusH").onclick=()=>drSet(DR.t-1);$("#dPlusH").onclick=()=>drSet(DR.t+1);
+function dMsg(cls,t){const m=$("#dMsg");m.className="msg show "+cls;m.textContent=t}
+$("#dCheck").onclick=()=>{const sc=DRAWS[DR.i];const t=DR.t;const [a,b]=sc.win;
+  if(t>=a-1e-6&&t<=b+1e-6){DR.res[DR.i]=1;dMsg("good",`✓ ${drFmt(sc,t)} works. `+(sc.target==="trough"?"That catches the lowest point, just before the next dose.":sc.target==="peak"?"The infusion has finished and the drug has had time to spread out, so this is a true peak.":"That gives a reading that reflects the real level."));drUI();return}
+  const nextDose=sc.doses.find(d=>d>=t-1e-6);const inInf=sc.doses.some(d=>t>d&&t<d+sc.inf);let why;
+  if(inInf)why="The infusion is still running at that time, so the level is rising and reads falsely high.";
+  else if(sc.target==="trough"&&t>b)why="That is after the next dose has gone in. The trough must be drawn before it.";
+  else if(sc.target==="trough")why=`That is not the lowest point. The level keeps falling until the dose at hour ${sc.doses.find(d=>d>=a)}.`;
+  else if(sc.target==="peak"&&t<a)why="Too early: the dose has not finished running in and spreading out.";
+  else if(sc.target==="peak")why="Too late: the level has already started to fall, so this would read falsely low.";
+  else if(t<a)why="Too soon after the dose: the drug has not finished spreading into the tissues, so the blood level reads falsely high.";
+  else why="That is after the next dose, so the reading mixes in the new dose.";
+  dMsg("warn","Not quite. "+why+(nextDose!=null?"":""))};
+$("#dHint").onclick=()=>dMsg("info","Hint: "+DRAWS[DR.i].hint);
+$("#dShow").onclick=()=>{const sc=DRAWS[DR.i];DR.shown=true;drSet((sc.win[0]+sc.win[1])/2);dMsg("info",`The green band shows the right window: ${drFmt(sc,sc.win[0])} to ${drFmt(sc,sc.win[1])}. The marker has moved there.`)};
+$("#dNext").onclick=()=>{DR.i=(DR.i+1)%DRAWS.length;DR.t=1;DR.shown=false;$("#dMsg").className="msg";drUI();a11yKey=""};
+function drawDraw(now){use(S4);const tt=now/1000;const sc=DRAWS[DR.i];const mx=drMax(sc)*1.15;
+  panelBox(8,8,784,404,{fill:hexA(C.panel,.95)});title(22,28,sc.drug+" level after each dose (teaching curve)");
+  const gx=70,gy=100,gw=690,gh=220;const X=t=>gx+t/sc.tmax*gw,Y=v=>gy+gh-clamp(v/mx,0,1)*gh;
+  for(let h=0;h<=sc.tmax;h+=(sc.tmax>30?4:2)){line(X(h),gy,X(h),gy+gh,C.grid,1);txt(X(h),gy+gh+16,String(h),{size:11.5,mono:true,align:"center",color:C["ink-soft"]})}
+  txt(gx+gw,gy+gh+64,"hours since the first dose",{size:11.5,mono:true,weight:600,align:"right",color:C["ink-soft"]});
+  line(gx,gy,gx,gy+gh,C["ink-soft"],1.5);line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.5);
+  ctx.save();ctx.translate(30,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,"drug level",{size:11.5,mono:true,weight:600,align:"center",color:C["ink-soft"]});ctx.restore();
+  const solved=!!DR.res[DR.i];if(solved||DR.shown){ctx.fillStyle=hexA(C.good,.22);ctx.fillRect(X(sc.win[0]),gy,Math.max(3,X(sc.win[1])-X(sc.win[0])),gh);label(X(sc.win[0])-4,gy+12,"right window",{size:11.5,weight:700,color:C.good,align:"right",border:C.good})}
+  /* doses */
+  sc.doses.forEach((d,i)=>{if(sc.route==="po"){tablet(X(d),gy+gh+38,7,C.pill,{noScore:true})}else{rr(X(d),gy+gh-6,Math.max(4,X(d+sc.inf)-X(d)),6,1);ctx.fillStyle=hexA(C.albumin,.85);ctx.fill();rr(X(d)-7,gy+gh+28,14,20,3);fillStroke(hexA(C.glass,.9),C["glass-edge"],1.2)}
+    txt(X(d)+12,gy+gh+38,"dose "+(i+1),{size:11.5,mono:true,weight:600,color:C["ink-soft"]})});
+  /* curve, animated drawing on a loop */
+  const prog=clamp((tt%10)/4,0,1);plotFn(t=>drLevel(sc,t),0,sc.tmax,gx,gy,gw,gh,0,mx,C.drug,2.6,null,prog*sc.tmax);
+  if(prog<1){const t=prog*sc.tmax;circ(X(t),Y(drLevel(sc,t)),4.5,C.drug)}
+  /* syringe marker */
+  const x=X(DR.t),y=Y(drLevel(sc,DR.t));line(x,gy-6,x,gy+gh,C.bad,2,[5,4]);circ(x,y,6.5,C.bad,C.panel,2);
+  syringe(x,gy-8,44,-Math.PI/2+.0,.6,{col:C.vessel});label(x+(x>gx+gw-120?-16:16),gy-34,"draw at "+drFmt(sc,DR.t),{size:12,weight:700,color:C.bad,align:x>gx+gw-120?"right":"left",border:C.bad});
+  const inInf=sc.doses.some(d=>DR.t>d&&DR.t<d+sc.inf);if(inInf)label(x+10,y+22,"infusion still running",{size:11.5,weight:700,color:C["warn-ink"],align:"left"});
+  txt(22,400,sc.route==="po"?"Tablet icons mark oral doses.":"Blue blocks on the time axis are the IV infusions; bags mark each dose.",{size:12,color:C["ink-soft"]})}
+function drawA11y(){const sc=DRAWS[DR.i];const v=drLevel(sc,DR.t),mx=drMax(sc);const pos=v>mx*.75?"near the top of a peak":v<mx*.35?"near a low point":"in the middle of the curve";
+  return [`Blood draw timeline for ${sc.name}: marker at ${drFmt(sc,DR.t)}, ${pos}.`,
+    `A graph of ${sc.drug} level over ${sc.tmax} hours. The purple curve rises after each dose at hours ${sc.doses.join(", ")} and falls between doses. A red dashed line with a syringe marks the chosen draw time, ${drFmt(sc,DR.t)}, which sits ${pos}.${DR.res[DR.i]||DR.shown?" A green band marks the right window, "+drFmt(sc,sc.win[0])+" to "+drFmt(sc,sc.win[1])+".":""}`]}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI()}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+/* drag: a ghost follows the pointer; drop on a bin */
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join("; ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+const A11Y={sim:{cv:"#cvSim",f:simA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y},draw:{cv:"#cvDraw",f:drawA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","cases","sort","draw"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now(),rdT=0;
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="sim"){simStep(dt);drawSim(now);rdT+=dt;if(rdT>.2){rdT=0;simRead()}}
+    else if(curTab==="cases")drawCase(now);
+    else if(curTab==="draw")drawDraw(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__cl={tab:k=>showTab(k),
+  sim:o=>{Object.assign(SIM,o);simChanged()},simRun:h=>{SIM.running=true;let g=0;while(SIM.now<Math.min(TMAX,h==null?TMAX:h)&&g++<5000)simStep(.02);simUI();simStatus();simRead();return {now:SIM.now,done:[...SIM.done]}},
+  simEv:k=>simEvent(k),simState:()=>({now:SIM.now,level:lvl(SIM.now),done:[...SIM.done],th:SIM.model.th,F:SIM.model.F}),
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),
+  sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order}),
+  drawGo:i=>{DR.i=i;DR.t=1;DR.shown=false;drUI()},drawSet:t=>drSet(t),drawCheck:()=>{$("#dCheck").click();return $("#dMsg").className},drawShow:()=>$("#dShow").click()};
+readColors();simRebuild(true);simStatus();simChalUI();caseUI();sLoad(0);drUI();fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

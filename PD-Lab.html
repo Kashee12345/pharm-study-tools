@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pharmacodynamics Lab</title>
+<meta name="description" content="Hands-on pharmacodynamics lab: a receptor and dose-response simulator with agonists, partial agonists, competitive and noncompetitive antagonists and receptor up- and down-regulation; a therapeutic index explorer; nursing case files; and sorting games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3784;--accent-wash:#E2E5F6;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#C4644F;--act3:#B57412;--act4:#2F7FC1;--act5:#2E8A7A;--act6:#A04E8C;--act7:#5E7F1A;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  /* pharmacodynamics palette */
+  --ecf:#EEF0F7;--cyto:#F4EEE3;--nuc:#E4DDF2;--mem:#D3B04E;--mem-tail:#EADFB8;
+  --drug:#6A4BC4;--rec:#1F8A85;--lig:#C98314;--blk:#6E7A84;--part:#B0508E;--inv:#2F7FC1;
+  --ion:#2F7FC1;--cl:#2E8A7A;--camp:#D0457A;--enz:#4F7FAA;--gprot:#C4644F;--kinase:#A04E8C;--dna:#2F6FD0;--mrna:#2E8A7A;
+  --eff:#2F7F55;--tox:#B5301F;--leth:#5E6E7A;
+  --water:#CFE5F1;--acid:#D0457A;--base:#2E8A7A;--bubble:#A9C7D8;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --rbc:#C4382F;--hist:#D98A1C;--ige:#3F6DB3;--mast:#C9A0D9;--liver:#9A5A3A;--kid:#B0605A;--gut:#E8B9A0;
+  --food:#E8B86A;--leaf:#4F8A2A;--cheese:#E0BE48;--grape:#E0705A;--milk:#F2EEE2;
+  --scr:#0F1A1F;--scr-ink:#E8EEF1;--hr:#1E8A5A;--glow:#F2B33B;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A24;--cyto:#211E1A;--nuc:#231F33;--mem:#B8973A;--mem-tail:#4A4128;
+  --drug:#B79CF5;--rec:#5CC9C2;--lig:#F2B33B;--blk:#9AA6AF;--part:#E08AC4;--inv:#6FB0F0;
+  --ion:#6FB0F0;--cl:#5CC4B0;--camp:#F08AB0;--enz:#8FB8DE;--gprot:#E08A74;--kinase:#D186C0;--dna:#6FA3F0;--mrna:#5CC4B0;
+  --eff:#6BC293;--tox:#F07A62;--leth:#9AAAB6;
+  --water:#1F3A4A;--acid:#F08AB0;--base:#5CC4B0;--bubble:#4A6A7A;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --rbc:#F27A6E;--hist:#F2A93B;--ige:#7FA6E6;--mast:#8A6A9A;--liver:#C98A6A;--kid:#D98A84;--gut:#6A4A3A;
+  --food:#9A7A40;--leaf:#8CC45A;--cheese:#E0BE48;--grape:#F2957E;--milk:#3A3830;
+  --scr:#081014;--scr-ink:#E8EEF1;--hr:#4FD08A;--glow:#F2B33B;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#F2A93B;--act4:#5AA9E6;--act5:#5CC4B0;--act6:#D186C0;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A24;--cyto:#211E1A;--nuc:#231F33;--mem:#B8973A;--mem-tail:#4A4128;
+  --drug:#B79CF5;--rec:#5CC9C2;--lig:#F2B33B;--blk:#9AA6AF;--part:#E08AC4;--inv:#6FB0F0;
+  --ion:#6FB0F0;--cl:#5CC4B0;--camp:#F08AB0;--enz:#8FB8DE;--gprot:#E08A74;--kinase:#D186C0;--dna:#6FA3F0;--mrna:#5CC4B0;
+  --eff:#6BC293;--tox:#F07A62;--leth:#9AAAB6;
+  --water:#1F3A4A;--acid:#F08AB0;--base:#5CC4B0;--bubble:#4A6A7A;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --rbc:#F27A6E;--hist:#F2A93B;--ige:#7FA6E6;--mast:#8A6A9A;--liver:#C98A6A;--kid:#D98A84;--gut:#6A4A3A;
+  --food:#9A7A40;--leaf:#8CC45A;--cheese:#E0BE48;--grape:#F2957E;--milk:#3A3830;
+  --scr:#081014;--scr-ink:#E8EEF1;--hr:#4FD08A;--glow:#F2B33B;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.side .ctl{margin:6px 0 10px}
+.readouts td.v{font-family:var(--mono);font-weight:600;text-align:right}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px}
+.pill-good{color:var(--good);font-weight:600}.pill-bad{color:var(--bad);font-weight:600}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 2 &middot; Pharmacodynamics</div>
+    <h1>Pharmacodynamics Lab</h1>
+    <p class="sub">Turn receptors on and off, watch the dose-response curve move, find the safety margin, work through nursing cases, and sort drugs by how they act. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-bench" data-tab="bench" id="tabbtn-bench" type="button">Part 1 &middot; Receptor Bench</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-ti" data-tab="ti" id="tabbtn-ti" type="button" tabindex="-1">Part 2 &middot; Therapeutic Index Explorer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: receptor bench -->
+  <section id="tab-bench" role="tabpanel" aria-labelledby="tabbtn-bench">
+    <h2 class="gk-sr">Part 1: Receptor Bench</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvBench" role="img" aria-label="Receptor bench."></canvas></div>
+        <div class="stagebar"><span class="caption" id="benchCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--drug)"></i>Full agonist</span>
+          <span><i style="background:var(--part)"></i>Partial agonist</span>
+          <span><i style="background:var(--blk)"></i>Antagonist</span>
+          <span><i class="s" style="background:var(--rec)"></i>Receptor</span>
+          <span><i style="background:var(--glow)"></i>Receptor switched on</span>
+          <span><i class="ln" style="border-top-color:var(--ink-soft)"></i>Agonist alone, normal receptors (dashed)</span>
+        </div>
+        <p class="sim-note">A teaching model with made-up relative units, not real doses. Binding is shown as a snapshot that keeps shuffling, because real drug molecules bind and let go many times a second. Cells often have spare receptors, so the response can be bigger than the share of receptors filled.</p>
+      </div>
+      <aside class="card side" aria-label="Receptor bench controls">
+        <div class="ctl"><label for="agDose">1. Full agonist dose <output id="agDoseOut" for="agDose"></output></label>
+          <input type="range" id="agDose" min="-2" max="3" step="0.25" value="0"><div class="ticks" aria-hidden="true"><span>0.01</span><span>1000 units</span></div></div>
+        <h3 id="partLab">2. Add a partial agonist</h3>
+        <div class="seg3" id="partSel" role="group" aria-labelledby="partLab"></div>
+        <h3 id="antLab">3. Add an antagonist</h3>
+        <div class="seg3" id="antSel" role="group" aria-labelledby="antLab"></div>
+        <div class="ctl"><label for="antAmt">Antagonist amount <output id="antAmtOut" for="antAmt"></output></label>
+          <input type="range" id="antAmt" min="0" max="3" step="1" value="2"><div class="ticks" aria-hidden="true"><span>none</span><span>high</span></div></div>
+        <div class="ctl"><label for="recN">4. Receptor number <output id="recNOut" for="recN"></output></label>
+          <input type="range" id="recN" min="40" max="160" step="10" value="100"><div class="ticks" aria-hidden="true"><span>down-regulated</span><span>up-regulated</span></div></div>
+        <div class="bar"><button class="tbtn" type="button" id="benchReset">Reset all</button></div>
+        <table class="readouts" id="benchRead"><caption class="sr">Receptor bench readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="benchStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="benchChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: therapeutic index explorer -->
+  <section id="tab-ti" role="tabpanel" aria-labelledby="tabbtn-ti" hidden>
+    <h2 class="gk-sr">Part 2: Therapeutic Index Explorer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvTI" role="img" aria-label="Therapeutic index explorer."></canvas></div>
+        <div class="stagebar"><span class="caption" id="tiCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--eff)"></i>Helped</span>
+          <span><i style="background:var(--tox)"></i>Toxic effect</span>
+          <span><i style="background:var(--sunk)"></i>No effect yet</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Therapeutic window</span>
+        </div>
+        <p class="sim-note">Sixty made-up people with normal spread in how sensitive they are. Doses are relative teaching units. In this model the window is the dose range where at least 80% are helped and no more than 5% have a toxic effect.</p>
+      </div>
+      <aside class="card side" aria-label="Therapeutic index controls">
+        <h3 id="tiDrugLab">1. Pick a drug profile</h3>
+        <div class="seg3" id="tiDrug" role="group" aria-labelledby="tiDrugLab"></div>
+        <div class="ctl"><label for="tiTD">TD50 (toxic dose for half) <output id="tiTDOut" for="tiTD"></output></label>
+          <input type="range" id="tiTD" min="0.2" max="2.5" step="0.1" value="2"><div class="ticks" aria-hidden="true"><span>close to ED50</span><span>far away</span></div></div>
+        <div class="ctl"><label for="tiDose">2. Dose given <output id="tiDoseOut" for="tiDose"></output></label>
+          <input type="range" id="tiDose" min="-1" max="3" step="0.05" value="0.3"><div class="ticks" aria-hidden="true"><span>0.1</span><span>1000 units</span></div></div>
+        <label class="mode"><input type="checkbox" id="tiKid"> Kidney function drops (drug level doubles)</label>
+        <table class="readouts" id="tiRead"><caption class="sr">Therapeutic index readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="tiStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="tiChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="PD-Walkthrough.html">Pharmacodynamics Walkthrough</a>. Patients, charts and lab values are fictional. Drugs are named by generic name only, no doses are given, and all simulator numbers are made-up relative teaching units. Always follow the prescriber, the order, the label and your facility's protocols.</footer>
+
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "cyto", "nuc", "mem", "mem-tail", "drug", "rec", "lig", "blk", "part", "inv", "ion", "cl", "camp", "enz", "gprot", "kinase", "dna", "mrna", "eff", "tox", "leth", "water", "acid", "base", "bubble", "skin", "skin-edge", "body", "body-edge", "rbc", "hist", "ige", "mast", "liver", "kid", "gut", "food", "leaf", "cheese", "grape", "milk", "scr", "scr-ink", "hr", "glow"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= pharmacodynamics drawing helpers ================= */
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ink(a){return hexA(C.ink,a==null?.5:a)}
+/* lipid bilayer, horizontal, centred on y. o.gaps=[[x0,x1],...] skipped. o.th thickness */
+function membrane(x,y,w,o){o=o||{};const th=o.th||24,r=o.r||4.2,step=r*2.15;
+  ctx.fillStyle=C["mem-tail"];ctx.fillRect(x,y-th/2+r,w,th-2*r);
+  const gaps=o.gaps||[];const inGap=X=>gaps.some(g=>X>g[0]-r&&X<g[1]+r);
+  for(let X=x+r;X<x+w-r+.1;X+=step){if(inGap(X))continue;
+    line(X-1.2,y-th/2+r,X-1.2,y-2,hexA(C.mem,.7),1);line(X+1.2,y-th/2+r,X+1.2,y-2,hexA(C.mem,.7),1);
+    line(X-1.2,y+2,X-1.2,y+th/2-r,hexA(C.mem,.7),1);line(X+1.2,y+2,X+1.2,y+th/2-r,hexA(C.mem,.7),1);
+    circ(X,y-th/2+r,r,C.mem);circ(X,y+th/2-r,r,C.mem)}}
+/* molecules: a downward teardrop key. kinds: lig, drug, part, blk, inv */
+const MOLCOL={lig:"lig",drug:"drug",part:"part",blk:"blk",inv:"inv",full:"drug"};
+function molPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*1.05);ctx.bezierCurveTo(x+s*.45,y+s*.45,x+s*.95,y+s*.1,x+s*.95,y-s*.35);ctx.arc(x,y-s*.35,s*.95,0,Math.PI,true);ctx.bezierCurveTo(x-s*.95,y+s*.1,x-s*.45,y+s*.45,x,y+s*1.05);ctx.closePath()}
+function mol(kind,x,y,s,o){o=o||{};s=s||9;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);
+  const col=C[MOLCOL[kind]||kind]||C.drug;molPath(0,0,s);fillStroke(col,ink(.55),1.2);
+  if(kind==="blk"){line(-s*.45,-s*.8,s*.45,0,onFill(),2);line(s*.45,-s*.8,-s*.45,0,onFill(),2)}
+  else if(kind==="inv"){line(-s*.45,-s*.38,s*.45,-s*.38,onFill(),2.2)}
+  else if(kind==="part"){circ(0,-s*.38,s*.32,null,onFill(),1.8)}
+  else{circ(-s*.3,-s*.6,s*.22,hexA(C.panel,.55))}
+  ctx.restore()}
+/* small round ion with optional text */
+function ion(x,y,col,r,lab){circ(x,y,r||4.5,col,ink(.35),.8);if(lab)txt(x,y-(r||4.5)-7,lab,{size:12,weight:700,align:"center",color:col})}
+/* membrane receptor sitting in a membrane at y (centre line). top of receptor at y-48. o.level 0..1 activity glow, o.mol bound kind, o.lock noncompetitive */
+function receptor(x,y,o){o=o||{};const col=o.col||C.rec;const lv=o.level||0;const s=o.s||1;
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  if(lv>0){glow(0,34,34,C.glow,.75*lv);for(let k=0;k<3;k++){const p=P((o.t||0)*1.4+k/3,1);withA((1-p)*lv,()=>circ(Math.sin(k*2.1)*8,24+p*34,3.2,C.glow))}}
+  ctx.beginPath();ctx.moveTo(-17,-48);ctx.lineTo(-6,-48);ctx.lineTo(0,-36);ctx.lineTo(6,-48);ctx.lineTo(17,-48);ctx.quadraticCurveTo(20,-48,20,-44);ctx.lineTo(18,24);ctx.quadraticCurveTo(18,30,12,30);ctx.lineTo(-12,30);ctx.quadraticCurveTo(-18,30,-18,24);ctx.lineTo(-20,-44);ctx.quadraticCurveTo(-20,-48,-17,-48);ctx.closePath();
+  fillStroke(o.dim?mix(col,C.panel,.55):col,ink(.5),1.3);
+  line(-10,-28,-10,18,hexA(C.panel,.35),2);line(0,-24,0,20,hexA(C.panel,.35),2);line(10,-28,10,18,hexA(C.panel,.35),2);
+  if(lv>0){rr(-12,16,24,10,4);ctx.fillStyle=mix(C.glow,col,1-lv);ctx.fill()}
+  if(o.lock){padlock(23,-14,8,o.lockCol||C.blk)}
+  ctx.restore();
+  if(o.mol)mol(o.mol,x,y-48*s-9*s+(o.molDy||0),9*s,{a:o.molA})}
+function padlock(x,y,s,col){ctx.beginPath();ctx.arc(x,y-s*.35,s*.55,Math.PI,0);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();rr(x-s*.8,y-s*.35,s*1.6,s*1.25,2);fillStroke(col,ink(.5),1);circ(x,y+.25*s,s*.2,onFill())}
+/* ion channel in membrane at y; open 0..1 */
+function channel(x,y,open,o){o=o||{};const col=o.col||C.rec;const g=4+open*9;
+  [-1,1].forEach(sd=>{ctx.beginPath();const x0=x+sd*g;ctx.moveTo(x0,-30+y);ctx.lineTo(x0+sd*18,-34+y);ctx.quadraticCurveTo(x0+sd*22,y,x0+sd*18,y+30);ctx.lineTo(x0,y+26);ctx.quadraticCurveTo(x0+sd*4,y,x0,-30+y);ctx.closePath();fillStroke(o.dim?mix(col,C.panel,.5):col,ink(.5),1.3)});
+  if(o.gate!=null){/* gate flap at top */}}
+/* transporter: two lobes with a pocket */
+function transporter(x,y,o){o=o||{};const col=o.col||C.enz;ctx.beginPath();ctx.ellipse(x-12,y,13,30,0,0,TAU);fillStroke(col,ink(.5),1.3);ctx.beginPath();ctx.ellipse(x+12,y,13,30,0,0,TAU);fillStroke(col,ink(.5),1.3);
+  rr(x-5,y-22,10,30,4);ctx.fillStyle=mix(col,C.panel,.6);ctx.fill()}
+/* enzyme: pac-man with active site notch, mouth facing angle a */
+function enzyme(x,y,r,o){o=o||{};const col=o.col||C.enz;const a=o.ang||0,m=o.mouth==null?.45:o.mouth;
+  ctx.beginPath();ctx.moveTo(x+Math.cos(a)*r*.25,y+Math.sin(a)*r*.25);ctx.arc(x,y,r,a+m,a-m+TAU);ctx.closePath();fillStroke(o.dim?mix(col,C.panel,.5):col,ink(.5),1.3);
+  circ(x-Math.cos(a)*r*.35,y-Math.sin(a)*r*.35-r*.2,r*.12,hexA(C.panel,.5))}
+/* generic cell-wall background: extracellular top, cytoplasm bottom, membrane between */
+function cellBand(x,y,w,h,my,o){o=o||{};ctx.fillStyle=C.ecf;ctx.fillRect(x,y,w,my-y);ctx.fillStyle=C.cyto;ctx.fillRect(x,my,w,y+h-my);membrane(x,my,w,o);
+  if(!o.noLabels){txt(x+8,y+12,o.outLab||"OUTSIDE THE CELL",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(x+8,y+h-12,o.inLab||"INSIDE THE CELL",{size:11.5,mono:true,weight:700,color:C["ink-soft"]})}}
+/* clip helper */
+function clipRect(x,y,w,h,fn){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();fn();ctx.restore()}
+/* ECG */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+(p>.28&&p<.31?-(p-.28)/.03*.12:0)+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+/* compact monitor: o {hr, bp, spo2, rr, lab} T seconds */
+function monitor(x,y,w,h,o,T){rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.stroke();
+  const hr=o.hr||75;const ew=w-24,eh=Math.min(54,h*.36);const ex=x+12,ey=y+10;
+  ctx.save();rr(ex,ey,ew,eh,4);ctx.clip();ctx.beginPath();const beats=ew/w*3.2;
+  for(let i=0;i<=ew;i+=1.5){const tt=(T||0)*hr/60-(ew-i)/ew*beats*hr/75;const v=ecgWave(tt);const Y=ey+eh*.72-v*eh*.6;i?ctx.lineTo(ex+i,Y):ctx.moveTo(ex+i,Y)}ctx.strokeStyle="#4FD08A";ctx.lineWidth=1.8;ctx.stroke();ctx.restore();
+  const items=[["HR",String(Math.round(hr)),"#4FD08A"]];if(o.bp)items.push(["BP",o.bp,"#F2A3C9"]);if(o.spo2!=null)items.push(["SpO₂",o.spo2+"%","#6FC3F0"]);if(o.rr!=null)items.push(["RR",String(o.rr),"#E8EEF1"]);if(o.temp)items.push(["T °C",o.temp,"#F2B33B"]);
+  const cw=(w-24)/items.length;items.forEach((it,i)=>{const lx=x+12+i*cw;txt(lx,ey+eh+16,it[0],{size:11.5,mono:true,weight:600,color:"#A9B8C0"});txt(lx,ey+eh+38,it[1],{size:it[1].length>6?15:18,mono:true,weight:700,color:it[2]});
+    if(o.flags&&o.flags[it[0]]){txt(lx,ey+eh+58,o.flags[it[0]],{size:11.5,mono:true,weight:700,color:"#F2B33B"})}})}
+/* Hill curve */
+function hill(c,ec50,emax,n){n=n||1;if(c<=0)return 0;const a=Math.pow(c,n);return emax*a/(a+Math.pow(ec50,n))}
+/* axes for curves: x log from lx0..lx1 (log10), y 0..100 */
+function axes(x,y,w,h,o){o=o||{};ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.lineTo(x+w,y+h);ctx.stroke();
+  if(o.grid!==false){[.25,.5,.75,1].forEach(f=>line(x,y+h-h*f,x+w,y+h-h*f,hexA(C["ink-soft"],.18),1))}
+  if(o.ylab){ctx.save();ctx.translate(x-(o.ylabDx||30),y+h/2);ctx.rotate(-Math.PI/2);txt(0,0,o.ylab,{size:12,weight:600,align:"center",color:C["ink-soft"]});ctx.restore()}
+  if(o.xlab)txt(x+w/2,y+h+(o.xlabDy||30),o.xlab,{size:12,weight:600,align:"center",color:C["ink-soft"]});
+  if(o.yt)o.yt.forEach(v=>txt(x-6,y+h-h*v[0],v[1],{size:11.5,mono:true,align:"right",color:C["ink-soft"]}));
+  if(o.xt)o.xt.forEach(v=>txt(x+w*v[0],y+h+13,v[1],{size:11.5,mono:true,align:"center",color:C["ink-soft"]}))}
+/* map helpers for log axes */
+function lx(x,w,lc,l0,l1){return x+w*(lc-l0)/(l1-l0)}
+/* simple person icon */
+function person(x,y,s,col,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;circ(x,y-s*1.25,s*.55,col,ink(.4),1);ctx.beginPath();ctx.moveTo(x-s*.85,y+s*.9);ctx.quadraticCurveTo(x-s*.9,y-s*.55,x,y-s*.55);ctx.quadraticCurveTo(x+s*.9,y-s*.55,x+s*.85,y+s*.9);ctx.closePath();fillStroke(col,ink(.4),1);
+  if(o.mark==="ok")poly([[x-s*.35,y+s*.15],[x-s*.05,y+s*.45],[x+s*.4,y-s*.1]],onFill(),2.2);
+  if(o.mark==="x"){line(x-s*.3,y-s*.1,x+s*.3,y+s*.5,onFill(),2.2);line(x+s*.3,y-s*.1,x-s*.3,y+s*.5,onFill(),2.2)}
+  ctx.restore()}
+function capsule(x,y,s,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.panel;ctx.fill();ctx.save();rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col;ctx.fillRect(-s,-s,s,2*s);ctx.restore();ctx.strokeStyle=ink(.5);ctx.lineWidth=1.2;rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.stroke();ctx.restore()}
+function tablet(x,y,r,col){circ(x,y,r,col,ink(.5),1.2);line(x-r*.6,y,x+r*.6,y,hexA(C.panel,.7),1.4)}
+function heart(x,y,s,col,beat){const k=1+(beat||0)*.12;ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.beginPath();ctx.moveTo(0,s*.9);ctx.bezierCurveTo(-s*1.3,0,-s*.9,-s*1,0,-s*.45);ctx.bezierCurveTo(s*.9,-s*1,s*1.3,0,0,s*.9);ctx.closePath();fillStroke(col,ink(.45),1.2);ctx.restore()}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* horizontal meter bar */
+function meter(x,y,w,h,f,col,lab,o){o=o||{};rr(x,y,w,h,h/2);ctx.fillStyle=C.sunk;ctx.fill();if(f>0){rr(x,y,Math.max(h,w*clamp(f,0,1)),h,h/2);ctx.fillStyle=col;ctx.fill()}
+  if(lab)txt(x,y-10,lab,{size:12,weight:600});if(o.val)txt(x+w,y-10,o.val,{size:12,weight:700,mono:true,align:"right",color:o.valCol||C.ink})}
+/* vertical bar */
+function vbar(x,base,w,h,f,col,o){o=o||{};rr(x,base-h,w,h,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const hh=h*clamp(f,0,1.2);if(hh>0){rr(x,base-hh,w,hh,4);ctx.fillStyle=col;ctx.fill()}
+  if(o.lab)txt(x+w/2,base+14,o.lab,{size:12,weight:600,align:"center"});if(o.val)txt(x+w/2,base-hh-11,o.val,{size:12,weight:700,mono:true,align:"center"})}
+/* speed clock chip */
+function speedChip(x,y,t,col){return chipL(x,y,t,col||C.accent)}
+/* water drop */
+function drop(x,y,s,col){ctx.beginPath();ctx.moveTo(x,y-s);ctx.bezierCurveTo(x+s*.9,y,x+s*.7,y+s*.8,x,y+s*.8);ctx.bezierCurveTo(x-s*.7,y+s*.8,x-s*.9,y,x,y-s);ctx.closePath();fillStroke(col,ink(.35),1)}
+/* rounded cell blob */
+function cellBlob(x,y,r,fill,stroke,seed,t){blobPath(x,y,r,seed||1,t||0,.05);fillStroke(fill,stroke,2)}
+
+/* ================= lab helpers ================= */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("pd-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("pd-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+function readRows(el,rows){el.querySelector("tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td class="v">${r[1]}</td></tr>`).join("")}
+function fmtU(l){const v=Math.pow(10,l);if(v>=100)return String(Math.round(v));if(v>=10)return String(Math.round(v));if(v>=1)return (Math.round(v*10)/10).toString();if(v>=.1)return v.toFixed(2).replace(/0$/,"");return v.toFixed(3).replace(/0+$/,"")}
+
+function uu(l){const v=fmtU(l);return v+(v==="1"?" unit":" units")}
+
+/* ================= PART 1: receptor bench ================= */
+const S1=makeStage("cvBench",800,520);
+const KA=1,KP=.03,KB=1,TOP=2.5,EP=.16;
+const PARTS=[["none","None"],["low","Low"],["high","High"]];
+const ANTS=[["none","None"],["comp","Competitive"],["non","Non&shy;competitive"]];
+const BAMT=[0,3,10,30],FRAC=[0,.35,.6,.85],PAMT={none:0,low:.1,high:3};
+const BN={la:0,part:"none",ant:"none",amt:2,rec:100,dispE:0,dispL:0,done:new Set()};
+function bParams(o){o=Object.assign({},BN,o||{});return {p:PAMT[o.part],b:o.ant==="comp"?BAMT[o.amt]:0,frac:o.ant==="non"?FRAC[o.amt]:0,R:o.rec/100}}
+function occ(a,q){const d=1+a/KA+q.p/KP+q.b/KB;return {A:(a/KA)/d,P:(q.p/KP)/d,B:(q.b/KB)/d}}
+function respOf(a,q){const o=occ(a,q);const Rav=q.R*(1-q.frac);const S=TOP*Rav*(o.A+EP*o.P);return 100*(S/(S+1))/(TOP/(TOP+1))}
+const REF={p:0,b:0,frac:0,R:1};
+function curveMax(q){return respOf(1e7,q)}
+function ec50(q){const top=curveMax(q),bot=respOf(0,q);const half=bot+(top-bot)/2;if(top-bot<1)return NaN;let lo=-6,hi=8;for(let i=0;i<50;i++){const m=(lo+hi)/2;if(respOf(Math.pow(10,m),q)<half)lo=m;else hi=m}return (lo+hi)/2}
+function bNow(){const q=bParams();const a=Math.pow(10,BN.la);return {q,a,o:occ(a,q),E:respOf(a,q),Eref:respOf(a,REF),max:curveMax(q),ec:ec50(q)}}
+const BCH=["Find the EC50: with the agonist alone, set a dose that gives a response close to 50%.",
+ "Add a competitive antagonist, then raise the agonist dose until the response is back above 90%.",
+ "Show that a noncompetitive antagonist caps the response: high amount and the top dose, response still below 60%.",
+ "Set the full agonist to 10 units or more, then add a high amount of partial agonist and watch the response fall.",
+ "Down-regulate receptors to 60% or less and see the top of the curve drop (tolerance).",
+ "Up-regulate receptors to 140% or more: the same dose now gives more than normal (supersensitivity)."];
+function benchCheck(){const s=bNow(),d=BN.done;const plain=BN.part==="none"&&(BN.ant==="none"||BN.amt===0)&&BN.rec===100;
+  if(plain&&s.E>=40&&s.E<=60)d.add(0);
+  if(BN.ant==="comp"&&BN.amt>=1&&BN.part==="none"&&BN.rec===100&&s.E>90)d.add(1);
+  if(BN.ant==="non"&&BN.amt===3&&BN.la>=3&&s.E<60)d.add(2);
+  if(BN.part==="high"&&BN.la>=1){const q=bParams({part:"none"});if(respOf(s.a,q)-s.E>15)d.add(3)}
+  if(BN.rec<=60&&s.max<90)d.add(4);
+  if(BN.rec>=140&&s.E>s.Eref+8)d.add(5);
+  chalUI($("#benchChal"),BCH,d)}
+function benchStatus(){const s=bNow();let cls="",t="";
+  if(BN.ant==="non"&&BN.amt>0)t=`The noncompetitive antagonist has locked ${Math.round(FRAC[BN.amt]*100)}% of receptors out of action. More agonist cannot unlock them, so the top of the curve is lower (now about ${Math.round(s.max)}%). This block is insurmountable.`;
+  else if(BN.ant==="comp"&&BN.amt>0)t=`The competitive antagonist sits in the same binding site. The curve has shifted right (EC50 now about ${uu(s.ec)}), but the top is the same: enough agonist can win the receptors back.`;
+  else if(BN.part!=="none")t=s.E<s.Eref-3?`The partial agonist holds receptors with high affinity but only switches them partly on. With a lot of full agonist around, it pulls the response down: it acts like an antagonist.`:`The partial agonist adds a small signal of its own. At low full agonist doses it can raise the response; at high doses it lowers it.`;
+  else if(BN.rec<100)t=`Fewer receptors (down-regulation). The same dose gives less effect and the curve's top is lower: this is tolerance.`;
+  else if(BN.rec>100)t=`Extra receptors (up-regulation). The same dose gives more effect than normal. This is why a blocker stopped suddenly can cause rebound.`;
+  else t=s.E<15?"Low dose: few receptors are filled, so the response is small.":s.E>90?"High dose: almost every receptor is filled. More drug adds little extra effect, only more risk of side effects.":"Middle of the curve: small dose changes make big changes in response.";
+  if(BN.ant!=="none"&&BN.amt>0)cls="warn";const st=$("#benchStatus");st.className="status "+cls;st.textContent=t}
+function benchRead(){const s=bNow();const N=Math.round(16*BN.rec/100);
+  readRows($("#benchRead"),[["Agonist dose",uu(BN.la)],["Receptors",N+" ("+BN.rec+"% of normal)"],["Filled by full agonist",Math.round(s.o.A*100)+"%"],
+   ["Filled by partial agonist",Math.round(s.o.P*100)+"%"],["Filled by competitive blocker",Math.round(s.o.B*100)+"%"],["Locked (noncompetitive)",Math.round(bParams().frac*100)+"%"],
+   ["Response",Math.round(s.E)+"%"],["Curve top (Emax)",Math.round(s.max)+"%"],["Curve EC50",isFinite(s.ec)?uu(s.ec):"–"]])}
+function benchChanged(){$("#agDoseOut").textContent=uu(BN.la);$("#antAmtOut").textContent=["none","low","medium","high"][BN.amt];$("#recNOut").textContent=BN.rec+"%";
+  $("#antAmt").disabled=BN.ant==="none";benchRead();benchStatus();benchCheck();a11yKey=""}
+function benchUI(){segBtns($("#partSel"),PARTS,()=>BN.part,k=>{BN.part=k;benchChanged()});segBtns($("#antSel"),ANTS,()=>BN.ant,k=>{BN.ant=k;benchChanged()});
+  $("#agDose").value=BN.la;$("#antAmt").value=BN.amt;$("#recN").value=BN.rec}
+$("#agDose").oninput=e=>{BN.la=+e.target.value;benchChanged()};$("#antAmt").oninput=e=>{BN.amt=+e.target.value;benchChanged()};$("#recN").oninput=e=>{BN.rec=+e.target.value;benchChanged()};
+$("#benchReset").onclick=()=>{Object.assign(BN,{la:0,part:"none",ant:"none",amt:2,rec:100});benchUI();benchChanged()};
+/* receptor assignment that reshuffles every epoch (binding is dynamic) */
+function bAssign(N,nL,counts,ep){const idx=[];for(let i=nL;i<N;i++)idx.push(i);idx.sort((x,y)=>rnd(ep*37+x*7.3)-rnd(ep*37+y*7.3));
+  const k=Array(N).fill("");for(let i=0;i<nL;i++)k[i]="L";let c=0;["A","P","B"].forEach(t=>{for(let j=0;j<counts[t]&&c<idx.length;j++)k[idx[c++]]=t});return k}
+function bCounts(N,nL,o){const av=N-nL;let A=Math.round(o.A*av),P=Math.round(o.P*av),B=Math.round(o.B*av);while(A+P+B>av){if(B>0)B--;else if(P>0)P--;else A--}return {A,P,B}}
+const KMOL={A:"drug",P:"part",B:"blk"};
+function lockPos(N,i){/* spread locked receptors across both rows */return i}
+function drawBench(now){use(S1);const t=now/1000;const s=bNow();const q=s.q;
+  BN.dispE+=(s.E-BN.dispE)*.12;BN.dispL+=(BN.la-BN.dispL)*.15;
+  const N=Math.round(16*BN.rec/100),nL=Math.round(N*q.frac);const cnt=bCounts(N,nL,s.o);
+  const EPL=1.7,ep=Math.floor(t/EPL),ph=(t%EPL)/EPL;const kNow=bAssign(N,nL,cnt,ep),kOld=bAssign(N,nL,cnt,ep-1);
+  /* order receptors: interleave locked ones across positions */
+  const pos=[];for(let i=0;i<N;i++)pos.push(i);const perm=pos.slice().sort((x,y)=>rnd(x*3.1+N)-rnd(y*3.1+N));
+  title(14,20,`Cell surface · ${N} receptors`+(BN.rec<100?" (down-regulated)":BN.rec>100?" (up-regulated)":" (normal)"));
+  const rows=[{m:196,top:34},{m:408,top:252}];const perRow=Math.ceil(N/2);
+  rows.forEach((r,ri)=>{ctx.fillStyle=C.ecf;ctx.fillRect(0,r.top,478,r.m-r.top);ctx.fillStyle=C.cyto;ctx.fillRect(0,r.m,478,46);
+    const n=ri===0?perRow:N-perRow;const sp=Math.min(46,440/Math.max(1,n));const rs=Math.min(.8,(sp-7)/40);const x0=239-sp*(n-1)/2;const xs=[];for(let j=0;j<n;j++)xs.push(x0+j*sp);
+    membrane(0,r.m,478,{gaps:xs.map(X=>[X-19*rs,X+19*rs])});txt(8,r.m+34,"INSIDE",{size:11,mono:true,weight:700,color:C["ink-soft"]});
+    /* free molecules */
+    const nf=[["drug",Math.round(1+(BN.dispL+2)*1.6)],["part",q.p?(q.p>3?6:3):0],["blk",q.b?(q.b>15?7:q.b>5?5:3):(q.frac?Math.round(q.frac*7):0)]];let fi=0;
+    nf.forEach(f=>{for(let k=0;k<f[1];k++,fi++){const sd=fi*13+ri*101;const fx=20+P(rnd(sd)+t*.018*(rnd(sd+1)>.5?1:-1),1)*438;const fy=r.top+16+rnd(sd+2)*(r.m-r.top-96)+Math.sin(t*1.3+sd)*5;mol(f[0],fx,fy,7,{rot:Math.sin(t+sd)*.6,a:.85})}});
+    xs.forEach((X,j)=>{const gi=perm[ri===0?j:perRow+j];const kn=kNow[gi],ko=kOld[gi];
+      const locked=kn==="L";const lv=locked?0:kn==="A"?1:kn==="P"?.35:0;
+      receptor(X,r.m,{s:rs,level:lv,t:t,lock:locked,dim:locked});
+      const by=r.m-48*rs-9*rs;const ms=9*rs;
+      if(locked){mol("blk",X+19*rs,r.m-14,6*rs/.8)}
+      else{const tr=smooth(seg(ph,0,.25));
+        if(ko&&ko!=="L"&&ko!==kn)withA(1-tr,()=>mol(KMOL[ko],X,by-tr*40,ms,{rot:tr}));
+        if(kn&&kn!==ko)mol(KMOL[kn],X,by-(1-tr)*40,ms,{rot:(1-tr)*.8,a:tr});else if(kn)mol(KMOL[kn],X,by,ms)}});
+  });
+  const sum=`Bound now: ${cnt.A} agonist · ${cnt.P} partial · ${cnt.B} blocker`+(nL?` · ${nL} locked`:"")+` · ${N-nL-cnt.A-cnt.P-cnt.B} empty`;
+  txt(239,494,sum,{size:12.5,weight:600,align:"center"});
+  /* graph */
+  panelBox(490,8,302,300);title(504,26,"Dose-response curve");
+  const gx=544,gy=50,gw=232,gh=200,l0=-2,l1=3,ym=120;
+  axes(gx,gy,gw,gh,{grid:false,xlab:"Agonist dose (log, relative units)",xlabDy:30,ylab:"Response (% of normal max)",ylabDx:36,yt:[[0,"0"],[50/ym,"50"],[100/ym,"100"],[1,"120"]],xt:[[0,"0.01"],[.2,"0.1"],[.4,"1"],[.6,"10"],[.8,"100"],[1,"1000"]]});
+  line(gx,gy+gh-gh*100/ym,gx+gw,gy+gh-gh*100/ym,hexA(C["ink-soft"],.35),1,[2,3]);line(gx,gy+gh-gh*50/ym,gx+gw,gy+gh-gh*50/ym,hexA(C["ink-soft"],.2),1,[2,3]);
+  plotFn(l=>respOf(Math.pow(10,l),REF),l0,l1,gx,gy,gw,gh,0,ym,C["ink-soft"],1.8,[5,4]);
+  plotFn(l=>respOf(Math.pow(10,l),q),l0,l1,gx,gy,gw,gh,0,ym,C.drug,2.8);
+  const ec=s.ec;if(isFinite(ec)&&ec>l0&&ec<l1){const ex=gx+gw*(ec-l0)/(l1-l0);line(ex,gy+gh-gh*(respOf(Math.pow(10,ec),q))/ym,ex,gy+gh,hexA(C.drug,.7),1.2,[3,3]);txt(ex,gy+gh-8,"EC50",{size:11,mono:true,weight:700,align:"center",color:C.drug})}
+  const dx=gx+gw*(BN.dispL-l0)/(l1-l0),dy=gy+gh-gh*clamp(BN.dispE,0,ym)/ym;line(dx,gy,dx,gy+gh,hexA(C.ink,.35),1,[2,3]);
+  pulseRing(dx,dy,16,C.drug,P(t,1.4));circ(dx,dy,6.5,C.drug,C.panel,2);
+  txt(gx+gw,gy-12,"max "+Math.round(s.max)+"%",{size:12,mono:true,weight:700,align:"right",color:C.drug});
+  /* response panel */
+  panelBox(490,318,302,194);title(504,336,"Response of the cell");
+  meter(504,366,274,16,BN.dispE/120,C.glow,"Effect",{val:Math.round(BN.dispE)+"%"});
+  const mk=504+274*100/120;line(mk,360,mk,388,C["ink-soft"],1.5);txt(mk,396,"normal max",{size:11,align:"center",color:C["ink-soft"]});
+  /* scrolling signal trace */
+  const tx=504,ty=406,tw=274,th=58;rr(tx,ty,tw,th,6);ctx.fillStyle=C.scr;ctx.fill();
+  ctx.save();rr(tx,ty,tw,th,6);ctx.clip();ctx.beginPath();const amp=clamp(BN.dispE/120,0,1)*(th/2-6);const fr=1+BN.dispE/40;
+  for(let i=0;i<=tw;i+=2){const Y=ty+th/2-Math.sin((i/tw)*TAU*3*fr*.6-t*fr*3)*amp*(.8+.2*Math.sin(i*.07+t));i?ctx.lineTo(tx+i,Y):ctx.moveTo(tx+i,Y)}
+  ctx.strokeStyle="#F2B33B";ctx.lineWidth=2;ctx.stroke();ctx.restore();txt(tx+8,ty+11,"CELL SIGNAL",{size:11,mono:true,weight:700,color:"#A9B8C0"});
+  /* occupancy stacked bar */
+  const ox=504,oy=490,ow=274;const parts=[[s.o.A*(1-q.frac),C.drug],[s.o.P*(1-q.frac),C.part],[s.o.B*(1-q.frac),C.blk],[q.frac,mix(C.blk,C.ink,.35)]];let acc=0;
+  rr(ox,oy,ow,12,4);ctx.fillStyle=C.sunk;ctx.fill();parts.forEach(p=>{if(p[0]>0.002){ctx.fillStyle=p[1];ctx.fillRect(ox+ow*acc,oy,ow*p[0],12)}acc+=p[0]});
+  txt(ox,oy-9,"Receptor share",{size:11.5,weight:600,color:C["ink-soft"]});
+}
+function benchA11y(){const s=bNow();const N=Math.round(16*BN.rec/100);
+  const lab=`Receptor bench: agonist dose ${uu(BN.la)}, ${N} receptors, response ${Math.round(s.E)}% of normal maximum.`;
+  const d=`The cell surface shows ${N} teal receptors in two rows${BN.rec!==100?` (${BN.rec}% of normal, ${BN.rec<100?"down-regulated":"up-regulated"})`:""}. About ${Math.round(s.o.A*100)}% are filled by violet full agonist molecules, which glow as they switch on`+
+   (BN.part!=="none"?`, about ${Math.round(s.o.P*100)}% hold pink partial agonist molecules, which glow only faintly`:"")+
+   (BN.ant==="comp"&&BN.amt?`, and about ${Math.round(s.o.B*100)}% hold grey competitive blocker molecules that switch nothing on`:"")+
+   (BN.ant==="non"&&BN.amt?`, and ${Math.round(bParams().frac*100)}% are padlocked and dimmed by a noncompetitive antagonist`:"")+
+   `. Molecules keep swapping places every second or two. On the right, a dose-response graph shows a dashed grey reference curve (agonist alone, normal receptors) and a solid violet curve for the current conditions, with its top at ${Math.round(s.max)}%`+(isFinite(s.ec)?` and its EC50 at about ${uu(s.ec)}`:"")+`. A dot marks the current dose. Below, the effect meter reads ${Math.round(s.E)}% and a scrolling signal trace grows taller and faster with the response.`;
+  return [lab,d]}
+
+/* ================= PART 2: therapeutic index explorer ================= */
+const S2=makeStage("cvTI",800,520);
+const SIG=.2,NPEOPLE=60;
+function erfA(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+.3275911*x);const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return s*y}
+function Phi(z){return .5*(1+erfA(z/Math.SQRT2))}
+function probit(p){let lo=-6,hi=6;for(let i=0;i<60;i++){const m=(lo+hi)/2;if(Phi(m)<p)lo=m;else hi=m}return (lo+hi)/2}
+const ZE=[],ZT=[];(function(){const q=[];for(let i=0;i<NPEOPLE;i++)q.push(probit((i+.5)/NPEOPLE));const a=q.map((v,i)=>[rnd(i*5.7+1),v]).sort((x,y)=>x[0]-y[0]);const b=q.map((v,i)=>[rnd(i*9.1+4),v]).sort((x,y)=>x[0]-y[0]);
+  for(let i=0;i<NPEOPLE;i++){ZE.push(a[i][1]);ZT.push(b[i][1])}})();
+const TI={drug:"wide",ltd:2,ld:.3,kid:false,disp:.3,prev:[],chg:[],done:new Set()};
+const TIDRUGS=[["wide","Wide TI"],["narrow","Narrow TI"],["custom","Custom"]];
+function tiNow(){const sh=TI.kid?Math.log10(2):0;const le=TI.ld+sh;const helped=Phi(le/SIG),tox=Phi((le-TI.ltd)/SIG);
+  const lo=SIG*probit(.8)-sh,hi=TI.ltd-SIG*probit(.95)-sh;let nh=0,nt=0,nn=0;const st=[];
+  for(let i=0;i<NPEOPLE;i++){const h=le>=ZE[i]*SIG,x=le>=TI.ltd+ZT[i]*SIG;st.push(x?"x":h?"ok":"");if(x)nt++;else if(h)nh++;else nn++}
+  return {le,helped,tox,lo,hi,win:hi>lo,ti:Math.pow(10,TI.ltd),nh,nt,nn,st}}
+const TICH=["Wide TI drug: find a dose that helps at least 80% of people with no toxic effects at all.",
+ "Narrow TI drug: find a dose inside its (much smaller) window.",
+ "Narrow TI drug in its window, then turn on the kidney problem: watch people tip into toxicity.",
+ "Make a custom drug with a TI below 2. Is there any window left?",
+ "Wide TI drug: raise the dose until the first few people show toxicity. How many times the ED50 is that?"];
+function tiCheck(){const s=tiNow(),d=TI.done;
+  if(TI.drug==="wide"&&s.helped>=.8&&s.nt===0)d.add(0);
+  if(TI.drug==="narrow"&&!TI.kid&&s.win&&TI.ld>=s.lo-1e-9&&TI.ld<=s.hi+1e-9)d.add(1);
+  if(TI.drug==="narrow"&&TI.kid&&s.nt>=6){const lo=SIG*probit(.8),hi=TI.ltd-SIG*probit(.95);if(TI.ld>=lo-.06&&TI.ld<=hi+.06)d.add(2)}
+  if(TI.ltd<Math.log10(2))d.add(3);
+  if(TI.drug==="wide"&&!TI.kid&&s.nt>=1&&s.nt<=12)d.add(4);
+  chalUI($("#tiChal"),TICH,d)}
+function tiChanged(){$("#tiTDOut").textContent=uu(TI.ltd);$("#tiDoseOut").textContent=uu(TI.ld);const s=tiNow();
+  readRows($("#tiRead"),[["ED50 (helps half)","1 unit"],["TD50 (toxic in half)",uu(TI.ltd)],["Therapeutic index",(s.ti>=10?Math.round(s.ti):s.ti.toFixed(1))+""],["Dose given",uu(TI.ld)],["Level reached",TI.kid?fmtU(s.le)+" units (×2)":uu(s.le)],
+   ["Helped, no toxicity",s.nh+" of 60"],["Toxic effect",s.nt+" of 60"],["Therapeutic window",s.win?fmtU(s.lo)+" to "+uu(s.hi):"none"]]);
+  let cls="",t="";
+  if(!s.win)t=`No therapeutic window: by the time 80% are helped, more than 5% already have toxic effects. A drug like this needs very careful dosing, blood levels, or a safer alternative.`,cls="bad";
+  else if(s.nt>0&&!TI.kid&&TI.ld>=s.lo&&TI.ld<=s.hi)t=`Inside the window, but ${s.nt} of 60 still ${s.nt===1?"has":"have"} a toxic effect. People vary, so even a correct dose needs monitoring, especially for a narrow TI drug.`,cls="warn";
+  else if(s.nt>0)t=`${s.nt} of 60 people now have a toxic effect.`+(TI.kid?" The dose did not change, but poor kidney function doubled the drug level.":" The dose is above the window.")+" Narrow TI drugs leave little room for error.",cls="warn";
+  else if(s.helped<.8)t=`Below the window: only about ${Math.round(s.helped*100)}% are helped. A higher dose would help more people.`;
+  else t=`Inside the window: most people are helped and no one is toxic. TI is ${s.ti>=10?Math.round(s.ti):s.ti.toFixed(1)}, so the window runs from about ${fmtU(s.lo)} to ${uu(s.hi)}.`,cls="good";
+  const st=$("#tiStatus");st.className="status "+cls;st.textContent=t;tiCheck();a11yKey=""}
+function tiUI(){segBtns($("#tiDrug"),TIDRUGS,()=>TI.drug,k=>{TI.drug=k;if(k==="wide")TI.ltd=2;if(k==="narrow")TI.ltd=.6;$("#tiTD").value=TI.ltd;tiChanged()});$("#tiTD").value=TI.ltd;$("#tiDose").value=TI.ld;$("#tiKid").checked=TI.kid}
+$("#tiTD").oninput=e=>{TI.ltd=+e.target.value;TI.drug="custom";$("#tiDrug").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(TIDRUGS[i][0]==="custom")));tiChanged()};
+$("#tiDose").oninput=e=>{TI.ld=+e.target.value;tiChanged()};$("#tiKid").onchange=e=>{TI.kid=e.target.checked;tiChanged()};
+function drawTI(now){use(S2);const t=now/1000;const s=tiNow();TI.disp+=(TI.ld-TI.disp)*.15;
+  /* crowd */
+  panelBox(12,12,380,306);title(26,32,"Sixty people, same dose");
+  for(let i=0;i<NPEOPLE;i++){const r=Math.floor(i/10),c=i%10;const x=44+c*35,y=72+r*38;
+    if(TI.prev[i]!==s.st[i]){TI.prev[i]=s.st[i];TI.chg[i]=t}const age=t-(TI.chg[i]||-9);const hop=age<.5?Math.sin(age/.5*Math.PI)*6:0;
+    const col=s.st[i]==="x"?C.tox:s.st[i]==="ok"?C.eff:mix(C.sunk,C.ink,.15);
+    person(x,y-hop+Math.sin(t*2+i)*.6,11,col,{mark:s.st[i]||null})}
+  txt(26,298,`Helped: ${s.nh}`,{size:12.5,weight:700,color:C.good});txt(150,298,`Toxic: ${s.nt}`,{size:12.5,weight:700,color:C.bad});txt(260,298,`No effect: ${s.nn}`,{size:12.5,weight:700,color:C["ink-soft"]});
+  /* quantal graph */
+  panelBox(404,12,384,306);title(418,32,"Quantal dose-response");
+  const gx=456,gy=50,gw=310,gh=184,l0=-1,l1=3,sh=TI.kid?Math.log10(2):0;const X=l=>gx+gw*(clamp(l,l0,l1)-l0)/(l1-l0);
+  if(s.win){ctx.fillStyle=hexA(C.good,.14);ctx.fillRect(X(s.lo),gy,X(s.hi)-X(s.lo),gh);txt((X(s.lo)+X(s.hi))/2,gy+10,"window",{size:11.5,weight:700,align:"center",color:C.good})}
+  axes(gx,gy,gw,gh,{xlab:"Dose given (log, relative units)",xlabDy:30,ylab:"% of people",ylabDx:34,yt:[[0,"0"],[.5,"50"],[1,"100"]],xt:[[0,"0.1"],[.25,"1"],[.5,"10"],[.75,"100"],[1,"1000"]]});
+  plotFn(l=>Phi((l+sh)/SIG)*100,l0,l1,gx,gy,gw,gh,0,100,C.eff,2.6);plotFn(l=>Phi((l+sh-TI.ltd)/SIG)*100,l0,l1,gx,gy,gw,gh,0,100,C.tox,2.6);
+  const e50=-sh,t50=TI.ltd-sh;line(X(e50),gy+gh/2,X(e50),gy+gh,hexA(C.eff,.8),1.2,[3,3]);line(X(t50),gy+gh/2,X(t50),gy+gh,hexA(C.tox,.8),1.2,[3,3]);
+  const close=X(t50)-X(e50)<56;label(X(e50)-(close?4:0),gy+gh/2-12,"ED50",{size:11.5,weight:700,color:C.eff,mono:true,align:close?"right":"center"});if(t50<l1)label(X(t50)+(close?4:0),gy+gh/2-12,"TD50",{size:11.5,weight:700,color:C.tox,mono:true,align:close?"left":"center"});
+  const bx0=X(e50),bx1=X(Math.min(t50,l1));line(bx0,gy+gh+48,bx1,gy+gh+48,C.accent,2);line(bx0,gy+gh+42,bx0,gy+gh+54,C.accent,2);line(bx1,gy+gh+42,bx1,gy+gh+54,C.accent,2);
+  txt((bx0+bx1)/2,gy+gh+66,"TI = TD50 ÷ ED50 = "+(s.ti>=10?Math.round(s.ti):s.ti.toFixed(1)),{size:12,weight:700,align:"center",color:C.accent});
+  const dx=X(TI.disp);line(dx,gy,dx,gy+gh,hexA(C.ink,.45),1.4,[2,3]);const he=Phi((TI.disp+sh)/SIG)*100,to=Phi((TI.disp+sh-TI.ltd)/SIG)*100;
+  pulseRing(dx,gy+gh-gh*he/100,15,C.eff,P(t,1.5));circ(dx,gy+gh-gh*he/100,6,C.eff,C.panel,2);circ(dx,gy+gh-gh*to/100,6,C.tox,C.panel,2);
+  if(TI.kid)chipText(gx+gw-70,gy+gh-20,"kidney: level ×2",C.warn);
+  /* level over time */
+  panelBox(12,328,776,184);title(26,346,"Blood level with repeated doses (log scale)");
+  const lx0=90,ly=362,lw=680,lh=116,y0=-1,y1=Math.max(1.6,TI.ltd+.9);const Y=v=>ly+lh-(clamp(v,y0,y1)-y0)/(y1-y0)*lh;
+  const winLo=SIG*probit(.8),winHi=TI.ltd-SIG*probit(.95);
+  ctx.fillStyle=hexA(C.tox,.12);ctx.fillRect(lx0,ly,lw,Y(winHi)-ly);
+  if(winHi>winLo){ctx.fillStyle=hexA(C.good,.16);ctx.fillRect(lx0,Y(winHi),lw,Y(winLo)-Y(winHi))}
+  line(lx0,Y(winHi),lx0+lw,Y(winHi),C.tox,1.6);line(lx0,Y(winLo),lx0+lw,Y(winLo),hexA(C.good,.9),1.2,[4,3]);
+  [[-1,"0.1"],[0,"1"],[1,"10"],[2,"100"],[3,"1000"]].forEach(v=>{if(v[0]<=y1)txt(lx0-8,Y(v[0]),v[1],{size:11,mono:true,align:"right",color:C["ink-soft"]})});
+  ctx.save();ctx.translate(lx0-44,ly+lh/2);ctx.rotate(-Math.PI/2);txt(0,0,"Drug level",{size:12,weight:600,align:"center",color:C["ink-soft"]});ctx.restore();
+  ctx.save();rr(lx0,ly,lw,lh,2);ctx.clip();ctx.beginPath();const per=110,scroll=(t*40)%per;const le=TI.disp+sh;
+  for(let i=0;i<=lw;i+=2){const ph=((i+scroll)%per)/per;const v=le+Math.log10(.62+.75*Math.exp(-ph*2.2));const yy=Y(v);i?ctx.lineTo(lx0+i,yy):ctx.moveTo(lx0+i,yy)}
+  ctx.strokeStyle=C.drug;ctx.lineWidth=2.4;ctx.stroke();ctx.restore();
+  label(lx0+8,Y(winHi)-11,"toxicity starts",{size:11.5,weight:700,align:"left",color:C.tox});label(lx0+lw-8,Y(winLo)+11,"enough to help",{size:11.5,weight:700,align:"right",color:C.good});
+  txt(lx0,ly+lh+14,"time →  each spike is a dose",{size:11.5,color:C["ink-soft"]});
+}
+function tiA11y(){const s=tiNow();const lab=`Therapeutic index explorer: TI ${s.ti>=10?Math.round(s.ti):s.ti.toFixed(1)}, dose ${uu(TI.ld)}, ${s.nh} helped and ${s.nt} toxic out of 60.`;
+  const d=`Left: sixty small person icons. ${s.nh} are green with a check (helped, no toxicity), ${s.nt} are red with an X (toxic effect) and ${s.nn} are grey (no effect yet). Right: a quantal graph with a green S-curve for percent helped and a red S-curve for percent with toxicity; dashed lines mark ED50 at 1 unit and TD50 at ${uu(TI.ltd)}, and a bracket reads TI equals ${s.ti>=10?Math.round(s.ti):s.ti.toFixed(1)}. `+(s.win?`A green band shades the therapeutic window from about ${fmtU(s.lo)} to ${uu(s.hi)}. `:"There is no green window band because the curves overlap too much. ")+`A dashed line marks the dose given. Bottom: a scrolling saw-tooth line shows the blood level rising with each dose and falling between doses, against a green helpful band and a red toxic zone`+(TI.kid?"; poor kidney function has doubled the level":"")+`.`;
+  return [lab,d]}
+
+/* ================= PART 3: case files ================= */
+const CASES=[
+{name:"Tolerance",who:"Grace, 58",title:"The same dose does not hold her pain any more",mech:"tolerance",allergy:"No known drug allergies",
+ mar:[["morphine extended-release","PO","every 12 h",[["08","given"],["20","due"]]],["senna","PO","at bedtime",[["21","declined"],["21","declined"],["21","declined"]]]],marNote:"Senna declined the last 3 nights",
+ vit:{hr:88,bp:"132/84",rr:16,spo2:97},labs:[["Pain score","7 / 10","was 3 / 10 a month ago","H"],["Sedation","Alert, calm","",""],["Last bowel movement","4 days ago","","A"],["Bowel sounds","Hypoactive","",""]],
+ story:"Grace has bone pain from cancer and has taken the same order of extended-release morphine for four months. It used to keep her pain at 3 out of 10. Over the last month, her pain creeps back to 7 before each dose. She has no new injury. She has also not had a bowel movement in four days.",
+ legend:[["rec","Mu opioid receptor","s"],["drug","Morphine"],["glow","Receptor switched on"]],
+ qs:[{q:"Why does the same dose relieve less pain now?",hint:"Think about what cells do when a receptor is switched on all day, every day.",opts:[
+   ["Tolerance: with constant stimulation, mu receptors are desensitized and pulled inside, so the same dose does less",1,"Yes. Fewer and less responsive receptors shift the dose-response curve to the right. The prescriber may need to adjust the plan."],
+   ["She has become allergic to morphine",0,"An allergy is an immune reaction (hives, swelling, wheeze). Fading pain relief over weeks fits tolerance."],
+   ["Morphine has turned into a partial agonist in her body",0,"A drug's intrinsic activity does not change. What changed is her receptors."],
+   ["The tablets must be weaker than before",0,"Nothing suggests a product problem. Losing effect slowly with steady use is the classic pattern of tolerance."]]},
+  {q:"Her pain relief faded, but her constipation did not. What should the nurse do?",hint:"Does tolerance develop evenly to every opioid effect?",opts:[
+   ["Recognize that little tolerance develops to constipation, assess her bowels, encourage the bowel regimen and report it",1,"Right. The gut effect persists, so a bowel plan stays part of every long-term opioid order."],
+   ["Wait, because constipation will fade as tolerance develops",0,"Tolerance to constipation develops very little, if at all. Waiting risks an impaction."],
+   ["Hold all morphine until she has a bowel movement",0,"Stopping her pain medicine on your own is not appropriate and could cause withdrawal. Treat and report the constipation."],
+   ["Constipation means the dose is too low",0,"Constipation comes from mu receptors in the gut. It is not a sign of underdosing."]]},
+  {q:"Her daughter asks, \"Does needing more mean she's addicted?\" What is the best reply?",hint:"Separate an expected body change from a behaviour pattern.",opts:[
+   ["\"Tolerance is an expected body change with long-term opioid use. It is not the same as addiction. I'll let her prescriber know her pain isn't controlled.\"",1,"Yes. Calm, accurate, non-judging language, plus action on the real problem: uncontrolled pain."],
+   ["\"Yes, needing a higher dose means she is addicted.\"",0,"Tolerance and physical dependence can happen without addiction, which is a pattern of craving, loss of control and use despite harm."],
+   ["\"She should try to tough it out to avoid addiction.\"",0,"Untreated pain causes real harm. Tolerance is managed by the prescriber, not by withholding relief."],
+   ["\"That question is for the doctor only.\"",0,"Nurses can and should teach basic medication facts, then involve the prescriber."]]}],
+ exp:"Constant agonist stimulation leads to desensitization and down-regulation: the curve shifts right and the same dose does less. Tolerance is uneven, so constipation persists. Tolerance is not addiction."},
+
+{name:"Rebound",who:"Marcus, 64",title:"He stopped his beta blocker on his own",mech:"rebound",allergy:"No known drug allergies",
+ mar:[["metoprolol (home med)","PO","twice daily",[["Mon","not taken"],["Tue","not taken"],["Wed","not taken"]]]],marNote:"Ran out 3 days ago and did not refill",
+ vit:{hr:124,bp:"172/98",rr:20,spo2:96,flags:{HR:"HIGH"}},labs:[["ECG","Sinus tachycardia","",""],["Chest pain","Tightness, 5 / 10","","A"],["Potassium","4.2 mEq/L","3.5 to 5.0",""],["Troponin","Pending","",""]],
+ story:"Marcus has high blood pressure and angina and has taken metoprolol for years. He ran out three days ago and \"felt fine\", so he did not refill it. Today he comes in with a pounding heart, chest tightness and a headache.",
+ legend:[["rec","Beta-1 receptor","s"],["lig","Epinephrine"],["blk","Beta blocker (now gone)"]],
+ qs:[{q:"What explains his fast heart rate and high blood pressure?",hint:"What did years of blocking do to the number of beta-1 receptors?",opts:[
+   ["Rebound: long-term blocking up-regulated beta-1 receptors, which are now all exposed to his own epinephrine",1,"Right. More receptors plus no blocker equals an exaggerated response: fast rate, high pressure and more oxygen demand."],
+   ["Metoprolol is a beta agonist that is wearing off",0,"Metoprolol is a beta-1 antagonist. The surge comes from losing the block."],
+   ["Down-regulation of beta receptors",0,"Blocking causes up-regulation. Down-regulation follows constant stimulation."],
+   ["A late allergic reaction to metoprolol",0,"The timing and signs fit abrupt withdrawal, not an immune reaction."]]},
+  {q:"What is the nurse's priority action?",hint:"He has chest pain and a fast rate. Who needs to know right away?",opts:[
+   ["Report the findings to the provider right away and assess his chest pain, rhythm and ECG per protocol",1,"Yes. Rebound can trigger angina or a heart attack. The provider decides how to restart and adjust the drug."],
+   ["Tell him to take two tablets now to catch up",0,"Doubling up is not safe self-management. Restarting is the prescriber's decision."],
+   ["Encourage a brisk walk to settle his heart",0,"Exercise raises oxygen demand, which is the last thing an angina patient in rebound needs."],
+   ["Reassure him that it will pass as the drug leaves his body",0,"The drug is already gone. The extra receptors are the problem, and chest pain needs action now."]]},
+  {q:"Which teaching would have prevented this?",hint:"How should a long-term beta blocker be stopped, if it ever needs to be?",opts:[
+   ["Never stop a beta blocker suddenly. Refill early, and if it must stop, the prescriber tapers it over 1 to 2 weeks",1,"Right. A taper lets receptor numbers drift back to normal. Beta blocker labels carry a boxed warning about abrupt stopping."],
+   ["Skip doses on days when you feel well",0,"Missed doses are exactly what triggers rebound."],
+   ["Stop it if your heart rate is ever above 60",0,"That makes no sense for a drug that lowers heart rate. Hold parameters are low pulse and low blood pressure, per order."],
+   ["Beta blockers can be stopped at any time without risk",0,"Abrupt stopping is a well-known danger."]]}],
+ exp:"Long-term blocking causes up-regulation. When the blocker is stopped suddenly, the extra receptors produce rebound. Taper instead, and teach patients not to stop on their own."},
+
+{name:"Interaction",who:"Linda, 71",title:"Hard to wake after an extra pill from home",mech:"synergy",allergy:"No known drug allergies",
+ mar:[["oxycodone","PO","every 4 h as needed",[["18","given"],["22","given"]]],["lorazepam (from home, not ordered)","PO","—",[["22:30","taken"]]]],marNote:"Son brought lorazepam from home",
+ vit:{hr:58,bp:"104/62",rr:8,spo2:86,flags:{"SpO₂":"LOW",RR:"LOW"}},labs:[["Sedation","Hard to rouse","","A"],["Pupils","Pinpoint","",""],["Glucose","112 mg/dL","70 to 140",""],["Breathing","Shallow, snoring","","A"]],
+ story:"Linda is on day one after hip surgery. She had oxycodone at 22:00 for pain. Her son, wanting to help her sleep, gave her one of her lorazepam tablets from home. At midnight she is very hard to wake, snoring, with slow shallow breaths.",
+ legend:[["drug","Opioid (mu receptor)"],["part","Benzodiazepine (GABA-A)"],["bad","Breathing drive","s"]],
+ qs:[{q:"What type of drug interaction is this?",hint:"Is the combined effect equal to, or bigger than, the sum of the two?",opts:[
+   ["Synergistic: two drugs acting at different receptors depress breathing far more together than either alone",1,"Yes. Opioids and benzodiazepines together carry a boxed warning for profound sedation, breathing depression and death."],
+   ["Additive only: the effect is exactly the sum",0,"Opioid plus benzodiazepine is the classic dangerous synergy: 1 + 1 is more than 2."],
+   ["Potentiation: lorazepam has no effect of its own",0,"Lorazepam is a sedative on its own. Both drugs are active."],
+   ["Antagonistic: the drugs cancel out",0,"They add up to more depression, not less."]]},
+  {q:"What should the nurse do first?",hint:"Airway and breathing come first.",opts:[
+   ["Try to rouse her, support her airway and breathing, call for help, and give naloxone per protocol",1,"Right. Treat the breathing first. Naloxone is the opioid antagonist on most respiratory depression protocols."],
+   ["Let her sleep. She needs rest after surgery",0,"An oxygen level of 86% and a breathing rate of 8 are an emergency, not restful sleep."],
+   ["Recheck vital signs in four hours",0,"She could stop breathing well before then. Act now."],
+   ["Give the next oxycodone dose early so she stays comfortable",0,"More opioid would deepen the respiratory depression."]]},
+  {q:"After naloxone, Linda wakes up but is still drowsy. Why?",hint:"Which receptor does naloxone bind?",opts:[
+   ["Naloxone blocks only mu opioid receptors. It does not reverse the benzodiazepine, so keep monitoring closely",1,"Yes. Naloxone is a competitive mu antagonist. It also wears off, sometimes before the opioid, so sedation can return."],
+   ["Naloxone reverses all sedating drugs",0,"Naloxone only works at opioid receptors."],
+   ["She needs a second dose of oxycodone",0,"That would undo the rescue."],
+   ["Drowsiness proves the naloxone failed",0,"She woke up, so it worked on the opioid part. The benzodiazepine is still acting."]]}],
+ exp:"Opioid plus benzodiazepine is a synergistic interaction with a boxed warning. Treat breathing first. Naloxone competes off the opioid only, and it can wear off before the opioid does."},
+
+{name:"Side effect or allergy?",who:"Priya, 29",title:"\"I'm allergic to codeine. It makes me throw up.\"",mech:"sidefx",allergy:"Listed: codeine (reaction: vomiting)",
+ mar:[["acetaminophen-codeine","PO","every 6 h as needed",[["10","not given"]]]],marNote:"Not given: nurse clarifying the allergy",
+ vit:{hr:76,bp:"118/74",rr:14,spo2:99},labs:[["Skin","No rash or hives","",""],["Lips and tongue","No swelling","",""],["Breath sounds","Clear","",""],["Pain score","6 / 10","",""]],
+ story:"Priya had wisdom teeth removed this morning. Acetaminophen with codeine is ordered for pain. On admission she listed codeine as an allergy. When you ask what happens, she says, \"It makes me sick to my stomach and I throw up.\" She has never had a rash, swelling or trouble breathing with it.",
+ legend:[["drug","Codeine (as morphine)"],["rec","Opioid receptor","s"],["mast","Mast cell (calm)"]],
+ qs:[{q:"Is vomiting after codeine an allergy?",hint:"Is the immune system involved, or is it the drug's own receptor action?",opts:[
+   ["No. Nausea and vomiting are predictable side effects from opioid receptors in the brain's vomiting centre",1,"Right. It is an unwanted but expected receptor effect, not an immune reaction."],
+   ["Yes. Any unpleasant reaction is an allergy",0,"An allergy is an immune reaction. Unpleasant but predictable receptor effects are side effects."],
+   ["Yes, it is anaphylaxis",0,"Anaphylaxis involves swelling, wheeze and low blood pressure. She has none of those."],
+   ["It is an idiosyncratic reaction",0,"Opioid nausea is common and expected, not rare and unexplained."]]},
+  {q:"Which finding would point to a true allergy instead?",hint:"Think about what mast cells and histamine do.",opts:[
+   ["Hives, itching, lip or tongue swelling, or wheezing soon after a dose",1,"Yes. Those come from IgE and histamine release, the immune pathway."],
+   ["Constipation the next day",0,"Constipation is another expected opioid side effect."],
+   ["Drowsiness",0,"Sedation is a known opioid side effect."],
+   ["Mild nausea that improves with food",0,"That is a side effect pattern."]]},
+  {q:"How should the nurse document this?",hint:"The goal is a record that is accurate and does not block useful drugs for no reason.",opts:[
+   ["Record it as an intolerance or side effect (nausea and vomiting), describe the reaction, and tell the prescriber",1,"Yes. Precise records protect patients. A false allergy label can keep someone from the best drug later."],
+   ["Leave \"allergy: codeine\" with no details",0,"Without a description, others will treat it as a true allergy and may avoid all related drugs."],
+   ["Delete it from the chart",0,"Her reaction is real and worth recording, just in the right category."],
+   ["Give the codeine without telling anyone",0,"Her concern needs to reach the prescriber, who may order another option or an antiemetic."]]}],
+ exp:"Side effects come from the drug's own receptor actions and are predictable. Allergies come from the immune system. Describe reactions precisely so allergy lists stay accurate."},
+
+{name:"Anaphylaxis",who:"Daniel, 45",title:"Ten minutes into his first IV antibiotic dose",mech:"anaphylaxis",allergy:"No known drug allergies",
+ mar:[["ampicillin","IV","every 6 h",[["14:05","started"],["14:15","stopped"]]]],marNote:"First dose. Infusion stopped at 14:15",
+ vit:{hr:128,bp:"82/48",rr:28,spo2:89,flags:{HR:"HIGH","SpO₂":"LOW"}},labs:[["Skin","Hives spreading","","A"],["Lips","Swelling","","A"],["Breath sounds","Wheezes","","A"],["Voice","Hoarse, throat tight","","A"]],
+ story:"Daniel is getting his first IV dose of ampicillin, a penicillin, for a skin infection. About ten minutes in, he says his throat feels tight. You see hives spreading on his chest, his lips are swelling, he is wheezing and his blood pressure has dropped.",
+ legend:[["mast","Mast cell"],["hist","Histamine"],["ige","IgE antibody"]],
+ qs:[{q:"What is happening?",hint:"Fast onset, skin, airway and blood pressure all at once.",opts:[
+   ["Anaphylaxis: an IgE-driven allergic reaction with mast cells releasing histamine and other mediators",1,"Yes. Body-wide histamine release causes hives, airway swelling, bronchospasm and leaky, dilated vessels."],
+   ["An expected side effect of penicillin",0,"Penicillins rarely cause these signs except through allergy. Airway swelling and low pressure are an emergency."],
+   ["A vancomycin infusion reaction",0,"That flushing reaction is linked to fast vancomycin infusions, not penicillins, and usually lacks airway swelling."],
+   ["A panic attack",0,"Hives, lip swelling, wheeze and hypotension are physical findings of anaphylaxis."]]},
+  {q:"What should the nurse do first? (The infusion is already stopped.)",hint:"Which drug works fastest on both airway and blood pressure?",opts:[
+   ["Call for help and give epinephrine IM per protocol, then support airway, oxygen and fluids",1,"Right. Epinephrine is the first-line drug for anaphylaxis. Antihistamines and steroids are add-ons, not substitutes."],
+   ["Give an oral antihistamine and recheck in 30 minutes",0,"Antihistamines are too slow and too weak for airway swelling and shock."],
+   ["Restart the infusion at a slower rate",0,"Never re-expose. The drug must stay stopped."],
+   ["Lay him flat and wait for the hives to fade",0,"Waiting risks airway closure and shock. Epinephrine is needed now."]]},
+  {q:"Why does epinephrine work so well here?",hint:"Which receptors does epinephrine switch on?",opts:[
+   ["It acts on alpha-1 receptors to tighten vessels and raise pressure, and on beta-2 receptors to open the airways",1,"Yes. It opposes histamine's effects through different receptors, an example of physiologic antagonism."],
+   ["It blocks histamine receptors",0,"Epinephrine does not block H1 receptors. It produces opposite effects through adrenergic receptors."],
+   ["It destroys IgE antibodies",0,"It acts on blood vessels and airways, not on the antibodies."],
+   ["It is a competitive antagonist of ampicillin",0,"The problem is the immune response, not ampicillin's receptor."]]}],
+ exp:"Anaphylaxis is a fast, body-wide IgE reaction. Stop the drug, call for help and give epinephrine first. Then document the allergy, apply an allergy band and teach the patient to tell every provider."},
+
+{name:"Food interaction",who:"Rosa, 66",title:"Her INR dropped after a new healthy habit",mech:"vitk",allergy:"No known drug allergies",
+ mar:[["warfarin","PO","daily at 17:00",[["Mon","given"],["Tue","given"],["Wed","given"],["Thu","given"]]]],marNote:"Taken every day as ordered",
+ vit:{hr:84,bp:"128/78",rr:16,spo2:98},labs:[["INR","1.4","goal commonly 2 to 3","L"],["INR last month","2.5","",""],["Hemoglobin","13.2 g/dL","12 to 16",""],["Platelets","240 K/µL","150 to 400",""]],
+ story:"Rosa takes warfarin for atrial fibrillation, and her INR has been steady at about 2.5 for months. Two weeks ago she started drinking a large kale and spinach smoothie every morning to eat healthier. She has not missed any doses. Today her INR is 1.4.",
+ legend:[["leaf","Vitamin K (leafy greens)"],["drug","Warfarin"],["enz","Recycling enzyme (VKOR)","s"]],
+ qs:[{q:"Why did her INR fall?",hint:"What does warfarin block, and what did her smoothie add?",opts:[
+   ["The extra vitamin K lets her liver make more active clotting factors, working against warfarin",1,"Yes. Warfarin blocks vitamin K recycling. A big new supply of vitamin K partly overrides that, so clotting speeds up and the INR falls."],
+   ["Leafy greens make warfarin a stronger drug",0,"It is the opposite: vitamin K counteracts warfarin."],
+   ["She must be skipping doses",0,"The MAR shows every dose given. The diet change explains the drop."],
+   ["Her liver stopped making clotting factors",0,"A lower INR means blood is clotting faster, so more factors are being made."]]},
+  {q:"What is the best teaching?",hint:"The goal is steady, not zero.",opts:[
+   ["Keep vitamin K intake about the same from week to week, and tell the provider before big diet changes",1,"Right. Warfarin doses are set around her usual diet. Consistency matters more than avoiding greens."],
+   ["Stop eating all green vegetables",0,"Not needed and not healthy. Consistent intake is the goal."],
+   ["Double the warfarin dose on smoothie days",0,"Patients should not adjust warfarin on their own. The prescriber adjusts the dose based on INR."],
+   ["Drink grapefruit juice to balance it",0,"That adds a new interaction rather than fixing this one."]]},
+  {q:"With an INR of 1.4, what risk is now higher?",hint:"Why is she on warfarin in the first place?",opts:[
+   ["A blood clot, such as a stroke from atrial fibrillation",1,"Yes. A low INR means less protection. A high INR would raise the bleeding risk instead."],
+   ["Major bleeding",0,"Bleeding risk rises when the INR is too high, not too low."],
+   ["Low potassium",0,"Warfarin and vitamin K do not change potassium."],
+   ["An allergic reaction",0,"This is a drug-food interaction, not an immune reaction."]]}],
+ exp:"Vitamin K works against warfarin, so a big change in leafy greens shifts the INR. Teach consistency, check the INR as ordered, and remember that vitamin K is also warfarin's reversal agent."},
+
+{name:"Narrow TI",who:"Walter, 79",title:"Nausea and yellow halos on digoxin",mech:"digoxin",allergy:"No known drug allergies",
+ mar:[["digoxin","PO","daily at 09:00",[["Mon","given"],["Tue","given"],["Wed","due"]]],["furosemide","PO","daily at 09:00",[["Mon","given"],["Tue","given"],["Wed","given"]]]],marNote:"Digoxin due now",
+ vit:{hr:52,bp:"110/68",rr:16,spo2:95,flags:{HR:"LOW"}},labs:[["Potassium","3.0 mEq/L","3.5 to 5.0","L"],["Digoxin level","Above target range","","H"],["Creatinine","1.6 mg/dL","about 0.6 to 1.2","H"],["Apical pulse","52, irregular","","L"]],
+ story:"Walter has heart failure and takes digoxin and furosemide. His dose has not changed in a year. For three days he has had nausea and a poor appetite, and this morning he says lights have yellow-green halos. His apical pulse is 52 and irregular. His 09:00 digoxin is due.",
+ legend:[["enz","Na⁺/K⁺ pump","s"],["drug","Digoxin"],["ion","Potassium (K⁺)"]],
+ qs:[{q:"His dose has not changed. Why is he showing digoxin toxicity now?",hint:"Look at the potassium and the creatinine.",opts:[
+   ["Low potassium lets more digoxin bind the pump, and weaker kidneys clear less digoxin. With a narrow TI, small changes tip into toxicity",1,"Yes. Furosemide lowered his potassium, and age and kidney decline raised his level. Digoxin's window is narrow."],
+   ["He has developed tolerance to digoxin",0,"Tolerance would weaken the effect. He has signs of too much effect."],
+   ["Furosemide is a digoxin antagonist",0,"Furosemide does the opposite here: by lowering potassium it makes digoxin more toxic."],
+   ["Yellow halos are a normal side effect at a correct level",0,"Vision changes are a classic sign of digoxin toxicity."]]},
+  {q:"What should the nurse do about the 09:00 digoxin dose?",hint:"Pulse under 60, toxicity signs and low potassium.",opts:[
+   ["Hold it and report the pulse, potassium, digoxin level and symptoms to the provider, per order or protocol",1,"Right. Digoxin is commonly held for an apical pulse below 60 or signs of toxicity. The provider may order potassium and other treatment."],
+   ["Give it, because missing a dose causes rebound",0,"Giving more digoxin to a toxic patient is dangerous."],
+   ["Give half the dose",0,"Nurses do not change doses on their own. Hold and report."],
+   ["Give it with a banana to replace potassium",0,"Food will not fix toxicity fast, and the dose should be held."]]},
+  {q:"Which teaching fits Walter's discharge?",hint:"What should he watch for and what should he keep checking?",opts:[
+   ["Report nausea, vision changes or a slow pulse, and keep appointments for potassium and digoxin levels",1,"Yes. Early signs plus regular labs are how narrow TI drugs are kept safe."],
+   ["Take an extra digoxin tablet if he feels tired",0,"Self-adjusting a narrow TI drug is unsafe."],
+   ["Stop furosemide whenever his ankles look normal",0,"Diuretic changes are the prescriber's decision."],
+   ["Lab checks are only needed if he feels sick",0,"Levels can drift before symptoms appear. Regular monitoring is the point."]]}],
+ exp:"Digoxin has a narrow therapeutic index. Low potassium (often from a loop diuretic) and reduced kidney function push it toward toxicity. Check the apical pulse and labs, hold and report per protocol."}
+];
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+const S3=makeStage("cvCase",640,672);
+const MARC={given:["good","✓"],due:["accent","DUE"],declined:["warn","refused"],"not taken":["warn","missed"],"not given":["warn","held"],taken:["bad","took"],started:["warn","start"],stopped:["bad","stop"],held:["warn","held"]};
+function drawMAR(c,t){const h=158;panelBox(12,54,616,h);title(26,72,"Medication administration record (MAR)");
+  txt(26,94,"Medication",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(262,94,"Route",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});txt(310,94,"Schedule",{size:11.5,mono:true,weight:700,color:C["ink-soft"]});
+  line(22,104,618,104,C.rule,1);
+  c.mar.forEach((m,i)=>{const y=132+i*40;wrapText(m[0],26,y,226,14,{size:12.5,weight:700});txt(262,y,m[1],{size:12.5,mono:true});wrapText(m[2],310,y,124,14,{size:11.5,color:C["ink-soft"]});
+    m[3].forEach((cell,j)=>{const x=444+j*46;const st=MARC[cell[1]]||["ink-soft",cell[1]];const col=C[st[0]];
+      txt(x+21,y-12,cell[0],{size:10.5,mono:true,align:"center",color:C["ink-soft"]});
+      rr(x,y-3,42,17,4);if(cell[1]==="due"){ctx.strokeStyle=col;ctx.lineWidth=1.5+Math.sin(t*4)*.8;ctx.stroke();txt(x+21,y+6,"DUE",{size:10.5,mono:true,weight:700,align:"center",color:col})}
+      else{ctx.fillStyle=hexA(col,.16);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.stroke();txt(x+21,y+6,st[1],{size:st[1].length>5?9.5:11,mono:true,weight:700,align:"center",color:col})}})});
+  txt(26,54+h-14,"Note: "+c.marNote,{size:11.5,color:C["ink-soft"]})}
+function drawLabs(c,y0){panelBox(324,y0,304,170);title(338,y0+18,"Labs and assessment");
+  c.labs.forEach((l,i)=>{const y=y0+42+i*33;txt(338,y,l[0],{size:12,weight:600,color:C["ink-soft"]});txt(338,y+15,l[1],{size:12.5,weight:700,color:l[3]==="H"||l[3]==="A"?C.bad:l[3]==="L"?C.inv:C.ink});
+    if(l[2])txt(614,y+15,l[2],{size:10.5,align:"right",color:C["ink-soft"]});if(l[3])chipText(590,y,{H:"HIGH",L:"LOW",A:"ABNORMAL"}[l[3]],l[3]==="L"?C.inv:C.bad)})}
+/* --- mechanism vignettes, panel 12..628 x 350..612 --- */
+function mechBox(t){panelBox(12,350,616,262);title(26,370,"What is happening at the receptor: "+t)}
+function vTolerance(t){mechBox("down-regulation");const my=496,p=P(t,10);const n=10-Math.round(4*smooth(seg(p,.1,.8)));
+  ctx.fillStyle=C.cyto;ctx.fillRect(14,my,380,64);const xs=[];for(let i=0;i<10;i++)xs.push(40+i*36);membrane(14,my,380,{gaps:xs.map(x=>[x-15,x+15])});
+  xs.forEach((x,i)=>{const gone=i>=n;const k=i-(n);if(!gone)receptor(x,my,{s:.8,level:.55+.45*Math.sin(t*3+i)*.2,t:t,mol:"drug"});else{const q=clamp(P(t,10)*10-(1+k*1.6),0,1);withA(1-q*.3,()=>{circ(x,my+38+q*10,13,hexA(C.rec,.25),C.rec,1.5);txt(x,my+38+q*10,"in",{size:10,align:"center",color:C["ink-soft"]})})}});
+  txt(30,396,`Month ${1+Math.round(5*smooth(seg(p,.1,.8)))} of steady morphine`,{size:12.5,weight:700});txt(30,414,`${n} of 10 receptors still on the surface`,{size:12,color:C["ink-soft"]});
+  meter(410,410,200,14,n/10,C.glow,"Relief from same dose",{val:Math.round(n*10)+"%"});
+  meter(410,470,200,14,1,C.warn,"Constipation (gut)",{val:"100%"});
+  wrapText("Tolerance develops to pain relief but very little to constipation.",410,510,200,17,{size:12,color:C["ink-soft"]})}
+function vRebound(t){mechBox("up-regulation and rebound");const my=480,p=P(t,8);const gone=smooth(seg(p,.15,.4));
+  ctx.fillStyle=C.cyto;ctx.fillRect(14,my,400,70);const xs=[];for(let i=0;i<10;i++)xs.push(36+i*38);membrane(14,my,400,{gaps:xs.map(x=>[x-15,x+15])});
+  xs.forEach((x,i)=>{const extra=i>=6;const on=gone>.7;receptor(x,my,{s:.8,level:on?1:0,t:t});
+    if(!on)withA(1-gone,()=>mol("blk",x,my-45-gone*60,7));else mol("lig",x,my-45-(1-smooth(seg(p,.4+i*.02,.5+i*.02)))*50,7);
+    if(extra)txt(x,my+36,"new",{size:10,align:"center",mono:true,color:C["ink-soft"]})});
+  txt(30,396,gone<.5?"Years of metoprolol: 10 receptors instead of 6":"Blocker gone: epinephrine fills all 10",{size:12.5,weight:700});
+  const hr=gone>.7?124:66;heart(520,450,30+0,C.bad,Math.max(0,Math.sin(t*TAU*hr/60))*1);txt(520,500,"HR "+hr,{size:16,mono:true,weight:700,align:"center",color:gone>.7?C.bad:C.ink});
+  if(gone>.7)chipText(520,530,"rebound",C.bad)}
+function vSynergy(t){mechBox("two drugs, one breathing centre");const p=P(t,9);
+  const xs=[110,270];mol("drug",xs[0],420,12);txt(xs[0],448,"Oxycodone: mu receptor",{size:12,weight:700,align:"center"});mol("part",xs[1],420,12);txt(xs[1],448,"Lorazepam: GABA-A",{size:12,weight:700,align:"center"});
+  arrow(xs[0],462,170,520,C.drug,2.5);arrow(xs[1],462,210,520,C.part,2.5);rr(120,520,140,40,8);ctx.fillStyle=hexA(C.bad,.15);ctx.fill();ctx.strokeStyle=C.bad;ctx.lineWidth=1.5;ctx.stroke();txt(190,540,"Breathing drive",{size:12.5,weight:700,align:"center",color:C.bad});
+  const bx=356,base=572;vbarS(bx,base,"Oxycodone",.3,C.drug);vbarS(bx+66,base,"Lorazepam",.25,C.part);vbarS(bx+132,base,"Expected sum",.55,C["ink-soft"]);vbarS(bx+198,base,"Together",.55+.35*smooth(seg(p,.2,.6)),C.bad);
+  txt(bx-6,400,"How much breathing is depressed",{size:12,weight:600,color:C["ink-soft"]});
+  /* breathing trace */
+  txt(30,578,"Breathing",{size:11.5,weight:600,color:C["ink-soft"]});const rate=lerp(14,8,smooth(seg(p,.2,.6)));ctx.beginPath();for(let i=0;i<=200;i+=2){const y=596-Math.sin((i/200)*TAU*3*(rate/14)-t*2*(rate/14))*6;i?ctx.lineTo(30+i,y):ctx.moveTo(30+i,y)}ctx.strokeStyle=C.inv;ctx.lineWidth=2;ctx.stroke()}
+function vbarS(x,base,lab,f,col){rr(x,base-140,44,140,4);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();const h=140*clamp(f,0,1);rr(x,base-h,44,h,4);ctx.fillStyle=col;ctx.fill();txt(x+22,base-h-10,Math.round(f*100)+"",{size:11,mono:true,weight:700,align:"center"});wrapText(lab,x+22,base+12,62,13,{size:10.5,align:"center"})}
+function vSidefx(t){mechBox("side effect, not allergy");const my=470;
+  ctx.fillStyle=C.cyto;ctx.fillRect(14,my,300,60);const xs=[60,130,200,270];membrane(14,my,300,{gaps:xs.map(x=>[x-15,x+15])});
+  xs.forEach((x,i)=>{receptor(x,my,{s:.8,level:.8,t:t,mol:"drug"})});txt(30,396,"Brain's vomiting centre: opioid receptors switched on",{size:12.5,weight:700});
+  const qx=170,qy=566;txt(qx,qy,"→ nausea and vomiting (expected, predictable)",{size:12,weight:600,align:"center",color:C.warn});
+  /* calm mast cell */
+  blobPath(480,470,52,3,t*.3,.05);fillStroke(hexA(C.mast,.5),C.mast,2.5);for(let k=0;k<10;k++){const a=k/10*TAU+t*.2;circ(480+Math.cos(a)*28,470+Math.sin(a)*24,5,C.hist)}
+  txt(480,544,"Mast cell: calm, no IgE trigger",{size:12,weight:700,align:"center"});txt(480,562,"No histamine release = no allergy",{size:12,align:"center",color:C["ink-soft"]})}
+function vAnaph(t){mechBox("IgE-driven anaphylaxis");const p=P(t,6);const burst=smooth(seg(p,.15,.45));
+  const cx=150,cy=480;blobPath(cx,cy,55,3,t*.3,.06);fillStroke(hexA(C.mast,.6),C.mast,2.5);
+  for(let k=0;k<6;k++){const a=-Math.PI/2+(k-2.5)*.35;const x=cx+Math.cos(a)*58,y=cy+Math.sin(a)*58;ctx.save();ctx.translate(x,y);ctx.rotate(a+Math.PI/2);ctx.strokeStyle=C.ige;ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-10);ctx.lineTo(-6,-17);ctx.moveTo(0,-10);ctx.lineTo(6,-17);ctx.stroke();ctx.restore()}
+  mol("drug",cx,cy-86+burst*8,8);
+  for(let k=0;k<26;k++){const a=rnd(k)*TAU,d=20+burst*(40+rnd(k+3)*110);circ(cx+Math.cos(a)*d*(k<8?.4:1),cy+Math.sin(a)*d*.8*(k<8?.4:1),4,C.hist)}
+  txt(cx,cy+80,"Histamine floods out",{size:12,weight:700,align:"center",color:C.hist});
+  /* airway and BP */
+  const ax=380,ay=470,open=1-.65*burst;circ(ax,ay,40,mix(C.gut,C.panel,.2),ink(.4),1.2);circ(ax,ay,10+22*open,C.ecf,ink(.4),1);txt(ax,ay+60,open<.6?"Airway narrowing":"Airway",{size:12,weight:700,align:"center",color:open<.6?C.bad:C.ink});
+  const bp=Math.round(lerp(124,82,burst));txt(530,440,"BP",{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]});txt(530,466,bp+"/"+Math.round(lerp(78,48,burst)),{size:20,mono:true,weight:700,align:"center",color:burst>.5?C.bad:C.ink});
+  txt(530,500,"vessels dilate and leak",{size:11.5,align:"center",color:C["ink-soft"]});if(burst>.6)chipText(470,570,"Epinephrine IM first",C.bad)}
+function vVitK(t){mechBox("vitamin K overrides the block");const p=P(t,8);const extra=smooth(seg(p,.15,.6));
+  const cx=200,cy=486;ell(cx,cy,90,60,0,hexA(C.liver,.18),C.liver,2);txt(cx,cy-74,"Liver cell",{size:12,weight:700,align:"center"});
+  enzyme(cx,cy,24,{mouth:.5,ang:Math.PI});mol("drug",cx-30,cy,8,{rot:-Math.PI/2});txt(cx,cy+74,"VKOR blocked by warfarin",{size:11.5,align:"center",color:C["ink-soft"]});
+  /* leaves and vitamin K dots streaming */
+  for(let k=0;k<3;k++){ctx.save();ctx.translate(40+k*18,420+k*8);ctx.rotate(-.5+k*.3);ell(0,0,14,7,0,C.leaf,ink(.4),1);ctx.restore()}
+  const nk=Math.round(3+9*extra);for(let k=0;k<nk;k++){const q=P(t*.25+k/nk,1);circ(lerp(70,cx-10,q),lerp(430,cy-20,q)+Math.sin(k)*8,3.5,C.food)}
+  /* clotting factors out */
+  const nf=Math.round(2+6*extra);for(let k=0;k<nf;k++){const q=P(t*.3+k/nf,1);rr(lerp(cx+60,cx+200,q),cy-10+((k%3)-1)*18,12,12,3);ctx.fillStyle=C.rbc;ctx.fill()}
+  txt(cx+150,cy-50,"Clotting factors II, VII, IX, X",{size:11.5,weight:700,align:"center",color:C.rbc});
+  /* INR gauge */
+  const gx=530,gy=520,inr=lerp(2.5,1.4,extra);ctx.beginPath();ctx.arc(gx,gy,48,Math.PI,TAU);ctx.strokeStyle=C.sunk;ctx.lineWidth=10;ctx.stroke();
+  ctx.beginPath();ctx.arc(gx,gy,48,Math.PI+(2-1)/3*Math.PI,Math.PI+(3-1)/3*Math.PI);ctx.strokeStyle=C.good;ctx.stroke();const a=Math.PI+clamp((inr-1)/3,0,1)*Math.PI;line(gx,gy,gx+Math.cos(a)*42,gy+Math.sin(a)*42,C.ink,2.5);circ(gx,gy,4,C.ink);
+  txt(gx,gy+20,"INR "+inr.toFixed(1),{size:14,mono:true,weight:700,align:"center",color:inr<2?C.inv:C.ink});txt(gx,gy-62,"goal 2 to 3",{size:11.5,align:"center",color:C.good})}
+function vDigoxin(t){mechBox("low potassium makes digoxin stronger");const my=470,p=P(t,8);const low=smooth(seg(p,.15,.5));
+  ctx.fillStyle=C.cyto;ctx.fillRect(14,my,360,64);membrane(14,my,360,{gaps:[[60,110],[160,210],[260,310]]});
+  [85,185,285].forEach((x,i)=>{transporter(x,my,{col:C.enz});const dig=i===0||(low>.5&&i<=1+Math.round(low));if(dig)mol("drug",x,my-40,8);else{const q=P(t*.8+i*.3,1);circ(x+4,my-40+q*30,5,C.ion,ink(.3),1);txt(x+16,my-44,"K⁺",{size:11,weight:700,color:C.ion})}});
+  txt(30,396,low<.5?"Normal K⁺: potassium competes with digoxin at the pump":"Low K⁺: more pumps open to digoxin",{size:12.5,weight:700});
+  /* levels */
+  const lx=420,ly=410,lw=190,lh=130;rr(lx,ly,lw,lh,6);ctx.fillStyle=hexA(C.sunk,.4);ctx.fill();ctx.fillStyle=hexA(C.good,.2);ctx.fillRect(lx,ly+lh*.45,lw,lh*.25);line(lx,ly+lh*.45,lx+lw,ly+lh*.45,C.tox,1.6);
+  txt(lx+lw-4,ly+lh*.45-9,"toxic",{size:11.5,weight:700,align:"right",color:C.tox});ctx.beginPath();for(let i=0;i<=lw;i+=2){const f=i/lw;const v=.6+.12*Math.exp(-((i+t*30)%45)/18)+f*.45*low;const y=ly+lh-lh*v*.75;i?ctx.lineTo(lx+i,y):ctx.moveTo(lx+i,y)}ctx.strokeStyle=C.drug;ctx.lineWidth=2.2;ctx.stroke();
+  txt(lx,ly+lh+14,"Digoxin effect over days",{size:11.5,color:C["ink-soft"]});chipText(170,580,"K⁺ "+lerp(4.2,3.0,low).toFixed(1)+" mEq/L",low>.5?C.inv:C.good)}
+const VIGS={tolerance:vTolerance,rebound:vRebound,synergy:vSynergy,sidefx:vSidefx,anaphylaxis:vAnaph,vitk:vVitK,digoxin:vDigoxin};
+function drawCase(now){use(S3);const t=now/1000;const c=CASES[CS.i];
+  panelBox(12,8,616,40);txt(26,28,c.who,{size:15,weight:700});const aw=c.allergy.startsWith("No")?0:1;
+  ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(c.allergy).width;rr(614-w-14,18,w+14,20,10);ctx.fillStyle=aw?C.bad:C.sunk;ctx.fill();txt(614-7,28,c.allergy,{size:11.5,mono:true,weight:600,align:"right",color:aw?onFill():C.ink});
+  drawMAR(c,t);const y0=222;monitor(12,y0,302,170,c.vit,t);drawLabs(c,y0);ctx.save();ctx.translate(0,y0+180-350);(VIGS[c.mech]||vTolerance)(t);ctx.restore()}
+function caseA11y(){const c=CASES[CS.i];const lab=`Case chart for ${c.who}: ${c.title}.`;
+  const mar=c.mar.map(m=>`${m[0]}, ${m[1]}, ${m[2]}: `+m[3].map(x=>x[0]+" "+x[1]).join(", ")).join("; ");
+  const v=c.vit;const d=`Header: ${c.who}; allergy band reads ${c.allergy}. MAR rows: ${mar}. Note: ${c.marNote}. Monitor: heart rate ${v.hr}, blood pressure ${v.bp}, oxygen saturation ${v.spo2}%, breathing rate ${v.rr}. Labs and assessment: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[3]?({H:" (high)",L:" (low)",A:" (abnormal)"}[l[3]]):""}`).join("; ")+". Bottom panel: "+VDESC[c.mech];
+  return [lab,d]}
+const VDESC={tolerance:"a membrane with ten receptors holding morphine; over a looping six months, receptors are pulled inside one by one until six remain. A pain relief meter drops with them, while a constipation meter stays full.",
+ rebound:"ten beta-1 receptors, four of them labelled new, first hold grey blocker molecules; the blockers float away and amber epinephrine fills every receptor, which glow, and a heart beats faster with heart rate 124 and a rebound label.",
+ synergy:"oxycodone acting on mu receptors and lorazepam on GABA-A receptors both point arrows at a breathing drive box. Bars compare each drug alone, the expected sum and the larger combined effect, and a breathing trace slows down.",
+ sidefx:"opioid receptors in the brain's vomiting centre are switched on by codeine's active form, labelled nausea and vomiting, expected. Beside it a calm mast cell keeps its histamine granules: no allergy.",
+ anaphylaxis:"a mast cell coated with IgE meets the drug and bursts, flooding the area with histamine dots. An airway circle narrows, the blood pressure falls to 82 over 48, and a label reads epinephrine IM first.",
+ vitk:"a liver cell with its vitamin K recycling enzyme blocked by warfarin. Leafy greens send a growing stream of vitamin K into the cell, more red clotting factors flow out, and an INR gauge needle falls from 2.5 to 1.4, below the green goal zone of 2 to 3.",
+ digoxin:"three sodium-potassium pumps in a membrane. At normal potassium, potassium ions compete and only one pump holds digoxin; as potassium falls to 3.0, more pumps take digoxin. A small graph shows the digoxin effect climbing over the toxic line."};
+
+/* ================= PART 4: sorting game ================= */
+const SROUNDS=[
+{name:"Agonist, partial agonist or antagonist?",goal:"Sort each drug by what it does at its receptor once it binds.",
+ bins:[["ag","Full agonist (turns it on)"],["pa","Partial agonist (partly on)"],["an","Antagonist (blocks)"]],
+ cards:[["morphine","ag","Full agonist at mu opioid receptors."],["albuterol","ag","Beta-2 agonist: opens the airways."],["epinephrine","ag","Agonist at alpha and beta receptors."],["dobutamine","ag","Beta-1 agonist: stronger heartbeat."],
+  ["buprenorphine","pa","Partial agonist at mu receptors: a ceiling on breathing depression."],["varenicline","pa","Partial agonist at nicotine receptors, used to quit smoking."],["aripiprazole","pa","Partial agonist at dopamine D2 receptors."],
+  ["naloxone","an","Competitive antagonist at mu receptors: reverses opioids."],["metoprolol","an","Beta-1 antagonist (-olol): slows the heart."],["atropine","an","Muscarinic antagonist: blocks acetylcholine."],["losartan","an","Angiotensin II receptor blocker (-sartan)."],["flumazenil","an","Antagonist at the benzodiazepine site."]]},
+{name:"Potency or efficacy?",goal:"Does each statement describe potency (how much drug is needed) or efficacy (how big the effect can get)?",
+ bins:[["pot","Potency"],["eff","Efficacy"]],
+ cards:[["Needs a smaller dose for the same effect","pot","Potency: less drug for the same result."],["Its curve sits further to the left","pot","Potency: a left-shifted curve means a lower EC50."],["Lower EC50","pot","Potency is measured by the EC50."],
+  ["A smaller amount of hydromorphone gives relief similar to morphine","pot","Potency: same top effect, smaller amount."],["A competitive antagonist shifts the curve right","pot","Potency drops (the curve moves right) but the top stays."],["Says how many units are in a tablet, not how well it works","pot","Potency alone does not make a drug better."],
+  ["The highest effect the drug can produce (Emax)","eff","Efficacy is the top of the curve."],["Furosemide removes more fluid than hydrochlorothiazide at any dose","eff","Efficacy: a higher maximum effect."],["A partial agonist has less of this than a full agonist","eff","Efficacy: a partial agonist has a lower ceiling."],
+  ["A noncompetitive antagonist lowers this","eff","Efficacy: the top of the curve drops."],["Usually matters more when choosing a drug for a big effect","eff","Efficacy: if you need a big effect, choose the drug that can deliver it."]]},
+{name:"Name that interaction",goal:"Sort each drug pair by the type of interaction.",
+ bins:[["add","Additive (1 + 1 = 2)"],["syn","Synergistic (1 + 1 > 2)"],["pot2","Potentiation (0 + 1 = 2)"],["ant","Antagonistic (1 + 1 = 0)"]],
+ cards:[["lisinopril with hydrochlorothiazide for blood pressure","add","Additive: two routes to a lower blood pressure."],["acetaminophen with ibuprofen for pain","add","Additive: two pain relievers acting in different ways."],
+  ["opioid with a benzodiazepine","syn","Synergistic: breathing depression far greater together (boxed warning)."],["opioid with alcohol","syn","Synergistic: dangerous CNS and breathing depression."],["trimethoprim with sulfamethoxazole","syn","Synergistic: two steps of the same bacterial pathway."],
+  ["probenecid with penicillin","pot2","Potentiation: probenecid slows penicillin removal by the kidney."],["clavulanate with amoxicillin","pot2","Potentiation: clavulanate protects amoxicillin from bacterial enzymes."],["carbidopa with levodopa","pot2","Potentiation: carbidopa stops levodopa breakdown outside the brain."],
+  ["naloxone with morphine","ant","Antagonistic: naloxone blocks mu receptors."],["vitamin K with warfarin","ant","Antagonistic: vitamin K restores clotting factor production."],["flumazenil with a benzodiazepine","ant","Antagonistic: flumazenil blocks the benzodiazepine site."]]},
+{name:"What kind of adverse reaction?",goal:"Sort each reaction into its type.",
+ bins:[["se","Side effect (expected, from the drug's own action)"],["al","Allergic (immune)"],["id","Idiosyncratic (unexpected, often genetic)"],["tx","Toxic effect (too much drug)"]],
+ cards:[["drowsiness from diphenhydramine","se","Side effect: H1 receptors in the brain are blocked too."],["dry mouth from an anticholinergic","se","Side effect: muscarinic receptors in salivary glands are blocked."],["constipation from morphine","se","Side effect: mu receptors in the gut."],["nausea from codeine","se","Side effect: opioid receptors in the vomiting centre."],
+  ["hives after amoxicillin","al","Allergic: IgE and histamine release."],["throat swelling and low blood pressure after penicillin","al","Allergic: anaphylaxis."],
+  ["red cells burst after primaquine in G6PD deficiency","id","Idiosyncratic: an inherited enzyme difference."],["fast breathing depression from codeine in an ultra-rapid CYP2D6 metabolizer","id","Idiosyncratic: a gene variant makes too much morphine."],
+  ["vision changes with a high digoxin level","tx","Toxic: too much digoxin in the body."],["tremor and confusion with a high lithium level","tx","Toxic: lithium level above its narrow range."],["bleeding with an INR far above goal on warfarin","tx","Toxic: too much anticoagulant effect."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const recep=(x,fill)=>`<path d="M${x-9} 14 L${x-3} 14 L${x} 20 L${x+3} 14 L${x+9} 14 L${x+9} 40 L${x-9} 40 Z" fill="var(--rec)" stroke="var(--ink)" stroke-opacity=".4"/>${fill?`<rect x="${x-6}" y="32" width="12" height="5" rx="2" fill="${fill}"/>`:""}`;
+  const key=(x,col,mark)=>`<path d="M${x} 13 C${x+4} 9 ${x+7} 6 ${x+7} 3 A7 7 0 0 0 ${x-7} 3 C${x-7} 6 ${x-4} 9 ${x} 13 Z" fill="${col}" stroke="var(--ink)" stroke-opacity=".4"/>${mark||""}`;
+  const mem=`<rect x="2" y="24" width="52" height="8" fill="var(--mem-tail)"/>`;
+  const curve=(d,col,dash)=>`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.6"${dash?' stroke-dasharray="4 3"':""}/>`;
+  const axes=`<path d="M6 4 L6 40 L52 40" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>`;
+  const bars=(a,b,c,col)=>`<rect x="8" y="${40-a}" width="10" height="${a}" fill="var(--drug)"/><rect x="22" y="${40-b}" width="10" height="${b}" fill="var(--drug)"/><rect x="38" y="${40-c}" width="12" height="${c}" fill="${col}"/><line x1="4" y1="40" x2="54" y2="40" stroke="var(--ink-soft)" stroke-width="1.5"/>`;
+  switch(k){
+    case "ag":return s(`${mem}${recep(28,"var(--glow)")}${key(28,"var(--drug)")}`);
+    case "pa":return s(`${mem}${recep(28,"var(--sunk)")}${key(28,"var(--part)",'<circle cx="28" cy="3" r="2.6" fill="none" stroke="var(--panel)" stroke-width="1.5"/>')}`);
+    case "an":return s(`${mem}${recep(28)}${key(28,"var(--blk)",'<path d="M25 0 L31 6 M31 0 L25 6" stroke="var(--panel)" stroke-width="1.6"/>')}`);
+    case "pot":return s(`${axes}${curve("M8 38 C16 36 18 10 30 8 L52 8","var(--drug)")}${curve("M8 39 C26 38 30 10 42 8 L52 8","var(--ink-soft)",1)}<path d="M40 24 L24 24 M28 20 L24 24 L28 28" stroke="var(--accent)" stroke-width="2" fill="none"/>`);
+    case "eff":return s(`${axes}${curve("M8 38 C18 36 22 6 34 5 L52 5","var(--drug)")}${curve("M8 39 C18 38 22 24 34 22 L52 22","var(--ink-soft)",1)}<path d="M46 20 L46 8 M42 12 L46 8 L50 12" stroke="var(--accent)" stroke-width="2" fill="none"/>`);
+    case "add":return s(bars(12,12,24,"var(--accent)"));
+    case "syn":return s(bars(12,12,36,"var(--bad)"));
+    case "pot2":return s(bars(2,12,26,"var(--warn)"));
+    case "ant":return s(bars(16,12,3,"var(--blk)"));
+    case "se":return s(`<circle cx="22" cy="20" r="13" fill="var(--body)" stroke="var(--body-edge)"/><text x="34" y="14" font-size="11" font-family="IBM Plex Mono,monospace" font-weight="700" fill="var(--inv)">z</text><text x="41" y="8" font-size="9" font-family="IBM Plex Mono,monospace" font-weight="700" fill="var(--inv)">z</text><path d="M14 22 Q22 18 30 22" stroke="var(--ink)" stroke-width="1.6" fill="none"/>`);
+    case "al":return s(`<ellipse cx="28" cy="24" rx="17" ry="14" fill="var(--mast)" stroke="var(--ink)" stroke-opacity=".3"/>${[0,1,2,3,4,5].map(i=>`<circle cx="${[10,46,14,42,20,36][i]}" cy="${[10,10,40,40,4,4][i]}" r="2.6" fill="var(--hist)"/>`).join("")}<path d="M28 10 L28 4 M28 4 L24 0 M28 4 L32 0" stroke="var(--ige)" stroke-width="2"/>`);
+    case "id":return s(`<path d="M6 12 C16 0 24 24 34 12 S50 0 52 12" fill="none" stroke="var(--dna)" stroke-width="2.5"/><path d="M6 26 C16 14 24 38 34 26 S50 14 52 26" fill="none" stroke="var(--dna)" stroke-width="2.5"/><ellipse cx="20" cy="40" rx="7" ry="4" fill="var(--rbc)"/><circle cx="36" cy="40" r="1.6" fill="var(--rbc)"/><circle cx="41" cy="37" r="1.4" fill="var(--rbc)"/><circle cx="44" cy="42" r="1.4" fill="var(--rbc)"/>`);
+    case "tx":return s(`${axes}<rect x="7" y="14" width="45" height="12" fill="var(--good-wash)"/><line x1="7" y1="12" x2="52" y2="12" stroke="var(--tox)" stroke-width="2"/><path d="M8 30 L14 22 L18 28 L24 20 L28 24 L34 14 L38 18 L44 6 L50 8" fill="none" stroke="var(--drug)" stroke-width="2.2"/>`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI()}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+/* drag: a ghost follows the pointer; drop on a bin */
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+const A11Y={bench:{cv:"#cvBench",f:benchA11y},ti:{cv:"#cvTI",f:tiA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}
+  const cap={bench:"#benchCap",ti:"#tiCap"}[curTab];if(cap&&lab)$(cap).textContent=lab}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="bench";
+const TABS=["bench","ti","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+function frame(now){
+  try{if(curTab==="bench")drawBench(now);else if(curTab==="ti")drawTI(now);else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__pd={tab:k=>showTab(k),bench:o=>{Object.assign(BN,o);benchUI();benchChanged();BN.dispE=bNow().E;BN.dispL=BN.la},benchState:()=>({E:bNow().E,max:bNow().max,ec:bNow().ec,done:[...BN.done]}),
+  ti:o=>{Object.assign(TI,o);tiUI();tiChanged();TI.disp=TI.ld},tiState:()=>{const s=tiNow();return {nh:s.nh,nt:s.nt,win:s.win,lo:s.lo,hi:s.hi,done:[...TI.done]}},
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),nCases:()=>CASES.length,sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),nRounds:()=>SROUNDS.length,cardBin:k=>SROUNDS[SG.r].cards[k][1],sortDrop:(k,b)=>sDrop(k,b),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order})};
+readColors();benchUI();benchChanged();tiUI();tiChanged();caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

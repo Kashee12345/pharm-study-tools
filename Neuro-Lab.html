@@ -1,0 +1,1507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neurologic Drugs Lab</title>
+<meta name="description" content="Antiseizure drug level simulator, Parkinson dopamine and acetylcholine balance simulator, neuromuscular junction anesthesia bench with train-of-four monitoring, nursing case files and sorting games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B378A;--accent-wash:#E2E5F6;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#C4644F;--act3:#2F7FC1;--act4:#2E8A7A;--act5:#A04E8C;--act6:#D98A1C;--act7:#5E7F1A;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#7A600F;
+  /* pharmacology: neuro palette */
+  --ecf:#EEF0F6;--grid:#D3D8E6;--scr:#0F1A20;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#5B3FB8;--drug2:#8A5ACB;--receptor:#1F7F95;--ligand:#D98A1C;--blocked:#8B9094;
+  --na:#C9A00C;--cl:#3E9A4E;--ca:#C4508A;--k:#5E6E7A;
+  --gaba:#2E9C7A;--glu:#C4382F;--dopa:#D2691E;--ach:#2F6FD0;--ser:#A04E8C;--epi:#7E9A2A;
+  --nrn:#E9DCCB;--nrn-edge:#A88B6A;--myelin:#F2E6C2;--myelin-edge:#B9A160;--mem:#C9A227;
+  --muscle:#D9827A;--muscle-edge:#A3473F;--sr:#E8C9E0;--liver:#B5653A;--gum:#E59AA6;--skin:#EAC9A8;--skin-edge:#B9937A;
+  --blood:#C4382F;--vessel:#E8B7B0;--heat:#E0563A;--cold:#2F7FC1;--bbb:#7F99A6;--brain:#E8D2D8;--brain-edge:#A3707E;--o2:#4F8FCB;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2346;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131826;--grid:#262E44;--scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#B39BF2;--drug2:#C9A8F0;--receptor:#5CC0D6;--ligand:#F2A93B;--blocked:#6F767B;
+  --na:#F0CC4A;--cl:#6BC26E;--ca:#E68AB8;--k:#A9B7C2;
+  --gaba:#4FD0A8;--glu:#F07A62;--dopa:#F2A060;--ach:#6FA3F0;--ser:#D186C0;--epi:#B5CF5A;
+  --nrn:#3E3528;--nrn-edge:#B39773;--myelin:#4A4430;--myelin-edge:#9C8A5A;--mem:#E0BE48;
+  --muscle:#6E3A36;--muscle-edge:#E07A74;--sr:#4A3446;--liver:#D98A6A;--gum:#B86A78;--skin:#5A4434;--skin-edge:#B9937A;
+  --blood:#F07A62;--vessel:#4A2A2A;--heat:#F27A5E;--cold:#5AA9E6;--bbb:#8FA9B6;--brain:#3F2E36;--brain-edge:#C99AA8;--o2:#8FC0EC;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2346;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#E08A74;--act3:#5AA9E6;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;--act7:#A3C95A;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131826;--grid:#262E44;--scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --drug:#B39BF2;--drug2:#C9A8F0;--receptor:#5CC0D6;--ligand:#F2A93B;--blocked:#6F767B;
+  --na:#F0CC4A;--cl:#6BC26E;--ca:#E68AB8;--k:#A9B7C2;
+  --gaba:#4FD0A8;--glu:#F07A62;--dopa:#F2A060;--ach:#6FA3F0;--ser:#D186C0;--epi:#B5CF5A;
+  --nrn:#3E3528;--nrn-edge:#B39773;--myelin:#4A4430;--myelin-edge:#9C8A5A;--mem:#E0BE48;
+  --muscle:#6E3A36;--muscle-edge:#E07A74;--sr:#4A3446;--liver:#D98A6A;--gum:#B86A78;--skin:#5A4434;--skin-edge:#B9937A;
+  --blood:#F07A62;--vessel:#4A2A2A;--heat:#F27A5E;--cold:#5AA9E6;--bbb:#8FA9B6;--brain:#3F2E36;--brain-edge:#C99AA8;--o2:#8FC0EC;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.seg2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg3 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:8px 8px}
+.drugbtns .tbtn b{display:block;font-size:14px}
+.drugbtns .tbtn small{display:block;color:var(--ink-soft);font-size:12.5px}
+.drugbtns .tbtn[aria-pressed="true"] small{color:inherit}
+.side h3 + .ctl{margin-top:2px}
+.checks{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.checks label{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;line-height:1.3}
+.checks input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:0 0 auto}
+.checks small{display:block;color:var(--ink-soft);font-size:12.5px}
+.tabs .tab{font-size:14.5px}
+.bins.six{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:640px){.bins.six{grid-template-columns:1fr}}
+.binhead span{min-width:0;overflow-wrap:anywhere}
+.case{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+@media (max-width:560px){.tabs .tab{flex:1 1 46%;font-size:13.5px;padding:8px 8px}}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 5 &middot; Neurologic drugs and anesthesia</div>
+    <h1>Neurologic Drugs Lab</h1>
+    <p class="sub">Push a phenytoin-like drug up one dose step at a time, rebalance the Parkinson seesaw through a day, run a twitch monitor through paralysis and reversal, then work real-feeling cases and sorting games. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sz" data-tab="sz" id="tabbtn-sz" type="button">Part 1 &middot; Seizure Drug Levels</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-pd" data-tab="pd" id="tabbtn-pd" type="button" tabindex="-1">Part 2 &middot; Parkinson Balance</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-nm" data-tab="nm" id="tabbtn-nm" type="button" tabindex="-1">Part 3 &middot; Anesthesia Bench</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 4 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 5 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: antiseizure level simulator -->
+  <section id="tab-sz" role="tabpanel" aria-labelledby="tabbtn-sz">
+    <h2 class="gk-sr">Part 1: Seizure Drug Levels</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSz" role="img" aria-label="Antiseizure drug level simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="szCap"></span></div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--drug)"></i>Blood level</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Target range</span>
+          <span><i style="background:var(--drug)"></i>Dose taken</span>
+          <span><i class="s" style="background:var(--panel);border-color:var(--bad)"></i>Missed dose (open circle)</span>
+        </div>
+        <p class="sim-note">A teaching model of a <b>phenytoin-like</b> drug over six weeks. Doses are in made-up "dose steps", and the level uses the familiar 10 to 20 target band as teaching units. Each dose step adds the same amount of drug. Watch what the level does.</p>
+      </div>
+      <aside class="card side" aria-label="Seizure simulator controls">
+        <div class="ctl"><label for="szDose">Daily dose <output id="szDoseOut" for="szDose"></output></label>
+          <input type="range" id="szDose" min="1" max="7" step="1" value="3"><div class="ticks" aria-hidden="true"><span>step 1</span><span>step 7</span></div></div>
+        <div class="ctl"><label for="szAdh">Doses taken <output id="szAdhOut" for="szAdh"></output></label>
+          <input type="range" id="szAdh" min="0" max="3" step="1" value="3"><div class="ticks" aria-hidden="true"><span>half</span><span>all</span></div></div>
+        <div class="checks">
+          <label><input type="checkbox" id="szInd"><span>Add a liver-enzyme inducer from week 2<small>for example carbamazepine or rifampin</small></span></label>
+          <label><input type="checkbox" id="szStop"><span>Patient stops the drug suddenly in week 4<small>"I felt fine, so I quit"</small></span></label>
+        </div>
+        <div class="bar">
+          <button class="btn" type="button" id="szPlay">Replay the six weeks</button>
+          <button class="tbtn" type="button" id="szReset">Reset</button>
+        </div>
+        <table class="readouts" id="szRead"><caption class="sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="szStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="szChal"></ul>
+        <p class="small">Simplified model. Real levels depend on the person, albumin, other drugs and the lab's own range; the prescriber adjusts doses.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: Parkinson balance -->
+  <section id="tab-pd" role="tabpanel" aria-labelledby="tabbtn-pd" hidden>
+    <h2 class="gk-sr">Part 2: Parkinson Balance</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvPd" role="img" aria-label="Parkinson balance simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="pdCap"></span></div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--dopa)"></i>Dopamine effect in the brain</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>ON window</span>
+          <span><i style="background:var(--drug)"></i>Levodopa dose</span>
+          <span><i style="background:var(--ach)"></i>Acetylcholine</span>
+        </div>
+        <p class="sim-note">A teaching model of one day, 6 am to 10 pm. "Effect" is relative, not a lab value. The seesaw and the person show the moment under the moving cursor.</p>
+      </div>
+      <aside class="card side" aria-label="Parkinson simulator controls">
+        <h3 id="pdStageLab">Disease stage</h3>
+        <div class="seg2" id="pdStage" role="group" aria-labelledby="pdStageLab"></div>
+        <div class="ctl"><label for="pdDoses">Levodopa doses per day <output id="pdDosesOut" for="pdDoses"></output></label>
+          <input type="range" id="pdDoses" min="2" max="6" step="1" value="3"><div class="ticks" aria-hidden="true"><span>2</span><span>6</span></div></div>
+        <div class="ctl"><label for="pdSize">Size of each dose <output id="pdSizeOut" for="pdSize"></output></label>
+          <input type="range" id="pdSize" min="1" max="4" step="1" value="2"><div class="ticks" aria-hidden="true"><span>small</span><span>large</span></div></div>
+        <h3>Add or remove</h3>
+        <div class="checks">
+          <label><input type="checkbox" id="pdCarbi" checked><span>Carbidopa with each dose<small>blocks dopa decarboxylase in the blood</small></span></label>
+          <label><input type="checkbox" id="pdComt"><span>COMT inhibitor (entacapone)<small>each levodopa dose lasts longer</small></span></label>
+          <label><input type="checkbox" id="pdMaob"><span>MAO-B inhibitor (selegiline)<small>slows dopamine breakdown in the brain</small></span></label>
+          <label><input type="checkbox" id="pdBenz"><span>Benztropine<small>lowers the acetylcholine side</small></span></label>
+          <label><input type="checkbox" id="pdProt"><span>Big high-protein lunch at noon<small>protein competes with levodopa</small></span></label>
+        </div>
+        <div class="bar">
+          <button class="btn" type="button" id="pdPlay">Replay the day</button>
+          <button class="tbtn" type="button" id="pdReset">Reset</button>
+        </div>
+        <table class="readouts" id="pdRead"><caption class="sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="pdStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="pdChal"></ul>
+        <p class="small">Simplified model with relative numbers. Real regimens are set by the prescriber; never change doses without them.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: neuromuscular junction anesthesia bench -->
+  <section id="tab-nm" role="tabpanel" aria-labelledby="tabbtn-nm" hidden>
+    <h2 class="gk-sr">Part 3: Anesthesia Bench</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvNm" role="img" aria-label="Neuromuscular junction bench."></canvas></div>
+        <div class="stagebar"><span class="caption" id="nmCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--ach)"></i>Acetylcholine (ACh)</span>
+          <span><i style="background:var(--receptor)"></i>Nicotinic receptor</span>
+          <span><i style="background:var(--drug)"></i>Drug</span>
+          <span><i class="s" style="background:var(--panel);border-color:var(--blocked)"></i>Blocked (grey)</span>
+        </div>
+        <p class="sim-note">A peripheral nerve stimulator sends a <b>train-of-four</b>: four quick pulses. The monitor counts the twitches and compares the fourth to the first. Time is sped up: one second here is about one minute.</p>
+      </div>
+      <aside class="card side" aria-label="Anesthesia bench controls">
+        <h3 id="nmDrugLab">Give a drug</h3>
+        <div class="drugbtns" id="nmDrugs" role="group" aria-labelledby="nmDrugLab"></div>
+        <div class="checks">
+          <label><input type="checkbox" id="nmSed"><span>Sedation and pain control running<small>propofol infusion plus an opioid</small></span></label>
+          <label><input type="checkbox" id="nmEpi"><span>Add epinephrine to the local anesthetic<small>narrows nearby vessels</small></span></label>
+        </div>
+        <div class="ctl"><label for="nmSpeed">Clock speed <output id="nmSpeedOut" for="nmSpeed"></output></label>
+          <input type="range" id="nmSpeed" min="1" max="4" step="1" value="2"><div class="ticks" aria-hidden="true"><span>slow</span><span>fast</span></div></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="nmReset">Reset bench</button>
+        </div>
+        <table class="readouts" id="nmRead"><caption class="sr">Monitor readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="nmStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="nmChal"></ul>
+        <p class="small">Teaching model. Timings are rounded and drugs have no doses here. Real reversal decisions follow quantitative monitoring and the anesthesia provider.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 4: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 4: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">8</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 5: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 5: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Learn the mechanisms first in the <a href="Neuro-Walkthrough.html">Neurologic Drugs Walkthrough</a>. Patients are fictional. Simulators use relative teaching units and made-up dose steps, never real doses, and drugs are named by generic name and class only. Always follow the prescriber, the label and your facility's protocol.</footer>
+
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "act7", "gold", "gold-wash", "gold-ink", "ecf", "grid", "scr", "scr-ink", "scr-soft", "drug", "drug2", "receptor", "ligand", "blocked", "na", "cl", "ca", "k", "gaba", "glu", "dopa", "ach", "ser", "epi", "nrn", "nrn-edge", "myelin", "myelin-edge", "mem", "muscle", "muscle-edge", "sr", "liver", "gum", "skin", "skin-edge", "blood", "vessel", "heat", "cold", "bbb", "brain", "brain-edge", "o2"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= neuro pharmacology drawing helpers ================= */
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function ngon(x,y,r,n,rot){ctx.beginPath();for(let k=0;k<=n;k++){const a=k/n*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function capsulePill(x,y,s,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.panel;ctx.fill();ctx.save();rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col;ctx.fillRect(-s,-s,s,2*s);ctx.restore();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.stroke();ctx.restore()}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.85),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+function fillPoly(pts,col){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();if(col){ctx.fillStyle=col;ctx.fill()}}
+
+/* drug molecules: shape tells the class, colour is drug (indigo/violet) unless given */
+function drugMol(x,y,s,o){o=o||{};const sh=o.shape||"hex";const col=o.col||C.drug;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  if(sh==="hex"){hexPath(0,0,s,0);fillStroke(col,hexA(C.ink,.55),1.3);hexPath(0,0,s*.45,0);fillStroke(hexA(C.panel,.35))}
+  else if(sh==="dia"){ctx.beginPath();ctx.moveTo(0,-s*1.1);ctx.lineTo(s,0);ctx.lineTo(0,s*1.1);ctx.lineTo(-s,0);ctx.closePath();fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="pent"){ngon(0,0,s,5,-Math.PI/2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="tri"){ngon(0,0,s*1.1,3,-Math.PI/2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="sq"){rr(-s*.85,-s*.85,s*1.7,s*1.7,2);fillStroke(col,hexA(C.ink,.55),1.3)}
+  else if(sh==="ring"){circ(0,0,s,null,col,s*.55);circ(0,0,s*1.25,null,hexA(C.ink,.35),1)}
+  else if(sh==="star"){ctx.beginPath();for(let k=0;k<10;k++){const a=k/10*TAU-Math.PI/2,r=k%2?s*.48:s*1.1;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();fillStroke(col,hexA(C.ink,.55),1.2)}
+  else{circ(0,0,s,col,hexA(C.ink,.55),1.3)}
+  ctx.restore()}
+/* natural messengers */
+function nt(kind,x,y,s,a){s=s||4.5;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);
+  if(kind==="gaba"){circ(x,y,s,C.gaba,hexA(C.ink,.4),1)}
+  else if(kind==="glu"){ngon(x,y,s*1.15,3,-Math.PI/2);fillStroke(C.glu,hexA(C.ink,.4),1)}
+  else if(kind==="dopa"){ngon(x,y,s*1.05,5,-Math.PI/2);fillStroke(C.dopa,hexA(C.ink,.4),1)}
+  else if(kind==="ach"){circ(x,y,s,C.ach,hexA(C.ink,.4),1)}
+  else if(kind==="ser"){rr(x-s,y-s,s*2,s*2,1.5);fillStroke(C.ser,hexA(C.ink,.4),1)}
+  else if(kind==="epi"){ngon(x,y,s*1.1,4,0);fillStroke(C.epi,hexA(C.ink,.4),1)}
+  ctx.restore()}
+/* ions: small circle with a sign drawn as strokes (colour is not the only cue) */
+function ion(kind,x,y,a,r){r=r||5;ctx.save();ctx.globalAlpha*=a==null?1:clamp(a,0,1);const col={na:C.na,cl:C.cl,ca:C.ca,k:C.k}[kind]||C.na;
+  circ(x,y,r,col,hexA(C.ink,.45),1);const c=isDark()?"#10161A":"#fff";line(x-r*.5,y,x+r*.5,y,c,1.4);if(kind!=="cl")line(x,y-r*.5,x,y+r*.5,c,1.4);ctx.restore()}
+
+/* lipid bilayer, horizontal, outside above */
+function bilayer(x1,x2,y,th,o){o=o||{};th=th||22;ctx.fillStyle=hexA(C.mem,.18);ctx.fillRect(x1,y-th/2,x2-x1,th);
+  for(let X=x1+4;X<x2;X+=9){circ(X,y-th/2+3,3.4,C.mem);circ(X,y+th/2-3,3.4,C.mem);line(X-1,y-th/2+6,X-1,y-2,hexA(C.mem,.8),1);line(X+1,y-th/2+6,X+1,y-2,hexA(C.mem,.8),1);line(X-1,y+2,X-1,y+th/2-6,hexA(C.mem,.8),1);line(X+1,y+2,X+1,y+th/2-6,hexA(C.mem,.8),1)}
+  if(o.labels){txt(x1+4,y-th/2-10,o.out||"Outside the cell",{size:12,color:C["ink-soft"]});txt(x1+4,y+th/2+11,o.in||"Inside the cell",{size:12,color:C["ink-soft"]})}}
+/* voltage-gated sodium channel in a horizontal membrane. open 0..1, inact 0..1, drug 0..1 */
+function naChannel(x,y,s,o){o=o||{};const open=clamp(o.open||0,0,1),inact=clamp(o.inact||0,0,1);const gap=s*(.12+.28*open);const col=o.col||C.receptor;
+  [-1,1].forEach(d=>{rr(x+d*(gap/2)+(d<0?-s*.62:0),y-s*.85,s*.62,s*1.7,s*.22);fillStroke(mix(col,C.panel,.15),mix(col,C.ink,.35),1.5)});
+  // inactivation ball on a chain, inside (below)
+  if(!o.noBall){const bx=x+lerp(s*.75,0,inact),by=y+lerp(s*1.25,s*.95,inact);poly([[x+s*.55,y+s*.8],[lerp(x+s*.8,bx,.5),by+s*.25],[bx,by]],mix(col,C.ink,.3),1.6);circ(bx,by,s*.22,mix(col,C.ink,.25))}
+  if(o.drug>0)drugMol(x,y+s*.55,s*.3,{a:o.drug,shape:o.shape||"hex",col:o.dcol});
+  if(o.lab)txt(x,y-s*1.1,o.lab,{size:12,weight:600,align:"center"})}
+/* GABA-A receptor (side view). gaba 0..1 bound, bz 0..1 benzodiazepine, barb 0..1 barbiturate/propofol, open 0..1 */
+function gabaA(x,y,s,o){o=o||{};const open=clamp(o.open||0,0,1);const gap=s*(.1+.32*open);const col=C.receptor;
+  [-1,1].forEach(d=>{const X=x+d*(gap/2)+(d<0?-s*.75:0);rr(X,y-s*1.05,s*.75,s*2,s*.25);fillStroke(mix(col,C.panel,.3),mix(col,C.ink,.35),1.5);
+    // GABA pocket notch
+    circ(x+d*(gap/2+s*.38),y-s*1.05,s*.17,C.ecf,mix(col,C.ink,.35),1.2)});
+  if(o.gaba>0){[-1,1].forEach(d=>nt("gaba",x+d*(gap/2+s*.38),y-s*1.05,s*.15,o.gaba))}
+  if(o.bz>0){circ(x-gap/2-s*.75,y-s*.55,s*.16,C.ecf,mix(col,C.ink,.35),1.2);drugMol(x-gap/2-s*.75,y-s*.55,s*.16,{shape:"dia",a:o.bz})}
+  if(o.barb>0){drugMol(x+gap/2+s*.75,y+s*.05,s*.17,{shape:"sq",a:o.barb,col:C.drug2})}
+  if(o.lab)txt(x,y-s*1.45,o.lab,{size:12,weight:600,align:"center"})}
+/* generic receptor (cup shape opening upward), with optional bound ligand or drug */
+function receptor(x,y,s,o){o=o||{};const col=o.col||C.receptor;ctx.beginPath();ctx.moveTo(x-s,y-s*.9);ctx.lineTo(x-s*.55,y-s*.9);ctx.lineTo(x-s*.55,y-s*.25);ctx.arc(x,y-s*.25,s*.55,Math.PI,0,true);ctx.lineTo(x+s*.55,y-s*.9);ctx.lineTo(x+s,y-s*.9);ctx.lineTo(x+s,y+s*.9);ctx.lineTo(x-s,y+s*.9);ctx.closePath();
+  fillStroke(o.off?mix(C.blocked,C.panel,.3):mix(col,C.panel,.2),mix(o.off?C.blocked:col,C.ink,.35),1.4);
+  if(o.glow)glow(x,y+s*.2,s*1.6,col,.35*o.glow);
+  if(o.lab)txt(x,y+s*1.25,o.lab,{size:12,weight:600,align:"center"})}
+
+/* a neuron: soma, dendrites to the left, axon to the right to x2 */
+function neuron(x,y,r,x2,T,o){o=o||{};const fire=o.fire||0;const col=o.col||C.nrn,ed=o.edge||C["nrn-edge"];
+  for(let k=0;k<5;k++){const a=Math.PI*.55+k*.22+Math.sin(k*2.1)*.05;const L=r*(1.7+rnd(k+3)*.6);poly([[x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8],[x+Math.cos(a)*L*.6,y+Math.sin(a)*L*.6+Math.sin(T*.6+k)*1.5],[x+Math.cos(a+.15)*L,y+Math.sin(a+.15)*L]],ed,3.2)}
+  for(let k=0;k<3;k++){const a=-Math.PI*.55-k*.25;const L=r*(1.6+rnd(k+9)*.5);poly([[x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8],[x+Math.cos(a-.1)*L,y+Math.sin(a-.1)*L]],ed,3)}
+  rr(x+r*.6,y-r*.16,x2-x-r*.6,r*.32,r*.16);fillStroke(col,ed,1.6);
+  blobPath(x,y,r,1.1,T*.3,.05);fillStroke(col,ed,2);circ(x-r*.1,y,r*.35,mix(col,ed,.35));
+  if(fire>0)glow(x,y,r*1.8,o.glowCol||C.na,.45*fire);
+  // terminal knobs
+  [-1,0,1].forEach(d=>{line(x2,y,x2+r*.6,y+d*r*.5,ed,2.4);circ(x2+r*.65,y+d*r*.5,r*.18,col,ed,1.4)})}
+/* travelling action potential pulse along an axon from xa to xb at y; p 0..1 */
+function apPulse(xa,xb,y,p,col,blocked){const X=lerp(xa,xb,p);if(blocked!=null&&X>blocked)return;glow(X,y,16,col||C.na,.9);circ(X,y,4,col||C.na)}
+
+/* chemical synapse: presynaptic bulb above, cleft, postsynaptic membrane below */
+function synapse(x,y,w,o){o=o||{};const col=C.nrn,ed=C["nrn-edge"];
+  ctx.beginPath();ctx.moveTo(x-w*.18,y-150);ctx.lineTo(x-w*.18,y-110);ctx.bezierCurveTo(x-w*.5,y-100,x-w*.5,y-18,x-w*.3,y-12);ctx.lineTo(x+w*.3,y-12);ctx.bezierCurveTo(x+w*.5,y-18,x+w*.5,y-100,x+w*.18,y-110);ctx.lineTo(x+w*.18,y-150);ctx.closePath();fillStroke(col,ed,2);
+  const g=o.gap||40;rr(x-w*.5,y+g,w,64,14);fillStroke(col,ed,2);
+  if(o.label!==false){txt(x+w*.36,y-120,o.pre||"Sending neuron",{size:12,color:C["ink-soft"]});txt(x+w*.5-6,y+g+52,o.post||"Receiving neuron",{size:12,color:C["ink-soft"],align:"right"})}
+  return {top:y-12,bot:y+g,x,w}}
+function vesicle(x,y,r,kind,n,T){circ(x,y,r,hexA(C.panel,.75),C["nrn-edge"],1.3);for(let i=0;i<(n||4);i++){const a=i/(n||4)*TAU+T*.4;nt(kind,x+Math.cos(a)*r*.45,y+Math.sin(a)*r*.45,r*.24)}}
+
+/* scrolling trace helpers */
+function eegVal(t,sev){const n=.16*Math.sin(TAU*9.7*t)+.12*Math.sin(TAU*6.1*t+1.3)+.09*Math.sin(TAU*17.3*t+.4)+.07*Math.sin(TAU*3.3*t+2);
+  const ph=P(t,1/3);const sw=Math.exp(-Math.pow((ph-.12)/.03,2))*1.35-Math.exp(-Math.pow((ph-.22)/.05,2))*.35-Math.sin(ph*Math.PI)*.45;return lerp(n,sw,clamp(sev,0,1))}
+function scopeBox(x,y,w,h,ttl){rr(x,y,w,h,8);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  ctx.save();rr(x,y,w,h,8);ctx.clip();ctx.strokeStyle="rgba(120,160,170,.16)";ctx.lineWidth=1;for(let gx=x+20;gx<x+w;gx+=20){ctx.beginPath();ctx.moveTo(gx,y);ctx.lineTo(gx,y+h);ctx.stroke()}for(let gy=y+20;gy<y+h;gy+=20){ctx.beginPath();ctx.moveTo(x,gy);ctx.lineTo(x+w,gy);ctx.stroke()}ctx.restore();
+  if(ttl)txt(x+10,y+13,ttl,{size:12,mono:true,weight:600,color:"#C5D3DA"})}
+/* draw an EEG trace: sevFn(t) gives seizure severity at time t; window of win seconds ending at T */
+function eegTrace(x,y,w,h,T,sevFn,o){o=o||{};const win=o.win||4;ctx.save();rr(x,y,w,h,6);ctx.clip();ctx.beginPath();
+  for(let i=0;i<=w;i+=1.5){const t=T-win+i/w*win;const v=eegVal(t,sevFn(t));const Y=y+h/2-v*h*.32;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=o.col||"#7FE0B0";ctx.lineWidth=1.8;ctx.lineJoin="round";ctx.stroke();ctx.restore()}
+/* ECG wave for monitors */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+(p>.28&&p<.31?-(p-.28)/.03*.12:0)+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+/* bedside monitor: o {hr,sbp,dbp,spo2,rr,temp,etco2} */
+function monitor(x,y,w,h,o,T){rr(x,y,w,h,10);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.stroke();
+  const ex=x+12,ew=w*.55,ey=y+14,eh=h*.36;ctx.save();rr(ex,ey,ew,eh,4);ctx.clip();ctx.beginPath();const hr=o.hr||75;
+  for(let i=0;i<=ew;i++){const tt=(T||0)*hr/60-(ew-i)/ew*2.5;const v=ecgWave(tt);const Y=ey+eh*.7-v*eh*.55;i?ctx.lineTo(ex+i,Y):ctx.moveTo(ex+i,Y)}ctx.strokeStyle="#4FD08A";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const vx=x+w*.62;const item=(lx,ly,lab,val,col,unit)=>{txt(lx,ly,lab,{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(lx,ly+21,val,{size:21,mono:true,weight:700,color:col});if(unit)txt(lx,ly+40,unit,{size:11.5,mono:true,color:"#A3B2BA"})};
+  item(vx,y+14,"HR",String(Math.round(hr)),"#4FD08A","/min");
+  if(o.sbp)item(vx,y+14+h*.34,"BP",Math.round(o.sbp)+"/"+Math.round(o.dbp),"#F2A3C9",null);
+  const by=y+h*.55;const items=[["SpO₂",o.spo2!=null?o.spo2+"%":"--","#6FC3F0"],["RR",o.rr!=null?String(o.rr):"--","#E8EEF1"],[o.etco2!=null?"EtCO₂":"Temp",o.etco2!=null?String(o.etco2):(o.temp||"--"),"#F2B33B"]];
+  items.forEach((it,i)=>{const lx=x+12+i*(w*.55/3);txt(lx,by+10,it[0],{size:12,mono:true,weight:600,color:"#A3B2BA"});txt(lx,by+32,it[1],{size:17,mono:true,weight:700,color:it[2]})});
+  if(o.etco2!=null&&o.temp)item(vx,y+14+h*.66,"Temp",o.temp,"#F2B33B",null)}
+
+/* simple patient figure; o.tremor (0..1), o.sleep, o.rigid, o.col */
+function person(x,y,s,T,o){o=o||{};const sk=o.skin||C.skin,ed=C["skin-edge"];const tr=(o.tremor||0)*Math.sin(T*TAU*5)*s*.06;const sw=o.sway?Math.sin(T*2.2)*s*.12*o.sway:0;
+  ctx.save();ctx.translate(x+sw,y);if(o.lean)ctx.rotate(o.lean);
+  rr(-s*.32,-s*1.1,s*.64,s*1.0,s*.18);fillStroke(o.shirt||mix(C.accent,C.panel,.55),hexA(C.ink,.35),1.2);
+  line(-s*.16,-s*.1,-s*.2-sw*.2,s*.75,ed,s*.16);line(s*.16,-s*.1,s*.2,s*.75,ed,s*.16);
+  const hy=o.rigid?-s*.4:-s*.35;line(-s*.3,-s*.95,-s*.48,hy+tr,ed,s*.13);line(s*.3,-s*.95,s*.48+(o.reach||0),hy-tr,ed,s*.13);
+  circ(-s*.5,hy+tr+s*.04,s*.09,sk,ed,1);circ(s*.5+(o.reach||0),hy-tr+s*.04,s*.09,sk,ed,1);
+  circ(0,-s*1.32,s*.26,sk,ed,1.4);
+  if(o.sleep){line(-s*.12,-s*1.33,-s*.04,-s*1.33,C.ink,1.5);line(s*.04,-s*1.33,s*.12,-s*1.33,C.ink,1.5)}else{circ(-s*.09,-s*1.35,s*.035,C.ink);circ(s*.09,-s*1.35,s*.035,C.ink)}
+  ctx.restore()}
+/* eye with optional nystagmus (jerky drift and snap back) */
+function eye(x,y,r,T,ny){ell(x,y,r,r*.62,0,"#FFFFFF",hexA(C.ink,.5),1.5);const ph=P(T*2.4,1);const dx=ny?(ph<.8?lerp(-.35,.35,ph/.8):lerp(.35,-.35,(ph-.8)/.2))*r:Math.sin(T*.6)*r*.1;
+  ctx.save();ell(x,y,r,r*.62,0);ctx.clip();circ(x+dx,y,r*.42,"#5B7FA8");circ(x+dx,y,r*.2,"#10161A");circ(x+dx-r*.1,y-r*.1,r*.07,"#FFFFFF");ctx.restore()}
+/* seesaw: tilt>0 means the right side is lower (heavier) */
+function seesaw(x,y,w,tilt,lab){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-22,y+40);ctx.lineTo(x+22,y+40);ctx.closePath();fillStroke(C["panel-2"],C["ink-soft"],1.5);
+  ctx.save();ctx.translate(x,y);ctx.rotate(tilt);rr(-w/2,-6,w,10,4);fillStroke(C.sunk,C["ink-soft"],1.5);ctx.restore();
+  const L=[x-Math.cos(tilt)*w*.42,y-Math.sin(tilt)*w*.42],R=[x+Math.cos(tilt)*w*.42,y+Math.sin(tilt)*w*.42];return {L,R}}
+function pan(px,py,w,items,kind,lab){rr(px-w/2,py-8,w,10,4);fillStroke(C.panel,C["ink-soft"],1.3);
+  for(let i=0;i<items;i++){const col=i%6,row=Math.floor(i/6);nt(kind,px-w/2+10+col*(w-20)/5,py-16-row*12,5)}
+  if(lab)txt(px,py+18,lab,{size:12.5,weight:700,align:"center"})}
+/* syringe: tip at (x,y) pointing in angle rot */
+function syringe(x,y,s,rot,fill,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);line(0,0,s*.55,0,C["ink-soft"],1.6);rr(s*.55,-s*.16,s*1.2,s*.32,3);fillStroke(hexA(C.panel,.85),C["ink-soft"],1.4);
+  ctx.fillStyle=hexA(col||C.drug,.75);ctx.fillRect(s*.58,-s*.12,s*1.14*clamp(fill==null?.7:fill,0,1),s*.24);line(s*1.75,0,s*2.1,0,C["ink-soft"],3);line(s*2.1,-s*.2,s*2.1,s*.2,C["ink-soft"],3);ctx.restore()}
+function ivBag(x,y,s,lab,col,lvl){rr(x-s*.45,y-s*1.2,s*.9,s*1.2,s*.2);fillStroke(hexA(C.panel,.85),C["ink-soft"],1.5);ctx.save();rr(x-s*.45,y-s*1.2,s*.9,s*1.2,s*.2);ctx.clip();ctx.fillStyle=hexA(col||C.o2,.35);const L=(lvl==null?.8:lvl)*s*1.2;ctx.fillRect(x-s*.45,y-L,s*.9,L);ctx.restore();
+  line(x,y,x,y+s*.35,C["ink-soft"],2);if(lab)txt(x,y-s*.6,lab,{size:12,weight:700,align:"center"})}
+/* gauge: semicircle meter, f 0..1 */
+function gauge(x,y,r,f,lab,col,zones){ctx.beginPath();ctx.arc(x,y,r,Math.PI,0);ctx.strokeStyle=C.sunk;ctx.lineWidth=10;ctx.stroke();
+  if(zones)zones.forEach(z=>{ctx.beginPath();ctx.arc(x,y,r,Math.PI+z[0]*Math.PI,Math.PI+z[1]*Math.PI);ctx.strokeStyle=hexA(z[2],.55);ctx.lineWidth=10;ctx.stroke()});
+  const a=Math.PI+clamp(f,0,1)*Math.PI;line(x,y,x+Math.cos(a)*(r-4),y+Math.sin(a)*(r-4),col||C.ink,3);circ(x,y,4,col||C.ink);if(lab)txt(x,y+16,lab,{size:12,weight:600,align:"center"})}
+/* horizontal level bar with a target window */
+function levelBar(x,y,w,f,lo,hi,lab,col){rr(x,y,w,14,7);fillStroke(C.sunk);if(lo!=null){rr(x+w*lo,y,w*(hi-lo),14,3);fillStroke(hexA(C.good,.3),C.good,1.2)}rr(x,y,w*clamp(f,0,1),14,7);fillStroke(hexA(col||C.drug,.75));
+  if(lab)txt(x,y-10,lab,{size:12,weight:600})}
+/* striated skeletal muscle fiber, contr 0..1 shortens the sarcomeres */
+function muscleFiber(x,y,w,h,contr,o){o=o||{};const sh=1-.18*clamp(contr,0,1);const W2=w*sh;const x0=x+(w-W2)/2;rr(x0,y,W2,h,h/2);fillStroke(o.col||C.muscle,C["muscle-edge"],1.6);
+  ctx.save();rr(x0,y,W2,h,h/2);ctx.clip();const n=Math.round(w/14);for(let i=0;i<n;i++){const X=x0+(i+.5)*W2/n;line(X,y,X,y+h,hexA(C["muscle-edge"],.55),i%2?1:2.2)}ctx.restore()}
+/* skull/brain side outline */
+function brainShape(x,y,s,fill){ctx.beginPath();ctx.moveTo(x-s,y+s*.1);ctx.bezierCurveTo(x-s*1.05,y-s*.7,x-s*.3,y-s*.95,x+s*.15,y-s*.85);ctx.bezierCurveTo(x+s*.85,y-s*.8,x+s*1.1,y-s*.25,x+s*.95,y+s*.2);ctx.bezierCurveTo(x+s*.9,y+s*.5,x+s*.5,y+s*.55,x+s*.25,y+s*.45);
+  ctx.bezierCurveTo(x+s*.1,y+s*.75,x-s*.15,y+s*.7,x-s*.2,y+s*.5);ctx.bezierCurveTo(x-s*.6,y+s*.55,x-s*.95,y+s*.45,x-s,y+s*.1);ctx.closePath();fillStroke(fill||C.brain,C["brain-edge"],2);
+  ctx.save();ctx.clip();ctx.strokeStyle=hexA(C["brain-edge"],.5);ctx.lineWidth=1.6;for(let k=0;k<7;k++){ctx.beginPath();const sx=x-s*.8+k*s*.27;ctx.moveTo(sx,y-s*.8);ctx.bezierCurveTo(sx+s*.15,y-s*.4,sx-s*.12,y-s*.1,sx+s*.08,y+s*.3);ctx.stroke()}ctx.restore()}
+/* axis frame for a mini graph */
+function axes(x,y,w,h,xl,yl){line(x,y+h,x+w,y+h,C["ink-soft"],1.4);line(x,y,x,y+h,C["ink-soft"],1.4);if(xl)txt(x+w,y+h+14,xl,{size:12,color:C["ink-soft"],align:"right"});if(yl){ctx.save();ctx.translate(x-12,y+h/2);ctx.rotate(-Math.PI/2);txt(0,0,yl,{size:12,color:C["ink-soft"],align:"center"});ctx.restore()}}
+function band(x,y,w,h,v0,v1,lo,hi,col){const Y1=y+h-(hi-v0)/(v1-v0)*h,Y2=y+h-(lo-v0)/(v1-v0)*h;ctx.fillStyle=hexA(col||C.good,.16);ctx.fillRect(x,Y1,w,Y2-Y1);line(x,Y1,x+w,Y1,hexA(col||C.good,.7),1,[4,3]);line(x,Y2,x+w,Y2,hexA(col||C.good,.7),1,[4,3])}
+/* liver lobe */
+function liverShape(x,y,s,col){ctx.beginPath();ctx.moveTo(x-s,y-s*.2);ctx.bezierCurveTo(x-s*.9,y-s*.75,x+s*.3,y-s*.8,x+s,y-s*.45);ctx.bezierCurveTo(x+s*1.1,y-s*.1,x+s*.4,y+s*.45,x-s*.2,y+s*.5);ctx.bezierCurveTo(x-s*.75,y+s*.5,x-s*1.05,y+s*.2,x-s,y-s*.2);ctx.closePath();fillStroke(col||C.liver,mix(col||C.liver,C.ink,.35),2)}
+/* neuromuscular junction: nerve terminal above a muscle fiber with receptors */
+function nmj(x,y,w,o){o=o||{};ctx.beginPath();ctx.moveTo(x-12,y-130);ctx.lineTo(x-12,y-90);ctx.bezierCurveTo(x-w*.45,y-80,x-w*.45,y-14,x-w*.3,y-10);ctx.lineTo(x+w*.3,y-10);ctx.bezierCurveTo(x+w*.45,y-14,x+w*.45,y-80,x+12,y-90);ctx.lineTo(x+12,y-130);ctx.closePath();fillStroke(C.nrn,C["nrn-edge"],2);
+  muscleFiber(x-w*.75,y+16,w*1.5,64,o.contr||0);if(o.labels!==false){txt(x+20,y-118,"Motor nerve ending",{size:12,color:C["ink-soft"]});txt(x+w*.75,y+96,"Skeletal muscle fiber",{size:12,color:C["ink-soft"],align:"right"})}}
+/* capillary segment; constrict 0..1 narrows it */
+function capillary(x1,x2,y,h,constrict,T,o){o=o||{};const hh=h*(1-.6*clamp(constrict,0,1));rr(x1,y-hh/2-4,x2-x1,hh+8,hh/2+4);fillStroke(C.vessel,mix(C.blood,C.ink,.2),1.8);
+  const n=Math.round((x2-x1)/26);const sp=(o.flow==null?1:o.flow)*(1-.65*clamp(constrict,0,1));for(let i=0;i<n;i++){const X=x1+((i*26+T*60*sp)%(x2-x1));ell(X,y+Math.sin(i*1.7)*hh*.15,8,Math.min(5,hh*.35),0,C.blood,null)}}
+/* clock face for times of day; hour 0..24 */
+function dayClock(x,y,r,hour){circ(x,y,r,C.panel,C["ink-soft"],1.6);for(let k=0;k<12;k++){const a=k/12*TAU-Math.PI/2;line(x+Math.cos(a)*r*.82,y+Math.sin(a)*r*.82,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95,C["ink-soft"],1.4)}
+  const h=hour%12,m=(hour%1)*60;const ah=h/12*TAU-Math.PI/2,am=m/60*TAU-Math.PI/2;line(x,y,x+Math.cos(ah)*r*.5,y+Math.sin(ah)*r*.5,C.ink,3);line(x,y,x+Math.cos(am)*r*.75,y+Math.sin(am)*r*.75,C.ink,1.8);circ(x,y,3,C.ink)}
+function thermometer(x,y,h,f,lab){rr(x-6,y,12,h,6);fillStroke(C.panel,C["ink-soft"],1.3);const L=(h-10)*clamp(f,0,1);rr(x-3,y+h-L-2,6,L,3);fillStroke(mix(C.cold,C.heat,f));circ(x,y+h+4,9,mix(C.cold,C.heat,f),C["ink-soft"],1.3);if(lab)txt(x,y-12,lab,{size:12,weight:600,align:"center"})}
+/* MAR-style medication row on canvas */
+function marRow(x,y,w,cols,o){o=o||{};const h=o.h||30;rr(x,y,w,h,4);fillStroke(o.fill||hexA(C["panel-2"],.95),C.rule,1.1);let X=x+8;cols.forEach((c,i)=>{txt(X,y+h/2,c[0],{size:c[2]||12.5,weight:c[3]||500,mono:!!c[4],color:c[5]||C.ink});X+=c[1]})}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("pharm-neuro-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("pharm-neuro-lab-"+k,v)}catch(e){}}};
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+function readRows(el,rows){el.querySelector("tbody").innerHTML=rows.map(r=>`<tr><td class="l">${r[0]}</td><td>${r[1]}</td></tr>`).join("")}
+function setStatus(el,cls,html){el.className="status"+(cls?" "+cls:"");el.innerHTML=html}
+/* small time-plot helper: x from t0..t1 into box, y from v0..v1 */
+function mapper(x,y,w,h,t0,t1,v0,v1){return {X:t=>x+(t-t0)/(t1-t0)*w,Y:v=>y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h}}
+
+/* ================= PART 1: antiseizure level simulator (phenytoin-like) ================= */
+const S1=makeStage("cvSz",800,500);
+const SZ_A=[7.0,8.45,9.9,11.35,12.8,14.25,15.7];      /* equal dose steps (teaching units per day) */
+const SZ_VM=20,SZ_KM=10,SZ_DAYS=42,SZ_ADH=[.5,.7,.85,1],SZ_ADHN=["About half","7 of 10","Most (6 of 7)","All of them"];
+const SZ={step:3,adh:3,ind:false,stop:false,t:0,hold:0,lvl:[],taken:[],done:new Set(),last:null};
+function vlab(x,y,t){ctx.save();ctx.translate(x,y);ctx.rotate(-Math.PI/2);txt(0,0,t,{size:12,color:C["ink-soft"],align:"center"});ctx.restore()}
+function szCss(step,ind){const A=SZ_A[step-1],vm=SZ_VM*(ind?1.3:1);return A>=vm?99:SZ_KM*A/(vm-A)}
+function szCssCont(s,ind){const A=lerp(SZ_A[0],SZ_A[6],(s-1)/6),vm=SZ_VM*(ind?1.3:1);return A>=vm?99:SZ_KM*A/(vm-A)}
+function szSim(){const A=SZ_A[SZ.step-1],frac=SZ_ADH[SZ.adh];let G=0,Cc=0;const out=[],tk=[];const dt=.01;
+  for(let d=0;d<SZ_DAYS;d++){const stopped=SZ.stop&&d>=24;const miss=!stopped&&frac<1&&d>0&&Math.floor((d+1)*(1-frac)+.35)>Math.floor(d*(1-frac)+.35);tk.push(stopped?2:miss?1:0);if(!stopped&&!miss)G+=A;
+    for(let k=0;k<100;k++){const t=d+k*dt;const vm=SZ_VM*(SZ.ind?1+.3*smooth((t-7)/10):1);const el=vm*Cc/(SZ_KM+Cc);const ab=1.5*G;G-=ab*dt;Cc=Math.max(0,Cc+(ab-el)*dt);if(k%10===0)out.push(Cc)}}
+  out.push(Cc);SZ.lvl=out;SZ.taken=tk}
+function szAt(t){const i=clamp(t*10,0,SZ.lvl.length-1);const a=Math.floor(i),b=Math.min(a+1,SZ.lvl.length-1);return lerp(SZ.lvl[a],SZ.lvl[b],i-a)}
+function szRisk(c){return clamp((10-c)/7,0,1)}
+function szZone(c){return c<10?"below":c<=20?"in":"above"}
+function szChanged(restart){SZ.step=+$("#szDose").value;SZ.adh=+$("#szAdh").value;SZ.ind=$("#szInd").checked;SZ.stop=$("#szStop").checked;
+  $("#szDoseOut").textContent="step "+SZ.step;$("#szAdhOut").textContent=SZ_ADHN[SZ.adh];szSim();if(restart!==false){SZ.t=0;SZ.hold=0}szCheck();szRead();a11yKey=""}
+["szDose","szAdh"].forEach(id=>$("#"+id).addEventListener("input",()=>szChanged()));["szInd","szStop"].forEach(id=>$("#"+id).addEventListener("change",()=>szChanged()));
+$("#szPlay").onclick=()=>{SZ.t=0;SZ.hold=0};
+$("#szReset").onclick=()=>{$("#szDose").value=3;$("#szAdh").value=3;$("#szInd").checked=false;$("#szStop").checked=false;szChanged()};
+const SZ_CH=["Find a dose step that settles inside the 10 to 20 target range.",
+ "From a dose that works, go up just one step. Watch the level leap into the toxic zone.",
+ "At a dose that was working, add the enzyme inducer. Where does the level end up?",
+ "Keep the inducer on and find the step that brings the level back into range.",
+ "Set doses taken to about half and watch the level dip and the seizure risk climb.",
+ "Make the patient stop suddenly in week 4. Watch the seizure risk meter."];
+function szCheck(){const full=SZ.adh===3&&!SZ.stop;const c=szCss(SZ.step,SZ.ind);
+  if(full&&!SZ.ind&&c>=10&&c<=20)SZ.done.add(0);
+  if(full&&!SZ.ind&&c>20&&SZ.last&&SZ.last.step===SZ.step-1&&!SZ.last.ind&&szCss(SZ.last.step,false)>=10&&szCss(SZ.last.step,false)<=20)SZ.done.add(1);
+  if(SZ.ind&&full&&szCss(SZ.step,false)>=10&&szCss(SZ.step,false)<=20)SZ.done.add(2);
+  if(SZ.ind&&full&&c>=10&&c<=20)SZ.done.add(3);
+  if(SZ.adh===0)SZ.done.add(4);if(SZ.stop)SZ.done.add(5);
+  SZ.last={step:SZ.step,ind:SZ.ind};chalUI($("#szChal"),SZ_CH,SZ.done);
+  const end=szAt(SZ_DAYS-.05);let cls="good",msg;
+  if(SZ.stop)cls="bad",msg="<b>Stopped suddenly.</b> The level drains away and breakthrough seizures return. Antiseizure drugs are tapered by the prescriber, never stopped all at once.";
+  else if(SZ.adh<3&&szZone(end)!=="above")cls="warn",msg="<b>Missed doses.</b> Each gap lets the level sag, sometimes below the band. Teach a routine (same time daily, a pill box) and never double up without asking.";
+  else if(end>20)cls="bad",msg=`<b>Above range: toxicity.</b> The level keeps climbing toward about ${Math.round(szCss(SZ.step,SZ.ind))}. Liver enzymes are saturated, so one small step caused a big jump. Look for <b>nystagmus</b> first, then <b>ataxia</b>. Hold the next dose and report.`;
+  else if(end<10)cls="warn",msg=SZ.ind?"<b>Below range.</b> The inducer made more liver enzymes, so the drug is cleared faster and the level falls. The prescriber may raise the dose and recheck levels.":"<b>Below range.</b> Seizures may break through. The prescriber may raise the dose a little and recheck the level.";
+  else msg=`<b>In range.</b> The level settles near ${Math.round(szCss(SZ.step,SZ.ind))}. Notice how long it took: at higher levels this drug can take weeks to settle.`;
+  setStatus($("#szStatus"),cls,msg)}
+function szRead(){const c=szAt(SZ.t);const inr=SZ.lvl.filter(v=>v>=10&&v<=20).length/SZ.lvl.length;
+  readRows($("#szRead"),[["Week and day",`Week ${Math.min(6,Math.floor(SZ.t/7)+1)}, day ${Math.floor(SZ.t%7)+1}`],["Level now",c.toFixed(1)+" ("+{below:"below range",in:"in range",above:"above range"}[szZone(c)]+")"],["Settles near (all doses)",szCss(SZ.step,SZ.ind)>60?"keeps climbing":szCss(SZ.step,SZ.ind).toFixed(1)],["Time in range",Math.round(inr*100)+"%"],["Seizure risk",["low","moderate","high"][Math.min(2,Math.floor(szRisk(c)*3))]]])}
+let szRdT=0;
+function szStep(dt){if(SZ.t<SZ_DAYS){SZ.t=Math.min(SZ_DAYS,SZ.t+dt*2)}szRdT+=dt;if(szRdT>.3){szRdT=0;szRead()}}
+function drawSz(now){use(S1);const T=now/1000;const cur=szAt(SZ.t);
+  /* main graph */
+  panelBox(8,8,540,284);title(22,26,"Blood level over six weeks");
+  const gx=60,gy=44,gw=470,gh=206,vmax=45;const M=mapper(gx,gy,gw,gh,0,SZ_DAYS,0,vmax);
+  ctx.fillStyle=hexA(C.bad,.08);ctx.fillRect(gx,M.Y(vmax),gw,M.Y(20)-M.Y(vmax));ctx.fillStyle=hexA(C.warn,.08);ctx.fillRect(gx,M.Y(10),gw,M.Y(0)-M.Y(10));
+  band(gx,gy,gw,gh,0,vmax,10,20,C.good);
+  txt(gx+gw-6,M.Y(15),"target range",{size:12,weight:600,color:C.good,align:"right"});txt(gx+gw-6,M.Y(38),"above range: toxicity",{size:12,weight:600,color:C.bad,align:"right"});txt(gx+gw-6,M.Y(5),"below range: seizure risk",{size:12,weight:600,color:C["warn-ink"],align:"right"});
+  axes(gx,gy,gw,gh,"","");vlab(gx-34,gy+gh/2,"Level");
+  for(let w=0;w<=6;w++){const X=M.X(w*7);line(X,gy+gh,X,gy+gh+4,C["ink-soft"],1.2);if(w<6)txt(X+M.X(3.5)-M.X(0),gy+gh+30,"wk "+(w+1),{size:12,color:C["ink-soft"],align:"center"})}
+  [0,10,20,30,40].forEach(v=>txt(gx-6,M.Y(v),String(v),{size:11.5,mono:true,color:C["ink-soft"],align:"right"}));
+  if(SZ.ind){const X=M.X(7);line(X,gy,X,gy+gh,hexA(C.warn,.8),1.4,[5,4]);label(X+4,gy+12,"inducer added",{size:12,weight:600,color:C["warn-ink"],align:"left"})}
+  if(SZ.stop){const X=M.X(24);line(X,gy,X,gy+gh,hexA(C.bad,.8),1.4,[5,4]);label(X+4,gy+30,"stopped",{size:12,weight:600,color:C.bad,align:"left"})}
+  /* faint full curve then bright to cursor */
+  const pts=(upto)=>{const a=[];for(let i=0;i<SZ.lvl.length;i++){const t=i/10;if(t>upto)break;a.push([M.X(t),M.Y(SZ.lvl[i])])}return a};
+  poly(pts(SZ_DAYS),hexA(C.drug,.25),2);poly(pts(SZ.t),C.drug,2.6);
+  /* dose markers */
+  SZ.taken.forEach((k,d)=>{const X=M.X(d+.2),Y=gy+gh+13;if(k===0)circ(X,Y,3.2,C.drug);else if(k===1)circ(X,Y,3.2,C.panel,C.bad,1.4);else line(X-2.5,Y,X+2.5,Y,C["ink-soft"],1.4)});
+  const cx=M.X(SZ.t);line(cx,gy,cx,gy+gh,hexA(C.ink,.45),1.2);circ(cx,M.Y(cur),5.5,C.drug,C.panel,2);
+  const lr=cx>gx+gw-60;label(cx+(lr?-10:10),clamp(M.Y(cur)-16,gy+10,gy+gh-10),cur.toFixed(1),{size:12,mono:true,weight:700,color:C.drug,border:C.drug,align:lr?"right":"left"});
+  /* steady-state inset */
+  panelBox(556,8,236,284);title(570,26,"Where each step settles");
+  const ix=596,iy=48,iw=180,ih=196,iv=40;const N=mapper(ix,iy,iw,ih,1,7,0,iv);
+  band(ix,iy,iw,ih,0,iv,10,20,C.good);axes(ix,iy,iw,ih,"","");vlab(ix-30,iy+ih/2,"Settles at");
+  [0,10,20,30,40].forEach(v=>txt(ix-6,N.Y(v),String(v),{size:11.5,mono:true,color:C["ink-soft"],align:"right"}));
+  for(let s=1;s<=7;s++)txt(N.X(s),iy+ih+12,String(s),{size:11.5,mono:true,color:s===SZ.step?C.ink:C["ink-soft"],weight:s===SZ.step?700:500,align:"center"});
+  txt(ix+iw/2,iy+ih+30,"Dose step (equal steps)",{size:12,color:C["ink-soft"],align:"center"});
+  const curve=(ind,col,dash)=>{const a=[];for(let s=1;s<=7.001;s+=.05){a.push([N.X(s),N.Y(szCssCont(s,ind))])}ctx.save();rr(ix,iy-4,iw+4,ih+4,0);ctx.clip();poly(a,col,2.2,dash);ctx.restore()};
+  curve(false,SZ.ind?hexA(C.drug,.35):C.drug);if(SZ.ind)curve(true,C.warn,[6,4]);
+  for(let s=1;s<=7;s++){const v=szCss(s,SZ.ind);if(v<=iv)circ(N.X(s),N.Y(v),s===SZ.step?6:3.2,s===SZ.step?(SZ.ind?C.warn:C.drug):hexA(SZ.ind?C.warn:C.drug,.6),s===SZ.step?C.panel:null,2);else if(s===SZ.step){arrow(N.X(s),N.Y(iv-6),N.X(s),N.Y(iv)+2,C.bad,2)}}
+  const cs=szCss(SZ.step,SZ.ind);label(N.X(SZ.step)+(SZ.step>4?-8:8),clamp(N.Y(Math.min(cs,iv))+(SZ.step>4?0:-16),iy+10,iy+ih-10),cs>60?"keeps climbing":"≈ "+cs.toFixed(1),{size:12,mono:true,weight:700,align:SZ.step>4?"right":"left",color:C.ink});
+  if(SZ.ind)txt(ix+4,iy+8,"dashed: with inducer",{size:11.5,color:C["warn-ink"],weight:600});
+  /* patient panel */
+  panelBox(8,300,380,192);title(22,318,"Patient at the cursor");
+  const risk=szRisk(cur);const seizing=risk>.4;
+  scopeBox(20,330,232,74,"EEG");eegTrace(22,348,228,54,T,t=>seizing?(P(t,5)<.4+.4*risk?clamp(risk*1.3,0,1):.08):0,{win:4});
+  if(seizing)chipText(200,343,"seizure",C.bad);
+  const ny=cur>20,atax=cur>30,conf=cur>40;
+  txt(22,420,"Eyes:",{size:12.5,weight:700});txt(66,420,ny?"nystagmus (jerky side-to-side)":"steady",{size:12.5,color:ny?C.bad:C.ink,weight:ny?600:500});
+  txt(22,442,"Walking:",{size:12.5,weight:700});txt(86,442,atax?"unsteady (ataxia), slurred speech":"steady",{size:12.5,color:atax?C.bad:C.ink,weight:atax?600:500});
+  txt(22,464,"Alertness:",{size:12.5,weight:700});txt(100,464,conf?"confused, drowsy":"alert",{size:12.5,color:conf?C.bad:C.ink,weight:conf?600:500});
+  eye(292,350,15,T,ny);eye(332,350,15,T,ny);
+  person(312,454,34,T,{sway:atax?1:0,sleep:conf,tremor:seizing?.8:0});
+  /* meters */
+  panelBox(396,300,396,192);title(410,318,"Meters");
+  gauge(488,420,62,risk,"",C.ink,[[0,.33,C.good],[.33,.66,C.warn],[.66,1,C.bad]]);
+  txt(488,438,"Seizure risk",{size:12.5,weight:700,align:"center"});txt(488,456,["low","moderate","high"][Math.min(2,Math.floor(risk*3))],{size:12.5,weight:600,align:"center",color:risk>.66?C.bad:risk>.33?C["warn-ink"]:C.good});
+  const rungs=[[20,"Nystagmus"],[30,"Ataxia, slurred speech"],[40,"Confusion, sedation"]];
+  txt(590,340,"Toxicity signs, in order",{size:12.5,weight:700});
+  rungs.forEach((r,i)=>{const y=466-i*40;const on=cur>r[0];rr(590,y-14,190,28,6);ctx.fillStyle=on?hexA(C.bad,.16):hexA(C["panel-2"],.9);ctx.fill();ctx.strokeStyle=on?C.bad:C.rule;ctx.lineWidth=on?1.8:1;ctx.stroke();
+    txt(600,y,(on?"▲ ":"")+r[1],{size:12.5,weight:on?700:500,color:on?C.bad:C["ink-soft"]});txt(772,y,"> "+r[0],{size:11.5,mono:true,color:C["ink-soft"],align:"right"})});
+  txt(590,360,"Level now "+cur.toFixed(1),{size:12.5,mono:true,weight:700,color:C.drug});
+  $("#szCap").textContent=`Dose step ${SZ.step}${SZ.ind?" with an inducer":""}${SZ.adh<3?", some doses missed":""}${SZ.stop?", stopped in week 4":""}. Week ${Math.min(6,Math.floor(SZ.t/7)+1)}: level ${cur.toFixed(1)}, ${{below:"below range",in:"in range",above:"above range"}[szZone(cur)]}.`}
+function szA11y(){const cur=szAt(SZ.t),cs=szCss(SZ.step,SZ.ind),z=szZone(cur);const end=szAt(SZ_DAYS-.05);
+  const lab=`Seizure drug level graph: dose step ${SZ.step}, level now ${z==="in"?"in range":z==="below"?"below range":"above range"}.`;
+  const d=`A purple line on the six-week graph climbs from zero after daily doses (filled purple dots along the bottom${SZ.adh<3?"; open red circles mark missed doses":""}) and ends near ${Math.round(end)}, ${szZone(end)==="in"?"inside the green 10 to 20 target band":szZone(end)==="below"?"below the green band in the amber seizure-risk zone":"above the green band in the red toxicity zone"}.${SZ.ind?" A dashed line at week 2 marks the inducer, after which the level drifts down.":""}${SZ.stop?" After the stopped marker in week 4 the line falls toward zero.":""} The right graph shows where each of the seven equal dose steps settles: the dots rise slowly, then bend sharply upward, so step 6 lands near 25 and step 7 near 37. Below, the patient panel shows ${szRisk(cur)>.4?"seizure spikes on the EEG":"a calm EEG"}, ${cur>20?"eyes jerking side to side (nystagmus)":"steady eyes"}${cur>30?" and a swaying, unsteady person":""}, and the seizure risk gauge reads ${["low","moderate","high"][Math.min(2,Math.floor(szRisk(cur)*3))]}.`;
+  return [lab,d]}
+
+/* ================= PART 2: Parkinson balance simulator ================= */
+const S2=makeStage("cvPd",800,500);
+const PD_SIZE=[.6,.85,1.1,1.45],PD_SIZEN=["small","medium","large","very large"];
+const PD={adv:false,n:3,size:2,carbi:true,comt:false,maob:false,benz:false,prot:false,h:6,hold:0,E:[],Lp:[],per:[],times:[],done:new Set(),seen:{}};
+const PD_H0=6,PD_H1=22,PD_DT=.05;
+function pdTimes(n){const iv=14/n;return Array.from({length:n},(_,i)=>Math.round((7+i*iv)*4)/4)}
+function pdModel(o){const k=Math.LN2/(o.comt?2.1:1.5),ka=2.2;const times=pdTimes(o.n);const sz=PD_SIZE[o.size-1];
+  const doses=[];[0,24].forEach(off=>times.forEach(t=>{const blunt=o.prot&&t>=11&&t<13.6?.4:1;doses.push([t+off,sz*blunt])}));
+  const tau=o.adv?.35:7,f=o.carbi?1:.3,base=o.adv?.12:.3,gain=(o.adv?.75:.9)*(o.maob?1.25:1);
+  let S=0;const E=[],Lp=[],per=[];
+  for(let t=PD_H0;t<=PD_H1+24+1e-6;t+=PD_DT){let L=0;doses.forEach(d=>{const u=t-d[0];if(u>0)L+=d[1]*(Math.exp(-k*u)-Math.exp(-ka*u))*1.9});
+    S+=(L*f-S)/tau*PD_DT;if(t>=PD_H0+24-1e-6){E.push(base+(o.maob?.06:0)+gain*S);Lp.push(L);per.push(L*(o.carbi?.15:1))}}
+  return {E,Lp,per,times,thr:o.benz?.37:.45}}
+function pdSim(){const m=pdModel(PD);PD.E=m.E;PD.Lp=m.Lp;PD.per=m.per;PD.times=m.times;PD.thr=m.thr}
+function pdAt(arr,h){const i=clamp((h-PD_H0)/PD_DT,0,arr.length-1);const a=Math.floor(i),b=Math.min(a+1,arr.length-1);return lerp(arr[a],arr[b],i-a)}
+function pdState(e){return e<PD.thr?"off":e>1?"dysk":"on"}
+function pdPct(){let on=0,off=0,dy=0;PD.E.forEach(e=>{const s=pdState(e);if(s==="on")on++;else if(s==="off")off++;else dy++});const n=PD.E.length;return {on:on/n,off:off/n,dy:dy/n}}
+function pdChanged(restart){PD.n=+$("#pdDoses").value;PD.size=+$("#pdSize").value;["carbi","comt","maob","benz","prot"].forEach(k=>PD[k]=$("#pd"+k[0].toUpperCase()+k.slice(1)).checked);
+  $("#pdDosesOut").textContent=PD.n+" ("+pdTimes(PD.n).map(pdClock).join(", ")+")";$("#pdSizeOut").textContent=PD_SIZEN[PD.size-1];pdSim();if(restart!==false){PD.h=PD_H0;PD.hold=0}pdCheck();pdRead();a11yKey=""}
+function pdClock(h){const H=Math.floor(h),m=Math.round((h-H)*60);const hh=H%12===0?12:H%12;return hh+(m?":"+String(m).padStart(2,"0"):"")+(H<12?" am":" pm")}
+segBtns($("#pdStage"),[[false,"Early disease"],[true,"Advanced disease"]],()=>PD.adv,v=>{PD.adv=v;pdChanged()});
+["pdDoses","pdSize"].forEach(id=>$("#"+id).addEventListener("input",()=>pdChanged()));["pdCarbi","pdComt","pdMaob","pdBenz","pdProt"].forEach(id=>$("#"+id).addEventListener("change",()=>pdChanged()));
+$("#pdPlay").onclick=()=>{PD.h=PD_H0;PD.hold=0};
+$("#pdReset").onclick=()=>{PD.adv=false;$("#pdDoses").value=3;$("#pdSize").value=2;$("#pdCarbi").checked=true;["pdComt","pdMaob","pdBenz","pdProt"].forEach(id=>$("#"+id).checked=false);segBtns($("#pdStage"),[[false,"Early disease"],[true,"Advanced disease"]],()=>PD.adv,v=>{PD.adv=v;pdChanged()});pdChanged()};
+const PD_CH=["Early disease: keep the patient ON for about 90% of the day (the first hour before breakfast is often OFF).",
+ "Switch to advanced disease and spot the wearing-off dips before each dose.",
+ "Turn off carbidopa. Why does so little reach the brain, and why the nausea?",
+ "Add the big protein lunch. Which dose gets blunted?",
+ "Push the dose size up in advanced disease until dyskinesia peaks appear.",
+ "Advanced disease: reach at least 80% ON with under 10% dyskinesia. Try more frequent doses or a COMT inhibitor."];
+function pdCheck(){const p=pdPct();
+  if(!PD.adv&&PD.carbi&&p.on>=.88)PD.done.add(0);if(PD.adv&&p.off>=.12)PD.done.add(1);if(!PD.carbi)PD.done.add(2);if(PD.prot)PD.done.add(3);
+  if(PD.adv&&p.dy>=.08)PD.done.add(4);if(PD.adv&&PD.carbi&&p.on>=.8&&p.dy<.1)PD.done.add(5);chalUI($("#pdChal"),PD_CH,PD.done);
+  let cls="good",msg;
+  if(!PD.carbi)cls="warn",msg="<b>No carbidopa.</b> Enzymes in the blood turn most levodopa into dopamine before it reaches the brain. Dopamine cannot cross the blood-brain barrier, so the brain gets little, while the dopamine in the blood causes <b>nausea</b> and <b>low blood pressure</b>.";
+  else if(p.dy>=.08)cls="warn",msg="<b>Peak-dose dyskinesia.</b> Right after each dose the effect overshoots and writhing movements appear. Smaller, more frequent doses usually help.";
+  else if(p.off>=.12)cls="warn",msg=PD.prot?"<b>Protein lunch.</b> Amino acids from the meal compete with levodopa for absorption and for the carrier into the brain, so the midday dose barely works. Take doses 30 to 60 minutes before meals and spread protein through the day.":"<b>Wearing off.</b> In advanced disease the brain cannot store dopamine, so symptoms return before the next dose. More frequent doses, a COMT inhibitor or an MAO-B inhibitor can fill the gaps.";
+  else msg=PD.adv?"<b>Good control.</b> The effect stays in the ON window most of the day.":"<b>Smooth.</b> In early disease, surviving neurons store dopamine and release it steadily, so each dose blends into the next.";
+  if(PD.benz)msg+=" <b>Benztropine</b> lowers the acetylcholine side, easing tremor, but watch for dry mouth, constipation, urinary retention and confusion in older adults.";
+  setStatus($("#pdStatus"),cls,msg)}
+function pdRead(){const p=pdPct();const e=pdAt(PD.E,PD.h);
+  readRows($("#pdRead"),[["Time",pdClock(PD.h)],["Effect now",e.toFixed(2)+" ("+{off:"OFF",on:"ON",dysk:"dyskinesia"}[pdState(e)]+")"],["Time ON",Math.round(p.on*100)+"%"],["Time OFF",Math.round(p.off*100)+"%"],["Time with dyskinesia",Math.round(p.dy*100)+"%"],["Nausea (dopamine in blood)",["low","some","high"][Math.min(2,Math.floor(pdAt(PD.per,PD.h)/.38))]]])}
+let pdRdT=0;
+function pdStep(dt){if(PD.h<PD_H1)PD.h=Math.min(PD_H1,PD.h+dt);else{PD.hold+=dt;if(PD.hold>2){PD.h=PD_H0;PD.hold=0}}pdRdT+=dt;if(pdRdT>.3){pdRdT=0;pdRead()}}
+function drawPd(now){use(S2);const T=now/1000;const e=pdAt(PD.E,PD.h),st=pdState(e);
+  panelBox(8,8,784,252);title(22,26,(PD.adv?"Advanced":"Early")+" disease: dopamine effect through one day");
+  const gx=64,gy=44,gw=700,gh=168,vmax=1.4;const M=mapper(gx,gy,gw,gh,PD_H0,PD_H1,0,vmax);
+  ctx.fillStyle=hexA(C.act5,.1);ctx.fillRect(gx,M.Y(vmax),gw,M.Y(1)-M.Y(vmax));ctx.fillStyle=hexA(C.good,.13);ctx.fillRect(gx,M.Y(1),gw,M.Y(PD.thr)-M.Y(1));ctx.fillStyle=hexA(C.warn,.1);ctx.fillRect(gx,M.Y(PD.thr),gw,M.Y(0)-M.Y(PD.thr));
+  line(gx,M.Y(1),gx+gw,M.Y(1),hexA(C.ink,.3),1,[4,3]);line(gx,M.Y(PD.thr),gx+gw,M.Y(PD.thr),hexA(C.ink,.3),1,[4,3]);
+  txt(gx+gw-6,M.Y(1.2),"dyskinesia (too much)",{size:12,weight:600,color:C.act5,align:"right"});txt(gx+gw-6,M.Y((1+PD.thr)/2),"ON",{size:12.5,weight:700,color:C.good,align:"right"});txt(gx+gw-6,M.Y(PD.thr/2),"OFF: tremor, stiffness",{size:12,weight:600,color:C["warn-ink"],align:"right"});
+  axes(gx,gy,gw,gh,"","Effect");
+  for(let h=6;h<=22;h+=2){const X=M.X(h);line(X,gy+gh,X,gy+gh+4,C["ink-soft"],1.2);txt(X,gy+gh+14,pdClock(h),{size:11.5,color:C["ink-soft"],align:"center"})}
+  if(PD.prot){const X=M.X(12);ctx.fillStyle=hexA(C.warn,.12);ctx.fillRect(M.X(11.6),gy,M.X(12.6)-M.X(11.6),gh);drumstick(X,gy+16);txt(X+14,gy+16,"protein lunch",{size:12,weight:600,color:C["warn-ink"]})}
+  const pts=(upto)=>{const a=[];for(let i=0;i<PD.E.length;i++){const h=PD_H0+i*PD_DT;if(h>upto)break;a.push([M.X(h),M.Y(PD.E[i])])}return a};
+  poly(pts(PD_H1),hexA(C.dopa,.3),2);poly(pts(PD.h),C.dopa,2.8);
+  PD.times.forEach(t=>{const X=M.X(t);drugMol(X,gy+gh+30,6,{shape:"pent",col:C.drug});});txt(gx-8,gy+gh+30,"Doses",{size:12,weight:600,align:"right",color:C["ink-soft"]});
+  const cx=M.X(PD.h);line(cx,gy,cx,gy+gh,hexA(C.ink,.45),1.2);circ(cx,M.Y(e),5.5,C.dopa,C.panel,2);
+  /* seesaw */
+  panelBox(8,268,300,224);title(22,286,"Movement seesaw now");
+  const achW=PD.benz?.5:.75;const tilt=clamp((achW-e)*.5,-.28,.28);const ss=seesaw(158,388,230,tilt);
+  const nd=Math.round(clamp(e,0,1.4)/1.4*10),na=Math.round(achW*8);
+  pan(ss.L[0],ss.L[1]-4,72,nd,"dopa");pan(ss.R[0],ss.R[1]-4,72,na,"ach");
+  if(PD.benz)for(let i=0;i<3;i++){const X=ss.R[0]-26+i*12,Y=ss.R[1]-44;drugMol(X,Y,5,{shape:"tri",col:C.drug})}
+  txt(ss.L[0],ss.L[1]+22,"Dopamine",{size:12.5,weight:700,color:C.dopa,align:"center"});txt(ss.R[0],ss.R[1]+22,"Acetylcholine",{size:12.5,weight:700,color:C.ach,align:"center"});
+  const tl=st==="off"?"Tipped toward ACh":st==="dysk"?"Tipped toward dopamine":"Close to balanced";label(158,470,tl,{size:12.5,weight:700,border:st==="on"?C.good:C.warn});
+  /* person + clock */
+  panelBox(316,268,220,224);title(330,286,"The patient");
+  dayClock(492,322,24,PD.h);txt(492,358,pdClock(PD.h),{size:12,mono:true,weight:600,align:"center"});
+  person(400,432,46,T,{tremor:st==="off"?1:0,sway:st==="dysk"?1.4:0,rigid:st==="off"});
+  const sc={off:[C.warn,"OFF: tremor, stiff"],on:[C.good,"ON: moving well"],dysk:[C.act5,"Dyskinesia: writhing"]}[st];
+  chipText(426,480,sc[1],sc[0]);
+  /* meters */
+  panelBox(544,268,248,224);title(558,286,"Meters");
+  txt(558,304,"Symptom meter",{size:12.5,weight:700});
+  const mx=558,mw=220,my=328;[["OFF",0,PD.thr,C.warn],["ON",PD.thr,1,C.good],["dysk.",1,1.4,C.act5]].forEach(z=>{const x1=mx+z[1]/1.4*mw,x2=mx+z[2]/1.4*mw;rr(x1,my,x2-x1,16,3);ctx.fillStyle=hexA(z[3],.35);ctx.fill();txt((x1+x2)/2,my+28,z[0],{size:11.5,weight:600,align:"center",color:C["ink-soft"]})});
+  const nx=mx+clamp(e,0,1.4)/1.4*mw;ctx.beginPath();ctx.moveTo(nx,my-2);ctx.lineTo(nx-6,my-11);ctx.lineTo(nx+6,my-11);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();line(nx,my-2,nx,my+18,C.ink,2);
+  const per=pdAt(PD.per,PD.h);levelBar(558,384,220,per/1.2,null,null,"Nausea, dizziness (dopamine in blood)",C.warn);
+  levelBar(558,428,220,PD.carbi?.8:.25,null,null,"Levodopa reaching the brain",C.drug);
+  txt(558,458,PD.carbi?"Carbidopa protects it in the blood":"No carbidopa: most lost in blood",{size:12,color:PD.carbi?C.good:C.bad,weight:600});
+  if(PD.benz)txt(558,478,"Benztropine: dry mouth, retention",{size:12,color:C["warn-ink"],weight:600});
+  $("#pdCap").textContent=`${PD.adv?"Advanced":"Early"} disease, ${PD.n} doses a day. At ${pdClock(PD.h)} the patient is ${{off:"OFF (tremor and stiffness)",on:"ON (moving well)",dysk:"in a dyskinesia peak"}[st]}.`}
+function drumstick(x,y){ell(x-3,y-2,7,5.5,-.5,C.warn,null);line(x+2,y+2,x+8,y+8,C["ink-soft"],2.5);circ(x+9,y+9,2.2,C["ink-soft"])}
+function pdA11y(){const p=pdPct(),e=pdAt(PD.E,PD.h),st=pdState(e);
+  const lab=`Parkinson day graph: ${PD.adv?"advanced":"early"} disease, ${Math.round(p.on*100)}% of the day ON. Patient now ${{off:"OFF",on:"ON",dysk:"dyskinetic"}[st]}.`;
+  const shape=PD.adv?(p.dy>=.08?"rises into the purple dyskinesia zone after each dose and sinks into the amber OFF zone before the next":p.off>=.12?"peaks after each dose and dips into the amber OFF zone before the next one (wearing off)":"rises and falls with each dose but stays mostly in the green ON band"):(p.on>=.9?"is a smooth, nearly flat line inside the green ON band":"stays low, mostly in the amber OFF zone");
+  const d=`An orange line across the day from 6 am to 10 pm ${shape}. Violet pentagons along the bottom mark ${PD.n} levodopa doses${PD.prot?", and a drumstick at noon marks a protein lunch whose dose barely rises":""}. A cursor sweeps across the day. Below, a seesaw holds orange dopamine pentagons on the left and blue acetylcholine circles on the right; it is ${st==="off"?"tipped down toward acetylcholine":st==="dysk"?"tipped down toward dopamine":"nearly level"}, and the person beside it ${st==="off"?"has a shaking hand":st==="dysk"?"sways and writhes":"stands steady"}. A nausea bar is ${PD.carbi?"low":"high"}.`;
+  return [lab,d]}
+
+/* ================= PART 3: neuromuscular junction anesthesia bench ================= */
+const S3=makeStage("cvNm",800,520);
+const NM_SPD=[.5,1,2,4];
+const NM_THR=[.96,.9,.86,.82];
+const NM={t:0,Rpl:0,Re:0,Spl:0,Se:0,sT:null,rocT:null,neoT:null,sugT:null,laT:null,laEpi:false,sed:false,spd:2,h:[1,1,1,1],pain:1,hist:[],histT:0,
+  train:{t0:-9,h:[1,1,1,1],shown:[1,1,1,1],n:4,prev:[1,1,1,1]},trainTimer:0,realT:0,events:[],done:new Set(),flags:{},last:""};
+const NM_DRUGS=[["la","Lidocaine","local anesthetic: nerve block"],["succ","Succinylcholine","depolarizing blocker"],["roc","Rocuronium","nondepolarizing blocker"],["neo","Neostigmine","plus glycopyrrolate: more ACh"],["sug","Sugammadex","wraps rocuronium"]];
+function nmDrugUI(){const el=$("#nmDrugs");el.innerHTML="";NM_DRUGS.forEach(d=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=`<b>${d[1]}</b><small>${d[2]}</small>`;b.onclick=()=>nmGive(d[0]);el.appendChild(b)})}
+function nmDepth(){const dR=clamp(NM.Re,0,.995);const neo=NM.neoT!=null&&NM.t-NM.neoT<90?1+2*smooth((NM.t-NM.neoT)/4):1;const dEff=1-Math.min(1,(1-dR)*neo);
+  const dS=clamp(NM.Se,0,.995);let LA=0;if(NM.laT!=null){const u=NM.t-NM.laT,dur=NM.laEpi?90:45;LA=smooth(u/3)*(1-smooth((u-dur)/15))}return {dR,dEff,dS,LA,neo}}
+function nmHeights(){const D=nmDepth();const hS=clamp((.96-D.dS)/.28,0,1),hLA=1-smooth((D.LA-.55)/.35);
+  NM.h=NM_THR.map(th=>clamp((th-D.dEff)/(th-.68),0,1)*hS*hLA);NM.pain=1-smooth((D.LA-.15)/.3);return D}
+function nmShown(){return NM.train.n>=4?NM.train.h:NM.train.prev}
+function nmCount(h){return (h||NM.h).filter(x=>x>.04).length}
+function nmRatio(h){h=h||NM.h;return h[0]>.04?h[3]/h[0]:0}
+function nmGive(k){const cnt=nmCount();const D=nmDepth();const st=$("#nmStatus");let cls="",msg="";const tag=`<b>${Math.round(NM.t)} min:</b> `;
+  if(k==="la"){NM.laT=NM.t;NM.laEpi=$("#nmEpi").checked;NM.flags[NM.laEpi?"laEpi":"laPlain"]=1;cls="good";
+    msg=tag+`Lidocaine plugs the <b>sodium channels</b> in the nerve, so signals stop at the shaded zone. Small pain fibers block first, then the motor fibers. ${NM.laEpi?"With <b>epinephrine</b> the nearby vessels narrow, so the drug stays longer (about twice as long here) and less reaches the blood.":"Without epinephrine, blood carries the drug away sooner."} Watch the strip chart for how long it lasts.`}
+  else if(k==="succ"){NM.Spl=4;NM.sT=NM.t;NM.flags.succ=1;cls="warn";
+    msg=tag+"Succinylcholine <b>activates</b> the nicotinic receptors and is not broken down by acetylcholinesterase, so the membrane stays depolarized. First come <b>fasciculations</b> (twitching), then all four twitches shrink <b>equally</b> (no fade). Plasma cholinesterase clears it in minutes. Potassium rises a little, and it can trigger <b>malignant hyperthermia</b>.";
+    if(!NM.sed)NM.flags.nosed=1}
+  else if(k==="roc"){NM.Rpl+=1.6;NM.rocT=NM.t;NM.flags.roc=1;cls="warn";
+    msg=tag+"Rocuronium <b>sits in</b> the ACh receptors without opening them (a competitive blocker). Twitches <b>fade</b>: the fourth weakens first, then the count drops to zero. It wears off slowly over about 30 to 60 minutes here.";
+    if(NM.sugT!=null&&NM.t-NM.sugT<60)msg+=" Sugammadex is still in the blood and wraps much of this new dose.";if(!NM.sed)NM.flags.nosed=1}
+  else if(k==="neo"){NM.neoT=NM.t;cls="good";
+    if(D.dS>.3){NM.flags.neoSucc=1;cls="bad";msg=tag+"Neostigmine does <b>not</b> reverse succinylcholine. Blocking cholinesterase can even <b>prolong</b> it. The fix is time while the patient is ventilated."}
+    else if(D.dR<.05){msg=tag+"Neostigmine raises ACh, but there is no rocuronium to compete with. Glycopyrrolate is given with it to stop the extra ACh from slowing the heart."}
+    else if(cnt===0){NM.flags.neoDeep=1;cls="bad";msg=tag+"<b>Too deep.</b> With zero twitches, almost every receptor holds rocuronium. Extra ACh cannot win enough of them back. Wait for twitches to return, or use <b>sugammadex</b>."}
+    else{NM.flags.neoOk=cnt>=2&&(cnt<4||nmRatio()<.9)?1:NM.flags.neoOk;msg=tag+"Neostigmine blocks <b>acetylcholinesterase</b>, so ACh builds up and outcompetes rocuronium. Twitches return over a few minutes. <b>Glycopyrrolate</b> goes with it to prevent a slow heart rate and drooling."+(cnt<2?" It works best once 2 or more twitches are back.":"")}}
+  else if(k==="sug"){NM.sugT=NM.t;cls="good";
+    if(D.dR>.05||NM.Rpl>.05){NM.flags.sug=1;msg=tag+"Sugammadex <b>rings</b> wrap rocuronium molecules in the blood and pull them off the receptors. Even a deep block reverses within a couple of minutes."}
+    else if(D.dS>.05){cls="warn";msg=tag+"Sugammadex only binds <b>rocuronium</b> and vecuronium. It does nothing for succinylcholine."}
+    else msg=tag+"Sugammadex is in the blood, but there is no rocuronium to wrap."}
+  NM.events.push([NM.t,{la:"LA",succ:"Succ",roc:"Roc",neo:"Neo",sug:"Sug"}[k]]);
+  if(!NM.sed&&(k==="succ"||k==="roc"))msg+=" <b>Warning:</b> no sedation is running. Paralytics cause no sleep and no pain relief.";
+  setStatus(st,cls,msg);nmCheck();a11yKey=""}
+const NM_CH=["Give succinylcholine: spot the fasciculations, then four equal twitches shrinking (no fade).",
+ "Give rocuronium and watch the train-of-four fade, then count down to zero.",
+ "Reverse rocuronium with neostigmine once 2 or more twitches are back.",
+ "Try neostigmine during a deep block (0 twitches), then reverse it with sugammadex.",
+ "Give a paralytic with no sedation running. What does the patient experience?",
+ "Compare a lidocaine nerve block with and without epinephrine."];
+function nmCheck(){const f=NM.flags;if(f.succ)NM.done.add(0);if(f.roc&&f.zero)NM.done.add(1);if(f.neoOk&&f.recovered)NM.done.add(2);if(f.neoDeep&&f.sug)NM.done.add(3);if(f.nosed)NM.done.add(4);if(f.laEpi&&f.laPlain)NM.done.add(5);chalUI($("#nmChal"),NM_CH,NM.done)}
+function nmStateText(h){const cnt=nmCount(h),r=nmRatio(h);const D=nmDepth();const anyNMB=D.dR>.05||D.dS>.05;
+  const breath=cnt<=1&&anyNMB?"ventilator only":cnt<4&&anyNMB?"weak, needs help":anyNMB&&r<.9?"shallow (residual)":"on own";
+  const aware=NM.sed?"asleep (sedated)":anyNMB&&cnt<4?"AWAKE + paralysed":"awake";
+  const pain=NM.pain<.2?"blocked":NM.pain<.8?"partly blocked":"felt normally";return {cnt,r,breath,aware,pain,anyNMB}}
+function nmRead(){const s=nmStateText(nmShown());const on=[];const D=nmDepth();if(D.LA>.05)on.push("lidocaine");if(D.dS>.03)on.push("succinylcholine");if(D.dR>.03)on.push("rocuronium");if(NM.neoT!=null&&NM.t-NM.neoT<90)on.push("neostigmine");if(NM.sugT!=null&&NM.t-NM.sugT<60)on.push("sugammadex");
+  readRows($("#nmRead"),[["Clock",Math.round(NM.t)+" min"],["TOF count",s.cnt+" of 4"],["TOF ratio (T4/T1)",s.cnt?s.r.toFixed(2):"--"],["On board",on.join(", ")||"nothing"],["Breathing",s.breath],["Patient",s.aware],["Pain from the nerve's area",s.pain]])}
+$("#nmSed").addEventListener("change",()=>{NM.sed=$("#nmSed").checked;a11yKey=""});
+$("#nmSpeed").addEventListener("input",()=>{NM.spd=+$("#nmSpeed").value;$("#nmSpeedOut").textContent=NM_SPD[NM.spd-1]+" min per second"});
+$("#nmReset").onclick=()=>{Object.assign(NM,{t:0,Rpl:0,Re:0,Spl:0,Se:0,sT:null,rocT:null,neoT:null,sugT:null,laT:null,hist:[],histT:0,events:[]});NM.train={t0:-9,h:[1,1,1,1],shown:[1,1,1,1],n:4,prev:[1,1,1,1]};setStatus($("#nmStatus"),"","Bench reset. The muscle twitches four times, all equal: a normal train-of-four.");a11yKey=""};
+let nmRdT=0;
+function nmStep(dt){const m=dt*NM_SPD[NM.spd-1];NM.t+=m;NM.realT+=dt;
+  NM.Rpl-=NM.Rpl/40*m;NM.Re+=(NM.Rpl-NM.Re)/.7*m;
+  if(NM.sugT!=null&&NM.t-NM.sugT<60){const k=Math.exp(-2.5*m);NM.Rpl*=k;NM.Re*=k}
+  const neoOn=NM.neoT!=null&&NM.t-NM.neoT<90;NM.Spl-=NM.Spl/(neoOn?9:4.5)*m;NM.Se+=(NM.Spl-NM.Se)/.3*m;
+  nmHeights();const c=nmCount();if(NM.flags.roc&&c===0)NM.flags.zero=1;if(NM.flags.neoOk&&c===4&&nmRatio()>=.9)NM.flags.recovered=1;
+  NM.histT+=m;if(NM.histT>=.25){NM.histT=0;NM.hist.push([NM.t,NM.h[0],c,NM.pain]);if(NM.hist.length>400)NM.hist.shift()}
+  /* train-of-four every 3 real seconds */
+  if(NM.realT-NM.train.t0>3){const o=NM.train;NM.train={t0:NM.realT,h:NM.h.slice(),shown:[0,0,0,0],n:0,prev:o.n>=4?o.h:o.prev}}
+  const u=NM.realT-NM.train.t0;for(let k=0;k<4;k++)if(u>=k*.45+.25&&NM.train.n<=k){NM.train.shown[k]=NM.train.h[k];NM.train.n=k+1}
+  nmRdT+=dt;if(nmRdT>.3){nmRdT=0;nmRead();nmCheck()}}
+const NM_ORDER=[3,6,1,4,0,7,2,5];
+function drawNm(now){use(S3);const T=now/1000;const D=nmDepth();const u=NM.realT-NM.train.t0;
+  panelBox(8,8,500,330);title(22,26,"Nerve, junction and muscle");
+  /* stimulator */
+  rr(24,96,86,46,6);fillStroke(C["panel-2"],C["ink-soft"],1.4);txt(67,110,"Stimulator",{size:12,weight:700,align:"center"});txt(67,128,"train of 4",{size:11.5,color:C["ink-soft"],align:"center"});
+  line(52,96,52,74,C["ink-soft"],1.6);line(82,96,82,74,C["ink-soft"],1.6);
+  /* nerve */
+  const ny=68,nx0=24,nx1=318;rr(nx0,ny-7,nx1-nx0,14,7);fillStroke(C.nrn,C["nrn-edge"],1.6);txt(nx0+4,ny-18,"Motor nerve",{size:12,color:C["ink-soft"]});
+  /* local anesthetic zone */
+  const lzx=196;if(D.LA>.02){ell(lzx,ny,46,24,0,hexA(C.drug,.12*D.LA+.05),hexA(C.drug,.6),1.4);}
+  [-24,0,24].forEach((dx,i)=>{naChannel(lzx+dx,ny,9,{open:0,inact:0,noBall:true,drug:D.LA>.2?clamp(D.LA,0,1):0})});
+  label(lzx,ny+38,D.LA>.02?"lidocaine zone":"sodium channels",{size:12,weight:600,color:D.LA>.02?C.drug:C["ink-soft"]});
+  /* NMJ */
+  const jx=330,jy=206;const twitchNow=(()=>{for(let k=0;k<4;k++){const tk=k*.45+.25;if(u>=tk&&u<tk+.22)return NM.train.h[k]*Math.sin((u-tk)/.22*Math.PI)}return 0})();
+  const fasc=NM.sT!=null&&NM.t-NM.sT>.05&&NM.t-NM.sT<.9?.35*Math.abs(Math.sin(T*23)*Math.sin(T*7.3)):0;
+  nmj(jx,jy,220,{contr:Math.max(twitchNow,fasc),labels:false});txt(jx+18,jy-118,"nerve ending",{size:12,color:C["ink-soft"]});
+  line(nx1,ny,jx-12,ny,C["nrn-edge"],1);
+  txt(jx+160,jy+92,"skeletal muscle",{size:12,color:C["ink-soft"],align:"right"});
+  if(fasc>0)label(jx,jy+48,"fasciculations",{size:12.5,weight:700,color:C.bad,border:C.bad});
+  /* action potential pulses travelling along the nerve */
+  const hLA=1-smooth((D.LA-.55)/.35);
+  for(let k=0;k<4;k++){const tk=k*.45;const p=(u-tk)/.25;if(p>=0&&p<=1){const X=lerp(67,jx,p);const Y=X<jx-12?ny:ny;const blocked=hLA<.5&&X>lzx-30;if(!blocked)apPulse(67,jx-12,ny,p,C.na);else{apPulse(67,jx-12,ny,p,C.na,lzx-30);blockSign(lzx-34,ny-26,9)}}}
+  /* vesicles */
+  [[-34,140],[0,128],[34,140],[-16,164],[18,164]].forEach((v,i)=>vesicle(jx+v[0],v[1],11,"ach",4,T+i));
+  /* receptors on the muscle */
+  const rx0=jx-91,rY=jy+14;const nOccR=Math.round(D.dEff*8),nOccS=Math.round(D.dS*8);
+  const releasing=(()=>{for(let k=0;k<4;k++){const tk=k*.45+.25;if(u>=tk&&u<tk+.3&&hLA>.5)return (u-tk)/.3}return -1})();
+  for(let i=0;i<8;i++){const x=rx0+i*26;const ord=NM_ORDER.indexOf(i);const roc=ord<nOccR,suc=!roc&&ord<nOccS;
+    receptor(x,rY+1,8,{off:roc,glow:suc?.6+.3*Math.sin(T*5):releasing>=0&&!roc?1-releasing:0});
+    if(roc)drugMol(x,rY-4,5,{shape:"sq",col:C.drug});else if(suc)drugMol(x,rY-4,5,{shape:"dia",col:C.drug2});
+    else if(releasing>=0){nt("ach",x,lerp(jy-12,rY-4,clamp(releasing*2,0,1)),4)}}
+  /* AChE enzymes in the cleft */
+  const neoOn=NM.neoT!=null&&NM.t-NM.neoT<90;[jx-70,jx+10,jx+80].forEach((x,i)=>{pacman(x,jy-1,5.5,T+i,C.receptor);if(neoOn)drugMol(x+3,jy-1,2.8,{shape:"tri",col:C.drug})});
+  /* extra ACh with neostigmine */
+  if(neoOn)for(let i=0;i<10;i++){const a=i*2.4+T*.6;nt("ach",jx-80+((i*37+T*14)%160),jy-4+Math.sin(a)*4,3.2,.85)}
+  /* sugammadex rings */
+  if(NM.sugT!=null&&NM.t-NM.sugT<60){for(let i=0;i<5;i++){const p=P(T*.12+i/5,1);const X=jx-150+p*300,Y=jy+122+Math.sin(T+i)*6;circ(X,Y,8,null,C.drug,4);if(i<3+Math.round(D.dR*2))drugMol(X,Y,3.4,{shape:"sq",col:C.drug})}
+    txt(jx-150,jy+104,"sugammadex rings in the blood",{size:12,weight:600,color:C.drug})}
+  /* legend line */
+  const occTxt=D.dS>.3?"succinylcholine holds receptors open":D.dEff>.3?"rocuronium blocks about "+Math.min(99,Math.round(D.dEff*100))+"% of receptors":"receptors free for ACh";
+  txt(22,326,occTxt,{size:12.5,weight:600,color:D.dS>.3||D.dEff>.3?C.drug:C.good});
+  /* TOF monitor */
+  rr(516,8,276,206,10);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.2;ctx.stroke();
+  txt(530,26,"TRAIN-OF-FOUR",{size:12,mono:true,weight:700,color:"#C5D3DA"});
+  const bx=548,bw=34,bbase=150,bh=96;line(536,bbase,780,bbase,"#3A4A52",1.4);
+  for(let k=0;k<4;k++){const X=bx+k*56;const v=NM.train.shown[k];rr(X,bbase-bh,bw,bh,3);ctx.fillStyle="rgba(120,160,170,.12)";ctx.fill();
+    if(v>0){rr(X,bbase-bh*v,bw,bh*v,3);ctx.fillStyle="#7FE0B0";ctx.fill()}txt(X+bw/2,bbase+14,"T"+(k+1),{size:12,mono:true,weight:600,color:"#A3B2BA",align:"center"})}
+  const shownN=nmShown();const c=nmCount(shownN),r=nmRatio(shownN);
+  txt(530,190,"Count "+c+"/4",{size:15,mono:true,weight:700,color:"#E8EEF1"});txt(780,190,c?"T4/T1 "+r.toFixed(2):"no twitch",{size:15,mono:true,weight:700,color:"#F2B33B",align:"right"});
+  const fade=c>=2&&r<.9&&D.dS<.3;if(fade)txt(530,44,"fade: T4 weaker than T1",{size:12,mono:true,color:"#F2B33B"});else if(D.dS>.3&&c>0)txt(530,44,"equal twitches: no fade",{size:12,mono:true,color:"#F2B33B"});
+  /* patient panel */
+  panelBox(516,222,276,116);title(530,240,"The patient");const s=nmStateText(nmShown());
+  const hx_=556,hy_=290;circ(hx_,hy_,22,C.skin,C["skin-edge"],1.5);
+  if(NM.sed){line(hx_-11,hy_-3,hx_-4,hy_-3,C.ink,2);line(hx_+4,hy_-3,hx_+11,hy_-3,C.ink,2)}else{circ(hx_-7,hy_-3,2.6,C.ink);circ(hx_+7,hy_-3,2.6,C.ink)}
+  if(NM.sed)txt(hx_+18,hy_-20,"z",{size:13,weight:700,color:C["ink-soft"]});
+  if(s.aware==="AWAKE + paralysed"){chipText(hx_,hy_+32,"AWARE!",C.bad)}
+  [["Aware",s.aware,s.aware.startsWith("AWAKE")?C.bad:C.ink],["Breathing",s.breath,/ventilator|weak/.test(s.breath)?C["warn-ink"]:C.ink],["Pain",s.pain,C.ink]].forEach((r,i)=>{txt(590,262+i*22,r[0],{size:12,color:C["ink-soft"]});txt(654,262+i*22,r[1],{size:12,weight:700,color:r[2]})});
+  txt(590,328,NM.sed?"Sedation running":"No sedation running",{size:12,color:NM.sed?C.good:C["ink-soft"]});
+  /* strip chart */
+  panelBox(8,346,784,166);title(22,364,"Twitch strength over the last hour");
+  const gx=62,gy=378,gw=708,gh=96;const t1=Math.max(60,NM.t),t0=t1-60;const M=mapper(gx,gy,gw,gh,t0,t1,0,1);
+  axes(gx,gy,gw,gh,"","T1");for(let m=Math.ceil(t0/10)*10;m<=t1;m+=10){const X=M.X(m);line(X,gy+gh,X,gy+gh+4,C["ink-soft"],1.2);txt(X,gy+gh+14,m+" min",{size:11.5,color:C["ink-soft"],align:"center"})}
+  ctx.save();rr(gx,gy-2,gw,gh+4,0);ctx.clip();
+  const hp=NM.hist.filter(h=>h[0]>=t0);poly(hp.map(h=>[M.X(h[0]),M.Y(h[1])]),C.good,2.4);
+  hp.forEach(h=>{if(h[2]<4){ctx.fillStyle=hexA(C.warn,.18);ctx.fillRect(M.X(h[0])-1.6,gy,3.2,gh)}});
+  poly(hp.map(h=>[M.X(h[0]),M.Y(h[3])]),hexA(C.drug,.8),1.6,[5,4]);
+  NM.events.forEach((e,i)=>{if(e[0]<t0)return;const X=M.X(e[0]);line(X,gy,X,gy+gh,hexA(C.drug,.8),1.4);label(Math.max(gx+22,X),gy+10+(i%3)*20,e[1],{size:11.5,weight:700,color:C.drug,border:C.drug})});
+  ctx.restore();
+  txt(gx+4,gy+gh+30,"green: first twitch (T1)",{size:12,weight:600,color:C.good});txt(gx+190,gy+gh+30,"shaded: fewer than 4 twitches",{size:12,weight:600,color:C["warn-ink"]});txt(gx+420,gy+gh+30,"dashed violet: pain signals getting through",{size:12,weight:600,color:C.drug});
+  $("#nmCap").textContent=`Minute ${Math.round(NM.t)}: train-of-four count ${c} of 4${c>=2?", ratio "+r.toFixed(2):""}. ${s.aware.startsWith("AWAKE")?"Patient is awake and paralysed.":""}`}
+function pacman(x,y,r,t,col){const m=.25+.2*Math.abs(Math.sin(t*3));ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,m,TAU-m);ctx.closePath();fillStroke(col,hexA(C.ink,.4),1.1);circ(x+r*.2,y-r*.45,r*.13,C.panel)}
+function nmA11y(){const D=nmDepth(),s=nmStateText();const c=s.cnt;
+  const lab=`Anesthesia bench: train-of-four count ${c} of 4. ${s.aware}.`;
+  let d=`A tan motor nerve runs from a stimulator on the left to a nerve ending above a striped red muscle fiber, with eight teal receptor cups on the muscle. `;
+  if(D.LA>.05)d+=`A violet shaded lidocaine zone sits on the nerve; signals ${1-smooth((D.LA-.55)/.35)<.5?"stop at it with a red no sign":"still pass through"}. `;
+  if(D.dS>.3)d+=`Violet diamonds (succinylcholine) sit in most receptors, which glow because they are held open. `;
+  if(D.dEff>.3)d+=`Violet squares (rocuronium) fill about ${Math.round(D.dEff*8)} of 8 receptors, which turn grey. `;
+  if(NM.neoT!=null&&NM.t-NM.neoT<90)d+="Extra blue ACh dots crowd the gap because the enzyme mouths are plugged by neostigmine. ";
+  if(NM.sugT!=null&&NM.t-NM.sugT<60)d+="Violet rings (sugammadex) drift through the blood below, holding rocuronium squares. ";
+  d+=`The dark monitor on the right shows ${c} green twitch bar${c===1?"":"s"}${c>=2&&nmRatio()<.9&&D.dS<.3?", shrinking from first to fourth (fade)":c>=2?", about equal in height":""}. The patient panel reads ${s.aware}, breathing ${s.breath}.`;
+  return [lab,d]}
+
+/* ================= PART 4: case files ================= */
+const S4=makeStage("cvCase",640,460);
+const CASES=[
+{name:"Jumpy eyes",who:"Ellen, 46",title:"Unsteady and seeing the room jump after a small dose increase",scene:"pheny",
+ mar:["0900","phenytoin","PO","per order (raised 2 weeks ago)","DUE"],vit:{hr:78,sbp:124,dbp:78,spo2:98,rr:16,temp:"36.8"},flags:[],
+ labs:[["Phenytoin level","28 mcg/mL","10-20","H"],["Albumin","4.0 g/dL","3.5-5.0",""],["Sodium","139 mEq/L","135-145",""],["Glucose","98 mg/dL","70-110",""]],
+ story:"Ellen takes phenytoin for a seizure disorder. Two weeks ago her dose was raised by a small amount after one breakthrough seizure. Today she says the room seems to jump when she looks to the side, she wobbled walking to the bathroom, and her speech is a little slurred. She also mentions that her gums bleed when she brushes.",
+ legend:[["drug","Phenytoin level"],["good","Target range","s"],["gum","Overgrown gums"]],
+ qs:[{q:"What best explains her new symptoms?",hint:"Look at the level, then think about how this drug's level responds to a small dose change.",opts:[
+   ["Phenytoin toxicity: a small dose increase caused a large jump in level",1,"Yes. Phenytoin's liver enzymes saturate, so a small increase can push the level well above range. Nystagmus comes first, then ataxia and slurred speech."],
+   ["A low phenytoin level letting seizures return",0,"Her level is 28, above the usual 10 to 20 range, not below it."],
+   ["An allergic reaction to the new dose",0,"Allergy would look like rash, hives or swelling. Her signs follow the classic toxicity order instead."],
+   ["Normal side effects that need no follow-up",0,"Nystagmus with ataxia and a level above range are toxicity signs. They need to be reported."]]},
+  {q:"What should the nurse do about the 0900 dose?",hint:"The level is already too high, and she is unsteady.",opts:[
+   ["Hold the dose, put fall precautions in place and report the level and signs to the prescriber",1,"Right. Holding prevents the level climbing further, and she is a fall risk until it comes down. The prescriber decides on the new dose."],
+   ["Give it with food to reduce side effects",0,"Food does not fix a level that is already above range. The dose should be held and reported."],
+   ["Give it, then recheck the level next month",0,"Giving more drug raises an already toxic level. This needs action today."],
+   ["Tell her she can stop phenytoin for good",0,"Stopping suddenly can trigger seizures, even status epilepticus. Only the prescriber changes the plan."]]},
+  {q:"What should she be taught about her gums?",hint:"This is a well-known long-term effect of phenytoin.",opts:[
+   ["Brush and floss gently every day and keep regular dental visits",1,"Yes. Gingival hyperplasia (gum overgrowth) is common with phenytoin. Good oral hygiene and dental care reduce it."],
+   ["Stop the drug whenever the gums bleed",0,"Stopping suddenly risks seizures. Gum care and dental follow-up are the answer."],
+   ["Avoid brushing so the gums can heal",0,"Less brushing lets plaque build up and makes overgrowth worse."],
+   ["Bleeding gums mean she is allergic to phenytoin",0,"Gum overgrowth is a side effect, not an allergy."]]}],
+ exp:"Phenytoin has a narrow therapeutic index and nonlinear kinetics: equal dose steps do not give equal level changes. Toxicity shows as nystagmus, then ataxia, slurred speech and sedation. Hold and report, protect from falls, and teach daily gum care."},
+
+{name:"Blistering rash",who:"Dana, 29",title:"Fever and a blistering rash three weeks into carbamazepine",scene:"carba",
+ mar:["0800","carbamazepine","PO","per order (started 3 wk ago)","HOLD?"],vit:{hr:106,sbp:118,dbp:74,spo2:97,rr:18,temp:"38.7"},flags:["hr","temp"],
+ labs:[["Sodium","130 mEq/L","135-145","L"],["WBC","3.4 K/µL","4.5-11.0","L"],["Platelets","180 K/µL","150-400",""],["ALT","32 U/L","7-56",""]],
+ story:"Dana started carbamazepine three weeks ago for focal seizures. She also takes a combined birth control pill. Today she has a fever, painful sores in her mouth and a red rash on her chest that is starting to blister.",
+ legend:[["bad","Rash and blisters"],["receptor","Liver enzymes"],["warn","Birth control level"]],
+ qs:[{q:"What is the most urgent concern?",hint:"Fever, mouth sores and blistering skin early in a new antiseizure drug.",opts:[
+   ["A severe skin reaction such as Stevens-Johnson syndrome",1,"Yes. Carbamazepine can cause Stevens-Johnson syndrome, most often in the first weeks. Mouth sores, fever and blistering are red flags."],
+   ["A mild heat rash that will fade",0,"Heat rash does not cause fever, mouth sores and blisters. This pattern is an emergency."],
+   ["An expected side effect to ignore",0,"A blistering rash is never expected. The drug is held and the prescriber told right away."],
+   ["Acne from the birth control pill",0,"Acne does not blister or cause mouth sores and fever."]]},
+  {q:"What should the nurse tell her about her birth control pill?",hint:"Carbamazepine makes the liver build more drug-clearing enzymes.",opts:[
+   ["Carbamazepine speeds up how fast the liver clears the pill, so it may fail; a backup or different method is needed",1,"Right. Carbamazepine is an enzyme inducer. Hormonal birth control levels fall, so pregnancy can happen."],
+   ["Carbamazepine makes the pill stronger",0,"It does the opposite: it lowers hormone levels by speeding their breakdown."],
+   ["There is no interaction",0,"This is one of the best-known interactions of carbamazepine."],
+   ["She should stop the pill to protect her liver",0,"The issue is lower effectiveness, not liver harm. She needs a reliable method."]]},
+  {q:"Her sodium and white blood cells are low. What should she learn to report?",hint:"Think about what low sodium and low WBCs feel like.",opts:[
+   ["Confusion or headache, and fever, sore throat or easy bruising",1,"Yes. Carbamazepine can cause low sodium and low blood counts. These symptoms point to them, and labs are checked."],
+   ["Only weight gain",0,"Weight change is not the main warning sign here."],
+   ["Nothing, because these labs fix themselves",0,"Low sodium and low WBCs need follow-up and can become serious."],
+   ["Hair growth",0,"That is not a typical carbamazepine warning sign."]]}],
+ exp:"Carbamazepine blocks sodium channels and is a strong enzyme inducer: it lowers the levels of many drugs, including birth control and itself. Watch for serious skin reactions (risk is higher with the HLA-B*1502 gene, so testing may be done first in some ancestries), low sodium and low blood counts."},
+
+{name:"Yellow eyes",who:"Grace, 27",title:"Tired, vomiting and yellow eyes on valproate",scene:"valpro",
+ mar:["0800","valproate","PO","per order","HOLD?"],vit:{hr:92,sbp:112,dbp:70,spo2:98,rr:16,temp:"37.2"},flags:[],
+ labs:[["ALT","210 U/L","7-56","H"],["AST","180 U/L","10-40","H"],["Bilirubin","3.1 mg/dL","0.1-1.2","H"],["Platelets","92 K/µL","150-400","L"]],
+ story:"Grace has taken valproate for two months for generalized seizures. For a week she has felt very tired, lost her appetite, vomited twice and noticed yellow in her eyes. She bruises easily. She mentions that she and her partner hope to start a family soon.",
+ legend:[["liver","Liver"],["gold","Platelets"],["bad","Warning"]],
+ qs:[{q:"What do her symptoms and labs most suggest?",hint:"Liver enzymes, bilirubin and platelets are all off.",opts:[
+   ["Valproate liver injury with low platelets",1,"Yes. Valproate carries a boxed warning for liver failure, and it can lower platelets. Fatigue, vomiting and jaundice are warning signs."],
+   ["A simple stomach bug",0,"A stomach bug does not raise ALT to 210 or turn the eyes yellow."],
+   ["Phenytoin toxicity",0,"She is not on phenytoin, and phenytoin toxicity looks like nystagmus and ataxia."],
+   ["An expected and harmless effect",0,"Jaundice with high liver enzymes is dangerous and urgent."]]},
+  {q:"What should the nurse do?",hint:"Report before the next dose, and think about the bleeding risk.",opts:[
+   ["Report urgently before the next dose and watch for bleeding",1,"Right. The prescriber needs to know now. Low platelets mean bruising and bleeding precautions."],
+   ["Give the dose and recheck the labs in three months",0,"Continuing a drug that may be injuring the liver is unsafe without the prescriber's review."],
+   ["Tell her to stop it at home and never take it again",0,"Any change must come from the prescriber. Stopping suddenly can trigger seizures; another drug is started safely."],
+   ["Give extra fluids and nothing else",0,"Fluids do not address possible drug-induced liver injury."]]},
+  {q:"What is the key teaching about pregnancy?",hint:"Valproate is one of the antiseizure drugs most linked to birth defects.",opts:[
+   ["Valproate has a high risk of birth defects such as neural tube defects; plan with the prescriber before trying to conceive and do not stop it alone",1,"Yes. Valproate can harm a developing baby. A planned switch, folic acid and close care protect both her and the baby."],
+   ["Valproate is completely safe in pregnancy",0,"Valproate has a boxed warning for serious birth defects."],
+   ["Stop it the moment the pregnancy test is positive",0,"Sudden stopping risks seizures, which are also dangerous in pregnancy. Plan ahead with the prescriber."],
+   ["Folic acid removes all the risk",0,"Folic acid helps, but it does not remove the risk from valproate."]]}],
+ exp:"Valproate works broadly (sodium channels, T-type calcium channels and more GABA), so it treats many seizure types. Its big warnings are liver failure, pancreatitis, low platelets and birth defects. Check liver tests and platelets, and plan pregnancy with the prescriber."},
+
+{name:"Will not stop",who:"Daniel, 52",title:"A seizure lasting more than five minutes",scene:"status",
+ mar:["STAT","lorazepam","IV","per order","NOW"],vit:{hr:128,sbp:168,dbp:96,spo2:89,rr:"--",temp:"37.9"},flags:["hr","sbp","spo2"],
+ labs:[["Glucose (finger stick)","96 mg/dL","70-110",""],["Phenytoin level","< 2 mcg/mL","10-20","L"],["Sodium","138 mEq/L","135-145",""]],
+ story:"Daniel has a seizure disorder and ran out of his phenytoin three days ago. He arrives by ambulance having seizures for more than five minutes without waking up between them. His oxygen level is falling.",
+ legend:[["drug","IV drug"],["scr-soft","EEG"],["o2","Normal saline"]],
+ qs:[{q:"What is the first-line drug for this status epilepticus?",hint:"It must work in minutes and be given by vein.",opts:[
+   ["An IV benzodiazepine such as lorazepam",1,"Yes. IV benzodiazepines boost GABA-A and stop most seizures within minutes. Longer-acting drugs follow."],
+   ["Oral phenytoin",0,"He cannot swallow safely while seizing, and oral phenytoin takes far too long."],
+   ["Succinylcholine to stop the movements",0,"A paralytic hides the movements but the brain keeps seizing. It is not a seizure treatment."],
+   ["Wait and see if it stops on its own",0,"Seizures past five minutes are an emergency. Waiting risks brain injury and breathing failure."]]},
+  {q:"After the lorazepam, what must the nurse watch most closely?",hint:"Think about what extra GABA does to the brainstem.",opts:[
+   ["Breathing and airway, with oxygen and suction ready",1,"Right. Benzodiazepines can depress breathing, especially with repeat doses. Watch the rate, SpO₂ and airway."],
+   ["Blood glucose only",0,"Glucose was checked and is normal. The bigger risk now is respiratory depression."],
+   ["Urine output only",0,"Output matters, but breathing comes first."],
+   ["Pupil size only",0,"Pupils are part of the neuro check, but airway and breathing are the priority."]]},
+  {q:"IV phenytoin is ordered next. How is it given safely?",hint:"It forms crystals in sugar solutions and can irritate veins and the heart.",opts:[
+   ["Slowly, through a line with normal saline only, with ECG and blood pressure monitoring and IV site checks",1,"Yes. Phenytoin crystallizes in dextrose, fast infusion can cause low blood pressure and dysrhythmias, and it can damage the vein."],
+   ["Mixed in D5W and pushed quickly",0,"Dextrose makes phenytoin crystallize, and fast pushes cause low BP and rhythm problems."],
+   ["As an intramuscular shot",0,"IM phenytoin absorbs poorly and harms tissue."],
+   ["In the same line as the dextrose drip",0,"Phenytoin and dextrose are not compatible. Flush with saline before and after."]]}],
+ exp:"Status epilepticus is a seizure over five minutes or repeated seizures without recovery. Give an IV benzodiazepine first, protect the airway, then a longer-acting drug such as IV phenytoin or fosphenytoin (saline only, slowly, with monitoring) or levetiracetam. Running out of medicine was the trigger: never stop antiseizure drugs suddenly."},
+
+{name:"Late dose",who:"Robert, 74",title:"Frozen in the doorway after a late levodopa dose",scene:"pd",
+ mar:["1300","levodopa-carbidopa","PO","per order","GIVEN 1430: LATE"],vit:{hr:88,sbp:104,dbp:66,spo2:95,rr:18,temp:"37.6"},flags:["sbp"],
+ labs:[["BP lying","132/80","",""],["BP standing","104/66","","L"],["WBC","13.2 K/µL","4.5-11.0","H"],["Sodium","138 mEq/L","135-145",""]],
+ story:"Robert has Parkinson disease and takes levodopa-carbidopa four times a day. He was admitted for pneumonia. His tremor and stiffness come back about an hour before each dose. Today his 1300 dose was given late, and he froze in the doorway. He feels dizzy when he stands. A new order for nausea reads metoclopramide.",
+ legend:[["dopa","Dopamine"],["ach","Acetylcholine"],["blocked","Blocked receptor","s"]],
+ qs:[{q:"Why do his symptoms return before each dose?",hint:"In advanced disease, the brain can no longer store dopamine.",opts:[
+   ["Wearing off: each dose lasts a shorter time as fewer dopamine neurons remain to store it",1,"Yes. As the disease advances, the effect follows each dose closely, so it fades before the next one is due."],
+   ["He has become allergic to levodopa",0,"Allergy does not cause a timed return of tremor before each dose."],
+   ["Carbidopa is causing the tremor",0,"Carbidopa protects levodopa in the blood. It does not cause tremor."],
+   ["The pneumonia is spreading to the brain",0,"The pattern tied to dose times points to wearing off."]]},
+  {q:"What should the nurse do about the metoclopramide order?",hint:"How does metoclopramide work on dopamine receptors?",opts:[
+   ["Question it with the prescriber, because it blocks dopamine receptors and can worsen Parkinson symptoms",1,"Right. Metoclopramide and many antipsychotics block dopamine. In Parkinson disease that tips the balance further toward acetylcholine."],
+   ["Give it with the levodopa so both work together",0,"They work against each other: one adds dopamine, the other blocks its receptors."],
+   ["Give it and hold the levodopa",0,"Holding levodopa would make him much worse and can be dangerous."],
+   ["It is safe because it only works in the stomach",0,"Metoclopramide crosses into the brain and blocks dopamine there too."]]},
+  {q:"What should he be taught about the dizziness when he stands?",hint:"Levodopa can lower blood pressure when changing position.",opts:[
+   ["Rise slowly, sit on the edge of the bed first, and call for help to walk",1,"Yes. Orthostatic hypotension is common with levodopa. Slow position changes and fall precautions keep him safe."],
+   ["Stand up quickly to get the blood moving",0,"Quick changes make the drop worse and risk a fall."],
+   ["Skip the levodopa when dizzy",0,"Skipping doses brings back rigidity and freezing. Report dizziness instead."],
+   ["Take extra doses to feel steadier",0,"Extra doses raise the risk of dyskinesia and low blood pressure."]]}],
+ exp:"Give Parkinson drugs on time: even an hour late can cause freezing and falls. Wearing off and on-off appear as the disease advances. Avoid dopamine blockers such as metoclopramide and most antipsychotics, teach slow position changes, and spread protein through the day."},
+
+{name:"Slow pulse",who:"Helen, 81",title:"Fainting and loose stools after a donepezil increase",scene:"donep",
+ mar:["2100","donepezil","PO","per order (raised 2 wk ago)","DUE"],vit:{hr:48,sbp:102,dbp:60,spo2:96,rr:16,temp:"36.6"},flags:["hr","sbp"],
+ labs:[["ECG","sinus bradycardia","HR 60-100","L"],["Potassium","3.9 mEq/L","3.5-5.0",""],["Weight","down 1.5 kg","",""],["Glucose","104 mg/dL","70-110",""]],
+ story:"Helen has Alzheimer disease. Her donepezil was increased two weeks ago. Her daughter says Helen fainted once this week and has had loose stools and a poor appetite. Her memory seems about the same. The daughter asks whether the medicine will bring her mother back to how she was.",
+ legend:[["ach","Acetylcholine"],["receptor","Enzyme (AChE)"],["blood","Heart"]],
+ qs:[{q:"What explains the slow pulse and fainting?",hint:"Donepezil raises acetylcholine everywhere, not just in the brain.",opts:[
+   ["Extra acetylcholine slows the heart, the same way the vagus nerve does",1,"Yes. Cholinesterase inhibitors increase ACh at the heart, which slows the rate and can cause fainting."],
+   ["Donepezil speeds up the heart",0,"It does the opposite: more ACh slows the heart."],
+   ["Low potassium",0,"Her potassium is normal at 3.9."],
+   ["The Alzheimer disease itself slows the heart",0,"The timing after the dose increase points to the drug's cholinergic effect."]]},
+  {q:"What should the nurse do before the 2100 dose?",hint:"A pulse of 48 with fainting is a safety issue.",opts:[
+   ["Hold the dose, report the pulse and fainting to the prescriber, and start fall precautions",1,"Right. A slow pulse with fainting needs the prescriber's review before more drug is given."],
+   ["Give the dose with a large meal",0,"Food may ease nausea, but it does not fix the slow heart rate."],
+   ["Give an extra dose to help her memory",0,"More drug would slow her heart further."],
+   ["Ignore it; slow pulses are normal in older adults",0,"A pulse of 48 with fainting is not normal and must be reported."]]},
+  {q:"How should the nurse answer the daughter's question?",hint:"What do these drugs really do for memory?",opts:[
+   ["The drug may slow the decline a little for a while, but it does not cure or reverse Alzheimer disease",1,"Yes. Benefits are modest. Honest, kind teaching helps families plan and set realistic goals."],
+   ["Yes, it will restore her memory completely",0,"No current Alzheimer drug restores lost memory."],
+   ["It does nothing, so stop it",0,"Some people do benefit a little. Any change is the prescriber's decision."],
+   ["Doubling the dose will bring her back",0,"Higher doses raise side effects without reversing the disease."]]}],
+ exp:"Cholinesterase inhibitors (donepezil, rivastigmine, galantamine) keep ACh around longer in the brain, but also at the heart and gut: slow pulse, fainting, nausea and diarrhea. Memantine works differently, by quieting excess glutamate at NMDA receptors. Both give modest benefit."},
+
+{name:"Chest pressure",who:"Paul, 58",title:"A migraine in a man with heart disease",scene:"triptan",
+ mar:["PRN","sumatriptan","PO","order to clarify","CLARIFY"],vit:{hr:84,sbp:156,dbp:94,spo2:98,rr:16,temp:"36.9"},flags:["sbp"],
+ labs:[["Troponin","normal","",""],["ECG","old Q waves (prior MI)","",""],["Cholesterol LDL","160 mg/dL","< 100","H"]],
+ story:"Paul has migraine with aura. He had a heart attack two years ago and has a coronary stent. In the emergency department he asks for sumatriptan because it works for his sister. His blood pressure is high, and the migraine started an hour ago.",
+ legend:[["ser","Triptan at 5-HT1B/1D"],["blood","Coronary artery"],["bad","Narrowing"]],
+ qs:[{q:"Why is a triptan a concern for Paul?",hint:"Where are 5-HT1B receptors found besides brain vessels?",opts:[
+   ["Triptans activate 5-HT1B receptors that narrow blood vessels, including coronary arteries",1,"Yes. That narrowing helps a migraine but can cause angina or a heart attack in someone with coronary disease."],
+   ["Triptans thin the blood",0,"Triptans do not affect clotting. The problem is vasoconstriction."],
+   ["Triptans lower blood pressure too far",0,"They tend to raise blood pressure slightly, not lower it."],
+   ["There is no concern at all",0,"Coronary artery disease and uncontrolled high blood pressure are contraindications."]]},
+  {q:"What should the nurse do?",hint:"Is the order safe for this patient as written?",opts:[
+   ["Hold and clarify with the prescriber, sharing his heart history and blood pressure",1,"Right. The prescriber can choose a non-vasoconstricting treatment."],
+   ["Give it now because the migraine is severe",0,"Severity does not remove the risk to his heart."],
+   ["Give a double dose to work faster",0,"More drug means more vasoconstriction."],
+   ["Let him use his sister's tablets",0,"Using someone else's medicine is unsafe, and this drug is contraindicated for him."]]},
+  {q:"Paul has migraines several times a month. What is useful teaching?",hint:"Treating attacks and preventing them are different goals.",opts:[
+   ["Ask about a daily preventive medicine and track triggers; frequent acute pills can cause rebound headaches",1,"Yes. Prevention lowers how often migraines happen. Using acute drugs too often can cause medication-overuse headache."],
+   ["Take a triptan every day to prevent migraines",0,"Triptans treat an attack; they are not daily prevention, and he should not take them at all."],
+   ["Lie down and avoid all treatment",0,"Rest helps, but he deserves an effective, safe plan."],
+   ["Caffeine pills all day prevent migraine",0,"Too much caffeine can worsen headaches and cause rebound."]]}],
+ exp:"Triptans are 5-HT1B/1D agonists: they narrow swollen brain vessels and stop pain-peptide release from trigeminal nerves. Take one at the start of a migraine. Do not use them with coronary artery disease, prior heart attack or stroke, or uncontrolled high blood pressure; report chest pain or tightness."},
+
+{name:"Rising CO₂",who:"Tom, 23",title:"Rising end-tidal CO₂ and rigid muscles during surgery",scene:"mh",
+ mar:["0730","sevoflurane, succinylcholine","inh, IV","per anesthesia","GIVEN"],vit:{hr:142,sbp:150,dbp:90,spo2:94,rr:"vent",temp:"38.9",etco2:68},flags:["hr","temp","etco2","spo2"],
+ labs:[["Potassium","6.1 mEq/L","3.5-5.0","H"],["pH (arterial)","7.18","7.35-7.45","L"],["CK","2,400 U/L","30-200","H"],["Lactate","5.2 mmol/L","0.5-2.2","H"]],
+ story:"Twenty minutes into a knee surgery under general anesthesia with sevoflurane (and succinylcholine at induction), Tom's end-tidal CO₂ keeps rising even though his breathing rate on the ventilator was increased. His heart rate is climbing, his jaw and limbs are rigid, and his temperature is starting to rise.",
+ legend:[["ca","Calcium"],["muscle","Muscle"],["drug","Dantrolene"]],
+ qs:[{q:"What is happening?",hint:"Trigger drugs plus a rising CO₂, a fast heart, rigidity and heat.",opts:[
+   ["Malignant hyperthermia",1,"Yes. In people with a gene change (often RYR1), these triggers flood muscle with calcium. Rising EtCO₂ is often the earliest sign; temperature rises later."],
+   ["A normal response to surgery",0,"A steadily rising EtCO₂ despite more ventilation, with rigidity, is never normal."],
+   ["An allergic reaction to the antibiotic",0,"Anaphylaxis brings low blood pressure, wheeze and rash, not rigidity and rising CO₂."],
+   ["Light anesthesia only",0,"Light anesthesia does not cause rigidity, high potassium and rising temperature together."]]},
+  {q:"What is the priority?",hint:"Remove the cause, then give the specific antidote.",opts:[
+   ["Stop the trigger agents, call for help, give 100% oxygen and give IV dantrolene",1,"Right. Dantrolene is the specific treatment. Cooling and treating high potassium and acidosis follow."],
+   ["Give more succinylcholine to relax the muscles",0,"Succinylcholine is a trigger. It would make the crisis worse."],
+   ["Give acetaminophen for the fever and continue",0,"The heat comes from muscle working nonstop, not a fever set-point. Acetaminophen will not help."],
+   ["Give neostigmine",0,"Neostigmine reverses nondepolarizing blockers. It does nothing for malignant hyperthermia."]]},
+  {q:"Why does dantrolene work?",hint:"Where does the flood of calcium come from?",opts:[
+   ["It blocks the ryanodine receptor calcium channel in the muscle's storage sac, so calcium stops flooding the muscle",1,"Yes. Less calcium means the muscle can relax, stops burning fuel and stops making heat and CO₂."],
+   ["It blocks nicotinic receptors at the junction",0,"That is what nondepolarizing blockers do. Dantrolene acts inside the muscle fiber."],
+   ["It lowers the brain's temperature set-point",0,"That is how fever reducers work. MH heat comes from the muscles."],
+   ["It speeds up the heart to pump heat away",0,"Dantrolene does not work on the heart rate."]]}],
+ exp:"Malignant hyperthermia is triggered by inhaled anesthetics (-flurane) and succinylcholine in susceptible people. Recognize it early (rising EtCO₂, fast heart rate, rigidity, high potassium, then rising temperature), stop triggers and give dantrolene. Ask every surgical patient about family reactions to anesthesia."}
+];
+function lightningC(x,y,s,col){fillPoly([[x-s*.2,y-s],[x+s*.45,y-s],[x+s*.05,y-s*.1],[x+s*.5,y-s*.1],[x-s*.35,y+s],[x-s*.05,y+s*.05],[x-s*.5,y+s*.05]],col)}
+function heartC(x,y,s,col){ctx.beginPath();ctx.moveTo(x,y+s*.9);ctx.bezierCurveTo(x-s*1.4,y,x-s*.8,y-s,x,y-s*.35);ctx.bezierCurveTo(x+s*.8,y-s,x+s*1.4,y,x,y+s*.9);ctx.closePath();fillStroke(col||C.blood,mix(col||C.blood,C.ink,.35),1.5)}
+function fetusC(x,y,s){ctx.beginPath();ctx.arc(x,y,s,Math.PI*.2,Math.PI*1.75);ctx.strokeStyle=mix(C.skin,C.ink,.3);ctx.lineWidth=s*.55;ctx.lineCap="round";ctx.stroke();ctx.lineCap="butt";circ(x+s*.55,y-s*.85,s*.5,C.skin,C["skin-edge"],1.4)}
+function caseScene(c,t){const x0=10,y0=262,W=620,H=188;panelBox(x0,y0,W,H);
+  const T0=(s)=>title(x0+14,y0+18,s);
+  switch(c.scene){
+  case "pheny":{T0("What the nurse sees");eye(80,330,22,t,true);eye(132,330,22,t,true);txt(106,366,"nystagmus",{size:12.5,weight:700,align:"center",color:C.bad});
+    person(220,414,44,t,{sway:1});txt(252,380,"ataxia",{size:12.5,weight:700,color:C.bad});
+    /* gums */rr(310,300,150,46,6);fillStroke(C.gum,mix(C.gum,C.ink,.3),1.4);for(let i=0;i<5;i++){rr(316+i*28,334,24,34,5);fillStroke("#F4F1E8",hexA(C.ink,.35),1.1)}ctx.beginPath();for(let i=0;i<5;i++){const X=314+i*28;ctx.moveTo(X,334);ctx.quadraticCurveTo(X+14,350+3*Math.sin(t*2+i),X+28,334)}ctx.fillStyle=C.gum;ctx.fill();
+    txt(385,388,"gum overgrowth",{size:12.5,weight:700,align:"center",color:C["ink-soft"]});
+    levelBar(486,320,128,28/40,10/40,20/40,"Level vs range",C.drug);txt(486,352,"28 (target 10 to 20)",{size:12,mono:true,weight:700,color:C.bad});txt(486,376,"above range",{size:12,color:C.bad,weight:600});break}
+  case "carba":{T0("Skin, liver and birth control");rr(26,292,190,140,10);fillStroke(C.skin,C["skin-edge"],1.4);for(let i=0;i<16;i++){const X=40+rnd(i)*160,Y=306+rnd(i+20)*112;const g=.5+.5*Math.sin(t*.8+i);circ(X,Y,5+rnd(i+5)*7,hexA(C.bad,.35+.25*g));if(i%3===0)circ(X+2,Y-1,4,hexA("#FFFFFF",.7),hexA(C.bad,.6),1)}txt(121,442,"rash with blisters",{size:12.5,weight:700,align:"center",color:C.bad});
+    ell(330,360,70,56,0,mix(C.liver,C.panel,.75),C.liver,2);const n=4+Math.round(4*P(t,6));for(let i=0;i<n;i++){const a=i/n*TAU+t*.3;circ(330+Math.cos(a)*40,360+Math.sin(a)*30,7,C.receptor,hexA(C.ink,.4),1)}txt(330,296,"more liver enzymes",{size:12.5,weight:700,align:"center"});txt(330,432,"enzyme induction",{size:12,color:C["ink-soft"],align:"center"});
+    levelBar(440,330,170,.62-.3*smooth(P(t,6)*1.4),.45,.8,"Birth control level",C.warn);txt(440,362,"falls below what protects",{size:12,color:C["warn-ink"],weight:600});capsulePillC(470,402,14,C.warn);txt(500,402,"backup method",{size:12.5,weight:600});break}
+  case "valpro":{T0("Liver, platelets and pregnancy");liverShape(110,368,56,mix(C.liver,C.gold,.35+.15*Math.sin(t)));txt(110,422,"liver injury: high ALT, AST",{size:12.5,weight:700,align:"center",color:C.bad});eye(110,300,14,t,false);ctx.fillStyle=hexA(C.gold,.35);ell(110,300,14,8.7,0);ctx.fill();txt(132,300,"yellow eyes",{size:12,color:C["warn-ink"],weight:600});
+    for(let i=0;i<5;i++)ell(250+i*24,330+Math.sin(t+i)*3,7,4,i*.6,C.gold,hexA(C.ink,.4));txt(298,360,"few platelets",{size:12.5,weight:700,align:"center"});txt(298,380,"bruising, bleeding",{size:12,color:C["ink-soft"],align:"center"});
+    fetusC(500,350,34);txt(500,412,"neural tube defects",{size:12.5,weight:700,align:"center",color:C.bad});txt(500,432,"plan pregnancy with prescriber",{size:12,align:"center",color:C["ink-soft"]});break}
+  case "status":{T0("EEG and the IV plan");scopeBox(24,290,300,80,"EEG");const stopT=P(t,10)*10;eegTrace(26,306,296,62,t,tt=>stopT<5?1:clamp(1-(stopT-5)/1.5,0,1)*1,{win:4});
+    label(250,302,stopT<5?"continuous seizure":"seizure stopping",{size:12,weight:700,color:stopT<5?C.bad:C.good,border:stopT<5?C.bad:C.good});
+    syringeC(40,404,30,0,stopT<5?.9:.2);txt(110,404,"1. IV lorazepam (GABA boost)",{size:12.5,weight:700});txt(40,432,"then watch breathing",{size:12,color:C["warn-ink"],weight:600});
+    ivBagC(410,372,56,"Normal saline",C.o2,.75);txt(410,400,"2. IV phenytoin: saline only,",{size:12,weight:700,align:"center"});txt(410,418,"slowly, ECG and BP watched",{size:12,align:"center",color:C["ink-soft"]});
+    ivBagC(572,372,56,"D5W",C.gold,.75);crossMark(572,340,10);txt(572,400,"crystals form",{size:12,weight:700,align:"center",color:C.bad});break}
+  case "pd":{T0("Dopamine and acetylcholine");const tilt=.22;const ss=seesaw(140,352,200,tilt);pan(ss.L[0],ss.L[1]-4,64,2,"dopa");pan(ss.R[0],ss.R[1]-4,64,7,"ach");txt(ss.L[0],ss.L[1]+22,"dopamine low",{size:12,weight:700,color:C.dopa,align:"center"});txt(ss.R[0],ss.R[1]+22,"ACh",{size:12,weight:700,color:C.ach,align:"center"});
+    txt(300,292,"Metoclopramide",{size:12.5,weight:700});for(let i=0;i<3;i++){const x=310+i*40;receptor(x,350,12,{off:true});drugMol(x,343,5,{shape:"tri",col:C.drug2});nt("dopa",x+Math.sin(t*2+i)*4,312+Math.abs(Math.sin(t*2+i))*10,5)}txt(350,384,"blocks dopamine receptors",{size:12,weight:600,color:C.bad,align:"center"});
+    person(540,418,40,t,{tremor:1,rigid:true});txt(540,344,"freezing, tremor",{size:12,weight:700,align:"center",color:C["warn-ink"]});txt(460,300,"BP 132 lying",{size:12,mono:true});txt(460,320,"BP 104 standing",{size:12,mono:true,color:C.bad,weight:700});break}
+  case "donep":{T0("Extra ACh reaches the heart");heartC(110,350,46,C.blood);const beat=P(t*48/60,1);ctx.save();ctx.globalAlpha=.25*Math.exp(-beat*6);heartC(110,350,52,C.blood);ctx.restore();for(let i=0;i<6;i++){const a=i/6*TAU+t*.4;nt("ach",110+Math.cos(a)*62,350+Math.sin(a)*48,5)}
+    txt(110,420,"HR 48: slow",{size:12.5,weight:700,align:"center",color:C.bad});
+    scopeBox(220,292,250,70,"ECG lead II");ctx.save();rr(222,306,246,54,6);ctx.clip();ctx.beginPath();for(let i=0;i<=246;i++){const tt=t*48/60-(246-i)/246*3;const Y=346-ecgWave(tt)*34;i?ctx.lineTo(222+i,Y):ctx.moveTo(222+i,Y)}ctx.strokeStyle="#7FE0B0";ctx.lineWidth=1.8;ctx.stroke();ctx.restore();
+    txt(220,384,"gut: nausea, loose stools",{size:12.5,weight:600});txt(220,406,"brain: small, short-lived memory help",{size:12.5,weight:600});
+    pacmanC(540,330,16,t,C.receptor);drugMol(548,330,6,{shape:"hex"});txt(540,362,"enzyme blocked",{size:12,weight:600,align:"center"});txt(540,382,"by donepezil",{size:12,align:"center",color:C["ink-soft"]});break}
+  case "triptan":{T0("Triptan: vessels narrow everywhere");const sq=smooth(P(t,6)*1.6);
+    const art=(x,y,w,lab)=>{rr(x,y-14+6*sq,w,28-12*sq,10);fillStroke(C.vessel,mix(C.blood,C.ink,.2),1.6);for(let i=0;i<4;i++){const X=x+((i*w/4+t*30*(1-.5*sq))%w);ell(X,y,6,Math.max(2,4-1.5*sq),0,C.blood)}receptor(x+w/2,y-24+6*sq,7,{glow:sq});drugMol(x+w/2,y-26+6*sq,4.5,{shape:"tri",col:C.ser});txt(x,y+30,lab,{size:12.5,weight:700})};
+    art(30,326,220,"brain vessel: narrows, migraine eases");heartC(380,350,40,mix(C.blood,C.panel,.15));const cr=sq;ctx.beginPath();ctx.moveTo(366,320);ctx.quadraticCurveTo(350,350,372,384);ctx.strokeStyle=C.bad;ctx.lineWidth=5-2.5*cr;ctx.stroke();txt(380,412,"coronary artery narrows too",{size:12.5,weight:700,align:"center",color:C.bad});
+    txt(470,310,"Not for people with:",{size:12.5,weight:700});["coronary artery disease","prior heart attack, stroke","uncontrolled high BP"].forEach((s,i)=>txt(478,334+i*22,"• "+s,{size:12}));break}
+  case "mh":{T0("Malignant hyperthermia: calcium flood");rr(30,300,250,46,20);fillStroke(C.sr,mix(C.sr,C.ink,.35),1.5);txt(40,330,"storage sac (SR)",{size:12,color:C["ink-soft"]});
+    const dan=smooth((P(t,9)*9-4.5)/1.5);rr(146,288,10,24,3);fillStroke(C.receptor);rr(160,288,10,24,3);fillStroke(C.receptor);if(dan>0)drugMol(158,300,6,{shape:"hex",a:dan});
+    for(let i=0;i<10;i++){const p=P(t*.6+i/10,1);ion("ca",158+Math.sin(i*2.1)*40*p,312+p*70,(1-dan)*(1-p*.5),5)}
+    muscleFiber(30,384,250,40,(1-dan)*(.8+.1*Math.sin(t*9)));txt(155,436,dan>.5?"dantrolene: calcium release stops, muscle relaxes":"muscle clenched, burning fuel",{size:12.5,weight:700,align:"center",color:dan>.5?C.good:C.bad});
+    const g=mapper(330,296,270,110,0,9,30,80);axes(330,296,270,110,"","EtCO₂");const curE=tt=>tt<4.5?38+8*tt:74-12*smooth((tt-4.5)/3);ctx.save();rr(330,290,272,118,0);ctx.clip();poly(Array.from({length:91},(_,i)=>[g.X(i/10),g.Y(curE(i/10))]),C.warn,2.4);ctx.restore();
+    const cx=g.X(P(t,9)*9);line(cx,296,cx,406,hexA(C.ink,.4),1);txt(600,418,"time",{size:12,color:C["ink-soft"],align:"right"});label(g.X(4.5),300,"dantrolene",{size:12,weight:700,color:C.drug,border:C.drug});break}}}
+function capsulePillC(x,y,s,col){rr(x-s,y-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.panel;ctx.fill();ctx.save();rr(x-s,y-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col;ctx.fillRect(x-s,y-s,s,2*s);ctx.restore();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;rr(x-s,y-s*.42,s*2,s*.84,s*.42);ctx.stroke()}
+function pacmanC(x,y,r,t,col){const m=.25+.2*Math.abs(Math.sin(t*3));ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,m,TAU-m);ctx.closePath();fillStroke(col,hexA(C.ink,.4),1.1);circ(x+r*.2,y-r*.45,r*.13,C.panel)}
+function syringeC(x,y,s,rot,fill){ctx.save();ctx.translate(x,y);line(-s*.5,0,0,0,C["ink-soft"],1.6);rr(0,-s*.18,s*1.3,s*.36,3);fillStroke(hexA(C.panel,.85),C["ink-soft"],1.4);ctx.fillStyle=hexA(C.drug,.75);ctx.fillRect(2,-s*.13,(s*1.3-4)*fill,s*.26);line(s*1.3,0,s*1.7,0,C["ink-soft"],3);line(s*1.7,-s*.22,s*1.7,s*.22,C["ink-soft"],3);ctx.restore()}
+function ivBagC(x,y,s,lab,col,lvl){rr(x-s*.4,y-s,s*.8,s,s*.16);fillStroke(hexA(C.panel,.9),C["ink-soft"],1.5);ctx.save();rr(x-s*.4,y-s,s*.8,s,s*.16);ctx.clip();ctx.fillStyle=hexA(col,.4);ctx.fillRect(x-s*.4,y-s*lvl,s*.8,s*lvl);ctx.restore();line(x,y,x,y+6,C["ink-soft"],2);txt(x,y-s-10,lab,{size:12,weight:700,align:"center"})}
+function drawCase(now){use(S4);const c=CASES[CS.i];const t=now/1000;
+  /* MAR */
+  panelBox(10,8,620,62);txt(22,23,"MAR · "+c.who.toUpperCase(),{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  const m=c.mar;const stCol=/LATE|HOLD|CLARIFY/.test(m[4])?C.bad:/NOW|DUE/.test(m[4])?C.warn:C.good;
+  marRow(18,36,604,[[m[0],56,12.5,700,true],[m[1],220,13,700],[m[2],96,12.5,500,true],[m[3],0,12,500]],{h:28});ctx.font=`600 11.5px ${MONO}`;const cw=ctx.measureText(m[4]).width;chipText(622-cw/2-6,22,m[4],stCol);
+  /* monitor */
+  const v=c.vit;monitor(10,78,330,166,{hr:v.hr,sbp:v.sbp,dbp:v.dbp,spo2:v.spo2,rr:v.rr,temp:v.temp+" °C",etco2:v.etco2},t);
+  const fl={hr:"HR",sbp:"BP",spo2:"SpO₂",temp:"Temp",etco2:"EtCO₂"};txt(14,254,c.flags.length?"Flags: "+c.flags.map(k=>fl[k]+(k==="hr"?(v.hr<60?" low":" high"):k==="sbp"?(v.sbp<110?" low":" high"):k==="spo2"?" low":" high")).join(", "):"Vitals within normal limits",{size:12,weight:600,color:c.flags.length?C.bad:C.good});
+  /* labs */
+  panelBox(350,78,280,176);txt(362,94,"LAB AND TEST RESULTS",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  c.labs.forEach((l,i)=>{const y=118+i*34;rr(360,y-14,262,30,5);ctx.fillStyle=l[3]?hexA(C.bad,.1):hexA(C["panel-2"],.9);ctx.fill();if(l[3]){ctx.strokeStyle=C.bad;ctx.lineWidth=1.2;ctx.stroke()}
+    txt(368,y-3,l[0],{size:12,weight:600});txt(368,y+9,l[2]?"ref "+l[2]:"",{size:11.5,color:C["ink-soft"]});txt(l[3]?586:614,y+1,l[1],{size:12.5,mono:true,weight:700,align:"right",color:l[3]?C.bad:C.ink});if(l[3])chipText(604,y+1,l[3],C.bad)});
+  caseScene(c,t)}
+function caseA11y(){const c=CASES[CS.i],v=c.vit;
+  const SC={pheny:"two eyes jerk side to side (nystagmus), a person sways (ataxia), pink gums grow down over the teeth, and a level bar sits above the green target window",
+    carba:"a patch of skin with red spots and white blisters, a liver with more and more teal enzyme circles appearing, and a birth control level bar that drops below its protective window",
+    valpro:"a yellowing liver labelled liver injury, an eye tinted yellow, a few scattered platelets labelled bruising and bleeding, and a curled fetus labelled neural tube defects",
+    status:"an EEG strip with continuous seizure spikes that later calm, a syringe labelled IV lorazepam, a saline bag with a check and a dextrose bag with a red X labelled crystals form",
+    pd:"a seesaw tipped down toward blue acetylcholine with only a few orange dopamine shapes, three grey receptors plugged by violet triangles labelled metoclopramide, a shaking person, and lying versus standing blood pressures",
+    donep:"a red heart beating slowly with blue acetylcholine dots circling it, an ECG strip with widely spaced beats, and an enzyme mouth plugged by a violet donepezil hexagon",
+    triptan:"a brain vessel and a coronary artery on a heart both narrowing when violet triptan triangles bind 5-HT1B receptors, with a list of who should not take triptans",
+    mh:"a muscle storage sac releasing pink calcium ions into a clenched muscle fiber until a violet dantrolene hexagon plugs the release channel, and an EtCO₂ graph that climbs, then falls after dantrolene"}[c.scene];
+  const d=`Case ${CS.i+1}, ${c.who}. The medication record shows ${c.mar[1]} ${c.mar[2]} at ${c.mar[0]}, status ${c.mar[4]}. The monitor shows heart rate ${v.hr}, blood pressure ${v.sbp} over ${v.dbp}, SpO₂ ${v.spo2}%, temperature ${v.temp}${v.etco2?", EtCO₂ "+v.etco2:""}. Labs: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[3]==="H"?" (high)":l[3]==="L"?" (low)":""}`).join("; ")+`. The picture below shows ${SC}.`;
+  return [`Case ${CS.i+1}: ${c.title}.`,d]}
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+
+/* ================= PART 5: sort it out ================= */
+const SROUNDS=[
+{name:"Name the class",goal:"Put each drug in its drug class.",
+ bins:[["na","Sodium channel blocker (antiseizure)"],["gaba","GABA enhancer"],["dopa","Dopamine booster (Parkinson)"],["ache","Cholinesterase inhibitor"],["nmb","Neuromuscular blocker"]],
+ cards:[["phenytoin","na","Sodium channel blocker: holds channels inactivated so fast firing stops."],["carbamazepine","na","Sodium channel blocker and a strong enzyme inducer."],["lamotrigine","na","Sodium channel blocker: raise the dose slowly to lower rash risk."],
+  ["lorazepam","gaba","Benzodiazepine: GABA-A opens more often. First-line IV drug for status epilepticus."],["diazepam","gaba","Benzodiazepine: boosts GABA-A."],["phenobarbital","gaba","Barbiturate: keeps the GABA-A chloride channel open longer."],
+  ["levodopa-carbidopa","dopa","Levodopa becomes dopamine in the brain; carbidopa protects it in the blood."],["pramipexole","dopa","Dopamine agonist: stimulates dopamine receptors directly."],["selegiline","dopa","MAO-B inhibitor: slows dopamine breakdown."],
+  ["donepezil","ache","Cholinesterase inhibitor for Alzheimer disease: more ACh in the brain."],["rivastigmine","ache","Cholinesterase inhibitor for Alzheimer disease."],["pyridostigmine","ache","Cholinesterase inhibitor for myasthenia gravis: more ACh at the junction."],
+  ["succinylcholine","nmb","Depolarizing neuromuscular blocker."],["rocuronium","nmb","Nondepolarizing neuromuscular blocker."]]},
+{name:"Name stems",goal:"Use the ending of each generic name to find its class.",
+ bins:[["caine","-caine: local anesthetic"],["curonium","-curonium: nondepolarizing blocker"],["triptan","-triptan: migraine drug"],["azepam","-azepam, -azolam: benzodiazepine"],["stigmine","-stigmine: cholinesterase inhibitor"],["flurane","-flurane: inhaled anesthetic"]],
+ cards:[["lidocaine","caine","-caine: blocks sodium channels in nerves."],["bupivacaine","caine","-caine: a long-acting local anesthetic."],["rocuronium","curonium","-curonium: competes with ACh at nicotinic receptors."],["vecuronium","curonium","-curonium: nondepolarizing; reversed by sugammadex or neostigmine."],
+  ["sumatriptan","triptan","-triptan: a 5-HT1B/1D agonist."],["rizatriptan","triptan","-triptan: treats a migraine attack."],["lorazepam","azepam","-azepam: benzodiazepine."],["midazolam","azepam","-azolam: a short-acting benzodiazepine used for sedation."],
+  ["neostigmine","stigmine","-stigmine: reverses nondepolarizing blockers."],["pyridostigmine","stigmine","-stigmine: used in myasthenia gravis."],["sevoflurane","flurane","-flurane: inhaled general anesthetic."],["desflurane","flurane","-flurane: inhaled general anesthetic."]]},
+{name:"Which drug causes it?",goal:"Match each adverse effect to the drug that explains it.",
+ bins:[["phenytoin","phenytoin"],["carbamazepine","carbamazepine"],["valproate","valproate"],["levodopa","levodopa-carbidopa"],["benztropine","benztropine"],["succinylcholine","succinylcholine"]],
+ cards:[["Gum overgrowth","phenytoin","Gingival hyperplasia: teach daily gum care and dental visits."],["Nystagmus, then ataxia","phenytoin","Toxicity signs as the level rises above range."],
+  ["Blistering rash with fever in the first weeks","carbamazepine","Risk of Stevens-Johnson syndrome."],["Low sodium","carbamazepine","Carbamazepine can cause hyponatremia."],
+  ["Jaundice and high liver enzymes","valproate","Valproate has a boxed warning for liver failure."],["Neural tube defects in pregnancy","valproate","Valproate carries a high birth defect risk."],
+  ["Writhing movements at peak dose","levodopa","Dyskinesia: too much dopamine effect."],["Dizziness on standing and nausea","levodopa","Dopamine in the blood and orthostatic hypotension."],
+  ["Dry mouth and urinary retention","benztropine","Anticholinergic effects from blocking muscarinic receptors."],["Confusion in an older adult","benztropine","Anticholinergics can cloud thinking in older adults."],
+  ["Fasciculations, then paralysis","succinylcholine","It activates, then holds, the nicotinic receptors open."],["High potassium; a trigger for malignant hyperthermia","succinylcholine","Depolarization lets potassium leak out; it is an MH trigger."]]},
+{name:"Hold it and report",goal:"For each warning sign, pick the drug to hold (per order or protocol) and report about.",
+ bins:[["phenytoin","phenytoin"],["donepezil","donepezil"],["carbamazepine","carbamazepine"],["sumatriptan","sumatriptan"],["valproate","valproate"],["benztropine","benztropine"]],
+ cards:[["Level above range with nystagmus","phenytoin","Hold and report: toxicity."],["Low BP or slow heart rate during an IV infusion","phenytoin","Slow or stop the infusion and report: give it slowly, saline only."],
+  ["Pulse below about 60","donepezil","Extra ACh slows the heart."],["Fainting spells","donepezil","Slow heart rate can cause fainting."],
+  ["New rash, mouth sores or blisters","carbamazepine","Possible Stevens-Johnson syndrome."],["Fever, sore throat or easy bruising","carbamazepine","Possible low blood counts."],
+  ["Chest pain or tightness","sumatriptan","Triptans narrow coronary arteries."],["Known coronary artery disease","sumatriptan","A contraindication: clarify the order."],
+  ["Yellow skin, vomiting, belly pain","valproate","Possible liver injury or pancreatitis."],["Platelets falling, unusual bleeding","valproate","Valproate can lower platelets."],
+  ["Cannot pass urine","benztropine","Anticholinergic urinary retention."],["Eye pain in narrow-angle glaucoma","benztropine","Pupil dilation can block drainage and raise eye pressure."]]},
+{name:"Antidote or reversal",goal:"Match each situation to the antidote or reversal agent.",
+ bins:[["flumazenil","flumazenil"],["naloxone","naloxone"],["sugammadex","sugammadex"],["neostig","neostigmine + glycopyrrolate"],["dantrolene","dantrolene"],["lipid","lipid emulsion"]],
+ cards:[["Midazolam oversedation, hard to rouse","flumazenil","Competes at the benzodiazepine site. Use with care: it can trigger seizures in long-term benzodiazepine users."],["Lorazepam overdose with slow breathing","flumazenil","Benzodiazepine antagonist."],
+  ["Fentanyl during sedation: RR 6, pinpoint pupils","naloxone","Opioid antagonist: restores breathing."],["Morphine after surgery, hard to arouse","naloxone","Opioid antagonist."],
+  ["Deep rocuronium block, 0 twitches, must reverse now","sugammadex","Wraps rocuronium; works even from deep block."],["Vecuronium block needing fast reversal","sugammadex","Also binds vecuronium."],
+  ["Rocuronium wearing off: 3 of 4 twitches","neostig","More ACh outcompetes the blocker once twitches are back; glycopyrrolate prevents a slow heart rate."],["Residual weakness, TOF ratio 0.6 after vecuronium","neostig","Cholinesterase inhibitor reversal."],
+  ["Rising EtCO₂, rigid jaw and heat under sevoflurane","dantrolene","Malignant hyperthermia: stops calcium release in muscle."],["Masseter rigidity and high potassium after succinylcholine","dantrolene","Possible malignant hyperthermia."],
+  ["Bupivacaine: metallic taste, then seizure and dysrhythmia","lipid","Local anesthetic systemic toxicity: lipid emulsion soaks up the drug."],["Lidocaine toxicity with cardiovascular collapse","lipid","Lipid emulsion plus airway, seizure control and CPR as needed."]]},
+{name:"How it works",goal:"Sort each drug by its mechanism.",
+ bins:[["na","Blocks sodium channels"],["gabaa","Boosts GABA-A (more chloride in)"],["agon","Activates a receptor (agonist)"],["enz","Blocks an enzyme"],["rblock","Blocks a receptor (antagonist)"],["ca","Stops calcium release inside muscle"]],
+ cards:[["phenytoin","na","Holds neuronal sodium channels inactivated."],["lidocaine","na","Plugs sodium channels in the nerve: no signal, no pain."],
+  ["lorazepam","gabaa","Benzodiazepine: more frequent GABA-A opening."],["propofol","gabaa","Strengthens GABA-A: unconsciousness."],
+  ["pramipexole","agon","Dopamine receptor agonist."],["sumatriptan","agon","5-HT1B/1D agonist."],["succinylcholine","agon","Activates nicotinic receptors, then keeps them depolarized."],["baclofen","agon","GABA-B agonist in the spinal cord (not GABA-A)."],
+  ["donepezil","enz","Blocks acetylcholinesterase."],["carbidopa","enz","Blocks dopa decarboxylase in the blood."],["selegiline","enz","Blocks MAO-B."],
+  ["benztropine","rblock","Blocks muscarinic acetylcholine receptors."],["memantine","rblock","Blocks the NMDA receptor channel."],["rocuronium","rblock","Competes with ACh at nicotinic receptors."],
+  ["dantrolene","ca","Blocks the ryanodine receptor calcium channel."]]}
+];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const memb=y=>`<line x1="2" y1="${y}" x2="54" y2="${y}" stroke="var(--mem)" stroke-width="6"/>`;
+  const cup=(x,y,c)=>`<path d="M${x-8} ${y-7} h4 v5 a4 4 0 0 0 8 0 v-5 h4 v14 h-16 z" fill="${c||"var(--receptor)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const sq=(x,y,c)=>`<rect x="${x-4}" y="${y-4}" width="8" height="8" rx="1.5" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const dia=(x,y,c)=>`<path d="M${x} ${y-5} L${x+5} ${y} L${x} ${y+5} L${x-5} ${y} Z" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const hex=(x,y,r,c)=>`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=i/6*Math.PI*2;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ")}" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const pent=(x,y,r,c)=>`<polygon points="${[0,1,2,3,4].map(i=>{const a=i/5*Math.PI*2-Math.PI/2;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ")}" fill="${c||"var(--dopa)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const pac=(x,y,r)=>`<path d="M${x} ${y} L${x+r*.9} ${y-r*.42} A${r} ${r} 0 1 0 ${x+r*.9} ${y+r*.42} Z" fill="var(--receptor)" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const dot=(x,y,c)=>`<circle cx="${x}" cy="${y}" r="3.6" fill="${c||"var(--ach)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const X=(x,y)=>`<path d="M${x-5} ${y-5} L${x+5} ${y+5} M${x-5} ${y+5} L${x+5} ${y-5}" stroke="var(--bad)" stroke-width="2.6"/>`;
+  const heart=(x,y,c)=>`<path d="M${x} ${y+11} C${x-17} ${y} ${x-10} ${y-12} ${x} ${y-4} C${x+10} ${y-12} ${x+17} ${y} ${x} ${y+11} Z" fill="${c||"var(--blood)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  switch(k){
+    case "na":return s(`${memb(26)}<rect x="17" y="13" width="9" height="26" rx="3" fill="var(--receptor)"/><rect x="30" y="13" width="9" height="26" rx="3" fill="var(--receptor)"/>${hex(28,26,5)}`);
+    case "gaba":case "gabaa":return s(`${memb(28)}<rect x="15" y="12" width="11" height="30" rx="4" fill="var(--receptor)"/><rect x="30" y="12" width="11" height="30" rx="4" fill="var(--receptor)"/>${dot(20,8,"var(--gaba)")}${dot(36,8,"var(--gaba)")}${dia(10,20)}<line x1="24" y1="40" x2="32" y2="40" stroke="var(--cl)" stroke-width="2.5"/>`);
+    case "dopa":return s(`${pent(14,24,7)}${pent(28,16,7)}${pent(42,26,7)}<path d="M8 40 L48 40" stroke="var(--ink-soft)" stroke-width="2"/><path d="M42 36 L48 40 L42 44" stroke="var(--ink-soft)" stroke-width="2" fill="none"/>`);
+    case "ache":return s(`${pac(22,23,12)}${dot(42,16)}${dot(46,30)}${dot(36,34)}`);
+    case "nmb":return s(`<rect x="4" y="30" width="48" height="12" rx="6" fill="var(--muscle)" stroke="var(--muscle-edge)"/>${cup(16,24,"var(--blocked)")}${sq(16,20)}${cup(40,24,"var(--blocked)")}${sq(40,20)}`);
+    case "caine":return s(`<rect x="2" y="30" width="52" height="9" rx="4.5" fill="var(--nrn)" stroke="var(--nrn-edge)"/><line x1="10" y1="8" x2="30" y2="24" stroke="var(--ink-soft)" stroke-width="2"/><rect x="2" y="2" width="16" height="9" rx="2" transform="rotate(40 10 6)" fill="var(--panel)" stroke="var(--ink-soft)"/>${hex(36,34,4)}${hex(44,30,3.5)}`);
+    case "curonium":return s(`${cup(28,26,"var(--blocked)")}${sq(28,21)}<rect x="6" y="34" width="44" height="9" rx="4.5" fill="var(--muscle)" stroke="var(--muscle-edge)"/>${dot(10,12)}${X(10,12)}`);
+    case "triptan":return s(`<path d="M2 14 C16 14 20 20 28 20 C36 20 40 14 54 14 L54 34 C40 34 36 28 28 28 C20 28 16 34 2 34 Z" fill="var(--vessel)" stroke="var(--blood)"/><path d="M24 8 L28 2 L32 8 Z" fill="var(--ser)"/>`);
+    case "azepam":return s(`${memb(30)}<rect x="18" y="14" width="9" height="28" rx="3" fill="var(--receptor)"/><rect x="30" y="14" width="9" height="28" rx="3" fill="var(--receptor)"/>${dia(11,22)}${dia(46,22)}`);
+    case "stigmine":return s(`${pac(20,23,12)}${`<path d="M28 18 L34 23 L28 28 Z" fill="var(--drug)"/>`}${dot(42,12)}${dot(48,24)}${dot(42,36)}${dot(34,40)}`);
+    case "flurane":return s(`<path d="M10 30 Q28 6 46 30 Z" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><circle cx="20" cy="38" r="3" fill="var(--drug)" opacity=".7"/><circle cx="30" cy="40" r="2.5" fill="var(--drug)" opacity=".6"/><circle cx="38" cy="37" r="2" fill="var(--drug)" opacity=".5"/>`);
+    case "phenytoin":return s(`<rect x="4" y="6" width="48" height="18" rx="5" fill="var(--gum)"/>${[0,1,2,3].map(i=>`<rect x="${7+i*11.5}" y="20" width="9.5" height="16" rx="2.5" fill="#F4F1E8" stroke="var(--ink)" stroke-opacity=".35"/>`).join("")}<path d="M4 22 Q10 30 16 22 Q22 30 28 22 Q34 30 40 22 Q46 30 52 22" fill="var(--gum)"/>`);
+    case "carbamazepine":return s(`<rect x="4" y="6" width="48" height="34" rx="6" fill="var(--skin)" stroke="var(--skin-edge)"/><circle cx="16" cy="18" r="5" fill="var(--bad)" opacity=".55"/><circle cx="34" cy="14" r="4" fill="var(--bad)" opacity=".5"/><circle cx="28" cy="30" r="6" fill="#FFFFFF" stroke="var(--bad)"/><circle cx="44" cy="30" r="4" fill="var(--bad)" opacity=".55"/>`);
+    case "valproate":return s(`<path d="M6 20 C8 8 30 6 50 12 C54 20 40 34 26 36 C14 38 4 30 6 20 Z" fill="var(--liver)" stroke="var(--ink)" stroke-opacity=".35"/><circle cx="44" cy="34" r="6" fill="var(--gold)"/>`);
+    case "levodopa":return s(`${pent(12,26,7,"var(--drug)")}<path d="M22 26 L30 26" stroke="var(--ink-soft)" stroke-width="2"/><ellipse cx="42" cy="24" rx="12" ry="14" fill="var(--brain)" stroke="var(--brain-edge)"/>${pent(42,24,5)}`);
+    case "benztropine":return s(`${dot(12,22)}${dot(24,14)}${dot(26,30)}${X(26,30)}<path d="M36 12 h12 v22 h-12 z" fill="var(--panel)" stroke="var(--ink-soft)"/><path d="M40 18 h4 M40 24 h4" stroke="var(--ink-soft)"/>${`<path d="M44 34 q-2 6 -6 8" stroke="var(--ink-soft)" fill="none"/>`}`);
+    case "succinylcholine":return s(`<rect x="4" y="30" width="48" height="12" rx="6" fill="var(--muscle)" stroke="var(--muscle-edge)"/>${cup(28,24)}${dia(28,19,"var(--drug2)")}<path d="M8 10 l5 6 l5 -6 l5 6" stroke="var(--bad)" stroke-width="2" fill="none"/>`);
+    case "donepezil":return s(`${heart(16,20)}<path d="M30 26 h6 l3 -10 l3 16 l3 -6 h8" stroke="var(--good)" stroke-width="2" fill="none"/>`);
+    case "sumatriptan":return s(`${heart(22,22,"var(--blood)")}<path d="M18 8 C14 18 22 26 18 36" stroke="var(--bad)" stroke-width="2.5" fill="none"/><path d="M40 10 L44 4 L48 10 Z" fill="var(--ser)"/>`);
+    case "flumazenil":return s(`${memb(32)}<rect x="20" y="18" width="16" height="22" rx="4" fill="var(--receptor)"/>${dia(28,14)}<path d="M36 10 L48 4" stroke="var(--ink-soft)" stroke-width="2"/>${dia(48,6,"var(--blocked)")}`);
+    case "naloxone":return s(`${cup(28,28)}${hex(28,22,5,"var(--good)")}<path d="M44 8 L52 14" stroke="var(--ink-soft)" stroke-width="2"/>${dia(46,10,"var(--blocked)")}`);
+    case "sugammadex":return s(`<circle cx="18" cy="22" r="10" fill="none" stroke="var(--drug)" stroke-width="5"/>${sq(18,22)}<circle cx="42" cy="22" r="10" fill="none" stroke="var(--drug)" stroke-width="5"/>${sq(42,22)}`);
+    case "neostig":return s(`${[0,1,2,3].map(i=>`<rect x="${6+i*12}" y="${40-[24,20,16,12][i]}" width="8" height="${[24,20,16,12][i]}" fill="var(--good)"/>`).join("")}${dot(10,8)}${dot(24,6)}${dot(38,8)}${dot(50,10)}`);
+    case "dantrolene":return s(`<rect x="8" y="6" width="8" height="28" rx="4" fill="var(--panel)" stroke="var(--ink-soft)"/><rect x="10" y="16" width="4" height="18" fill="var(--heat)"/><circle cx="12" cy="38" r="5" fill="var(--heat)"/>${hex(38,22,9)}`);
+    case "lipid":return s(`<circle cx="16" cy="18" r="8" fill="var(--gold)" opacity=".85"/><circle cx="34" cy="26" r="10" fill="var(--gold)" opacity=".85"/>${hex(34,26,3.4)}<circle cx="46" cy="12" r="5" fill="var(--gold)" opacity=".85"/>`);
+    case "agon":return s(`${cup(28,30)}<circle cx="28" cy="30" r="13" fill="var(--receptor)" opacity=".18"/>${pent(28,22,6,"var(--drug)")}<path d="M28 4 v8" stroke="var(--ink-soft)" stroke-width="2"/>`);
+    case "enz":return s(`${pac(24,23,13)}${hex(34,23,4.5)}${dot(48,14)}${dot(48,32)}`);
+    case "rblock":return s(`${cup(28,30,"var(--blocked)")}${sq(28,25)}${dot(12,10)}${X(12,10)}`);
+    case "ca":return s(`<ellipse cx="28" cy="16" rx="24" ry="10" fill="var(--sr)" stroke="var(--ink)" stroke-opacity=".35"/>${[0,1,2].map(i=>`<circle cx="${16+i*12}" cy="16" r="3.4" fill="var(--ca)"/>`).join("")}<rect x="24" y="24" width="8" height="10" fill="var(--receptor)"/>${hex(28,29,4)}<path d="M20 40 h16" stroke="var(--muscle-edge)" stroke-width="3"/>`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";bins.classList.toggle("six",R.bins.length>5);R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI()}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+/* drag: a ghost follows the pointer; drop on a bin */
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+const A11Y={sz:{cv:"#cvSz",f:szA11y},pd:{cv:"#cvPd",f:pdA11y},nm:{cv:"#cvNm",f:nmA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sz";
+const TABS=["sz","pd","nm","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="sz"){szStep(dt);drawSz(now)}
+    else if(curTab==="pd"){pdStep(dt);drawPd(now)}
+    else if(curTab==="nm"){nmStep(dt);drawNm(now)}
+    else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__nl={tab:k=>showTab(k),
+  sz:o=>{if(o.step!=null)$("#szDose").value=o.step;if(o.adh!=null)$("#szAdh").value=o.adh;if(o.ind!=null)$("#szInd").checked=o.ind;if(o.stop!=null)$("#szStop").checked=o.stop;szChanged();if(o.t!=null)SZ.t=o.t},
+  szState:()=>({step:SZ.step,css:szCss(SZ.step,SZ.ind),end:szAt(SZ_DAYS-.05),done:[...SZ.done]}),
+  pd:o=>{if(o.adv!=null){PD.adv=o.adv;$("#pdStage").querySelectorAll("button").forEach((b,i)=>b.setAttribute("aria-pressed",String(i===(o.adv?1:0))))}if(o.n!=null)$("#pdDoses").value=o.n;if(o.size!=null)$("#pdSize").value=o.size;["carbi","comt","maob","benz","prot"].forEach(k=>{if(o[k]!=null)$("#pd"+k[0].toUpperCase()+k.slice(1)).checked=o[k]});pdChanged();if(o.h!=null)PD.h=o.h},
+  pdState:()=>Object.assign(pdPct(),{done:[...PD.done]}),
+  nmGive:k=>nmGive(k),nmRun:min=>{const n=Math.round(min/(NM_SPD[NM.spd-1]*.02));for(let i=0;i<n;i++)nmStep(.02)},nmState:()=>({t:NM.t,h:NM.h.slice(),cnt:nmCount(),ratio:nmRatio(),pain:NM.pain,done:[...NM.done]}),
+  nmSed:v=>{$("#nmSed").checked=v;NM.sed=v},nmEpi:v=>{$("#nmEpi").checked=v},nmReset:()=>$("#nmReset").click(),
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order})};
+readColors();szChanged();pdChanged();nmDrugUI();$("#nmSpeed").dispatchEvent(new Event("input"));nmCheck();nmRead();setStatus($("#nmStatus"),"","Normal train-of-four: four equal twitches. Turn on sedation, then give a drug.");caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

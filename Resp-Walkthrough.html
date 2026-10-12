@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Respiratory and Allergy Drugs Walkthrough</title>
+<meta name="description" content="Step-by-step animated walkthrough of respiratory and allergy drugs: bronchodilators, inhaled and systemic steroids, leukotriene modifiers, biologics, inhaler technique, antihistamines, decongestants, cough and mucus drugs, smoking cessation and oxygen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3785;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#2F7FC1;--act3:#C4644F;--act4:#2E8A7A;--act5:#A04E8C;--act6:#D98A1C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF1F6;--grid:#D5DAE6;
+  --drug:#5B3FC4;--receptor:#1E8A84;--ligand:#D08A12;--blocked:#8B9094;
+  --na:#D9A015;--k:#B03A8C;--cl:#2E8A4A;--h2o:#3F8FD0;--ca:#5E7183;--glu:#C77A12;--urate:#9A6A12;
+  --blood:#C0392B;--plasma:#F4D9D2;--vessel:#C4644F;--smooth:#D9A07A;--smooth-edge:#A8704A;--heart:#B5303A;--heart-edge:#7E1F27;
+  --tubule:#E9DCCB;--tubule-edge:#A88B6A;--lumen:#FBF6EA;--urine:#E8C64A;--peri:#F3D6D0;
+  --renin:#2F7FC1;--angio:#C4644F;--aldo:#D98A1C;--brady:#A04E8C;--symp:#D98A1C;--ace:#2E8A7A;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --scr:#0E1A1F;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#CFE5F1;--glass:#DCE8EE;--glass-edge:#7F99A6;--fruit:#E0784A;--fruit-in:#F2B6A0;
+  --mucosa:#E7B3AD;--mucosa-edge:#B06A64;--mucus:#B8B04A;--mucus-edge:#857E22;--air:#DCEEF8;--infl:#C8553F;--o2:#2F7FC1;
+  --hist:#C77A12;--leuko:#A04E8C;--steroid:#2E8A7A;--ach:#2F7FC1;--b2:#1E8A84;--m3:#B4632A;--cilia:#8E5A56;--powder:#7B5CC9;--aero:#5B3FC4;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --mucosa:#6A3A38;--mucosa-edge:#D9958F;--mucus:#A8A046;--mucus-edge:#D6CF7A;--air:#15303C;--infl:#E8806A;--o2:#6FB3EC;
+  --hist:#E0A050;--leuko:#D186C0;--steroid:#5CC4B0;--ach:#5AA9E6;--b2:#5CC9C0;--m3:#E39A5B;--cilia:#D9958F;--powder:#A98BEF;--aero:#B3A1F5;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --mucosa:#6A3A38;--mucosa-edge:#D9958F;--mucus:#A8A046;--mucus-edge:#D6CF7A;--air:#15303C;--infl:#E8806A;--o2:#6FB3EC;
+  --hist:#E0A050;--leuko:#D186C0;--steroid:#5CC4B0;--ach:#5AA9E6;--b2:#5CC9C0;--m3:#E39A5B;--cilia:#D9958F;--powder:#A98BEF;--aero:#B3A1F5;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 10 &middot; Respiratory and allergy drugs</div>
+    <h1>Respiratory and Allergy Drugs Walkthrough</h1>
+    <p class="sub">Watch what each drug does inside the airway (the squeeze, the swelling and the mucus), so rescue versus controller, side effects and inhaler teaching all make sense. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Use the left and right arrow keys to move between steps. Practice next in the <a href="Resp-Lab.html">Respiratory and Allergy Drugs Lab</a>. Drugs are taught by class with one generic prototype each; this page gives no doses. Airways, receptors and particles are drawn as simple shapes, and changes that take hours or weeks are sped up so you can watch them. Always follow the prescriber, the label and your facility's protocols.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "receptor", "ligand", "blocked", "na", "k", "cl", "h2o", "ca", "glu", "urate", "blood", "plasma", "vessel", "smooth", "smooth-edge", "heart", "heart-edge", "tubule", "tubule-edge", "lumen", "urine", "peri", "renin", "angio", "aldo", "brady", "symp", "ace", "skin", "skin-edge", "body", "body-edge", "scr", "scr-ink", "scr-soft", "water", "glass", "glass-edge", "fruit", "fruit-in", "mucosa", "mucosa-edge", "mucus", "mucus-edge", "air", "infl", "o2", "hist", "leuko", "steroid", "ach", "b2", "m3", "cilia", "powder", "aero"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= module 7 drawing helpers ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.9),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* ion token. kinds: na k cl ca h2o glu urate */
+const IONLAB={na:"Na⁺",k:"K⁺",cl:"Cl⁻",ca:"Ca²⁺",glu:"Glu",urate:"UA"};
+function ion(kind,x,y,r,o){o=o||{};r=r||8;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  if(kind==="h2o"){ctx.beginPath();ctx.moveTo(x,y-r*1.3);ctx.bezierCurveTo(x+r*.95,y-r*.15,x+r*.95,y+r*.9,x,y+r*.9);ctx.bezierCurveTo(x-r*.95,y+r*.9,x-r*.95,y-r*.15,x,y-r*1.3);ctx.closePath();
+    ctx.fillStyle=C.h2o;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1;ctx.stroke();circ(x-r*.3,y,r*.22,hexA("#ffffff",.55))}
+  else{const col=C[kind]||C.ink;circ(x,y,r,col,hexA(C.ink,.45),1);
+    if(o.lab!==false&&r>=7){const t=IONLAB[kind]||"";ctx.font=`700 ${r>=10?10.5:Math.max(8,r*1.05)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(t.replace(/[⁺⁻²]/g,""),x,y+.5)}}
+  ctx.restore()}
+/* drug molecule: indigo hexagon with a short label */
+function drugMol(x,y,s,lab,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  hexPath(0,0,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.5),1.3);hexPath(0,0,s*.55,Math.PI/6);ctx.strokeStyle=hexA(inkOn(o.col||C.drug),.5);ctx.lineWidth=1;ctx.stroke();ctx.restore();
+  if(lab)label(x,y+s+11,lab,{size:12,weight:700,color:C.drug,a:o.a})}
+/* natural signal molecule (ligand): amber diamond */
+function ligand(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s,0);ctx.lineTo(0,s);ctx.lineTo(-s,0);ctx.closePath();fillStroke(o.col||C.ligand,hexA(C.ink,.5),1.2);ctx.restore()}
+/* heart that beats. o.hr beats/min, o.force 0..1.5, o.label */
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.35,y+s*.1,x-s*1.05,y-s*1.05,x,y-s*.45);ctx.bezierCurveTo(x+s*1.05,y-s*1.05,x+s*1.35,y+s*.1,x,y+s*.95);ctx.closePath()}
+function beatPhase(T,hr){return P(T*(hr||75)/60,1)}
+function heart(x,y,s,T,o){o=o||{};const hr=o.hr||75,f=o.force==null?1:o.force;const ph=beatPhase(T,hr);const sq=Math.exp(-Math.pow((ph-.18)/.09,2));const k=1-.09*f*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);ctx.fillStyle=o.col||C.heart;ctx.fill();ctx.strokeStyle=C["heart-edge"];ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-s*.15,-s*.5);ctx.quadraticCurveTo(s*.1,s*.1,-s*.05,s*.6);ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.6;ctx.stroke();
+  rr(-s*.28,-s*1.1,s*.22,s*.5,s*.1);ctx.fillStyle=o.col||C.heart;ctx.fill();rr(s*.08,-s*1.15,s*.26,s*.55,s*.12);ctx.fill();ctx.restore();
+  if(sq>.3&&o.pulse!==false)pulseRing(x,y,s*1.4,o.col||C.heart,clamp((ph-.12)/.3,0,1));return sq}
+/* artery segment (horizontal). r = lumen radius, o.flow speed, o.tone 0..1 (squeeze) */
+function artery(x,y,w,r,T,o){o=o||{};const wall=o.wall||12;const tone=o.tone==null?.5:o.tone;
+  const mcol=mix(C.smooth,C.vessel,tone);
+  rr(x,y-r-wall,w,2*(r+wall),8);ctx.fillStyle=mcol;ctx.fill();ctx.strokeStyle=C["smooth-edge"];ctx.lineWidth=1.5;ctx.stroke();
+  for(let X=x+8;X<x+w-4;X+=11){line(X,y-r-wall+2,X+4,y-r-2,hexA(C["smooth-edge"],.55),1.4);line(X,y+r+2,X+4,y+r+wall-2,hexA(C["smooth-edge"],.55),1.4)}
+  rr(x,y-r,w,2*r,Math.min(6,r));ctx.fillStyle=C.plasma;ctx.fill();
+  ctx.save();rr(x,y-r,w,2*r,Math.min(6,r));ctx.clip();const n=Math.max(4,Math.round(w/22));const sp=o.flow==null?60:o.flow;
+  for(let i=0;i<n*2;i++){const X=x+((i*w/n*.5+T*sp+rnd(i)*20)%(w+20))-10;const Y=y+(rnd(i*3+1)-.5)*1.4*Math.max(0,r-5);ell(X,Y,6,3.6,0,C.blood,hexA(C.ink,.3),.8)}ctx.restore()}
+/* fluid tank (blood volume) */
+function volTank(x,y,w,h,level,T,o){o=o||{};rr(x,y,w,h,10);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();const lh=(h-6)*clamp(level,0,1);
+  ctx.save();rr(x,y,w,h,10);ctx.clip();ctx.fillStyle=hexA(C.blood,.75);ctx.beginPath();ctx.moveTo(x,y+h-lh);for(let i=0;i<=w;i+=5)ctx.lineTo(x+i,y+h-lh+Math.sin(i/11+T*3)*2.2);ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.closePath();ctx.fill();ctx.restore();
+  rr(x,y,w,h,10);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+  for(let k=1;k<4;k++)line(x+w-10,y+h*k/4,x+w,y+h*k/4,C["ink-soft"],1.2);
+  if(o.label)txt(x+w/2,y-12,o.label,{size:12.5,weight:700,align:"center"})}
+/* BP dial, 0..240 mmHg */
+function bpDial(x,y,r,sbp,dbp,o){o=o||{};circ(x,y,r,C.panel,C["ink-soft"],2);const a0=Math.PI*.75,a1=Math.PI*2.25;const ang=v=>a0+(a1-a0)*clamp(v/240,0,1);
+  [[0,120,C.good],[120,140,C.gold],[140,240,C.bad]].forEach(b=>{ctx.beginPath();ctx.arc(x,y,r-7,ang(b[0]),ang(b[1]));ctx.strokeStyle=hexA(b[2],.6);ctx.lineWidth=6;ctx.stroke()});
+  for(let v=0;v<=240;v+=40){const a=ang(v);line(x+Math.cos(a)*(r-14),y+Math.sin(a)*(r-14),x+Math.cos(a)*(r-3),y+Math.sin(a)*(r-3),C["ink-soft"],1.5);if(r>=46)txt(x+Math.cos(a)*(r-24),y+Math.sin(a)*(r-24),String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  const a=ang(sbp);line(x,y,x+Math.cos(a)*(r-10),y+Math.sin(a)*(r-10),C.ink,3);circ(x,y,5,C.ink);
+  txt(x,y+r+13,Math.round(sbp)+"/"+Math.round(dbp)+(o.label===false?"":" mmHg"),{size:r>=46?14.5:13,mono:true,weight:700,align:"center",color:o.col||C.ink})}
+/* simplified ECG wave, t in beats */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+function ecgTrace(x,y,w,h,hr,T,col,o){o=o||{};const secs=o.secs||4;ctx.save();rr(x,y,w,h,4);ctx.clip();ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=(T-(w-i)/w*secs)*hr/60;const v=ecgWave(tt)*(o.amp||1);const Y=y+h*.68-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C.good;ctx.lineWidth=2;ctx.stroke();ctx.restore()}
+/* smooth muscle cell: spindle that shortens when contracted (c 0..1) */
+function smCell(x,y,len,c,o){o=o||{};const L=len*(1-.3*c),hgt=(o.h||16)+18*c;ctx.beginPath();ctx.moveTo(x-L/2,y);ctx.quadraticCurveTo(x,y-hgt,x+L/2,y);ctx.quadraticCurveTo(x,y+hgt,x-L/2,y);ctx.closePath();
+  fillStroke(mix(C.smooth,C.vessel,c*.8),C["smooth-edge"],1.5);ell(x,y,7,3.5,0,hexA(C["smooth-edge"],.6));
+  for(let k=-2;k<=2;k++){if(k===0)continue;const X=x+k*L*.16;line(X-4,y-hgt*.35,X+4,y+hgt*.35,hexA(C["smooth-edge"],.7),1.2)}}
+/* simple stick-free person silhouette. pose: lie, sit, stand. o.faint 0..1 (dizzy) */
+function person(x,y,s,pose,o){o=o||{};const col=o.col||C.skin,ed=C["skin-edge"];ctx.save();ctx.translate(x,y);
+  const body=(hx,hy,bw,bh,rot)=>{ctx.save();ctx.translate(hx,hy);ctx.rotate(rot||0);rr(-bw/2,0,bw,bh,bw/2);fillStroke(col,ed,1.5);ctx.restore()};
+  if(pose==="lie"){circ(-s*1.1,-s*.18,s*.22,col,ed,1.5);rr(-s*.85,-s*.36,s*1.1,s*.36,s*.16);fillStroke(col,ed,1.5);rr(s*.2,-s*.3,s*1,s*.24,s*.11);fillStroke(col,ed,1.5)}
+  else if(pose==="sit"){circ(0,-s*1.25,s*.22,col,ed,1.5);rr(-s*.2,-s*1,s*.4,s*.62,s*.16);fillStroke(col,ed,1.5);rr(-s*.2,-s*.44,s*.75,s*.22,s*.1);fillStroke(col,ed,1.5);rr(s*.4,-s*.44,s*.2,s*.55,s*.09);fillStroke(col,ed,1.5)}
+  else{const sway=(o.faint||0)*Math.sin((o.t||0)*3)*.12;ctx.rotate(sway);circ(0,-s*1.72,s*.22,col,ed,1.5);rr(-s*.2,-s*1.47,s*.4,s*.72,s*.16);fillStroke(col,ed,1.5);rr(-s*.19,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5);rr(s*.02,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5)}
+  ctx.restore()}
+/* little organ icons */
+function kidneyIcon(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(s*.2,-s*.95);ctx.bezierCurveTo(-s*1.2,-s*1.1,-s*1.2,s*1.1,s*.2,s*.95);ctx.bezierCurveTo(s*.75,s*.85,s*.55,s*.25,s*.3,0);ctx.bezierCurveTo(s*.55,-s*.25,s*.75,-s*.85,s*.2,-s*.95);ctx.closePath();
+  fillStroke(o.col||mix(C.vessel,C.panel,.25),C["heart-edge"],1.6);ctx.restore()}
+function lungIcon(x,y,s){[-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(x+sd*s*.12,y-s*.8);ctx.bezierCurveTo(x+sd*s*1.1,y-s*.9,x+sd*s*1.05,y+s*.95,x+sd*s*.18,y+s*.8);ctx.closePath();fillStroke(mix(C.angio,C.panel,.45),C["heart-edge"],1.4)});line(x,y-s*1.1,x,y-s*.3,C["ink-soft"],3)}
+function liverIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s*1.1,y-s*.2);ctx.bezierCurveTo(x-s*.6,y-s*.8,x+s*.9,y-s*.7,x+s*1.1,y-s*.4);ctx.bezierCurveTo(x+s*.6,y+s*.2,x-s*.3,y+s*.6,x-s*1.1,y-s*.2);ctx.closePath();fillStroke(mix("#8A4A2A",C.panel,isDark()?.1:.15),C["heart-edge"],1.4)}
+function adrenalIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y+s*.4);ctx.lineTo(x,y-s*.6);ctx.lineTo(x+s,y+s*.4);ctx.closePath();fillStroke(mix(C.aldo,C.panel,.3),C["heart-edge"],1.3)}
+function brainIcon(x,y,s,glw){if(glw)glow(x,y,s*1.8,C.gold,glw*.6);ell(x,y,s,s*.75,0,mix(C.brady,C.panel,.55),C["heart-edge"],1.4);ctx.beginPath();for(let k=0;k<5;k++){ctx.moveTo(x-s*.7+k*s*.32,y-s*.5);ctx.quadraticCurveTo(x-s*.55+k*s*.32,y,x-s*.7+k*s*.32,y+s*.45)}ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.2;ctx.stroke()}
+/* membrane transporter / receptor shape. kind: "tr" transporter pocket, "rec" receptor cup, "chan" channel. state "open"|"bound"|"blocked" */
+function transporter(x,y,w,h,o){o=o||{};const col=o.col||C.receptor;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);
+  rr(-w/2,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);rr(w*.08,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);
+  if(o.lab)txt(0,h/2+11,o.lab,{size:11.5,weight:700,mono:true,align:"center",color:o.labCol||C.ink});ctx.restore()}
+/* lipid bilayer, vertical (x fixed) or horizontal */
+function bilayerV(x,y0,y1,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let y=y0;y<=y1;y+=9){circ(x-5,y,3.4,col);circ(x+5,y,3.4,col)}line(x-2,y0,x-2,y1,hexA(col,.6),1);line(x+2,y0,x+2,y1,hexA(col,.6),1)}
+function bilayerH(x0,x1,y,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let x=x0;x<=x1;x+=9){circ(x,y-5,3.4,col);circ(x,y+5,3.4,col)}}
+/* small labelled chip pill on canvas */
+function tag(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12,weight:700,color:o.color||C.ink,border:col,bg:o.bg,align:o.align})}
+/* up / down arrow badge for effects (text included so colour is not the only signal) */
+function effect(x,y,t,up,o){o=o||{};const col=o.col||(up?C.bad:C.accent);const s=o.size||13;ctx.font=`700 ${s}px ${FONT}`;const w=ctx.measureText(t).width+26;
+  rr(x,y-s,w,s*2,s*.5);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.stroke();
+  const ax=x+11,ay=y;ctx.beginPath();if(up){ctx.moveTo(ax-5,ay+4);ctx.lineTo(ax,ay-5);ctx.lineTo(ax+5,ay+4)}else{ctx.moveTo(ax-5,ay-4);ctx.lineTo(ax,ay+5);ctx.lineTo(ax+5,ay-4)}ctx.closePath();ctx.fillStyle=col;ctx.fill();
+  txt(x+20,y+.5,t,{size:s,weight:700,color:C.ink});return w}
+/* grapefruit slice */
+function grapefruit(x,y,r){circ(x,y,r,C.fruit,hexA(C.ink,.4),1.5);circ(x,y,r*.82,C["fruit-in"]);for(let k=0;k<10;k++){const a=k/10*TAU;line(x,y,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,hexA(C.panel,.8),1.4)}circ(x,y,r*.12,hexA(C.panel,.9))}
+/* pill bottle with label */
+function pillBottle(x,y,s,lab,col){rr(x-s*.45,y-s*1.25,s*.9,s*1.25,s*.15);ctx.fillStyle=hexA(col||C.gold,.35);ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();rr(x-s*.52,y-s*1.5,s*1.04,s*.3,s*.08);ctx.fillStyle=C.panel;ctx.fill();ctx.stroke();
+  rr(x-s*.38,y-s*.95,s*.76,s*.5,3);ctx.fillStyle=C.panel;ctx.fill();if(lab)txt(x,y-s*.7,lab,{size:Math.max(10,s*.22),weight:700,align:"center"})}
+
+/* ================= shared scene pieces ================= */
+function chipDrug(x,y,t,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.font=`700 12.5px ${FONT}`;const w=ctx.measureText(t).width+30;
+  rr(x-w/2,y-13,w,26,13);ctx.fillStyle=C.drug;ctx.fill();hexPath(x-w/2+13,y,6.5,Math.PI/6);fillStroke(inkOn(C.drug),null);
+  ctx.fillStyle=inkOn(C.drug);ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,x+8,y+.5);ctx.restore();return w}
+function sideLabel(x,y,t,col){txt(x,y,t,{size:12.5,weight:700,color:col||C.ink,align:"center"})}
+function bpFrom(co,svr){const map=93*co*svr;const pp=40*Math.sqrt(co);return [map+pp*2/3,map-pp/3,map]}
+function partCards(parts,lit,mode){parts.forEach((pt,i)=>{const x=420,y=14+i*76,w=368,h=68;const l=mode==="all"?i<=lit:i===lit%parts.length;
+  panelBox(x,y,w,h,{stroke:l?C[pt[1]]:C.rule,lw:l?2.6:1.2,fill:hexA(C.panel,l?.98:.7)});
+  ctx.save();ctx.globalAlpha=mode==="all"&&!l?.5:1;badge(x+22,y+h/2,i+1,C[pt[1]],12);txt(x+44,y+22,pt[0],{size:14,weight:700});wrapText(pt[2],x+44,y+44,w-56,15,{size:12.5,color:C["ink-soft"]});ctx.restore()})}
+
+/* ================= module 10 drawing helpers: airways, inhalers, receptors ================= */
+/* Bronchiole cross-section. o.sq squeeze 0..1, o.sw swelling 0..1, o.mu mucus 0..1, o.inf inflammatory cells 0..1.
+   Returns lumen radius so scenes can place labels. */
+function bronchiole(x,y,R,T,o){o=o||{};const sq=clamp(o.sq||0,0,1),sw=clamp(o.sw||0,0,1),mu=clamp(o.mu||0,0,1),inf=clamp(o.inf==null?sw:o.inf,0,1);
+  const ro=R*(1-.25*sq),rmo=ro*.93,rmi=rmo-R*(.1+.08*sq);const mth=R*(.16+.22*sw+.08*sq);const rl=Math.max(R*.07,rmi-mth);
+  // adventitia (outer connective tissue)
+  circ(x,y,ro,mix(C.panel,C.mucosa,.25),C["mucosa-edge"],1.4);
+  // smooth muscle ring
+  circ(x,y,rmo,mix(C.smooth,C.vessel,sq*.85));
+  const nc=18;for(let i=0;i<nc;i++){const a=i/nc*TAU+(o.rot||0);const rm=(rmo+rmi)/2;ctx.save();ctx.translate(x+Math.cos(a)*rm,y+Math.sin(a)*rm);ctx.rotate(a+Math.PI/2);
+    const L=TAU*rm/nc*.9*(1-.25*sq),hh=(rmo-rmi)*.32*(1+.5*sq);ctx.beginPath();ctx.moveTo(-L/2,0);ctx.quadraticCurveTo(0,-hh,L/2,0);ctx.quadraticCurveTo(0,hh,-L/2,0);ctx.closePath();
+    fillStroke(mix(C.smooth,C.vessel,sq*.9),C["smooth-edge"],1);ctx.restore()}
+  circ(x,y,rmo,null,C["smooth-edge"],1.4);
+  // submucosa (edema tint)
+  circ(x,y,rmi,mix(mix(C.panel,C.mucosa,.45),C.h2o,sw*.18),hexA(C["mucosa-edge"],.6),1);
+  // inflammatory cells
+  const ncell=Math.round(inf*16);for(let i=0;i<ncell;i++){const a=rnd(i*3.7+1)*TAU;const rr_=lerp(rl+mth*.45,rmi-R*.03,rnd(i*5.1+2));const cx=x+Math.cos(a)*rr_,cy=y+Math.sin(a)*rr_;const s=Math.max(2.4,R*.035);
+    circ(cx,cy,s*1.25,mix(C.infl,C.panel,.25),hexA(C.ink,.35),.8);circ(cx-s*.4,cy,s*.5,hexA(C.ink,.55));circ(cx+s*.4,cy,s*.5,hexA(C.ink,.55))}
+  // mucosa with folds (wavy inner edge)
+  const fold=a=>rl*(1+.16*sq*Math.sin(a*9+.4));const re=a=>fold(a)+R*(.07+.15*sw);
+  ctx.beginPath();for(let i=0;i<=72;i++){const a=i/72*TAU;const r=re(a);i?ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r):ctx.moveTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}ctx.closePath();fillStroke(mix(C.mucosa,C.infl,sw*.25),C["mucosa-edge"],1.3);
+  // lumen (air)
+  ctx.beginPath();for(let i=0;i<=72;i++){const a=i/72*TAU;const r=fold(a);i?ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r):ctx.moveTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}ctx.closePath();fillStroke(C.air,C["mucosa-edge"],1.4);
+  // cilia
+  if(R>40){for(let i=0;i<48;i++){const a=i/48*TAU;const r=fold(a);const w=Math.sin(T*6+i)*.25;line(x+Math.cos(a)*r,y+Math.sin(a)*r,x+Math.cos(a+w*.05)*(r-R*.035),y+Math.sin(a+w*.05)*(r-R*.035),C.cilia,1)}}
+  // air movement: dots drift through the lumen, fewer when narrow
+  ctx.save();ctx.beginPath();for(let i=0;i<=48;i++){const a=i/48*TAU;const r=fold(a)-1;i?ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r):ctx.moveTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}ctx.closePath();ctx.clip();
+  const nd=Math.round(4+26*Math.pow(rl/(R*.66),2));for(let i=0;i<nd;i++){const a=rnd(i*1.3)*TAU+T*(.4+rnd(i)*.5);const r=rl*Math.sqrt(rnd(i*7.7+3))*.9;circ(x+Math.cos(a)*r,y+Math.sin(a)*r,Math.max(1.6,R*.022),hexA(C.o2,.75))}
+  // mucus blobs attached to the wall
+  const nm=Math.round(mu*6);for(let i=0;i<nm;i++){const a=i/6*TAU+.5;const r=fold(a);const s=R*(.06+.1*mu)*(.7+.5*rnd(i*9.1));const bx=x+Math.cos(a)*(r-s*.55),by=y+Math.sin(a)*(r-s*.55);
+    blobPath(bx,by,s,i*2.1,T*.6,.12);fillStroke(hexA(C.mucus,.88),C["mucus-edge"],1.2)}
+  if(mu>.75){blobPath(x+rl*.1,y-rl*.05,rl*.45*(mu-.6)/.4,3,T*.5,.1);fillStroke(hexA(C.mucus,.85),C["mucus-edge"],1.2)}
+  ctx.restore();
+  return {rl,rmi,rmo,ro}}
+/* label set for a bronchiole drawn at x,y,R */
+function bronchLabels(x,y,R,g,o){o=o||{};const a=o.a==null?1:o.a;
+  lead(x+Math.cos(-.6)*(g.rmo+g.rmi)/2,y+Math.sin(-.6)*(g.rmo+g.rmi)/2,x+R+18,y-R*.72,"Smooth muscle",{a,size:12,align:"left"});
+  lead(x+Math.cos(.5)*(g.rl+R*.08),y+Math.sin(.5)*(g.rl+R*.08),x+R+18,y+R*.3,"Lining (mucosa)",{a,size:12,align:"left"});
+  lead(x-g.rl*.3,y+g.rl*.2,x-R-18,y+R*.75,"Airway opening",{a,size:12,align:"right"})}
+/* receptor cup on a horizontal membrane, opening upward (out of cell is above). kind colours: b2, m3, h1, lt */
+function recCup(x,y,col,lab,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(1,-1);
+  ctx.beginPath();ctx.moveTo(-15,-14);ctx.lineTo(-15,8);ctx.quadraticCurveTo(-15,16,-7,16);ctx.lineTo(7,16);ctx.quadraticCurveTo(15,16,15,8);ctx.lineTo(15,-14);ctx.lineTo(8,-14);ctx.lineTo(8,4);ctx.lineTo(-8,4);ctx.lineTo(-8,-14);ctx.closePath();
+  fillStroke(col,hexA(C.ink,.45),1.3);ctx.restore();if(lab)txt(x,y+(o.flip?-28:30),lab,{size:12,weight:700,mono:true,align:"center",color:o.labCol||C.ink})}
+/* membrane strip */
+function membrane(x0,x1,y){bilayerH(x0,x1,y,{})}
+/* inhaler drawings */
+function mdi(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);if(o.flip)ctx.scale(-1,1);
+  rr(-s*.28,-s*1.1,s*.56,s*1.05,s*.12);fillStroke(o.col||mix(C.act2,C.panel,.3),hexA(C.ink,.5),1.4);
+  rr(-s*.36,-s*.1,s*.72,s*.55,s*.12);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.4);
+  rr(-s*.36,s*.3,s*.95,s*.32,s*.1);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.4);
+  if(o.lab&&!o.flip)txt(0,-s*.6,o.lab,{size:12,weight:700,align:"center",color:inkOn(o.col||mix(C.act2,C.panel,.3))});ctx.restore()}
+function spacer(x,y,w,h){rr(x,y-h/2,w,h,h/2);ctx.fillStyle=hexA(C.glass,.65);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.6;ctx.stroke();
+  rr(x+w-4,y-h*.22,18,h*.44,4);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.3)}
+function dpi(x,y,s,o){o=o||{};circ(x,y,s,o.col||mix(C.act1,C.panel,.35),hexA(C.ink,.5),1.6);circ(x,y,s*.62,mix(C.panel,C.rule,.3),hexA(C.ink,.4),1.2);
+  rr(x+s*.7,y-s*.22,s*.7,s*.44,s*.1);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.4);rr(x-s*.15,y-s*1.05,s*.3,s*.25,3);fillStroke(C.gold,hexA(C.ink,.4),1);if(o.lab)txt(x,y,o.lab,{size:12,weight:700,align:"center"})}
+function nebulizer(x,y,s,T){rr(x-s*.4,y-s*.2,s*.8,s*.9,s*.15);fillStroke(hexA(C.glass,.8),C["glass-edge"],1.5);
+  ctx.save();rr(x-s*.4,y-s*.2,s*.8,s*.9,s*.15);ctx.clip();ctx.fillStyle=hexA(C.aero,.35);ctx.fillRect(x-s*.4,y+s*.35,s*.8,s*.4);ctx.restore();
+  for(let i=0;i<8;i++){const q=P(T*.8+i/8,1);circ(x+Math.sin(i*2+T)*s*.2,y-s*.25-q*s*.9,2+2*q,hexA(C.aero,.6*(1-q)))}
+  rr(x-s*.12,y-s*.55,s*.24,s*.35,4);fillStroke(mix(C.panel,C.rule,.3),C["glass-edge"],1.2)}
+/* head in profile facing right, with mouth, throat and airway tree going down. returns key points */
+function headAirway(x,y,s,o){o=o||{};const col=C.skin,ed=C["skin-edge"];
+  // head and neck silhouette
+  ctx.beginPath();ctx.moveTo(x-s*.55,y+s*.95);ctx.lineTo(x-s*.55,y+s*.35);ctx.bezierCurveTo(x-s*.95,y+s*.1,x-s*.95,y-s*.9,x-s*.1,y-s*.95);
+  ctx.bezierCurveTo(x+s*.45,y-s*.98,x+s*.6,y-s*.5,x+s*.55,y-s*.25);ctx.lineTo(x+s*.7,y-s*.05);ctx.lineTo(x+s*.55,y+s*.02);ctx.lineTo(x+s*.58,y+s*.12);ctx.lineTo(x+s*.52,y+s*.2);ctx.bezierCurveTo(x+s*.5,y+s*.42,x+s*.3,y+s*.45,x+s*.05,y+s*.45);ctx.lineTo(x+s*.05,y+s*.95);ctx.closePath();
+  fillStroke(hexA(col,.85),ed,1.6);
+  circ(x+s*.25,y-s*.42,s*.04,C.ink);
+  // mouth cavity and throat path
+  const mouth=[x+s*.56,y+s*.15],throat=[x-s*.15,y+s*.25],trach=[x-s*.25,y+s*.95];
+  poly([[mouth[0],mouth[1]],[x+s*.2,y+s*.17],[x-s*.05,y+s*.12],throat,[x-s*.22,y+s*.55],trach],hexA(C.mucosa,.9),s*.1);
+  poly([[mouth[0],mouth[1]],[x+s*.2,y+s*.17],[x-s*.05,y+s*.12],throat,[x-s*.22,y+s*.55],trach],hexA(C.air,.95),s*.055);
+  return {mouth,throat,trach}}
+/* lungs with branching airway tree. top of trachea at (x,y). size s. returns branch tip list */
+function lungTree(x,y,s,o){o=o||{};const sq=o.sq||0;
+  [-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(x+sd*s*.12,y+s*.35);ctx.bezierCurveTo(x+sd*s*1.15,y+s*.15,x+sd*s*1.2,y+s*1.5,x+sd*s*.22,y+s*1.45);ctx.closePath();fillStroke(hexA(mix(C.mucosa,C.panel,.45),.9),C["mucosa-edge"],1.5)});
+  const tips=[];const br=(x0,y0,a,len,w,d)=>{const x1=x0+Math.cos(a)*len,y1=y0+Math.sin(a)*len;line(x0,y0,x1,y1,mix(C.mucosa,C["mucosa-edge"],.5),w*(1-.3*sq));line(x0,y0,x1,y1,C.air,Math.max(1,w*.45*(1-.6*sq)));
+    if(d>0){br(x1,y1,a-.45,len*.72,w*.7,d-1);br(x1,y1,a+.45,len*.72,w*.7,d-1)}else tips.push([x1,y1])};
+  line(x,y,x,y+s*.42,mix(C.mucosa,C["mucosa-edge"],.5),s*.12);line(x,y,x,y+s*.42,C.air,s*.06);
+  br(x,y+s*.42,Math.PI/2+.75,s*.36,s*.09,3);br(x,y+s*.42,Math.PI/2-.75,s*.36,s*.09,3);return tips}
+/* small graph frame */
+function gframe(x,y,w,h,o){o=o||{};line(x,y+h,x+w,y+h,C["ink-soft"],1.3);line(x,y,x,y+h,C["ink-soft"],1.3);if(o.yl)txt(x-6,y-10,o.yl,{size:12,color:C["ink-soft"],weight:600});if(o.xl)txt(x+w,y+h+16,o.xl,{size:12,color:C["ink-soft"],align:"right",weight:600})}
+/* peak flow zones band */
+function pfZones(x,y,w,h,v0,v1){const Y=v=>y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;[[80,100,C.good],[50,80,C.gold],[v0,50,C.bad]].forEach(z=>{ctx.fillStyle=hexA(z[2],.12);ctx.fillRect(x,Y(z[1]),w,Y(z[0])-Y(z[1]))})}
+/* hand that shakes (tremor) */
+function hand(x,y,s,trem,T){const dx=trem*Math.sin(T*55)*s*.08;ctx.save();ctx.translate(x+dx,y);rr(-s*.35,-s*.1,s*.7,s*.6,s*.18);fillStroke(C.skin,C["skin-edge"],1.4);
+  for(let k=0;k<4;k++){rr(-s*.33+k*s*.17,-s*.62,s*.13,s*.55,s*.06);fillStroke(C.skin,C["skin-edge"],1.2)}rr(s*.3,-s*.02,s*.32,s*.13,s*.06);fillStroke(C.skin,C["skin-edge"],1.2);ctx.restore();
+  if(trem>.2){for(let k=0;k<2;k++){const X=x+(k?1:-1)*s*.6;ctx.beginPath();ctx.arc(X,y-s*.15,s*.2,k?-.8:Math.PI-.8,k?.8:Math.PI+.8);ctx.strokeStyle=hexA(C.bad,trem);ctx.lineWidth=2;ctx.stroke()}}}
+/* pulse oximeter readout box */
+function oxBox(x,y,spo2,hr,o){o=o||{};rr(x,y,o.w||118,o.h||58,8);ctx.fillStyle=C.scr;ctx.fill();txt(x+10,y+15,"SpO₂",{size:12,mono:true,weight:700,color:C["scr-soft"]});
+  txt(x+10,y+38,Math.round(spo2)+"%",{size:20,mono:true,weight:700,color:spo2<92?"#FF9C8F":"#7FD9F2"});txt(x+(o.w||118)-10,y+15,"HR",{size:12,mono:true,weight:700,color:C["scr-soft"],align:"right"});
+  txt(x+(o.w||118)-10,y+38,String(Math.round(hr)),{size:20,mono:true,weight:700,color:hr>110?"#FF9C8F":"#9BE8B0",align:"right"})}
+/* inflammatory/immune cells */
+function mastCell(x,y,r,T,o){o=o||{};blobPath(x,y,r,1.3,T*.4,.07);fillStroke(mix(C.leuko,C.panel,.55),C.leuko,1.5);circ(x,y,r*.32,mix(C.leuko,C.ink,.3));
+  for(let i=0;i<10;i++){const a=i/10*TAU+.3;const d=r*(.5+.25*rnd(i));if(o.burst&&rnd(i*3)<o.burst)continue;circ(x+Math.cos(a)*d,y+Math.sin(a)*d,r*.09,C.hist)}}
+function eosin(x,y,r){circ(x,y,r,mix(C.infl,C.panel,.3),C.infl,1.3);circ(x-r*.35,y,r*.38,hexA(C.ink,.6));circ(x+r*.35,y,r*.38,hexA(C.ink,.6))}
+/* antibody Y */
+function antibodyY(x,y,s,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.strokeStyle=col;ctx.lineWidth=Math.max(2.5,s*.22);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(0,s);ctx.lineTo(0,0);ctx.lineTo(-s*.7,-s*.8);ctx.moveTo(0,0);ctx.lineTo(s*.7,-s*.8);ctx.stroke();ctx.lineCap="butt";ctx.restore()}
+/* nasal passage cross-section with turbinate vessels. o.cong 0..1 */
+function noseSection(x,y,w,h,cong,T){rr(x,y,w,h,14);fillStroke(hexA(C.panel,.9),C["mucosa-edge"],1.5);
+  const tb=(yy,dir)=>{const bulge=h*(.14+.2*cong);ctx.beginPath();ctx.moveTo(x+10,yy);ctx.bezierCurveTo(x+w*.3,yy+dir*bulge,x+w*.7,yy+dir*bulge,x+w-10,yy);ctx.closePath();fillStroke(mix(C.mucosa,C.vessel,cong*.5),C["mucosa-edge"],1.4);
+    for(let k=0;k<4;k++){const X=x+w*(.25+k*.17);ell(X,yy+dir*bulge*.35,4+5*cong,2.5+3.5*cong,0,mix(C.blood,C.panel,.15),null)}};
+  ctx.save();rr(x,y,w,h,14);ctx.clip();ctx.fillStyle=C.air;ctx.fillRect(x+4,y+4,w-8,h-8);tb(y+4,1);tb(y+h-4,-1);
+  const gap=h*(1-2*(.14+.2*cong)*.75);const nd=Math.round(4+14*(1-cong));for(let i=0;i<nd;i++){const X=x+((i*w/nd+T*70)%w);circ(X,y+h/2+(rnd(i)-.5)*gap*.6,2.4,hexA(C.o2,.8))}ctx.restore()}
+/* small cell with nucleus for steroid mechanism */
+function cellNucleus(x,y,w,h,T,o){o=o||{};rr(x,y,w,h,24);fillStroke(hexA(mix(C.mucosa,C.panel,.55),.95),C["mucosa-edge"],1.6);
+  ell(x+w*.6,y+h*.55,w*.2,h*.26,0,mix(C.act1,C.panel,.7),C.act1,1.5);
+  // DNA squiggle
+  ctx.beginPath();for(let i=0;i<=30;i++){const X=x+w*.47+i*w*.009,Y=y+h*.55+Math.sin(i*.8+T)*h*.06;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=hexA(C.act1,.9);ctx.lineWidth=2;ctx.stroke();
+  return [x+w*.6,y+h*.55]}
+/* little up/down meter bar with text */
+function meterBar(x,y,w,v,lab,col,o){o=o||{};txt(x,y-10,lab,{size:12,weight:700});rr(x,y,w,12,6);ctx.fillStyle=C.sunk;ctx.fill();rr(x,y,Math.max(4,w*clamp(v,0,1)),12,6);ctx.fillStyle=col;ctx.fill();if(o.val)txt(x+w+8,y+6,o.val,{size:12,mono:true,weight:700})}
+/* small clock / calendar icons for minutes vs days */
+function clockIcon(x,y,r,T){circ(x,y,r,C.panel,C["ink-soft"],1.6);const a=T*2;line(x,y,x+Math.cos(a-Math.PI/2)*r*.75,y+Math.sin(a-Math.PI/2)*r*.75,C.ink,2);line(x,y,x+Math.cos(a/12-Math.PI/2)*r*.5,y+Math.sin(a/12-Math.PI/2)*r*.5,C.ink,2.4)}
+function calIcon(x,y,s,n){rr(x-s/2,y-s/2,s,s,4);fillStroke(C.panel,C["ink-soft"],1.5);rr(x-s/2,y-s/2,s,s*.26,4);ctx.fillStyle=C.bad;ctx.fill();txt(x,y+s*.12,String(n),{size:Math.max(12,s*.4),mono:true,weight:700,align:"center"})}
+/* steroid molecule: four fused rings */
+function steroidMol(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);const col=o.col||C.steroid;
+  [[0,0],[s*1.5,0],[s*.75,-s*1.3],[s*2.6,-s*.7]].forEach((p,i)=>{if(i===3){ctx.beginPath();for(let k=0;k<5;k++){const a=k/5*TAU-Math.PI/2;const X=x+p[0]+Math.cos(a)*s*.8,Y=y+p[1]+Math.sin(a)*s*.8;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}else hexPath(x+p[0],y+p[1],s*.85,Math.PI/6);fillStroke(hexA(col,.85),hexA(C.ink,.5),1.1)});ctx.restore()}
+/* ================= small props ================= */
+function cigarette(x,y,s,T,o){o=o||{};rr(x,y-s*.12,s*1.6,s*.24,s*.06);fillStroke("#F2F2EE",hexA(C.ink,.45),1.1);rr(x,y-s*.12,s*.45,s*.24,s*.06);fillStroke("#D9A05A",hexA(C.ink,.45),1.1);
+  if(o.lit!==false){circ(x+s*1.6,y,s*.1,C.bad);for(let i=0;i<3;i++){const q=P((T||0)*.5+i/3,1);ctx.save();ctx.globalAlpha=(1-q)*.6;ctx.beginPath();ctx.moveTo(x+s*1.62,y-s*.14);ctx.quadraticCurveTo(x+s*1.4+Math.sin(q*6+i)*s*.2,y-s*.5-q*s*.6,x+s*1.7,y-s*.6-q*s);ctx.strokeStyle=C.blocked;ctx.lineWidth=2;ctx.stroke();ctx.restore()}}
+  if(o.cross){crossMark(x+s*.8,y,s*.42)}}
+function coffee(x,y,s,T){rr(x-s*.4,y-s*.4,s*.8,s*.8,s*.12);fillStroke(C.panel,C["ink-soft"],1.5);ctx.beginPath();ctx.arc(x+s*.45,y,s*.18,-1.3,1.3);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+  rr(x-s*.34,y-s*.32,s*.68,s*.2,4);ctx.fillStyle="#6B4426";ctx.fill();for(let i=0;i<2;i++){const q=P((T||0)*.6+i/2,1);ctx.save();ctx.globalAlpha=1-q;line(x-s*.12+i*s*.24,y-s*.5-q*s*.4,x-s*.06+i*s*.24,y-s*.7-q*s*.4,C["ink-soft"],1.6);ctx.restore()}}
+function pollen(x,y,r,T){ctx.save();ctx.translate(x,y);ctx.rotate(T*.8);ctx.beginPath();for(let i=0;i<=24;i++){const a=i/24*TAU;const rad=r*(i%2?1:.72);i?ctx.lineTo(Math.cos(a)*rad,Math.sin(a)*rad):ctx.moveTo(Math.cos(a)*rad,Math.sin(a)*rad)}ctx.closePath();fillStroke(mix(C.cl,C.gold,.4),hexA(C.ink,.45),1.2);ctx.restore()}
+function nerveEnd(x,y,s){ctx.beginPath();ctx.moveTo(x-s*.25,y-s*1.4);ctx.lineTo(x-s*.25,y-s*.4);ctx.bezierCurveTo(x-s*1.1,y-s*.3,x-s*1.1,y+s*.6,x,y+s*.6);ctx.bezierCurveTo(x+s*1.1,y+s*.6,x+s*1.1,y-s*.3,x+s*.25,y-s*.4);ctx.lineTo(x+s*.25,y-s*1.4);ctx.closePath();fillStroke(mix(C.ach,C.panel,.6),C.ach,1.6)}
+/* a ligand that falls into a cup at (cx,cy) during [t0,t1] and leaves during [t2,t3]; returns bound 0..1 */
+function fallIn(draw,sx,sy,cx,cy,t,t0,t1,t2,t3){if(t<t0)return 0;const a=ease(seg(t,t0,t1));const l=seg(t,t2,t3);const x=lerp(sx,cx,a),y=lerp(sy,cy,a);if(l>0){draw(lerp(cx,cx+(cx-sx)*.6,l),lerp(cy,sy,l),1-l);return a*(1-l)}draw(x,y,1);return a}
+
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · Airway basics",col:"act1"},
+            2:{name:"Part 2 · Bronchodilators",col:"act2"},
+            3:{name:"Part 3 · Anti-inflammatories",col:"act3"},
+            4:{name:"Part 4 · Inhalers and step care",col:"act4"},
+            5:{name:"Part 5 · Allergy, cold and cough",col:"act5"},
+            6:{name:"Part 6 · Quitting and oxygen",col:"act6"}};
+const NACT=6;
+const STEPS=[
+{act:0,scene:"map",desc:"On the left, a large round cross-section of a small airway fills a panel. Its outer ring is tan smooth muscle, inside that is a pink lining, and the pale blue centre is the open airway with small blue air dots drifting. The picture cycles through three problems: the muscle ring squeezes and the opening shrinks; the pink lining swells with red inflammatory cells; yellow-green mucus blobs grow from the wall. Each time, an indigo drug chip (Bronchodilator, Steroid or Mucus drug) slides in and that problem eases. On the right, six numbered cards for the six parts of this walkthrough light up one at a time.",
+ title:"The big picture: three airway problems, three kinds of drugs",
+ body:`<p>Breathing trouble in asthma and COPD comes from just <b>three problems</b> inside the small airways:</p>
+ <ul><li><b>Squeeze:</b> the ring of smooth muscle tightens (<b>bronchoconstriction</b>).</li><li><b>Swelling:</b> the lining is inflamed and puffy.</li><li><b>Mucus:</b> thick mucus plugs the opening.</li></ul>
+ <p>Most respiratory drugs fix one of these. <b>Bronchodilators</b> relax the muscle in minutes. <b>Anti-inflammatory</b> drugs (mainly steroids) calm the swelling over days. <b>Mucus drugs</b> thin or loosen secretions. Allergy drugs block the chemical signals (like histamine) that start the trouble.</p>
+ <p>This walkthrough has six parts: <b>airway basics</b>, <b>bronchodilators</b>, <b>anti-inflammatories</b>, <b>inhalers and step care</b>, <b>allergy, cold and cough drugs</b>, and <b>quitting smoking and oxygen</b>.</p>`,
+ analogy:"A garden hose that is hard to drink from. Someone could be squeezing it (muscle), the inside could be lined with gunk that swells (inflammation), or it could be clogged (mucus). You fix each one a different way.",
+ terms:[["Bronchoconstriction","Tightening of the smooth muscle around the airways, which narrows them."],["Bronchodilator","A drug that relaxes airway smooth muscle so the airway opens."],["Anti-inflammatory","A drug that calms swelling and immune activity in the airway lining."]],
+ check:null,caption:"Squeeze, swelling and mucus narrow the airway. Bronchodilators, steroids and mucus drugs each fix one.",
+ legend:[["smooth","Smooth muscle ring"],["mucosa","Airway lining"],["infl","Inflammatory cells"],["mucus","Mucus"],["drug","Drug","s"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"airway",desc:"On the left, an airway cross-section slowly cycles between relaxed (wide pale blue opening) and squeezed (the tan muscle ring turns darker red-brown, thickens and the opening shrinks). On the right, a zoomed-in strip of muscle cell membrane holds two receptor cups: a teal one labelled beta-2 and an orange one labelled M3. An amber diamond (epinephrine) drops into the beta-2 cup and a green label says relax. Then blue dots (acetylcholine) drop into the M3 cup and a red label says squeeze. A spindle-shaped muscle cell below lengthens when beta-2 is active and shortens when M3 is active.",
+ title:"Airway recap: one muscle, two switches",
+ body:`<p>Each small airway (<b>bronchiole</b>) is a tube wrapped in <b>smooth muscle</b> and lined with a moist <b>mucosa</b> that makes mucus and has tiny hairs (<b>cilia</b>) that sweep it upward.</p>
+ <p>The muscle has two main switches:</p>
+ <ul><li><b>Beta-2 receptors</b> (sympathetic side): when <b>epinephrine</b> binds, the muscle <b>relaxes</b> and the airway opens. This is part of fight or flight.</li><li><b>Muscarinic (M3) receptors</b> (parasympathetic side): when <b>acetylcholine</b> from the vagus nerve binds, the muscle <b>contracts</b> and mucus glands secrete more.</li></ul>
+ <p>So there are two ways to open an airway: <b>turn on beta-2</b> (beta-2 agonists) or <b>block M3</b> (anticholinergics). Both are bronchodilators.</p>`,
+ analogy:"A dimmer switch with two buttons. Pressing the beta-2 button turns the squeeze down. The M3 button turns it up. Drugs either press the down button or tape over the up button.",
+ terms:[["Beta-2 receptor","Receptor on airway smooth muscle; when stimulated, the muscle relaxes (bronchodilation)."],["Muscarinic (M3) receptor","Acetylcholine receptor on airway smooth muscle and glands; when stimulated, the muscle contracts and mucus increases."],["Cilia","Tiny hairs on airway cells that sweep mucus up and out."]],
+ check:{q:"Which change would open (dilate) a narrowed airway?",opts:[
+  ["Stimulating beta-2 receptors on the smooth muscle",1,"Yes. Beta-2 stimulation relaxes airway smooth muscle, so the airway widens."],
+  ["Stimulating M3 muscarinic receptors",0,"M3 stimulation by acetylcholine makes the muscle contract and narrows the airway. Blocking M3 is what opens it."],
+  ["Blocking beta-2 receptors",0,"Blocking beta-2 removes the relax signal. That is why nonselective beta blockers can trigger bronchospasm in asthma."],
+  ["More acetylcholine from the vagus nerve",0,"More acetylcholine means more M3 stimulation: more squeeze and more mucus."]]},
+ caption:"Beta-2 stimulation relaxes airway muscle; acetylcholine at M3 receptors squeezes it.",
+ legend:[["b2","Beta-2 receptor","s"],["m3","M3 receptor","s"],["ligand","Epinephrine","d"],["ach","Acetylcholine"],["smooth","Smooth muscle"]]},
+
+{act:1,scene:"asthmacopd",desc:"Two panels side by side. The left panel, labelled Asthma, shows an airway that narrows during an attack and then opens back to normal, again and again, with red inflammatory cells in the lining and a pollen grain trigger floating by. Under it, a line graph of airflow dips sharply and recovers to normal several times. The right panel, labelled COPD, shows an airway that stays narrow with thick yellow-green mucus and a grey cigarette icon. Its graph is a line that stays low and slowly slopes down. Under each panel a short list names the main drugs.",
+ title:"Asthma vs COPD in drug terms",
+ body:`<p><b>Asthma</b> is chronic airway <b>inflammation</b> with airways that overreact to triggers (allergens, exercise, cold air, infections). The narrowing comes in episodes and is <b>reversible</b>. Because inflammation drives it, an <b>inhaled corticosteroid (ICS)</b> is the main <b>controller</b>, and a quick bronchodilator is the <b>rescue</b>.</p>
+ <p><b>COPD</b> (chronic obstructive pulmonary disease) is mostly caused by smoking. Airways are damaged, mucus is heavy and air sacs are destroyed (emphysema). The narrowing is <b>persistent</b> and only partly reversible. The mainstay is <b>long-acting bronchodilators</b> (a long-acting anticholinergic and/or a long-acting beta-2 agonist). An ICS is added only for some patients, such as those with frequent flare-ups.</p>
+ <p>Both use rescue inhalers for sudden symptoms, and both benefit when the patient stops smoking.</p>`,
+ analogy:"Asthma is a door that slams shut when the wind blows and opens again when it calms. COPD is a door with a warped frame: it never opens all the way, so you keep it propped open all day.",
+ terms:[["Asthma","Chronic airway inflammation with episodes of reversible narrowing."],["COPD","Chronic obstructive pulmonary disease: persistent, mostly smoking-related airflow limitation."],["Controller vs rescue","Controllers are taken every day to prevent symptoms; rescue drugs relieve symptoms within minutes."]],
+ check:{q:"Which drug class is the main daily controller in persistent asthma?",opts:[
+  ["An inhaled corticosteroid (ICS), because inflammation drives asthma",1,"Right. An ICS calms the airway inflammation that makes asthma airways overreact."],
+  ["A short-acting beta-2 agonist taken every 4 hours",0,"A SABA only relaxes muscle for a few hours and does not treat inflammation. Scheduled SABA use is not a controller plan."],
+  ["An oral antihistamine",0,"Antihistamines help allergic nose and eye symptoms, but they are not asthma controllers."],
+  ["A decongestant",0,"Decongestants shrink nasal blood vessels. They do nothing for lower airway inflammation."]]},
+ caption:"Asthma: reversible episodes driven by inflammation (ICS controller). COPD: persistent narrowing (long-acting bronchodilators).",
+ legend:[["infl","Inflammatory cells"],["mucus","Mucus"],["accent","Airflow line","l"],["drug","Main drugs","s"]]},
+
+{act:1,scene:"timing",desc:"The canvas is split in two. On the left, under a ticking clock labelled Minutes, a squeezed airway gets an indigo puff labelled albuterol and its dark muscle ring relaxes and the blue opening widens within a few seconds. On the right, under a calendar whose day number counts up from 1 to 14, a swollen airway full of red inflammatory cells and mucus slowly calms as an indigo chip labelled inhaled steroid stays on: the cells fade and the lining thins day by day. Along the bottom, a graph shows a fast green spike that rises and falls (rescue) and a slow purple line that climbs steadily and stays up (controller).",
+ title:"Rescue in minutes, control over days",
+ body:`<p>The most important idea in this module is <b>timing</b>.</p>
+ <ul><li><b>Rescue (reliever) drugs</b> work in <b>minutes</b>. The prototype is <b>albuterol</b>, a short-acting beta-2 agonist. It relaxes the muscle but does nothing for swelling.</li><li><b>Controller (maintenance) drugs</b> work over <b>days to weeks</b>. The prototype is an <b>inhaled corticosteroid</b>. It calms inflammation, so attacks happen less often. It cannot stop an attack that is already happening.</li></ul>
+ <p>Patients mix these up. A patient who takes the steroid inhaler during an attack and waits for relief, or who stops the controller because "I feel fine", needs teaching.</p>`,
+ analogy:"A rescue inhaler is a fire extinguisher: fast, for the fire in front of you. A controller is fireproofing the house: slow, unexciting, and the reason there are fewer fires.",
+ terms:[["Rescue (reliever)","Fast-acting drug for symptoms now; for example albuterol."],["Controller (maintenance)","Drug taken daily to prevent symptoms; for example an inhaled corticosteroid."],["Onset","How soon a drug starts to work after it is taken."]],
+ check:{q:"A patient with asthma is wheezing and short of breath right now. Which inhaler should the nurse expect to give first?",opts:[
+  ["Albuterol, the short-acting rescue inhaler",1,"Yes. Albuterol relaxes airway muscle within minutes. It is the rescue drug."],
+  ["Fluticasone, the inhaled steroid",0,"An inhaled steroid takes days to calm inflammation. It will not relieve an attack in progress."],
+  ["Salmeterol, a long-acting beta-2 agonist",0,"Salmeterol starts too slowly to be a rescue drug and should not be used alone in asthma."],
+  ["Montelukast tablet",0,"Montelukast is a daily preventer. It is not used to treat an acute attack."]]},
+ caption:"Rescue drugs relax muscle in minutes. Controllers calm inflammation over days to weeks.",
+ legend:[["good","Rescue effect (fast, short)","l"],["act1","Controller effect (slow, lasting)","l"],["infl","Inflammatory cells"],["drug","Drug","s"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"saba",desc:"On the left, a strip of muscle cell membrane runs across the panel with three teal beta-2 receptor cups. Indigo hexagon drug molecules labelled albuterol float down from above and settle into the cups. As each one binds, small gold dots labelled cAMP multiply inside the cell, and a spindle-shaped smooth muscle cell below stretches out longer and turns from dark red-brown to tan, with a label that says relaxing. On the right, an airway cross-section opens wider over a few seconds while a clock counts minutes, a peak flow bar rises from the red zone into the green zone, and a dark monitor shows the oxygen saturation climbing.",
+ title:"Short-acting beta-2 agonists (SABA): albuterol",
+ body:`<p><b>Albuterol</b> is a <b>short-acting beta-2 agonist (SABA)</b>. It is the classic <b>rescue inhaler</b>. Name stem: <b>-terol</b>.</p>
+ <p><b>Mechanism:</b> albuterol binds <b>beta-2 receptors</b> on airway smooth muscle. Inside the cell, <b>cAMP</b> rises, and the muscle relaxes. The airway opens within about <b>5 minutes</b>, and the effect lasts about <b>4 to 6 hours</b>.</p>
+ <p><b>Uses:</b> quick relief of wheeze and shortness of breath in asthma and COPD, and before exercise to prevent exercise-induced bronchospasm. It is given by inhaler or nebulizer.</p>
+ <p>It relaxes muscle only. It does <b>not</b> treat the inflammation underneath.</p>`,
+ analogy:"Albuterol is a key that fits the relax lock on the muscle. Turn it and the muscle lets go, fast, but the key wears off after a few hours.",
+ terms:[["SABA","Short-acting beta-2 agonist; fast rescue bronchodilator such as albuterol."],["Agonist","A drug that binds a receptor and turns it on."],["cAMP","A messenger inside the cell; when it rises in airway muscle, the muscle relaxes."]],
+ check:{q:"How does albuterol open the airway?",opts:[
+  ["It turns on beta-2 receptors, raising cAMP so the smooth muscle relaxes",1,"Correct. Albuterol is a beta-2 agonist. More cAMP inside the cell means the muscle relaxes."],
+  ["It blocks acetylcholine at M3 receptors",0,"That is how anticholinergics like ipratropium work. Albuterol turns ON beta-2."],
+  ["It reduces inflammation in the airway lining",0,"Albuterol does not treat inflammation. That is the job of steroids."],
+  ["It thins the mucus so it can be coughed up",0,"Mucus thinning is the job of guaifenesin or the mucolytic acetylcysteine, not albuterol."]]},
+ caption:"Albuterol binds beta-2 receptors, cAMP rises, the muscle relaxes and the airway opens within minutes.",
+ legend:[["b2","Beta-2 receptor","s"],["drug","Albuterol","s"],["gold","cAMP"],["smooth","Smooth muscle"],["good","Peak flow, green zone","s"]]},
+
+{act:2,scene:"sabaae",desc:"A body outline sits in the centre. Indigo drug dots spread from the lungs to three places, each with a label: a hand that shakes with small red tremor arcs (skeletal muscle beta-2), a heart that beats faster while a heart rate number climbs (heart), and magenta potassium dots that move from the blood into cells (blood potassium dips). On the right, a week calendar fills with inhaler marks day by day. When the marks pass two days in a week, the calendar border turns red and a label says poorly controlled: needs a controller review.",
+ title:"Albuterol side effects, and what overuse is telling you",
+ body:`<p>Albuterol is <b>beta-2 selective</b>, but not perfectly, and beta-2 receptors are not only in the lungs. That predicts its side effects:</p>
+ <ul><li><b>Tremor and nervousness:</b> beta-2 receptors in skeletal muscle.</li><li><b>Tachycardia and palpitations:</b> some beta-1 stimulation of the heart, plus a reflex from vessels widening.</li><li><b>Low potassium</b> (with frequent or large doses): beta-2 drives K⁺ into cells. Blood glucose can rise a little too.</li></ul>
+ <p><b>Overuse is a warning sign.</b> Needing the rescue inhaler more than <b>2 days a week</b> (outside of pre-exercise use) means the asthma is <b>not well controlled</b>. The patient needs a controller review, not more albuterol. Teach patients to track use and report it.</p>
+ <p><b>Nursing:</b> check heart rate and breath sounds before and after; note how many puffs were needed; teach that worsening despite rescue use is an emergency.</p>`,
+ analogy:"The rescue inhaler is a smoke alarm button you press. Pressing it once in a while is fine. If you are pressing it every day, the problem is not the alarm: something in the house is still smouldering.",
+ terms:[["Tremor","Shaky hands from beta-2 stimulation of skeletal muscle."],["Tachycardia","Heart rate above 100 per minute."],["Not well controlled","Rescue use more than 2 days a week, night waking or activity limits; time to review the controller plan."]],
+ check:{q:"A patient says, \"I use my albuterol 3 or 4 times every day now, and it helps.\" What is the best nursing response?",opts:[
+  ["Report it: daily rescue use means the asthma is poorly controlled and the controller plan needs review",1,"Yes. Frequent rescue use signals uncontrolled inflammation. More albuterol only hides it."],
+  ["Praise the patient for using the inhaler correctly",0,"Good technique is great, but daily use is a red flag that needs follow-up."],
+  ["Tell the patient to switch to the steroid inhaler only when wheezing",0,"Steroid inhalers are daily controllers. They do not relieve wheezing on the spot."],
+  ["Suggest doubling the albuterol dose to get longer relief",0,"Never adjust doses without the prescriber. More beta-2 agonist means more tremor, tachycardia and hidden worsening."]]},
+ caption:"Beta-2 receptors outside the lungs explain tremor; spillover to the heart explains tachycardia; frequent use signals poor control.",
+ legend:[["drug","Albuterol","s"],["k","Potassium (K⁺)"],["heart","Heart"],["bad","Warning","s"]]},
+
+{act:2,scene:"laba",desc:"On the left, a strip of membrane with a teal beta-2 receptor cup. An indigo molecule with a long tail labelled salmeterol anchors its tail in the membrane and its head keeps dipping back into the receptor again and again, while a 12-hour clock sweeps around. In the middle, a graph shows two curves: a short green hump for albuterol lasting about 4 to 6 hours and a long flat purple curve for the long-acting drug lasting about 12 hours. On the right, two cards: the top one shows a single LABA inhaler with a large red X and the words never alone in asthma; the bottom one shows a combined inhaler with a teal steroid half and an indigo LABA half and a green check mark.",
+ title:"Long-acting beta-2 agonists (LABA): salmeterol, formoterol",
+ body:`<p><b>Salmeterol</b> and <b>formoterol</b> are <b>long-acting beta-2 agonists (LABAs)</b>. Same mechanism as albuterol (turn on beta-2, raise cAMP, relax muscle), but the effect lasts about <b>12 hours</b>, so they are taken twice a day as <b>controllers</b>.</p>
+ <p>Salmeterol starts slowly, so it is <b>never a rescue drug</b>. (Formoterol starts fast; some asthma plans use a combined steroid-formoterol inhaler as both the daily and the reliever inhaler, but only when the prescriber orders that plan.)</p>
+ <p><b>The safety rule:</b> in asthma, a LABA is <b>never used alone</b>. It is always given <b>with an inhaled corticosteroid</b>, usually in one combined inhaler. A LABA alone opens the airway so the patient feels better while the inflammation keeps growing, and studies linked LABA-alone use to severe and fatal asthma attacks. That was a boxed warning.</p>
+ <p>In <b>COPD</b>, LABAs can be used alone or with a long-acting anticholinergic.</p>`,
+ analogy:"A LABA alone is like painting over a water stain on the ceiling. The room looks fine, but the leak is still there and getting worse. The inhaled steroid is the plumber.",
+ terms:[["LABA","Long-acting beta-2 agonist; 12-hour bronchodilator used as a controller."],["Combination inhaler","One device with an inhaled steroid plus a LABA."],["Boxed warning","The strongest FDA safety warning on a drug label."]],
+ check:{q:"An order for a patient with asthma reads salmeterol inhaler twice daily, with no other controller. What should the nurse do?",opts:[
+  ["Question the order: in asthma a LABA must be paired with an inhaled corticosteroid",1,"Right. LABA alone in asthma can mask worsening inflammation and has been linked to severe attacks."],
+  ["Give it, and teach the patient to use it for sudden wheezing",0,"Salmeterol is too slow for rescue, and it should not be used alone in asthma."],
+  ["Give it only at night",0,"Timing does not fix the problem. The issue is the missing inhaled steroid."],
+  ["Replace it with a second albuterol inhaler",0,"Nurses do not substitute drugs, and scheduled SABA is not a controller plan. Clarify with the prescriber."]]},
+ caption:"LABAs relax airway muscle for about 12 hours. In asthma they are always paired with an inhaled steroid.",
+ legend:[["b2","Beta-2 receptor","s"],["drug","LABA","s"],["steroid","Inhaled steroid"],["good","Albuterol (short)","l"],["act1","LABA (about 12 h)","l"]]},
+
+{act:2,scene:"antichol",desc:"On the left, a blue nerve ending at the top releases small blue acetylcholine dots that drift down toward a strip of membrane with orange M3 receptor cups. In the first half of the loop, the dots land in the cups and a muscle cell below shortens and turns dark red-brown, labelled squeeze. In the second half, indigo hexagons labelled ipratropium sit in the cups; the blue dots bounce off and float away, and the muscle cell stays long and tan, labelled relaxed. On the right, a face shows a dry mouth with a crossed-out water drop, an eye with a caution label, and a bladder with a caution label. Two duration bars compare ipratropium (short, several hours) and tiotropium (about 24 hours, once a day).",
+ title:"Anticholinergics: ipratropium (short) and tiotropium (long)",
+ body:`<p><b>Anticholinergics</b> (also called <b>muscarinic antagonists</b>) block <b>acetylcholine</b> at <b>M3 receptors</b> on airway muscle and mucus glands. With the squeeze signal blocked, the muscle relaxes and there is less mucus. Name stem: <b>-tropium</b>.</p>
+ <ul><li><b>Ipratropium:</b> short-acting (SAMA). Starts in about 15 minutes, lasts several hours. Often given with albuterol in a nebulizer for flare-ups.</li><li><b>Tiotropium:</b> long-acting (LAMA). Once a day. A first-line <b>COPD</b> controller; also an add-on in severe asthma.</li></ul>
+ <p><b>Side effects</b> follow from blocking acetylcholine: <b>dry mouth</b> (most common), throat irritation, and less often <b>urinary retention</b> and eye problems. Inhaled drug stays mostly in the lungs, so effects are milder than with anticholinergic pills.</p>
+ <p><b>Nursing:</b> teach sips of water, sugar-free candy and mouth care; keep spray and powder <b>out of the eyes</b> (can worsen narrow-angle glaucoma); use caution and monitor urine output in men with an enlarged prostate.</p>`,
+ analogy:"Acetylcholine is a hand pressing the squeeze button. The anticholinergic is tape over the button: the hand still presses, but nothing happens.",
+ terms:[["Anticholinergic","Drug that blocks acetylcholine at muscarinic receptors."],["SAMA / LAMA","Short-acting / long-acting muscarinic antagonist (ipratropium / tiotropium)."],["Urinary retention","Trouble emptying the bladder; a classic anticholinergic effect."]],
+ check:{q:"A patient using tiotropium for COPD complains of a constantly dry mouth. What is the best explanation and response?",opts:[
+  ["Blocking acetylcholine reduces saliva; suggest water sips, sugar-free candy and mouth care",1,"Yes. Dry mouth is the classic anticholinergic effect and is usually managed with simple measures."],
+  ["It is an allergic reaction; stop the drug",0,"Dry mouth is an expected side effect, not an allergy. Do not stop a controller without the prescriber."],
+  ["It means the dose is too low",0,"Dry mouth reflects the drug's action on salivary glands, not underdosing."],
+  ["It is caused by beta-2 stimulation",0,"Tiotropium does not act on beta-2. Dry mouth comes from blocking muscarinic receptors."]]},
+ caption:"Ipratropium and tiotropium block acetylcholine at M3, so the muscle stays relaxed. Side effects come from blocking acetylcholine elsewhere.",
+ legend:[["ach","Acetylcholine"],["m3","M3 receptor","s"],["drug","Anticholinergic","s"],["smooth","Smooth muscle"]]},
+
+{act:2,scene:"theo",desc:"A large graph fills most of the canvas: drug level in the blood over days. A narrow green band in the middle is labelled therapeutic range, with a red zone above it labelled toxic and a grey zone below labelled too low. A purple line moves along inside the green band. A coffee cup icon appears and the line climbs into the red zone, then settles. A cigarette icon appears with a liver icon whose enzyme speeds up, and the line drops below the band. The cigarette is crossed out (quit smoking) and the line climbs back up into the red zone. On the right, four warning icons light up when the line is in the red: nausea, fast heart, restlessness and seizures.",
+ title:"Methylxanthines: theophylline and its narrow window",
+ body:`<p><b>Theophylline</b> is an older oral bronchodilator, a cousin of caffeine. It mostly works by blocking an enzyme (<b>phosphodiesterase</b>) that breaks down cAMP, so cAMP stays high and airway muscle relaxes. It is rarely used now, mostly as an add-on.</p>
+ <p>Its big problem is a <b>narrow therapeutic index</b>: the helpful blood level and the toxic level are close together. Blood levels are checked; a commonly cited range is about <b>10 to 20 mcg/mL</b> (some references use 5 to 15).</p>
+ <p><b>Interactions you can predict:</b></p>
+ <ul><li><b>Caffeine</b> adds the same effects: jitters and fast heart rate. Limit coffee, tea, cola and energy drinks.</li><li><b>Smoking</b> speeds up the liver enzyme that clears theophylline, so levels <b>fall</b>. When a patient <b>quits smoking</b>, levels <b>rise</b> and can turn toxic.</li><li>Some drugs (such as cimetidine and ciprofloxacin) slow its clearance and raise levels.</li></ul>
+ <p><b>Toxicity:</b> nausea and vomiting first, then restlessness, tachycardia and arrhythmias, and <b>seizures</b>. Hold the dose and report.</p>`,
+ analogy:"Theophylline is a narrow mountain trail with a cliff on one side. A cup of coffee or a change in smoking habits is enough of a nudge to send you over the edge.",
+ terms:[["Narrow therapeutic index","Small gap between an effective level and a toxic level; needs blood level checks."],["Phosphodiesterase","Enzyme that breaks down cAMP; theophylline blocks it."],["Enzyme induction","A substance (like smoke) makes the liver clear a drug faster, lowering its level."]],
+ check:{q:"A patient on theophylline quit smoking two weeks ago and now has nausea, a racing heart and restlessness. What is the most likely cause?",opts:[
+  ["Theophylline levels rose because the liver is no longer sped up by smoke",1,"Yes. Smoking induces the enzyme that clears theophylline. Quitting removes that boost, levels rise, and toxicity appears."],
+  ["Nicotine withdrawal only; theophylline is not involved",0,"Withdrawal can cause restlessness, but nausea plus tachycardia on theophylline points to a high level. Check the level."],
+  ["The theophylline level dropped too low",0,"A low level causes poor asthma control, not nausea and tachycardia."],
+  ["An allergic reaction to theophylline",0,"These are classic dose-related toxic effects, not an allergy."]]},
+ caption:"Theophylline has a narrow window. Caffeine adds to it, smoking lowers levels, quitting smoking raises them.",
+ legend:[["good","Therapeutic range","s"],["bad","Toxic zone","s"],["act1","Blood level","l"],["drug","Theophylline","s"]]},
+
+/* ---------- Part 3 ---------- */
+{act:3,scene:"ics",desc:"On the left, a large airway lining cell with a purple nucleus. Teal four-ring steroid molecules drift in through the cell edge, join a teal receptor shape in the cell, and the pair moves into the nucleus. Red signal arrows labelled inflammatory signals that were streaming out of the nucleus grow fewer and fade. On the right, an airway cross-section starts swollen with many red inflammatory cells and yellow-green mucus. A calendar above it counts days from 1 up to 28, and as the days pass the red cells disappear, the lining thins and the blue opening grows.",
+ title:"Inhaled corticosteroids (ICS): fluticasone, budesonide",
+ body:`<p><b>Inhaled corticosteroids</b> are the cornerstone <b>controller</b> for persistent asthma. Prototypes: <b>fluticasone</b> and <b>budesonide</b>. Name stems: <b>-sone</b> and <b>-nide</b>.</p>
+ <p><b>Mechanism:</b> the steroid enters airway cells, binds a steroid receptor inside, and the pair moves into the <b>nucleus</b>. There it turns <b>down</b> the genes for inflammatory signals. Over time there are fewer inflammatory cells, less swelling, less mucus, and airways that overreact less.</p>
+ <p>Because it works by changing gene activity, it takes time: improvement over <b>days</b>, full effect after <b>1 to 2 weeks or more</b>. It is <b>not a rescue drug</b>.</p>
+ <p><b>Teach:</b> use it <b>every day</b>, even when feeling well; do not use it for an attack; do not stop suddenly without talking to the prescriber.</p>`,
+ analogy:"The inhaled steroid is a quiet manager who walks into the factory and turns down the inflammation machines one by one. It does not stop today's fire, but week by week the factory makes less trouble.",
+ terms:[["Inhaled corticosteroid (ICS)","Steroid delivered to the airways to calm chronic inflammation; a controller."],["Gene expression","Which genes a cell switches on; steroids turn down inflammatory genes."],["Adherence","Taking a medicine as prescribed every day."]],
+ check:{q:"A patient started a fluticasone inhaler 2 days ago and says, \"It doesn't work, I still wheeze when I climb stairs.\" What should the nurse teach?",opts:[
+  ["It calms inflammation slowly; keep using it daily, and use the rescue inhaler for wheezing",1,"Yes. ICS benefit builds over days to weeks. The rescue inhaler covers symptoms in the meantime."],
+  ["Stop it, since it is not working",0,"Stopping a controller after 2 days misses its slow benefit."],
+  ["Take extra puffs during wheezing to make it work faster",0,"Extra steroid puffs will not relieve wheeze quickly and add side effects."],
+  ["Switch to taking it only when symptoms start",0,"An ICS is a daily controller, not an as-needed reliever."]]},
+ caption:"Inhaled steroids turn down inflammatory genes. Swelling and inflammatory cells fade over days to weeks.",
+ legend:[["steroid","Steroid molecule"],["act1","Nucleus","s"],["infl","Inflammatory cells / signals"],["mucus","Mucus"]]},
+
+{act:3,scene:"icsae",desc:"A side view of an open mouth. An inhaler sprays a puff of teal steroid particles; some go down the throat but many stick to the tongue and the back of the throat. Over time, white patches (thrush) appear on the tongue, and wobbly lines at the voice box show a hoarse voice. Then a water cup tips, water swishes through the mouth with blue drops, and is spat out: the white patches clear. On the right, a comparison shows the same puff with a spacer: far fewer particles stick in the mouth and more travel down to the lungs.",
+ title:"ICS side effects: thrush and hoarseness",
+ body:`<p>Not every particle reaches the lungs. Some steroid lands in the <b>mouth and throat</b>, where it lowers local immunity. That predicts the main side effects:</p>
+ <ul><li><b>Oral thrush</b> (candidiasis): white patches on the tongue or cheeks that may not wipe off easily, or a sore mouth.</li><li><b>Hoarseness</b> (dysphonia): steroid on the vocal cords.</li></ul>
+ <p><b>Prevention:</b> <b>rinse the mouth with water, gargle and spit</b> (do not swallow) after each use, and use a <b>spacer</b> with metered-dose inhalers so fewer particles hit the mouth.</p>
+ <p>Inhaled doses are small, so whole-body steroid effects are much less than with pills. At high doses over long periods, watch growth in children and bone health. Report white patches, mouth pain or a voice change that does not go away.</p>`,
+ analogy:"Spraying a plant across the room: some mist always lands on your hand on the way. Rinsing your hand afterward (rinsing the mouth) keeps that leftover from causing trouble.",
+ terms:[["Oral candidiasis (thrush)","Yeast infection of the mouth; white patches; linked to inhaled steroids."],["Dysphonia","Hoarse or weak voice."],["Spacer","Tube attached to a metered-dose inhaler that slows the spray so more reaches the lungs."]],
+ check:{q:"Which instruction best prevents thrush in a patient using an inhaled corticosteroid?",opts:[
+  ["Rinse the mouth with water and spit after each dose",1,"Correct. Rinsing removes steroid left in the mouth, lowering thrush and hoarseness."],
+  ["Take the inhaler with a glass of milk",0,"Milk does not remove steroid particles from the mouth. Rinse and spit with water."],
+  ["Use the inhaler only every other day",0,"Skipping doses weakens control and is not how thrush is prevented."],
+  ["Hold the breath for 30 seconds",0,"A breath hold of about 10 seconds helps lung deposition, but it does not clear the mouth."]]},
+ caption:"Steroid left in the mouth causes thrush and hoarseness. Rinse and spit, and use a spacer.",
+ legend:[["steroid","Steroid particles"],["mucosa","Mouth and throat"],["h2o","Rinse water"],["panel","White patches (thrush)","s"]]},
+
+{act:3,scene:"systemic",desc:"A body outline stands in the middle. An indigo pill labelled oral steroid and an IV bag labelled IV steroid feed teal steroid dots into the blood, which spread through the whole body. In the lungs, an airway's swelling and red inflammatory cells fade over hours to days on a timeline at the bottom marked 4 to 6 hours, day 1, day 3 and day 5, with a highlighted short course. Around the body, side effect labels light up one at a time: blood sugar up, mood and sleep changes, appetite up, fluid and blood pressure up, infection risk. A separate card says long courses: taper, do not stop suddenly.",
+ title:"Systemic steroids for flares",
+ body:`<p>For a moderate or severe asthma or COPD <b>flare</b>, the prescriber often adds a <b>systemic corticosteroid</b>: oral <b>prednisone</b> for a short course (a "burst" of about 5 to 7 days), or IV <b>methylprednisolone</b> in the hospital.</p>
+ <p>Same mechanism as the inhaled form, but the drug reaches the <b>whole body</b>. It starts helping in about <b>4 to 6 hours</b> and helps most over the next days, which shortens the flare and lowers the chance of a relapse.</p>
+ <p><b>Short-term side effects</b> come from steroid action everywhere: <b>high blood glucose</b> (check it, especially in diabetes), mood swings and trouble sleeping, increased appetite, fluid retention and higher blood pressure, and a higher <b>infection</b> risk.</p>
+ <p><b>Long-term use</b> adds bone loss, cataracts, muscle weakness and <b>adrenal suppression</b>. After longer courses the dose must be <b>tapered</b>, never stopped suddenly. Give oral doses with food, in the morning.</p>`,
+ analogy:"An inhaled steroid is a garden hose aimed at one flower bed. A systemic steroid is the sprinkler for the whole yard: it reaches the trouble spot fast, but everything else gets wet too.",
+ terms:[["Systemic corticosteroid","Steroid given by mouth or IV that reaches the whole body."],["Burst","A short course of oral steroid for a flare."],["Adrenal suppression","The body's own cortisol production shuts down during long steroid use; stopping suddenly can cause crisis."]],
+ check:{q:"A patient with diabetes is started on prednisone for an asthma flare. What should the nurse monitor closely?",opts:[
+  ["Blood glucose, because steroids raise blood sugar",1,"Yes. Systemic steroids raise glucose, and patients with diabetes often need closer checks and insulin adjustments."],
+  ["Serum potassium for a dangerous rise",0,"Steroids tend to lower potassium slightly, not raise it. Glucose is the key concern here."],
+  ["Heart rate for bradycardia",0,"Steroids do not typically slow the heart."],
+  ["Signs of thrush only",0,"Thrush is linked to inhaled steroids. Systemic steroids cause whole-body effects, especially high glucose."]]},
+ caption:"Systemic steroids calm a flare over hours to days, with whole-body side effects such as high blood glucose.",
+ legend:[["steroid","Steroid in the blood"],["infl","Inflammatory cells"],["bad","Side effect","s"],["drug","Drug source","s"]]},
+
+{act:3,scene:"montelukast",desc:"On the left, a purple mast cell releases small purple leukotriene dots that drift to a strip of membrane with three violet leukotriene receptor cups. In the first half of the loop, the dots fill the cups and a muscle cell below shortens and turns dark (squeeze), and yellow mucus drops appear. In the second half, indigo hexagons labelled montelukast sit in the cups, the purple dots bounce off, and the muscle cell relaxes. On the right, a brain icon sits beside a warning card that slowly lists mood or behaviour changes, agitation or aggression, bad dreams or sleep trouble, depression or suicidal thoughts, with the words stop and call the prescriber.",
+ title:"Leukotriene modifiers: montelukast",
+ body:`<p><b>Leukotrienes</b> are inflammatory chemicals released by mast cells and other immune cells. They squeeze airway muscle, make vessels leaky and increase mucus.</p>
+ <p><b>Montelukast</b> is a <b>leukotriene receptor antagonist</b>: it blocks the leukotriene receptor so the signal cannot land. Name stem: <b>-lukast</b>. It is a <b>tablet</b> taken once a day, usually in the evening, for prevention of asthma symptoms, exercise-induced bronchospasm and allergic rhinitis. It is <b>not</b> for an acute attack.</p>
+ <p><b>Boxed warning, in plain words:</b> montelukast can cause serious <b>mood and behaviour changes</b> in some people: agitation or aggression, anxiety, depression, bad dreams or sleepwalking, trouble sleeping, and <b>suicidal thoughts or actions</b>. These can happen in adults, teens and children. Teach patients and families to watch for changes and to <b>stop and call the prescriber</b> right away if they appear.</p>
+ <p>(Other drugs in this family, like zafirlukast and zileuton, can affect the liver.)</p>`,
+ analogy:"Leukotrienes are a fire alarm that keeps ringing. Montelukast unplugs the alarm speaker. Useful, but some people notice the unplugged alarm messing with their mood and sleep, and that must be reported.",
+ terms:[["Leukotriene","Inflammatory chemical that tightens airways and increases mucus."],["Receptor antagonist","Drug that sits in a receptor and blocks the natural signal."],["Neuropsychiatric","Affecting mood, behaviour, sleep and thinking."]],
+ check:{q:"The parent of a teen taking montelukast says he has been having nightmares and seems angry and withdrawn. What should the nurse do?",opts:[
+  ["Treat this as a possible boxed-warning reaction: notify the prescriber promptly and assess for safety",1,"Yes. Mood, sleep and behaviour changes are the montelukast boxed warning. Report them, and ask directly about thoughts of self-harm."],
+  ["Reassure the parent that this is normal teenage behaviour",0,"These changes match the drug's boxed warning and must be taken seriously."],
+  ["Tell them to give the dose in the morning instead",0,"Changing the time does not address a possible serious reaction. Notify the prescriber."],
+  ["Suggest doubling the dose to control the asthma better",0,"More drug would not help and could worsen the reaction."]]},
+ caption:"Montelukast blocks leukotriene receptors. Its boxed warning is about mood, behaviour and sleep changes.",
+ legend:[["leuko","Leukotrienes"],["drug","Montelukast","s"],["smooth","Smooth muscle"],["bad","Warning","s"]]},
+
+{act:3,scene:"mastbio",desc:"A large purple mast cell sits on the left with amber histamine granules inside. Orange Y-shaped IgE antibodies stick out from its surface, and green allergen grains bridge two of them, making the cell burst and release amber granules. Then an indigo Y-shaped antibody labelled omalizumab floats in and grabs free orange IgE in the fluid, so fewer IgE stay on the cell and it stops bursting. A teal shield labelled cromolyn briefly wraps a second mast cell to show it holding its granules in. On the right, a card lists other biologics with the -mab stem and an injection icon with the note watch for anaphylaxis after the shot.",
+ title:"Mast cell stabilizers and biologics",
+ body:`<p><b>Mast cells</b> in the airway carry <b>IgE antibodies</b>. When an allergen bridges two IgE, the cell bursts open (<b>degranulates</b>) and releases histamine, leukotrienes and other signals.</p>
+ <ul><li><b>Mast cell stabilizers (cromolyn):</b> keep mast cells from degranulating. Used <b>before</b> exposure, by nebulizer or nasal spray, and take weeks for full effect. Very safe, but less effective than inhaled steroids. Never for an acute attack.</li>
+ <li><b>Biologics</b> are <b>monoclonal antibodies</b> (name stem <b>-mab</b>) for severe asthma that stays uncontrolled on high-dose inhalers. <b>Omalizumab</b> is <b>anti-IgE</b>: it mops up free IgE so mast cells have less to trigger them. Others target eosinophil signals such as interleukin-5.</li></ul>
+ <p><b>Nursing for biologics:</b> they are injections every few weeks. <b>Anaphylaxis</b> can occur (even after many doses), so patients are observed after the injection and epinephrine must be available. They add to, and do not replace, the inhaled controllers.</p>`,
+ analogy:"The mast cell is a piñata. Cromolyn tapes it shut. Omalizumab takes away the sticks (IgE) that would break it open.",
+ terms:[["Degranulation","A mast cell bursting open to release histamine and other chemicals."],["IgE","Antibody that coats mast cells and triggers allergic reactions."],["Monoclonal antibody (-mab)","A lab-made antibody aimed at one target."]],
+ check:{q:"After an omalizumab injection, what is the priority nursing action?",opts:[
+  ["Observe the patient for signs of anaphylaxis, with emergency equipment and epinephrine ready",1,"Yes. Anaphylaxis is the key risk with omalizumab, so patients are watched after each injection."],
+  ["Teach the patient to stop inhaled steroids now",0,"Biologics are add-ons. Inhaled controllers continue unless the prescriber changes them."],
+  ["Have the patient use it as a rescue drug during attacks",0,"Omalizumab works over weeks by lowering IgE. It is not a rescue drug."],
+  ["Check for thrush",0,"Thrush is linked to inhaled steroids, not injected antibodies."]]},
+ caption:"Cromolyn keeps mast cells closed. Omalizumab removes the IgE that triggers them. Watch for anaphylaxis after biologic injections.",
+ legend:[["leuko","Mast cell"],["hist","Histamine granules"],["m3","IgE antibody","y"],["drug","Omalizumab","y"],["cl","Allergen"]]},
+/* ---------- Part 4 ---------- */
+{act:4,scene:"mdi",desc:"A head in profile faces right, with the mouth, throat and windpipe drawn as a pale blue channel leading down into a pair of lungs with a branching airway tree. A metered-dose inhaler attached to a clear spacer tube sits at the mouth. The scene plays twice. In the first run, labelled poor technique: no spacer, fast breath, most indigo spray dots hit the back of the throat and stop there. In the second run, labelled good technique: spacer, slow deep breath, then a breath hold timer counting to 10, most dots travel down the windpipe and settle in the small branches. A bar at the bottom compares how much reached the lungs in each run. On the right, a numbered step list lights up step by step.",
+ title:"Metered-dose inhaler (MDI) with a spacer",
+ body:`<p>A <b>metered-dose inhaler (MDI)</b> sprays a fast puff of drug. Without good timing, much of it hits the back of the throat. A <b>spacer</b> (holding chamber) slows the spray and lets the patient breathe it in, so more reaches the lungs and less lands in the mouth. Spacers are recommended for children and for any inhaled steroid MDI.</p>
+ <ol><li>Remove the cap and <b>shake</b> the inhaler. Attach the spacer.</li><li><b>Breathe out</b> fully, away from the device.</li><li>Seal the lips around the spacer mouthpiece. <b>Press once</b>.</li><li>Breathe in <b>slowly and deeply</b> (about 3 to 5 seconds).</li><li><b>Hold</b> the breath for about <b>10 seconds</b>, then breathe out slowly.</li><li>Wait about <b>1 minute</b> before a second puff. Rinse and spit after a steroid.</li></ol>
+ <p>Check the dose counter, and prime a new inhaler as the label directs.</p>`,
+ analogy:"Spraying a can of paint straight at the wall from two inches away puts a blob in one spot. A spacer is like stepping back and letting the mist float: it travels much farther.",
+ terms:[["Metered-dose inhaler (MDI)","Pressurized canister that sprays a measured dose with each press."],["Spacer","Chamber between the MDI and mouth that slows the spray and improves lung delivery."],["Breath hold","Holding the breath about 10 seconds so particles settle in the airways."]],
+ check:{q:"Which breathing pattern is correct after pressing an MDI with a spacer?",opts:[
+  ["A slow, deep breath in, then hold for about 10 seconds",1,"Correct. A slow deep breath carries the spray deep into the lungs, and the hold lets particles settle."],
+  ["A fast, forceful breath in",0,"Fast, forceful breathing is for dry powder inhalers. With an MDI it sends particles into the throat."],
+  ["Short, quick breaths for a full minute",0,"Tidal breathing like this is used with nebulizers or some spacer masks for small children, not standard MDI technique."],
+  ["Breathe out into the spacer right after the puff",0,"Breathing out blows the medicine out. Breathe in slowly, then hold."]]},
+ caption:"With a spacer and a slow, deep breath plus a 10-second hold, far more spray reaches the small airways.",
+ legend:[["aero","Drug particles"],["air","Airway path"],["good","Reached the lungs","s"],["bad","Stuck in mouth/throat","s"]]},
+
+{act:4,scene:"dpi",desc:"A head in profile faces right with a round purple dry powder inhaler at the mouth. Two runs alternate. Labelled slow breath: a gentle breath barely moves a clump of purple powder, which drops onto the tongue. Labelled fast deep breath: a quick strong breath breaks the clump into fine dots that race down the windpipe into the lung branches. A breath-strength gauge beside the head swings from low to high. A small inset shows a person breathing out into the device with a red X. On the right, a nebulizer cup with a mist rising into a mouthpiece is labelled for patients who cannot coordinate an inhaler, with a 10 to 15 minute timer.",
+ title:"Dry powder inhalers (DPI) and nebulizers",
+ body:`<p>A <b>dry powder inhaler (DPI)</b> holds powder, not a spray. There is no propellant, so <b>the patient's own breath</b> pulls the powder out and breaks it into fine particles.</p>
+ <ul><li>Load the dose as the device directs (most are <b>not</b> shaken).</li><li>Breathe out fully <b>away</b> from the device; <b>never breathe into it</b> (moisture clumps the powder).</li><li>Seal the lips and take a <b>fast, deep, forceful</b> breath in.</li><li>Hold the breath about <b>10 seconds</b>. Keep the device dry.</li></ul>
+ <p>A slow breath leaves the powder in the mouth. That is why DPIs can be hard for young children, very breathless patients and some older adults.</p>
+ <p>A <b>nebulizer</b> turns liquid drug into a mist that the patient breathes through a mouthpiece or mask with normal, relaxed breaths for about <b>10 to 15 minutes</b>. No coordination is needed, so it suits young children, people in a severe flare and anyone who cannot use an inhaler well.</p>`,
+ analogy:"An MDI is a spray bottle: it pushes the medicine out, so you breathe in gently. A DPI is a straw full of powder: nothing comes out unless you suck hard.",
+ terms:[["Dry powder inhaler (DPI)","Breath-powered inhaler that delivers a powder; needs a fast, deep breath."],["Nebulizer","Machine that turns liquid drug into a mist inhaled with normal breathing over several minutes."],["Propellant","The gas in an MDI that sprays the dose out."]],
+ check:{q:"Which teaching is correct for a dry powder inhaler?",opts:[
+  ["Breathe out away from the device, then breathe in fast and deep",1,"Yes. The patient's own fast, deep breath breaks up and carries the powder; exhaling into it makes the powder clump."],
+  ["Shake it well and breathe in slowly over 5 seconds",0,"That is MDI teaching. Most DPIs are not shaken, and a slow breath leaves powder in the mouth."],
+  ["Breathe out into the mouthpiece to clear it before each dose",0,"Breath moisture clumps the powder. Always exhale away from the device."],
+  ["Use a spacer to slow the powder down",0,"Spacers are for MDIs. DPIs need a fast breath, not a slower flow."]]},
+ caption:"A dry powder inhaler needs a fast, deep breath. A nebulizer needs no special technique.",
+ legend:[["powder","Dry powder"],["aero","Nebulizer mist"],["air","Airway path"],["bad","Wrong technique","s"]]},
+
+{act:4,scene:"order",desc:"Two rows play side by side. In the top row, labelled steroid first, a narrow squeezed airway receives teal steroid particles that pile up near the entrance and cannot get in; a little later an indigo bronchodilator puff opens the airway, but the steroid is already stuck at the top. In the bottom row, labelled bronchodilator first, the indigo puff goes in first and the airway opens wide over a timer of about 5 minutes; then the teal steroid particles flow deep inside and spread along the lining. A green check mark appears beside the bottom row and a red X beside the top row. A footer reminds: then rinse and spit.",
+ title:"The order rule: bronchodilator first, then steroid",
+ body:`<p>When a patient takes both a bronchodilator and an inhaled steroid at the same time of day, the <b>bronchodilator goes first</b>.</p>
+ <p>Why? The bronchodilator <b>opens the airways</b>. A few minutes later, the steroid can travel deeper and coat more of the inflamed lining. Give the steroid first and much of it lands in the narrow upper airways.</p>
+ <ul><li>Bronchodilator first, then wait (commonly about <b>5 minutes</b>, per the plan) before the steroid.</li><li>Between puffs of the same drug, wait about <b>1 minute</b>.</li><li>Steroid last, then <b>rinse and spit</b>.</li></ul>
+ <p>Combination inhalers (steroid plus LABA in one device) take care of this on their own; just teach rinsing.</p>`,
+ analogy:"Open the door before you carry in the groceries. The bronchodilator opens the door; the steroid is the bags.",
+ terms:[["Sequencing","The order in which inhaled drugs are given."],["Deposition","Where inhaled particles land in the airway."],["Combination inhaler","Two drugs in one device; no separate sequencing needed."]],
+ check:{q:"A patient has albuterol and a fluticasone inhaler due at the same time. What should the nurse do?",opts:[
+  ["Give albuterol first, wait a few minutes, then fluticasone, then have the patient rinse",1,"Correct. Opening the airways first lets the steroid reach deeper, and rinsing prevents thrush."],
+  ["Give fluticasone first so it can start working sooner",0,"The steroid does not act in minutes anyway, and the narrower airways keep it from reaching deep."],
+  ["Give both puffs at the same moment",0,"Spacing them lets the bronchodilator open the airway first."],
+  ["Skip fluticasone if the albuterol helps",0,"The controller treats inflammation and should be given as ordered."]]},
+ caption:"Bronchodilator first opens the airway; the steroid that follows reaches deeper. Then rinse.",
+ legend:[["drug","Bronchodilator"],["steroid","Steroid"],["air","Airway opening"],["good","Better order","s"],["bad","Worse order","s"]]},
+
+{act:4,scene:"stepwise",desc:"On the left, a staircase with five steps labelled from low to high: as-needed reliever, low-dose inhaled steroid, inhaled steroid plus LABA, medium to high dose, add-ons and biologics. A round marker for the patient climbs up a step when a red label reads not controlled: check technique and adherence first, then step up, and walks down a step when a green label reads well controlled for about 3 months. On the right, a peak flow meter tube with a sliding marker sits beside a traffic light: green zone 80 to 100 percent of personal best, keep taking controllers; yellow zone 50 to 79 percent, use rescue and follow the plan; red zone below 50 percent, emergency. The marker moves through the zones and the matching light glows.",
+ title:"Stepwise control and the action plan",
+ body:`<p>Asthma treatment follows a <b>stepwise</b> approach: the plan moves <b>up</b> a step when asthma is not controlled and <b>down</b> a step after it has been well controlled for a while (often about <b>3 months</b>).</p>
+ <p>Before stepping up, the nurse checks the simple things first: <b>inhaler technique</b>, <b>adherence</b> (is the controller actually being used every day?), and <b>triggers</b> (smoke, allergens, reflux).</p>
+ <p>Higher steps add or increase: low-dose ICS, then ICS plus LABA, then higher doses, then add-ons such as a LAMA, montelukast or a biologic.</p>
+ <p>Many patients use a <b>peak flow meter</b> and a written <b>asthma action plan</b> based on their personal best:</p>
+ <ul><li><b>Green</b> (80 to 100%): doing well; keep the controller.</li><li><b>Yellow</b> (50 to 79%): caution; use the rescue inhaler and follow the plan.</li><li><b>Red</b> (below 50%): medical alert; rescue inhaler and get emergency help.</li></ul>`,
+ analogy:"A thermostat: if the house stays too cold, you turn the heat up a notch, but first you check that the windows are shut (technique, adherence, triggers). When it has been comfortable for a while, you turn it back down.",
+ terms:[["Stepwise therapy","Adjusting asthma drugs up or down one step at a time based on control."],["Peak expiratory flow","How fast a person can blow air out; measured with a peak flow meter."],["Asthma action plan","Written green, yellow and red zone instructions for a patient."]],
+ check:{q:"A patient's peak flow is 55% of personal best. Which zone is this and what should they do?",opts:[
+  ["Yellow zone: use the rescue inhaler and follow the action plan",1,"Correct. 50 to 79% is the yellow (caution) zone."],
+  ["Green zone: no action needed",0,"Green is 80% or more of personal best. 55% is lower than that."],
+  ["Red zone: go straight to emergency care without using any inhaler",0,"Red is below 50%. Even then, the plan says use the rescue inhaler while getting help."],
+  ["Yellow zone: take an extra inhaled steroid dose instead of the rescue inhaler",0,"Extra inhaled steroid will not relieve symptoms quickly. Use the rescue inhaler per the plan."]]},
+ caption:"Step up when not controlled (after checking technique and adherence), step down when well controlled. Peak flow zones guide the action plan.",
+ legend:[["good","Green zone","s"],["gold","Yellow zone","s"],["bad","Red zone","s"],["accent","Patient marker"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"h1",desc:"Two panels, normal on the left and with drug on the right. In each, a purple mast cell at the top releases amber diamond histamine molecules that drift down to a blood vessel wall lined with orange-gold H1 receptor cups. On the left, histamine fills the cups: the vessel wall gaps widen and blue fluid leaks out into swollen tissue, and labels read itch, sneeze, runny nose, hives. On the right, indigo hexagons labelled H1 blocker already sit in the cups; histamine bounces off, the wall stays tight and the tissue stays calm.",
+ title:"Histamine and H1 blockers (antihistamines)",
+ body:`<p>In an allergic reaction, mast cells release <b>histamine</b>. At <b>H1 receptors</b> it makes small vessels <b>leaky</b> (swelling, runny nose, watery eyes, hives), stimulates nerves (<b>itch, sneezing</b>) and tightens some smooth muscle.</p>
+ <p><b>H1 blockers</b> (antihistamines) sit in the H1 receptor so histamine cannot act. They work best when taken <b>before</b> exposure or early in symptoms. Uses: allergic rhinitis, hives, itching, and some motion sickness and sleep aids (first-generation only).</p>
+ <p>They do <b>not</b> treat asthma inflammation, and they are <b>not enough for anaphylaxis</b>: that needs <b>epinephrine</b> first.</p>`,
+ analogy:"Histamine is a crowd of people ringing doorbells. The antihistamine is a sticky note over each doorbell: the crowd shows up, but no bells ring.",
+ terms:[["Histamine","Chemical from mast cells that causes itch, sneezing, leaky vessels and hives."],["H1 receptor","Histamine receptor on vessels, nerves and smooth muscle (H2 receptors are in the stomach)."],["Allergic rhinitis","Hay fever: sneezing, runny and itchy nose from allergens."]],
+ check:{q:"A patient with a bee sting has throat tightness, wheezing and low blood pressure. What should the nurse expect to give first?",opts:[
+  ["Epinephrine, because this is anaphylaxis",1,"Yes. Antihistamines are too slow and too narrow for anaphylaxis. Epinephrine reverses airway swelling and low blood pressure."],
+  ["Diphenhydramine by mouth",0,"An antihistamine may be added later, but it does not fix airway swelling or shock fast enough."],
+  ["Loratadine",0,"A second-generation antihistamine is far too slow and weak for anaphylaxis."],
+  ["A nasal decongestant spray",0,"This does nothing for anaphylaxis."]]},
+ caption:"H1 blockers sit in histamine's receptor, so vessels stay tight and nerves stay quiet.",
+ legend:[["leuko","Mast cell"],["ligand","Histamine","d"],["hist","H1 receptor","s"],["drug","H1 blocker","s"],["h2o","Leaked fluid"]]},
+
+{act:5,scene:"h1gen",desc:"A wall of tightly packed grey cells crosses the canvas horizontally: the blood-brain barrier, with blood below and a brain above. Small indigo hexagons labelled diphenhydramine slip through the wall into the brain, where a sleepy face appears with z letters, and some also land in orange muscarinic receptor cups, triggering icons for dry mouth, urine retention and confusion. Larger indigo hexagons labelled loratadine, cetirizine and fexofenadine bump against the wall and mostly stay below. On the right, an older adult figure with a cane sways, and a red caution label reads falls, confusion, urine retention: avoid in older adults.",
+ title:"First vs second generation antihistamines",
+ body:`<p><b>First-generation</b> H1 blockers, such as <b>diphenhydramine</b>, are small and fat-soluble. They cross into the brain and also block <b>muscarinic</b> (acetylcholine) receptors.</p>
+ <ul><li>Brain: <b>drowsiness</b>, slowed reaction time, confusion (and sometimes excitement in children).</li><li>Anticholinergic: <b>dry mouth</b>, constipation, blurred vision, <b>urinary retention</b>.</li></ul>
+ <p>In <b>older adults</b> these effects add up to <b>falls, delirium and urinary retention</b>. Diphenhydramine is on lists of drugs to avoid in older adults (including many "PM" sleep products). Teach: no driving or alcohol after taking it.</p>
+ <p><b>Second-generation</b> H1 blockers, such as <b>loratadine</b>, <b>cetirizine</b> and <b>fexofenadine</b> (stem <b>-tadine</b> for two of them), mostly stay out of the brain and have little anticholinergic action. They are <b>much less sedating</b> (cetirizine a little more than the others) and are preferred for daily allergy control.</p>`,
+ analogy:"The blood-brain barrier is a club bouncer. First-generation antihistamines are small enough to slip past and make the brain sleepy. Second-generation ones are mostly turned away at the door.",
+ terms:[["Blood-brain barrier","Tight lining of brain capillaries that keeps many drugs out of the brain."],["Anticholinergic effects","Dry mouth, constipation, blurred vision, urinary retention, confusion."],["Second-generation antihistamine","Less sedating H1 blocker such as loratadine, cetirizine or fexofenadine."]],
+ check:{q:"An 82-year-old patient asks for diphenhydramine to help with sleep in the hospital. What is the nurse's best response?",opts:[
+  ["Explain the risk of confusion, falls and urinary retention and contact the prescriber about safer options",1,"Yes. First-generation antihistamines are risky in older adults because of sedation and anticholinergic effects."],
+  ["Give it, since it is available over the counter",0,"Over the counter does not mean safe for an older adult. Its brain and anticholinergic effects raise fall and delirium risk."],
+  ["Give it with a second sedative to make it work better",0,"Combining sedatives increases fall and breathing risks."],
+  ["Suggest fexofenadine because it makes people sleepy",0,"Fexofenadine is chosen because it does NOT cause much drowsiness."]]},
+ caption:"First-generation antihistamines cross into the brain and block acetylcholine; second-generation mostly do not.",
+ legend:[["blocked","Blood-brain barrier","s"],["drug","Antihistamine","s"],["m3","Muscarinic receptor","s"],["bad","Older adult risk","s"]]},
+
+{act:5,scene:"decong",desc:"On the left, a nasal passage cross-section shows swollen red-pink turbinates with fat blood vessels almost closing the blue air channel. Indigo hexagons labelled decongestant land on alpha-1 receptor marks along the vessels, the vessels shrink, the turbinates flatten and blue air dots flow through. In the middle, a blood pressure dial needle rises and a small heart beats faster. On the right, a timeline for a nasal spray shows days 1 to 3 shaded green (clear nose), then from day 4 on the turbinates swell back worse, shaded red and labelled rebound congestion. A teal card underneath says intranasal steroid: slower, daily, no rebound.",
+ title:"Decongestants: pseudoephedrine, phenylephrine",
+ body:`<p>A stuffy nose is mostly <b>swollen blood vessels</b> in the nasal lining. <b>Decongestants</b> are <b>alpha-1 agonists</b> (sympathomimetics): they squeeze those vessels, the lining shrinks and air flows again.</p>
+ <ul><li><b>Pseudoephedrine</b> (by mouth) and <b>phenylephrine</b> (by mouth or nasal spray); <b>oxymetazoline</b> is a common nasal spray. (A recent FDA review found oral phenylephrine works poorly as a decongestant.)</li></ul>
+ <p><b>The catch:</b> oral decongestants also squeeze vessels elsewhere, so they can <b>raise blood pressure</b> and heart rate and cause nervousness and insomnia. Use caution or avoid in <b>hypertension</b>, heart disease, glaucoma, an enlarged prostate and hyperthyroidism, and never with MAO inhibitors.</p>
+ <p><b>Nasal sprays:</b> use for no more than about <b>3 days</b>. Longer use causes <b>rebound congestion</b> (rhinitis medicamentosa): the vessels swell back worse when the spray wears off.</p>
+ <p><b>Intranasal steroids</b> (for example fluticasone nasal spray) are the most effective daily treatment for allergic rhinitis. They take days to work, do not cause rebound, and can cause nose irritation or nosebleeds.</p>`,
+ analogy:"A decongestant is a belt pulled tight on swollen nasal vessels. But it tightens every belt in the body, which pushes blood pressure up, and if you wear it too long the vessels bulge back when you take it off.",
+ terms:[["Alpha-1 agonist","Drug that turns on alpha-1 receptors, squeezing blood vessels."],["Rebound congestion","Worse stuffiness after nasal decongestant sprays are used more than about 3 days."],["Intranasal steroid","Steroid nasal spray that calms allergic nose inflammation over days."]],
+ check:{q:"A patient with poorly controlled hypertension wants a cold medicine with pseudoephedrine. What should the nurse teach?",opts:[
+  ["It can raise blood pressure by squeezing blood vessels; check with the provider about safer options",1,"Yes. Oral decongestants are alpha-1 agonists that raise blood pressure and heart rate."],
+  ["It is safe because it only acts in the nose",0,"Oral decongestants travel through the blood and squeeze vessels throughout the body."],
+  ["Use an oxymetazoline nasal spray every day for the whole cold season instead",0,"Daily spray use beyond about 3 days causes rebound congestion."],
+  ["Take double the usual dose for faster relief",0,"A higher dose means a bigger blood pressure rise. Never exceed label directions."]]},
+ caption:"Decongestants squeeze nasal vessels via alpha-1 receptors. Taken by mouth they can raise blood pressure; sprays cause rebound after about 3 days.",
+ legend:[["mucosa","Nasal lining"],["blood","Nasal blood vessels"],["drug","Decongestant","s"],["steroid","Intranasal steroid","s"],["bad","Rebound / BP rise","s"]]},
+
+{act:5,scene:"cough",desc:"Three panels. Left, labelled cough suppressants: a brain icon with a cough centre that sends pulsing signals to the chest; an indigo chip labelled dextromethorphan or codeine dims the pulses, and a red tag on codeine reads breathing slows, constipation, not for children. Middle, labelled expectorant: thick yellow-green mucus in an airway takes in blue water drops from an indigo guaifenesin chip and a glass of water, loosening and moving upward with the cilia. Right, labelled mucolytic: long mucus strands with link marks are cut by an indigo acetylcysteine chip shaped like scissors, so they fall apart into small pieces; a caution tag reads may cause bronchospasm: bronchodilator first.",
+ title:"Cough and mucus drugs",
+ body:`<p><b>Antitussives</b> (cough suppressants) quiet the <b>cough centre</b> in the brainstem. Use them for a dry, tiring cough, not for a productive cough that clears mucus.</p>
+ <ul><li><b>Dextromethorphan:</b> over the counter. Mild side effects (dizziness, drowsiness). Avoid with MAO inhibitors and use caution with serotonin drugs; high doses are misused.</li><li><b>Codeine</b> (an opioid): stronger, but causes <b>drowsiness, constipation</b> and can <b>slow breathing</b>. Not for children under 12; caution with other sedatives and alcohol.</li></ul>
+ <p><b>Expectorant: guaifenesin</b> loosens and thins mucus so it is easier to cough up. Teach to <b>drink plenty of fluids</b>.</p>
+ <p><b>Mucolytic: acetylcysteine</b> (inhaled) breaks the chemical bonds that hold mucus strands together. It smells like rotten eggs and can trigger <b>bronchospasm</b>, so a bronchodilator is often given first and suction kept ready. (Given by mouth or IV, the same drug is the antidote for acetaminophen overdose.)</p>`,
+ analogy:"An antitussive turns down the cough alarm. An expectorant adds water to thick glue. A mucolytic cuts the glue's strings so it falls apart.",
+ terms:[["Antitussive","Cough suppressant such as dextromethorphan or codeine."],["Expectorant","Drug that loosens mucus so it is easier to cough up, such as guaifenesin."],["Mucolytic","Drug that breaks down mucus structure, such as acetylcysteine."]],
+ check:{q:"Which instruction is most important for a patient taking guaifenesin?",opts:[
+  ["Drink plenty of fluids to help thin the mucus",1,"Correct. Good hydration helps guaifenesin loosen secretions."],
+  ["Avoid coughing so the drug can work",0,"Guaifenesin helps the patient cough mucus UP. Coughing is the goal."],
+  ["Expect it to cause slow breathing",0,"That is a concern with codeine, not guaifenesin."],
+  ["Take it with a nasal decongestant spray every day",0,"Daily nasal spray use leads to rebound congestion."]]},
+ caption:"Antitussives quiet the cough centre; guaifenesin loosens mucus; acetylcysteine cuts mucus strands.",
+ legend:[["brady","Cough centre"],["mucus","Mucus"],["h2o","Water"],["drug","Drug","s"],["bad","Caution","s"]]},
+
+/* ---------- Part 6 ---------- */
+{act:6,scene:"smoke",desc:"On the left, a graph of nicotine level in the brain over a day. A grey jagged line spikes up and crashes again and again with each cigarette icon, and craving marks appear in the dips. A teal line for a nicotine patch stays smooth and steady, and short teal bumps show a gum or lozenge for cravings. On the right, a nicotinic receptor cup on a brain cell: grey nicotine dots fill it and gold reward sparks burst; then an indigo molecule labelled varenicline sits in the cup, giving a small steady spark while grey nicotine bounces off. A card below lists bupropion with a caution: not with seizure disorders.",
+ title:"Smoking cessation drugs",
+ body:`<p>Nicotine hits <b>nicotinic receptors</b> in the brain's reward pathway, releasing dopamine. Each cigarette spikes the level; in between, withdrawal and <b>craving</b> set in.</p>
+ <ul><li><b>Nicotine replacement (NRT):</b> patch (steady background level) plus gum, lozenge, inhaler or spray (quick help with cravings). Teach to rotate patch sites and remove it at bedtime if it causes vivid dreams.</li>
+ <li><b>Varenicline:</b> a <b>partial agonist</b> at the nicotinic receptor. It gives a small steady signal (less craving and withdrawal) and blocks nicotine from a cigarette (less reward). Common: nausea and vivid dreams. Monitor mood and behaviour.</li>
+ <li><b>Bupropion:</b> an antidepressant that boosts dopamine and norepinephrine. Lowers the seizure threshold, so <b>avoid in seizure disorders</b> and eating disorders. Monitor mood.</li></ul>
+ <p>Combining a medicine with counselling works best. Quitting is the single most effective "drug" for COPD.</p>`,
+ analogy:"Cigarettes are a roller coaster of highs and crashes. A patch lays down a flat road. Varenicline is a passenger who sits in the driver's seat: it drives slowly and steadily and will not let the cigarette take the wheel.",
+ terms:[["Nicotine replacement therapy","Clean nicotine (patch, gum, lozenge) without smoke, tapered over time."],["Partial agonist","Drug that turns a receptor on a little while blocking a stronger agonist."],["Seizure threshold","How easily seizures can be triggered; bupropion lowers it."]],
+ check:{q:"Which patient should NOT be started on bupropion to quit smoking?",opts:[
+  ["A patient with a seizure disorder",1,"Correct. Bupropion lowers the seizure threshold and is avoided in seizure disorders."],
+  ["A patient with COPD",0,"COPD is not a reason to avoid bupropion; quitting helps COPD greatly."],
+  ["A patient who also uses a nicotine patch",0,"Bupropion can be combined with nicotine replacement."],
+  ["A patient with seasonal allergies",0,"Allergies are not a contraindication."]]},
+ caption:"Nicotine replacement smooths the spikes; varenicline partly activates and blocks the nicotine receptor; bupropion adds dopamine support.",
+ legend:[["blocked","Cigarette nicotine","l"],["steroid","Patch / gum level","l"],["drug","Varenicline","s"],["gold","Reward signal"]]},
+
+{act:6,scene:"oxygen",desc:"On the left, an oxygen flowmeter on the wall feeds tubing to a nasal cannula on a seated person. Blue oxygen dots travel down the tubing, into the nose, and on into a zoomed-in air sac, where they cross into red blood cells that turn brighter red. In the middle, a vertical SpO2 gauge shows two target bands: about 92 to 96 percent for most adults and 88 to 92 percent for some COPD patients, with a pointer that settles into the band. On the right, a no-smoking and no-open-flame sign glows, with the words oxygen feeds fire.",
+ title:"Oxygen is a drug",
+ body:`<p><b>Oxygen</b> is a medication. It needs an order (or a protocol), and it is <b>titrated</b> to a target <b>oxygen saturation (SpO₂)</b>, not given "as much as possible".</p>
+ <ul><li>Common target for most adults: about <b>92 to 96%</b> (facilities vary).</li><li>For some patients with <b>COPD</b> who retain carbon dioxide: often <b>88 to 92%</b>. Too much oxygen can worsen CO₂ buildup in these patients, causing drowsiness and confusion.</li></ul>
+ <p><b>Safety:</b> oxygen does not burn, but it makes fires burn fast and hot. <b>No smoking</b>, no open flames, and keep away from heat sources. Secure tanks upright.</p>
+ <p><b>Comfort:</b> nasal cannulas dry the nose; humidify as ordered, use water-based lubricant (not petroleum jelly), and check the ears and nose for pressure sores.</p>`,
+ analogy:"Oxygen is like water for a plant: too little and it wilts, but more is not always better, and you water to a target, not until it overflows.",
+ terms:[["Titrate","Adjust a drug up or down to reach a target, such as an SpO₂ range."],["Nasal cannula","Prongs in the nose that deliver low-flow oxygen."],["CO₂ retention","Carbon dioxide building up in the blood, seen in some COPD patients."]],
+ check:{q:"A patient with COPD who retains CO₂ has an SpO₂ of 99% on oxygen and is becoming drowsy. What should the nurse do?",opts:[
+  ["Recognize oxygen may be too high, follow the order to titrate to the target range and report the drowsiness",1,"Yes. In CO₂ retainers, high oxygen can worsen CO₂ buildup. Titrate to the ordered target (often 88 to 92%) and report."],
+  ["Increase the oxygen to keep SpO₂ at 100%",0,"More oxygen could deepen CO₂ retention and drowsiness."],
+  ["Remove the oxygen completely",0,"Stopping oxygen abruptly can cause dangerous hypoxemia. Titrate per the order."],
+  ["Give a sedative so the patient can rest",0,"Sedation could further depress breathing."]]},
+ caption:"Oxygen is titrated to a saturation target. Some COPD patients need a lower target. Oxygen feeds fire.",
+ legend:[["o2","Oxygen"],["blood","Red blood cells"],["good","Target band","s"],["bad","Fire safety","s"]]},
+
+{act:0,scene:"recap",desc:"On the left, three small airway pictures are stacked: a squeezed airway, a swollen airway and a mucus-filled airway. Beside each, the drugs that fix that problem are listed, and the active group's list is highlighted in turn: squeeze with albuterol, salmeterol, ipratropium, tiotropium and theophylline; swelling with fluticasone, budesonide, prednisone, montelukast and omalizumab; mucus with guaifenesin and acetylcysteine. On the right, six cards for the six parts of the walkthrough light up one after another with their key take-home lines.",
+ title:"Recap: squeeze, swell, mucus",
+ body:`<p>You can now sort almost every respiratory drug by the problem it fixes:</p>
+ <ul><li><b>Squeeze (bronchodilators):</b> SABA <b>albuterol</b> (rescue), LABA <b>salmeterol</b>/<b>formoterol</b> (never alone in asthma), anticholinergics <b>ipratropium</b>/<b>tiotropium</b> (dry mouth), <b>theophylline</b> (narrow window).</li>
+ <li><b>Swelling (anti-inflammatories):</b> ICS <b>fluticasone</b>/<b>budesonide</b> (controller; rinse and spit), systemic <b>prednisone</b> (flares; glucose), <b>montelukast</b> (mood warning), cromolyn, <b>omalizumab</b> (anaphylaxis watch).</li>
+ <li><b>Mucus and cough:</b> <b>guaifenesin</b> (fluids), <b>acetylcysteine</b> (bronchospasm), <b>dextromethorphan</b>, <b>codeine</b> (breathing).</li>
+ <li><b>Allergy and nose:</b> H1 blockers (first generation sedating and anticholinergic), decongestants (blood pressure, rebound), intranasal steroids.</li></ul>
+ <p>And the nursing habits that tie it together: rescue vs controller, bronchodilator before steroid, good inhaler technique, watch rescue use, and oxygen to a target.</p>`,
+ analogy:"Three locks on the airway door (squeeze, swelling, mucus) and a key ring with a labelled key for each.",
+ terms:[["Rescue","Albuterol: minutes."],["Controller","Inhaled steroid (± LABA): days to weeks, every day."],["Order rule","Bronchodilator first, then steroid, then rinse."]],
+ check:null,caption:"Every drug in this module fixes squeeze, swelling or mucus, or blocks the allergy signals that start them.",
+ legend:[["act1","Basics"],["act2","Bronchodilators"],["act3","Anti-inflammatories"],["act4","Inhalers"],["act5","Allergy and cough"],["act6","Quitting and oxygen"]]}
+];
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+/* ================= start map ================= */
+function sceneMap(T){
+  panelBox(10,10,400,460);title(24,30,"Three airway problems");
+  const L=4.5,k=Math.floor(T/L)%3,p=P(T,L);const prob=smooth(seg(p,.05,.35)),fix=smooth(seg(p,.5,.85));const amt=prob*(1-fix*.85);
+  bronchiole(210,250,150,T,{sq:k===0?amt:0,sw:k===1?amt:0,inf:k===1?amt:0,mu:k===2?amt*1.1:0});
+  const nm=["1. Squeeze","2. Swelling","3. Mucus"],dg=["Bronchodilator","Steroid","Mucus drug"],eff=["muscle relaxes","swelling calms","mucus thins"];
+  nm.forEach((n,i)=>label(80+i*130,64,n,{size:12.5,weight:700,border:i===k?C.accent:null,color:i===k?C.accent:C.ink}));
+  chipDrug(210,lerp(470,438,fix),dg[k],{a:fix});
+  if(fix>.6)label(210,404,eff[k],{size:12.5,weight:700,border:C.good,a:(fix-.6)/.4});
+  const parts=[["Airway basics","act1","Beta-2 vs M3, asthma vs COPD, rescue vs controller"],["Bronchodilators","act2","Albuterol, LABAs, ipratropium, tiotropium, theophylline"],["Anti-inflammatories","act3","Inhaled and oral steroids, montelukast, biologics"],["Inhalers and step care","act4","MDI with spacer, DPI, nebulizer, order rule, zones"],["Allergy, cold and cough","act5","Antihistamines, decongestants, cough and mucus drugs"],["Quitting and oxygen","act6","Nicotine replacement, varenicline, bupropion, O₂"]];
+  partCards(parts,Math.floor(T/2.2),"one")}
+
+/* ================= Part 1 ================= */
+function sceneAirway(T){
+  const L=9,t=P(T,L)*L,p=t/L;const sq=smooth(seg(p,.52,.66))*(1-smooth(seg(p,.9,1)));const b2on=seg(p,.1,.2)>0&&p<.48;
+  panelBox(10,10,380,460);title(24,30,"Bronchiole, cut across");
+  const g=bronchiole(195,235,140,T,{sq,sw:.05,inf:.05,mu:.05});
+  label(195,440,sq>.5?"Squeezed: opening narrow":"Relaxed: opening wide",{size:13,weight:700,border:sq>.5?C.bad:C.good});
+  panelBox(400,10,390,460);title(414,30,"Muscle cell surface (zoomed in)");
+  txt(414,176,"outside",{size:12,color:C["ink-soft"]});txt(414,232,"inside cell",{size:12,color:C["ink-soft"]});
+  bilayerH(470,775,200);
+  recCup(530,200,C.b2,null);recCup(690,200,C.m3,null);
+  label(530,246,"beta-2",{size:12.5,weight:700,mono:true});label(690,246,"M3",{size:12.5,weight:700,mono:true});
+  // epinephrine
+  const eb=fallIn((x,y,a)=>ligand(x,y,9,{a}),500,70,530,192,t,.6,1.8,4.1,4.6);txt(500,56,"epinephrine",{size:12,weight:600,color:C["ink-soft"],align:"center"});
+  // acetylcholine from nerve
+  nerveEnd(700,64,26);txt(745,52,"vagus",{size:12,weight:600,color:C["ink-soft"]});
+  let mb=0;for(let i=0;i<3;i++){const b=fallIn((x,y,a)=>circ(x,y,5.5,hexA(C.ach,a),hexA(C.ink,.4*a),1),700+(i-1)*14,86,690+(i-1)*4,190+i*2,t,4.7+i*.15,5.8+i*.15,8.1,8.7);mb=Math.max(mb,b)}
+  if(eb>.9)label(530,120,"relax",{size:13,weight:700,border:C.good,color:C.good});
+  if(mb>.9)label(690,128,"squeeze",{size:13,weight:700,border:C.bad,color:C.bad});
+  if(eb>.9)arrow(530,268,560,300,C.good,2);if(mb>.9)arrow(690,268,660,300,C.bad,2);
+  smCell(595,350,250,sq,{h:18});txt(595,410,"airway smooth muscle cell",{size:12.5,weight:600,align:"center"});
+  txt(595,438,sq>.5?"shorter, thicker: squeeze":"long and thin: relaxed",{size:12.5,weight:700,align:"center",color:sq>.5?C.bad:C.good})}
+
+function sceneAsthmaCopd(T){
+  const L=6,p=P(T,L);const att=smooth(seg(p,.12,.32))*(1-smooth(seg(p,.6,.85)));
+  // asthma
+  panelBox(10,10,385,460);title(24,30,"Asthma",C.act3);
+  bronchiole(200,150,92,T,{sq:.8*att,sw:.2+.4*att,inf:.35+.5*att,mu:.25*att});
+  if(p<.35){const q=seg(p,0,.35);pollen(lerp(40,330,q),62+Math.sin(q*9)*8,9,T)}
+  label(200,262,att>.4?"attack: narrow":"between attacks: open",{size:12.5,weight:700,border:att>.4?C.bad:C.good});
+  const gx=50,gy=290,gw=320,gh=80;gframe(gx,gy,gw,gh,{yl:"airflow"});
+  const fa=t=>{const q=P(t,1);return 92-55*smooth(seg(q,.12,.32))*(1-smooth(seg(q,.6,.85)))};
+  plotFn(fa,0,3,gx,gy,gw,gh,20,100,C.accent,2.4);const ct=P(T/L,3)*1;const cu=(T/L)%3;circ(gx+gw*cu/3,gy+gh-(fa(cu)-20)/80*gh,5,C.accent,C.panel,2);txt(gx+gw,gy+gh+14,"comes and goes",{size:12,align:"right",color:C["ink-soft"]});
+  hexPath(36,410,5,Math.PI/6);fillStroke(C.drug);txt(48,410,"Controller: inhaled steroid (ICS)",{size:12.5,weight:600});
+  hexPath(36,436,5,Math.PI/6);fillStroke(C.drug);txt(48,436,"Rescue: albuterol (SABA)",{size:12.5,weight:600});
+  // copd
+  panelBox(405,10,385,460);title(419,30,"COPD",C.act3);
+  bronchiole(595,150,92,T,{sq:.45,sw:.45,inf:.3,mu:.75});cigarette(690,52,40,T);
+  label(595,262,"stays narrow, heavy mucus",{size:12.5,weight:700,border:C.bad});
+  const hx=445;gframe(hx,gy,gw,gh,{yl:"airflow"});
+  const fc=t=>62-4*t-14*Math.exp(-Math.pow((t-1.9)/.08,2));plotFn(fc,0,3,hx,gy,gw,gh,20,100,C.accent,2.4);circ(hx+gw*cu/3,gy+gh-(fc(cu)-20)/80*gh,5,C.accent,C.panel,2);txt(hx+gw,gy+gh+14,"low, slowly worse",{size:12,align:"right",color:C["ink-soft"]});
+  hexPath(431,410,5,Math.PI/6);fillStroke(C.drug);txt(443,410,"Mainstay: long-acting bronchodilators",{size:12.5,weight:600});
+  hexPath(431,436,5,Math.PI/6);fillStroke(C.drug);txt(443,436,"ICS added only for some; rescue SABA",{size:12.5,weight:600})}
+
+function sceneTiming(T){
+  const L=12,t=P(T,L)*L;
+  panelBox(10,10,385,300);clockIcon(40,40,16,T);title(66,40,"Rescue: minutes");
+  const rel=smooth(seg(t,2,4.2));bronchiole(200,180,98,T,{sq:.85*(1-rel*.9),sw:.35,inf:.4,mu:.25});
+  chipDrug(330,90,"albuterol",{a:smooth(seg(t,1,1.6))});if(t>1&&t<2.2){for(let i=0;i<10;i++){const q=seg(t,1+i*.05,1.9+i*.05);circ(lerp(300,200,q),lerp(100,180,q)+(rnd(i)-.5)*30*q,3.5,hexA(C.aero,1-q*.6))}}
+  txt(200,296,rel>.6?Math.round(lerp(1,10,seg(t,2,4.2)))+" min: muscle relaxed":"squeezed",{size:12.5,weight:700,align:"center",color:rel>.6?C.good:C.bad});
+  panelBox(405,10,385,300);const day=1+Math.floor(13*seg(t,1,10));calIcon(434,40,28,day);title(456,40,"Controller: days to weeks");
+  const f=smooth(seg(t,1,10));bronchiole(597,180,98,T,{sq:.3*(1-f*.7),sw:.85*(1-f*.85),inf:.95*(1-f*.95),mu:.6*(1-f*.9)});
+  chipDrug(725,90,"inhaled steroid",{a:smooth(seg(t,.6,1.2))});txt(597,296,"day "+day+(f>.8?": swelling calmed":""),{size:12.5,weight:700,align:"center",color:f>.8?C.good:C.ink});
+  panelBox(10,320,780,150);title(24,338,"Effect on the airway");
+  const gx=70,gy=350,gw=680,gh=90;gframe(gx,gy,gw,gh);txt(gx+gw,gy+gh+14,"time (not to scale)",{size:12,align:"right",color:C["ink-soft"]});
+  const fr=x=>x<.05?0:Math.exp(-Math.pow((x-.14)/.06,2))*.9+(x>.14?0:0);const fc=x=>.85*smooth(seg(x,.15,.75));const prog=clamp(t/10,0,1);
+  plotFn(fr,0,1,gx,gy,gw,gh,0,1,C.good,3,null,prog);plotFn(fc,0,1,gx,gy,gw,gh,0,1,C.act1,3,[8,5],prog);
+  label(gx+gw*.2,gy+14,"rescue: fast, short",{size:12,weight:700,border:C.good,align:"left"});label(gx+gw*.62,gy+gh-36,"controller: slow, lasting",{size:12,weight:700,border:C.act1,align:"left",a:smooth(seg(t,4,5))})}
+
+/* ================= Part 2 ================= */
+function sceneSaba(T){
+  const L=9,t=P(T,L)*L;
+  panelBox(10,10,465,460);title(24,30,"Beta-2 receptors on airway muscle");
+  txt(24,150,"outside",{size:12,color:C["ink-soft"]});txt(24,214,"inside cell",{size:12,color:C["ink-soft"]});
+  bilayerH(90,455,180);const xs=[150,270,390];let bound=0;
+  xs.forEach((x,i)=>{recCup(x,180,C.b2,null);const b=fallIn((X,Y,a)=>drugMol(X,Y,8,null,{a}),x-40+i*10,52,x,175,t,.4+i*.5,1.6+i*.5,8.2,8.8);bound+=b});
+  txt(240,50,"albuterol (beta-2 agonist)",{size:12.5,weight:700,color:C.drug,align:"center"});
+  xs.forEach(x=>txt(x,224,"beta-2",{size:12,weight:700,mono:true,align:"center"}));
+  const rel=smooth(seg(t,2.2,4.5))*(1-smooth(seg(t,8.2,9)));const n=Math.round(rel*18);
+  for(let i=0;i<n;i++){const X=110+rnd(i*3.1)*320+Math.sin(T*2+i)*6,Y=252+rnd(i*7.3)*36+Math.cos(T*1.7+i)*4;circ(X,Y,4.2,C.gold,hexA(C.ink,.35),1)}
+  if(n>3)label(410,248,"cAMP rises",{size:12.5,weight:700,border:C.gold});
+  smCell(250,350,330,1-rel,{h:18});txt(250,420,rel>.6?"relaxing: muscle lengthens":"squeezed muscle cell",{size:12.5,weight:700,align:"center",color:rel>.6?C.good:C.bad});
+  // right
+  panelBox(485,10,305,460);clockIcon(512,38,14,T);txt(534,38,Math.round(15*seg(t,.4,6))+" min",{size:13,mono:true,weight:700});title(610,38,"Airway");
+  bronchiole(637,170,105,T,{sq:.85*(1-rel*.9),sw:.2,inf:.2,mu:.1});
+  const pf=lerp(42,88,rel);const bx=505,by=316,bw=265;txt(bx,by-12,"Peak flow, % of personal best",{size:12,weight:700});
+  [[0,.5,C.bad],[.5,.8,C.gold],[.8,1,C.good]].forEach(z=>{ctx.fillStyle=hexA(z[2],.3);ctx.fillRect(bx+bw*z[0],by,bw*(z[1]-z[0]),16)});rr(bx,by,bw,16,3);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;ctx.stroke();
+  line(bx+bw*pf/100,by-4,bx+bw*pf/100,by+20,C.ink,3);txt(bx+bw*pf/100,by+32,Math.round(pf)+"%",{size:12.5,mono:true,weight:700,align:"center"});
+  oxBox(545,380,lerp(89,96,rel),lerp(102,106,rel),{w:185,h:62})}
+
+function sceneSabaAE(T){
+  const L=11,t=P(T,L)*L;const on=smooth(seg(t,.3,1.5));
+  panelBox(10,10,515,460);title(24,30,"Beta-2 receptors outside the lungs");
+  person(260,450,118,"stand",{});lungIcon(260,300,26);
+  const dests=[[95,170],[430,120],[430,330]];dests.forEach((d,i)=>{line(260,300,d[0],d[1]+(i===0?40:0),hexA(C.drug,.35),1.5,[4,4]);for(let k=0;k<3;k++){const q=P(T*.5+k/3+i*.1,1);hexPath(lerp(260,d[0],q),lerp(300,d[1]+(i===0?40:0),q),5,Math.PI/6);fillStroke(hexA(C.drug,on),null)}});
+  hand(95,170,58,on,T);label(95,248,"tremor",{size:12.5,weight:700,border:C.bad});txt(95,270,"skeletal muscle beta-2",{size:12,align:"center",color:C["ink-soft"]});
+  const hr=Math.round(lerp(80,108,on));heart(430,110,32,T,{hr});label(430,168,"HR "+hr,{size:12.5,weight:700,mono:true,border:on>.5?C.bad:null});txt(430,190,"some beta-1 + reflex",{size:12,align:"center",color:C["ink-soft"]});
+  panelBox(360,248,150,140,{fill:hexA(C.panel,.95)});ctx.fillStyle=hexA(C.plasma,.8);ctx.fillRect(366,256,64,126);ctx.fillStyle=hexA(C.mucosa,.5);ctx.fillRect(440,256,64,126);txt(398,270,"blood",{size:12,weight:600,align:"center"});txt(472,270,"cells",{size:12,weight:600,align:"center"});
+  for(let i=0;i<5;i++){const q=on*P(T*.35+i/5,1);ion("k",lerp(398,472,q),300+i*16,7,{})}txt(435,404,"K⁺ dips (big or frequent doses)",{size:12,align:"center",weight:600});
+  // calendar
+  panelBox(535,10,255,460);title(549,30,"Rescue puffs per week");
+  const days=["M","T","W","T","F","S","S"];const w1=[1,0,0,1,0,0,0],w2=[1,1,0,1,1,1,0];
+  [[w1,90,"Week 1"],[w2,240,"Week 2"]].forEach((wk,ri)=>{const y=wk[1];const shown=ri===0?Math.floor(seg(t,.5,4)*7.99):Math.floor(seg(t,5,9)*7.99);const cnt=wk[0].slice(0,shown).reduce((a,b)=>a+b,0);const bad=ri===1&&cnt>2;
+    txt(549,y-24,wk[2],{size:12.5,weight:700});rr(547,y-12,232,72,6);ctx.strokeStyle=bad?C.bad:C.rule;ctx.lineWidth=bad?2.5:1.2;ctx.stroke();
+    days.forEach((d,i)=>{const x=565+i*32;txt(x,y+2,d,{size:12,mono:true,align:"center",color:C["ink-soft"]});if(i<shown&&wk[0][i]){mdi(x,y+36,22,{col:mix(C.act2,C.panel,.3)})}else{circ(x,y+34,3,C.rule)}});
+    if(ri===0&&shown>6)txt(549,y+78,"2 days: OK",{size:12.5,weight:700,color:C.good});if(ri===1&&shown>4)txt(549,y+78,cnt+" days: not well controlled",{size:12.5,weight:700,color:C.bad})});
+  if(t>8)wrapText("More than 2 days a week: review the controller, not more albuterol.",551,370,226,17,{size:12.5,weight:700,color:C.bad})}
+
+function sceneLaba(T){
+  const L=12,t=P(T,L)*L;
+  panelBox(10,10,290,460);title(24,30,"Salmeterol stays put");
+  txt(24,180,"outside",{size:12,color:C["ink-soft"]});bilayerH(30,285,210);recCup(180,210,C.b2,null);txt(180,252,"beta-2",{size:12,weight:700,mono:true,align:"center"});
+  const dip=.5+.5*Math.sin(T*1.6);const hx=180,hy=lerp(203,150,1-dip>0?(1-dip):0);
+  ctx.beginPath();ctx.moveTo(80,212);for(let i=0;i<=10;i++){const X=lerp(80,hx-8,i/10),Y=lerp(212,hy+4,i/10)+(i%2?-5:5);ctx.lineTo(X,Y)}ctx.strokeStyle=C.drug;ctx.lineWidth=3;ctx.stroke();circ(80,212,5,C.drug);
+  drugMol(hx,hy,8,null);txt(150,90,"long tail anchors in the",{size:12,align:"center"});txt(150,106,"membrane; head re-binds",{size:12,align:"center"});
+  // 12h clock
+  const cx=150,cy=355,r=58;circ(cx,cy,r,C.panel,C["ink-soft"],2);for(let k=0;k<12;k++){const a=k/12*TAU-Math.PI/2;line(cx+Math.cos(a)*(r-8),cy+Math.sin(a)*(r-8),cx+Math.cos(a)*(r-2),cy+Math.sin(a)*(r-2),C["ink-soft"],1.5)}
+  const sw=P(T,L);ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r-12,-Math.PI/2,-Math.PI/2+sw*TAU);ctx.closePath();ctx.fillStyle=hexA(C.act1,.3);ctx.fill();line(cx,cy,cx+Math.cos(-Math.PI/2+sw*TAU)*(r-10),cy+Math.sin(-Math.PI/2+sw*TAU)*(r-10),C.ink,2.5);
+  txt(cx,cy+r+16,"about 12 hours",{size:12.5,weight:700,align:"center"});
+  // graph
+  panelBox(310,10,250,460);title(324,30,"How long it lasts");
+  const gx=350,gy=70,gw=190,gh=300;gframe(gx,gy,gw,gh,{yl:"effect"});
+  const fS=h=>h<.05?0:.95*(1-Math.exp(-h/.15))*Math.exp(-Math.max(0,h-1)/2.2);
+  const fL=h=>.75*smooth(seg(h,.2,2))*(1-smooth(seg(h,12,14)));const up=P(T,L)*16;
+  plotFn(fS,0,16,gx,gy,gw,gh,0,1,C.good,3,null,up);plotFn(fL,0,16,gx,gy,gw,gh,0,1,C.act1,3,[8,5],up);
+  [0,4,8,12,16].forEach(h=>txt(gx+gw*h/16,gy+gh+14,h+"h",{size:12,mono:true,align:"center",color:C["ink-soft"]}));
+  label(gx+60,gy+28,"albuterol 4-6 h",{size:12,weight:700,border:C.good,align:"left"});label(gx+30,gy+gh-150,"LABA ~12 h",{size:12,weight:700,border:C.act1,align:"left"});
+  // cards
+  panelBox(570,10,220,225);title(584,30,"In asthma");mdi(640,130,62,{col:mix(C.drug,C.panel,.25)});txt(720,110,"LABA",{size:13,weight:700});txt(720,128,"alone",{size:13,weight:700});
+  ctx.save();ctx.globalAlpha=.5+.5*Math.sin(T*3)*.5+.25;crossMark(660,120,40);ctx.restore();txt(680,215,"never alone in asthma",{size:12.5,weight:700,align:"center",color:C.bad});
+  panelBox(570,245,220,225);title(584,265,"Always with a steroid");
+  ctx.save();ctx.translate(640,360);rr(-17,-68,34,64,7);fillStroke(C.steroid,hexA(C.ink,.5),1.4);rr(-17,-68,17,64,7);fillStroke(C.drug,null);rr(-22,-6,44,34,7);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.4);rr(-22,18,58,20,6);fillStroke(mix(C.panel,C.rule,.4),hexA(C.ink,.5),1.4);ctx.restore();
+  txt(700,320,"ICS",{size:13,weight:700,color:C.steroid});txt(700,340,"+ LABA",{size:13,weight:700,color:C.drug});checkMark(735,400,14);txt(680,452,"one combined inhaler",{size:12.5,weight:700,align:"center",color:C.good})}
+
+function sceneAntichol(T){
+  const L=10,t=P(T,L)*L,p=t/L;const drug=p>=.5;const da=smooth(seg(p,.5,.56));
+  panelBox(10,10,470,460);title(24,30,drug?"With ipratropium":"Without drug");
+  nerveEnd(245,70,30);txt(300,60,"vagus nerve ending",{size:12,weight:600,color:C["ink-soft"]});
+  bilayerH(40,450,210);const xs=[130,245,360];let bound=0;
+  xs.forEach((x,i)=>{recCup(x,210,C.m3,null);txt(x,252,"M3",{size:12,weight:700,mono:true,align:"center"});if(drug)drugMol(x,206,8,null,{a:da})});
+  for(let i=0;i<9;i++){const tgt=xs[i%3];const ph=P(T*.45+i/9,1);const sx=245+(rnd(i)-.5)*30,sy=96;
+    if(!drug||ph<.3){const q=ease(clamp(ph/.55,0,1));const y=lerp(sy,198,q),x=lerp(sx,tgt,q);circ(x,y,5.5,C.ach,hexA(C.ink,.4),1);if(q>.98&&!drug)bound++}
+    else{const q=ease(clamp((ph-.3)/.6,0,1));const x0=lerp(sx,tgt,.55),y0=lerp(sy,198,.55)-12;circ(x0+(tgt-sx)*q*.6+(i%2?-1:1)*q*40,y0-q*80,5.5,hexA(C.ach,1-q*.5),hexA(C.ink,.3),1)}}
+  if(drug)txt(245,152,"ipratropium blocks M3: acetylcholine bounces off",{size:12.5,weight:700,align:"center",color:C.drug});
+  const sq=drug?.05:smooth(seg(p,.1,.25))*(1-smooth(seg(p,.45,.5)));
+  smCell(245,350,330,sq,{h:18});txt(245,420,sq>.5?"squeeze: airway narrows":"relaxed: airway stays open",{size:12.5,weight:700,align:"center",color:sq>.5?C.bad:C.good});
+  // right
+  panelBox(490,10,300,460);title(504,30,"Blocking acetylcholine elsewhere");
+  ell(560,110,40,50,0,C.skin,C["skin-edge"],1.6);circ(546,96,3.5,C.ink);circ(574,96,3.5,C.ink);ell(560,130,14,5,0,mix(C.vessel,C.skin,.3),C["heart-edge"],1.2);
+  ctx.beginPath();ctx.moveTo(620,90);ctx.bezierCurveTo(628,104,632,112,620,120);ctx.bezierCurveTo(608,112,612,104,620,90);fillStroke(C.h2o,null);crossMark(620,106,11);
+  txt(650,100,"dry mouth",{size:13,weight:700});txt(650,120,"(most common)",{size:12,color:C["ink-soft"]});
+  ell(540,200,22,12,0,C.panel,C["ink-soft"],1.5);circ(540,200,6,C.act2);txt(575,194,"keep out of the eyes",{size:12.5,weight:700});txt(575,212,"(narrow-angle glaucoma)",{size:12,color:C["ink-soft"]});
+  ell(540,270,18,15,0,mix(C.urine,C.panel,.4),C["ink-soft"],1.5);txt(575,264,"urinary retention",{size:12.5,weight:700});txt(575,282,"(enlarged prostate)",{size:12,color:C["ink-soft"]});
+  title(504,330,"How long it lasts");
+  const bx=510,bw=260;line(bx,420,bx+bw,420,C["ink-soft"],1.2);[0,6,12,18,24].forEach(h=>txt(bx+bw*h/24,436,h+"h",{size:12,mono:true,align:"center",color:C["ink-soft"]}));
+  const gr=smooth(seg(P(T,L),.05,.6));txt(bx,350,"ipratropium (SAMA): several hours",{size:12.5,weight:700});rr(bx,360,bw*6/24*gr,14,5);ctx.fillStyle=hexA(C.drug,.6);ctx.fill();
+  txt(bx,386,"tiotropium (LAMA): about 24 h, once a day",{size:12.5,weight:700});rr(bx,396,bw*gr,14,5);ctx.fillStyle=C.drug;ctx.fill()}
+
+function sceneTheo(T){
+  const L=16,t=P(T,L)*L;
+  panelBox(10,10,560,460);title(24,30,"Theophylline level in the blood");
+  const gx=80,gy=80,gw=460,gh=320;const V=v=>gy+gh-v/30*gh;
+  ctx.fillStyle=hexA(C.bad,.13);ctx.fillRect(gx,V(30),gw,V(20)-V(30));ctx.fillStyle=hexA(C.good,.17);ctx.fillRect(gx,V(20),gw,V(10)-V(20));ctx.fillStyle=hexA(C.blocked,.13);ctx.fillRect(gx,V(10),gw,V(0)-V(10));
+  txt(gx+gw-6,V(27),"toxic",{size:12.5,weight:700,align:"right",color:C.bad});txt(gx+gw-6,V(15),"therapeutic range (narrow)",{size:12.5,weight:700,align:"right",color:C.good});txt(gx+gw-6,V(5),"too low",{size:12.5,weight:700,align:"right",color:C["ink-soft"]});
+  gframe(gx,gy,gw,gh,{yl:"level",xl:"days"});[10,20].forEach(v=>txt(gx-8,V(v),String(v),{size:12,mono:true,align:"right",color:C["ink-soft"]}));
+  const lv=d=>{let v=15;v+=8*smooth(seg(d,3,4))*(1-smooth(seg(d,4.5,6.5)));v-=7*smooth(seg(d,7,9))*(1-smooth(seg(d,11,13.5)));v+=9*smooth(seg(d,11.5,14));return v};
+  plotFn(lv,0,16,gx,gy,gw,gh,0,30,C.act1,3,null,t);const cv_=lv(t);circ(gx+gw*t/16,V(cv_),6,C.act1,C.panel,2);
+  const ev=[[3,"coffee"],[7,"smoking"],[11.2,"quits smoking"]];ev.forEach(e=>{if(t<e[0])return;const x=gx+gw*e[0]/16;line(x,gy,x,gy+gh,hexA(C.ink,.3),1.2,[4,4]);
+    if(e[1]==="coffee")coffee(x,gy-26,26,T);else cigarette(x-18,gy-26,24,T,{cross:e[1]==="quits smoking",lit:e[1]!=="quits smoking"});txt(x+(e[1]==="quits smoking"?-8:4),gy+gh+30,e[1],{size:12,weight:700,align:e[1]==="quits smoking"?"right":"left"})});
+  // right
+  panelBox(580,10,210,460);title(594,30,"Liver clears it");
+  const smoking=t>7&&t<11.2;liverIcon(650,80,34);for(let k=0;k<2;k++){const a=T*(smoking?5:1.5)+k*Math.PI;ctx.save();ctx.translate(710+k*26,70+k*12);ctx.rotate(a);for(let j=0;j<6;j++){ctx.rotate(Math.PI/3);rr(-3,-12,6,7,2);ctx.fillStyle=C["ink-soft"];ctx.fill()}circ(0,0,8,C["ink-soft"]);circ(0,0,3,C.panel);ctx.restore()}
+  txt(685,128,smoking?"sped up by smoke":"normal speed",{size:12.5,weight:700,align:"center",color:smoking?C.warn:C.ink});
+  title(594,168,"Toxic signs");const tox=cv_>20.3;const items=["nausea, vomiting","fast heart, arrhythmia","restless, jittery","seizures"];const th=[20.3,21.5,22.6,23.4];
+  items.forEach((s,i)=>{const y=200+i*62;const on=cv_>th[i];panelBox(592,y-22,186,48,{stroke:on?C.bad:C.rule,lw:on?2.2:1.1,fill:hexA(on?C["bad-wash"]:C.panel,.95)});
+    if(i===1)heart(616,y+2,13,T,{hr:on?130:75,pulse:false});else if(i===3)brainIcon(616,y+2,13,on?.6:0);else if(i===0){ell(616,y+2,12,9,0,mix(C.glu,C.panel,.4),C["ink-soft"],1.2)}else{line(606,y-6,612,y+8,C.ink,2);line(612,y+8,620,y-8,C.ink,2);line(620,y-8,626,y+8,C.ink,2)}
+    txt(636,y+2,s,{size:12.5,weight:on?700:500,color:on?C.bad:C["ink-soft"]})});
+  if(tox)txt(685,452,"hold and report",{size:12.5,weight:700,align:"center",color:C.bad})}
+/* ================= Part 3 ================= */
+function sceneIcs(T){
+  const L=12,t=P(T,L)*L;const f=smooth(seg(t,1,10));const day=1+Math.floor(27*seg(t,1,10));
+  panelBox(10,10,465,460);title(24,30,"Inside an airway lining cell");
+  const nc=cellNucleus(40,70,410,330,T);txt(nc[0],nc[1]+100,"nucleus (genes)",{size:12.5,weight:700,align:"center",color:C.act1});
+  // inflammatory signals leaving nucleus, fading with days
+  const nsig=Math.round(10*(1-f*.85));for(let i=0;i<nsig;i++){const a=-2.6+i*.55;const q=P(T*.5+i/7,1);const r0=95,r1=200;const x0=nc[0]+Math.cos(a)*lerp(r0,r1,q),y0=nc[1]+Math.sin(a)*lerp(r0,r1,q)*.8;
+    if(x0>50&&x0<440&&y0>80&&y0<390)arrow(x0-Math.cos(a)*10,y0-Math.sin(a)*8,x0,y0,hexA(C.infl,1-q*.4),2)}
+  if(nsig>3)label(380,96,"inflammatory signals",{size:12,weight:700,border:C.infl});
+  // steroid entering, binding receptor, moving to nucleus
+  const q=P(T,4);const ph1=ease(seg(q,0,.35)),ph2=ease(seg(q,.45,.8));
+  const rx=150,ry=250;ctx.beginPath();ctx.arc(rx,ry+(ph2?0:0),16,.3,Math.PI*2-.3);ctx.closePath();
+  const cx=lerp(rx,nc[0]-10,ph2),cy=lerp(ry,nc[1],ph2);
+  ctx.save();ctx.translate(cx,cy);ctx.beginPath();ctx.arc(0,0,15,.5,TAU-.5);ctx.lineTo(4,0);ctx.closePath();fillStroke(hexA(C.receptor,.9),hexA(C.ink,.45),1.2);ctx.restore();
+  const sx=lerp(14,cx-8,ph1),sy=lerp(48,cy-6,ph1);steroidMol(sx,sy,6.5,{});
+  txt(rx,ry+34,ph2>.1?"":"steroid receptor",{size:12,weight:600,align:"center"});
+  if(q>.8)label(nc[0]-10,nc[1]-60,"genes turned DOWN",{size:12.5,weight:700,border:C.good});
+  txt(100,42,"fluticasone, budesonide",{size:12.5,weight:700,color:C.steroid});
+  // right
+  panelBox(485,10,305,460);calIcon(515,42,30,day);title(540,42,"Day "+day);
+  bronchiole(637,250,128,T,{sq:.3*(1-f*.7),sw:.85*(1-f*.85),inf:.95*(1-f*.95),mu:.6*(1-f*.9)});
+  txt(637,420,f>.8?"weeks: calm lining, open airway":f>.3?"days: swelling easing":"start: swollen, inflamed",{size:12.5,weight:700,align:"center",color:f>.8?C.good:C.ink});
+  txt(637,446,"not a rescue drug",{size:12.5,weight:700,align:"center",color:C.bad})}
+
+function mouthSection(x,y,T,o){o=o||{};// x,y top-left of a 420x420 region
+  rr(x+20,y+60,330,120,60);fillStroke(C.air,C["mucosa-edge"],1.8);
+  rr(x+20,y+120,70,300,30);fillStroke(C.air,null);ctx.strokeStyle=C["mucosa-edge"];ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(x+20,y+160);ctx.lineTo(x+20,y+420);ctx.moveTo(x+90,y+178);ctx.lineTo(x+90,y+420);ctx.stroke();
+  ell(x+190,y+172,140,34,0,mix(C.mucosa,C.infl,.2),C["mucosa-edge"],1.6);
+  // vocal cords
+  const vy=y+300;line(x+22,vy,x+50,vy+6,C["mucosa-edge"],4);line(x+88,vy,x+60,vy+6,C["mucosa-edge"],4);
+  if(o.hoarse>0){for(let k=0;k<3;k++){ctx.save();ctx.globalAlpha=o.hoarse*(1-k*.25);ctx.beginPath();for(let i=0;i<=20;i++){const X=x+100+i*4,Y=vy-6+k*8+Math.sin(i*1.3+T*9+k)*4*(1+rnd(i+k));i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.bad;ctx.lineWidth=1.8;ctx.stroke();ctx.restore()}}
+  txt(x+200,y+40,"mouth",{size:12.5,weight:600,align:"center",color:C["ink-soft"]});txt(x+230,y+224,"tongue",{size:12.5,weight:600,align:"center",color:C["ink-soft"]});
+  txt(x+100,y+250,"throat",{size:12.5,weight:600,color:C["ink-soft"]});txt(x+100,y+330,"voice box",{size:12.5,weight:600,color:C["ink-soft"]});txt(x+100,y+410,"to lungs",{size:12.5,weight:600,color:C["ink-soft"]})}
+function sceneIcsAE(T){
+  const L=14,t=P(T,L)*L;
+  panelBox(10,10,520,460);title(24,30,"Where an inhaled steroid lands");
+  mouthSection(30,30,T,{hoarse:smooth(seg(t,3.5,5))*(1-smooth(seg(t,8,9.5)))});
+  mdi(452,120,44,{flip:true,col:C.steroid});
+  const N=36;const thr=smooth(seg(t,3,5.5))*(1-smooth(seg(t,8,10)));
+  for(let i=0;i<N;i++){const fate=rnd(i*3.3)<.55?(rnd(i*5.1)<.6?"tongue":"throat"):"lung";const d=.05*i/N*10;const q=clamp((t-.5-d*.4)/1.4,0,1);if(t<.5)continue;
+    let ex,ey;if(fate==="tongue"){ex=90+rnd(i*7)*260;ey=172+30-Math.sqrt(Math.max(0,1-Math.pow((ex-220)/140,2)))*34+4}else if(fate==="throat"){ex=58+rnd(i*7)*14;ey=150+rnd(i*9)*120}else{ex=74+rnd(i*7)*30;ey=lerp(200,440,q)}
+    const sx=410,sy=120;let x,y;if(fate==="lung"){const qq=clamp(q*1.6,0,1);x=lerp(sx,85,qq);y=lerp(sy,180,qq);if(q>.62){x=ex;y=lerp(180,440,(q-.62)/.38)}if(q>=1)continue}else{x=lerp(sx,ex,q);y=lerp(sy,ey,q)-Math.sin(q*Math.PI)*20}
+    const wash=smooth(seg(t,8,10));if(q>=1&&wash>0&&fate!=="lung"){x+=(-260)*wash*0;ctx.save();ctx.globalAlpha=1-wash;circ(x,y,3.4,C.steroid);ctx.restore()}else circ(x,y,3.4,C.steroid,hexA(C.ink,.3),.8)}
+  // thrush patches
+  if(thr>0){for(let k=0;k<6;k++){const X=140+k*38,Y=150+Math.abs(Math.sin(k))*6;ctx.save();ctx.globalAlpha=thr;blobPath(X,Y,9+rnd(k)*5,k,0,.2);fillStroke("#FAFAF5",hexA(C.ink,.35),1);ctx.restore()}
+    label(260,92,"white patches: thrush",{size:12.5,weight:700,border:C.bad,a:thr});label(220,330,"hoarse voice",{size:12.5,weight:700,border:C.bad,a:thr})}
+  // rinse
+  const rinse=seg(t,7.6,10.4);if(rinse>0&&rinse<1){ctx.save();ctx.translate(470,110);ctx.rotate(-.9*Math.sin(Math.min(1,rinse*3)*Math.PI/2));rr(-16,-26,32,46,5);fillStroke(hexA(C.glass,.8),C["glass-edge"],1.5);rr(-14,-6,28,24,3);ctx.fillStyle=hexA(C.h2o,.7);ctx.fill();ctx.restore();
+    for(let i=0;i<14;i++){const q=P(rinse*3+i/14,1);circ(lerp(380,60,q),130+Math.sin(q*10+i)*24,4,hexA(C.h2o,.85))}label(300,390,"rinse, gargle and spit",{size:12.5,weight:700,border:C.h2o})}
+  if(t>10.4)label(300,390,"rinse and spit: mouth clear",{size:12.5,weight:700,border:C.good});
+  // spacer comparison
+  panelBox(540,10,250,460);title(554,30,"Same puff, with a spacer");
+  spacer(570,110,120,40);mdi(712,98,28,{flip:true,col:C.steroid});
+  const bars=[["no spacer","about half stuck in mouth",.55],["with spacer","much less in the mouth",.2]];
+  bars.forEach((b,i)=>{const y=190+i*110;txt(556,y,b[0],{size:13,weight:700});rr(556,y+14,220,18,5);ctx.fillStyle=C.sunk;ctx.fill();const g=smooth(seg(t,.5,3));rr(556,y+14,220*b[2]*g,18,5);ctx.fillStyle=hexA(C.bad,.65);ctx.fill();
+    txt(556,y+48,b[1],{size:12.5,color:C["ink-soft"]})});
+  txt(556,420,"Teaching values, not measurements.",{size:12,color:C["ink-soft"]});txt(556,444,"Use a spacer with steroid MDIs.",{size:12.5,weight:700})}
+
+function sceneSystemic(T){
+  const L=12,t=P(T,L)*L;const f=smooth(seg(t,1,9));
+  panelBox(10,10,520,460);title(24,30,"Steroid reaches the whole body");
+  person(290,455,120,"stand",{});lungIcon(290,298,26);
+  pillBottle(80,140,40,"oral",C.drug);txt(80,166,"prednisone",{size:12.5,weight:700,align:"center",color:C.drug});
+  rr(56,230,48,64,8);fillStroke(hexA(C.glass,.85),C["glass-edge"],1.5);rr(60,250,40,40,6);ctx.fillStyle=hexA(C.steroid,.45);ctx.fill();txt(80,312,"IV methyl-",{size:12.5,weight:700,align:"center",color:C.drug});txt(80,328,"prednisolone",{size:12.5,weight:700,align:"center",color:C.drug});
+  line(80,294,250,330,C["glass-edge"],1.5,[4,3]);
+  for(let i=0;i<22;i++){const a=rnd(i*2.1)*TAU+T*(.4+rnd(i)*.4);const X=290+Math.cos(a)*(20+rnd(i*5)*40),Y=320+Math.sin(a)*(70+rnd(i*3)*50);circ(X,Y,3.6,hexA(C.steroid,.9))}
+  const se=["blood sugar up","mood, sleep changes","appetite up","fluid and BP up","infection risk"];const k=Math.floor(T/1.6)%5;
+  const pos=[[430,110],[430,170],[430,230],[430,290],[430,350]];se.forEach((s,i)=>label(pos[i][0],pos[i][1],s,{size:12.5,weight:700,border:i===k?C.bad:C.rule,color:i===k?C.bad:C.ink}));
+  // right
+  panelBox(540,10,250,460);title(554,30,"Lungs: over hours to days");
+  bronchiole(665,135,82,T,{sq:.35*(1-f*.7),sw:.9*(1-f*.85),inf:.95*(1-f*.95),mu:.6*(1-f*.9)});
+  const tx=560,tw=210,ty=262;line(tx,ty,tx+tw,ty,C["ink-soft"],1.5);
+  const marks=[[0,"0"],[.12,"4-6 h"],[.3,"day 1"],[.62,"day 3"],[.95,"day 5"]];
+  rr(tx,ty-9,tw*.95,18,6);ctx.fillStyle=hexA(C.steroid,.25);ctx.fill();marks.forEach((m,i)=>{line(tx+tw*m[0],ty-5,tx+tw*m[0],ty+5,C["ink-soft"],1.5);txt(tx+tw*m[0],ty+(i%2?-22:22),m[1],{size:12,mono:true,align:"center",color:C["ink-soft"]})});
+  circ(tx+tw*.95*f,ty,7,C.steroid,C.panel,2);txt(tx,ty+46,"short course (burst)",{size:12.5,weight:700,color:C.steroid});
+  panelBox(554,350,222,106,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.9)});wrapText("Long courses: taper the dose. Do not stop suddenly (adrenal suppression).",566,374,200,18,{size:12.5,weight:700})}
+
+function sceneMonte(T){
+  const L=10,t=P(T,L)*L,p=t/L;const drug=p>=.5;const da=smooth(seg(p,.5,.56));
+  panelBox(10,10,490,460);title(24,30,drug?"With montelukast":"Without drug");
+  mastCell(95,105,42,T,{});txt(95,166,"mast cell",{size:12.5,weight:700,align:"center"});
+  bilayerH(150,480,240);const xs=[220,330,440];
+  xs.forEach((x,i)=>{recCup(x,240,C.receptor,null);txt(x,282,"LT receptor",{size:12,weight:700,mono:true,align:"center"});if(drug)drugMol(x,236,8,null,{a:da})});
+  for(let i=0;i<9;i++){const tgt=xs[i%3];const ph=P(T*.45+i/9,1);const sx=130,sy=110+(rnd(i)-.5)*30;
+    if(!drug||ph<.3){const q=ease(clamp(ph/.55,0,1));circ(lerp(sx,tgt,q),lerp(sy,228,q),5,C.leuko,hexA(C.ink,.4),1)}
+    else{const q=ease(clamp((ph-.3)/.6,0,1));const x0=lerp(sx,tgt,.55),y0=lerp(sy,228,.55)-10;circ(x0+q*30,y0-q*70,5,hexA(C.leuko,1-q*.5),hexA(C.ink,.3),1)}}
+  txt(260,74,drug?"montelukast blocks the receptor":"leukotrienes land",{size:12.5,weight:700,color:drug?C.drug:C.leuko});
+  const sq=drug?.05:smooth(seg(p,.1,.25))*(1-smooth(seg(p,.45,.5)));smCell(310,360,300,sq,{h:18});
+  if(sq>.4){for(let k=0;k<3;k++){const q=P(T*.7+k/3,1);ctx.save();ctx.globalAlpha=sq;blobPath(180+k*30,400+q*40,6,k,0,.15);fillStroke(C.mucus,C["mucus-edge"],1);ctx.restore()}}
+  txt(310,440,sq>.5?"squeeze and more mucus":"relaxed, less mucus",{size:12.5,weight:700,align:"center",color:sq>.5?C.bad:C.good});
+  // warning
+  panelBox(510,10,280,460);title(524,30,"Boxed warning, plain words");brainIcon(560,90,30,.4+.3*Math.sin(T*2));
+  txt(604,80,"Mood and behaviour",{size:13,weight:700});txt(604,100,"changes can happen",{size:13,weight:700});
+  const items=["Agitation or aggression","Anxiety, depression","Bad dreams, sleepwalking","Trouble sleeping","Suicidal thoughts or actions"];const n=Math.floor(P(T,12)*(items.length+2));
+  items.forEach((s,i)=>{const y=156+i*42;const on=i<n;panelBox(524,y-16,252,34,{stroke:on?C.bad:C.rule,fill:hexA(C.panel,on?.98:.6)});ctx.save();ctx.globalAlpha=on?1:.4;txt(536,y+1,"! "+s,{size:12.5,weight:on?700:500,color:on?C.bad:C.ink});ctx.restore()});
+  panelBox(524,370,252,86,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.95)});txt(650,392,"Stop and call the prescriber",{size:13,weight:700,align:"center",color:C.bad});txt(650,416,"Tablet once a day (evening).",{size:12.5,align:"center"});txt(650,436,"Not for an acute attack.",{size:12.5,align:"center"})}
+
+function sceneMastBio(T){
+  const L=12,t=P(T,L)*L,p=t/L;const ph2=p>=.45;
+  panelBox(10,10,520,460);title(24,30,ph2?"Omalizumab mops up IgE":"Allergen bridges IgE: mast cell bursts");
+  const mx=190,my=220,mr=88;const burst=!ph2?smooth(seg(p,.18,.3))*(1-smooth(seg(p,.4,.45))):0;
+  mastCell(mx,my,mr,T,{burst:burst*.8});
+  const nY=ph2?Math.round(lerp(10,3,smooth(seg(p,.5,.8)))):10;
+  for(let i=0;i<nY;i++){const a=-Math.PI/2+(i-4.5)*.28;antibodyY(mx+Math.cos(a)*(mr+12),my+Math.sin(a)*(mr+12),11,C.m3,a+Math.PI/2)}
+  if(!ph2){const q=ease(seg(p,0,.18));pollen(lerp(380,mx,q),lerp(60,my-mr-30,q),10,T);
+    for(let i=0;i<14;i++){const q2=seg(p,.22+i*.005,.42);if(q2<=0)continue;const a=rnd(i)*Math.PI-Math.PI;const X=mx+Math.cos(a)*(mr+q2*120),Y=my+Math.sin(a)*(mr*.6+q2*100);circ(X,Y,5,C.hist,hexA(C.ink,.3),1)}
+    if(burst>.5)label(mx,my+mr+30,"histamine and leukotrienes released",{size:12.5,weight:700,border:C.bad})}
+  else{// free IgE in fluid captured by omalizumab
+    for(let i=0;i<5;i++){const q=seg(p,.5+i*.05,.62+i*.05);const fx=330+i*30,fy=120+rnd(i)*220;antibodyY(fx,fy+Math.sin(T+i)*6,9,C.m3,Math.sin(T*.7+i)*.6);
+      const ox=lerp(500,fx+10,ease(q)),oy=lerp(440,fy+14,ease(q));antibodyY(ox,oy,12,C.drug,-.6)}
+    label(mx,my+mr+30,"less IgE on the cell: less bursting",{size:12.5,weight:700,border:C.good})}
+  // cromolyn cell
+  const cx=430,cy=400;mastCell(cx,cy,34,T,{});ctx.save();ctx.setLineDash([6,4]);ctx.lineDashOffset=-T*12;circ(cx,cy,44,null,C.steroid,3);ctx.restore();txt(cx-52,cy-40,"cromolyn",{size:12.5,weight:700,align:"right",color:C.steroid});txt(cx-52,cy-22,"keeps it closed",{size:12,align:"right",color:C["ink-soft"]});
+  // right card
+  panelBox(540,10,250,460);title(554,30,"Biologics (-mab)");
+  [["omalizumab","anti-IgE"],["others","anti-IL-5 and more (eosinophils)"]].forEach((r,i)=>{const y=72+i*58;antibodyY(570,y+4,11,C.drug,0);txt(592,y-4,r[0],{size:13,weight:700,color:C.drug});txt(592,y+15,r[1],{size:12,color:C["ink-soft"]})});
+  ctx.save();ctx.translate(660,230);ctx.rotate(-.5);rr(-50,-9,80,18,4);fillStroke(hexA(C.glass,.9),C["glass-edge"],1.4);rr(-46,-6,46,12,2);ctx.fillStyle=hexA(C.drug,.5);ctx.fill();line(30,0,58,0,C["ink-soft"],2);rr(-62,-12,12,24,3);fillStroke(C.panel,C["ink-soft"],1.3);ctx.restore();
+  txt(665,282,"injection every few weeks",{size:12.5,align:"center"});
+  panelBox(554,306,222,90,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.95)});wrapText("Watch for anaphylaxis after the shot; epinephrine ready.",566,330,200,18,{size:12.5,weight:700});
+  wrapText("Add-on for severe asthma. Not a rescue drug.",556,422,220,18,{size:12.5,weight:600})}
+
+/* ================= Part 4: inhaler technique ================= */
+function deposit(i,run,kind){const r=rnd(i*3.3+run*.7);if(kind==="poorMDI")return r<.25?"mouth":r<.75?"throat":"lung";if(kind==="goodMDI")return r<.08?"mouth":r<.28?"throat":"lung";
+  if(kind==="slowDPI")return r<.8?"mouth":r<.9?"throat":"lung";return r<.1?"mouth":r<.25?"throat":"lung"}
+function particles(hp,tips,start,kind,t,dur,col,N){let lung=0;for(let i=0;i<N;i++){const fate=deposit(i,0,kind);const d=i/N*.6;const q=clamp((t-d)/dur,0,1);if(t<d)continue;
+    const jit=(rnd(i*9)-.5)*10;let pts;if(fate==="mouth")pts=[start,[hp.mouth[0]-20-rnd(i)*30,hp.mouth[1]+6+jit*.4]];else if(fate==="throat")pts=[start,hp.mouth,[hp.throat[0]-6+jit*.3,hp.throat[1]+jit]];
+    else{const tp=tips[i%tips.length];pts=[start,hp.mouth,hp.throat,hp.trach,[hp.trach[0],hp.trach[1]+40],[tp[0]+jit*.4,tp[1]+jit*.4]];lung++}
+    const p_=along(pts,q);circ(p_[0],p_[1],3.2,col,hexA(C.ink,.3),.8)}return lung/N}
+function sceneMdi(T){
+  const L=13,run=Math.floor(T/L)%2,t=P(T,L)*L;const good=run===1;
+  panelBox(10,10,545,460);title(24,30,good?"Good: spacer + slow deep breath + hold":"Poor: no spacer, fast breath",good?C.good:C.bad);
+  const hp=headAirway(190,150,100);const tips=lungTree(hp.trach[0],hp.trach[1],100,{});
+  let start;if(good){spacer(hp.mouth[0]+2,hp.mouth[1],110,40);mdi(hp.mouth[0]+150,hp.mouth[1]-6,30,{flip:true});start=[hp.mouth[0]+100,hp.mouth[1]]}else{mdi(hp.mouth[0]+40,hp.mouth[1]-6,30,{flip:true});start=[hp.mouth[0]+12,hp.mouth[1]]}
+  const fr=particles(hp,tips,start,good?"goodMDI":"poorMDI",t-1,good?1.8:.6,C.aero,40);
+  if(t>.8&&t<1.4)label(hp.mouth[0]+60,hp.mouth[1]-50,"press",{size:12.5,weight:700});
+  if(good&&t>3.2&&t<7){const n=Math.min(10,1+Math.floor((t-3.2)*2.6));label(400,250,"hold "+n+" s",{size:13,weight:700,border:C.accent,mono:true})}
+  txt(hp.mouth[0]+70,hp.mouth[1]+44,good?"slow, deep breath":"fast, uncoordinated",{size:12.5,weight:700,color:good?C.good:C.bad});
+  const fin=smooth(seg(t,7,8));if(fin>0){const bx=330,by=330;txt(bx,by,"Reached the lungs",{size:12.5,weight:700});rr(bx,by+12,200,18,5);ctx.fillStyle=C.sunk;ctx.fill();rr(bx,by+12,200*(good?.64:.25)*fin,18,5);ctx.fillStyle=C.good;ctx.fill();txt(bx,by+50,"Stuck in mouth/throat",{size:12.5,weight:700});rr(bx,by+62,200,18,5);ctx.fillStyle=C.sunk;ctx.fill();rr(bx,by+62,200*(good?.36:.75)*fin,18,5);ctx.fillStyle=hexA(C.bad,.8);ctx.fill();txt(bx,by+100,"teaching values",{size:12,color:C["ink-soft"]})}
+  panelBox(565,10,225,460);title(579,30,"MDI + spacer steps");
+  const st=["Cap off, shake, attach spacer","Breathe out fully, away","Lips sealed; press once","Slow deep breath, 3-5 s","Hold about 10 s","Wait 1 min; rinse after steroid"];const lit=Math.floor(P(T,12)*7);
+  st.forEach((s,i)=>{const y=58+i*68;const on=i<=lit;panelBox(577,y,201,58,{stroke:on?C.accent:C.rule,lw:on?2:1.1,fill:hexA(C.panel,on?.98:.6)});badge(597,y+29,i+1,on?C.accent:C.blocked,11);ctx.save();ctx.globalAlpha=on?1:.55;wrapText(s,616,y+21,152,17,{size:12.5,weight:on?700:500});ctx.restore()})}
+
+function sceneDpi(T){
+  const L=11,run=Math.floor(T/L)%2,t=P(T,L)*L;const fast=run===1;
+  panelBox(10,10,545,460);title(24,30,fast?"Fast, deep breath: powder breaks up":"Slow breath: powder stays in the mouth",fast?C.good:C.bad);
+  const hp=headAirway(190,150,100);const tips=lungTree(hp.trach[0],hp.trach[1],100,{});dpi(hp.mouth[0]+44,hp.mouth[1],22,{});
+  // gauge
+  const gx=470,gy=120;ctx.beginPath();ctx.arc(gx,gy,40,Math.PI,TAU);ctx.strokeStyle=C.sunk;ctx.lineWidth=10;ctx.stroke();ctx.beginPath();ctx.arc(gx,gy,40,Math.PI,Math.PI*1.33);ctx.strokeStyle=hexA(C.bad,.7);ctx.stroke();ctx.beginPath();ctx.arc(gx,gy,40,Math.PI*1.66,TAU);ctx.strokeStyle=hexA(C.good,.8);ctx.stroke();
+  const br=smooth(seg(t,.8,1.6))*(1-smooth(seg(t,4,5)));const ang=Math.PI+(fast?.9:.22)*br*Math.PI;line(gx,gy,gx+Math.cos(ang)*34,gy+Math.sin(ang)*34,C.ink,3);circ(gx,gy,4,C.ink);txt(gx,gy+18,"breath strength",{size:12,weight:600,align:"center"});
+  const st=[hp.mouth[0]+22,hp.mouth[1]];
+  if(fast){if(t>1&&t<1.4)blobPath(st[0],st[1],8,1,T,.2),fillStroke(C.powder,null);particles(hp,tips,st,"fastDPI",t-1.3,.9,C.powder,40)}
+  else{const q=ease(seg(t,1,3));const cx=lerp(st[0],hp.mouth[0]-40,q),cy=lerp(st[1],hp.mouth[1]+10,q);blobPath(cx,cy,9,1,T*.3,.18);fillStroke(C.powder,hexA(C.ink,.4),1);particles(hp,tips,st,"slowDPI",t-1.3,2.2,C.powder,10)}
+  // inset
+  panelBox(330,300,215,160,{fill:hexA(C.panel,.95)});txt(437,320,"Never breathe out into it",{size:12.5,weight:700,align:"center"});
+  ell(380,388,26,30,0,C.skin,C["skin-edge"],1.4);dpi(470,390,24,{});for(let k=0;k<4;k++){const q=P(T*.8+k/4,1);circ(lerp(406,446,q),388+Math.sin(q*6)*4,3,hexA(C.h2o,.8))}crossMark(437,390,18);txt(437,446,"moisture clumps powder",{size:12,align:"center",color:C["ink-soft"]});
+  // nebulizer
+  panelBox(565,10,225,460);title(579,30,"Nebulizer");nebulizer(677,200,90,T);
+  rr(650,92,54,16,6);fillStroke(mix(C.panel,C.rule,.3),C["glass-edge"],1.2);
+  clockIcon(610,312,16,T);txt(634,312,"10-15 min",{size:13,mono:true,weight:700});
+  wrapText("Normal, relaxed breaths. No coordination needed.",579,350,200,17,{size:12.5,weight:600});
+  wrapText("For young children, severe flares and anyone who cannot use an inhaler well.",579,400,200,17,{size:12.5,color:C["ink-soft"]})}
+
+function tubeR(x,x0,x1,open){const f=(x-x0)/(x1-x0);return (30-16*f)*(.42+.58*open)}
+function airwayTube(x0,x1,yc,open,T){ctx.beginPath();for(let x=x0;x<=x1;x+=6){const r=tubeR(x,x0,x1,open)+10;x===x0?ctx.moveTo(x,yc-r):ctx.lineTo(x,yc-r)}for(let x=x1;x>=x0;x-=6){const r=tubeR(x,x0,x1,open)+10;ctx.lineTo(x,yc+r)}ctx.closePath();fillStroke(mix(C.smooth,C.vessel,1-open),C["smooth-edge"],1.4);
+  ctx.beginPath();for(let x=x0;x<=x1;x+=6){const r=tubeR(x,x0,x1,open);x===x0?ctx.moveTo(x,yc-r):ctx.lineTo(x,yc-r)}for(let x=x1;x>=x0;x-=6){const r=tubeR(x,x0,x1,open);ctx.lineTo(x,yc+r)}ctx.closePath();fillStroke(C.air,C["mucosa-edge"],1.2)}
+function sceneOrder(T){
+  const L=10,t=P(T,L)*L;const x0=70,x1=540;
+  const rows=[{y:120,first:"steroid",lab:"Steroid first",ok:false},{y:340,first:"bd",lab:"Bronchodilator first",ok:true}];
+  rows.forEach((r,ri)=>{panelBox(10,r.y-110,780,215);title(24,r.y-90,r.lab,r.ok?C.good:C.bad);
+    const bdT=r.ok?.5:4.5,stT=r.ok?5:.6;const open=smooth(seg(t,bdT+.6,bdT+3));airwayTube(x0,x1,r.y,open,T);
+    for(let i=0;i<14;i++){const q=seg(t,bdT+i*.04,bdT+.9+i*.04);if(q<=0||q>=1)continue;circ(lerp(20,x0+60,q),r.y+(rnd(i)-.5)*30,4,C.drug)}
+    if(t>bdT)label(x0+20,r.y-62,"bronchodilator",{size:12.5,weight:700,border:C.drug,a:smooth(seg(t,bdT,bdT+.4))});
+    if(r.ok&&t>1&&t<5){const m=Math.min(5,1+Math.floor((t-1)*1.1));label(320,r.y-62,"wait about "+m+" min",{size:12.5,weight:700,border:C.accent,mono:true})}
+    const openAt=r.ok?1:0;for(let i=0;i<30;i++){const st=stT+i*.05;const q=seg(t,st,st+1.3);if(q<=0)continue;const depth=openAt?(.15+.8*rnd(i*4.1)):(.03+.18*rnd(i*4.1));const X=lerp(20,x0+(x1-x0)*depth,ease(q));const side=i%2?1:-1;const R=tubeR(Math.max(x0,X),x0,x1,r.ok?open:Math.max(open,0))-3;
+      const Y=r.y+side*lerp(0,Math.max(4,R),ease(q));circ(X,Y,4,C.steroid,hexA(C.ink,.35),.8)}
+    if(t>stT)label(x0+20,r.y+66,"inhaled steroid",{size:12.5,weight:700,border:C.steroid,a:smooth(seg(t,stT,stT+.4))});
+    const fin=smooth(seg(t,7,7.5));if(fin>0){ctx.save();ctx.globalAlpha=fin;if(r.ok){checkMark(640,r.y,22);txt(680,r.y-8,"reaches",{size:13,weight:700,color:C.good});txt(680,r.y+12,"deep",{size:13,weight:700,color:C.good})}else{crossMark(640,r.y,18);txt(680,r.y-8,"stuck near",{size:13,weight:700,color:C.bad});txt(680,r.y+12,"the top",{size:13,weight:700,color:C.bad})}ctx.restore()}
+    txt(x1+6,r.y+44,"deeper",{size:12,color:C["ink-soft"]});txt(x0-48,r.y+44,"mouth",{size:12,color:C["ink-soft"]})});
+  txt(400,470,"Then rinse and spit after the steroid.",{size:12.5,weight:700,align:"center"})}
+function sceneStepwise(T){
+  const L=18,t=P(T,L)*L;
+  panelBox(10,10,465,460);title(24,30,"Step up, step down");
+  const labs=[["As-needed","reliever"],["Low-dose","ICS"],["ICS +","LABA"],["Medium to","high dose"],["Add-ons,","biologics"]];
+  for(let i=0;i<5;i++){const x=30+i*86,top=420-(i+1)*66;rr(x,top,86,420-top+30,4);fillStroke(mix(C.act4,C.panel,.75-i*.1),C.act4,1.4);txt(x+43,top+20,labs[i][0],{size:12,weight:700,align:"center"});txt(x+43,top+36,labs[i][1],{size:12,weight:700,align:"center"});txt(x+43,top+56,"step "+(i+1),{size:12,mono:true,align:"center",color:C["ink-soft"]})}
+  const seq=[0,1,2,3,2,1];const seg_=L/seq.length;const k=Math.floor(t/seg_)%seq.length,q=smooth(seg(t%seg_,0,1));const from=k===0?seq[seq.length-1]:seq[k-1],to=seq[k];
+  const sx=i=>30+i*86+43,sy=i=>420-(i+1)*66-16;const X=lerp(sx(from),sx(to),q),Y=lerp(sy(from),sy(to),q)-Math.sin(q*Math.PI)*30;
+  circ(X,Y,14,C.accent,C.panel,2.5);txt(X,Y+1,"pt",{size:12,weight:700,align:"center",color:C["on-accent"]});
+  const up=to>from;if(k>0||t>0)label(250,78,up?"Not controlled: check technique and adherence first, then step up":"Well controlled about 3 months: step down",{size:12,weight:700,border:up?C.bad:C.good,color:up?C.bad:C.good});
+  // peak flow + traffic light
+  panelBox(485,10,305,460);title(499,30,"Peak flow action plan");
+  const pv=[90,65,40,90][Math.floor(T/4)%4];const pvp=[90,65,40,90][(Math.floor(T/4)+3)%4];const pf=lerp(pvp,pv,smooth(seg(P(T,4),0,.4)));
+  rr(505,52,265,34,17);fillStroke(hexA(C.glass,.8),C["glass-edge"],1.5);for(let v=0;v<=100;v+=20){const x=515+245*v/100;line(x,58,x,66,C["ink-soft"],1.2);txt(x,76,String(v),{size:12,mono:true,align:"center",color:C["ink-soft"]})}
+  const mx=515+245*pf/100;rr(mx-5,48,10,42,3);fillStroke(C.bad,null);txt(637,104,Math.round(pf)+"% of personal best",{size:12.5,weight:700,align:"center"});
+  const zones=[[80,"Green: 80-100%","keep taking controllers",C.good],[50,"Yellow: 50-79%","rescue inhaler, follow plan",C.gold],[0,"Red: below 50%","rescue inhaler + emergency help",C.bad]];
+  rr(500,128,64,220,30);fillStroke(C.scr,null);zones.forEach((z,i)=>{const on=pf>=z[0]&&(i===0||pf<zones[i-1][0]);const y=168+i*70;circ(532,y,24,on?z[3]:hexA(z[3],.2),hexA(C.ink,.4),1.2);if(on)glow(532,y,40,z[3],.4);
+    txt(578,y-10,z[1],{size:12.5,weight:700,color:on?C.ink:C["ink-soft"]});wrapText(z[2],578,y+8,200,15,{size:12,color:C["ink-soft"]})});
+  wrapText("Before stepping up: check inhaler technique, daily use of the controller, and triggers.",499,384,280,17,{size:12.5,weight:600})}
+
+/* ================= Part 5 ================= */
+function vesselWall(x0,x1,y,gap,T){ctx.fillStyle=hexA(C.plasma,.9);ctx.fillRect(x0,y+10,x1-x0,90);for(let i=0;i<4;i++){const X=x0+((i*90+T*40)%(x1-x0));ell(X,y+60,9,5,0,C.blood,hexA(C.ink,.3),.8)}
+  const n=6,w=(x1-x0)/n;for(let i=0;i<n;i++){rr(x0+i*w+gap/2,y-4,w-gap,16,7);fillStroke(mix(C.vessel,C.panel,.45),C["smooth-edge"],1.2)}}
+function sceneH1(T){
+  [[10,"Normal: histamine acts",false],[405,"With an H1 blocker",true]].forEach(pn=>{const x0=pn[0],drug=pn[2];panelBox(x0,10,385,460);title(x0+14,30,pn[1],drug?C.good:C.bad);
+    const mx=x0+80,my=90;mastCell(mx,my,34,T,{});const cups=[x0+120,x0+200,x0+280];const wy=270;
+    const leak=drug?0:.5+.5*Math.sin(T*1.5);vesselWall(x0+20,x0+365,wy,drug?3:6+12*leak,T);
+    cups.forEach(cx=>{recCup(cx,wy-22,C.hist,null);if(drug)drugMol(cx,wy-26,8,null)});txt(x0+200,wy+122,"H1 receptors on a small blood vessel",{size:12,weight:600,align:"center",color:C["ink-soft"]});
+    for(let i=0;i<9;i++){const tgt=cups[i%3];const ph=P(T*.4+i/9,1);const sx=mx+20,sy=my+20;
+      if(!drug||ph<.35){const q=ease(clamp(ph/.6,0,1));ligand(lerp(sx,tgt,q),lerp(sy,wy-30,q),7)}else{const q=ease(clamp((ph-.35)/.6,0,1));const x=lerp(sx,tgt,.58),y=lerp(sy,wy-30,.58)-8;ligand(x+q*30,y-q*70,7,{a:1-q*.5})}}
+    if(!drug){for(let i=0;i<8;i++){const q=P(T*.6+i/8,1);circ(x0+60+i*38,lerp(wy+30,wy-90,q),4,hexA(C.h2o,(1-q)*.9))}
+      ["itch","sneeze","runny nose","hives"].forEach((s,i)=>label(x0+220+(i%2)*90,110+Math.floor(i/2)*36,s,{size:12.5,weight:700,border:C.bad}))}
+    else{label(x0+250,110,"histamine bounces off",{size:12.5,weight:700,border:C.good});label(x0+250,146,"vessel stays tight",{size:12.5,weight:700,border:C.good})}
+    txt(mx,my+52,"mast cell",{size:12,weight:600,align:"center"})});
+  txt(205,446,"leaky vessel: swelling",{size:12.5,weight:700,align:"center",color:C.bad});txt(597,446,"calm tissue",{size:12.5,weight:700,align:"center",color:C.good})}
+
+function sceneH1Gen(T){
+  panelBox(10,10,560,460);title(24,30,"Blood-brain barrier");
+  ctx.fillStyle=hexA(C.act1,.08);ctx.fillRect(14,40,552,160);brainIcon(80,110,34,0);txt(80,160,"brain",{size:12.5,weight:700,align:"center"});
+  for(let i=0;i<12;i++){rr(20+i*46,206,44,30,8);fillStroke(mix(C.blocked,C.panel,.4),C.blocked,1.3)}
+  txt(560,252,"blood",{size:12.5,weight:600,align:"right",color:C["ink-soft"]});
+  // first gen small molecules pass through gaps
+  let inBrain=0;for(let i=0;i<6;i++){const q=P(T*.25+i/6,1);const gx=66+i*92;const y=lerp(330,90,q);const x=gx+Math.sin(q*6+i)*6;drugMol(x,y,6,null);if(y<200)inBrain++}
+  label(24,290,"1st gen (diphenhydramine): slips in",{size:12.5,weight:700,border:C.drug,align:"left"});
+  // second gen bounce
+  for(let i=0;i<3;i++){const q=P(T*.4+i/3,1);const y=q<.5?lerp(400,262,q*2):lerp(262,400,(q-.5)*2);drugMol(400+i*60,y,12,null)}
+  label(24,420,"2nd gen (loratadine, cetirizine,",{size:12.5,weight:700,border:C.drug,align:"left"});label(24,446,"fexofenadine): mostly kept out",{size:12.5,weight:700,border:C.drug,align:"left"});
+  // sleepy
+  const z=.5+.5*Math.sin(T*2);ell(200,110,26,30,0,C.skin,C["skin-edge"],1.4);line(188,104,196,104,C.ink,2);line(204,104,212,104,C.ink,2);ell(200,124,5,3,0,C["skin-edge"]);
+  ["z","z","Z"].forEach((c,i)=>txt(232+i*12,90-i*12-z*4,c,{size:12+i*3,weight:700,color:C.act1}));txt(200,160,"drowsy",{size:12.5,weight:700,align:"center",color:C.bad});
+  // anticholinergic
+  panelBox(330,52,230,140,{fill:hexA(C.panel,.95)});txt(344,72,"Also blocks muscarinic receptors:",{size:12,weight:700});
+  recCup(360,120,C.m3,null);drugMol(360,116,6,null);["dry mouth, constipation","urine retention","blurred vision, confusion"].forEach((s,i)=>txt(390,104+i*24,s,{size:12.5,weight:600}));
+  // older adult
+  panelBox(580,10,210,460);title(594,30,"Older adults");
+  const sway=Math.sin(T*1.5)*.08;ctx.save();ctx.translate(685,340);ctx.rotate(sway);person(0,0,90,"stand",{col:mix(C.skin,C.panel,.15)});line(40,-86,60,0,C["ink-soft"],3.5);line(40,-86,28,-88,C["ink-soft"],3.5);ctx.restore();
+  for(let k=0;k<3;k++){const a=T*3+k*2.1;circ(685+Math.cos(a)*18,150+Math.sin(a)*6,3.5,C.gold)}
+  panelBox(594,370,182,86,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.95)});wrapText("Falls, confusion, urine retention: avoid 1st-gen in older adults",606,392,160,17,{size:12.5,weight:700})}
+
+function sceneDecong(T){
+  const L=12,t=P(T,L)*L;const d=smooth(seg(t,1.5,4));const cong=.9-.75*d;
+  panelBox(10,10,320,460);title(24,30,"Nasal passage");noseSection(30,70,280,230,cong,T);
+  for(let i=0;i<4;i++){const q=seg(t,.8+i*.15,1.8+i*.15);if(q<=0)continue;const X=30+280*(.25+i*.17),tY=70+4+230*(.14+.2*cong)*.35;drugMol(X+10,lerp(330,tY+14,ease(q)),7,null,{a:1})}
+  chipDrug(170,340,"decongestant (alpha-1 agonist)",{});txt(170,372,d>.5?"vessels squeezed: air flows":"swollen vessels block air",{size:12.5,weight:700,align:"center",color:d>.5?C.good:C.bad});
+  txt(170,410,"pseudoephedrine, phenylephrine",{size:12.5,weight:600,align:"center",color:C.drug});txt(170,430,"(oxymetazoline nasal spray)",{size:12,align:"center",color:C["ink-soft"]});
+  panelBox(340,10,200,460);title(354,30,"Taken by mouth");const sbp=lerp(128,146,d),dbp=lerp(80,90,d);bpDial(440,140,60,sbp,dbp,{col:d>.5?C.bad:C.ink});
+  const hr=Math.round(lerp(76,92,d));heart(440,320,32,T,{hr});txt(440,372,"HR "+hr,{size:13,mono:true,weight:700,align:"center"});if(d>.5)label(440,412,"BP and HR rise",{size:12.5,weight:700,border:C.bad});
+  panelBox(550,10,240,460);title(564,30,"Nasal spray: day by day");
+  const day=1+Math.floor(P(T,10)*7);for(let i=0;i<7;i++){const x=568+i*30,on=i<day;rr(x,60,26,46,5);ctx.fillStyle=on?hexA(i<3?C.good:C.bad,.35):C.sunk;ctx.fill();ctx.strokeStyle=i<3?C.good:C.bad;ctx.lineWidth=1.3;ctx.stroke();txt(x+13,75,String(i+1),{size:12,mono:true,weight:700,align:"center"});txt(x+13,94,i<3?"ok":"!",{size:12,weight:700,align:"center",color:i<3?C.good:C.bad})}
+  txt(568,124,"days 1-3: clear",{size:12.5,weight:700,color:C.good});if(day>3)txt(568,144,"day 4 on: rebound congestion",{size:12.5,weight:700,color:C.bad});
+  noseSection(580,166,180,110,day>3?.95:.2,T);
+  panelBox(564,300,212,156,{stroke:C.steroid,lw:2,fill:hexA(C.panel,.98)});txt(576,322,"Intranasal steroid",{size:13,weight:700,color:C.steroid});
+  wrapText("Calms allergic inflammation. Slower (days), daily use, no rebound. May irritate the nose or cause nosebleeds.",576,346,192,17,{size:12.5})}
+
+function sceneCough(T){
+  const L=10,t=P(T,L)*L;
+  // panel 1
+  panelBox(10,10,252,460);title(24,30,"Cough suppressants");const dim=smooth(seg(t,2,4));brainIcon(136,96,34,.7*(1-dim));glow(150,100,30,C.brady,.6*(1-dim)*(.5+.5*Math.sin(T*6)));txt(136,146,"cough centre",{size:12.5,weight:700,align:"center"});
+  line(136,160,136,280,C["ink-soft"],2,[4,4]);for(let k=0;k<3;k++){const q=P(T*.9+k/3,1);circ(136,lerp(160,280,q),6*(1-dim*.7),hexA(C.brady,1-dim*.6))}lungIcon(136,320,30);
+  chipDrug(136,206,"dextromethorphan",{a:dim});chipDrug(136,240,"or codeine",{a:dim});
+  panelBox(24,370,224,90,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.95)});txt(36,390,"Codeine (opioid):",{size:12.5,weight:700,color:C.bad});wrapText("slows breathing, constipation, drowsy; not for children under 12",36,410,204,16,{size:12});
+  // panel 2
+  panelBox(272,10,256,460);title(286,30,"Expectorant");const th=smooth(seg(t,2,6));
+  rr(350,80,100,300,30);fillStroke(C.air,C["mucosa-edge"],1.8);for(let k=0;k<6;k++){const y=100+k*45;line(352,y,362,y-5+Math.sin(T*6+k)*3,C.cilia,1.4);line(448,y,438,y-5+Math.sin(T*6+k)*3,C.cilia,1.4)}
+  const my=lerp(300,180,th)-((th>.95)?P(T*.3,1)*80:0);blobPath(400,my,lerp(40,26,th),2,T*.4,.12);fillStroke(hexA(mix(C.mucus,C.h2o,th*.5),lerp(.95,.6,th)),C["mucus-edge"],1.4);
+  for(let i=0;i<8;i++){const q=P(T*.7+i/8,1);if(t<1.5)break;circ(lerp(487,410,q),lerp(300,my,q)+Math.sin(q*8+i)*6,4,hexA(C.h2o,.9))}
+  rr(470,300,34,46,4);fillStroke(hexA(C.glass,.8),C["glass-edge"],1.4);rr(473,314,28,30,3);ctx.fillStyle=hexA(C.h2o,.6);ctx.fill();
+  chipDrug(400,56,"guaifenesin",{});txt(400,420,th>.6?"loosened: easier to cough up":"thick, sticky mucus",{size:12.5,weight:700,align:"center",color:th>.6?C.good:C.ink});txt(400,446,"drink plenty of fluids",{size:12.5,weight:700,align:"center",color:C.ink});
+  // panel 3
+  panelBox(538,10,252,460);title(552,30,"Mucolytic");const cut=seg(t,2,6);const sx=lerp(560,780,cut);
+  for(let k=0;k<5;k++){const y=110+k*42;ctx.beginPath();for(let x=560;x<=770;x+=4){const broke=x<sx&&((x-560)%40>30);const Y=y+Math.sin(x*.06+k+T)*6;if(broke){ctx.moveTo(x,Y);continue}x===560?ctx.moveTo(x,Y):ctx.lineTo(x,Y)}ctx.strokeStyle=C["mucus-edge"];ctx.lineWidth=4;ctx.stroke();
+    if(k<4){for(let x=580;x<760;x+=40){if(x<sx)continue;line(x,y+4,x+8,y+40,hexA(C["mucus-edge"],.7),2)}}}
+  if(cut>0&&cut<1){ctx.save();ctx.translate(sx,94);ctx.rotate(.3);line(-10,-10,10,10,C.drug,3);line(-10,10,10,-10,C.drug,3);circ(-12,-12,5,null,C.drug,2.5);circ(-12,12,5,null,C.drug,2.5);ctx.restore()}
+  chipDrug(664,330,"acetylcysteine",{});txt(664,362,cut>.9?"strands cut into pieces":"bonds hold strands together",{size:12.5,weight:700,align:"center"});
+  panelBox(552,380,224,80,{stroke:C.bad,lw:2,fill:hexA(C["bad-wash"],.95)});wrapText("May cause bronchospasm: bronchodilator first. Rotten-egg smell.",564,402,204,16,{size:12.5,weight:700})}
+
+/* ================= Part 6 ================= */
+function sceneSmoke(T){
+  const L=12,t=P(T,L)*L;
+  panelBox(10,10,465,460);title(24,30,"Nicotine level in the brain over a day");
+  const gx=60,gy=70,gw=390,gh=270;gframe(gx,gy,gw,gh,{xl:"time of day"});
+  const cig=h=>{let v=.12;for(let k=0;k<10;k++){const c=7+k*1.6;if(h>c)v+=.75*Math.exp(-(h-c)/.45)}return Math.min(1,v)};const patch=h=>.42*smooth(seg(h,6.5,8))+(h>11&&h<11.6?.08*Math.sin((h-11)/.6*Math.PI):0)+(h>16&&h<16.6?.08*Math.sin((h-16)/.6*Math.PI):0);
+  const up=6+P(T,L)*17;plotFn(cig,6,23,gx,gy,gw,gh,0,1,C.blocked,2.4,null,up);plotFn(patch,6,23,gx,gy,gw,gh,0,1,C.steroid,3,[8,4],up);
+  for(let k=0;k<10;k++){const c=7+k*1.6;if(up<c)break;const X=gx+gw*(c-6)/17;cigarette(X-8,gy-12,14,T,{lit:false})}
+  for(let k=0;k<9;k++){const c=7+k*1.6+1.3;if(up<c)break;const X=gx+gw*(c-6)/17,Y=gy+gh-cig(c)*gh;txt(X,Y+16,"!",{size:13,weight:700,color:C.bad,align:"center"})}
+  label(gx+gw*.32,gy+gh+34,"cigarettes: spikes and cravings (!)",{size:12.5,weight:700,border:C.blocked,align:"left"});label(gx+gw*.32,gy+gh+64,"patch + gum: steady, small bumps",{size:12.5,weight:700,border:C.steroid,align:"left"});
+  // receptor
+  panelBox(485,10,305,320);title(499,30,"Nicotinic receptor");const p=P(T,8);const vr=p>=.5;
+  bilayerH(500,775,200);recCup(637,200,C.receptor,null);
+  if(!vr){for(let i=0;i<5;i++){const q=ease(clamp((p*2-i*.1)/.6,0,1));circ(lerp(560+i*30,637,q),lerp(70,192,q),5,C.blocked,hexA(C.ink,.3),1)}const sp=smooth(seg(p,.25,.35));for(let k=0;k<10;k++){const a=k/10*TAU+T;circ(637+Math.cos(a)*(30+sp*40),240+Math.sin(a)*(10+sp*20),4*sp,C.gold)}label(637,300,"nicotine: big reward spike",{size:12.5,weight:700,border:C.gold})}
+  else{drugMol(637,196,8,null);for(let k=0;k<5;k++){const a=k/5*TAU+T;circ(637+Math.cos(a)*30,240+Math.sin(a)*10,3,C.gold)}for(let i=0;i<4;i++){const q=P(T*.6+i/4,1);circ(lerp(600+i*20,637,Math.min(q*2,1))+(q>.5?(q-.5)*120*(i%2?1:-1):0),q<.5?lerp(80,180,q*2):lerp(180,90,(q-.5)*2),5,C.blocked,hexA(C.ink,.3),1)}
+    label(637,72,"varenicline (partial agonist)",{size:12.5,weight:700,border:C.drug});label(637,300,"small steady signal; nicotine blocked",{size:12.5,weight:700,border:C.good})}
+  panelBox(485,340,305,130,{stroke:C.warn,lw:2});txt(499,362,"Bupropion",{size:13,weight:700});wrapText("Boosts dopamine and norepinephrine. Lowers seizure threshold: avoid in seizure disorders. Watch mood (varenicline too).",499,384,280,17,{size:12.5})}
+
+function sceneOxygen(T){
+  panelBox(10,10,400,460);title(24,30,"Oxygen to the blood");
+  rr(30,60,44,90,8);fillStroke(C.panel,C["ink-soft"],1.5);rr(42,72,20,62,6);fillStroke(hexA(C.glass,.8),C["glass-edge"],1.2);circ(52,100+Math.sin(T*2)*4,6,C.good);txt(84,100,"flowmeter",{size:12,weight:600});
+  person(250,380,80,"sit",{});const nose=[268,268];const tube=[[52,150],[60,230],[150,250],[220,262],nose];poly(tube,hexA(C.o2,.6),3);
+  for(let i=0;i<10;i++){const q=P(T*.4+i/10,1);const pt=along(tube,q);circ(pt[0],pt[1],3.5,C.o2)}
+  // alveolus zoom
+  const ax=110,ay=372;rr(ax-70,ay+40,150,26,13);fillStroke(hexA(C.plasma,.95),C.vessel,1.4);circ(ax,ay,56,hexA(C.air,.95),C["mucosa-edge"],2);txt(ax,ay-68,"air sac",{size:12,weight:600,align:"center"});
+  for(let i=0;i<6;i++){const q=P(T*.5+i/6,1);circ(ax+Math.cos(i)*30*(1-q),ay+Math.sin(i)*30*(1-q)+q*40,3.5,hexA(C.o2,1-q*.3))}
+  for(let i=0;i<5;i++){const X=ax-60+((i*30+T*25)%130);const ox=X>ax-10;ell(X,ay+53,10,6,0,ox?C.blood:mix(C.blood,C.act1,.4),hexA(C.ink,.3),1)}txt(ax+88,ay+53,"red cells pick up O₂",{size:12,weight:600,align:"left"});
+  // gauge
+  panelBox(420,10,190,460);title(434,30,"SpO₂ target");const gx=470,gy=60,gh=380;const V=v=>gy+gh-(v-80)/20*gh;
+  rr(gx,gy,40,gh,8);fillStroke(C.sunk,C.rule,1.2);ctx.fillStyle=hexA(C.good,.45);ctx.fillRect(gx,V(96),40,V(92)-V(96));ctx.fillStyle=hexA(C.gold,.55);ctx.fillRect(gx,V(92),40,V(88)-V(92));
+  [80,85,90,95,100].forEach(v=>txt(gx-6,V(v),String(v),{size:12,mono:true,align:"right",color:C["ink-soft"]}));
+  txt(gx+50,V(94)-8,"most adults",{size:12,weight:700});txt(gx+50,V(94)+8,"92-96%",{size:12,mono:true,weight:700,color:C.good});txt(gx+50,V(90)-2,"some COPD",{size:12,weight:700});txt(gx+50,V(90)+14,"88-92%",{size:12,mono:true,weight:700,color:C["gold-ink"]});
+  const m=Math.floor(T/6)%2;const tgt=m?90:94.5;const v=lerp(84,tgt,smooth(seg(P(T,6),0,.5)));line(gx-8,V(v),gx+44,V(v),C.ink,3);txt(gx+20,gy+gh+18,m?"COPD, CO₂ retainer":"typical adult",{size:12,weight:700,align:"center"});
+  // fire
+  panelBox(620,10,170,460);title(634,30,"Fire safety");
+  const sign=(x,y,fn)=>{circ(x,y,46,C.panel,C.bad,5);fn();line(x-32,y+32,x+32,y-32,C.bad,5)};
+  sign(705,120,()=>cigarette(680,120,32,T,{}));sign(705,260,()=>{const f=.9+.1*Math.sin(T*8);ctx.beginPath();ctx.moveTo(705,230);ctx.bezierCurveTo(735,262*f+10,722,292,705,292);ctx.bezierCurveTo(688,292,675,262,705,230);fillStroke(C.act6,C.warn,1.4)});
+  txt(705,346,"Oxygen feeds fire",{size:13,weight:700,align:"center",color:C.bad});wrapText("No smoking or open flames. Keep tanks upright and away from heat.",634,376,146,17,{size:12.5})}
+
+function sceneRecap(T){
+  panelBox(10,10,400,460);title(24,30,"Three problems, three drug groups");
+  const k=Math.floor(T/2.4)%3;const g=[["Squeeze",["albuterol (rescue)","salmeterol, formoterol","ipratropium, tiotropium","theophylline"],{sq:.85,sw:.1,inf:.1}],["Swelling",["fluticasone, budesonide","prednisone (flares)","montelukast","cromolyn, omalizumab"],{sq:.2,sw:.9,inf:.9}],["Mucus",["guaifenesin","acetylcysteine","(+ cough: dextromethorphan)"],{mu:.95,sw:.2}]];
+  g.forEach((r,i)=>{const y=96+i*134;bronchiole(64,y,46,T,r[2]);const on=i===k;txt(124,y-46,r[0],{size:14,weight:700,color:on?C.drug:C.ink});
+    r[1].forEach((d,j)=>{const yy=y-22+j*21;if(on){hexPath(130,yy,5,Math.PI/6);fillStroke(C.drug)}else circ(130,yy,3,C["ink-soft"]);txt(142,yy,d,{size:12.5,weight:on?600:500})})});
+  const parts=[["Airway basics","act1","Beta-2 relaxes, M3 squeezes; rescue vs controller"],["Bronchodilators","act2","SABA rescue; LABA never alone in asthma; -tropium dry mouth"],["Anti-inflammatories","act3","ICS daily, rinse; prednisone glucose; montelukast mood"],["Inhalers and step care","act4","Spacer slow breath; DPI fast breath; bronchodilator first"],["Allergy, cold and cough","act5","1st-gen sedates; decongestant BP and rebound"],["Quitting and oxygen","act6","NRT, varenicline, bupropion seizures; O₂ to a target"]];
+  partCards(parts,Math.floor(P(T,16)*7),"all")}
+
+/* ---------------- loop ---------------- */
+window.addEventListener("resize",fit);
+let T=0,last=performance.now();
+const SCENES={map:sceneMap,airway:sceneAirway,asthmacopd:sceneAsthmaCopd,timing:sceneTiming,saba:sceneSaba,sabaae:sceneSabaAE,laba:sceneLaba,antichol:sceneAntichol,theo:sceneTheo,ics:sceneIcs,icsae:sceneIcsAE,systemic:sceneSystemic,montelukast:sceneMonte,mastbio:sceneMastBio,mdi:sceneMdi,dpi:sceneDpi,order:sceneOrder,stepwise:sceneStepwise,h1:sceneH1,h1gen:sceneH1Gen,decong:sceneDecong,cough:sceneCough,smoke:sceneSmoke,oxygen:sceneOxygen,recap:sceneRecap};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneMap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;if(!paused)T+=dt*speed;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

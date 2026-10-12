@@ -1,0 +1,1262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medication Safety Lab</title>
+<meta name="description" content="Practice lab for medication safety: a dosage calculation trainer with made-up practice problems, an IV pump simulator, a spot-the-error medication record checker, a toxidrome-to-antidote match and sorting games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3785;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#2F7FC1;--act3:#C4644F;--act4:#2E8A7A;--act5:#A04E8C;--act6:#D98A1C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF1F6;--grid:#D5DAE6;
+  --drug:#5B3FC4;--receptor:#1E8A84;--ligand:#D08A12;--blocked:#8B9094;
+  --na:#D9A015;--k:#B03A8C;--cl:#2E8A4A;--h2o:#3F8FD0;--ca:#5E7183;--glu:#C77A12;--urate:#9A6A12;
+  --blood:#C0392B;--plasma:#F4D9D2;--vessel:#C4644F;--smooth:#D9A07A;--smooth-edge:#A8704A;--heart:#B5303A;--heart-edge:#7E1F27;
+  --tubule:#E9DCCB;--tubule-edge:#A88B6A;--lumen:#FBF6EA;--urine:#E8C64A;--peri:#F3D6D0;
+  --renin:#2F7FC1;--angio:#C4644F;--aldo:#D98A1C;--brady:#A04E8C;--symp:#D98A1C;--ace:#2E8A7A;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --scr:#0E1A1F;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#CFE5F1;--glass:#DCE8EE;--glass-edge:#7F99A6;--fruit:#E0784A;--fruit-in:#F2B6A0;
+  --paper:#FFFDF7;--anti:#1F7A5A;--toxin:#A8462A;--liq:#D98A1C;--pump:#3C4A55;--band:#F2F5F8;--powder:#E9E2F2;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;--serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --paper:#1E262B;--anti:#5FD0A0;--toxin:#F08A6A;--liq:#E0A050;--pump:#2A353D;--band:#24313A;--powder:#3A3450;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#CBD2FA;--accent-wash:#1C2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5AA9E6;--act3:#E08A74;--act4:#5CC4B0;--act5:#D186C0;--act6:#F2A93B;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--grid:#26303D;
+  --drug:#B3A1F5;--receptor:#5CC9C0;--ligand:#F2B33B;--blocked:#6F767B;
+  --na:#F2C14E;--k:#E07AC4;--cl:#6BC293;--h2o:#6FB3EC;--ca:#A9B7C2;--glu:#E0A050;--urate:#D9B070;
+  --blood:#E8705F;--plasma:#3A2424;--vessel:#E08A74;--smooth:#9A6A4A;--smooth-edge:#D9A07A;--heart:#E0707A;--heart-edge:#F2A3AA;
+  --tubule:#3E3528;--tubule-edge:#B39773;--lumen:#22201A;--urine:#C9A83A;--peri:#3A2622;
+  --renin:#5AA9E6;--angio:#E08A74;--aldo:#F2A93B;--brady:#D186C0;--symp:#F2A93B;--ace:#5CC4B0;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3E3528;--body-edge:#B39773;
+  --scr:#0A1216;--scr-ink:#E8EEF1;--scr-soft:#A3B2BA;
+  --water:#1F3A4A;--glass:#1E2C34;--glass-edge:#7F99A6;--fruit:#F0946A;--fruit-in:#7A4A3A;
+  --paper:#1E262B;--anti:#5FD0A0;--toxin:#F08A6A;--liq:#E0A050;--pump:#2A353D;--band:#24313A;--powder:#3A3450;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{font-size:13.5px;line-height:1.25;padding:7px 8px;text-align:left}
+.drugbtns .tbtn small{display:block;font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--rule);border-left-width:5px;background:var(--panel-2);font-size:14.5px}
+.alert b{white-space:nowrap}
+.alert .ic{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:12px;padding:1px 6px;border-radius:4px;border:1.5px solid currentColor}
+.alert.bad{border-color:var(--bad);background:var(--bad-wash)}.alert.bad .ic{color:var(--bad)}
+.alert.warn{border-color:var(--warn);background:var(--warn-wash)}.alert.warn .ic{color:var(--warn-ink)}
+.alert.good{border-color:var(--good);background:var(--good-wash)}.alert.good .ic{color:var(--good)}
+.alert.info{border-color:var(--accent);background:var(--accent-wash)}.alert.info .ic{color:var(--accent-ink)}
+.readouts td.hi{color:var(--bad);font-weight:700}.readouts td.lo{color:var(--accent-ink);font-weight:700}.readouts td.ok{color:var(--good);font-weight:600}
+.bins{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.binhead span{min-width:0;overflow-wrap:break-word}
+.practice-banner{background:var(--gold-wash);border-left:4px solid var(--gold);border-radius:4px;padding:8px 12px;margin:0 0 12px;font-size:14.5px;color:var(--ink)}
+.practice-tag{display:inline-block;background:var(--gold-wash);border:1.5px solid var(--gold);color:var(--ink);border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600;line-height:1.3}
+.lab-sel{display:block;font-weight:600;font-size:14.5px;margin:12px 0 4px}
+#calcType{width:100%;padding:7px 8px;font-size:15px}
+.probcard{margin:12px 0 8px;padding:12px 14px;border:1px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);background:var(--panel-2);font-size:15.5px;line-height:1.5}
+.probcard .pt{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+.probcard .rd{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.ansrow{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ans-l{font-weight:600;font-size:14.5px}
+.ansbox{display:flex;align-items:center;gap:8px}
+.ansbox input{font:600 18px var(--mono);width:150px;padding:7px 9px;border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);color:var(--ink)}
+.ansbox input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.unit{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink-soft)}
+.streak{margin-top:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg4b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg2 .tbtn,.seg4b .tbtn{font-size:13.5px;line-height:1.25;padding:8px 6px}
+.marfields{display:grid;grid-template-columns:1fr;gap:6px}
+.mf{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:8px 10px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.mf:hover{border-color:var(--accent)}
+.mf .k{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft)}
+.mf.right{border-color:var(--good);background:var(--good-wash)}
+.mf.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mf.hinted{box-shadow:0 0 0 3px var(--gold)}
+.antis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.antis .tbtn{text-align:left;font-size:14px;line-height:1.25;padding:8px 9px}
+.antis .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.antis .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.antis .tbtn.hinted{box-shadow:0 0 0 3px var(--gold)}
+@media (max-width:420px){.mf{grid-template-columns:1fr;gap:2px}.antis{grid-template-columns:1fr}}
+.case.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+@media (max-width:900px){.case.wide{grid-template-columns:1fr}}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 15 &middot; Medication safety, dosage calculation and toxicology</div>
+    <h1>Medication Safety Lab</h1>
+    <p class="sub">Practice dosage math and watch the answer fill a syringe, cup or pump, run an IV pump, catch errors on a medication record, match poisonings to antidotes and sort safety facts. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <p class="practice-banner"><b>Practice only.</b> Every order, label and number in this lab is made up to learn the math and the safety habits. It is not dosing guidance.</p>
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-calc" data-tab="calc" id="tabbtn-calc" type="button">Part 1 &middot; Dosage Trainer</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-pump" data-tab="pump" id="tabbtn-pump" type="button" tabindex="-1">Part 2 &middot; IV Pump Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-mar" data-tab="mar" id="tabbtn-mar" type="button" tabindex="-1">Part 3 &middot; Spot the Error</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-tox" data-tab="tox" id="tabbtn-tox" type="button" tabindex="-1">Part 4 &middot; Toxidrome Match</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 5 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1 -->
+  <section id="tab-calc" role="tabpanel" aria-labelledby="tabbtn-calc">
+    <h2 class="gk-sr">Part 1: Dosage Trainer</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCalc" role="img" aria-label="Dosage trainer picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="calcCap"></span></div>
+        <p class="sim-note">The device fills to the answer you type, so you can see whether the amount looks sensible. The worked solution uses dimensional analysis: watch the units cancel.</p>
+      </div>
+      <aside class="card side" aria-label="Dosage trainer controls">
+        <div class="calc-top"><span class="practice-tag">Practice problem: made-up numbers to learn the math, not dosing guidance</span></div>
+        <label class="lab-sel" for="calcType">Problem type</label>
+        <select id="calcType"></select>
+        <div class="probcard" id="calcProb" aria-live="polite"></div>
+        <div class="ansrow">
+          <label for="calcAns" class="ans-l">Your answer</label>
+          <div class="ansbox"><input type="number" id="calcAns" step="any" inputmode="decimal" autocomplete="off"><span id="calcUnit" class="unit"></span></div>
+        </div>
+        <div class="bar">
+          <button class="btn" id="calcCheck" type="button">Check</button>
+          <button class="tbtn" id="calcHint" type="button">Hint</button>
+          <button class="tbtn" id="calcSol" type="button">Show worked solution</button>
+          <button class="tbtn" id="calcNew" type="button">New problem</button>
+        </div>
+        <div class="msg" id="calcMsg" role="status"></div>
+        <div class="hintbox" id="calcHintBox" role="status" hidden></div>
+        <div class="meter streak"><span>Streak <b id="calcStreak">0</b></span><span>Best <b id="calcBest">0</b></span><span>Solved <b id="calcSolved">0</b></span></div>
+        <p class="small">The streak counts answers right on the first check without opening the solution. Rounding rules are in each problem.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <section id="tab-pump" role="tabpanel" aria-labelledby="tabbtn-pump" hidden>
+    <h2 class="gk-sr">Part 2: IV Pump Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvPump" role="img" aria-label="IV pump simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="pumpCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--water)"></i>IV fluid</span>
+          <span><i style="background:var(--h2o)"></i>Drops in the drip chamber</span>
+          <span><i class="ln" style="border-top-color:var(--accent)"></i>Volume left over time</span>
+        </div>
+        <div class="alerts" id="pumpAlerts" role="status" aria-live="polite"></div>
+        <p class="sim-note">Teaching model with made-up practice settings. Drops are shown at real speed; use time-lapse to watch the bag empty.</p>
+      </div>
+      <aside class="card side" aria-label="IV pump controls">
+        <h3 id="pm-h">Delivery</h3>
+        <div class="seg2" id="pumpMode" role="group" aria-labelledby="pm-h"></div>
+        <div class="ctl"><label for="pumpVol">Volume to infuse (VTBI) <output id="pumpVolO" for="pumpVol"></output></label><input type="range" id="pumpVol" min="50" max="1000" step="50" value="1000"></div>
+        <div class="ctl"><label for="pumpRate">Rate <output id="pumpRateO" for="pumpRate"></output></label><input type="range" id="pumpRate" min="5" max="500" step="5" value="125"></div>
+        <div id="dfWrap"><h3 id="df-h">Tubing drop factor</h3><div class="seg4b" id="pumpDf" role="group" aria-labelledby="df-h"></div></div>
+        <h3 id="tl-h">Time-lapse</h3>
+        <div class="seg3" id="pumpLapse" role="group" aria-labelledby="tl-h"></div>
+        <div class="bar">
+          <button class="btn" type="button" id="pumpRun">Start infusion</button>
+          <button class="tbtn" type="button" id="pumpReset">New bag</button>
+        </div>
+        <table class="readouts" id="pumpRead"><caption class="gk-sr">Live readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <h3>Challenges</h3>
+        <ul class="chal" id="pumpChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <section id="tab-mar" role="tabpanel" aria-labelledby="tabbtn-mar" hidden>
+    <h2 class="gk-sr">Part 3: Spot the Error</h2>
+    <div class="casechips" id="marChips" role="group" aria-label="Choose a medication record"></div>
+    <div class="meter"><span>Record <b id="marN">1</b> of <b id="marT">10</b></span><span>Errors found <b id="marFound">0</b></span><span>First try <b id="marFirst">0</b></span></div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvMar" role="img" aria-label="Medication record."></canvas></div>
+        <p class="sim-note">Fictional patients and practice orders with one deliberate error each.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="marWho"></div>
+        <h2 class="sc-title" id="marTitle">Find the one unsafe part</h2>
+        <p class="story" id="marStory"></p>
+        <p class="qlab" id="marQ">Tap the part of the record that is unsafe:</p>
+        <div class="marfields" id="marFields" role="group" aria-labelledby="marQ"></div>
+        <div class="fb" id="marFb" role="status"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="marHint" type="button">Hint</button>
+          <button class="tbtn" id="marShow" type="button">Show answer</button>
+          <button class="tbtn" id="marPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="marNext" type="button">Next record &rarr;</button>
+        </div>
+        <div class="hintbox" id="marHintBox" role="status" hidden></div>
+        <p class="calm">Wrong picks are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <section id="tab-tox" role="tabpanel" aria-labelledby="tabbtn-tox" hidden>
+    <h2 class="gk-sr">Part 4: Toxidrome Match</h2>
+    <div class="sorthead">
+      <div class="meter"><span>Patient <b id="toxN">1</b> of <b id="toxT">13</b></span><span>Matched <b id="toxDone">0</b></span><span>Mistakes <b id="toxMist">0</b></span></div>
+      <div class="sortbar">
+        <label class="mode"><input type="checkbox" id="toxRelaxed" checked> Relaxed mode (no timer)</label>
+        <span class="timer" id="toxTimer" hidden>0:00</span>
+        <span class="stars" id="toxStars" role="img" aria-label="Stars appear when every patient is matched"></span>
+      </div>
+    </div>
+    <div class="case wide">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvTox" role="img" aria-label="Patient picture."></canvas></div>
+        <p class="sim-note">Fictional adult patients. Vital signs and labs are rounded teaching values that show a pattern, not thresholds.</p>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="toxWho"></div>
+        <h2 class="sc-title" id="toxTitle"></h2>
+        <p class="story" id="toxStory"></p>
+        <p class="qlab" id="toxQ">After supporting airway, breathing and circulation (and calling poison control), which antidote fits this pattern?</p>
+        <div class="antis" id="toxBtns" role="group" aria-labelledby="toxQ"></div>
+        <div class="fb" id="toxFb" role="status"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="toxHint" type="button">Hint</button>
+          <button class="tbtn" id="toxShow" type="button">Show answer</button>
+          <button class="tbtn" id="toxRestart" type="button">Start over</button>
+          <button class="btn" id="toxNext" type="button">Next patient &rarr;</button>
+        </div>
+        <div class="hintbox" id="toxHintBox" role="status" hidden></div>
+        <p class="small" id="toxBest"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 5 -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 5: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Learn the ideas first in the <a href="Safety-Walkthrough.html">Medication Safety Walkthrough</a>. Every problem, order and label here is a practice problem with made-up numbers to learn the math, not dosing guidance. Patients are fictional. Drugs are named by generic name only. For a real poisoning, call poison control or emergency services and follow your facility's protocols.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "grid", "drug", "receptor", "ligand", "blocked", "na", "k", "cl", "h2o", "ca", "glu", "urate", "blood", "plasma", "vessel", "smooth", "smooth-edge", "heart", "heart-edge", "tubule", "tubule-edge", "lumen", "urine", "peri", "renin", "angio", "aldo", "brady", "symp", "ace", "skin", "skin-edge", "body", "body-edge", "scr", "scr-ink", "scr-soft", "water", "glass", "glass-edge", "fruit", "fruit-in", "paper", "anti", "toxin", "liq", "pump", "band", "powder"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= module 7 drawing helpers ================= */
+function lumOf(c){const A=hx(c).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*A[0]+.7152*A[1]+.0722*A[2]}
+function inkOn(c){return lumOf(c)>.3?"#10161A":"#fff"}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<=6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function blockSign(x,y,r,col){circ(x,y,r,hexA(C.panel,.9),col||C.bad,2.5);line(x-r*.7,y+r*.7,x+r*.7,y-r*.7,col||C.bad,2.5)}
+/* ion token. kinds: na k cl ca h2o glu urate */
+const IONLAB={na:"Na⁺",k:"K⁺",cl:"Cl⁻",ca:"Ca²⁺",glu:"Glu",urate:"UA"};
+function ion(kind,x,y,r,o){o=o||{};r=r||8;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);
+  if(kind==="h2o"){ctx.beginPath();ctx.moveTo(x,y-r*1.3);ctx.bezierCurveTo(x+r*.95,y-r*.15,x+r*.95,y+r*.9,x,y+r*.9);ctx.bezierCurveTo(x-r*.95,y+r*.9,x-r*.95,y-r*.15,x,y-r*1.3);ctx.closePath();
+    ctx.fillStyle=C.h2o;ctx.fill();ctx.strokeStyle=hexA(C.ink,.35);ctx.lineWidth=1;ctx.stroke();circ(x-r*.3,y,r*.22,hexA("#ffffff",.55))}
+  else{const col=C[kind]||C.ink;circ(x,y,r,col,hexA(C.ink,.45),1);
+    if(o.lab!==false&&r>=7){const t=IONLAB[kind]||"";ctx.font=`700 ${r>=10?10.5:Math.max(8,r*1.05)}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=inkOn(col);ctx.fillText(t.replace(/[⁺⁻²]/g,""),x,y+.5)}}
+  ctx.restore()}
+/* drug molecule: indigo hexagon with a short label */
+function drugMol(x,y,s,lab,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  hexPath(0,0,s,Math.PI/6);fillStroke(o.col||C.drug,hexA(C.ink,.5),1.3);hexPath(0,0,s*.55,Math.PI/6);ctx.strokeStyle=hexA(inkOn(o.col||C.drug),.5);ctx.lineWidth=1;ctx.stroke();ctx.restore();
+  if(lab)label(x,y+s+11,lab,{size:12,weight:700,color:C.drug,a:o.a})}
+/* natural signal molecule (ligand): amber diamond */
+function ligand(x,y,s,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s,0);ctx.lineTo(0,s);ctx.lineTo(-s,0);ctx.closePath();fillStroke(o.col||C.ligand,hexA(C.ink,.5),1.2);ctx.restore()}
+/* heart that beats. o.hr beats/min, o.force 0..1.5, o.label */
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.35,y+s*.1,x-s*1.05,y-s*1.05,x,y-s*.45);ctx.bezierCurveTo(x+s*1.05,y-s*1.05,x+s*1.35,y+s*.1,x,y+s*.95);ctx.closePath()}
+function beatPhase(T,hr){return P(T*(hr||75)/60,1)}
+function heart(x,y,s,T,o){o=o||{};const hr=o.hr||75,f=o.force==null?1:o.force;const ph=beatPhase(T,hr);const sq=Math.exp(-Math.pow((ph-.18)/.09,2));const k=1-.09*f*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);ctx.fillStyle=o.col||C.heart;ctx.fill();ctx.strokeStyle=C["heart-edge"];ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-s*.15,-s*.5);ctx.quadraticCurveTo(s*.1,s*.1,-s*.05,s*.6);ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.6;ctx.stroke();
+  rr(-s*.28,-s*1.1,s*.22,s*.5,s*.1);ctx.fillStyle=o.col||C.heart;ctx.fill();rr(s*.08,-s*1.15,s*.26,s*.55,s*.12);ctx.fill();ctx.restore();
+  if(sq>.3&&o.pulse!==false)pulseRing(x,y,s*1.4,o.col||C.heart,clamp((ph-.12)/.3,0,1));return sq}
+/* artery segment (horizontal). r = lumen radius, o.flow speed, o.tone 0..1 (squeeze) */
+function artery(x,y,w,r,T,o){o=o||{};const wall=o.wall||12;const tone=o.tone==null?.5:o.tone;
+  const mcol=mix(C.smooth,C.vessel,tone);
+  rr(x,y-r-wall,w,2*(r+wall),8);ctx.fillStyle=mcol;ctx.fill();ctx.strokeStyle=C["smooth-edge"];ctx.lineWidth=1.5;ctx.stroke();
+  for(let X=x+8;X<x+w-4;X+=11){line(X,y-r-wall+2,X+4,y-r-2,hexA(C["smooth-edge"],.55),1.4);line(X,y+r+2,X+4,y+r+wall-2,hexA(C["smooth-edge"],.55),1.4)}
+  rr(x,y-r,w,2*r,Math.min(6,r));ctx.fillStyle=C.plasma;ctx.fill();
+  ctx.save();rr(x,y-r,w,2*r,Math.min(6,r));ctx.clip();const n=Math.max(4,Math.round(w/22));const sp=o.flow==null?60:o.flow;
+  for(let i=0;i<n*2;i++){const X=x+((i*w/n*.5+T*sp+rnd(i)*20)%(w+20))-10;const Y=y+(rnd(i*3+1)-.5)*1.4*Math.max(0,r-5);ell(X,Y,6,3.6,0,C.blood,hexA(C.ink,.3),.8)}ctx.restore()}
+/* fluid tank (blood volume) */
+function volTank(x,y,w,h,level,T,o){o=o||{};rr(x,y,w,h,10);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();const lh=(h-6)*clamp(level,0,1);
+  ctx.save();rr(x,y,w,h,10);ctx.clip();ctx.fillStyle=hexA(C.blood,.75);ctx.beginPath();ctx.moveTo(x,y+h-lh);for(let i=0;i<=w;i+=5)ctx.lineTo(x+i,y+h-lh+Math.sin(i/11+T*3)*2.2);ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.closePath();ctx.fill();ctx.restore();
+  rr(x,y,w,h,10);ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke();
+  for(let k=1;k<4;k++)line(x+w-10,y+h*k/4,x+w,y+h*k/4,C["ink-soft"],1.2);
+  if(o.label)txt(x+w/2,y-12,o.label,{size:12.5,weight:700,align:"center"})}
+/* BP dial, 0..240 mmHg */
+function bpDial(x,y,r,sbp,dbp,o){o=o||{};circ(x,y,r,C.panel,C["ink-soft"],2);const a0=Math.PI*.75,a1=Math.PI*2.25;const ang=v=>a0+(a1-a0)*clamp(v/240,0,1);
+  [[0,120,C.good],[120,140,C.gold],[140,240,C.bad]].forEach(b=>{ctx.beginPath();ctx.arc(x,y,r-7,ang(b[0]),ang(b[1]));ctx.strokeStyle=hexA(b[2],.6);ctx.lineWidth=6;ctx.stroke()});
+  for(let v=0;v<=240;v+=40){const a=ang(v);line(x+Math.cos(a)*(r-14),y+Math.sin(a)*(r-14),x+Math.cos(a)*(r-3),y+Math.sin(a)*(r-3),C["ink-soft"],1.5);if(r>=46)txt(x+Math.cos(a)*(r-24),y+Math.sin(a)*(r-24),String(v),{size:10.5,mono:true,align:"center",color:C["ink-soft"]})}
+  const a=ang(sbp);line(x,y,x+Math.cos(a)*(r-10),y+Math.sin(a)*(r-10),C.ink,3);circ(x,y,5,C.ink);
+  txt(x,y+r+13,Math.round(sbp)+"/"+Math.round(dbp)+(o.label===false?"":" mmHg"),{size:r>=46?14.5:13,mono:true,weight:700,align:"center",color:o.col||C.ink})}
+/* simplified ECG wave, t in beats */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+function ecgTrace(x,y,w,h,hr,T,col,o){o=o||{};const secs=o.secs||4;ctx.save();rr(x,y,w,h,4);ctx.clip();ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=(T-(w-i)/w*secs)*hr/60;const v=ecgWave(tt)*(o.amp||1);const Y=y+h*.68-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C.good;ctx.lineWidth=2;ctx.stroke();ctx.restore()}
+/* smooth muscle cell: spindle that shortens when contracted (c 0..1) */
+function smCell(x,y,len,c,o){o=o||{};const L=len*(1-.3*c),hgt=(o.h||16)+18*c;ctx.beginPath();ctx.moveTo(x-L/2,y);ctx.quadraticCurveTo(x,y-hgt,x+L/2,y);ctx.quadraticCurveTo(x,y+hgt,x-L/2,y);ctx.closePath();
+  fillStroke(mix(C.smooth,C.vessel,c*.8),C["smooth-edge"],1.5);ell(x,y,7,3.5,0,hexA(C["smooth-edge"],.6));
+  for(let k=-2;k<=2;k++){if(k===0)continue;const X=x+k*L*.16;line(X-4,y-hgt*.35,X+4,y+hgt*.35,hexA(C["smooth-edge"],.7),1.2)}}
+/* simple stick-free person silhouette. pose: lie, sit, stand. o.faint 0..1 (dizzy) */
+function person(x,y,s,pose,o){o=o||{};const col=o.col||C.skin,ed=C["skin-edge"];ctx.save();ctx.translate(x,y);
+  const body=(hx,hy,bw,bh,rot)=>{ctx.save();ctx.translate(hx,hy);ctx.rotate(rot||0);rr(-bw/2,0,bw,bh,bw/2);fillStroke(col,ed,1.5);ctx.restore()};
+  if(pose==="lie"){circ(-s*1.1,-s*.18,s*.22,col,ed,1.5);rr(-s*.85,-s*.36,s*1.1,s*.36,s*.16);fillStroke(col,ed,1.5);rr(s*.2,-s*.3,s*1,s*.24,s*.11);fillStroke(col,ed,1.5)}
+  else if(pose==="sit"){circ(0,-s*1.25,s*.22,col,ed,1.5);rr(-s*.2,-s*1,s*.4,s*.62,s*.16);fillStroke(col,ed,1.5);rr(-s*.2,-s*.44,s*.75,s*.22,s*.1);fillStroke(col,ed,1.5);rr(s*.4,-s*.44,s*.2,s*.55,s*.09);fillStroke(col,ed,1.5)}
+  else{const sway=(o.faint||0)*Math.sin((o.t||0)*3)*.12;ctx.rotate(sway);circ(0,-s*1.72,s*.22,col,ed,1.5);rr(-s*.2,-s*1.47,s*.4,s*.72,s*.16);fillStroke(col,ed,1.5);rr(-s*.19,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5);rr(s*.02,-s*.78,s*.17,s*.78,s*.08);fillStroke(col,ed,1.5)}
+  ctx.restore()}
+/* little organ icons */
+function kidneyIcon(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);if(o.flip)ctx.scale(-1,1);ctx.beginPath();ctx.moveTo(s*.2,-s*.95);ctx.bezierCurveTo(-s*1.2,-s*1.1,-s*1.2,s*1.1,s*.2,s*.95);ctx.bezierCurveTo(s*.75,s*.85,s*.55,s*.25,s*.3,0);ctx.bezierCurveTo(s*.55,-s*.25,s*.75,-s*.85,s*.2,-s*.95);ctx.closePath();
+  fillStroke(o.col||mix(C.vessel,C.panel,.25),C["heart-edge"],1.6);ctx.restore()}
+function lungIcon(x,y,s){[-1,1].forEach(sd=>{ctx.beginPath();ctx.moveTo(x+sd*s*.12,y-s*.8);ctx.bezierCurveTo(x+sd*s*1.1,y-s*.9,x+sd*s*1.05,y+s*.95,x+sd*s*.18,y+s*.8);ctx.closePath();fillStroke(mix(C.angio,C.panel,.45),C["heart-edge"],1.4)});line(x,y-s*1.1,x,y-s*.3,C["ink-soft"],3)}
+function liverIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s*1.1,y-s*.2);ctx.bezierCurveTo(x-s*.6,y-s*.8,x+s*.9,y-s*.7,x+s*1.1,y-s*.4);ctx.bezierCurveTo(x+s*.6,y+s*.2,x-s*.3,y+s*.6,x-s*1.1,y-s*.2);ctx.closePath();fillStroke(mix("#8A4A2A",C.panel,isDark()?.1:.15),C["heart-edge"],1.4)}
+function adrenalIcon(x,y,s){ctx.beginPath();ctx.moveTo(x-s,y+s*.4);ctx.lineTo(x,y-s*.6);ctx.lineTo(x+s,y+s*.4);ctx.closePath();fillStroke(mix(C.aldo,C.panel,.3),C["heart-edge"],1.3)}
+function brainIcon(x,y,s,glw){if(glw)glow(x,y,s*1.8,C.gold,glw*.6);ell(x,y,s,s*.75,0,mix(C.brady,C.panel,.55),C["heart-edge"],1.4);ctx.beginPath();for(let k=0;k<5;k++){ctx.moveTo(x-s*.7+k*s*.32,y-s*.5);ctx.quadraticCurveTo(x-s*.55+k*s*.32,y,x-s*.7+k*s*.32,y+s*.45)}ctx.strokeStyle=hexA(C["heart-edge"],.6);ctx.lineWidth=1.2;ctx.stroke()}
+/* membrane transporter / receptor shape. kind: "tr" transporter pocket, "rec" receptor cup, "chan" channel. state "open"|"bound"|"blocked" */
+function transporter(x,y,w,h,o){o=o||{};const col=o.col||C.receptor;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);
+  rr(-w/2,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);rr(w*.08,-h/2,w*.42,h,6);fillStroke(col,hexA(C.ink,.45),1.2);
+  if(o.lab)txt(0,h/2+11,o.lab,{size:11.5,weight:700,mono:true,align:"center",color:o.labCol||C.ink});ctx.restore()}
+/* lipid bilayer, vertical (x fixed) or horizontal */
+function bilayerV(x,y0,y1,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let y=y0;y<=y1;y+=9){circ(x-5,y,3.4,col);circ(x+5,y,3.4,col)}line(x-2,y0,x-2,y1,hexA(col,.6),1);line(x+2,y0,x+2,y1,hexA(col,.6),1)}
+function bilayerH(x0,x1,y,o){o=o||{};const col=o.col||mix(C.gold,C.panel,.25);for(let x=x0;x<=x1;x+=9){circ(x,y-5,3.4,col);circ(x,y+5,3.4,col)}}
+/* small labelled chip pill on canvas */
+function tag(x,y,t,col,o){o=o||{};return label(x,y,t,{size:o.size||12,weight:700,color:o.color||C.ink,border:col,bg:o.bg,align:o.align})}
+/* up / down arrow badge for effects (text included so colour is not the only signal) */
+function effect(x,y,t,up,o){o=o||{};const col=o.col||(up?C.bad:C.accent);const s=o.size||13;ctx.font=`700 ${s}px ${FONT}`;const w=ctx.measureText(t).width+26;
+  rr(x,y-s,w,s*2,s*.5);ctx.fillStyle=hexA(C.panel,.95);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1.6;ctx.stroke();
+  const ax=x+11,ay=y;ctx.beginPath();if(up){ctx.moveTo(ax-5,ay+4);ctx.lineTo(ax,ay-5);ctx.lineTo(ax+5,ay+4)}else{ctx.moveTo(ax-5,ay-4);ctx.lineTo(ax,ay+5);ctx.lineTo(ax+5,ay-4)}ctx.closePath();ctx.fillStyle=col;ctx.fill();
+  txt(x+20,y+.5,t,{size:s,weight:700,color:C.ink});return w}
+/* grapefruit slice */
+function grapefruit(x,y,r){circ(x,y,r,C.fruit,hexA(C.ink,.4),1.5);circ(x,y,r*.82,C["fruit-in"]);for(let k=0;k<10;k++){const a=k/10*TAU;line(x,y,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,hexA(C.panel,.8),1.4)}circ(x,y,r*.12,hexA(C.panel,.9))}
+/* pill bottle with label */
+function pillBottle(x,y,s,lab,col){rr(x-s*.45,y-s*1.25,s*.9,s*1.25,s*.15);ctx.fillStyle=hexA(col||C.gold,.35);ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();rr(x-s*.52,y-s*1.5,s*1.04,s*.3,s*.08);ctx.fillStyle=C.panel;ctx.fill();ctx.stroke();
+  rr(x-s*.38,y-s*.95,s*.76,s*.5,3);ctx.fillStyle=C.panel;ctx.fill();if(lab)txt(x,y-s*.7,lab,{size:Math.max(10,s*.22),weight:700,align:"center"})}
+
+/* ================= module 15 drawing helpers (devices, paperwork, fractions) ================= */
+function fmtNum(v,dp){if(dp==null)dp=2;const r=Math.round(v*Math.pow(10,dp))/Math.pow(10,dp);let s=String(r);if(Math.abs(r)>=1000){const p=s.split(".");p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");s=p.join(".")}if(r>0&&r<1&&s[0]===".")s="0"+s;return s}
+/* "PRACTICE NUMBERS" chip drawn on canvases that show calculations */
+function practiceTag(x,y,o){o=o||{};ctx.save();ctx.font=`700 11.5px ${MONO}`;const t=o.t||"PRACTICE NUMBERS · NOT DOSING GUIDANCE";const w=ctx.measureText(t).width+16;
+  rr(x,y-10,w,20,10);ctx.fillStyle=C["gold-wash"];ctx.fill();ctx.strokeStyle=C.gold;ctx.lineWidth=1.4;ctx.stroke();ctx.fillStyle=C["gold-ink"];ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(t,x+8,y+.5);ctx.restore();return w}
+/* horizontal syringe. barrel from x..x+w centred on y. cap mL, vol mL filled. */
+function syringeScale(cap){if(cap<=1)return [.05,.1,.2];if(cap<=3)return [.1,.5,.5];if(cap<=5)return [.2,1,1];if(cap<=10)return [.5,1,2];return [1,5,5]}
+function syringeH(x,y,w,cap,vol,o){o=o||{};const h=o.h||34;const fillW=w*clamp(vol/cap,0,1.02);const tipX=x;const col=o.liq||C.liq;
+  // needle
+  line(x-46,y,x-6,y,C["ink-soft"],2);rr(x-10,y-5,10,10,2);ctx.fillStyle=C["glass-edge"];ctx.fill();
+  // barrel
+  rr(x,y-h/2,w,h,4);ctx.fillStyle=hexA(C.glass,.95);ctx.fill();
+  if(fillW>0.5){rr(x+1,y-h/2+2,fillW,h-4,3);ctx.fillStyle=hexA(col,.75);ctx.fill()}
+  // stopper + plunger
+  const sx=x+fillW;rr(sx,y-h/2+1,10,h-2,2);ctx.fillStyle=C.ink;ctx.fill();
+  rr(sx+10,y-4,Math.max(0,x+w+60-sx-10),8,2);ctx.fillStyle=hexA(C["ink-soft"],.85);ctx.fill();rr(x+w+58,y-h/2-6,8,h+12,2);ctx.fillStyle=C["ink-soft"];ctx.fill();
+  rr(x+w,y-h/2-8,6,h+16,2);ctx.fillStyle=C["glass-edge"];ctx.fill();
+  rr(x,y-h/2,w,h,4);ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.6;ctx.stroke();
+  // scale
+  const [mn,mj,lb]=syringeScale(cap);const n=Math.round(cap/mn);
+  for(let i=0;i<=n;i++){const v=i*mn;const X=x+w*v/cap;const major=Math.abs(v/mj-Math.round(v/mj))<1e-6;line(X,y-h/2,X,y-h/2+(major?12:7),C.ink,major?1.4:1);
+    if(Math.abs(v/lb-Math.round(v/lb))<1e-6&&o.labels!==false)txt(X,y-h/2-9,fmtNum(v,2),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  if(o.cap!==false)txt(x+w+76,y,cap+" mL",{size:12,mono:true,weight:700,color:C["ink-soft"]});
+  if(o.read!==false&&vol>0)label(sx,y+h/2+14,fmtNum(vol,2)+" mL",{size:12.5,weight:700,border:col,mono:true});
+  return sx}
+/* medicine cup (30 mL) */
+function medCup(x,y,s,vol,T,o){o=o||{};const top=y-s,bot=y,wt=s*.62,wb=s*.46,cap=30;
+  const lv=clamp(vol/cap,0,1);const yl=bot-(bot-top)*lv;const wAt=yy=>lerp(wb,wt,(bot-yy)/(bot-top));
+  ctx.beginPath();ctx.moveTo(x-wt,top);ctx.lineTo(x-wb,bot);ctx.lineTo(x+wb,bot);ctx.lineTo(x+wt,top);ctx.closePath();ctx.fillStyle=hexA(C.glass,.9);ctx.fill();
+  if(lv>0){ctx.save();ctx.beginPath();ctx.moveTo(x-wt,top);ctx.lineTo(x-wb,bot);ctx.lineTo(x+wb,bot);ctx.lineTo(x+wt,top);ctx.closePath();ctx.clip();
+    ctx.beginPath();const ww=wAt(yl);ctx.moveTo(x-ww-2,yl);for(let i=0;i<=20;i++){const X=x-ww+2*ww*i/20;ctx.lineTo(X,yl+Math.sin(i/2.5+(T||0)*3)*1.2+(i===0||i===20?-2:0))}ctx.lineTo(x+wb,bot);ctx.lineTo(x-wb,bot);ctx.closePath();ctx.fillStyle=hexA(o.liq||C.liq,.75);ctx.fill();ctx.restore()}
+  ctx.beginPath();ctx.moveTo(x-wt,top);ctx.lineTo(x-wb,bot);ctx.lineTo(x+wb,bot);ctx.lineTo(x+wt,top);ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=2;ctx.stroke();
+  const small=s<90;for(let v=5;v<=30;v+=5){const yy=bot-(bot-top)*v/cap;const ww=wAt(yy);line(x-ww,yy,x-ww+(small?7:14),yy,C.ink,1.3);if(!small)txt(x-ww+18,yy,v+" mL",{size:11,mono:true,color:C["ink-soft"]})}
+  if(o.read!==false&&vol>0)label(x+wt+38,yl,fmtNum(vol,1)+" mL",{size:12.5,weight:700,mono:true,border:o.liq||C.liq})}
+/* tablets: n may include .5 */
+function tablets(x,y,n,o){o=o||{};const r=o.r||15;const whole=Math.floor(n+1e-6),half=n-whole>.25;let i=0;
+  for(;i<whole;i++){const X=x+i*(r*2.4);circ(X,y,r,o.col||C.panel,C["ink-soft"],2);line(X,y-r*.8,X,y+r*.8,hexA(C["ink-soft"],.6),1.4)}
+  if(half){const X=x+i*(r*2.4);ctx.beginPath();ctx.arc(X,y,r,Math.PI/2,Math.PI*1.5);ctx.closePath();ctx.fillStyle=o.col||C.panel;ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=2;ctx.stroke()}
+  return x+(whole+(half?1:0))*(r*2.4)}
+/* IV bag. frac = fraction of fluid left */
+function ivBag(x,y,w,h,frac,o){o=o||{};const col=o.fluid||C.water;
+  rr(x+w/2-8,y-14,16,16,3);ctx.fillStyle=C.panel;ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.4;ctx.stroke();circ(x+w/2,y-20,6,null,C["glass-edge"],2);
+  ctx.beginPath();ctx.moveTo(x+6,y);ctx.lineTo(x+w-6,y);ctx.quadraticCurveTo(x+w,y,x+w,y+8);ctx.lineTo(x+w-4,y+h-14);ctx.quadraticCurveTo(x+w/2,y+h+6,x+4,y+h-14);ctx.lineTo(x,y+8);ctx.quadraticCurveTo(x,y,x+6,y);ctx.closePath();
+  ctx.fillStyle=hexA(C.glass,.85);ctx.fill();
+  ctx.save();ctx.clip();const lv=y+h-(h)*clamp(frac,0,1);ctx.fillStyle=hexA(col,.95);ctx.fillRect(x,lv,w,h+10);
+  if(o.tint){ctx.fillStyle=hexA(o.tint,.35);ctx.fillRect(x,lv,w,h+10)}ctx.restore();
+  ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=2;ctx.stroke();
+  for(let k=1;k<10;k++){const yy=y+h*k/10;line(x+w-12,yy,x+w-4,yy,hexA(C.ink,.5),1)}
+  if(o.label){rr(x+10,y+12,w-20,o.label.length*15+10,4);ctx.fillStyle=hexA(C.paper,.95);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();
+    o.label.forEach((t,i)=>txt(x+w/2,y+24+i*15,t,{size:i===0?12:11,weight:i===0?700:600,align:"center",mono:i>0}))}
+  rr(x+w/2-5,y+h-6,10,14,2);ctx.fillStyle=C["glass-edge"];ctx.fill();return [x+w/2,y+h+8]}
+/* drip chamber: drops per minute gpm; T seconds */
+function dripChamber(x,y,s,T,gpm,o){o=o||{};const h=s*2.2,w=s;rr(x-w/2,y,w,h,w*.25);ctx.fillStyle=hexA(C.glass,.9);ctx.fill();
+  rr(x-w/2+2,y+h*.62,w-4,h*.38-2,w*.2);ctx.fillStyle=hexA(o.fluid||C.water,.95);ctx.fill();rr(x-w/2,y,w,h,w*.25);ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=2;ctx.stroke();
+  rr(x-4,y-2,8,10,2);ctx.fillStyle=C["glass-edge"];ctx.fill();
+  if(gpm>0){const per=60/gpm;const ph=(T%per)/per;const grow=Math.min(1,ph/.6);
+    if(ph<.6){const r=2+3.5*grow;ctx.beginPath();ctx.arc(x,y+10+r,r,0,TAU);ctx.fillStyle=o.fluid?hexA(o.fluid,1):C.h2o;ctx.fill()}
+    else{const f=(ph-.6)/.4;const yy=y+16+f*f*(h*.62-16);ctx.beginPath();ctx.arc(x,yy,5,0,TAU);ctx.fillStyle=o.fluid?hexA(o.fluid,1):C.h2o;ctx.fill()}
+    if(ph>.95&&o.splash!==false)pulseRing(x,y+h*.62,10,C.h2o,(ph-.95)/.05)}
+  return y+h}
+/* pump with LCD screen */
+function pumpBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,10);ctx.fillStyle=C.pump;ctx.fill();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.5;ctx.stroke();
+  rr(x+10,y+10,w-20,h*.52,6);ctx.fillStyle=o.alarm?"#3B1414":C.scr;ctx.fill();
+  const lines=o.lines||[];lines.forEach((l,i)=>txt(x+20,y+28+i*20,l,{size:i===0?13:12,mono:true,weight:i===0?700:600,color:i===0?(o.alarm?"#FF9C8F":"#7FE0A8"):"#CFE3EA"}));
+  for(let r=0;r<2;r++)for(let c=0;c<4;c++){rr(x+12+c*(w-24)/4+2,y+h*.62+4+r*((h*.38-12)/2),(w-24)/4-4,(h*.38-12)/2-4,4);ctx.fillStyle="#5A6873";ctx.fill()}
+  if(o.run){circ(x+w-18,y+18,5,(o.T||0)%1<.5?"#7FE0A8":"#2F6F4F")}}
+/* wristband */
+function barcode(x,y,w,h,seed){let X=x;let i=0;while(X<x+w){const bw=1+Math.floor(rnd(i*3.1+seed)*3);if(i%2===0){ctx.fillStyle=C.ink;ctx.fillRect(X,y,bw,h)}X+=bw+ (i%2?1:0);i++}}
+function wristband(x,y,w,lines,o){o=o||{};const h=o.h||58;rr(x,y,w,h,h/2);ctx.fillStyle=o.col||C.band;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.4;ctx.stroke();
+  rr(x+18,y+6,w-36,h-12,6);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=hexA(C.ink,.2);ctx.stroke();
+  lines.forEach((l,i)=>txt(x+28,y+18+i*14,l,{size:i===0?12.5:11.5,weight:i===0?700:500,mono:i>0}));
+  if(o.code!==false)barcode(x+w-90,y+12,62,h-24,o.seed||3);
+  if(o.allergy){rr(x+w-30,y+6,12,h-12,3);ctx.fillStyle=C.bad;ctx.fill()}}
+/* sheet of paper with lines of text */
+function paper(x,y,w,h,o){o=o||{};rr(x,y,w,h,6);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.4;ctx.stroke();
+  if(o.title){rr(x,y,w,24,6);ctx.fillStyle=hexA(o.tcol||C.accent,.16);ctx.fill();txt(x+10,y+12.5,o.title,{size:12,weight:700,mono:true,color:C.ink})}}
+/* fraction chain for dimensional analysis.
+   items: [{n:[val,units[]],d:[val,units[]]|null}], res:[val,units[]]. p = 0..1 progress of cancellation. returns end x. */
+function unitStr(u){return u.join(" · ")}
+function fracChain(x,y,items,res,p,o){o=o||{};const fs=o.size||15;ctx.font=`600 ${fs}px ${MONO}`;
+  // find cancellation pairs: numerator unit in item i matches denominator unit in item j
+  const ns=[],ds=[];items.forEach((it,i)=>{it.n[1].forEach((u,k)=>ns.push({i,k,u,used:false}));if(it.d)it.d[1].forEach((u,k)=>ds.push({i,k,u,used:false}))});
+  const pairs=[];ds.forEach(d=>{const m=ns.find(n=>!n.used&&n.u===d.u&&n.i!==d.i);if(m){m.used=true;d.used=true;pairs.push([m,d])}});
+  const pos={};let X=x;let y0=y;const gap=o.gap||22;const seg=pairs.length?1/pairs.length:1;
+  items.forEach((it,i)=>{const nt=fmtNum(it.n[0],4)+" "+unitStr(it.n[1]);const dt=it.d?fmtNum(it.d[0],4)+" "+unitStr(it.d[1]):"";ctx.font=`600 ${fs}px ${MONO}`;const w=Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8;
+    const cx=X+w/2;
+    const drawPart=(val,units,yy,isN)=>{ctx.font=`600 ${fs}px ${MONO}`;const full=fmtNum(val,4)+" "+unitStr(units);let px=cx-ctx.measureText(full).width/2;
+      const vs=fmtNum(val,4)+" ";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillStyle=C.ink;ctx.fillText(vs,px,yy);px+=ctx.measureText(vs).width;
+      units.forEach((u,k)=>{const uw=ctx.measureText(u).width;pos[(isN?"n":"d")+i+"_"+k]=[px,yy,uw];ctx.fillStyle=o.ucol||C.accent;ctx.fillText(u,px,yy);px+=uw;if(k<units.length-1){ctx.fillStyle=C.ink;ctx.fillText(" · ",px,yy);px+=ctx.measureText(" · ").width}})};
+    if(it.d){drawPart(it.n[0],it.n[1],y-14,true);line(X,y,X+w,y,C.ink,1.6);drawPart(it.d[0],it.d[1],y+15,false)}else drawPart(it.n[0],it.n[1],y,true);
+    X+=w;if(i<items.length-1){txt(X+gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]});X+=gap;if(o.breakAfter===i){X=x+(o.indent||0);y+=o.rowH||70;txt(X-gap/2,y,"×",{size:fs+2,weight:700,align:"center",color:C["ink-soft"]})}}});
+  // strikes
+  pairs.forEach((pr,j)=>{const f=clamp((p-j*seg)/seg,0,1);if(f<=0)return;[pr[0],pr[1]].forEach((q,qi)=>{const key=(qi===0?"n":"d")+q.i+"_"+q.k;const ps=pos[key];if(!ps)return;
+    line(ps[0]-2,ps[1]+6,ps[0]-2+(ps[2]+4)*f,ps[1]-6,C.bad,2.4)})});
+  // result
+  const rf=clamp((p-.92)/.08,0,1);
+  if(res){txt(X+gap/2,y,"=",{size:fs+3,weight:700,align:"center",color:C["ink-soft"]});X+=gap+6;
+    if(rf>0)withA(rf,()=>{const t=fmtNum(res[0],2)+" "+unitStr(res[1]);ctx.font=`700 ${fs+2}px ${MONO}`;const w=ctx.measureText(t).width;rr(X-4,y-14,w+12,28,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.6;ctx.stroke();txt(X+2,y,t,{size:fs+2,weight:700,mono:true})});
+    X+=ctx.measureText(fmtNum(res[0],2)+" "+unitStr(res[1])).width+12}
+  return X}
+function fracChainWidth(items,res,o){o=o||{};const fs=o.size||15;ctx.font=`600 ${fs}px ${MONO}`;const gap=o.gap||22;let X=0;
+  items.forEach((it,i)=>{const nt=fmtNum(it.n[0],4)+" "+unitStr(it.n[1]);const dt=it.d?fmtNum(it.d[0],4)+" "+unitStr(it.d[1]):"";X+=Math.max(ctx.measureText(nt).width,ctx.measureText(dt).width)+8;if(i<items.length-1)X+=gap});
+  if(res){X+=gap+6;ctx.font=`700 ${fs+2}px ${MONO}`;X+=ctx.measureText(fmtNum(res[0],2)+" "+unitStr(res[1])).width+12}return X}
+/* little nurse figure (head + scrub top) */
+function nurse(x,y,s,col){circ(x,y-s*1.2,s*.42,C.skin,C["skin-edge"],1.4);rr(x-s*.7,y-s*.72,s*1.4,s*1.3,s*.4);fillStroke(col||C.receptor,hexA(C.ink,.4),1.3);rr(x-s*.48,y-s*1.68,s*.96,s*.22,s*.1);ctx.fillStyle=col||C.receptor;ctx.fill()}
+/* face for toxidromes: o.pupil 0.2..1.6, o.sweat, o.drool, o.red, o.eyesClosed, o.pale */
+function toxFace(x,y,s,T,o){o=o||{};const skin=o.red?mix(C.skin,C.blood,.35):o.pale?mix(C.skin,"#d8dde0",.4):C.skin;
+  ell(x,y,s*.8,s,0,skin,C["skin-edge"],2);
+  [-1,1].forEach(sd=>{const ex=x+sd*s*.33,ey=y-s*.18;if(o.eyesClosed){line(ex-s*.16,ey,ex+s*.16,ey,C.ink,2.2)}else{ell(ex,ey,s*.2,s*.12,0,"#fff",C.ink,1.4);const pr=s*.035*(o.pupil==null?1:o.pupil)*2.4;circ(ex,ey,Math.min(pr,s*.11),C.ink)}});
+  ctx.beginPath();ctx.moveTo(x-s*.25,y+s*.45);ctx.quadraticCurveTo(x,y+s*(o.frown?.38:.55),x+s*.25,y+s*.45);ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.stroke();
+  if(o.sweat){for(let k=0;k<3;k++){const ph=P(T*.6+k*.33,1);const dx=x+(k-1)*s*.45,dy=y-s*.7+ph*s*.7;withA(1-ph,()=>{ctx.beginPath();ctx.moveTo(dx,dy-6);ctx.quadraticCurveTo(dx+5,dy+2,dx,dy+4);ctx.quadraticCurveTo(dx-5,dy+2,dx,dy-6);ctx.fillStyle=C.h2o;ctx.fill()})}}
+  if(o.drool){const ph=P(T*.5,1);const dy=y+s*.5+ph*s*.6;withA(1-ph*.6,()=>{ell(x+s*.12,dy,4,6,0,C.h2o)})}
+  if(o.dry){[[-.55,.1],[.5,.2],[0,-.75]].forEach(q=>{line(x+q[0]*s-5,y+q[1]*s,x+q[0]*s+5,y+q[1]*s-4,hexA(C["skin-edge"],.9),1.6)})}}
+/* vital chip */
+function vital(x,y,lab,val,col){rr(x,y,92,40,6);ctx.fillStyle=C.scr;ctx.fill();txt(x+8,y+12,lab,{size:10.5,mono:true,weight:700,color:"#A3B2BA"});txt(x+8,y+28,val,{size:14,mono:true,weight:700,color:col||"#7FE0A8"})}
+function miniSyringe(x,y,len,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);line(-len*.62,0,-len*.42,0,C["ink-soft"],1.6);rr(-len*.42,-6,len*.6,12,3);ctx.fillStyle=hexA(C.glass,.95);ctx.fill();rr(-len*.42,-5,len*.36,10,2);ctx.fillStyle=hexA(col||C.liq,.75);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.4;rr(-len*.42,-6,len*.6,12,3);ctx.stroke();rr(-len*.06,-3,len*.36,6,2);ctx.fillStyle=C["ink-soft"];ctx.fill();rr(len*.3,-9,5,18,2);ctx.fill();ctx.restore()}
+function axes(x,y,w,h,xl,yl){line(x,y,x,y+h,C["ink-soft"],1.5);line(x,y+h,x+w,y+h,C["ink-soft"],1.5);if(xl)txt(x+w,y+h+13,xl,{size:11,align:"right",color:C["ink-soft"]});if(yl)txt(x+4,y-8,yl,{size:11.5,weight:600,color:C["ink-soft"]})}
+function vial(x,y,s,o){o=o||{};rr(x-s*.42,y-s*1.2,s*.84,s*1.2,s*.14);ctx.fillStyle=hexA(C.glass,.95);ctx.fill();ctx.strokeStyle=C["glass-edge"];ctx.lineWidth=1.6;ctx.stroke();
+  const lv=o.level==null?.6:o.level;if(lv>0){rr(x-s*.38,y-s*1.16*lv-2,s*.76,s*1.16*lv,s*.1);ctx.fillStyle=hexA(o.liq||C.water,.9);ctx.fill()}
+  rr(x-s*.26,y-s*1.42,s*.52,s*.24,3);ctx.fillStyle=o.cap||C["ink-soft"];ctx.fill();
+  if(o.label){rr(x-s*.42,y-s*.86,s*.84,s*.42,2);ctx.fillStyle=hexA(C.paper,.96);ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.stroke();txt(x,y-s*.65,o.label,{size:o.ls||11,weight:700,align:"center",color:o.lcol||C.ink})}}
+function insulinPen(x,y,s){ctx.save();ctx.translate(x,y);ctx.rotate(-.35);rr(-s,-s*.16,s*2,s*.32,s*.12);ctx.fillStyle=mix(C.accent,C.panel,.45);ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();rr(-s,-s*.18,s*.55,s*.36,s*.12);ctx.fillStyle=C["ink-soft"];ctx.fill();rr(s*.25,-s*.1,s*.4,s*.2,3);ctx.fillStyle=hexA(C.water,.9);ctx.fill();ctx.restore()}
+function chipDrug(x,y,t,o){o=o||{};ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.font=`700 12.5px ${FONT}`;const w=ctx.measureText(t).width+30;const col=o.col||C.drug;
+  rr(x-w/2,y-13,w,26,13);ctx.fillStyle=col;ctx.fill();hexPath(x-w/2+13,y,6.5,Math.PI/6);fillStroke(inkOn(col),null);
+  ctx.fillStyle=inkOn(col);ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(t,x+8,y+.5);ctx.restore();return w}
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("safety-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("htn-lab-"+k,v)}catch(e){}}};
+function fmtMin(m){if(!isFinite(m))return "never";if(m<1/60)return "< 1 s";if(m<1)return Math.round(m*60)+" s";if(m<120)return (m<10?m.toFixed(1):Math.round(m))+" min";return (m/60).toFixed(1)+" h"}
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+
+/* ================= PART 1: dosage trainer (practice numbers only) ================= */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const R=(v,dp)=>Math.round(v*Math.pow(10,dp||0))/Math.pow(10,dp||0);
+const LET=["A","B","C","D","E","G","K","M","P","R"];
+const nf=v=>fmtNum(v,4);
+const CTYPES=[["mix","All types, mixed"],["tabs","Tablets (same units)"],["conv","Tablets with a unit conversion"],["liquid","Oral liquids"],["inj","Injections from a vial"],["weight","Weight-based (mg/kg)"],["recon","Reconstitution"],["safe","Safe dose range check"],["mlhr","IV rate on a pump (mL/hr)"],["gtt","IV gravity rate (gtt/min)"],["unitshr","IV drug in units/hr"],["mcgkg","IV drug in mcg/kg/min"]];
+function frac(nv,nu,dv,du){return {n:[nv,Array.isArray(nu)?nu:[nu]],d:dv==null?null:[dv,Array.isArray(du)?du:[du]]}}
+const GEN={
+ tabs(){const H=pick([5,10,25,50,100,125,250,500]);const r=pick([.5,1,1.5,2,2,3]);const D=R(H*r,2);const X=pick(LET);
+  return {title:"Tablets",html:`Order: <b>Drug ${X} ${nf(D)} mg</b> by mouth. Available: <b>${nf(H)} mg tablets</b> (scored). How many tablets?`,round:"Give your answer to the nearest half tablet.",
+   card:[`Drug ${X} ${nf(D)} mg PO`,`Have: ${nf(H)} mg per tablet`,"Want: tablets"],ans:r,unit:"tablets",tol:.01,dev:{k:"tabs"},
+   chain:{items:[frac(D,"mg"),frac(1,"tab",H,"mg")],res:[r,["tab"]]},
+   hints:[`You want tablets. Start with the ordered dose: ${nf(D)} mg.`,`Each tablet holds ${nf(H)} mg, so multiply by 1 tablet / ${nf(H)} mg.`,`Set up: ${nf(D)} mg × 1 tablet / ${nf(H)} mg = ? (D/H × Q)`],
+   slips:[[H/D,"That is H ÷ D, the fraction upside down. Put the ordered dose on top."],[D*H,"That multiplies the doses. Divide the ordered dose by the tablet strength."]]}},
+ conv(){const X=pick(LET);if(Math.random()<.5){const H=pick([125,250,500]);const r=pick([1,2,.5,1.5]);const Dg=R(H*r/1000,4);
+   return {title:"Tablets with a conversion",html:`Order: <b>Drug ${X} ${nf(Dg)} g</b> by mouth. Available: <b>${H} mg tablets</b> (scored). How many tablets?`,round:"Give your answer to the nearest half tablet.",
+    card:[`Drug ${X} ${nf(Dg)} g PO`,`Have: ${H} mg per tablet`,"1 g = 1,000 mg"],ans:r,unit:"tablets",tol:.01,dev:{k:"tabs"},
+    chain:{items:[frac(Dg,"g"),frac(1000,"mg",1,"g"),frac(1,"tab",H,"mg")],res:[r,["tab"]]},
+    hints:["The order is in grams but the tablets are in milligrams. Convert first.",`1 g = 1,000 mg, so ${nf(Dg)} g = ${nf(Dg*1000)} mg.`,`Set up: ${nf(Dg)} g × 1,000 mg / 1 g × 1 tablet / ${H} mg = ?`],
+    slips:[[r*1000,"Conversion slip: you multiplied by 1,000 once too often. Check g to mg."],[r/1000,"Conversion slip: the grams were not changed to milligrams (× 1,000)."],[Dg/H,"Convert the grams to milligrams before dividing."]]}}
+  const H=pick([.05,.1,.125,.25]);const r=pick([1,2,.5]);const Dm=R(H*r*1000,3);
+  return {title:"Tablets with a conversion",html:`Order: <b>Drug ${X} ${nf(Dm)} mcg</b> by mouth. Available: <b>${nf(H)} mg tablets</b> (scored). How many tablets?`,round:"Give your answer to the nearest half tablet.",
+   card:[`Drug ${X} ${nf(Dm)} mcg PO`,`Have: ${nf(H)} mg per tablet`,"1 mg = 1,000 mcg"],ans:r,unit:"tablets",tol:.01,dev:{k:"tabs"},
+   chain:{items:[frac(Dm,"mcg"),frac(1,"mg",1000,"mcg"),frac(1,"tab",H,"mg")],res:[r,["tab"]]},
+   hints:["The order is in micrograms but the tablets are in milligrams. Convert first.",`1 mg = 1,000 mcg, so ${nf(Dm)} mcg = ${nf(Dm/1000)} mg.`,`Set up: ${nf(Dm)} mcg × 1 mg / 1,000 mcg × 1 tablet / ${nf(H)} mg = ?`],
+   slips:[[r*1000,"Conversion slip: the micrograms were not changed to milligrams (÷ 1,000)."],[r/1000,"Conversion slip: check which way the decimal moves from mcg to mg."]]}},
+ liquid(){const X=pick(LET);for(let k=0;k<50;k++){const [H,Q]=pick([[125,5],[250,5],[100,5],[200,5],[160,5],[40,5],[50,10],[100,10]]);const V=pick([2.5,5,7.5,10,12.5,15,20]);const D=H*V/Q;if(Math.abs(D-Math.round(D))>1e-9||D<10)continue;
+   return {title:"Oral liquid",html:`Order: <b>Drug ${X} ${D} mg</b> by mouth. Available: <b>${H} mg per ${Q} mL</b> oral liquid. How many mL?`,round:"Round to the nearest tenth of a mL.",
+    card:[`Drug ${X} ${D} mg PO`,`Have: ${H} mg per ${Q} mL`,"Want: mL"],ans:V,unit:"mL",tol:.051,dev:{k:V>10?"cup":"osyr",cap:10},
+    chain:{items:[frac(D,"mg"),frac(Q,"mL",H,"mg")],res:[V,["mL"]]},
+    hints:[`You want mL. Start with the order: ${D} mg.`,`The label gives ${H} mg in every ${Q} mL, so multiply by ${Q} mL / ${H} mg.`,`Set up: ${D} mg × ${Q} mL / ${H} mg = ? (D/H × Q)`],
+    slips:[[D/H,`You found D/H but forgot to multiply by Q (${Q} mL).`],[H/D*Q,"The fraction is upside down. Put the ordered dose on top."]]}}},
+ inj(){const X=pick(LET);for(let k=0;k<50;k++){const H=pick([2,4,5,10,20,25,40,50,80,100]);const V=pick([.2,.4,.5,.6,.8,1,1.2,1.5,2,2.5]);const D=R(H*V,2);if(Math.abs(D*10-Math.round(D*10))>1e-9)continue;
+   return {title:"Injection from a vial",html:`Order: <b>Drug ${X} ${nf(D)} mg</b> by injection. Vial label: <b>${H} mg per mL</b>. How many mL do you draw up?`,round:"Round to the nearest tenth of a mL.",
+    card:[`Drug ${X} ${nf(D)} mg injection`,`Vial: ${H} mg/mL`,"Want: mL"],ans:V,unit:"mL",tol:.051,dev:{k:"syr",cap:V<=1?1:3},
+    chain:{items:[frac(D,"mg"),frac(1,"mL",H,"mg")],res:[V,["mL"]]},
+    hints:[`You want mL. Start with ${nf(D)} mg.`,`Each mL holds ${H} mg: multiply by 1 mL / ${H} mg.`,`Set up as a proportion: ${H} mg : 1 mL = ${nf(D)} mg : x mL.`],
+    slips:[[H/D,"Upside down: the ordered dose goes on top (D/H)."],[D*H,"Divide by the concentration, do not multiply."]]}}},
+ weight(){const X=pick(LET);for(let k=0;k<80;k++){const lb=pick([22,33,44,55,66,88]);const kg=lb/2.2;const mk=pick([2,4,5,10,15]);const mg=R(kg*mk,4);const [H,Q]=pick([[100,5],[125,5],[200,5],[250,5],[160,5],[40,1],[50,1]]);const V=mg*Q/H;
+   if(Math.abs(V*10-Math.round(V*10))>1e-9||V>25||V<.5)continue;
+   return {title:"Weight-based",html:`Order: <b>Drug ${X} ${mk} mg/kg</b> by mouth, one dose. Patient weight: <b>${lb} lb</b>. Available: <b>${H} mg per ${Q} mL</b>. How many mL?`,round:"Round to the nearest tenth of a mL.",
+    card:[`Drug ${X} ${mk} mg/kg PO`,`Weight ${lb} lb (1 kg = 2.2 lb)`,`Have: ${H} mg per ${Q} mL`],ans:R(V,1),unit:"mL",tol:.051,dev:{k:V>10?"cup":"osyr",cap:10},
+    chain:{items:[frac(lb,"lb"),frac(1,"kg",2.2,"lb"),frac(mk,"mg",1,"kg"),frac(Q,"mL",H,"mg")],res:[R(V,1),["mL"]],brk:1},
+    hints:[`First change pounds to kilograms: ${lb} ÷ 2.2 = ${nf(kg)} kg.`,`Dose: ${mk} mg/kg × ${nf(kg)} kg = ${nf(mg)} mg.`,`Then volume: ${nf(mg)} mg × ${Q} mL / ${H} mg = ?`],
+    slips:[[R(V*2.2,2),"It looks like the weight stayed in pounds. Divide pounds by 2.2 first."],[R(V/2.2,2),"Check the weight conversion: kg = lb ÷ 2.2."],[mg,`${nf(mg)} is the dose in mg. Now turn it into mL with the concentration.`]]}}},
+ recon(){const X=pick(LET);const vs=pick([[1000,"4.5 mL",200,5],[1000,"9.6 mL",100,10],[500,"1.8 mL",250,2],[2000,"9.2 mL",200,10]]);for(let k=0;k<40;k++){const V=pick([.5,1,1.2,1.5,2,2.5,3]);const D=vs[2]*V;if(D>vs[0])continue;
+   return {title:"Reconstitution",html:`A vial holds <b>Drug ${X} ${nf(vs[0]/1000)} g</b> as a powder. The label says: add <b>${vs[1]}</b> sterile water to make <b>${vs[2]} mg per mL</b>. Order: <b>${nf(D)} mg</b> IM. How many mL?`,round:"Round to the nearest tenth of a mL.",
+    card:[`Drug ${X} ${nf(vs[0]/1000)} g powder`,`Add ${vs[1]} → ${vs[2]} mg/mL`,`Order: ${nf(D)} mg IM`],ans:V,unit:"mL",tol:.051,dev:{k:"syr",cap:V<=3?3:5},
+    chain:{items:[frac(D,"mg"),frac(1,"mL",vs[2],"mg")],res:[V,["mL"]]},
+    hints:["After mixing, use the NEW concentration on the label, not the powder amount or the diluent volume.",`The concentration is ${vs[2]} mg in each mL.`,`Set up: ${nf(D)} mg × 1 mL / ${vs[2]} mg = ?`],
+    slips:[[R(D/vs[0]*parseFloat(vs[1]),2),"That used the diluent volume. Use the final concentration the label gives."],[vs[2]/D,"Upside down: put the ordered dose on top."]]}}},
+ safe(){const X=pick(LET);for(let k=0;k<80;k++){const rg=pick([[20,40],[25,50],[10,20],[30,60],[50,100]]);const kg=pick([10,12,15,18,20,25]);const fq=pick([[2,"every 12 hours"],[3,"every 8 hours"],[4,"every 6 hours"]]);
+   const target=pick([rg[0]*kg,rg[1]*kg,(rg[0]+rg[1])/2*kg,rg[1]*kg*1.5,rg[0]*kg*.5]);const dose=Math.round(target/fq[0]/5)*5;if(dose<5)continue;const day=dose*fq[0];const lo=rg[0]*kg,hi=rg[1]*kg;
+   return {title:"Safe dose range check",html:`Order: <b>Drug ${X} ${dose} mg ${fq[1]}</b>. Child's weight: <b>${kg} kg</b>. Reference safe range: <b>${rg[0]} to ${rg[1]} mg/kg/day</b>. What total daily dose is ordered (mg/day)? Then compare it with the safe range.`,round:"Give a whole number of mg/day.",
+    card:[`Drug ${X} ${dose} mg ${fq[1]}`,`Weight ${kg} kg`,`Safe: ${rg[0]}–${rg[1]} mg/kg/day`],ans:day,unit:"mg/day",tol:.5,dev:{k:"range",lo,hi},verdict:day<lo?"below":day>hi?"above":"inside",
+    chain:{items:[frac(dose,"mg",1,"dose"),frac(fq[0],"dose",1,"day")],res:[day,["mg/day"]]},
+    hints:[`${fq[1]} means ${fq[0]} doses in 24 hours.`,`Daily total = ${dose} mg × ${fq[0]} doses.`,`Safe range for ${kg} kg: ${rg[0]} × ${kg} = ${lo} to ${rg[1]} × ${kg} = ${hi} mg/day. Compare your total with it.`],
+    slips:[[dose,"That is one dose. The range is per day, so multiply by the number of doses."],[lo,"That is the low end of the safe range. First find what the order adds up to per day."],[hi,"That is the top of the safe range. First find what the order adds up to per day."]]}}},
+ mlhr(){const c=pick([[1000,8],[1000,10],[1000,12],[500,4],[500,8],[100,.5],[50,.5],[1000,6],[500,6],[100,1],[250,2],[1000,5]]);const [V,t]=c;const ans=Math.round(V/t);
+   const tt=t<1?`${t*60} minutes`:t===1?"1 hour":`${t} hours`;
+   return {title:"IV rate on a pump",html:`Infuse <b>${V.toLocaleString("en-US")} mL</b> of IV fluid over <b>${tt}</b> on an infusion pump. What rate do you program (mL/hr)?`,round:"Round to the nearest whole mL/hr.",
+    card:[`IV fluid ${V.toLocaleString("en-US")} mL`,`over ${tt}`,"Pump rate: mL/hr"],ans,unit:"mL/hr",tol:.5,dev:{k:"pump",V},
+    chain:t<1?{items:[frac(V,"mL",t*60,"min"),frac(60,"min",1,"hr")],res:[ans,["mL/hr"]]}:{items:[frac(V,"mL",t,"hr")],res:[ans,["mL/hr"]]},
+    hints:["mL/hr = total volume ÷ time in hours.",t<1?`${t*60} minutes is ${t} hour.`:`Time is already in hours: ${t} hr.`,`Set up: ${V} mL ÷ ${t} hr = ?`],
+    slips:[[V*t,"Divide the volume by the time; do not multiply."],[R(V/(t*60),2),"That is mL per minute. Pumps run in mL per hour."]]}},
+ gtt(){for(let k=0;k<60;k++){const [V,t]=pick([[1000,8],[1000,10],[1000,6],[500,4],[500,6],[250,2],[100,1],[1000,12],[500,8]]);const df=pick([10,15,20,60]);const raw=V*df/(t*60);if(Math.abs(raw%1-.5)<.02)continue;const ans=Math.round(raw);
+   return {title:"IV gravity rate",html:`Infuse <b>${V.toLocaleString("en-US")} mL</b> over <b>${t} hours</b> by gravity. The tubing drop factor is <b>${df} gtt/mL</b>. How many drops per minute?`,round:"Round to the nearest whole drop.",
+    card:[`IV fluid ${V.toLocaleString("en-US")} mL over ${t} h`,`Drop factor ${df} gtt/mL`,"Want: gtt/min"],ans,unit:"gtt/min",tol:.5,dev:{k:"drip",df},raw,
+    chain:{items:[frac(V,"mL",t,"hr"),frac(df,"gtt",1,"mL"),frac(1,"hr",60,"min")],res:[ans,["gtt/min"]]},
+    hints:["gtt/min = volume (mL) × drop factor ÷ time in minutes.",`${t} hours = ${t*60} minutes.`,`Set up: ${V} mL × ${df} gtt/mL ÷ ${t*60} min = ?`],
+    slips:[[Math.round(V/t),"That is the mL/hr rate. Multiply by the drop factor and divide by 60."],[Math.round(V*df/t),"The time is still in hours. Change it to minutes (× 60)."]]}}},
+ unitshr(){const bag=pick([[25000,250],[25000,500],[20000,500],[100,100],[10000,250]]);const conc=bag[0]/bag[1];const opts=conc===100?[800,1000,1200,1500,1800]:conc===50?[500,750,1000,1250]:conc===40?[400,600,800,1000]:[2,3,4,5,6,8];const O=pick(opts);const ans=R(O/conc,1);
+   return {title:"IV drug in units/hr",html:`A bag contains <b>Drug H ${bag[0].toLocaleString("en-US")} units in ${bag[1]} mL</b>. The order is <b>${O.toLocaleString("en-US")} units/hr</b>. What rate do you program (mL/hr)?`,round:"Round to the nearest tenth of a mL/hr.",
+    card:[`Drug H ${bag[0].toLocaleString("en-US")} units / ${bag[1]} mL`,`Order: ${O.toLocaleString("en-US")} units/hr`,"Pump rate: mL/hr"],ans,unit:"mL/hr",tol:.051,dev:{k:"pump",drug:true},
+    chain:{items:[frac(O,"units",1,"hr"),frac(bag[1],"mL",bag[0],"units")],res:[ans,["mL/hr"]]},
+    hints:["First find the concentration: total units ÷ total mL.",`${bag[0].toLocaleString("en-US")} units ÷ ${bag[1]} mL = ${nf(conc)} units/mL.`,`Rate = ${O} units/hr ÷ ${nf(conc)} units/mL = ?`],
+    slips:[[O*conc,"Divide the order by the concentration; do not multiply."],[R(conc/O,3),"Upside down: put the ordered units/hr on top."]]}},
+ mcgkg(){for(let k=0;k<80;k++){const [mg,mL]=pick([[400,250],[200,250],[50,250],[800,500],[250,250],[100,100]]);const conc=mg*1000/mL;const d=pick([2,3,5,10]);const kg=pick([50,60,70,80,90,100]);const raw=d*kg*60/conc;if(Math.abs(raw*10-Math.round(raw*10))>1e-6||raw>200)continue;const ans=R(raw,1);const X=pick(["J","N","S","T"]);
+   return {title:"IV drug in mcg/kg/min",html:`A bag contains <b>Drug ${X} ${mg} mg in ${mL} mL</b>. The order is <b>${d} mcg/kg/min</b>. The patient weighs <b>${kg} kg</b>. What rate do you program (mL/hr)?`,round:"Round to the nearest tenth of a mL/hr.",
+    card:[`Drug ${X} ${mg} mg / ${mL} mL`,`Order ${d} mcg/kg/min · ${kg} kg`,"Pump rate: mL/hr"],ans,unit:"mL/hr",tol:.051,dev:{k:"pump",drug:true},
+    chain:{items:[frac(d,"mcg",1,["kg","min"]),frac(kg,"kg"),frac(60,"min",1,"hr"),frac(1,"mg",1000,"mcg"),frac(mL,"mL",mg,"mg")],res:[ans,["mL/hr"]],brk:2},
+    hints:[`Concentration: ${mg} mg ÷ ${mL} mL = ${nf(mg/mL)} mg/mL = ${nf(conc)} mcg/mL.`,`Dose per hour: ${d} mcg/kg/min × ${kg} kg × 60 min/hr = ${nf(d*kg*60)} mcg/hr.`,`Rate = ${nf(d*kg*60)} mcg/hr ÷ ${nf(conc)} mcg/mL = ?`],
+    slips:[[R(raw/60,2),"You left out the 60 minutes per hour."],[R(raw/kg,2),"You left out the patient's weight."],[R(raw*1000,1),"Conversion slip: mg to mcg is × 1,000."],[R(raw/1000,3),"Conversion slip: check mg and mcg."]]}}}};
+const TR={type:"mix",p:null,disp:0,hint:0,first:true,sol:false,solT:0,solved:false,streak:0,best:0,count:0};
+function calcNew(){const keys=Object.keys(GEN);const k=TR.type==="mix"?pick(keys):TR.type;let q=null;for(let i=0;i<20&&!q;i++)q=GEN[k]();TR.p=q;TR.p.kind=k;TR.hint=0;TR.first=true;TR.sol=false;TR.solved=false;
+  const p=TR.p;$("#calcProb").innerHTML=`<span class="pt">${p.title} · practice problem</span>${p.html}<span class="rd">${p.round}</span>`;$("#calcUnit").textContent=p.unit;$("#calcAns").value="";
+  $("#calcMsg").className="msg";$("#calcHintBox").hidden=true;$("#calcCap").textContent=capFor();a11yKey=""}
+function capFor(){const p=TR.p;const k=p.dev.k;return k==="tabs"?"Tablets appear for the number you type.":k==="cup"?"The medicine cup fills to the mL you type.":k==="osyr"?"The oral syringe fills to the mL you type.":k==="syr"?"The syringe fills to the mL you type.":k==="pump"?"The pump shows the rate you type.":k==="drip"?"Drops fall at the rate you type.":"Your daily total is marked against the safe range."}
+function calcVal(){const v=parseFloat($("#calcAns").value);return isFinite(v)?v:null}
+function calcMsg(cls,t){const m=$("#calcMsg");m.className="msg show "+cls;m.textContent=t}
+function calcCheck(){const p=TR.p;const v=calcVal();if(v==null){calcMsg("info","Type a number in the answer box first.");return}
+  if(Math.abs(v-p.ans)<=p.tol){const wasFirst=TR.first&&!TR.sol;if(!TR.solved){TR.count++;if(wasFirst){TR.streak++;if(TR.streak>TR.best){TR.best=TR.streak;store.set("best",TR.best)}}}TR.solved=true;
+    let t=`✓ Correct: ${fmtNum(p.ans,2)} ${p.unit==="tablets"&&p.ans<=1?"tablet":p.unit}.`;if(p.kind==="safe"){t+=p.verdict==="inside"?` That is inside the safe range (${p.dev.lo}–${p.dev.hi} mg/day), so the dose is safe to give.`:p.verdict==="above"?` That is ABOVE the safe range (${p.dev.lo}–${p.dev.hi} mg/day): hold the dose and clarify with the prescriber.`:` That is BELOW the safe range (${p.dev.lo}–${p.dev.hi} mg/day): it may not work, so clarify with the prescriber.`}
+    if(p.kind==="gtt")t+=` (exact value ${fmtNum(p.raw,2)}, rounded to a whole drop)`;
+    calcMsg("good",t+" Watch the units cancel in the worked solution.");showSol(false)}
+  else{TR.first=false;TR.streak=0;let msg="Not quite. ";const sl=p.slips.find(s=>Math.abs(v-s[0])<=Math.max(p.tol,Math.abs(s[0])*.01));
+    if(sl)msg+=sl[1];else if(Math.abs(v-p.ans)<Math.max(1,p.ans*.03))msg+="Very close. Check the rounding rule: "+p.round;else msg+="Check the setup. "+p.hints[0];
+    if(p.dev.k==="tabs"&&v>4)msg+=" Also, more than 4 tablets for one dose is unusual: that is a signal to recheck.";
+    if((p.dev.k==="syr")&&v>p.dev.cap)msg+=" That would not fit in this syringe: a signal to recheck.";
+    calcMsg("warn",msg)}
+  updCalcMeter();a11yKey=""}
+function showSol(byBtn){if(byBtn&&!TR.solved){TR.streak=0;TR.first=false}TR.sol=true;TR.solT=performance.now();updCalcMeter();a11yKey=""}
+function updCalcMeter(){$("#calcStreak").textContent=TR.streak;$("#calcBest").textContent=TR.best;$("#calcSolved").textContent=TR.count}
+$("#calcCheck").onclick=calcCheck;$("#calcAns").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcCheck()}});
+$("#calcHint").onclick=()=>{const p=TR.p;const b=$("#calcHintBox");if(TR.hint<p.hints.length){TR.hint++}b.hidden=false;
+  b.innerHTML=p.hints.slice(0,TR.hint).map((h,i)=>`<div><b>Hint ${i+1}:</b> ${h}</div>`).join("")+(TR.hint>=p.hints.length?`<div class="small">That is the whole ladder. Next: try it, or press Show worked solution.</div>`:"")};
+$("#calcSol").onclick=()=>{showSol(true);calcMsg("info",`Worked solution: ${fmtNum(TR.p.ans,2)} ${TR.p.unit}. Watch which units cancel. Then try a new problem.`)};
+$("#calcNew").onclick=()=>{calcNew();$("#calcAns").focus()};
+(function(){const sel=$("#calcType");sel.innerHTML=CTYPES.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("");sel.onchange=()=>{TR.type=sel.value;calcNew()}})();
+TR.best=+(store.get("best")||0);
+/* drawing */
+function drawCalc(now){use(S1);const p=TR.p;const T=now/1000;const tgt=calcVal()||0;TR.disp+=(tgt-TR.disp)*.15;if(Math.abs(tgt-TR.disp)<1e-3)TR.disp=tgt;const v=TR.disp;
+  practiceTag(16,20,{t:"PRACTICE PROBLEM · MADE-UP NUMBERS · NOT DOSING GUIDANCE"});
+  panelBox(10,38,385,282);title(24,58,"Your answer, measured");
+  const k=p.dev.k;const ok=TR.solved;
+  if(k==="tabs"){const n=Math.min(6,Math.round(v*2)/2);if(n>0){const cnt=Math.ceil(n);tablets(200-cnt*52.8/2+26.4,170,n,{r:22})}else txt(200,170,"Type a number of tablets",{size:13,align:"center",color:C["ink-soft"]});
+    if(v>6)label(200,236,"More than 6 tablets? Recheck!",{size:12.5,weight:700,border:C.bad,color:C.bad});else if(v>0)label(200,236,fmtNum(Math.round(v*2)/2,1)+" tablet"+(v<=1?"":"s"),{size:13,weight:700,border:C.accent});
+    if(v>0&&Math.abs(v*2-Math.round(v*2))>.01)txt(200,270,"(shown to the nearest half tablet)",{size:11.5,align:"center",color:C["ink-soft"]})}
+  else if(k==="cup"){medCup(150,305,200,Math.min(v,32),T,{});if(v>30)label(200,84,"More than the cup holds: recheck",{size:12,weight:700,border:C.bad,color:C.bad});txt(330,290,"medicine cup",{size:12,weight:600,align:"center"})}
+  else if(k==="osyr"){syringeH(60,180,230,10,Math.min(v,10.4),{liq:C.liq});txt(200,236,"oral syringe (10 mL)",{size:12,weight:600,align:"center"});if(v>10)label(200,110,"More than 10 mL: use a bigger device or recheck",{size:12,weight:700,border:C.bad,color:C.bad})}
+  else if(k==="syr"){const cap=p.dev.cap;syringeH(60,180,230,cap,Math.min(v,cap*1.03),{});txt(200,240,cap+" mL syringe",{size:12,weight:600,align:"center"});if(v>cap)label(200,110,"Will not fit in this syringe: recheck",{size:12,weight:700,border:C.bad,color:C.bad})}
+  else if(k==="pump"){ivBag(40,96,90,130,.8,{tint:p.dev.drug?C.drug:null});line(85,234,85,250,C["glass-edge"],2.5);pumpBox(150,90,220,150,{lines:[v>0?fmtNum(Math.round(v*10)/10,1)+" mL/hr":"-- mL/hr",p.dev.drug?"drug infusion":"IV fluid",p.dev.V&&v>0?"finishes in "+fmtMin(p.dev.V/v*60):""],run:v>0,T});
+    if(v>500)label(260,270,"Very fast for a pump: recheck",{size:12,weight:700,border:C.bad,color:C.bad})}
+  else if(k==="drip"){ivBag(60,92,80,96,.7,{});const g=Math.min(v,240);const cy=dripChamber(100,204,24,T,g,{});line(100,cy,100,310,C["glass-edge"],2.5);
+    txt(170,150,v>0?fmtNum(Math.round(v),0)+" gtt/min":"-- gtt/min",{size:20,weight:700,mono:true});txt(170,180,`drop factor ${p.dev.df} gtt/mL`,{size:12.5,color:C["ink-soft"]});
+    if(v>0)txt(170,210,`count about ${fmtNum(Math.round(v/4*10)/10,1)} drops in 15 seconds`,{size:12.5,weight:600});if(v>240)label(250,260,"Too fast to count: recheck",{size:12,weight:700,border:C.bad,color:C.bad})}
+  else if(k==="range"){const lo=p.dev.lo,hi=p.dev.hi;const mx=Math.max(hi*1.8,v*1.1);const bx=40,bw=320,by=170;const X=q=>bx+bw*clamp(q,0,mx)/mx;
+    rr(bx,by,bw,26,5);ctx.fillStyle=C.sunk;ctx.fill();rr(X(lo),by,X(hi)-X(lo),26,0);ctx.fillStyle=hexA(C.good,.55);ctx.fill();rr(X(hi),by,bx+bw-X(hi),26,0);ctx.fillStyle=hexA(C.bad,.3);ctx.fill();
+    txt(X(lo),by+42,String(lo),{size:11.5,mono:true,align:"center"});txt(X(hi),by+42,String(hi),{size:11.5,mono:true,align:"center"});txt(bx,by-46,"safe range for this child (mg/day)",{size:12.5,weight:600});
+    if(v>0){const mxp=X(v);ctx.beginPath();ctx.moveTo(mxp,by-2);ctx.lineTo(mxp-8,by-15);ctx.lineTo(mxp+8,by-15);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();label(clamp(mxp,bx+40,bx+bw-40),by-26,fmtNum(v,1)+" mg/day",{size:12,weight:700,mono:true,border:C.accent})}
+    if(ok){const vd=p.verdict;label(200,270,vd==="inside"?"inside range: safe to give":vd==="above"?"above range: hold and clarify":"below range: clarify",{size:13,weight:700,border:vd==="inside"?C.good:C.bad,color:vd==="inside"?C.good:C.bad})}}
+  if(ok){circ(360,70,14,C.good);checkMark(360,70,7,"#fff")}
+  if(calcVal()==null){const bx=Math.sin(T*3)*8;label(250+bx,300,"type an answer →",{size:12.5,weight:700,border:C.accent,color:C["accent-ink"]})}
+  // order card
+  paper(405,38,385,282,{title:"PRACTICE ORDER",tcol:C.gold});p.card.forEach((l,i)=>txt(420,90+i*30,l,{size:14.5,weight:i===0?700:600,mono:i>0}));
+  txt(420,200,"Unit wanted:",{size:12.5,color:C["ink-soft"]});label(510,200,p.unit,{size:13,weight:700,mono:true,border:C.good,align:"left"});
+  wrapText(p.round,420,240,350,17,{size:12.5,color:C["ink-soft"]});
+  // chain band
+  panelBox(10,330,780,140);title(24,350,"Worked solution · dimensional analysis");
+  if(TR.sol){const pr=smooth(clamp((now-TR.solT)/3200,0,1));const ch=p.chain;const w=fracChainWidth(ch.items,ch.res,{size:15});
+    if(w<740&&ch.brk==null)fracChain(Math.max(30,400-w/2),410,ch.items,ch.res,pr,{size:15});
+    else fracChain(40,385,ch.items,ch.res,pr,{size:14,breakAfter:ch.brk!=null?ch.brk:Math.floor(ch.items.length/2)-1,rowH:56,indent:20})}
+  else wrapText("The worked solution appears here after a correct answer, or when you press Show worked solution. Units that appear on top and bottom cancel.",30,395,740,18,{size:13,color:C["ink-soft"]});
+}
+function calcA11y(){const p=TR.p;const v=calcVal();const dv={tabs:"tablets",cup:"a medicine cup",osyr:"an oral syringe",syr:"a syringe",pump:"an infusion pump screen",drip:"a drip chamber",range:"a safe range bar"}[p.dev.k];
+  const lab=`Practice problem, ${p.title}. Your answer ${v==null?"not entered":fmtNum(v,2)+" "+p.unit}.${TR.solved?" Correct.":""}`;
+  return [lab,`The left side shows ${dv} filled or set to your typed answer${v==null?" (nothing typed yet)":", "+fmtNum(v,2)+" "+p.unit}. The right side shows the practice order: ${p.card.join("; ")}. ${TR.sol?"The bottom shows the worked solution as a chain of fractions; matching units are struck through in red, leaving "+p.unit+", and the answer "+fmtNum(p.ans,2)+" "+p.unit+" appears in a green box.":"The worked solution is hidden until you check a correct answer or ask for it."}`]}
+
+/* ================= PART 2: IV pump simulator ================= */
+const PS={mode:"pump",vtbi:1000,rate:125,df:15,lapse:60,running:false,infused:0,simT:0,hist:[[0,1000]],alarm:false,done:new Set(),acc:0};
+const PCHAL=["Set 1,000 mL to run over 8 hours on the pump (125 mL/hr).","Switch to gravity with 15 gtt/mL tubing at 125 mL/hr: about 31 gtt/min.","Try microdrip tubing (60 gtt/mL): drops per minute now equal mL/hr.","Set a 100 mL bag to run over 30 minutes (200 mL/hr).","Run a bag until the pump alarms: infusion complete."];
+function fmtHM(h){if(!isFinite(h))return "--";const m=Math.round(h*60);return Math.floor(m/60)+" h "+String(m%60).padStart(2,"0")+" min"}
+function pGpm(){return PS.rate*PS.df/60}
+function pLeft(){return Math.max(0,PS.vtbi-PS.infused)}
+function pNewBag(){PS.infused=0;PS.simT=0;PS.hist=[[0,PS.vtbi]];PS.alarm=false;PS.running=false;pUI()}
+function pStep(dt){if(!PS.running||PS.alarm)return;const sec=dt*PS.lapse;PS.infused+=PS.rate/3600*sec;PS.simT+=sec;PS.acc+=dt;
+  if(PS.infused>=PS.vtbi){PS.infused=PS.vtbi;PS.alarm=true;PS.running=false;PS.done.add(4);PS.hist.push([PS.simT/3600,0]);pUI();return}
+  if(PS.acc>.25){PS.acc=0;PS.hist.push([PS.simT/3600,pLeft()]);if(PS.hist.length>600)PS.hist.splice(1,1);pRead()}}
+function pChal(){if(PS.vtbi===1000&&PS.rate===125&&PS.mode==="pump")PS.done.add(0);if(PS.mode==="grav"&&PS.df===15&&PS.rate===125)PS.done.add(1);if(PS.mode==="grav"&&PS.df===60)PS.done.add(2);if(PS.vtbi===100&&PS.rate===200)PS.done.add(3);chalUI($("#pumpChal"),PCHAL,PS.done)}
+function pRead(){const rows=[["Rate",PS.rate+" mL/hr"],["Drops per minute",fmtNum(pGpm(),1)+" gtt/min ("+PS.df+" gtt/mL)"],["Drops in 15 seconds","about "+fmtNum(Math.round(pGpm()/4*10)/10,1)],["Volume infused",fmtNum(Math.round(PS.infused),0)+" mL"],["Volume left",fmtNum(Math.round(pLeft()),0)+" mL"],["Time to empty",PS.alarm?"empty":fmtHM(pLeft()/PS.rate)],["Elapsed (simulated)",fmtHM(PS.simT/3600)]];
+  pCap();$("#pumpRead tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}
+function pAlerts(){const a=[];if(PS.alarm)a.push(["bad","ALARM","Infusion complete: the bag is empty. Check the patient and the order before hanging the next bag."]);
+  if(PS.mode==="grav")a.push(["info","GRAVITY","Gravity rates drift as the patient moves. Recount the drops often; high-alert drugs always go on a pump."]);
+  if(PS.mode==="grav"&&PS.df===60)a.push(["good","MICRODRIP","With 60 gtt/mL tubing, gtt/min equals mL/hr."]);
+  if(PS.rate>300)a.push(["warn","CHECK","A fast rate: double-check the order and the patient (practice setting)."]);
+  $("#pumpAlerts").innerHTML=a.map(x=>`<div class="alert ${x[0]}"><span class="ic">${x[1]}</span><span>${x[2]}</span></div>`).join("")}
+function pUI(){$("#pumpVolO").textContent=PS.vtbi+" mL";$("#pumpRateO").textContent=PS.rate+" mL/hr";$("#pumpVol").value=PS.vtbi;$("#pumpRate").value=PS.rate;
+  $("#pumpRun").textContent=PS.alarm?"Bag empty":PS.running?"Pause infusion":"Start infusion";$("#pumpRun").disabled=PS.alarm;
+  segBtns($("#pumpMode"),[["pump","Infusion pump<br><small>mL/hr</small>"],["grav","Gravity<br><small>gtt/min</small>"]],()=>PS.mode,v=>{PS.mode=v;pUI()});
+  segBtns($("#pumpDf"),[[10,"10"],[15,"15"],[20,"20"],[60,"60 micro"]].map(x=>[x[0],x[1]+'<span class="gk-sr"> gtt/mL</span>']),()=>PS.df,v=>{PS.df=v;pUI()});
+  segBtns($("#pumpLapse"),[[1,"Real time"],[60,"× 60"],[600,"× 600"]],()=>PS.lapse,v=>{PS.lapse=v;pUI()});
+  $("#pumpCap").textContent=PS.mode==="pump"?`Pump at ${PS.rate} mL/hr; ${fmtNum(Math.round(pLeft()),0)} mL left; time to empty ${PS.alarm?"now":fmtHM(pLeft()/PS.rate)}.`:`Gravity at ${fmtNum(pGpm(),1)} gtt/min with ${PS.df} gtt/mL tubing (${PS.rate} mL/hr).`;
+  pRead();pAlerts();pChal();a11yKey=""}
+function pCap(){$("#pumpCap").textContent=PS.mode==="pump"?`Pump at ${PS.rate} mL/hr; ${fmtNum(Math.round(pLeft()),0)} mL left; time to empty ${PS.alarm?"now":fmtHM(pLeft()/PS.rate)}.`:`Gravity at ${fmtNum(pGpm(),1)} gtt/min with ${PS.df} gtt/mL tubing (${PS.rate} mL/hr); ${fmtNum(Math.round(pLeft()),0)} mL left.`}
+$("#pumpVol").oninput=e=>{PS.vtbi=+e.target.value;pNewBag()};
+$("#pumpRate").oninput=e=>{PS.rate=+e.target.value;pUI()};
+$("#pumpRun").onclick=()=>{if(PS.alarm)return;PS.running=!PS.running;pUI()};
+$("#pumpReset").onclick=()=>pNewBag();
+function drawPump(now){use(S2);const T=now/1000;practiceTag(16,20,{t:"PRACTICE SETTINGS"});
+  panelBox(10,38,320,432);const frac_=pLeft()/PS.vtbi;
+  line(60,48,60,460,C["ink-soft"],4);line(40,60,120,60,C["ink-soft"],4);
+  ivBag(70,80,100,150,frac_,{label:[PS.vtbi+" mL","IV fluid"]});
+  const run=PS.running&&!PS.alarm;const cy=dripChamber(120,250,26,T,run?pGpm():0,{});
+  if(PS.mode==="pump"){line(120,cy,120,300,C["glass-edge"],2.5);pumpBox(150,290,165,130,{lines:[PS.alarm?"INFUSION COMPLETE":PS.rate+" mL/hr",`VTBI ${PS.vtbi} mL`,`left ${Math.round(pLeft())} mL`],alarm:PS.alarm&&(T%1<.6),run,T});line(120,300,150,320,C["glass-edge"],2.5);line(232,420,232,450,C["glass-edge"],2.5)}
+  else{line(120,cy,120,450,C["glass-edge"],2.5);rr(106,330,28,40,5);ctx.fillStyle=C["panel-2"];ctx.fill();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.4;ctx.stroke();circ(120,350,8,C["ink-soft"]);txt(142,350,"roller clamp",{size:12,color:C["ink-soft"]});
+    rr(180,160,140,64,8);ctx.fillStyle=C.scr;ctx.fill();txt(190,178,"COUNT FOR 15 s",{size:11,mono:true,weight:700,color:"#A3B2BA"});txt(190,204,run?"≈ "+fmtNum(Math.round(pGpm()/4*10)/10,1)+" drops":"start to watch",{size:15,mono:true,weight:700,color:"#7FE0A8"})}
+  txt(142,270,run?fmtNum(pGpm(),1)+" gtt/min":"drops stopped",{size:12.5,weight:700,mono:true,align:"left"});
+  // graph
+  panelBox(340,38,450,432);title(354,60,"Volume left over time");
+  const gx=390,gy=90,gw=370,gh=250;const tEnd=Math.max(PS.vtbi/PS.rate,PS.simT/3600,0.25)*1.08;
+  axes(gx,gy,gw,gh,null,"mL left");txt(gx+gw,gy+gh+32,"hours →",{size:11,align:"right",color:C["ink-soft"]});const X=h=>gx+gw*h/tEnd,Y=v=>gy+gh-gh*v/PS.vtbi;
+  const stp=[.25,.5,1,2,4,6,12].find(q=>tEnd/q<=6)||24;for(let h=0;h<=tEnd+1e-9;h+=stp){line(X(h),gy+gh,X(h),gy+gh+5,C["ink-soft"],1.2);txt(X(h),gy+gh+16,fmtNum(h,2),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  txt(gx-6,gy,String(PS.vtbi),{size:11,mono:true,align:"right",color:C["ink-soft"]});txt(gx-6,gy+gh,"0",{size:11,mono:true,align:"right",color:C["ink-soft"]});
+  const h0=PS.simT/3600,l0=pLeft();if(!PS.alarm){line(X(h0),Y(l0),X(h0+l0/PS.rate),Y(0),hexA(C.accent,.6),2,[6,5]);circ(X(h0+l0/PS.rate),Y(0),5,C.accent);label(clamp(X(h0+l0/PS.rate),gx+60,gx+gw-60),Y(0)-22,"empty at "+fmtHM(h0+l0/PS.rate),{size:12,weight:700,border:C.accent})}
+  poly(PS.hist.map(q=>[X(q[0]),Y(q[1])]).concat([[X(h0),Y(l0)]]),C.accent,3);circ(X(h0),Y(l0),5,C.accent);
+  txt(354,384,PS.rate+" mL/hr",{size:20,weight:700,mono:true});txt(560,384,fmtNum(pGpm(),1)+" gtt/min",{size:20,weight:700,mono:true});
+  txt(354,410,"pump rate",{size:12,color:C["ink-soft"]});txt(560,410,"at "+PS.df+" gtt/mL",{size:12,color:C["ink-soft"]});
+  txt(354,440,"time-lapse "+(PS.lapse===1?"off (real time)":"× "+PS.lapse)+(PS.running?" · running":PS.alarm?" · bag empty":" · paused"),{size:12.5,weight:600});
+}
+function pumpA11y(){const lab=`IV ${PS.mode==="pump"?"pump":"gravity line"}: ${PS.rate} mL/hr, ${fmtNum(pGpm(),1)} drops per minute, ${Math.round(pLeft())} of ${PS.vtbi} mL left${PS.alarm?", infusion complete alarm":""}.`;
+  return [lab,`On the left, an IV bag hangs on a pole and is ${Math.round(pLeft()/PS.vtbi*100)} percent full. Below it, drops ${PS.running?"fall in the drip chamber at about "+fmtNum(pGpm(),0)+" per minute":"are not falling because the infusion is stopped"}. ${PS.mode==="pump"?"An infusion pump screen shows the rate and volume.":"A roller clamp controls the drops, and a box shows how many drops to count in 15 seconds."} On the right, a graph shows volume left against time in hours; a dashed line projects when the bag will be empty${PS.alarm?"; the bag is now empty":", at "+fmtHM(PS.simT/3600+pLeft()/PS.rate)}.`]}
+
+/* ================= PART 3: spot the error ================= */
+const MF=[["id","Patient record"],["allergy","Allergies"],["drug","Drug"],["dose","Dose"],["route","Route"],["freq","Time / frequency"],["other","Other active orders"]];
+const MFOK={id:"Name, date of birth and record number match the wristband.",allergy:"The allergy list does not conflict with this drug.",drug:"The drug name is clear and spelled out.",dose:"The dose is written safely, with no trailing zero and no naked decimal.",route:"The route fits this form of the drug.",freq:"The timing is written clearly and fits the record.",other:"No other active order overlaps with this one."};
+const MBASE={allergy:"none known",other:"none",now:"0900"};
+const MARX=[
+{who:"Ana Lee, 63",band:["LEE, ANA","DOB 04/12/1961","MRN 0048213"],rec:{id:"LEE, ANA · DOB 04/12/1961 · MRN 0048213",drug:"Drug A tablets",dose:"5.0 mg",route:"PO (by mouth)",freq:"daily at 0900"},err:["dose"],pic:"tabs",name:"Trailing zero",
+ why:"5.0 mg has a trailing zero. If the decimal point is missed or faint, it reads as 50 mg: a tenfold overdose. Clarify the order; it should be written 5 mg.",hint:"Look closely at how the number in the dose is written.",fix:"5 mg"},
+{who:"James Okafor, 50",band:["OKAFOR, JAMES","DOB 09/30/1975","MRN 0062290"],rec:{id:"OKAFOR, JAMES · DOB 03/09/1957 · MRN 0071154",drug:"Drug B tablets",dose:"10 mg",route:"PO (by mouth)",freq:"daily at 0900"},err:["id"],pic:"tabs",name:"Wrong patient",
+ why:"Same name, but the date of birth and record number do not match the wristband. This record belongs to a different James Okafor. Two identifiers must match; stop and find the right record.",hint:"Compare every identifier on the record with the wristband, not just the name.",fix:"use the record that matches DOB 09/30/1975 and MRN 0062290"},
+{who:"Maria Santos, 71",band:["SANTOS, MARIA","DOB 02/18/1955","MRN 0039004"],rec:{id:"SANTOS, MARIA · DOB 02/18/1955 · MRN 0039004",drug:"potassium chloride concentrate",dose:"1 vial (practice)",route:"IV push",freq:"now, once"},err:["route"],pic:"kcl",name:"Potassium IV push",
+ why:"Potassium is never given by IV push. A sudden bolus can stop the heart. IV potassium is always diluted and infused slowly on a pump. Do not give it; clarify the order.",hint:"Think about what happens when a concentrated electrolyte reaches the heart all at once.",fix:"diluted IV infusion on a pump, per order and policy"},
+{who:"David Kim, 45",band:["KIM, DAVID","DOB 11/05/1980","MRN 0055871"],rec:{id:"KIM, DAVID · DOB 11/05/1980 · MRN 0055871",drug:"Drug C oral suspension",dose:"5 mL",route:"IV",freq:"every 8 hours"},err:["route"],pic:"osyr",name:"Wrong route",
+ why:"An oral suspension must never go into a vein: its particles and additives can cause emboli and infection. Oral liquids are drawn up in oral syringes that do not fit IV ports. Clarify the route (PO).",hint:"Does the form of this drug match the route?",fix:"PO (by mouth), in an oral syringe"},
+{who:"Grace Miller, 58",band:["MILLER, GRACE","DOB 06/22/1967","MRN 0041530"],rec:{id:"MILLER, GRACE · DOB 06/22/1967 · MRN 0041530",drug:"Drug D injection",dose:".5 mg",route:"IV",freq:"every 6 hours as needed"},err:["dose"],pic:"syr",name:"Missing leading zero",
+ why:".5 mg has no leading zero. If the small dot is missed, it reads as 5 mg: ten times too much. It should be written 0.5 mg; clarify before giving.",hint:"Look at the start of the dose number.",fix:"0.5 mg"},
+{who:"Samuel Brooks, 66",band:["BROOKS, SAMUEL","DOB 01/14/1960","MRN 0027718"],rec:{id:"BROOKS, SAMUEL · DOB 01/14/1960 · MRN 0027718",drug:"Drug H (dosed in units)",dose:"10U",route:"subcutaneous",freq:"at bedtime"},err:["dose"],pic:"pen",name:"U for units",
+ why:"A handwritten U can look like a 0 or a 4, so 10U can be read as 100. 'U' is on the do-not-use list; write the word units. Clarify the order.",hint:"Which abbreviation in this record is on the do-not-use list?",fix:"10 units"},
+{who:"Lena Fischer, 77",band:["FISCHER, LENA","DOB 08/03/1948","MRN 0018822"],rec:{id:"FISCHER, LENA · DOB 08/03/1948 · MRN 0018822",drug:"Drug E tablets",dose:"1 tablet",route:"PO (by mouth)",freq:"QD"},err:["freq"],pic:"tabs",name:"QD",
+ why:"QD is on the do-not-use list. It can be misread as QID (four times a day) or QOD (every other day). Write daily and clarify the order.",hint:"One abbreviation here is on the do-not-use list.",fix:"daily"},
+{who:"Omar Haddad, 39",band:["HADDAD, OMAR","DOB 05/27/1986","MRN 0068811"],allergyBand:true,rec:{id:"HADDAD, OMAR · DOB 05/27/1986 · MRN 0068811",allergy:"penicillin (hives)",drug:"amoxicillin capsules",dose:"1 capsule (practice)",route:"PO (by mouth)",freq:"every 8 hours"},err:["drug","allergy"],pic:"caps",name:"Allergy conflict",
+ why:"Amoxicillin is a penicillin. Giving it to a patient with a penicillin allergy risks a reaction, up to anaphylaxis. Hold it and contact the prescriber.",hint:"Compare the drug's class with the allergy list (and the red allergy band).",fix:"hold and contact the prescriber for a non-penicillin option"},
+{who:"Ruth Adams, 68",band:["ADAMS, RUTH","DOB 12/01/1957","MRN 0033465"],rec:{id:"ADAMS, RUTH · DOB 12/01/1957 · MRN 0033465",drug:"acetaminophen tablets",dose:"1 tablet (practice)",route:"PO (by mouth)",freq:"every 6 hours as needed for pain",other:"hydrocodone/acetaminophen, 1 tablet every 4 hours as needed for pain"},err:["other","drug"],pic:"tabs",name:"Duplicate therapy",
+ why:"Both orders contain acetaminophen. Taken together they can push the daily total past the safe maximum and injure the liver. Clarify with the prescriber which one to use and the daily limit.",hint:"Read the other active orders: does any of them contain the same drug?",fix:"one acetaminophen source with a clear daily maximum"},
+{who:"Peter Novak, 54",band:["NOVAK, PETER","DOB 07/19/1971","MRN 0059127"],rec:{id:"NOVAK, PETER · DOB 07/19/1971 · MRN 0059127",drug:"MS injection",dose:"2 mg (practice)",route:"IV",freq:"every 4 hours as needed"},err:["drug"],pic:"syr",name:"Ambiguous drug name",
+ why:"MS could mean morphine sulfate or magnesium sulfate: two very different high-alert drugs. The drug name must be written out in full. Clarify before giving.",hint:"Could the drug name mean two different drugs?",fix:"write the full drug name"},
+{who:"Helen Ortiz, 80",band:["ORTIZ, HELEN","DOB 03/30/1946","MRN 0012479"],rec:{id:"ORTIZ, HELEN · DOB 03/30/1946 · MRN 0012479",drug:"Drug F tablets",dose:"1 tablet",route:"PO (by mouth)",freq:"daily at 0900 · already given today at 0815 (charted)"},err:["freq"],pic:"tabs",name:"Already given",
+ why:"The record shows today's dose was already given and charted at 0815. Giving it again at 0900 would double the dose. Right time includes checking when the last dose was given.",hint:"Read the whole time line, including what was charted earlier today.",fix:"do not give; next dose tomorrow at 0900"}];
+const MS={i:0,picked:{},solved:{},first:{},hint:false};
+function marRec(m){return Object.assign({},MBASE,m.rec)}
+function marUI(){const m=MARX[MS.i];const r=marRec(m);
+  $("#marChips").innerHTML=MARX.map((x,i)=>`<button type="button" class="casechip" aria-pressed="${i===MS.i}" data-i="${i}">Record ${i+1}${MS.solved[i]?'<span class="ok" aria-hidden="true">✓</span><span class="gk-sr"> (solved)</span>':""}</button>`).join("");
+  $("#marChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{MS.i=+b.dataset.i;MS.hint=false;marUI()});
+  $("#marN").textContent=MS.i+1;$("#marT").textContent=MARX.length;$("#marFound").textContent=Object.keys(MS.solved).length;$("#marFirst").textContent=Object.keys(MS.first).filter(k=>MS.first[k]).length;
+  $("#marWho").textContent=`Practice MAR · ${m.who} · time now 0900`;$("#marTitle").textContent=MS.solved[MS.i]?`Found it: ${m.name}`:"Find the one unsafe part";
+  $("#marStory").textContent=`You are about to give the 0900 medication. The wristband reads ${m.band.join(", ")}${m.allergyBand?", with a red allergy band":""}. Compare it with the record below.`;
+  const box=$("#marFields");box.innerHTML="";const picked=MS.picked[MS.i]||[];
+  MF.forEach(f=>{const b=document.createElement("button");b.type="button";b.className="mf";const isErr=m.err.indexOf(f[0])>=0;
+    if(picked.indexOf(f[0])>=0)b.classList.add(isErr?"right":"wrong");if(MS.solved[MS.i]&&isErr)b.classList.add("right");if(MS.hint&&!MS.solved[MS.i]&&f[0]===m.err[0])b.classList.add("hinted");
+    b.innerHTML=`<span class="k">${f[1]}</span><span>${r[f[0]]}</span>`;b.onclick=()=>marPick(f[0]);box.appendChild(b)});
+  const fb=$("#marFb");if(MS.solved[MS.i]){fb.className="fb show ok";fb.textContent="✓ "+m.why+" Safe version: "+m.fix+"."}else if(picked.length){const last=picked[picked.length-1];fb.className="fb show no";fb.textContent="Not quite. "+MFOK[last]+" Look again."}else{fb.className="fb";fb.textContent=""}
+  $("#marHintBox").hidden=!MS.hint||!!MS.solved[MS.i];$("#marHintBox").textContent="Hint: "+m.hint;a11yKey=""}
+function marPick(k){const m=MARX[MS.i];if(MS.solved[MS.i])return;const pk=MS.picked[MS.i]=(MS.picked[MS.i]||[]);if(pk.indexOf(k)<0)pk.push(k);
+  if(m.err.indexOf(k)>=0){MS.solved[MS.i]=true;if(MS.first[MS.i]==null)MS.first[MS.i]=pk.length===1;MS.solveT=performance.now()}else{if(MS.first[MS.i]==null)MS.first[MS.i]=false}
+  marUI()}
+$("#marHint").onclick=()=>{MS.hint=true;marUI()};
+$("#marShow").onclick=()=>{if(!MS.solved[MS.i]){MS.solved[MS.i]=true;MS.first[MS.i]=false;MS.solveT=performance.now()}marUI()};
+$("#marPrev").onclick=()=>{MS.i=(MS.i+MARX.length-1)%MARX.length;MS.hint=false;marUI()};
+$("#marNext").onclick=()=>{MS.i=(MS.i+1)%MARX.length;MS.hint=false;marUI()};
+function marPic(kind,x,y,T){if(kind==="tabs"){tablets(x-30,y,2,{r:16})}else if(kind==="caps"){[0,1].forEach(k=>{ctx.save();ctx.translate(x-20+k*40,y);ctx.rotate(.5);rr(-18,-8,36,16,8);ctx.fillStyle=C.gold;ctx.fill();ctx.beginPath();ctx.rect(0,-8,18,16);ctx.save();rr(-18,-8,36,16,8);ctx.clip();ctx.fillStyle=C.bad;ctx.fillRect(0,-8,18,16);ctx.restore();ctx.strokeStyle=C["ink-soft"];ctx.lineWidth=1.2;rr(-18,-8,36,16,8);ctx.stroke();ctx.restore()})}
+  else if(kind==="kcl"){vial(x,y+30,50,{label:"KCl",cap:"#1A1A1A",level:.7,lcol:C.bad})}else if(kind==="osyr"){syringeH(x-60,y,110,10,5,{liq:C.liq,labels:false,read:false,cap:false,h:20})}
+  else if(kind==="syr"){syringeH(x-60,y,110,1,.5,{labels:false,read:false,cap:false,h:18,liq:C.water})}else if(kind==="pen"){insulinPen(x,y,46)}}
+function drawMar(now){use(S3);const m=MARX[MS.i];const r=marRec(m);const T=now/1000;
+  practiceTag(14,18,{t:"PRACTICE MAR · FICTIONAL PATIENT"});
+  wristband(14,34,380,m.band,{h:60,seed:MS.i*3+2,allergy:m.allergyBand});
+  rr(404,34,182,60,8);ctx.fillStyle=C.scr;ctx.fill();txt(416,52,"TIME NOW",{size:10.5,mono:true,weight:700,color:"#A3B2BA"});txt(416,74,"0900",{size:17,mono:true,weight:700,color:"#7FE0A8"});
+  ctx.save();ctx.translate(530,66);ctx.scale(.62,.62);marPic(m.pic,0,0,T);ctx.restore();
+  if(m.allergyBand)label(300,108,"red band = allergy",{size:11.5,weight:700,border:C.bad,color:C.bad,align:"left"});
+  paper(14,120,572,322,{title:"MEDICATION ADMINISTRATION RECORD"});
+  const solved=!!MS.solved[MS.i];const tSince=solved?(now-(MS.solveT||0))/1000:0;
+  MF.forEach((f,i)=>{const y=162+i*38;line(22,y+19,578,y+19,C["rule-soft"],1);txt(24,y,f[1].toUpperCase(),{size:11,mono:true,weight:700,color:C["ink-soft"]});
+    const val=r[f[0]];const isErr=m.err.indexOf(f[0])>=0;ctx.font=`600 13.5px ${FONT}`;let t=val;while(ctx.measureText(t).width>410&&t.length>4)t=t.slice(0,-2);if(t!==val)t+="…";
+    txt(160,y,t,{size:13.5,weight:600});
+    if(solved&&isErr){ctx.font=`600 13.5px ${FONT}`;const w=Math.min(410,ctx.measureText(t).width);const f_=smooth(clamp(tSince/.6,0,1));ctx.beginPath();ctx.ellipse(160+w/2,y,(w/2+(w>380?5:12))*f_,14*f_,0,0,TAU);ctx.strokeStyle=C.bad;ctx.lineWidth=2.6;ctx.stroke()}});
+  if(solved){const a=smooth(clamp((tSince-.5)/.6,0,1));withA(a,()=>{ctx.font=`700 12.5px ${FONT}`;let t="Safe: "+m.fix;while(ctx.measureText(t).width>530&&t.length>8)t=t.slice(0,-2);const w=ctx.measureText(t).width+20;rr(578-w,404,w,30,6);ctx.fillStyle=C["good-wash"];ctx.fill();ctx.strokeStyle=C.good;ctx.lineWidth=1.8;ctx.stroke();txt(578-w+10,419,t,{size:12.5,weight:700})})}
+  else{const sy=162+((T*.6)%1)*7*38;withA(.16,()=>{rr(20,sy-15,560,30,4);ctx.fillStyle=C.accent;ctx.fill()})}
+}
+function marA11y(){const m=MARX[MS.i];const r=marRec(m);const solved=!!MS.solved[MS.i];
+  return [`Practice medication record ${MS.i+1}: ${m.who}.${solved?" Error found: "+m.name+".":""}`,`At the top, a wristband reads ${m.band.join(", ")}${m.allergyBand?", next to a red allergy band":""}, and a clock reads 0900. Below, the medication record lists: `+MF.map(f=>f[1]+": "+r[f[0]]).join("; ")+(solved?`. The unsafe part, ${MF.filter(f=>m.err.indexOf(f[0])>=0).map(f=>f[1]).join(" and ")}, is circled in red, and a green box gives the safe version: ${m.fix}.`:". A faint highlight scans down the rows.")]}
+
+/* ================= PART 4: toxidrome match ================= */
+const ANTI=[["naloxone","naloxone","reverses opioids by pushing them off mu receptors"],["flumazenil","flumazenil","reverses benzodiazepines at the GABA-A benzodiazepine site"],["nac","acetylcysteine","treats acetaminophen overdose by refilling glutathione"],["atro","atropine + pralidoxime","treat organophosphate (cholinergic) poisoning"],["physo","physostigmine","is used with caution for anticholinergic poisoning"],["vitk","vitamin K","reverses warfarin by letting the liver remake clotting factors"],["prot","protamine","binds and neutralizes heparin"],["ida","idarucizumab","grabs and reverses dabigatran"],["andx","andexanet alfa","is a decoy that soaks up factor Xa inhibitors such as apixaban"],["fab","digoxin immune fab","binds digoxin and pulls it off the sodium-potassium pump"],["gluc","glucagon","raises cAMP around blocked beta receptors and raises blood glucose"],["dant","dantrolene","stops calcium release in muscle in malignant hyperthermia"]];
+const NORM={pupil:1,rr:16,hr:76,spo2:98,bp:"122/76",temp:37};
+const TOX=[
+{who:"Marcus, 34",title:"Very sleepy after leftover pain pills",story:"Found hard to wake after taking leftover pain pills from a dental procedure. Breathing is slow and shallow.",s:{pupil:.25,rr:6,hr:58,spo2:84,bp:"104/62",temp:36.6,eyesClosed:true},labs:[["Breathing","slow, shallow","bad"],["Pupils","pinpoint","bad"]],bottle:"pain pills (opioid)",ans:"naloxone",hint:"Pinpoint pupils plus slow breathing is the classic opioid pattern.",why:"Naloxone is a competitive antagonist at mu opioid receptors: it pushes the opioid off and breathing returns. It may wear off first, so keep monitoring for re-sedation."},
+{who:"Ines, 52",title:"Hard to rouse after a procedure",story:"After a short procedure with midazolam sedation, she is hard to rouse and breathing more slowly. She does not take benzodiazepines at home.",s:{pupil:1,rr:10,hr:66,spo2:91,bp:"110/70",temp:36.8,eyesClosed:true},labs:[["Sedation","deep","bad"],["Pupils","normal size","ok"]],bottle:"midazolam (procedure)",ans:"flumazenil",hint:"The sedative used was a benzodiazepine, and this is procedural sedation, not a mixed overdose.",why:"Flumazenil blocks the benzodiazepine site on the GABA-A receptor and reverses procedural sedation. It is avoided in long-term benzodiazepine users and mixed overdoses because it can trigger seizures, and it is short-acting."},
+{who:"Tom, 41",title:"Too many cold and pain tablets",story:"Over the past day he took a lot of a cold remedy plus extra pain reliever, both containing acetaminophen. He feels mostly fine, a little nauseated.",s:{pupil:1,rr:16,hr:84,spo2:98,bp:"126/80",temp:37},labs:[["Acetaminophen level","above treatment line","bad"],["Liver tests","normal so far","ok"]],bottle:"cold remedy + pain reliever",ans:"nac",hint:"Early acetaminophen overdose often looks well. The danger is to the liver, later.",why:"Acetylcysteine refills glutathione so the toxic product NAPQI is neutralized before it injures the liver. It works best when started early."},
+{who:"Rosa, 47",title:"Sick after spraying insecticide",story:"A farm worker who was spraying insecticide. She is drooling, sweating and wheezing, with muscle twitching.",s:{pupil:.25,rr:26,hr:46,spo2:89,bp:"96/60",temp:36.9,sweat:true,drool:true,twitch:true},labs:[["Airway","wet, wheezing","bad"],["Muscles","twitching","bad"]],bottle:"organophosphate insecticide",ans:"atro",hint:"Too much acetylcholine everywhere: secretions, slow heart, small pupils, twitching.",why:"Atropine blocks muscarinic receptors and dries the airway secretions; pralidoxime reactivates acetylcholinesterase if given before 'aging'. Staff wear protective equipment and decontaminate."},
+{who:"Kevin, 23",title:"Hot, dry and confused",story:"Took a large amount of an over-the-counter sleep aid (diphenhydramine). His skin is hot, dry and flushed, he is confused and has not urinated for hours.",s:{pupil:1.7,rr:20,hr:128,spo2:97,bp:"142/88",temp:38.6,red:true,dry:true},labs:[["Skin","hot, dry, flushed","bad"],["Bladder","full, cannot void","bad"]],bottle:"OTC sleep aid",ans:"physo",hint:"Hot as a hare, dry as a bone, red as a beet, blind as a bat, mad as a hatter: the anticholinergic pattern.",why:"Physostigmine blocks acetylcholinesterase and crosses into the brain, so acetylcholine rises enough to overcome the blockade. It is used with caution and expert advice (seizure and slow-heart risk; avoided when the ECG suggests a tricyclic). Supportive care comes first."},
+{who:"Edith, 79",title:"Nosebleed and bruises on warfarin",story:"Takes warfarin for atrial fibrillation. She has a nosebleed that will not stop and new bruises on her arms.",s:{pupil:1,rr:18,hr:92,spo2:97,bp:"118/72",temp:36.8,pale:true},labs:[["INR","very high","bad"],["Bleeding","nose, skin","bad"]],bottle:"warfarin",ans:"vitk",hint:"Which antidote helps the liver make clotting factors II, VII, IX and X again?",why:"Vitamin K lets the liver make clotting factors again, which takes hours. For serious bleeding a factor concentrate may be added per protocol. Watch the INR."},
+{who:"Frank, 66",title:"Oozing on a heparin infusion",story:"On a heparin infusion. His IV site and gums are oozing blood. The infusion has been stopped.",s:{pupil:1,rr:18,hr:98,spo2:97,bp:"108/66",temp:36.9,pale:true},labs:[["aPTT","far above goal","bad"],["Bleeding","IV site, gums","bad"]],bottle:"heparin infusion",ans:"prot",hint:"Heparin is strongly negative. Which antidote is strongly positive?",why:"Protamine is positively charged and binds heparin into an inactive complex. Give it slowly; it can lower blood pressure and cause allergic reactions. Watch the aPTT."},
+{who:"Joan, 72",title:"GI bleed on dabigatran",story:"Takes dabigatran. She has black, tarry stools and feels dizzy when she stands.",s:{pupil:1,rr:20,hr:112,spo2:96,bp:"96/58",temp:36.7,pale:true},labs:[["Hemoglobin","falling","bad"],["Stool","black, tarry","bad"]],bottle:"dabigatran",ans:"ida",hint:"This direct oral anticoagulant has its own antibody-fragment reversal agent.",why:"Idarucizumab is an antibody fragment that binds dabigatran tightly and reverses it within minutes."},
+{who:"Victor, 69",title:"Head bleed on apixaban",story:"Takes apixaban. He fell and now has a severe headache; a scan shows bleeding in the head.",s:{pupil:1,rr:16,hr:64,spo2:96,bp:"168/94",temp:36.9},labs:[["Head scan","bleeding","bad"],["Drug","factor Xa inhibitor","bad"]],bottle:"apixaban",ans:"andx",hint:"Apixaban blocks factor Xa. Which antidote is a decoy Xa?",why:"Andexanet alfa is a modified factor Xa decoy. The drug binds the decoy instead of the patient's own factor Xa, so clotting can resume."},
+{who:"Mae, 84",title:"Halos and a slow, irregular pulse on digoxin",story:"Takes digoxin. Her kidney function has worsened. She is nauseated, not eating, and sees yellow-green halos around lights.",s:{pupil:1,rr:18,hr:42,spo2:95,bp:"100/62",temp:36.6},labs:[["Potassium","high","bad"],["Rhythm","slow, irregular","bad"]],bottle:"digoxin",ans:"fab",hint:"Vision changes, nausea and a slow irregular rhythm in an older adult with worse kidneys.",why:"Digoxin immune fab fragments bind digoxin and pull it off the Na⁺/K⁺ pump; the kidneys remove the complex. Afterwards potassium can fall, so monitor it."},
+{who:"Leo, 58",title:"Too many beta blocker tablets",story:"Took many metoprolol tablets. He is dizzy and pale, with a very slow pulse and low blood pressure.",s:{pupil:1,rr:16,hr:36,spo2:95,bp:"78/40",temp:36.4,pale:true},labs:[["Glucose","low","bad"],["Rhythm","very slow","bad"]],bottle:"metoprolol",ans:"gluc",hint:"The beta receptors are blocked. Which drug raises cAMP through a different receptor?",why:"Glucagon acts through its own receptor on heart cells and still raises cAMP, so the heart beats faster and stronger around the beta block. It often causes vomiting, so protect the airway."},
+{who:"Nina, 30",title:"Too much insulin",story:"Has type 1 diabetes and injected too much insulin. She is sweaty, shaky and confused, and cannot swallow safely.",s:{pupil:1.2,rr:18,hr:112,spo2:98,bp:"128/80",temp:36.8,sweat:true,pale:true},labs:[["Glucose","very low","bad"],["Swallow","not safe","bad"]],bottle:"insulin",ans:"gluc",hint:"She cannot swallow sugar safely. Which antidote makes the liver release glucose?",why:"Glucagon tells the liver to break glycogen down into glucose. (IV dextrose is also used.) Once she is awake and can swallow, give fast and then longer-acting carbohydrates."},
+{who:"Sam, 27",title:"Rigid and overheating in surgery",story:"During surgery with an inhaled anesthetic, his jaw and muscles become rigid, his temperature climbs fast and exhaled CO₂ keeps rising.",s:{pupil:1,rr:28,hr:142,spo2:93,bp:"150/90",temp:40.2,red:true,sweat:true,rigid:true},labs:[["Exhaled CO₂","rising fast","bad"],["Potassium","high","bad"]],bottle:"inhaled anesthetic",ans:"dant",hint:"Muscle calcium is leaking out of RyR1 in a susceptible patient.",why:"Dantrolene blocks RyR1 calcium release in skeletal muscle, so the muscles relax and heat production falls. Stop the trigger, call for help, cool and watch potassium and rhythm."}];
+const TX={order:[],pos:0,done:{},mist:0,wrong:{},hint:false,t0:Date.now(),timer:null,solT:0};
+function toxStart(){TX.order=shuffle(TOX.map((c,i)=>i));TX.pos=0;TX.done={};TX.mist=0;TX.wrong={};TX.hint=false;TX.t0=Date.now();toxTimerUI();toxUI()}
+function toxCur(){return TOX[TX.order[TX.pos]]}
+function toxStars(){return TX.mist===0?3:TX.mist<=3?2:1}
+function toxUI(){const c=toxCur();const id=TX.order[TX.pos];const solved=!!TX.done[id];
+  $("#toxN").textContent=TX.pos+1;$("#toxT").textContent=TOX.length;$("#toxDone").textContent=Object.keys(TX.done).length;$("#toxMist").textContent=TX.mist;
+  $("#toxWho").textContent="Fictional patient · "+c.who;$("#toxTitle").textContent=c.title;$("#toxStory").textContent=c.story;
+  const box=$("#toxBtns");box.innerHTML="";const wr=TX.wrong[id]||[];
+  ANTI.forEach(a=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=a[1];if(wr.indexOf(a[0])>=0)b.classList.add("wrong");if(solved&&a[0]===c.ans)b.classList.add("right");if(TX.hint&&!solved&&a[0]===c.ans)b.classList.add("hinted");b.onclick=()=>toxPick(a[0]);box.appendChild(b)});
+  const fb=$("#toxFb");if(solved){fb.className="fb show ok";fb.textContent="✓ "+ANTI.find(a=>a[0]===c.ans)[1]+". "+c.why}else if(wr.length){const a=ANTI.find(x=>x[0]===wr[wr.length-1]);fb.className="fb show no";fb.textContent="Not quite. "+a[1].charAt(0).toUpperCase()+a[1].slice(1)+" "+a[2]+". That does not fit this pattern."}else{fb.className="fb";fb.textContent=""}
+  $("#toxHintBox").hidden=!TX.hint||solved;$("#toxHintBox").textContent="Hint: "+c.hint;
+  const all=Object.keys(TX.done).length===TOX.length;const st=$("#toxStars");st.textContent=all?"★".repeat(toxStars())+"☆".repeat(3-toxStars()):"";st.setAttribute("aria-label",all?toxStars()+" of 3 stars":"Stars appear when every patient is matched");
+  const best=store.get("tox-best");$("#toxBest").textContent=(all?`All ${TOX.length} patients matched with ${TX.mist} ${TX.mist===1?"mistake":"mistakes"}${!$("#toxRelaxed").checked?" in "+fmt((Date.now()-TX.t0)/1000):""}. `:"")+(best?`Best: ${"★".repeat(+best)}`:"");a11yKey=""}
+function toxPick(k){const c=toxCur();const id=TX.order[TX.pos];if(TX.done[id])return;
+  if(k===c.ans){TX.done[id]=true;TX.solT=performance.now();if(Object.keys(TX.done).length===TOX.length){const st=toxStars();if(st>+(store.get("tox-best")||0))store.set("tox-best",st)}}
+  else{const w=TX.wrong[id]=(TX.wrong[id]||[]);if(w.indexOf(k)<0){w.push(k);TX.mist++}}toxUI()}
+$("#toxHint").onclick=()=>{TX.hint=true;toxUI()};
+$("#toxShow").onclick=()=>{const id=TX.order[TX.pos];if(!TX.done[id]){TX.done[id]=true;TX.mist++;TX.solT=performance.now()}toxUI()};
+$("#toxNext").onclick=()=>{TX.pos=(TX.pos+1)%TOX.length;TX.hint=false;toxUI()};
+$("#toxRestart").onclick=()=>toxStart();
+function toxTimerUI(){const relaxed=$("#toxRelaxed").checked;$("#toxTimer").hidden=relaxed;clearInterval(TX.timer);if(!relaxed)TX.timer=setInterval(()=>{if(Object.keys(TX.done).length<TOX.length)$("#toxTimer").textContent=fmt((Date.now()-TX.t0)/1000)},500)}
+$("#toxRelaxed").onchange=()=>{TX.t0=Date.now();toxTimerUI()};
+function drawTox(now){use(S4);const c=toxCur();const id=TX.order[TX.pos];const solved=!!TX.done[id];const T=now/1000;const f=solved?smooth(clamp((now-TX.solT)/2200,0,1)):0;
+  const s=c.s;const L=(a,b)=>lerp(a,b,f);const pupil=L(s.pupil,1),rr_=L(s.rr,16),hr=L(s.hr,76),spo2=L(s.spo2,98),temp=L(s.temp,37);const on=k=>s[k]&&f<.5;
+  panelBox(10,10,250,300);
+  const jit=on("twitch")?Math.sin(T*40)*1.5:0;const br=Math.sin(T*TAU*rr_/60);
+  ctx.save();ctx.translate(135,262);ctx.scale(1+br*.03,1+br*.06);rr(-82,-34,164,72,32);ctx.fillStyle=mix(C.accent,C.panel,.6);ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.lineWidth=1.4;ctx.stroke();ctx.restore();
+  if(on("rigid")){line(60,240,34,300,C["skin-edge"],9);line(210,240,236,300,C["skin-edge"],9);label(135,292,"rigid muscles",{size:12,weight:700,border:C.bad,color:C.bad})}
+  toxFace(135+jit,140,76,T,{pupil,sweat:on("sweat"),drool:on("drool"),red:on("red"),dry:on("dry"),pale:on("pale"),eyesClosed:s.eyesClosed&&f<.6,frown:!solved});
+  if(on("twitch"))label(56,66,"twitching",{size:12,weight:700,border:C.bad,color:C.bad});
+  const pl=pupil<.5?"pinpoint pupils":pupil>1.4?"large pupils":"normal pupils";label(135,32,s.eyesClosed&&f<.6?"eyes closed: "+pl:pl,{size:12,weight:700,border:pupil<.5||pupil>1.4?C.bad:C.good});
+  panelBox(270,10,320,300);title(284,30,"Monitor");
+  rr(282,42,296,60,6);ctx.fillStyle=C.scr;ctx.fill();ctx.save();rr(282,42,296,60,6);ctx.clip();ctx.beginPath();for(let i=0;i<=296;i+=1.5){const tt=(T-(296-i)/296*4)*hr/60;const v=ecgWave(tt);const Y=42+42-v*30;i?ctx.lineTo(282+i,Y):ctx.moveTo(282+i,Y)}ctx.strokeStyle="#7FE0A8";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const bad=(v,lo,hi)=>v<lo||v>hi?"#FF9C8F":"#7FE0A8";
+  vital(282,110,"HR",Math.round(hr)+" /min",bad(hr,55,110));vital(384,110,"RR",Math.round(rr_)+" /min",bad(rr_,10,24));vital(486,110,"SpO₂",Math.round(spo2)+"%",bad(spo2,94,101));
+  vital(282,158,"TEMP",fmtNum(temp,1)+" °C",bad(temp,35.5,38.2));vital(384,158,"BP",f>.5?NORM.bp:s.bp,f>.5?"#7FE0A8":"#A3B2BA");
+  rr(282,206,296,44,6);ctx.fillStyle=C.scr;ctx.fill();txt(290,218,"BREATHING",{size:10.5,mono:true,weight:700,color:"#A3B2BA"});
+  ctx.save();rr(370,208,204,40,4);ctx.clip();ctx.beginPath();for(let i=0;i<=204;i+=2){const tt=T-(204-i)/204*8;const Y=228-Math.sin(tt*TAU*rr_/60)*13;i?ctx.lineTo(370+i,Y):ctx.moveTo(370+i,Y)}ctx.strokeStyle="#6FB3EC";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  if(f>0)withA(Math.min(1,f*2),()=>{const a=ANTI.find(x=>x[0]===c.ans);chipDrug(430,lerp(330,280,f),a[1]+" given",{col:C.anti})});
+  panelBox(10,320,580,140);title(24,340,"Findings and history");
+  c.labs.forEach((l,i)=>{const y=372+i*36;const ok=l[2]==="ok"||f>.5;rr(24,y-14,330,28,6);ctx.fillStyle=ok?C["good-wash"]:C["bad-wash"];ctx.fill();ctx.strokeStyle=ok?C.good:C.bad;ctx.lineWidth=1.3;ctx.stroke();txt(34,y,l[0]+":",{size:12.5,weight:700});txt(344,y,f>.5&&l[2]!=="ok"?"improving":l[1],{size:12.5,weight:600,align:"right"})});
+  pillBottle(400,446,40,"",C.gold);wrapText("Took: "+c.bottle,432,380,150,16,{size:12.5,weight:600});
+}
+function toxA11y(){const c=toxCur();const solved=!!TX.done[TX.order[TX.pos]];const s=c.s;
+  return [`Toxidrome patient ${TX.pos+1}: ${c.title}. Heart rate ${s.hr}, breathing ${s.rr} per minute, temperature ${s.temp} degrees.${solved?" Antidote given; signs returning toward normal.":""}`,
+   `On the left, a drawing of the patient's face and chest: ${s.pupil<.5?"pinpoint pupils":s.pupil>1.4?"large pupils":"normal pupils"}${s.eyesClosed?", eyes closed":""}${s.sweat?", sweat drops":""}${s.drool?", drooling":""}${s.red?", flushed red skin":""}${s.dry?", dry skin":""}${s.pale?", pale skin":""}${s.twitch?", muscle twitching":""}${s.rigid?", rigid arms":""}; the chest rises and falls ${s.rr} times a minute. On the right, a monitor shows heart rate ${s.hr}, breathing ${s.rr}, oxygen ${s.spo2} percent, temperature ${s.temp} degrees and blood pressure ${s.bp}, plus findings: ${c.labs.map(l=>l[0]+" "+l[1]).join("; ")}. History: ${c.bottle}.${solved?" A green antidote chip slides in and the numbers drift back to normal.":""}`]}
+/* ================= PART 5: sort it out ================= */
+/* card: [text, bin or [bins], why] */
+const SROUNDS=[
+{name:"High-alert or not?",goal:"Sort each medicine: is it on the usual high-alert lists, where an error is likely to cause serious harm?",
+ bins:[["ha","High-alert medication"],["no","Not a high-alert medication"]],
+ cards:[["insulin","ha","Too much causes severe hypoglycemia."],["heparin infusion","ha","Anticoagulant: bleeding risk."],["warfarin","ha","Anticoagulant: bleeding risk."],["apixaban","ha","Direct oral anticoagulant: bleeding risk."],["IV morphine","ha","Opioid: respiratory depression."],["fentanyl patch","ha","Opioid: respiratory depression."],["potassium chloride concentrate","ha","Concentrated electrolyte: can stop the heart."],["3% sodium chloride (hypertonic saline)","ha","Concentrated electrolyte."],["IV chemotherapy","ha","Narrow margin between help and harm."],["IV midazolam for sedation","ha","Sedation agents are high-alert."],
+  ["docusate","no","A stool softener: not high-alert."],["loratadine","no","An antihistamine: not high-alert."],["multivitamin","no","Not high-alert."],["0.9% saline flush","no","Normal saline flushes are not high-alert."],["famotidine tablet","no","Not high-alert."]]},
+{name:"Safe or do-not-use?",goal:"Is each way of writing an order safe, or on a do-not-use or error-prone list?",
+ bins:[["safe","Safe to write"],["unsafe","Do not use"]],
+ cards:[["5 mg","safe","No trailing zero."],["5.0 mg","unsafe","Trailing zero: can be read as 50 mg."],["0.5 mg","safe","Leading zero."],[".5 mg","unsafe","No leading zero: can be read as 5 mg."],["10 units","safe","Write the word units."],["10 U","unsafe","U can be read as 0 or 4."],["10 IU","unsafe","IU can be read as IV or 10."],["daily","safe","Written out."],["QD","unsafe","Can be read as QID."],["QOD","unsafe","Can be read as QD or QID."],["morphine sulfate","safe","Full name."],["MSO4","unsafe","Morphine or magnesium sulfate?"],["mL","safe","Use mL."],["cc","unsafe","cc can be read as u (units) or 00."],["mcg","safe","Use mcg."],["µg","unsafe","µ can be read as m (mg): 1,000-fold error."],["1,000 units","safe","Commas make large numbers clear."],["hydrOXYzine","safe","Tall-man lettering helps."]]},
+{name:"What does it reverse?",goal:"Put each drug or poisoning in the box of the antidote that reverses it.",
+ bins:[["naloxone","naloxone"],["flumazenil","flumazenil"],["nac","acetylcysteine"],["vitk","vitamin K"],["prot","protamine"],["fab","digoxin immune fab"],["gluc","glucagon"],["dant","dantrolene"]],
+ cards:[["morphine","naloxone","Opioid: naloxone displaces it from mu receptors."],["fentanyl","naloxone","Opioid."],["oxycodone","naloxone","Opioid."],["midazolam (procedural sedation)","flumazenil","Benzodiazepine."],["lorazepam (procedural)","flumazenil","Benzodiazepine; seizure caution in long-term users."],["acetaminophen","nac","Acetylcysteine refills glutathione."],["warfarin","vitk","Vitamin K lets the liver remake factors II, VII, IX, X."],["heparin","prot","Protamine binds heparin."],["enoxaparin (partial reversal)","prot","Protamine only partly reverses low-molecular-weight heparin."],["digoxin","fab","Fab fragments bind digoxin."],["metoprolol overdose","gluc","Glucagon goes around the blocked beta receptor."],["severe low glucose from insulin","gluc","Glucagon releases liver glucose."],["malignant hyperthermia","dant","Dantrolene blocks RyR1 calcium release."]]},
+{name:"Special populations",goal:"Which group is each safety point mainly about? Some fit two; either correct box counts.",
+ bins:[["peds","Children"],["older","Older adults"],["preg","Pregnancy and lactation"],["kidney","Kidney impairment"],["liver","Liver impairment"]],
+ cards:[["Dose in mg/kg; weigh in kg","peds","Weight-based dosing."],["Immature liver enzymes in newborns","peds","Slow metabolism early in life."],["More body water, thinner skin barrier","peds","Changes distribution and absorption."],["Beers Criteria review","older","Potentially inappropriate drugs for 65+."],["Start low, go slow","older","Lower starting doses, slow increases."],["Polypharmacy and falls","older","Many drugs, sedation, dizziness."],["Weeks 3 to 8 after conception most sensitive","preg","Organogenesis."],["Narrative labeling replaced letter categories","preg","Pregnancy, Lactation, Reproductive potential sections."],["Drug may pass into breast milk","preg","Check a lactation reference."],["Adjust by creatinine clearance or eGFR","kidney","Renal dose adjustment."],["Metformin and many antibiotics may build up","kidney","Renally cleared drugs accumulate."],["Less first-pass removal of swallowed drugs","liver","More drug reaches the blood."],["Low albumin leaves more drug free",["liver","older"],"Liver disease and older age both lower albumin."],["Watch liver tests and INR","liver","Liver function clues."]]},
+{name:"Which right was missed?",goal:"Match each slip to the right of medication administration that was missed.",
+ bins:[["patient","Right patient"],["drug","Right drug"],["dose","Right dose"],["route","Right route"],["time","Right time"],["doc","Right documentation"]],
+ cards:[["Checked only the room number","patient","Room numbers are never identifiers."],["Gave bed A's medicine to the patient in bed B","patient","Use two identifiers every time."],["Grabbed hydrALAZINE instead of hydrOXYzine","drug","Look-alike names."],["Gave amoxicillin despite a penicillin allergy","drug","Check allergies against the drug."],["Read 5.0 mg as 50 mg","dose","Trailing zero error."],["Gave 2 tablets when 1 was ordered","dose","Recheck the math."],["Gave an oral suspension IV","route","Oral liquids never go IV."],["Gave potassium chloride by IV push","route","Potassium is always diluted on a pump."],["Gave the 0900 dose at 1400 for no reason","time","Outside the time window."],["Gave a dose already charted at 0815","time","Check the last dose."],["Charted the dose before giving it","doc","Document after giving, never before."],["Gave a PRN dose and did not chart it","doc","Undocumented doses lead to double doses."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const hex=(x,y,r,f)=>`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=Math.PI/6+i*Math.PI/3;return (x+r*Math.cos(a)).toFixed(1)+","+(y+r*Math.sin(a)).toFixed(1)}).join(" ")}" fill="${f||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".4"/>`;
+  const tag=(t,c)=>`<rect x="6" y="15" width="44" height="16" rx="3" fill="${c}"/><text x="28" y="27" font-size="9" font-family="IBM Plex Mono,monospace" font-weight="700" text-anchor="middle" fill="#fff">${t}</text>`;
+  const person=(x,h,c)=>`<circle cx="${x}" cy="${40-h-5}" r="${h*.18}" fill="var(--skin)" stroke="var(--skin-edge)"/><rect x="${x-h*.17}" y="${40-h*.95}" width="${h*.34}" height="${h*.95}" rx="${h*.15}" fill="${c||"var(--skin)"}" stroke="var(--skin-edge)"/>`;
+  switch(k){
+    case "ha":return s(`<rect x="10" y="4" width="22" height="34" rx="4" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="13" y="0" width="16" height="6" rx="2" fill="var(--ink-soft)"/>${tag("HIGH","var(--bad)")}`);
+    case "no":return s(`<circle cx="28" cy="23" r="15" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><path d="M20 23 l6 6 l10 -12" fill="none" stroke="var(--good)" stroke-width="3.5"/>`);
+    case "safe":return s(`<rect x="6" y="8" width="44" height="30" rx="4" fill="var(--paper)" stroke="var(--rule)"/><text x="28" y="28" font-size="12" font-family="IBM Plex Mono,monospace" font-weight="700" text-anchor="middle" fill="var(--ink)">0.5</text><path d="M38 34 l4 4 l8 -10" fill="none" stroke="var(--good)" stroke-width="3"/>`);
+    case "unsafe":return s(`<rect x="6" y="8" width="44" height="30" rx="4" fill="var(--paper)" stroke="var(--rule)"/><text x="26" y="28" font-size="12" font-family="IBM Plex Mono,monospace" font-weight="700" text-anchor="middle" fill="var(--ink)">5.0</text><path d="M40 28 l10 10 M50 28 l-10 10" stroke="var(--bad)" stroke-width="3"/>`);
+    case "naloxone":return s(`<path d="M10 40 v-16 a8 8 0 0 1 16 0 v16" fill="none" stroke="var(--receptor)" stroke-width="5"/>${hex(18,26,6)}<path d="M38 10 l6 6 l-6 6 l-6 -6z" fill="var(--ligand)"/>`);
+    case "flumazenil":return s(`<circle cx="22" cy="24" r="12" fill="var(--receptor)" fill-opacity=".6"/>${hex(40,14,6)}<circle cx="22" cy="24" r="4" fill="var(--panel)"/>`);
+    case "nac":return s(`<path d="M8 30 q10 -22 40 -8 q-10 18 -40 8z" fill="#8A4A2A" fill-opacity=".7"/>${hex(40,12,6)}<circle cx="22" cy="26" r="5" fill="none" stroke="var(--anti)" stroke-width="2.5"/>`);
+    case "vitk":return s(`${hex(14,14,7,"var(--gold)")}<circle cx="30" cy="30" r="6" fill="var(--accent)"/><circle cx="44" cy="30" r="6" fill="var(--accent)"/><circle cx="37" cy="18" r="6" fill="var(--accent)"/>`);
+    case "prot":return s(`<circle cx="12" cy="24" r="6" fill="var(--drug)"/><circle cx="24" cy="24" r="6" fill="var(--drug)"/><circle cx="18" cy="12" r="6" fill="var(--anti)"/><circle cx="40" cy="24" r="6" fill="var(--anti)"/><text x="40" y="27.5" font-size="10" text-anchor="middle" fill="#fff" font-weight="700">+</text>`);
+    case "fab":return s(`<path d="M28 42 v-16 l-10 -12 M28 26 l10 -12" fill="none" stroke="var(--anti)" stroke-width="5" stroke-linecap="round"/>${hex(28,9,5)}`);
+    case "gluc":return s(`<path d="M14 36 C2 26 6 12 16 16 C26 12 30 26 14 36Z" fill="var(--heart)"/>${hex(38,14,6)}<circle cx="40" cy="34" r="5" fill="var(--glu)"/>`);
+    case "dant":return s(`<rect x="6" y="14" width="30" height="20" rx="6" fill="var(--heart)" fill-opacity=".5"/><rect x="40" y="6" width="8" height="34" rx="4" fill="var(--panel)" stroke="var(--ink-soft)"/><rect x="42" y="22" width="4" height="16" fill="var(--bad)"/>${hex(22,24,5)}`);
+    case "peds":return s(person(28,26,"var(--act3)"));
+    case "older":return s(`${person(24,34,"var(--act5)")}<path d="M38 18 v22" stroke="var(--ink-soft)" stroke-width="3"/><path d="M38 18 q4 -4 6 0" fill="none" stroke="var(--ink-soft)" stroke-width="3"/>`);
+    case "preg":return s(`<circle cx="24" cy="8" r="5" fill="var(--skin)" stroke="var(--skin-edge)"/><path d="M18 14 h12 q10 10 2 20 v8 h-14z" fill="var(--act1)" fill-opacity=".7" stroke="var(--skin-edge)"/><path d="M44 18 q6 8 0 12 q-6 -4 0 -12z" fill="#F4F1E8" stroke="var(--ink-soft)"/>`);
+    case "kidney":return s(`<path d="M30 6 C10 4 10 42 30 40 C38 38 36 28 32 23 C36 18 38 8 30 6Z" fill="var(--vessel)" fill-opacity=".8" stroke="var(--heart-edge)"/>`);
+    case "liver":return s(`<path d="M6 22 C14 8 40 8 50 14 C42 28 22 36 6 22Z" fill="#8A4A2A" fill-opacity=".75" stroke="var(--heart-edge)"/>`);
+    case "patient":return s(`<rect x="4" y="16" width="48" height="16" rx="8" fill="var(--band)" stroke="var(--rule)"/><rect x="10" y="19" width="36" height="10" rx="3" fill="var(--paper)"/><path d="M14 24 h20" stroke="var(--ink)" stroke-width="2"/>`);
+    case "drug":return s(`<rect x="16" y="10" width="24" height="30" rx="4" fill="var(--glass)" stroke="var(--glass-edge)"/><rect x="19" y="5" width="18" height="6" rx="2" fill="var(--ink-soft)"/><rect x="16" y="20" width="24" height="10" fill="var(--paper)"/><text x="28" y="28" font-size="8" text-anchor="middle" font-weight="700" fill="var(--accent)">AbC</text>`);
+    case "dose":return s(`<circle cx="18" cy="24" r="10" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><path d="M18 15 v18" stroke="var(--ink-soft)" stroke-opacity=".6"/><circle cx="40" cy="24" r="10" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/>`);
+    case "route":return s(`<path d="M6 24 h34" stroke="var(--accent)" stroke-width="4"/><path d="M36 14 l12 10 l-12 10z" fill="var(--accent)"/>`);
+    case "time":return s(`<circle cx="28" cy="23" r="16" fill="var(--panel)" stroke="var(--ink-soft)" stroke-width="2"/><path d="M28 23 v-10 M28 23 h8" stroke="var(--ink)" stroke-width="2.5"/>`);
+    case "doc":return s(`<rect x="12" y="4" width="32" height="38" rx="3" fill="var(--paper)" stroke="var(--rule)"/><path d="M18 14 h20 M18 22 h20 M18 30 h12" stroke="var(--ink-soft)" stroke-width="2"/><path d="M34 32 l4 4 l8 -10" fill="none" stroke="var(--good)" stroke-width="3"/>`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function cardBins(c){return Array.isArray(c[1])?c[1]:[c[1]]}
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&cardBins(R.cards[SG.hint]).indexOf(d.dataset.k)>=0);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(cardBins(c).indexOf(bin)>=0){SG.placed[k]=bin;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();a11yKey="";if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=cardBins(R.cards[k]).map(b=>R.bins.find(x=>x[0]===b)[1]).join(" or ");sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>{if(!SG.placed[k])SG.placed[k]=cardBins(c)[0]});SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing and a name: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+
+/* ---------------- stages ---------------- */
+const S1=makeStage("cvCalc",800,470),S2=makeStage("cvPump",800,470),S3=makeStage("cvMar",600,450),S4=makeStage("cvTox",600,470);
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={calc:{cv:"#cvCalc",f:calcA11y},pump:{cv:"#cvPump",f:pumpA11y},mar:{cv:"#cvMar",f:marA11y},tox:{cv:"#cvTox",f:toxA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="calc";
+const TABS=["calc","pump","mar","tox","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3,S4].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{pStep(dt);
+    if(curTab==="calc")drawCalc(now);else if(curTab==="pump")drawPump(now);else if(curTab==="mar")drawMar(now);else if(curTab==="tox")drawTox(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__safety={tab:k=>showTab(k),calcTypes:()=>CTYPES.map(c=>c[0]),calcSet:t=>{TR.type=t;$("#calcType").value=t;calcNew()},calcProb:()=>TR.p,calcAnswer:v=>{$("#calcAns").value=v;$("#calcAns").dispatchEvent(new Event("input"))},
+  pump:o=>{Object.assign(PS,o);pUI()},pumpState:()=>({infused:PS.infused,alarm:PS.alarm,done:[...PS.done]}),
+  marGo:i=>{MS.i=i;MS.hint=false;marUI()},marN:()=>MARX.length,marShow:()=>$("#marShow").click(),
+  toxGo:i=>{TX.pos=i;TX.hint=false;toxUI()},toxN:()=>TOX.length,toxShow:()=>$("#toxShow").click(),
+  sortGo:i=>sLoad(i),sortN:()=>SROUNDS.length,sortShow:()=>$("#sShow").click(),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist})};
+readColors();calcNew();updCalcMeter();pNewBag();marUI();toxStart();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

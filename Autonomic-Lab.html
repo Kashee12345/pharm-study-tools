@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Autonomic Drugs Lab</title>
+<meta name="description" content="Autonomic control-panel simulator with a live monitor and receptor board, name-the-receptor pictures, nursing case files and sorting games for cholinergic, anticholinergic, adrenergic and blocker drugs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3787;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#5B6BC9;--act2:#2E8A5A;--act3:#B4632A;--act4:#C4382F;--act5:#2F7FC1;--act6:#A04E8C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF0F6;--glass:#DCE8EE;--glass-edge:#7F99A6;--water:#CFE5F1;
+  --drug:#6A3FB5;--drug2:#3A49A8;--rec:#1B7F86;--ach:#C98512;--ne:#C4382F;--epi:#B03A8C;--blocked:#8B9094;--ache:#2F7FC1;--op:#7E5A1A;
+  --symp:#C4502F;--para:#2E8A5A;--somatic:#7B5CC9;
+  --a1:#C4644F;--a2:#A04E8C;--b1:#2F7FC1;--b2:#1E8C74;--mus:#5E7F1A;--nic:#D98A1C;--dop:#7B5CC9;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --myo:#D9786A;--myo-edge:#9A3F33;--lung:#F0B8B0;--lung-edge:#B5675C;--vessel:#C4382F;--vwall:#E7A59C;--blood:#B5301F;
+  --gut:#E3B07E;--gut-edge:#A8733F;--bladder:#EBD889;--bladder-edge:#A99232;--urine:#E8CB3A;--iris:#5E86A8;--iris-edge:#2F5778;--muscle:#C9786A;--brain:#E6B7C1;--brain-edge:#A8707E;--mucus:#B9D7A0;--sweat:#5AA9E6;--prostate:#D7A3B8;--glow:#F2B33B;
+  --mon:#0F1A20;--mon-grid:#1C2E36;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#F27A6E;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B9A0F0;--drug2:#A9B4F5;--rec:#5CC4C8;--ach:#F2B33B;--ne:#F27A6E;--epi:#E07AC4;--blocked:#7A8288;--ache:#5AA9E6;--op:#D9AE5E;
+  --symp:#F08A6E;--para:#6BC293;--somatic:#A98BEF;
+  --a1:#E08A74;--a2:#D186C0;--b1:#5AA9E6;--b2:#4FD0A8;--mus:#A3C95A;--nic:#F2A93B;--dop:#A98BEF;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;
+  --myo:#8A3A33;--myo-edge:#E08A74;--lung:#5A3434;--lung-edge:#D98A80;--vessel:#F27A6E;--vwall:#6A2E2A;--blood:#E0574A;
+  --gut:#6A4A2A;--gut-edge:#D9A06A;--bladder:#5A5226;--bladder-edge:#E0CC6A;--urine:#E8CC3A;--iris:#4A6A88;--iris-edge:#9AC0E0;--muscle:#7A4038;--brain:#5A3A44;--brain-edge:#D9A0B0;--mucus:#4A6A3A;--sweat:#8FC0EC;--prostate:#6A3A4E;--glow:#F2B33B;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#F27A6E;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B9A0F0;--drug2:#A9B4F5;--rec:#5CC4C8;--ach:#F2B33B;--ne:#F27A6E;--epi:#E07AC4;--blocked:#7A8288;--ache:#5AA9E6;--op:#D9AE5E;
+  --symp:#F08A6E;--para:#6BC293;--somatic:#A98BEF;
+  --a1:#E08A74;--a2:#D186C0;--b1:#5AA9E6;--b2:#4FD0A8;--mus:#A3C95A;--nic:#F2A93B;--dop:#A98BEF;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;
+  --myo:#8A3A33;--myo-edge:#E08A74;--lung:#5A3434;--lung-edge:#D98A80;--vessel:#F27A6E;--vwall:#6A2E2A;--blood:#E0574A;
+  --gut:#6A4A2A;--gut-edge:#D9A06A;--bladder:#5A5226;--bladder-edge:#E0CC6A;--urine:#E8CC3A;--iris:#4A6A88;--iris-edge:#9AC0E0;--muscle:#7A4038;--brain:#5A3A44;--brain-edge:#D9A0B0;--mucus:#4A6A3A;--sweat:#8FC0EC;--prostate:#6A3A4E;--glow:#F2B33B;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.drugs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugs .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px;display:flex;align-items:center;gap:7px}
+.drugs .tbtn i{width:10px;height:10px;border-radius:2px;flex:0 0 auto;display:inline-block}
+.dgroup{margin:4px 0 2px;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.toggles{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.toggles .tbtn{font-size:13.5px;padding:7px 10px}
+.warnlist{margin:6px 0 0;padding-left:18px;font-size:14px}
+.warnlist li{margin:2px 0}
+.explist{margin:6px 0 0;padding-left:18px;font-size:14px}
+.explist li{margin:3px 0}
+.recopts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0}
+.recopts .tbtn{font-weight:600;font-size:14.5px;padding:9px 4px;text-align:center}
+.recopts .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.recopts .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.mini{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px;font-weight:600}
+.simlow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:640px){.simlow{grid-template-columns:1fr}}
+.recq{font-size:16px;font-weight:600;margin:4px 0 6px}
+@media (max-width:520px){.recopts{grid-template-columns:repeat(2,minmax(0,1fr))}.drugs{grid-template-columns:1fr 1fr}}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 3 &middot; Autonomic nervous system drugs</div>
+    <h1>Autonomic Drugs Lab</h1>
+    <p class="sub">Give drugs to a virtual body and watch every organ respond, name the receptor behind each effect, work through patient cases, and sort drugs and effects. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-sim" data-tab="sim" id="tabbtn-sim" type="button">Part 1 &middot; Receptor Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-rec" data-tab="rec" id="tabbtn-rec" type="button" tabindex="-1">Part 2 &middot; Name the Receptor</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: simulator -->
+  <section id="tab-sim" role="tabpanel" aria-labelledby="tabbtn-sim">
+    <h2 class="gk-sr">Part 1: Receptor Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSim" role="img" aria-label="Autonomic receptor simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="simCap"></span></div>
+        <div class="legend">
+          <span><i style="background:var(--a1)"></i>α1</span><span><i style="background:var(--a2)"></i>α2</span><span><i style="background:var(--b1)"></i>β1</span><span><i style="background:var(--b2)"></i>β2</span><span><i style="background:var(--dop)"></i>D1</span><span><i style="background:var(--mus)"></i>Muscarinic</span><span><i style="background:var(--nic)"></i>Nicotinic</span>
+          <span><i class="s" style="background:var(--blocked)"></i>Blocked part of a bar</span>
+        </div>
+        <p class="sim-note">A teaching model, not a real patient. Drug strength is a relative scale with no real doses. Bars show how strongly each receptor type is being switched on compared with normal (the tick mark). Numbers on the monitor are rounded teaching values.</p>
+        <div class="status" id="simStatus" role="status"></div>
+        <h3 class="mini">What is happening</h3>
+        <ul class="explist" id="simExplain" aria-live="polite"></ul>
+        <div class="simlow">
+          <div><h3 class="mini">Live readouts</h3>
+          <table class="readouts" id="simRead"><caption class="sr">Live readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div>
+          <div><h3 class="mini">Challenges</h3>
+          <ul class="chal" id="simChal"></ul></div>
+        </div>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="drugLab">1. Give drugs (tap to add or remove)</h3>
+        <div id="simDrugs" role="group" aria-labelledby="drugLab"></div>
+        <div class="ctl"><label for="simDose">Drug strength <output id="simDoseOut" for="simDose"></output></label>
+          <input type="range" id="simDose" min="1" max="3" step="1" value="2"><div class="ticks" aria-hidden="true"><span>low</span><span>medium</span><span>high</span></div></div>
+        <h3 id="patLab">2. The patient</h3>
+        <div class="toggles" role="group" aria-labelledby="patLab">
+          <button class="tbtn" type="button" id="simAsthma" aria-pressed="false">Has asthma</button>
+          <button class="tbtn" type="button" id="simOld" aria-pressed="false">Older adult</button>
+          <button class="tbtn" type="button" id="simStand" aria-pressed="false">Standing up</button>
+        </div>
+        <div class="bar"><button class="btn" type="button" id="simReset">Clear all drugs</button></div>
+        <p class="small">Simplified model with rounded numbers. It shows directions of change, not real drug levels; always follow the prescriber.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: name the receptor -->
+  <section id="tab-rec" role="tabpanel" aria-labelledby="tabbtn-rec" hidden>
+    <h2 class="gk-sr">Part 2: Name the Receptor</h2>
+    <div class="meter"><span>Picture <b id="rN">1</b> of <b id="rT">16</b></span><span>Solved <b id="rSolved">0</b></span><span>First try <b id="rFirst">0</b></span><span>Streak <b id="rStreak">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvRec" role="img" aria-label="Receptor picture."></canvas></div>
+        <div class="stagebar"><span class="caption" id="recCap"></span></div>
+      </div>
+      <div class="card">
+        <div class="lvl-n">Name the receptor</div>
+        <p class="recq" id="recQ"></p>
+        <div class="recopts" id="recOpts" role="group" aria-label="Receptor choices"></div>
+        <div class="fb" id="recFb" role="status"></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="recHint">Hint</button>
+          <button class="tbtn" type="button" id="recShow">Show answer</button>
+          <button class="tbtn" type="button" id="recPrev">&larr; Previous</button>
+          <button class="btn" type="button" id="recNext">Next picture &rarr;</button>
+        </div>
+        <div class="hintbox" id="recHintBox" role="status" hidden></div>
+        <div class="abbox"><b>Receptor key.</b> α1: squeeze vessels, widen pupil, tighten bladder neck. α2: brake on norepinephrine release. β1: heart faster and stronger, renin. β2: open airways, relax uterus, tremor. D1: widen kidney vessels. M: rest and digest. N: skeletal muscle and ganglia.</div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 3: case files -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">8</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case picture."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting game -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="Autonomic-Walkthrough.html">Autonomic Drugs Walkthrough</a>. Patients are fictional. The simulator uses a relative strength scale and rounded teaching numbers, never real doses, and the medication records say "as ordered" in place of doses. Always follow the prescriber, the label and your facility's protocol.</footer>
+
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "glass", "glass-edge", "water", "drug", "drug2", "rec", "ach", "ne", "epi", "blocked", "ache", "op", "symp", "para", "somatic", "a1", "a2", "b1", "b2", "mus", "nic", "dop", "skin", "skin-edge", "body", "body-edge", "myo", "myo-edge", "lung", "lung-edge", "vessel", "vwall", "blood", "gut", "gut-edge", "bladder", "bladder-edge", "urine", "iris", "iris-edge", "muscle", "brain", "brain-edge", "mucus", "sweat", "prostate", "glow", "mon", "mon-grid", "mon-hr", "mon-bp", "mon-sp", "mon-rr", "mon-ink"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("ans-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("ans-lab-"+k,v)}catch(e){}}};
+function fmtMin(m){if(!isFinite(m))return "never";if(m<1/60)return "< 1 s";if(m<1)return Math.round(m*60)+" s";if(m<120)return (m<10?m.toFixed(1):Math.round(m))+" min";return (m/60).toFixed(1)+" h"}
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+
+/* ================= autonomic drawing helpers ================= */
+const RCOL={a1:"a1",a2:"a2",b1:"b1",b2:"b2",M:"mus",N:"nic",D:"dop"};
+const RNAME={a1:"α1",a2:"α2",b1:"β1",b2:"β2",M:"M",N:"N",D:"D1"};
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function diamond(x,y,r){ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath()}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function triPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<3;k++){const a=-Math.PI/2+k/3*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+/* ligands: ACh circle (amber), NE diamond (red), Epi diamond with dot (magenta), agonist drug hexagon (violet), antagonist plug (violet square), OP triangle */
+function lig(type,x,y,r,a){r=r||7;withA(a==null?1:a,()=>{
+  if(type==="ach"){circ(x,y,r,C.ach,hexA(C.ink,.45),1.1)}
+  else if(type==="ne"){diamond(x,y,r*1.15);fillStroke(C.ne,hexA(C.ink,.45),1.1)}
+  else if(type==="epi"){diamond(x,y,r*1.15);fillStroke(C.epi,hexA(C.ink,.45),1.1);circ(x,y,r*.32,C.panel)}
+  else if(type==="ago"){hexPath(x,y,r*1.1,0);fillStroke(C.drug,hexA(C.ink,.45),1.1)}
+  else if(type==="ant"){rr(x-r,y-r,r*2,r*2,2.5);fillStroke(C.drug,hexA(C.ink,.5),1.1);line(x-r*.55,y-r*.55,x+r*.55,y+r*.55,C.panel,1.6);line(x+r*.55,y-r*.55,x-r*.55,y+r*.55,C.panel,1.6)}
+  else if(type==="op"){triPath(x,y,r*1.25,0);fillStroke(C.op,hexA(C.ink,.5),1.1)}
+  else if(type==="dop"){circ(x,y,r,C.dop,hexA(C.ink,.45),1.1);circ(x,y,r*.35,C.panel)}
+  else if(type==="glu"){hexPath(x,y,r,Math.PI/6);fillStroke(C.gold,hexA(C.ink,.4),1)}
+})}
+function membrane(x1,x2,y,o){o=o||{};const h=o.h||14;ctx.fillStyle=hexA(C.gold,.18);ctx.fillRect(x1,y-h/2,x2-x1,h);
+  for(let x=x1+3;x<x2;x+=7){circ(x,y-h/2+2,2.6,hexA(C.gold,.85));circ(x,y+h/2-2,2.6,hexA(C.gold,.85))}}
+/* receptor cup in a membrane, opening upward (dir=1) or downward (dir=-1) */
+function receptor(x,y,kind,o){o=o||{};const s=o.s||1,dir=o.dir||1;const col=o.blocked?C.blocked:C[RCOL[kind]||"rec"];
+  ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.scale(s,s*dir);
+  if(o.active){glow(0,-4,26,col,.45)}
+  ctx.beginPath();ctx.moveTo(-14,-16);ctx.lineTo(-14,10);ctx.quadraticCurveTo(-14,16,-8,16);ctx.lineTo(8,16);ctx.quadraticCurveTo(14,16,14,10);ctx.lineTo(14,-16);ctx.lineTo(7,-16);ctx.lineTo(7,2);ctx.lineTo(-7,2);ctx.lineTo(-7,-16);ctx.closePath();
+  fillStroke(col,hexA(C.ink,.5),1.2);ctx.restore();
+  if(o.label!==false){const ly=o.rot?y+(o.labDy||24)*s:y+dir*(o.labDy||27)*s;label(o.rot?x+(o.labDx||0):x,ly,o.text||RNAME[kind]||kind,{size:o.fs||12,weight:700,color:C.ink,bg:C.panel,border:o.blocked?C.blocked:C[RCOL[kind]]})}
+  if(o.blocked&&o.x!==false){const yy=y-dir*4*s;line(x-12*s,yy-10*s,x+12*s,yy+10*s,C.bad,2.6);line(x+12*s,yy-10*s,x-12*s,yy+10*s,C.bad,2.6)}}
+/* place ligand in a receptor's pocket */
+function inPocket(x,y,dir,s){return [x,y-dir*7*(s||1)]}
+/* presynaptic terminal knob (top) with vesicles */
+function terminal(x,y,w,h,col,o){o=o||{};ctx.beginPath();ctx.moveTo(x-w*.18,y-h);ctx.lineTo(x-w*.18,y-h*.55);ctx.bezierCurveTo(x-w*.62,y-h*.5,x-w*.55,y,x,y);ctx.bezierCurveTo(x+w*.55,y,x+w*.62,y-h*.5,x+w*.18,y-h*.55);ctx.lineTo(x+w*.18,y-h);ctx.closePath();
+  fillStroke(hexA(col,.22),col,2);
+  const n=o.ves==null?6:o.ves;for(let i=0;i<n;i++){const vx=x-w*.3+(i%3)*w*.3,vy=y-h*.18-Math.floor(i/3)*16;circ(vx,vy,6.5,hexA(C.panel,.85),col,1.3);if(o.lig)lig(o.lig,vx,vy,2.8)}}
+/* acetylcholinesterase: blue pac-man */
+function ache(x,y,r,mouth,o){o=o||{};const m=(mouth==null?.5:mouth)*0.8;ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,m+(o.rot||0),TAU-m+(o.rot||0));ctx.closePath();fillStroke(o.dead?C.blocked:C.ache,hexA(C.ink,.5),1.2);
+  circ(x+Math.cos((o.rot||0)-1.6)*r*.45,y+Math.sin((o.rot||0)-1.6)*r*.45,r*.12,C.panel)}
+/* heart */
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.25,y+s*.15,x-s*1.0,y-s*.95,x,y-s*.42);ctx.bezierCurveTo(x+s*1.0,y-s*.95,x+s*1.25,y+s*.15,x,y+s*.95);ctx.closePath()}
+function heart(x,y,s,T,hr,o){o=o||{};const ph=(T*(hr||70)/60)%1;const sq=gauss(ph,.12,.05)*(o.force==null?1:o.force);const k=1-.09*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);fillStroke(C.myo,C["myo-edge"],2);
+  ctx.beginPath();ctx.moveTo(-s*.2,-s*.45);ctx.quadraticCurveTo(-s*.1,s*.2,s*.15,s*.55);ctx.strokeStyle=hexA(C["myo-edge"],.6);ctx.lineWidth=1.5;ctx.stroke();
+  ctx.restore();if(sq>.4&&o.ring!==false)pulseRing(x,y,s*.9,C.myo,clamp(1-sq,0,1))}
+/* bronchiole cross-section: ring of smooth muscle; open=0..1 lumen size */
+function bronchiole(x,y,R,open,o){o=o||{};const lum=R*(.2+.42*clamp(open,0,1));
+  circ(x,y,R,hexA(C.lung,.8),C["lung-edge"],2);
+  const n=18;for(let i=0;i<n;i++){const a=i/n*TAU;const r1=Math.min(lum+4,R-6),r2=R-3;ctx.beginPath();ctx.ellipse(x+Math.cos(a)*(r1+r2)/2,y+Math.sin(a)*(r1+r2)/2,Math.max(1,(r2-r1)/2*.9+1),3.4,a,0,TAU);ctx.fillStyle=hexA(C.muscle,.7);ctx.fill()}
+  ctx.beginPath();for(let i=0;i<=40;i++){const a=i/40*TAU;const rr_=lum*(1+.08*Math.sin(a*8));const X=x+Math.cos(a)*rr_,Y=y+Math.sin(a)*rr_;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath();fillStroke(C.panel,C["lung-edge"],1.6);
+  if(o.mucus){const m=clamp(o.mucus,0,1);ctx.save();ctx.beginPath();ctx.arc(x,y,lum,0,TAU);ctx.clip();ctx.fillStyle=hexA(C.mucus,.85);ctx.fillRect(x-lum,y+lum*(1-1.6*m),lum*2,lum*2);ctx.restore()}}
+/* eye with iris and pupil (pupil 0..1 relative) */
+function eye(x,y,r,pupil,o){o=o||{};ctx.beginPath();ctx.moveTo(x-r*1.6,y);ctx.quadraticCurveTo(x,y-r*1.35,x+r*1.6,y);ctx.quadraticCurveTo(x,y+r*1.35,x-r*1.6,y);ctx.closePath();fillStroke("#F5F7F8",hexA(C.ink,.6),1.6);
+  ctx.save();ctx.clip();circ(x,y,r*.82,C.iris,C["iris-edge"],1.5);for(let k=0;k<16;k++){const a=k/16*TAU;line(x+Math.cos(a)*r*.32,y+Math.sin(a)*r*.32,x+Math.cos(a)*r*.78,y+Math.sin(a)*r*.78,hexA(C["iris-edge"],.5),1)}
+  circ(x,y,r*(.12+.55*clamp(pupil,0,1)),"#0B0F12");circ(x-r*.25,y-r*.25,r*.1,"rgba(255,255,255,.8)");ctx.restore()}
+/* vessel cross-section; constrict 0..1 */
+function vesselX(x,y,R,constrict,o){o=o||{};const wall=R*(.18+.32*clamp(constrict,0,1));circ(x,y,R,C.vwall,C.vessel,2);circ(x,y,R-wall,C.blood,hexA(C.ink,.35),1);
+  for(let k=0;k<5;k++){const a=k/5*TAU+(o.t||0)*.6;circ(x+Math.cos(a)*(R-wall)*.5,y+Math.sin(a)*(R-wall)*.5,Math.max(1.5,(R-wall)*.18),hexA("#fff",.25))}}
+/* long vessel segment with flowing cells; width w0 */
+function vesselTube(x1,x2,y,w,T,o){o=o||{};rr(x1,y-w/2-6,x2-x1,w+12,6);ctx.fillStyle=C.vwall;ctx.fill();rr(x1,y-w/2,x2-x1,w,w/2);ctx.fillStyle=C.blood;ctx.fill();
+  const sp=o.speed==null?40:o.speed;for(let i=0;i<14;i++){const xx=x1+((i*37+T*sp)%(x2-x1));ell(xx,y+Math.sin(i*2.1)*w*.25,Math.min(6,w*.3),Math.min(4,w*.2),0,hexA("#fff",.28))}}
+/* bladder */
+function bladder(x,y,s,fill,squeeze,o){o=o||{};const sq=clamp(squeeze||0,0,1);const w=s*(1-.18*sq),h=s*.9*(1-.2*sq);
+  ctx.beginPath();ctx.moveTo(x-w*.18,y+h*.55);ctx.bezierCurveTo(x-w*.9,y+h*.4,x-w*.85,y-h*.75,x,y-h*.7);ctx.bezierCurveTo(x+w*.85,y-h*.75,x+w*.9,y+h*.4,x+w*.18,y+h*.55);ctx.closePath();fillStroke(C.bladder,C["bladder-edge"],2.4);
+  ctx.save();ctx.clip();ctx.fillStyle=hexA(C.urine,.75);const lv=y+h*.55-(h*1.25)*clamp(fill,0,1);ctx.fillRect(x-s,lv,s*2,s*2);ctx.restore();
+  rr(x-w*.12,y+h*.52,w*.24,s*.35,3);ctx.fillStyle=o.closed?C["bladder-edge"]:hexA(C.urine,.8);ctx.fill();ctx.strokeStyle=C["bladder-edge"];ctx.lineWidth=1.5;ctx.stroke();
+  if(o.flow){const f=o.flow;for(let i=0;i<5;i++){const yy=y+h*.55+s*.35+((i*9+(o.t||0)*40)%40);circ(x,yy,2.4*f,hexA(C.urine,.9))}}}
+/* gut segment with peristalsis; rate 0..2 */
+function gut(x,y,w,T,rate,o){o=o||{};const amp=6,ph=T*2.2*rate;ctx.beginPath();for(let i=0;i<=60;i++){const X=x+i/60*w;const sq=Math.max(0,Math.sin(i/60*TAU*2-ph))*amp*Math.min(1,rate);const Y=y-14+sq;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+  for(let i=60;i>=0;i--){const X=x+i/60*w;const sq=Math.max(0,Math.sin(i/60*TAU*2-ph))*amp*Math.min(1,rate);ctx.lineTo(X,y+14-sq)}ctx.closePath();fillStroke(C.gut,C["gut-edge"],2);
+  const pos=(T*18*rate)%w;ell(x+pos,y,7,5,0,hexA(C["gut-edge"],.8))}
+/* simple human figure (front), standing; o.pose: stand, lie, slump */
+function person(x,y,s,o){o=o||{};const col=o.col||C.skin,ed=o.edge||C["skin-edge"];ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.scale(s,s);
+  circ(0,-62,13,col,ed,1.6);rr(-15,-47,30,46,10);fillStroke(o.shirt||hexA(C.accent,.55),ed,1.4);
+  line(-14,-42,-24,-10,ed,6);line(14,-42,24,-10,ed,6);line(-8,-2,-10,38,ed,7);line(8,-2,10,38,ed,7);ctx.restore()}
+/* syringe / pill / IV bag icons */
+function pill(x,y,r,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-r*1.6,-r*.7,r*3.2,r*1.4,r*.7);fillStroke(col,hexA(C.ink,.5),1.2);ctx.fillStyle=hexA(C.panel,.6);ctx.fillRect(0,-r*.7,r*1.6-r*.7,r*1.4);ctx.restore()}
+function ivBag(x,y,s,lab,col){rr(x-s*.45,y-s*.7,s*.9,s*1.2,s*.15);fillStroke(hexA(C.water,.8),C["glass-edge"],1.6);rr(x-s*.45,y-s*.1,s*.9,s*.6,s*.12);ctx.fillStyle=hexA(col||C.drug,.35);ctx.fill();
+  line(x,y+s*.5,x,y+s*.75,C["glass-edge"],2);if(lab)txt(x,y-s*.38,lab,{size:11.5,weight:700,align:"center"})}
+function syringe(x,y,s,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.22,s*1.5,s*.44,3);fillStroke(hexA(C.water,.9),C["glass-edge"],1.4);ctx.fillStyle=hexA(col||C.drug,.6);ctx.fillRect(-s*.2,-s*.18,s*.66,s*.36);
+  line(s*.5,0,s*1.1,0,C["glass-edge"],1.6);line(-s,-s*.3,-s,s*.3,C["glass-edge"],2.5);line(-s*1.35,0,-s,0,C["glass-edge"],2.5);ctx.restore()}
+/* bold X */
+function bigX(x,y,s,col,lw){line(x-s,y-s,x+s,y+s,col||C.bad,lw||3);line(x+s,y-s,x-s,y+s,col||C.bad,lw||3)}
+/* ECG wave value for a phase 0..1 */
+function pqrst(ph){return .12*gauss(ph,.12,.025)-.12*gauss(ph,.215,.008)+1*gauss(ph,.24,.012)-.25*gauss(ph,.265,.01)+.25*gauss(ph,.45,.04)}
+function ecg(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;const v=pqrst(ph);const Y=y+h*.62-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-hr"];ctx.lineWidth=o.lw||1.8;ctx.lineJoin="round";ctx.stroke()}
+function artWave(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;const v=ph<.12?ph/.12:(ph<.2?1-(ph-.12)*1.5:Math.max(0,.88-(ph-.2)*1.1)+.12*gauss(ph,.3,.03));const Y=y+h-v*h;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-bp"];ctx.lineWidth=o.lw||1.6;ctx.stroke()}
+/* bedside monitor: v={hr,sys,dia,sp,rr,t} flags: v.hrF etc ('hi'|'lo') */
+function monitor(x,y,w,h,v,T,o){o=o||{};rr(x,y,w,h,8);ctx.fillStyle=C.mon;ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.lineWidth=1.5;ctx.stroke();
+  const gw=w-112;ctx.save();ctx.beginPath();rr(x+6,y+6,gw,h-12,4);ctx.clip();ctx.strokeStyle=C["mon-grid"];ctx.lineWidth=1;for(let gx=x+6;gx<x+6+gw;gx+=16){line(gx,y,gx,y+h,C["mon-grid"],1)}
+  const hr=Math.max(1,v.hr);const rows=o.art===false?1:2;const rh=(h-12)/rows;
+  if(v.hr>0)ecg(x+6,y+6,gw,rh,hr,T,C["mon-hr"]);else line(x+6,y+6+rh*.62,x+6+gw,y+6+rh*.62,C["mon-hr"],1.6);
+  if(rows>1)artWave(x+6,y+6+rh+4,gw,rh-14,hr,T,C["mon-bp"]);ctx.restore();
+  const nx=x+gw+14;const items=[["HR",Math.round(v.hr),"mon-hr",v.hrF],["BP",Math.round(v.sys)+"/"+Math.round(v.dia),"mon-bp",v.bpF],["SpO₂",Math.round(v.sp)+"%","mon-sp",v.spF]];
+  if(v.rr!=null)items.push(["RR",Math.round(v.rr),"mon-rr",v.rrF]);
+  const ih=(h-8)/items.length;items.forEach((it,i)=>{const yy=y+4+i*ih+ih/2;txt(nx,yy,it[0],{size:11,mono:true,weight:600,color:C[it[2]]});
+    txt(x+w-8,yy,String(it[1])+(it[3]==="hi"?"▲":it[3]==="lo"?"▼":""),{size:it[0]==="BP"?13.5:16,mono:true,weight:700,color:C[it[2]],align:"right"})})}
+/* body silhouette outline for maps */
+function bodyShape(cx,top,s,o){o=o||{};ctx.save();ctx.translate(cx,top);ctx.scale(s,s);
+  ctx.beginPath();ctx.arc(0,30,26,0,TAU);fillStroke(o.fill||hexA(C.body,.9),C["body-edge"],2/s);
+  ctx.beginPath();ctx.moveTo(-12,54);ctx.lineTo(-12,62);ctx.bezierCurveTo(-60,66,-66,80,-68,110);ctx.lineTo(-80,230);ctx.lineTo(-64,234);ctx.lineTo(-50,128);ctx.lineTo(-48,240);ctx.lineTo(-44,380);ctx.lineTo(-14,380);ctx.lineTo(-6,256);ctx.lineTo(6,256);ctx.lineTo(14,380);ctx.lineTo(44,380);ctx.lineTo(48,240);ctx.lineTo(50,128);ctx.lineTo(64,234);ctx.lineTo(80,230);ctx.lineTo(68,110);ctx.bezierCurveTo(66,80,60,66,12,62);ctx.lineTo(12,54);ctx.closePath();
+  fillStroke(o.fill||hexA(C.body,.9),C["body-edge"],2/s);ctx.restore()}
+/* small drops (saliva / sweat) */
+function drops(x,y,n,T,col,spread,size){for(let i=0;i<n;i++){const p=((T*.8+i/n)%1);const xx=x+(rnd(i+3)-.5)*(spread||20);const yy=y+p*24;const r=(size||3)*(1-p*.3);ctx.beginPath();ctx.moveTo(xx,yy-r*1.8);ctx.quadraticCurveTo(xx+r,yy,xx,yy+r);ctx.quadraticCurveTo(xx-r,yy,xx,yy-r*1.8);ctx.fillStyle=hexA(col,1-p*.6);ctx.fill()}}
+/* gauge bar (vertical) */
+function vbar(x,y,w,h,v,col,lab,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();const f=clamp(v,0,1);rr(x,y+h*(1-f),w,h*f,4);ctx.fillStyle=col;ctx.fill();if(lab)txt(x+w/2,y+h+12,lab,{size:o.fs||11.5,weight:600,align:"center",color:o.lc||C.ink})}
+function hbar(x,y,w,h,v,col){rr(x,y,w,h,h/2);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(x,y,Math.max(h,w*clamp(v,0,1)),h,h/2);ctx.fillStyle=col;ctx.fill()}
+/* neuron line with axon and a ganglion bulb */
+function neuron(x1,y1,x2,y2,col,lw){circ(x1,y1,7,hexA(col,.3),col,2);line(x1+7,y1,x2-6,y2,col,lw||3);circ(x2,y2,5,col)}
+function dotsAlong(x1,y1,x2,y2,T,col,n,sp){for(let i=0;i<(n||3);i++){const p=((T*(sp||.5))+i/(n||3))%1;circ(lerp(x1,x2,p),lerp(y1,y2,p),3.2,col)}}
+function sweatDrop(x,y,r,col){ctx.beginPath();ctx.moveTo(x,y-r*1.8);ctx.quadraticCurveTo(x+r,y,x,y+r);ctx.quadraticCurveTo(x-r,y,x,y-r*1.8);ctx.fillStyle=col;ctx.fill()}
+function thermo(x,y,h,v,col){rr(x-5,y,10,h,5);fillStroke(C.panel,C["ink-soft"],1.4);circ(x,y+h+4,8,col,C["ink-soft"],1.4);rr(x-2.5,y+h*(1-clamp(v,0,1)),5,h*clamp(v,0,1)+4,2.5);ctx.fillStyle=col;ctx.fill()}
+function brain(x,y,s,col,ed){ctx.beginPath();ctx.ellipse(x,y,s,s*.72,0,0,TAU);fillStroke(col||C.brain,ed||C["brain-edge"],2);
+  for(let k=0;k<5;k++){ctx.beginPath();ctx.arc(x-s*.6+k*s*.3,y+Math.sin(k)*s*.15,s*.22,Math.PI*.1,Math.PI*.9);ctx.strokeStyle=hexA(ed||C["brain-edge"],.7);ctx.lineWidth=1.4;ctx.stroke()}}
+function mouthIcon(x,y,s,wet,T){ell(x,y,s,s*.45,0,C.skin,C["skin-edge"],1.6);ell(x,y,s*.7,s*.18,0,hexA(C.myo,.8));if(wet>0)drops(x,y+s*.35,Math.round(1+wet*3),T,C.sweat,s,2.6);else{txt(x,y+s*.8,"dry",{size:11,align:"center",color:C["ink-soft"]})}}
+function prostateIcon(x,y,s,relax){ell(x,y,s,s*.8,0,C.prostate,hexA(C.ink,.4),1.6);const w=s*(.12+.18*clamp(relax,0,1));rr(x-w,y-s*1.1,w*2,s*2.2,w);ctx.fillStyle=hexA(C.urine,.8);ctx.fill()}
+
+/* ================= body map with organ callouts (walkthrough + lab) ================= */
+const ORG_DEF={
+  brain:{name:"Brain",ax:0,ay:16,side:-1,row:0},eye:{name:"Pupil",ax:-8,ay:30,side:-1,row:1},airway:{name:"Airway",ax:-16,ay:96,side:-1,row:2},gut:{name:"Gut",ax:-6,ay:172,side:-1,row:3},muscle:{name:"Skeletal muscle",ax:-28,ay:300,side:-1,row:4},
+  mouth:{name:"Saliva",ax:0,ay:44,side:1,row:0},heart:{name:"Heart",ax:12,ay:104,side:1,row:1},vessel:{name:"Vessels",ax:60,ay:150,side:1,row:2},bladder:{name:"Bladder",ax:0,ay:226,side:1,row:3},skin:{name:"Skin and sweat",ax:56,ay:200,side:1,row:4}};
+const BODY_BASE={pupil:.45,hr:72,force:1,airway:.6,mucus:0,constrict:.45,gut:1,bfill:.45,bsq:0,bflow:0,bclosed:true,saliva:.35,sweat:.25,red:0,twitch:0,weak:0,confuse:0,sleepy:0,tremor:0};
+function bodyState(o){return Object.assign({},BODY_BASE,o||{})}
+function mixState(a,b,t){const o={};for(const k in BODY_BASE){const A=a[k],B=b[k];o[k]=typeof A==="number"?lerp(A,B,t):(t<.5?A:B)}return o}
+function calloutPos(k,cx,y0,o){o=o||{};const d=ORG_DEF[k];const gap=o.gap||74,dx=o.dx||142;return [cx+d.side*dx,y0+34+d.row*gap]}
+function organIcon(k,x,y,R,st,T){
+  if(k==="brain"){brain(x,y-2,R*.62);if(st.confuse>.05){ctx.save();ctx.globalAlpha*=clamp(st.confuse,0,1);for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x,y-2,R*(.25+i*.14),T*3+i*2,T*3+i*2+3.6);ctx.strokeStyle=C.bad;ctx.lineWidth=1.6;ctx.stroke()}ctx.restore()}
+    if(st.sleepy>.05)txt(x+R*.45,y-R*.55,"z z",{size:11.5,weight:700,color:C.accent,align:"center"})}
+  else if(k==="eye")eye(x,y,R*.52,st.pupil);
+  else if(k==="mouth")mouthIcon(x,y-4,R*.6,st.saliva>.5?(st.saliva-.4)*1.6:0,T);
+  else if(k==="airway"){bronchiole(x,y,R*.82,st.airway,{mucus:st.mucus})}
+  else if(k==="heart"){heart(x,y-2,R*.5,T,st.hr,{force:st.force,ring:false})}
+  else if(k==="vessel")vesselX(x,y,R*.78,st.constrict,{t:T});
+  else if(k==="gut"){ctx.save();ctx.translate(x,y);ctx.scale(.85,.85);gut(-R*.95,0,R*1.9,T,st.gut);ctx.restore()}
+  else if(k==="bladder")bladder(x,y-3,R*.62,st.bfill,st.bsq,{closed:st.bclosed,flow:st.bflow,t:T});
+  else if(k==="muscle"){const tw=st.twitch>0?Math.sin(T*40)*2*st.twitch*(rnd(Math.floor(T*6))>.4?1:0):0;const tr=st.tremor>0?Math.sin(T*55)*1.8*st.tremor:0;
+    ctx.save();ctx.translate(x+tr,y+tw);rr(-R*.72,-R*.32,R*1.44,R*.64,R*.3);fillStroke(mix(C.muscle,C.blocked,st.weak*.7),hexA(C.ink,.45),1.4);for(let i=-3;i<=3;i++)line(i*R*.18,-R*.28,i*R*.18,R*.28,hexA(C.panel,.45),1.2);ctx.restore()}
+  else if(k==="skin"){rr(x-R*.7,y-R*.42,R*1.4,R*.84,6);fillStroke(mix(C.skin,"#D8402F",st.red*.75),C["skin-edge"],1.4);
+    const n=Math.round(st.sweat*5);for(let i=0;i<n;i++){const p=((T*.5+i*.23)%1);sweatDrop(x-R*.5+i*R*.25,y-R*.2+p*R*.4,3,hexA(C.sweat,1-p*.5))}
+    if(st.red>.4){ctx.save();ctx.globalAlpha*=clamp((st.red-.4)*1.6,0,1);for(let i=0;i<3;i++){const yy=y-R*.7-((T*14+i*8)%20);ctx.beginPath();ctx.moveTo(x-8+i*8,yy+8);ctx.quadraticCurveTo(x-12+i*8,yy+3,x-8+i*8,yy-2);ctx.strokeStyle=C.bad;ctx.lineWidth=1.5;ctx.stroke()}ctx.restore()}}
+}
+/* bodyMap: o.hl = {key:colorKey}, o.only = keys to draw, o.dim = alpha for unhighlighted, o.vals = {key:text}, o.scale */
+function bodyMap(cx,y0,st,T,o){o=o||{};const s=o.scale||.95;const R=o.R||29;
+  bodyShape(cx,y0,s,{fill:mix(C.body,"#E0573F",(st.red||0)*.35)});
+  const keys=o.only||Object.keys(ORG_DEF);
+  keys.forEach(k=>{const d=ORG_DEF[k];const [px,py]=calloutPos(k,cx,y0,o);const ax=cx+d.ax*s,ay=y0+d.ay*s;const hk=o.hl&&o.hl[k];
+    const a=(o.hl&&!hk&&o.dim!=null)?o.dim:1;
+    withA(a,()=>{line(ax,ay,px-d.side*R,py,hexA(hk?C[hk]:C["ink-soft"],hk?.95:.6),hk?2:1.1);circ(ax,ay,3,hk?C[hk]:C["ink-soft"]);
+      circ(px,py,R+2,C.panel,hk?C[hk]:C.rule,hk?3:1.4);if(hk)pulseRing(px,py,R+2,C[hk],P(T,1.4));
+      ctx.save();ctx.beginPath();ctx.arc(px,py,R,0,TAU);ctx.clip();organIcon(k,px,py,R,st,T);ctx.restore();
+      const lab=(o.vals&&o.vals[k])||d.name;txt(px,py+R+11,lab,{size:11.5,weight:hk?700:600,align:"center",color:C.ink})})})}
+
+/* ================= PART 1: autonomic control panel ================= */
+const S1={cv:document.getElementById("cvSim"),W:820,H:440,K:1,narrow:false};
+S1.ctx=S1.cv.getContext("2d");
+S1.fit=()=>{const cv=S1.cv;const w=cv.parentElement.clientWidth;if(!w)return;S1.narrow=w<600;S1.W=S1.narrow?440:820;S1.H=S1.narrow?892:440;const dpr=window.devicePixelRatio||1;
+  cv.style.height=(w*S1.H/S1.W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*S1.H/S1.W*dpr);S1.K=cv.width/S1.W};
+const LV=(d,a)=>a[d-1];
+const MORG=["heart","eye","airway","gut","bladder","mouth","skin","brain"];
+const ALLM=v=>{const o={};MORG.forEach(k=>o[k]=v);return o};
+/* each drug returns its receptor actions for strength d (1 low, 2 medium, 3 high) */
+const DRUGS=[
+ {id:"beth",grp:"Cholinergic: turn rest and digest up",name:"bethanechol",col:"mus",
+  act:d=>({Mago:{bladder:LV(d,[.6,1.2,1.8]),gut:LV(d,[.6,1.2,1.8]),mouth:LV(d,[.25,.5,.8]),eye:LV(d,[.15,.3,.5]),heart:LV(d,[.2,.45,.7]),airway:LV(d,[.25,.5,.8]),skin:LV(d,[.25,.5,.8])}}),
+  ex:"bethanechol sits in muscarinic (M) receptors itself, mostly in the bladder and gut, so the bladder squeezes and empties and the gut speeds up."},
+ {id:"pilo",grp:"Cholinergic: turn rest and digest up",name:"pilocarpine (eye drops)",col:"mus",
+  act:d=>({Mago:{eye:LV(d,[.8,1.5,2.2]),mouth:LV(d,[.05,.1,.2])}}),
+  ex:"pilocarpine drops turn on M receptors in the iris sphincter, so the pupil gets small and fluid drains better (used in glaucoma)."},
+ {id:"neo",grp:"Cholinergic: turn rest and digest up",name:"neostigmine or pyridostigmine",col:"ache",
+  act:d=>({ache:LV(d,[.4,.8,1.3])}),
+  ex:"neostigmine and pyridostigmine slow acetylcholinesterase, so the body's own ACh lasts longer at M and N receptors. Muscles get stronger; too much gives SLUDGE signs and a slow heart."},
+ {id:"op",grp:"Cholinergic: turn rest and digest up",name:"organophosphate exposure",col:"op",
+  act:d=>({op:1}),
+  ex:"the organophosphate poison binds acetylcholinesterase and does not let go. ACh floods every M and N receptor: secretions, pinpoint pupils, slow heart, twitching, then weakness."},
+ {id:"pam",grp:"Cholinergic: turn rest and digest up",name:"pralidoxime",col:"ache",
+  act:d=>({pam:1}),
+  ex:"pralidoxime pulls the organophosphate off acetylcholinesterase (if given before the bond ages), so the enzyme works again. This is what fixes the nicotinic twitching and weakness."},
+ {id:"atro",grp:"Anticholinergic: block rest and digest",name:"atropine",col:"blocked",
+  act:d=>({Mblk:Object.assign(ALLM(LV(d,[.45,.75,.92])),{brain:LV(d,[0,.15,.45])})}),
+  ex:"atropine plugs M receptors almost everywhere: the vagal brake on the heart lifts (faster rate), the pupil widens, mouth and skin dry, gut and bladder slow."},
+ {id:"glyco",grp:"Anticholinergic: block rest and digest",name:"glycopyrrolate",col:"blocked",
+  act:d=>({Mblk:Object.assign(ALLM(LV(d,[.45,.75,.9])),{brain:0})}),
+  ex:"glycopyrrolate blocks M receptors in the body but does not cross into the brain, so it dries secretions without confusion."},
+ {id:"scop",grp:"Anticholinergic: block rest and digest",name:"scopolamine",col:"blocked",sleepy:.6,
+  act:d=>({Mblk:{brain:LV(d,[.3,.45,.6]),eye:LV(d,[.3,.5,.7]),gut:LV(d,[.3,.5,.7]),mouth:LV(d,[.4,.6,.8]),heart:LV(d,[.1,.2,.35]),bladder:LV(d,[.2,.35,.5]),skin:LV(d,[.2,.35,.5]),airway:LV(d,[.2,.3,.4])}}),
+  ex:"scopolamine blocks M receptors in the brain's motion-sickness pathway, which also brings drowsiness, a dry mouth and a wider pupil."},
+ {id:"oxy",grp:"Anticholinergic: block rest and digest",name:"oxybutynin",col:"blocked",
+  act:d=>({Mblk:{bladder:LV(d,[.5,.75,.9]),mouth:LV(d,[.35,.6,.75]),gut:LV(d,[.2,.4,.6]),eye:LV(d,[.1,.25,.4]),brain:LV(d,[.05,.15,.3]),heart:LV(d,[.05,.1,.2]),skin:LV(d,[.1,.2,.35]),airway:LV(d,[.05,.1,.15])}}),
+  ex:"oxybutynin blocks M receptors in the bladder wall, so the detrusor relaxes and urgency eases. A dry mouth and constipation come from the same block elsewhere."},
+ {id:"ipra",grp:"Anticholinergic: block rest and digest",name:"ipratropium (inhaled)",col:"blocked",
+  act:d=>({Mblk:{airway:LV(d,[.5,.75,.9]),mouth:LV(d,[.1,.2,.3])}}),
+  ex:"inhaled ipratropium blocks M receptors in the airway, so it opens and makes less mucus. Little reaches the rest of the body."},
+ {id:"benz",grp:"Anticholinergic: block rest and digest",name:"benztropine",col:"blocked",
+  act:d=>({Mblk:{brain:LV(d,[.4,.6,.8]),mouth:LV(d,[.3,.5,.65]),gut:LV(d,[.2,.35,.5]),bladder:LV(d,[.2,.35,.5]),eye:LV(d,[.2,.35,.5]),heart:LV(d,[.1,.2,.3]),skin:LV(d,[.2,.35,.5])}}),
+  ex:"benztropine blocks M receptors in the brain's movement centres (used for Parkinson-like tremor), with the usual dry, constipated, retained side effects."},
+ {id:"epi",grp:"Adrenergic agonists: turn fight or flight up",name:"epinephrine",col:"epi",
+  act:d=>({ago:{a1:LV(d,[.5,1,1.6]),b1:LV(d,[.6,1.2,1.8]),b2:LV(d,[.6,1.2,1.8])}}),
+  ex:"epinephrine turns on α1 (vessels squeeze, swelling eases), β1 (stronger, faster heart) and β2 (airways open). That full set is why it is first for anaphylaxis."},
+ {id:"ne",grp:"Adrenergic agonists: turn fight or flight up",name:"norepinephrine",col:"ne",
+  act:d=>({ago:{a1:LV(d,[.8,1.6,2.4]),b1:LV(d,[.3,.6,.9])}}),
+  ex:"norepinephrine is mostly α1 with some β1: vessels clamp down and blood pressure rises. The heart rate often stays about the same because of the reflex."},
+ {id:"dopa",grp:"Adrenergic agonists: turn fight or flight up",name:"dopamine",col:"dop",
+  act:d=>({ago:d===1?{D:1}:d===2?{D:1,b1:.9}:{D:1,b1:1.2,a1:1.8}}),
+  ex:"dopamine changes with the rate: low turns on D1 (kidney vessels widen), medium adds β1 (stronger heart), high adds α1 (vessels squeeze)."},
+ {id:"dobu",grp:"Adrenergic agonists: turn fight or flight up",name:"dobutamine",col:"b1",
+  act:d=>({ago:{b1:LV(d,[.6,1.2,1.8]),b2:LV(d,[.1,.2,.3])}}),
+  ex:"dobutamine is a β1 agonist: a weak heart pumps harder (inotrope). Watch the heart rate and rhythm."},
+ {id:"albu",grp:"Adrenergic agonists: turn fight or flight up",name:"albuterol (inhaled)",col:"b2",
+  act:d=>({ago:{b2:LV(d,[.8,1.6,2.4]),b1:LV(d,[.1,.2,.35])}}),
+  ex:"albuterol turns on β2 in the airway smooth muscle, so it relaxes and opens. β2 in skeletal muscle gives tremor; a faster pulse comes along too."},
+ {id:"phen",grp:"Adrenergic agonists: turn fight or flight up",name:"phenylephrine",col:"a1",
+  act:d=>({ago:{a1:LV(d,[.7,1.4,2.1])}}),
+  ex:"phenylephrine is pure α1: vessels squeeze and pressure rises. The body senses the high pressure and slows the heart through the vagus nerve (reflex bradycardia)."},
+ {id:"clon",grp:"Adrenergic agonists: turn fight or flight up",name:"clonidine",col:"a2",sleepy:.45,
+  act:d=>({ago:{a2:LV(d,[.6,1.2,1.8])},symp:LV(d,[.85,.7,.55])}),
+  ex:"clonidine turns on α2 in the brainstem, a brake that lowers sympathetic outflow. Less norepinephrine reaches α1 and β1, so pressure and pulse fall. Drowsy and dry mouth are common."},
+ {id:"praz",grp:"Adrenergic blockers: turn fight or flight down",name:"prazosin",col:"a1",
+  act:d=>({blkA1:{v:LV(d,[.45,.7,.85]),e:LV(d,[.3,.5,.6]),p:LV(d,[.45,.7,.85])}}),
+  ex:"prazosin blocks α1 in vessel walls, so they relax and blood pressure falls. Standing up, vessels cannot squeeze to hold pressure: first-dose dizziness."},
+ {id:"tams",grp:"Adrenergic blockers: turn fight or flight down",name:"tamsulosin",col:"a1",
+  act:d=>({blkA1:{v:LV(d,[.1,.2,.3]),e:LV(d,[.1,.2,.3]),p:LV(d,[.6,.85,.95])}}),
+  ex:"tamsulosin prefers the α1 receptors in the prostate and bladder neck, so the outlet relaxes and urine flows better, with less effect on blood pressure."},
+ {id:"meto",grp:"Adrenergic blockers: turn fight or flight down",name:"metoprolol",col:"b1",
+  act:d=>({blk:{b1:LV(d,[.45,.7,.85]),b2:LV(d,[.05,.1,.25])}}),
+  ex:"metoprolol is cardioselective: it blocks β1, so the heart slows and beats less forcefully. β2 in the airways is mostly spared, though selectivity fades at higher strength."},
+ {id:"prop",grp:"Adrenergic blockers: turn fight or flight down",name:"propranolol",col:"b2",
+  act:d=>({blk:{b1:LV(d,[.45,.7,.85]),b2:LV(d,[.45,.7,.85])}}),
+  ex:"propranolol is nonselective: it blocks β1 and β2. The heart slows, but airway β2 is blocked too, which is risky in asthma."}
+];
+const DBYID={};DRUGS.forEach(d=>DBYID[d.id]=d);
+const B1AGO=["epi","ne","dopa","dobu","albu"];
+const SIM={on:new Set(),order:[],dose:2,asthma:false,old:false,stand:false,done:new Set(),dopaSeen:{},disp:null,tgt:null,dispV:null,lastWarn:""};
+const RKEYS=["a1","a2","b1","b2","D","M","N"];
+
+function simCompute(){const d=SIM.dose,on=id=>SIM.on.has(id);
+  const ago={a1:0,a2:0,b1:0,b2:0,D:0},blk={b1:0,b2:0,N:0},blkA1={v:0,e:0,p:0},Mago=ALLM(0),Mblk=ALLM(0);let b2vas=0,symp=1,ache=1,brainAche=1,pam=on("pam"),sleepy=0;
+  const comb=(a,b)=>1-(1-a)*(1-b);
+  SIM.on.forEach(id=>{const D_=DBYID[id];const a=D_.act(d);
+    if(a.ago)for(const k in a.ago)ago[k]+=a.ago[k];if(a.ago&&a.ago.b2&&id!=="albu")b2vas+=a.ago.b2;
+    if(a.blk)for(const k in a.blk)blk[k]=comb(blk[k],a.blk[k]);
+    if(a.blkA1)for(const k in a.blkA1)blkA1[k]=comb(blkA1[k],a.blkA1[k]);
+    if(a.Mago)for(const k in a.Mago)Mago[k]+=a.Mago[k];
+    if(a.Mblk)for(const k in a.Mblk)Mblk[k]=comb(Mblk[k],a.Mblk[k]);
+    if(a.symp)symp*=a.symp;if(a.ache)ache+=a.ache;if(D_.sleepy)sleepy=Math.max(sleepy,D_.sleepy*(d/2))});
+  if(on("op")){ache+=pam?.3:2.6;brainAche+=pam?.2:1.4}
+  const old=SIM.old;
+  /* receptor activation: (natural signal + drug agonist) x (fraction not blocked); 1 = normal */
+  const A1v=(symp+ago.a1)*(1-blkA1.v),A1e=(symp+ago.a1)*(1-blkA1.e),A1p=(symp+ago.a1)*(1-blkA1.p);
+  const A2=1+ago.a2,B1=(symp+ago.b1)*(1-blk.b1),B2=(1+ago.b2)*(1-blk.b2),Dp=1+ago.D,N=ache*(1-blk.N);
+  const M={};MORG.forEach(k=>{const f=k==="brain"?brainAche:ache;let b=Mblk[k];if(k==="brain"&&old)b=Math.min(.95,b*1.8);M[k]=(f+Mago[k])*(1-b)});
+  /* heart and pressure */
+  const Mh=M.heart;let hr=72+28*(B1-1)+(Mh>1?-14*(Mh-1):30*(1-Mh))+6*Math.max(0,B2-1);
+  const B2v=(1+b2vas)*(1-blk.b2);let map=93+18*(A1v-1)+4*(B1-1)-14*(B2v-1)-4*(Dp-1)+(hr-72)*.15;
+  if(SIM.stand)map-=30*Math.max(0,1-A1v)*(old?1.3:1);
+  const dm=map-93;const rf=old?.4:.6;let reflex=0;
+  if(dm>0)reflex=-Math.min(22,rf*dm)*clamp(1-Mblk.heart,0,1);else reflex=Math.min(22,rf*-dm)*clamp(B1,0,1)*symp;
+  hr=clamp(hr+reflex,34,175);map+=reflex*.15;
+  const force=clamp(1+.3*(B1-1),.5,2.2);const pp=clamp(42+12*(force-1)+6*(A1v-1),24,80);
+  const sys=map+pp*2/3,dia=map-pp/3;
+  /* organs */
+  const st=bodyState();st.hr=hr;st.force=force;
+  st.pupil=clamp(.45+.1*(A1e-1)+(M.eye>1?-.13*(M.eye-1):.32*(1-M.eye)),.08,1);
+  let air=(SIM.asthma?.4:.62)+.12*(B2-1)-.1*Math.max(0,M.airway-1)+.12*Math.max(0,1-M.airway);
+  if(SIM.asthma)air-=.38*blk.b2;st.airway=clamp(air,.05,1);
+  st.mucus=clamp(.35*(M.airway-1),0,1);
+  st.constrict=clamp(.45+.18*(A1v-1)-.05*(Dp-1)-.04*(B2v-1),.08,1);
+  st.gut=clamp(.15+.85*M.gut,.08,2);
+  const retain=M.bladder<.6||A1p>2.8;const empt=M.bladder>1.3&&A1p<1.8;
+  st.bsq=clamp(.6*(M.bladder-1),0,1);st.bclosed=!empt;st.bflow=empt?1:0;st.bfill=retain?.88:empt?.2:.45;
+  st.saliva=clamp(.6*M.mouth*(symp<1?.75:1),0,1.6);
+  st.sweat=clamp(.3*M.skin+(M.skin>1?.3*(M.skin-1):0),0,1);
+  st.red=clamp((1-M.skin)*.95-.1,0,1);
+  const temp=37+1.4*clamp(1-M.skin-.15,0,1);
+  st.confuse=clamp((1-M.brain)*1.3-.25,0,1)+(M.brain>1.8?.6:0);st.confuse=clamp(st.confuse,0,1);
+  st.sleepy=sleepy>0||symp<.8?1:0;
+  const weak=N>3?clamp((N-3)/1.2,0,1):0;st.twitch=N>1.5?clamp((N-1.4)/1.2,0,1)*(1-weak*.5):0;st.weak=weak;
+  st.tremor=clamp((B2-1.3)*.5,0,1);
+  let sp=98-(st.airway<.38?(.38-st.airway)*45:0)-st.mucus*7-weak*5;sp=clamp(sp,82,99);
+  const act={a1:A1v,a2:A2,b1:B1,b2:B2,D:Dp,M:MORG.reduce((s,k)=>s+M[k],0)/MORG.length,N};
+  const pot={a1:symp+ago.a1,a2:A2,b1:symp+ago.b1,b2:1+ago.b2,D:Dp,M:MORG.reduce((s,k)=>s+(k==="brain"?brainAche:ache)+Mago[k],0)/MORG.length,N:ache};
+  const occ={a1:ago.a1>0?"ago":blkA1.v>.3||blkA1.p>.5?"ant":"",a2:ago.a2>0?"ago":"",b1:ago.b1>0?"ago":blk.b1>.3?"ant":"",b2:ago.b2>0&&blk.b2<.3?"ago":blk.b2>.3?"ant":"",D:ago.D>0?"ago":"",
+    M:MORG.some(k=>Mblk[k]>.4)?"ant":MORG.some(k=>Mago[k]>.3)?"ago":"",N:""};
+  const mBlkAvg=MORG.reduce((s,k)=>s+Mblk[k],0)/MORG.length;
+  return {st,hr,sys,dia,map,sp,temp,act,pot,occ,M,Mblk,Mago,blk,blkA1,ago,ache,symp,N,weak,mBlkAvg,A1p};
+}
+
+/* ---------- UI ---------- */
+function simDrugsUI(){const box=$("#simDrugs");box.innerHTML="";let g="";let grid=null;
+  DRUGS.forEach(D_=>{if(D_.grp!==g){g=D_.grp;const h=document.createElement("div");h.className="dgroup";h.textContent=g;box.appendChild(h);grid=document.createElement("div");grid.className="drugs";box.appendChild(grid)}
+    const b=document.createElement("button");b.type="button";b.className="tbtn";b.dataset.id=D_.id;b.setAttribute("aria-pressed",String(SIM.on.has(D_.id)));
+    b.innerHTML=`<i aria-hidden="true" style="background:var(--${D_.col})"></i><span>${D_.name}</span>`;
+    b.onclick=()=>simToggle(D_.id);grid.appendChild(b)})}
+function simToggle(id){if(SIM.on.has(id)){SIM.on.delete(id);SIM.order=SIM.order.filter(x=>x!==id)}else{SIM.on.add(id);SIM.order.push(id)}
+  document.querySelectorAll("#simDrugs button").forEach(b=>b.setAttribute("aria-pressed",String(SIM.on.has(b.dataset.id))));simChanged()}
+const DOSEN=["","low","medium","high"];
+function simChanged(){const r=simCompute();SIM.tgt=r;if(!SIM.disp){SIM.disp=r.st;SIM.dispV={hr:r.hr,sys:r.sys,dia:r.dia,sp:r.sp}}
+  $("#simDoseOut").textContent=DOSEN[SIM.dose];
+  if(SIM.on.has("dopa"))SIM.dopaSeen[SIM.dose]=1;
+  simRead(r);simStatus(r);simExplainUI(r);simCheck(r);a11yKey=""}
+function word(v,lo,hi,a,b,c){return v<lo?a:v>hi?c:b}
+function pupilWord(p){return p<.3?"small (constricted)":p>.62?"wide (dilated)":"normal"}
+function airWord(r){return r.st.airway<.3?"narrowed (bronchospasm)":r.st.airway>.75?"wide open":"normal"}
+function bladderWord(st){return st.bflow?"squeezing, emptying":st.bfill>.8?"full, not emptying (retention)":"normal"}
+function gutWord(g){return g<.55?"slow (constipation risk)":g>1.5?"fast, cramping":"normal"}
+function mouthWord(r){return r.st.saliva<.45?"dry mouth":r.st.saliva>.95?"drooling":"normal saliva"}
+function skinWord(r){return r.st.red>.3?"hot, dry, flushed":r.st.sweat>.6?"sweating heavily":"normal"}
+function mindWord(r){return r.st.confuse>.4?"confused, agitated":r.st.sleepy?"drowsy":"alert"}
+function muscleWord(r){return r.weak>.3?"weak (too much ACh)":r.st.twitch>.2?"twitching":r.st.tremor>.15?"fine tremor":"normal"}
+function simRead(r){const rows=[["Heart rate",Math.round(r.hr)+" /min"],["Blood pressure",Math.round(r.sys)+"/"+Math.round(r.dia)],["SpO₂",Math.round(r.sp)+"%"],["Temperature",r.temp.toFixed(1)+" °C"],
+  ["Pupils",pupilWord(r.st.pupil)],["Airways",airWord(r)],["Gut",gutWord(r.st.gut)],["Bladder",bladderWord(r.st)],["Mouth",mouthWord(r)],["Skin",skinWord(r)],["Muscles",muscleWord(r)],["Mind",mindWord(r)]];
+  $("#simRead tbody").innerHTML=rows.map(x=>`<tr><th scope="row">${x[0]}</th><td>${x[1]}</td></tr>`).join("")}
+function simWarnings(r){const w=[],on=id=>SIM.on.has(id);
+  if(SIM.asthma&&r.blk.b2>.3)w.push(["bad","Bronchospasm: the beta-2 receptors that hold this asthmatic airway open are blocked. Nonselective beta blockers are generally avoided in asthma."]);
+  if(r.weak>.3)w.push(["bad","Muscle weakness from too much ACh at nicotinic receptors. Breathing muscles are at risk. Atropine does not fix this part; pralidoxime can, if given early."]);
+  if(r.M.airway>1.8||(r.M.gut>2.4&&r.M.heart>1.6))w.push(["bad","Cholinergic excess: SLUDGE signs and the killer Bs (bradycardia, bronchospasm, bronchorrhea). Airway first; atropine dries the secretions."]);
+  if(r.hr<60)w.push(["warn","Heart rate below 60. Beta blockers and similar drugs are commonly held and the prescriber notified, per order or protocol."]);
+  if(r.blk.b2>.4&&r.ago.a1>0)w.push(["warn","Unopposed α1: with β1 and β2 blocked, the drug can only squeeze vessels. Pressure rises while the pulse stays slow."]);else if(r.sys>165)w.push(["warn","Very high blood pressure."]);
+  if(r.map<72)w.push(["warn",SIM.stand?"Orthostatic hypotension: vessels cannot squeeze when standing. Dizziness and fall risk.":"Low blood pressure."]);
+  if(r.st.confuse>.4)w.push(["warn",r.M.brain>1.5?"Confusion: ACh overload in the brain. Seizures are possible in severe poisoning.":"Confusion: anticholinergic effect in the brain. Older adults are most at risk."]);
+  if(r.temp>37.8)w.push(["warn","Temperature rising: no sweating, so heat cannot escape (hot as a hare)."]);
+  if(r.st.bfill>.8)w.push(["warn","Urinary retention: check for a full bladder (a bladder scan, per protocol)."]);
+  if(r.hr>115)w.push(["warn","Fast heart rate."]);
+  return w}
+function simStatus(r){const w=simWarnings(r);const el=$("#simStatus");
+  if(!w.length){el.className="status good";el.textContent=SIM.on.size?"No warning signs at this strength. Read the explanations under the picture.":"No drugs given. The body is at normal resting tone: a balance of both branches."}
+  else{el.className="status "+(w.some(x=>x[0]==="bad")?"bad":"warn");el.innerHTML=w.map(x=>(x[0]==="bad"?"<b>Danger:</b> ":"<b>Watch:</b> ")+x[1]).join("<br>")}}
+function simExplainUI(r){const on=id=>SIM.on.has(id);const L=SIM.order.map(id=>`<li>${DBYID[id].ex}</li>`);
+  if(on("prop")&&on("epi"))L.push("<li><b>Combination</b>: with β1 and β2 blocked by propranolol, epinephrine can only reach α1. Vessels clamp, pressure jumps and the reflex slows the heart. A patient on a beta blocker may also respond poorly to epinephrine in anaphylaxis.</li>");
+  if(on("meto")&&on("epi")&&!on("prop"))L.push("<li><b>Combination</b>: metoprolol blocks β1 only, so epinephrine still opens the airway through β2.</li>");
+  if(on("op")&&on("atro")&&!on("pam"))L.push("<li><b>Combination</b>: atropine has dried the muscarinic signs, but the nicotinic twitching and weakness remain. Add pralidoxime.</li>");
+  if(on("op")&&on("pam"))L.push("<li><b>Combination</b>: pralidoxime has freed acetylcholinesterase, so ACh is being cleared again at both M and N receptors.</li>");
+  if(on("op")&&on("pam")&&on("atro"))L.push("<li><b>Titrate</b>: once the enzyme works again, less atropine is needed. Watch for the dry, hot, fast signs of too much atropine.</li>");
+  if(on("meto")&&SIM.dose===3)L.push("<li><b>Selectivity fades</b>: at high strength metoprolol starts blocking some β2 too. Cardioselective means safer, not risk-free, in asthma.</li>");
+  if(on("albu")&&on("prop"))L.push("<li><b>Combination</b>: propranolol sits in β2 receptors, so albuterol has fewer receptors to act on.</li>");
+  if(on("phen")||on("ne"))if(r.hr<70&&!on("atro"))L.push("<li><b>Reflex</b>: pressure sensors detect the higher pressure and the vagus nerve slows the heart (through M receptors).</li>");
+  if(!L.length)L.push("<li>Pick a drug on the right. Each one acts at a receptor; the organs follow from that.</li>");
+  $("#simExplain").innerHTML=L.join("")}
+const SCHAL=[
+ ["Speed the heart past 90 without any beta agonist.",r=>r.hr>=90&&!B1AGO.some(i=>SIM.on.has(i))],
+ ["Show reflex bradycardia: blood pressure up, heart rate below 65.",r=>r.map>103&&r.hr<65],
+ ["Turn on Has asthma, then find a beta blocker that keeps the airway open.",r=>SIM.asthma&&SIM.on.has("meto")&&!SIM.on.has("prop")&&r.st.airway>=.3],
+ ["Give propranolol, then epinephrine: watch the unopposed α1 squeeze.",r=>SIM.on.has("prop")&&SIM.on.has("epi")],
+ ["Organophosphate exposure: dry the secretions and stop the twitching.",r=>SIM.on.has("op")&&r.st.mucus<.15&&r.st.twitch<.2&&r.weak<.1&&r.hr>=55],
+ ["First-dose effect: stand the patient up with prazosin on board.",r=>SIM.stand&&SIM.on.has("praz")&&r.map<75],
+ ["Make an older adult confused with an anticholinergic.",r=>SIM.old&&r.st.confuse>.4],
+ ["Empty a retained bladder with a direct cholinergic agonist.",r=>SIM.on.has("beth")&&r.st.bflow],
+ ["Run dopamine at low and then at high strength.",r=>SIM.dopaSeen[1]&&SIM.dopaSeen[3]]];
+function simCheck(r){SCHAL.forEach((c,i)=>{try{if(c[1](r))SIM.done.add(i)}catch(e){}});chalUI($("#simChal"),SCHAL.map(c=>c[0]),SIM.done)}
+$("#simDose").oninput=e=>{SIM.dose=+e.target.value;simChanged()};
+[["simAsthma","asthma"],["simOld","old"],["simStand","stand"]].forEach(([id,k])=>{$("#"+id).onclick=e=>{SIM[k]=!SIM[k];e.currentTarget.setAttribute("aria-pressed",String(SIM[k]));simChanged()}});
+$("#simReset").onclick=()=>{SIM.on.clear();SIM.order=[];document.querySelectorAll("#simDrugs button").forEach(b=>b.setAttribute("aria-pressed","false"));simChanged()};
+
+/* ---------- drawing ---------- */
+function simStep(dt){if(!SIM.tgt)return;const k=clamp(dt*3,0,1);SIM.disp=mixState(SIM.disp,SIM.tgt.st,k);
+  const v=SIM.dispV;["hr","sys","dia","sp"].forEach(n=>v[n]=lerp(v[n],SIM.tgt[n],k))}
+const NATLIG={a1:"ne",a2:"ne",b1:"ne",b2:"epi",D:"dop",M:"ach",N:"ach"};
+function recWord(a,p){if(p>.05&&a/p<.6)return "blocked "+Math.round((1-a/p)*100)+"%";return a>2.2?"very high":a>1.25?"higher":a<.75?"lower":"normal"}
+function drawBoard(x,y,w,h,r,T){panelBox(x,y,w,h);title(x+12,y+16,"Receptor board");txt(x+w-10,y+16,"tick = normal",{size:11.5,color:C["ink-soft"],align:"right"});
+  const rows=RKEYS.length,rh=(h-34)/rows;const bx=x+78,bw=w-78-104;
+  RKEYS.forEach((k,i)=>{const yy=y+34+rh*i+rh/2;const a=r.act[k],p=r.pot[k],o=r.occ[k];const col=C[RCOL[k==="D"?"D":k]];
+    if(i%2===0){rr(x+4,yy-rh/2+1,w-8,rh-2,4);ctx.fillStyle=hexA(C["panel-2"],.7);ctx.fill()}
+    const blocked=o==="ant";const active=a>1.2;
+    receptor(x+22,yy+6,k,{s:.5,active,blocked,label:false,x:false});
+    // ligand in pocket
+    const bob=Math.sin(T*4+i)*1.5;
+    if(o==="ant")lig("ant",x+22,yy-2,4.6);
+    else if(o==="ago")lig("ago",x+22,yy-3+bob,4.6);
+    else{const ph=P(T+i*.37,clamp(1.6/Math.max(.3,a),.5,4));const yy2=yy-2-Math.abs(Math.sin(ph*Math.PI))*8;lig(NATLIG[k],x+22,yy2,4)}
+    txt(x+40,yy,RNAME[k],{size:13.5,weight:700});
+    rr(bx,yy-6,bw,12,6);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();
+    const sc=v=>bx+bw*clamp(v/3.5,0,1);
+    if(p>a+.03){ctx.save();rr(sc(a)-2,yy-6,Math.max(4,sc(p)-sc(a)+2),12,6);ctx.clip();ctx.fillStyle=hexA(C.blocked,.45);ctx.fillRect(sc(a)-4,yy-6,sc(p)-sc(a)+8,12);ctx.strokeStyle=hexA(C.ink,.55);ctx.lineWidth=1.2;for(let hx_=sc(a)-14;hx_<sc(p)+12;hx_+=6){ctx.beginPath();ctx.moveTo(hx_,yy+6);ctx.lineTo(hx_+10,yy-6);ctx.stroke()}ctx.restore()}
+    if(a>.02){rr(bx,yy-6,Math.max(12,sc(a)-bx),12,6);ctx.fillStyle=col;ctx.fill()}
+    line(sc(1),yy-10,sc(1),yy+10,C.ink,2);
+    txt(x+w-10,yy,recWord(a,p),{size:12,weight:600,align:"right",color:o==="ant"?C["ink-soft"]:C.ink})})}
+function orgCause(r){const hl={},vals={},st=r.st;
+  if(Math.abs(st.pupil-.45)>.08){hl.eye=st.pupil<.45?"mus":(r.M.eye<.8?"mus":"a1");vals.eye=st.pupil<.45?"Pupil small":"Pupil wide"}
+  if(Math.abs(st.hr-72)>7){hl.heart=st.hr>72?(r.Mblk.heart>.3?"mus":"b1"):(r.act.b1<.8?"b1":"mus");vals.heart="Heart "+Math.round(SIM.dispV.hr)}else vals.heart="Heart "+Math.round(SIM.dispV.hr);
+  if(Math.abs(st.airway-.62)>.08||st.mucus>.1){hl.airway=(r.act.b2>1.15||r.blk.b2>.3)?"b2":"mus";vals.airway=st.airway<.45?"Airway narrow":"Airway open"}
+  if(r.act.D>1.2&&r.act.a1<1.3){hl.vessel="dop";vals.vessel="Kidney vessels widen"}else if(Math.abs(st.constrict-.45)>.06){hl.vessel="a1";vals.vessel=st.constrict>.45?"Vessels squeeze":"Vessels relax"}
+  if(Math.abs(st.gut-1)>.2){hl.gut="mus";vals.gut=st.gut<1?"Gut slow":"Gut cramping"}
+  if(st.bflow||st.bfill>.8){hl.bladder=st.bfill>.8&&r.A1p>2.2?"a1":"mus";vals.bladder=st.bflow?"Bladder empties":"Bladder full"}
+  else if(r.blkA1.p>.5){hl.bladder="a1";vals.bladder="Outlet relaxed"}
+  if(st.saliva<.45||st.saliva>.95){hl.mouth=r.symp<1&&r.mBlkAvg<.1?"a2":"mus";vals.mouth=st.saliva<.45?"Mouth dry":"Drooling"}
+  if(st.red>.25||st.sweat>.6){hl.skin="mus";vals.skin=st.red>.25?"Hot, dry, red":"Sweating"}
+  if(st.confuse>.3||st.sleepy){hl.brain=r.symp<1&&st.confuse<.3?"a2":"mus";vals.brain=st.confuse>.3?"Confused":"Drowsy"}
+  if(st.twitch>.15||r.weak>.2||st.tremor>.1){hl.muscle=st.tremor>.1&&st.twitch<.15?"b2":"nic";vals.muscle=r.weak>.3?"Weak":st.twitch>.15?"Twitching":"Tremor"}
+  return {hl,vals}}
+function drawSim(now){const T=now/1000;ctx=S1.ctx;ctx.setTransform(S1.K,0,0,S1.K,0,0);ctx.clearRect(0,0,S1.W,S1.H);ctx.globalAlpha=1;bg(C.ecf);
+  const r=SIM.tgt;if(!r)return;const st=SIM.disp,v=SIM.dispV;const {hl,vals}=orgCause(r);
+  const N_=S1.narrow;const cx=N_?220:194,y0=N_?14:16;
+  if(SIM.stand||SIM.asthma||SIM.old){const tags=[SIM.old?"older adult":"",SIM.asthma?"asthma":"",SIM.stand?"standing":""].filter(Boolean).join(" · ");label(cx,y0+4,tags,{size:12,weight:700,color:C.ink,border:C.rule})}
+  bodyMap(cx,y0+8,st,T,{hl,vals,dim:.55,scale:.93,gap:80,R:27,dx:136});
+  const mx=N_?10:386,my=N_?426:14,mw=N_?420:424;
+  monitor(mx,my,mw,118,{hr:v.hr,sys:v.sys,dia:v.dia,sp:v.sp,hrF:v.hr<60?"lo":v.hr>100?"hi":"",bpF:v.sys>140?"hi":v.sys<95?"lo":"",spF:v.sp<94?"lo":""},T);
+  drawBoard(mx,my+128,mw,N_?320:282,r,T)}
+function simA11y(){const r=SIM.tgt;if(!r)return [null,""];const names=SIM.order.map(id=>DBYID[id].name);
+  const lab=`Simulator: ${names.length?names.join(", "):"no drugs"}. Heart rate ${Math.round(r.hr)}, blood pressure ${Math.round(r.sys)} over ${Math.round(r.dia)}, oxygen ${Math.round(r.sp)} percent.`;
+  const recs=RKEYS.map(k=>`${RNAME[k].replace("α","alpha ").replace("β","beta ")} ${recWord(r.act[k],r.pot[k])}`).join(", ");
+  const d=`A body figure with ten organ circles: pupils ${pupilWord(r.st.pupil)}, airways ${airWord(r)}, gut ${gutWord(r.st.gut)}, bladder ${bladderWord(r.st)}, ${mouthWord(r)}, skin ${skinWord(r)}, muscles ${muscleWord(r)}, mind ${mindWord(r)}. Organs that changed are ringed in the colour of the receptor responsible. The monitor shows heart rate ${Math.round(r.hr)} and blood pressure ${Math.round(r.sys)} over ${Math.round(r.dia)}. Receptor board: ${recs}.`;
+  return [lab,d]}
+
+/* ================= PART 2: name the receptor ================= */
+const S2=makeStage("cvRec",560,380);
+const RDO={a1:"α1 receptors squeeze smooth muscle: vessels narrow, the iris radial muscle pulls the pupil wide, and the bladder neck and prostate tighten.",
+ a2:"α2 receptors sit on the nerve ending itself and act as a brake on norepinephrine release.",
+ b1:"β1 receptors are mainly in the heart (faster, stronger beats) and the kidney (renin release).",
+ b2:"β2 receptors relax smooth muscle (airways open), raise blood glucose from the liver and cause skeletal muscle tremor.",
+ D:"D1 receptors widen blood vessels in the kidney and gut.",
+ M:"Muscarinic (M) receptors carry rest-and-digest signals from ACh: slower heart, small pupil, secretions, gut and bladder activity, and sweating.",
+ N:"Nicotinic (N) receptors are ion channels on skeletal muscle and in the ganglia; ACh opens them."};
+const RSHORT={a1:"α1: squeezes smooth muscle",a2:"α2: brake on the nerve ending",b1:"β1: heart and kidney",b2:"β2: relaxes airways, fuel, tremor",D:"D1: widens kidney vessels",M:"M: rest and digest",N:"N: skeletal muscle, ganglia"};
+const SIGN={ne:"norepinephrine from a nerve",ach:"acetylcholine (ACh) from a nerve",epi:"epinephrine in the blood",dop:"dopamine from an infusion"};
+const RECS=[
+ {org:"eye",a:.45,b:.88,r:"a1",sig:"ne",opts:["a1","b2","M","N"],eff:"The pupil widens: the radial muscle of the iris squeezes.",shows:"the radial (dilator) muscle squeezing to widen the pupil",why:"α1 squeezes the radial muscle, so the pupil widens (mydriasis). It is one reason phenylephrine eye drops dilate pupils for an eye exam.",hint:"Squeezing smooth muscle with norepinephrine is usually an α job."},
+ {org:"eye",a:.5,b:.1,r:"M",sig:"ach",opts:["a1","b1","M","N"],eff:"The pupil gets small: the circular sphincter muscle squeezes.",shows:"the circular sphincter muscle squeezing to make the pupil small",why:"ACh on M receptors squeezes the sphincter, so the pupil constricts (miosis). Pinpoint pupils are a cholinergic sign.",hint:"Small pupils are a rest-and-digest sign."},
+ {org:"heart",a:70,b:125,r:"b1",sig:"ne",opts:["a1","b1","b2","M"],eff:"The heart beats faster and harder.",shows:"the heart speeding up and squeezing harder",why:"β1 in the SA node and heart muscle raises rate and force. Beta blockers block exactly this.",hint:"Which receptor do -olol drugs block to slow the heart?"},
+ {org:"heart",a:80,b:48,r:"M",sig:"ach",opts:["b1","M","N","a2"],eff:"The heart slows down.",shows:"the heart slowing as the vagus nerve releases ACh",why:"The vagus nerve releases ACh onto M receptors in the SA node: the heart slows. Atropine blocks this brake, so the rate rises.",hint:"The vagus nerve is parasympathetic."},
+ {org:"airway",a:.35,b:.95,r:"b2",sig:"epi",opts:["a1","b1","b2","M"],eff:"The airway relaxes and opens wide.",shows:"airway smooth muscle relaxing so the airway opens",why:"β2 relaxes airway smooth muscle. Albuterol works here, and propranolol blocks here, which is why it is risky in asthma.",hint:"Remember: β1 for one heart, β2 for two lungs."},
+ {org:"airway",a:.7,b:.15,r:"M",sig:"ach",opts:["b2","M","N","D"],eff:"The airway narrows and fills with mucus.",shows:"airway muscle tightening and mucus building up",why:"ACh on M receptors narrows the airway and increases secretions: bronchospasm and bronchorrhea, two of the killer Bs.",hint:"Think of the SLUDGE and killer B signs."},
+ {org:"vessel",a:.3,b:.95,r:"a1",sig:"ne",opts:["a1","a2","b2","D"],eff:"An arteriole wall squeezes, so blood pressure rises.",shows:"the vessel wall thickening as it squeezes",why:"α1 on vessel smooth muscle constricts arterioles and raises resistance and blood pressure. Norepinephrine and phenylephrine use it; prazosin blocks it.",hint:"Pressors such as phenylephrine work here."},
+ {org:"kidneyD",a:0,b:1,r:"D",sig:"dop",opts:["a1","b1","D","M"],eff:"Blood vessels in the kidney widen.",shows:"the kidney's blood vessel widening",why:"Low-rate dopamine turns on D1 receptors that widen kidney and gut vessels.",hint:"The signal molecule is the receptor's own name."},
+ {org:"kidneyR",a:0,b:1,r:"b1",sig:"ne",opts:["b1","b2","a1","M"],eff:"The kidney releases renin.",shows:"kidney cells releasing renin",why:"β1 on kidney cells releases renin, which leads to angiotensin II. Beta blockers lower blood pressure partly by cutting this.",hint:"Same receptor as the heart."},
+ {org:"bladder",a:0,b:1,r:"M",sig:"ach",opts:["a1","b2","M","N"],eff:"The bladder wall squeezes and empties.",shows:"the detrusor muscle squeezing and urine flowing out",why:"ACh on M receptors squeezes the detrusor. Bethanechol turns this on for urinary retention; oxybutynin blocks it for overactive bladder.",hint:"Peeing is rest and digest."},
+ {org:"prostate",a:1,b:0,r:"a1",sig:"ne",opts:["a1","a2","b1","M"],eff:"The prostate and bladder neck tighten, so the outlet narrows.",shows:"smooth muscle in the prostate tightening around the urethra",why:"α1 tightens the bladder neck and prostate. Tamsulosin blocks this to ease urine flow in BPH.",hint:"-osin drugs block this to help men with an enlarged prostate."},
+ {org:"muscle",a:0,b:1,r:"N",sig:"ach",opts:["M","N","b2","a1"],eff:"A skeletal muscle fibre contracts.",shows:"a skeletal muscle shortening at the neuromuscular junction",why:"ACh opens nicotinic receptors on skeletal muscle. Myasthenia gravis attacks these; neostigmine and pyridostigmine boost ACh here.",hint:"Skeletal muscle is somatic, not autonomic, and uses an ion-channel receptor."},
+ {org:"nerve",a:0,b:1,r:"a2",sig:"ne",opts:["a1","a2","b1","D"],eff:"The nerve ending slows its own norepinephrine release.",shows:"a receptor on the nerve ending turning down norepinephrine release",why:"α2 on the nerve ending is a brake. Clonidine turns on α2 in the brainstem, lowering sympathetic outflow and blood pressure.",hint:"This receptor is on the sending side, not the organ."},
+ {org:"sweat",a:0,b:1,r:"M",sig:"ach",opts:["a1","b2","M","N"],eff:"Sweat glands pour out sweat.",shows:"sweat glands releasing sweat",why:"Sweat glands are a twist: sympathetic nerves supply them, but the nerve releases ACh onto M receptors. That is why anticholinergics stop sweating.",hint:"The nerve here is sympathetic, but check which molecule it releases."},
+ {org:"gut",a:.25,b:1.9,r:"M",sig:"ach",opts:["a1","b2","M","N"],eff:"The gut squeezes in waves and moves contents along.",shows:"strong waves of peristalsis in the gut",why:"ACh on M receptors speeds gut motility and secretions. Too much gives cramps and diarrhea; blocking it gives constipation.",hint:"Digesting is rest and digest."},
+ {org:"tremor",a:0,b:1,r:"b2",sig:"epi",opts:["b1","b2","N","M"],eff:"Skeletal muscle shows a fine tremor after an inhaler.",shows:"a hand with a fine tremor",why:"β2 in skeletal muscle causes the fine tremor seen with albuterol. It is a mechanism-based side effect, usually harmless.",hint:"The inhaler that caused it opens airways."},
+ {org:"liver",a:0,b:1,r:"b2",sig:"epi",opts:["b2","a1","M","D"],eff:"The liver breaks down glycogen and releases glucose.",shows:"the liver releasing glucose into the blood",why:"β2 (with some α1 help) releases glucose. This is one reason beta blockers can delay recovery from low blood sugar and hide its warning signs.",hint:"Fight or flight needs fuel; the receptor is the airway one."},
+ {org:"mouth",a:0,b:1,r:"M",sig:"ach",opts:["a1","b1","M","N"],eff:"Saliva flows freely.",shows:"saliva dripping from the mouth",why:"ACh on M receptors drives watery saliva. Anticholinergics cause dry mouth for the same reason.",hint:"Salivation is the S in SLUDGE."}];
+const RC={i:0,solved:{},first:{},wrong:{},shown:{},streak:0,pick:{}};
+function kidney(x,y,s,widen,renin,T){ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,-s);ctx.bezierCurveTo(s*.9,-s*1.05,s*1.05,s*.95,0,s);ctx.bezierCurveTo(-s*.55,s*1,-s*.45,s*.3,-s*.18,s*.1);ctx.bezierCurveTo(-s*.45,-s*.2,-s*.55,-s*1,0,-s);ctx.closePath();
+  fillStroke(mix(C.myo,C.panel,.25),C["myo-edge"],2);ctx.restore();
+  const w=6+10*clamp(widen,0,1);rr(x-s*1.25,y-w/2,s*1.1,w,w/2);ctx.fillStyle=C.blood;ctx.fill();ctx.strokeStyle=C.vessel;ctx.lineWidth=2;ctx.stroke();
+  if(renin>0)for(let i=0;i<6;i++){const p=(T*.5+i/6)%1;withA(renin*(1-p),()=>{circ(x+s*.3+p*s*1.2,y-s*.4+Math.sin(i*2)*s*.5+p*10,5,C.gold,hexA(C.ink,.4),1)})}}
+function liver(x,y,s,rel,T){ctx.beginPath();ctx.moveTo(x-s,y-s*.2);ctx.bezierCurveTo(x-s*.9,y-s*.9,x+s*.8,y-s*.8,x+s*1.1,y-s*.5);ctx.bezierCurveTo(x+s*.7,y+s*.1,x+s*.1,y+s*.7,x-s*.6,y+s*.5);ctx.closePath();fillStroke(mix(C.myo,"#7A3A2A",.3),C["myo-edge"],2);
+  for(let i=0;i<8;i++){const p=(T*.4+i/8)%1;const g=rel*1;if(g<=0)continue;withA(g*(1-p*.6),()=>lig("glu",x-s*.4+(i%4)*s*.35+p*20,y+s*.5+p*s*.9,7))}}
+function recScene(it,t,T){const k=it.org;const v=lerp(it.a,it.b,t);const x=180,y=180;
+  if(k==="eye")eye(x,y,72,v);
+  else if(k==="heart"){heart(x,y-10,62,T,v,{force:t>.5?1.5:1});rr(x-130,y+72,260,46,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x-126,y+74,196,42,v,T,C["mon-hr"]);txt(x+124,y+95,Math.round(v)+" /min",{size:14,mono:true,weight:700,align:"right",color:C["mon-hr"]})}
+  else if(k==="airway")bronchiole(x,y,95,v,{mucus:it.r==="M"?t*.8:0});
+  else if(k==="vessel")vesselX(x,y,95,v,{t:T});
+  else if(k==="kidneyD")kidney(x+20,y,70,v,0,T);
+  else if(k==="kidneyR")kidney(x+20,y,70,.3,v,T);
+  else if(k==="bladder")bladder(x,y-10,100,lerp(.8,.25,t),t,{closed:t<.4,flow:t>.4?1:0,t:T});
+  else if(k==="prostate"){prostateIcon(x,y+30,70,v);bladder(x,y-70,46,.6,0,{closed:true})}
+  else if(k==="muscle"){const w=220*(1-.22*v);rr(x-w/2,y-40,w,80,30);fillStroke(C.muscle,hexA(C.ink,.45),1.6);for(let i=-6;i<=6;i++)line(x+i*w/14,y-34,x+i*w/14,y+34,hexA(C.panel,.5),1.4);
+    neuron(x-150,y-110,x,y-46,C.somatic,3)}
+  else if(k==="tremor"){const sh=Math.sin(T*50)*3*v;ctx.save();ctx.translate(x+sh,y);for(let i=0;i<4;i++){rr(-46+i*24,-80,20,70,10);fillStroke(C.skin,C["skin-edge"],1.6)}rr(-52,-20,108,80,18);fillStroke(C.skin,C["skin-edge"],1.6);rr(54,0,46,22,11);fillStroke(C.skin,C["skin-edge"],1.6);ctx.restore();
+    if(v>.3){line(x-80,y-20,x-64,y-20,C["ink-soft"],2);line(x-84,y,x-68,y,C["ink-soft"],2);line(x+112,y-20,x+128,y-20,C["ink-soft"],2)}}
+  else if(k==="liver")liver(x,y-20,100,v,T);
+  else if(k==="nerve"){terminal(x,y+40,170,150,C.symp,{ves:6,lig:"ne"});const n=Math.round(lerp(7,2,v));for(let i=0;i<n;i++){const p=(T*.6+i/n)%1;lig("ne",x-50+i*15,y+50+p*60,6,1-p)}
+    membrane(x-140,x+140,y+112,{});receptor(x+68,y+10,"a2",{s:1,dir:-1,active:v>.5,label:false});txt(x+100,y-30,"brake",{size:13,weight:700,color:C.a2})}
+  else if(k==="sweat"){rr(x-110,y-40,220,90,10);fillStroke(C.skin,C["skin-edge"],2);for(let i=0;i<5;i++){const gx=x-80+i*40;line(gx,y+40,gx,y-30,hexA(C["skin-edge"],.8),3);circ(gx,y+40,7,hexA(C.sweat,.5),C["skin-edge"],1.2);
+      const n=Math.round(v*3);for(let j=0;j<n;j++){const p=(T*.7+j/3+i*.2)%1;sweatDrop(gx,y-40-p*40,5,hexA(C.sweat,1-p))}}}
+  else if(k==="gut"){ctx.save();ctx.translate(x,y);ctx.scale(1.6,1.6);gut(-80,0,160,T,v);ctx.restore()}
+  else if(k==="mouth"){mouthIcon(x,y-20,85,v*1.2,T)}}
+function drawRec(now){use(S2);const T=now/1000;const it=RECS[RC.i];const ph=P(T,5);const t=smooth(seg(ph,.12,.42))-smooth(seg(ph,.7,.95));const solved=RC.solved[RC.i];
+  panelBox(8,8,344,364);title(20,26,"Watch this effect");txt(340,26,t>.5?"signal on":"signal off",{size:12,mono:true,weight:700,align:"right",color:t>.5?C.accent:C["ink-soft"]});
+  ctx.save();ctx.beginPath();rr(9,40,342,262,6);ctx.clip();recScene(it,t,T);ctx.restore();
+  wrapText(it.eff,22,322,316,18,{size:14,weight:600});
+  panelBox(362,8,190,364);title(374,26,"The receptor");
+  const rx=457,ry=258;txt(rx,52,"Signal:",{size:12,weight:600,align:"center",color:C["ink-soft"]});wrapText(SIGN[it.sig],380,72,160,16,{size:12.5,weight:700});
+  // source: nerve terminal or blood vessel
+  if(it.sig==="epi"||it.sig==="dop"){rr(380,118,154,26,13);ctx.fillStyle=C.vwall;ctx.fill();rr(386,123,142,16,8);ctx.fillStyle=C.blood;ctx.fill();txt(rx,154,it.sig==="epi"?"from the blood":"from the IV",{size:11.5,align:"center",color:C["ink-soft"]})}
+  else terminal(rx,170,110,62,it.sig==="ach"?C.ach:C.symp,{ves:3,lig:it.sig});
+  membrane(372,542,ry+6,{});
+  const lp=P(T,2.2);const ly=lerp(176,ry-4,smooth(seg(lp,0,.55)));lig(it.sig,rx+Math.sin(lp*9)*4*(1-seg(lp,0,.55)),ly,7.5,1-seg(lp,.85,1));
+  receptor(rx,ry+8,solved?it.r:"?",{s:1.15,active:seg(lp,.5,.6)>.5&&lp<.85,text:solved?RNAME[it.r]:"?",labDy:30});
+  txt(rx,ry+66,solved?"Solved":"Which receptor?",{size:13,weight:700,align:"center",color:solved?C.good:C.ink});
+  wrapText(solved?RSHORT[it.r]:"Pick below.",380,ry+90,160,16,{size:12,color:C["ink-soft"]})}
+function recUI(){const it=RECS[RC.i];$("#rN").textContent=RC.i+1;$("#rT").textContent=RECS.length;
+  $("#recQ").textContent=it.eff+" Which receptor is doing this?";
+  const box=$("#recOpts");box.innerHTML="";it.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.textContent=RNAME[o];b.setAttribute("aria-label",RNAME[o]+" "+({a1:"alpha 1",a2:"alpha 2",b1:"beta 1",b2:"beta 2",D:"dopamine 1",M:"muscarinic",N:"nicotinic"})[o]);
+    if(RC.solved[RC.i]&&o===it.r)b.classList.add("right");b.onclick=()=>recPick(o,b);box.appendChild(b)});
+  const fb=$("#recFb");if(RC.solved[RC.i]){fb.className="fb show ok";fb.textContent="✓ "+it.why}else{fb.className="fb";fb.textContent=""}
+  $("#recHintBox").hidden=true;$("#recPrev").disabled=RC.i===0;$("#recNext").textContent=RC.i===RECS.length-1?"Back to picture 1 →":"Next picture →";recMeta();a11yKey=""}
+function recMeta(){$("#rSolved").textContent=Object.keys(RC.solved).length;$("#rFirst").textContent=Object.keys(RC.first).length;$("#rStreak").textContent=RC.streak;$("#recCap").textContent=`Picture ${RC.i+1}: ${RECS[RC.i].eff}`}
+function recPick(o,b){const it=RECS[RC.i];const fb=$("#recFb");
+  if(o===it.r){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+it.why;if(!RC.solved[RC.i]){RC.solved[RC.i]=1;if(!RC.wrong[RC.i]&&!RC.shown[RC.i]){RC.first[RC.i]=1;RC.streak++}}}
+  else{b.classList.add("wrong");RC.wrong[RC.i]=1;RC.streak=0;fb.className="fb show no";fb.textContent=`Not quite. ${RDO[o]} This picture shows ${it.shows}.`}
+  recMeta();a11yKey=""}
+$("#recHint").onclick=()=>{const hb=$("#recHintBox");hb.hidden=false;hb.textContent="Hint: "+RECS[RC.i].hint+" Then ask: rest and digest (ACh) or fight or flight (norepinephrine or epinephrine)? Squeeze or relax?"};
+$("#recShow").onclick=()=>{if(!RC.solved[RC.i]){RC.shown[RC.i]=1;RC.solved[RC.i]=1;RC.streak=0}recUI()};
+$("#recPrev").onclick=()=>{if(RC.i>0){RC.i--;recUI()}};$("#recNext").onclick=()=>{RC.i=(RC.i+1)%RECS.length;recUI()};
+function recA11y(){const it=RECS[RC.i];const s=RC.solved[RC.i];
+  return [`Picture ${RC.i+1}: ${it.eff}`,`Left: ${it.shows}, cycling between rest and the effect every few seconds. Right: ${SIGN[it.sig]} travels down into a receptor cup in a cell membrane. The receptor is labelled ${s?RNAME[it.r]+" (solved)":"with a question mark"}.`]}
+
+/* ================= PART 3: case files ================= */
+const S3=makeStage("cvCase",560,430);
+const CASES=[
+{name:"Too much of a good thing",who:"Grace, 46",title:"Myasthenia gravis, extra pyridostigmine, and new drooling",scene:"chol",
+ mar:[["pyridostigmine","PO","0800","took extra","bad"]],
+ v:{hr:52,sys:104,dia:62,sp:92,hrF:"lo",spF:"lo"},
+ labs:[["Pupils","2 mm, pinpoint",1],["Secretions","drooling, copious",1],["Bowel sounds","hyperactive, cramps",1],["Muscles","twitching, weaker",1],["Resp rate","24, shallow",1],["Potassium","4.0 mEq/L",0]],
+ story:"Grace has myasthenia gravis and takes pyridostigmine. For two days she felt weak, so she took extra doses on her own. Now she is weaker, drooling, sweating, has stomach cramps and diarrhea, and her vision is blurry.",
+ legend:[["ach","Acetylcholine"],["ache","Acetylcholinesterase"],["mucus","Airway mucus","s"]],
+ qs:[{q:"Which explanation fits her findings best?",hint:"Look at the pupils, the secretions and the pulse. Are they rest-and-digest signs?",opts:[
+   ["Cholinergic crisis: too much cholinesterase inhibitor, so ACh floods M and N receptors",1,"Yes. Pinpoint pupils, drooling, sweating, cramps, diarrhea and a slow pulse are SLUDGE signs. Weakness comes from ACh overload at the nicotinic receptors."],
+   ["Myasthenic crisis: her disease is undertreated",0,"Myasthenic crisis also causes weakness, but without SLUDGE signs, pinpoint pupils or a slow pulse. She took extra drug, not too little."],
+   ["Anticholinergic toxicity",0,"That is the opposite picture: dry mouth, wide pupils, hot dry skin and a fast pulse."],
+   ["An allergic reaction to the drug",0,"Allergy brings hives, swelling or wheeze with a fast pulse, not pinpoint pupils and a slow pulse."]]},
+  {q:"What should the nurse do first?",hint:"Weak breathing muscles plus heavy secretions threaten one thing above all.",opts:[
+   ["Assess airway and breathing, hold the pyridostigmine and notify the provider right away; have atropine available per order",1,"Right. Airway first. The cause is too much drug, so it is held. Atropine can dry the muscarinic secretions if ordered."],
+   ["Give the next dose early because she is weak",0,"More cholinesterase inhibitor would add even more ACh and deepen the crisis."],
+   ["Encourage her to drink plenty of fluids",0,"With heavy secretions and weak swallowing muscles she could aspirate. Airway assessment comes first."],
+   ["Let her rest and recheck in four hours",0,"Weak breathing muscles can fail quickly. This needs action now."]]},
+  {q:"Later, what teaching matters most?",hint:"How did this start?",opts:[
+   ["Take each dose on schedule and never add extra doses on your own; report drooling, sweating, cramps or worse weakness",1,"Yes. The right amount strengthens muscles; too much causes this crisis. Weakness can come from too little or too much, so she should call rather than guess."],
+   ["If weakness increases, take an extra dose",0,"That is exactly what caused this crisis."],
+   ["Skip doses on days you feel strong",0,"Skipping can trigger a myasthenic crisis. Doses are timed to keep levels steady."],
+   ["Drooling is a normal effect; ignore it",0,"Drooling is a warning sign of too much ACh and should be reported."]]}],
+ exp:"Both crises make a myasthenia patient weak. SLUDGE signs, pinpoint pupils and a slow pulse point to too much drug (cholinergic crisis). Airway first, hold the drug, atropine for muscarinic signs."},
+
+{name:"Dry, hot, confused",who:"Walter, 81",title:"Oxybutynin plus a night-time sleep aid",scene:"antichol",
+ mar:[["oxybutynin","PO","0900","given","good"],["diphenhydramine (OTC)","PO, home","bedtime","new","warn"]],
+ v:{hr:112,sys:138,dia:82,sp:96,hrF:"hi"},
+ labs:[["Temp","38.1 °C",1],["Pupils","6 mm, wide",1],["Bladder scan","large volume retained",1],["Bowel sounds","hypoactive",1],["Skin","hot, dry, flushed",1],["Glucose","104 mg/dL",0]],
+ story:"Walter takes oxybutynin for an overactive bladder. Last week he started an over-the-counter night-time sleep aid that contains diphenhydramine. His daughter says he is suddenly confused and agitated. He has not passed urine for ten hours and is constipated.",
+ legend:[["mus","Muscarinic receptor"],["blocked","Blocked receptor","s"],["bad","Flushed, hot skin"]],
+ qs:[{q:"What best explains the change?",hint:"Both drugs share one receptor action.",opts:[
+   ["Anticholinergic burden: two drugs blocking muscarinic receptors add up",1,"Yes. Oxybutynin and diphenhydramine both block M receptors. Together they give the classic picture: confused, hot, dry, red, fast pulse, retained urine."],
+   ["A cholinergic crisis",0,"Cholinergic excess is wet: sweating, drooling, small pupils, slow pulse. Walter is dry with wide pupils and a fast pulse."],
+   ["Low blood sugar",0,"His glucose is normal. Hot, dry, flushed skin with wide pupils points to an anticholinergic effect."],
+   ["Normal ageing",0,"Sudden confusion is never just ageing. It has a cause, here a drug effect."]]},
+  {q:"Which assessment or action comes first?",hint:"He has not passed urine in ten hours.",opts:[
+   ["Check for urinary retention (bladder scan per protocol), keep him safe from falls, and report to the provider so the sleep aid can be stopped",1,"Right. Retention is common and painful, confusion raises fall risk, and the culprit drug needs review."],
+   ["Give another dose of the sleep aid to calm his agitation",0,"That would add more anticholinergic effect and worsen the confusion."],
+   ["Give oxybutynin early to relax his bladder",0,"Oxybutynin is part of the problem: it is also a muscarinic blocker."],
+   ["Apply warm blankets because his skin feels hot",0,"He cannot sweat to lose heat; warming him further is the wrong direction."]]},
+  {q:"Which history would make anticholinergics even riskier for him?",hint:"Think of two places where blocking M receptors traps fluid.",opts:[
+   ["Narrow-angle glaucoma and an enlarged prostate",1,"Yes. Wide pupils can block fluid drainage in narrow-angle glaucoma, and an enlarged prostate adds to urinary retention."],
+   ["Asthma",0,"Some anticholinergics (ipratropium) are actually used for airway disease. This is not the main contraindication."],
+   ["High cholesterol",0,"That is unrelated to anticholinergic effects."],
+   ["A slow heart rate",0,"Anticholinergics speed the heart; atropine is even used for slow rates."]]}],
+ exp:"Dry as a bone, red as a beet, hot as a hare, blind as a bat, mad as a hatter, full as a flask. Older adults are especially sensitive, and many over-the-counter sleep and allergy products block muscarinic receptors too."},
+
+{name:"Wheeze after a new pill",who:"Dana, 38",title:"Asthma and a newly started propranolol",scene:"asthma",
+ mar:[["propranolol","PO","0800","given","good"],["albuterol inhaler","inhaled","PRN","given","good"]],
+ v:{hr:58,sys:112,dia:70,sp:91,hrF:"lo",spF:"lo"},
+ labs:[["Resp rate","26 /min",1],["Breath sounds","wheezes, both lungs",1],["Peak flow","well below her best",1],["Speech","short phrases",1],["Temp","36.9 °C",0]],
+ story:"Dana has asthma. Three days ago she started propranolol to prevent migraines. Today she is wheezing with a tight chest, and says her albuterol inhaler is not helping as much as usual.",
+ legend:[["b2","β2 receptor"],["blocked","Blocked by propranolol","s"],["drug","Albuterol"]],
+ qs:[{q:"Why is she wheezing?",hint:"Propranolol is nonselective. Where else are beta receptors?",opts:[
+   ["Propranolol blocks β2 receptors in the airway, so the muscle tightens",1,"Yes. Propranolol blocks β1 and β2. Without β2 tone, airway smooth muscle narrows, which is why nonselective beta blockers are generally avoided in asthma."],
+   ["Propranolol stimulates muscarinic receptors",0,"Propranolol does not act on muscarinic receptors. Its effect is to block beta receptors."],
+   ["A migraine causes wheezing",0,"Migraines do not narrow the airways. The timing points to the new drug."],
+   ["She is allergic to albuterol",0,"Albuterol still works, just less: its β2 target is occupied by propranolol."]]},
+  {q:"Why is her albuterol working less well?",hint:"Albuterol and propranolol compete for the same receptor.",opts:[
+   ["Propranolol is occupying the β2 receptors that albuterol needs",1,"Right. A blocker in the receptor leaves fewer receptors for the agonist, so the inhaler has less effect."],
+   ["Albuterol is a β2 blocker",0,"Albuterol is a β2 agonist: it turns the receptor on to open the airway."],
+   ["Her inhaler must be empty",0,"Possible in real life, but the mechanism here is receptor blockade, which the timing explains."],
+   ["Albuterol only works on the heart",0,"Albuterol is chosen because it acts mainly on airway β2 receptors."]]},
+  {q:"What should the nurse do, and what might the prescriber consider instead?",hint:"Hold the cause, protect breathing, and think cardioselective.",opts:[
+   ["Hold the next propranolol dose, assess breathing and oxygen, notify the prescriber; a cardioselective -olol or a different drug class may be considered",1,"Yes. Cardioselective drugs such as metoprolol mainly block β1, so they are generally safer in asthma, though still used with caution."],
+   ["Give the propranolol anyway; migraines matter more",0,"Bronchospasm can become life-threatening. The dose should be held and reported."],
+   ["Switch to nadolol, another -olol",0,"Nadolol is also nonselective, so it would block airway β2 too."],
+   ["Increase the propranolol so the heart slows more",0,"The problem is the airway; more propranolol would make it worse."]]}],
+ exp:"β1 for one heart, β2 for two lungs. Nonselective beta blockers block both, so they can trigger bronchospasm and blunt rescue inhalers. Cardioselective -olols are safer, not risk-free."},
+
+{name:"A pale, cold IV site",who:"Luis, 63",title:"Norepinephrine running into a forearm vein",scene:"extrav",
+ mar:[["norepinephrine infusion","IV, forearm","running","titrating","warn"]],
+ v:{hr:108,sys:92,dia:50,sp:95,hrF:"hi",bpF:"lo"},
+ labs:[["MAP","64 mmHg",1],["IV site","pale, cool, firm",1],["Patient report","burning at site",1],["Cap refill at site","slow",1],["Lactate","high",1]],
+ story:"Luis is in septic shock. Norepinephrine is running through a forearm IV while a central line is being placed. He says the IV site burns. The skin around it is pale (blanched), cool and hard.",
+ legend:[["ne","Norepinephrine"],["a1","α1 receptor"],["drug","Phentolamine"]],
+ qs:[{q:"What is happening at the IV site?",hint:"What does norepinephrine do to α1 receptors in vessel walls?",opts:[
+   ["Norepinephrine has leaked into the tissue and is clamping the small vessels there (α1), cutting off blood flow",1,"Yes. This is extravasation. The same α1 squeeze that raises his blood pressure starves the leaked area of blood, and the tissue can die."],
+   ["An allergic reaction to the IV tubing",0,"Allergy brings redness, hives and swelling, not a pale, cold, hard area."],
+   ["A normal effect of a working pressor",0,"A pale, cool, painful site is never normal. It is an emergency."],
+   ["An infection of the IV site",0,"Infection develops over days and is red, warm and swollen."]]},
+  {q:"What should the nurse do first?",hint:"Stop the leak, then call.",opts:[
+   ["Stop the infusion at that site, notify the provider right away and follow the extravasation protocol; the pressor is restarted at another site",1,"Right. He still needs the pressor, so it is restarted elsewhere per order, while the leaked area is treated."],
+   ["Speed up the infusion to raise his pressure",0,"More drug through a leaking site means more tissue damage."],
+   ["Massage the area to spread the drug out",0,"Massage does not reverse vasoconstriction and can spread the injury."],
+   ["Leave it and recheck at the end of the shift",0,"Tissue damage can happen within hours. Act now."]]},
+  {q:"Phentolamine is the antidote. How does it work?",hint:"It is the opposite of norepinephrine at one receptor.",opts:[
+   ["It blocks α1 receptors in the area, so the vessels relax and blood returns",1,"Yes. Phentolamine is an α blocker. Infiltrated into the area per protocol, it undoes the squeeze."],
+   ["It speeds up the breakdown of norepinephrine in the blood",0,"Phentolamine does not break down the drug; it blocks its receptor."],
+   ["It blocks β1 receptors in the heart",0,"Beta blockers act on the heart; the problem is α1 vessel squeeze in the skin."],
+   ["It is a pain medicine",0,"It is a receptor blocker that restores blood flow."]]}],
+ exp:"Vasopressors save pressure by squeezing vessels; leaked into tissue, the same squeeze causes ischemia. Check peripheral pressor sites often, prefer a central line, and know the phentolamine protocol."},
+
+{name:"Pesticide exposure",who:"Ray, 52",title:"Sprayed in the field: wet, slow and twitching",scene:"op",
+ mar:[["atropine","IV","now","ordered","warn"],["pralidoxime","IV","now","ordered","warn"]],
+ v:{hr:46,sys:96,dia:58,sp:88,hrF:"lo",bpF:"lo",spF:"lo"},
+ labs:[["Pupils","pinpoint",1],["Lungs","wheeze, frothy secretions",1],["GI","vomiting, diarrhea",1],["Skin","sweating heavily",1],["Muscles","twitching",1],["Cholinesterase","low (sent)",1]],
+ story:"Ray, a farmworker, was caught in an organophosphate pesticide spray. He is drooling, tearing, vomiting, sweating, wheezing with frothy secretions and twitching. His clothes are still damp.",
+ legend:[["op","Organophosphate"],["ache","Acetylcholinesterase"],["ach","Acetylcholine"]],
+ qs:[{q:"How does the poison cause these signs?",hint:"Which enzyme normally clears ACh?",opts:[
+   ["It binds acetylcholinesterase and does not let go, so ACh builds up at muscarinic and nicotinic receptors",1,"Yes. ACh is never cleared. Muscarinic overload gives SLUDGE and the killer Bs; nicotinic overload gives twitching, then weakness."],
+   ["It blocks muscarinic receptors",0,"Blocking M receptors would make him dry with wide pupils, the opposite of what you see."],
+   ["It releases histamine",0,"Histamine gives hives and swelling, not pinpoint pupils and a slow pulse."],
+   ["It turns on β2 receptors",0,"β2 would open his airways; his are narrowed and full of secretions."]]},
+  {q:"Which two antidotes are used, and what does each do?",hint:"One blocks the receptor; one rescues the enzyme.",opts:[
+   ["Atropine blocks M receptors to dry secretions; pralidoxime reactivates acetylcholinesterase if given early",1,"Right. Atropine fixes the muscarinic side but not the nicotinic weakness. Pralidoxime frees the enzyme before the bond ages."],
+   ["Physostigmine and neostigmine",0,"Those are cholinesterase inhibitors. They would add even more ACh."],
+   ["Naloxone and flumazenil",0,"Those reverse opioids and benzodiazepines, not organophosphates."],
+   ["Epinephrine and propranolol",0,"These act on adrenergic receptors and do not address the ACh flood."]]},
+  {q:"What tells the team that enough atropine has been given?",hint:"What is the most dangerous muscarinic sign?",opts:[
+   ["Drying of airway secretions and easier breathing",1,"Yes. Atropine is titrated to dry lungs. Pupil size is not used as the target."],
+   ["Pupils back to normal size",0,"Pupils may stay small for a while; they are not the endpoint."],
+   ["Twitching stops",0,"Twitching is nicotinic. Atropine does not block nicotinic receptors."],
+   ["Heart rate below 60",0,"Atropine raises the heart rate. The aim is dry lungs, not a slow pulse."]]}],
+ exp:"Protect staff first: remove contaminated clothing, decontaminate and wear protective equipment. Then airway, atropine for the wet muscarinic signs, and pralidoxime early for the enzyme and nicotinic weakness."},
+
+{name:"Slow pulse, hidden low",who:"Helen, 67",title:"Metoprolol, insulin and a quiet low blood sugar",scene:"hypo",
+ mar:[["metoprolol","PO","0900","due","warn"],["insulin","subcut","0730","given","good"]],
+ v:{hr:54,sys:100,dia:62,sp:97,hrF:"lo"},
+ labs:[["Apical pulse","54, full minute",1],["Glucose (meter)","58 mg/dL",1],["Skin","sweaty",1],["Tremor","none",0],["Potassium","4.2 mEq/L",0]],
+ story:"Helen has type 2 diabetes treated with insulin, plus high blood pressure and angina treated with metoprolol. Her 0900 metoprolol is due. Her apical pulse is 54. She felt sweaty earlier but did not notice a racing heart or shakiness, and her glucose meter now reads 58.",
+ legend:[["b1","β1 receptor"],["blocked","Blocked by metoprolol","s"],["sweat","Sweat"]],
+ qs:[{q:"What should the nurse do about the 0900 metoprolol?",hint:"A common hold parameter is an apical pulse below 60.",opts:[
+   ["Hold it and notify the prescriber, following the hold parameters in the order",1,"Yes. Metoprolol slows the heart through β1 blockade; a pulse of 54 is commonly a reason to hold and report, per order or protocol."],
+   ["Give it and recheck the pulse in an hour",0,"Giving it would slow the heart further. Check the hold parameters first."],
+   ["Give half the tablet",0,"Nurses do not change the dose on their own. Hold and report."],
+   ["Give it with orange juice to raise her sugar",0,"Treating the low glucose is right, but the beta blocker dose question is separate: hold and report."]]},
+  {q:"Why did she not feel the usual warning signs of low blood sugar?",hint:"Which warning signs come from β receptors?",opts:[
+   ["Beta blockade hides the fast heartbeat and tremor; sweating still shows because sweat glands use ACh",1,"Right. Tachycardia and tremor are β-driven warning signs. Sweat glands run on muscarinic receptors, so sweating is often the one sign left."],
+   ["Low blood sugar never causes symptoms",0,"It usually causes shakiness, a fast heart, sweating, hunger and confusion."],
+   ["Insulin blocks beta receptors",0,"Insulin acts on its own receptor; it does not block beta receptors."],
+   ["Metoprolol raises blood sugar",0,"The issue is hidden warning signs, not a higher sugar."]]},
+  {q:"What teaching fits her best?",hint:"What happens if a beta blocker is stopped all at once?",opts:[
+   ["Do not stop metoprolol suddenly; check glucose with the meter rather than relying on how you feel",1,"Yes. Stopping suddenly can cause rebound fast heart rate, high blood pressure and chest pain. Because warning signs are blunted, meter checks matter more."],
+   ["Stop metoprolol at home whenever the pulse is slow",0,"Stopping suddenly can trigger rebound angina. She should call the prescriber instead."],
+   ["If you miss a dose, double the next one",0,"Doubling risks a very slow pulse and low blood pressure."],
+   ["You can stop it once your blood pressure is normal",0,"A normal pressure usually means the drug is working, and stopping suddenly is risky."]]}],
+ exp:"Check the apical pulse and blood pressure before a beta blocker and hold per order. Beta blockers mask the tachycardia and tremor of hypoglycemia; sweating remains. Never stop them abruptly."},
+
+{name:"Dizzy at night",who:"Sam, 72",title:"First dose of prazosin and a near fall",scene:"fall",
+ mar:[["prazosin","PO","2100","first dose","good"]],
+ v:{hr:98,sys:94,dia:58,sp:97,hrF:"hi",bpF:"lo"},
+ labs:[["BP lying","128/78",0],["BP standing","94/58",1],["HR lying","76",0],["HR standing","98",1],["Symptoms","dizzy, near fall",1]],
+ story:"Sam has high blood pressure and an enlarged prostate. He had his first dose of prazosin last evening. At 0200 he got up quickly to urinate, felt light-headed and nearly fell.",
+ legend:[["a1","α1 receptor"],["blocked","Blocked by prazosin","s"],["vessel","Vessels"]],
+ qs:[{q:"Why did his blood pressure drop when he stood up?",hint:"Standing needs vessels that can squeeze quickly.",opts:[
+   ["α1 receptors in his vessels are blocked, so they cannot squeeze to hold pressure when he stands (first-dose effect)",1,"Yes. Normally α1 squeeze keeps blood from pooling in the legs. Blocked, pressure falls on standing; the heart speeds up to compensate."],
+   ["Prazosin blocks β1 receptors and slows the heart",0,"His heart rate went up, not down. Prazosin blocks α1."],
+   ["He is dehydrated from the prostate",0,"An enlarged prostate does not dehydrate. The timing after the first dose points to the drug."],
+   ["Prazosin causes bleeding",0,"Prazosin does not affect clotting."]]},
+  {q:"What should the nurse teach?",hint:"Timing of the dose and how to get up.",opts:[
+   ["Take the first doses at bedtime, rise slowly (sit on the bed edge first) and call for help at night",1,"Right. The first-dose effect is strongest early, so bedtime dosing and slow position changes lower fall risk."],
+   ["Take it in the morning before a walk",0,"That is when he is most active and most likely to fall."],
+   ["Stand up quickly so the dizziness passes faster",0,"Fast position changes make the drop worse."],
+   ["Skip it on days you feel dizzy without telling anyone",0,"He should report dizziness rather than adjust doses alone."]]},
+  {q:"Which bonus effect might he notice?",hint:"Where else are α1 receptors that hold urine in?",opts:[
+   ["A better urine stream, because the prostate and bladder neck relax",1,"Yes. α1 blockers relax smooth muscle around the urethra, which is why -osin drugs such as tamsulosin are used for an enlarged prostate."],
+   ["Slower heart rate",0,"Blocking α1 tends to cause a reflex faster heart rate, as you saw on standing."],
+   ["Wider airways",0,"That is a β2 agonist effect, not α1 blockade."],
+   ["More saliva",0,"Saliva is mainly a muscarinic effect."]]}],
+ exp:"-osin (alpha-1 blockers): vessels relax, pressure falls, and the prostate outlet relaxes. The first-dose orthostatic drop is the big safety issue: bedtime dosing, rise slowly, fall precautions."}];
+
+/* ---------- drawing ---------- */
+function faceIcon(x,y,r,o,t){o=o||{};circ(x,y,r,mix(C.skin,"#D8402F",o.red||0),C["skin-edge"],2);
+  eye(x-r*.38,y-r*.12,r*.17,o.pupil==null?.45:o.pupil);eye(x+r*.38,y-r*.12,r*.17,o.pupil==null?.45:o.pupil);
+  ctx.beginPath();ctx.ellipse(x,y+r*.45,r*.28,r*.1,0,0,TAU);fillStroke(hexA(C.myo,.8),C["myo-edge"],1.4);
+  if(o.drool)drops(x+r*.1,y+r*.55,3,t,C.sweat,r*.3,3.4);
+  if(o.tears){drops(x-r*.38,y+r*.05,2,t,C.sweat,4,2.6);drops(x+r*.38,y+r*.05,2,t+.4,C.sweat,4,2.6)}
+  if(o.sweat)for(let i=0;i<4;i++){const p=(t*.5+i*.25)%1;sweatDrop(x-r*.6+i*r*.4,y-r*.7+p*r*.3,4,hexA(C.sweat,1-p*.6))}
+  if(o.dry)txt(x,y+r*.72,"dry mouth",{size:11.5,weight:600,align:"center",color:C.ink});
+  if(o.confuse){for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x,y-r*1.15,6+i*5,t*3+i*2,t*3+i*2+3.6);ctx.strokeStyle=C.bad;ctx.lineWidth=1.8;ctx.stroke()}}}
+function caseScene(c,x,y,w,h,t){const cx=x+w/2;
+  if(c.scene==="chol"){faceIcon(cx,y+86,58,{pupil:.08,drool:1,tears:1,sweat:1},t);txt(cx,y+160,"pinpoint pupils, drooling, sweating",{size:11.5,weight:600,align:"center"});
+    bronchiole(x+62,y+222,42,.35,{mucus:.7});txt(x+62,y+276,"airway: mucus",{size:11.5,weight:600,align:"center"});
+    const tw=Math.sin(t*40)*2*(rnd(Math.floor(t*6))>.4?1:0);ctx.save();ctx.translate(x+178,y+222+tw);rr(-44,-16,88,32,14);fillStroke(C.muscle,hexA(C.ink,.45),1.4);for(let i=-3;i<=3;i++)line(i*11,-12,i*11,12,hexA(C.panel,.5),1.2);ctx.restore();
+    txt(x+178,y+262,"twitching, weak",{size:11.5,weight:600,align:"center"});
+    const ph=P(t,3);ache(x+60,y+304,13,.45+.25*Math.sin(t*6),{rot:0});lig("ago",x+60+20,y+304,6);for(let i=0;i<5;i++)lig("ach",x+120+i*20+Math.sin(t*2+i)*3,y+300+Math.cos(t*2+i*1.7)*6,5);
+    txt(cx,y+h-12,"enzyme slowed: ACh piles up",{size:11.5,weight:600,align:"center",color:C["ink-soft"]})}
+  else if(c.scene==="antichol"){faceIcon(cx,y+100,56,{pupil:.95,red:.45,dry:1,confuse:1},t);txt(cx,y+172,"wide pupils, flushed, confused",{size:11.5,weight:600,align:"center"});
+    thermo(x+46,y+190,74,.82,C.bad);txt(x+46,y+290,"38.1 °C",{size:12,mono:true,weight:700,align:"center"});
+    bladder(x+170,y+232,56,.92,0,{closed:true});txt(x+170,y+290,"bladder full",{size:11.5,weight:600,align:"center"});
+    receptor(x+36,y+316,"M",{s:.7,blocked:true,label:false});lig("ant",x+36,y+307,5.5);txt(x+56,y+316,"M blocked by two drugs",{size:11.5,weight:600});}
+  else if(c.scene==="asthma"){const br=.18+.06*Math.sin(t*2);bronchiole(cx,y+110,84,br,{mucus:.25});
+    for(let i=0;i<3;i++){const p=(t*.8+i/3)%1;ctx.save();ctx.globalAlpha*=1-p;ctx.beginPath();ctx.arc(cx,y+110,90+p*24,-.6,.6);ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.stroke();ctx.restore()}
+    txt(cx,y+204,"airway squeezed narrow",{size:12,weight:700,align:"center"});
+    membrane(x+14,x+w-14,y+262,{});receptor(cx-50,y+266,"b2",{s:.85,blocked:true,labDy:30});lig("ant",cx-50,y+254,6.5);receptor(cx+50,y+266,"b2",{s:.85,blocked:true,labDy:30});lig("ant",cx+50,y+254,6.5);
+    const p=P(t,2);const q=p<.5?smooth(p/.5):1-smooth((p-.5)/.5)*.9;lig("ago",lerp(cx+100,cx+56,p<.5?smooth(p/.5):1)+(p>.5?(p-.5)*60:0),lerp(y+222,y+246,q),6,1-seg(p,.85,1));
+    txt(cx,y+h-12,"albuterol bounces off blocked β2",{size:11.5,weight:600,align:"center",color:C["ink-soft"]})}
+  else if(c.scene==="extrav"){ivBag(x+48,y+50,58,"NE",C.ne);line(x+48,y+94,x+48,y+140,C["glass-edge"],2);line(x+48,y+140,x+120,y+160,C["glass-edge"],2);
+    rr(x+16,y+150,w-32,70,34);fillStroke(C.skin,C["skin-edge"],2);
+    const g=.6+.25*Math.sin(t*1.2);glow(x+128,y+184,46*g+8,"#FFFFFF",.85);ell(x+128,y+184,44*g,24*g,0,hexA("#F4F1EC",.9),hexA(C.ink,.3),1.2);
+    rr(x+112,y+160,26,8,3);fillStroke(C.panel,C["glass-edge"],1.4);txt(x+128,y+232,"pale, cool, hard",{size:12,weight:700,align:"center",color:C.bad});
+    vesselX(x+62,y+290,34,.95,{t});receptor(x+62,y+252,"a1",{s:.55,active:true,label:false});txt(x+62,y+334,"vessel clamped",{size:11.5,weight:600,align:"center"});
+    syringe(x+178,y+290,24,0,C.drug);txt(x+178,y+316,"phentolamine",{size:11.5,weight:700,align:"center",color:C.drug});txt(x+178,y+332,"blocks α1",{size:11.5,align:"center",color:C["ink-soft"]})}
+  else if(c.scene==="op"){for(let i=0;i<4;i++){const px=x+30+i*24;line(px,y+60,px,y+30,C.good,3);ell(px-5,y+38,6,3,-.5,C.good);ell(px+5,y+46,6,3,.5,C.good)}
+    for(let i=0;i<10;i++){const p=(t*.6+i/10)%1;circ(x+20+p*110,y+18+Math.sin(i*3+p*6)*8,2.6,hexA(C.op,1-p))}txt(x+80,y+76,"pesticide spray",{size:11.5,weight:600,align:"center"});
+    faceIcon(x+w-62,y+60,40,{pupil:.06,drool:1,tears:1,sweat:1},t);
+    bronchiole(x+62,y+168,46,.3,{mucus:.85});txt(x+62,y+228,"frothy secretions",{size:11.5,weight:600,align:"center"});
+    const tw=Math.sin(t*44)*2.4*(rnd(Math.floor(t*7))>.3?1:0);ctx.save();ctx.translate(x+178,y+168+tw);rr(-44,-16,88,32,14);fillStroke(C.muscle,hexA(C.ink,.45),1.4);for(let i=-3;i<=3;i++)line(i*11,-12,i*11,12,hexA(C.panel,.5),1.2);ctx.restore();txt(x+178,y+206,"twitching (N)",{size:11.5,weight:600,align:"center"});
+    ache(x+60,y+280,20,.45,{dead:true});lig("op",x+80,y+280,9);txt(x+68,y+314,"enzyme stuck",{size:11.5,weight:600,align:"center"});
+    for(let i=0;i<9;i++)lig("ach",x+130+(i%3)*28+Math.sin(t*2+i)*4,y+258+Math.floor(i/3)*20+Math.cos(t*1.7+i)*3,5.5);txt(x+168,y+320,"ACh floods",{size:11.5,weight:600,align:"center"})}
+  else if(c.scene==="hypo"){rr(x+20,y+20,96,128,14);fillStroke(C.panel,C["ink-soft"],2);rr(x+30,y+34,76,56,6);fillStroke(C["bad-wash"],C.bad,1.4);txt(x+68,y+56,"58",{size:24,mono:true,weight:700,align:"center",color:C.bad});txt(x+68,y+78,"mg/dL LOW",{size:11,mono:true,weight:700,align:"center",color:C.bad});
+    txt(x+68,y+164,"glucose meter",{size:11.5,weight:600,align:"center"});
+    heart(x+176,y+70,34,t,54,{});receptor(x+176,y+134,"b1",{s:.7,blocked:true,labDy:28});lig("ant",x+176,y+124,5.5);txt(x+176,y+178,"no racing pulse",{size:11.5,weight:600,align:"center"});
+    rr(x+16,y+196,w-32,44,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+20,y+198,w-40,40,54,t,C["mon-hr"]);
+    rr(x+30,y+258,80,52,12);fillStroke(C.skin,C["skin-edge"],1.6);for(let i=0;i<4;i++){const p=(t*.5+i*.25)%1;sweatDrop(x+44+i*17,y+268+p*30,4.5,hexA(C.sweat,1-p*.5))}txt(x+70,y+326,"sweat still shows (M)",{size:11.5,weight:600,align:"center"});
+    ctx.save();ctx.translate(x+178,y+284);for(let i=0;i<4;i++){rr(-24+i*12,-24,10,30,5);fillStroke(C.skin,C["skin-edge"],1.2)}rr(-28,0,56,30,10);fillStroke(C.skin,C["skin-edge"],1.2);ctx.restore();txt(x+178,y+326,"no tremor (β2)",{size:11.5,weight:600,align:"center"})}
+  else if(c.scene==="fall"){const ph=P(t,5);const tilt=smooth(seg(ph,.35,.6))*.35-smooth(seg(ph,.85,1))*.35;person(x+70,y+150,1.25,{rot:tilt});
+    if(tilt>.15)for(let i=0;i<3;i++){const a=t*4+i*2.1;txt(x+70+Math.cos(a)*22,y+48+Math.sin(a)*8,"*",{size:16,weight:700,align:"center",color:C.gold})}
+    txt(x+70,y+212,tilt>.15?"stands: light-headed":"lying in bed",{size:11.5,weight:600,align:"center"});
+    const bx=x+150,by=y+40;txt(bx+30,by-6,"systolic BP",{size:11.5,weight:600,align:"center"});rr(bx,by+130-104,24,104,4);ctx.fillStyle=C.good;ctx.fill();rr(bx+36,by+130-76,24,76,4);ctx.fillStyle=C.bad;ctx.fill();
+    line(bx-4,by+130,bx+66,by+130,C["ink-soft"],1.4);txt(bx+12,by+142,"lie",{size:11.5,align:"center"});txt(bx+48,by+142,"stand",{size:11.5,align:"center"});txt(bx+12,by+130-112,"128",{size:11.5,mono:true,weight:700,align:"center"});txt(bx+48,by+130-84,"94",{size:11.5,mono:true,weight:700,align:"center",color:C.bad});
+    vesselX(x+62,y+282,36,.15,{t});receptor(x+62,y+238,"a1",{s:.55,blocked:true,label:false});lig("ant",x+62,y+231,4.5);txt(x+62,y+330,"vessel relaxed",{size:11.5,weight:600,align:"center"});
+    prostateIcon(x+180,y+278,30,.9);txt(x+180,y+330,"prostate relaxed",{size:11.5,weight:600,align:"center"})}}
+function drawCase(now){use(S3);const c=CASES[CS.i];const t=now/1000;
+  const mh=30+c.mar.length*24;panelBox(10,10,540,mh);title(22,24,"Medication administration record");
+  c.mar.forEach((m,i)=>{const yy=44+i*24;txt(22,yy,m[0],{size:13.5,weight:700});txt(205,yy,m[1],{size:12.5,color:C["ink-soft"]});txt(296,yy,"as ordered",{size:12.5,color:C["ink-soft"]});txt(374,yy,m[2],{size:12.5,mono:true,weight:600});
+    const col=m[4]==="bad"?C.bad:m[4]==="warn"?C["warn-ink"]:C.good;chipL(444,yy,m[3],col)});
+  const y1=10+mh+8;
+  monitor(10,y1,290,118,c.v,t);
+  const ly=y1+128,lh=430-ly-10;panelBox(10,ly,290,lh);title(22,ly+16,"Labs and assessment");
+  c.labs.forEach((l,i)=>{const yy=ly+40+i*((lh-48)/Math.max(5,c.labs.length));txt(22,yy,l[0],{size:12.5,weight:600});txt(290,yy,l[1]+(l[2]?" ▲":""),{size:12.5,weight:700,mono:false,align:"right",color:l[2]?C["warn-ink"]:C.ink})});
+  const hh=430-y1-10;panelBox(310,y1,240,hh);ctx.save();ctx.beginPath();rr(311,y1+1,238,hh-2,7);ctx.clip();const sc=Math.min(1,hh/346);ctx.translate(310+120*(1-sc),y1+2);ctx.scale(sc,sc);caseScene(c,0,0,240,346,t);ctx.restore()}
+function caseA11y(){const c=CASES[CS.i];const v=c.v;
+  const SC={chol:"a face with pinpoint pupils, tears, drool and sweat drops; an airway ring partly filled with green mucus; a twitching muscle bar; and a blue enzyme with a drug stuck in it while amber ACh dots pile up",
+    antichol:"a flushed red face with wide pupils, a dry mouth label and red swirls over the head for confusion; a high thermometer; a full bladder with the outlet shut; and a grey muscarinic receptor plugged by a blocker",
+    asthma:"a narrowed airway ring with wheeze arcs pulsing outward; below, two beta-2 receptors plugged by grey blocker squares while a violet albuterol hexagon bounces off",
+    extrav:"an IV bag labelled NE feeding a forearm catheter; a pale white patch spreads around the catheter, labelled pale, cool, hard; a clamped vessel with an alpha-1 receptor; and a violet phentolamine syringe labelled blocks alpha-1",
+    op:"green plants under a brown pesticide spray; a face with pinpoint pupils, tears and drool; an airway full of froth; a twitching muscle; a grey enzyme with a brown triangle stuck in it and amber ACh dots crowding beside it",
+    hypo:"a glucose meter reading 58 low; a heart beating slowly above a blocked beta-1 receptor, labelled no racing pulse; a slow ECG strip; a hand with sweat drops labelled sweat still shows; and a steady hand labelled no tremor",
+    fall:"a person who tips sideways as he stands, with stars for dizziness; a bar chart of systolic pressure, 128 lying and 94 standing; a relaxed vessel whose alpha-1 receptor is blocked; and a relaxed prostate"}[c.scene];
+  const d=`Case ${CS.i+1}, ${c.who}. Medication record: `+c.mar.map(m=>`${m[0]}, ${m[1]}, as ordered, ${m[2]}, ${m[3]}`).join("; ")+`. Monitor: heart rate ${v.hr}, blood pressure ${v.sys} over ${v.dia}, oxygen ${v.sp} percent. Labs and assessment: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[2]?" (abnormal)":""}`).join(", ")+`. Picture: ${SC}.`;
+  return [`Case ${CS.i+1}: ${c.title}.`,d]}
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=c.legend.map(l=>`<span><i class="${l[2]||""}" style="background:var(--${l[0]})"></i>${l[1]}</span>`).join("");
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+
+/* ================= PART 4: sort it out ================= */
+const SROUNDS=[
+{name:"Adrenergic drugs: what do they do?",goal:"Put each adrenergic drug or name stem in the box for its receptor action.",
+ bins:[["a1on","Turns on α1"],["b1on","Turns on β1"],["b2on","Turns on β2"],["mix","Turns on α1, β1 and β2"],["a2on","Turns on α2 in the brain"],["a1off","Blocks α1"],["boff","Blocks β receptors"]],
+ cards:[["phenylephrine","a1on","Pure α1 agonist: it squeezes vessels and shrinks swollen nasal lining."],["norepinephrine","a1on","Mostly α1 with some β1: a vasopressor that clamps vessels."],
+  ["dobutamine","b1on","β1 agonist: it makes a weak heart pump harder."],["albuterol","b2on","β2 agonist: it relaxes airway muscle."],["epinephrine","mix","Turns on α1, β1 and β2, which is why it treats anaphylaxis."],
+  ["clonidine","a2on","Central α2 agonist: a brake on sympathetic outflow."],["prazosin","a1off","α1 blocker: vessels relax."],["tamsulosin","a1off","α1 blocker that prefers the prostate."],["the -osin stem","a1off","-osin (or -zosin) drugs block α1."],
+  ["metoprolol","boff","Cardioselective: blocks mainly β1."],["propranolol","boff","Nonselective: blocks β1 and β2."],["the -olol stem","boff","-olol drugs are beta blockers."]]},
+{name:"Cholinergic side: more ACh or less?",goal:"Sort each drug by how it changes acetylcholine signalling.",
+ bins:[["mago","Turns on M receptors directly"],["achei","Slows acetylcholinesterase, so ACh lasts longer"],["mblock","Blocks M receptors"],["react","Frees acetylcholinesterase"]],
+ cards:[["bethanechol","mago","Direct M agonist: it squeezes the bladder in urinary retention."],["pilocarpine","mago","Direct M agonist: eye drops make the pupil small."],
+  ["neostigmine","achei","Cholinesterase inhibitor: used for myasthenia and to reverse some muscle relaxants."],["pyridostigmine","achei","Cholinesterase inhibitor: the oral myasthenia drug."],["the -stigmine stem","achei","-stigmine drugs inhibit acetylcholinesterase."],
+  ["donepezil","achei","Cholinesterase inhibitor in the brain, for Alzheimer disease."],["organophosphate pesticide","achei","An irreversible cholinesterase inhibitor: a poison."],
+  ["atropine","mblock","M blocker: speeds a slow heart and dries secretions."],["glycopyrrolate","mblock","M blocker that stays out of the brain."],["scopolamine","mblock","M blocker for motion sickness."],["oxybutynin","mblock","M blocker for an overactive bladder."],["ipratropium","mblock","Inhaled M blocker that opens airways."],["benztropine","mblock","M blocker in the brain for Parkinson-like tremor."],
+  ["pralidoxime","react","It pulls organophosphate off the enzyme, if given early."]]},
+{name:"Fight or flight, or rest and digest?",goal:"Which branch of the autonomic nervous system causes each effect?",
+ bins:[["symp","Sympathetic: fight or flight"],["para","Parasympathetic: rest and digest"]],
+ cards:[["Heart speeds up","symp","Norepinephrine on β1 speeds the heart."],["Heart slows down","para","The vagus nerve releases ACh onto M receptors."],["Pupils widen","symp","α1 squeezes the radial muscle of the iris."],["Pupils get small","para","ACh on M squeezes the sphincter muscle."],
+  ["Airways open wide","symp","Epinephrine on β2 relaxes airway muscle."],["Airways narrow, more mucus","para","ACh on M tightens airways and adds secretions."],["Saliva and tears flow","para","Salivation and lacrimation are the S and L in SLUDGE."],
+  ["Gut moves food along","para","ACh on M drives peristalsis."],["Gut slows down","symp","During fight or flight, digestion waits."],["Bladder squeezes and empties","para","ACh on M squeezes the detrusor."],["Bladder outlet tightens, urine held","symp","α1 tightens the bladder neck."],
+  ["Liver releases glucose","symp","Fuel for muscles, mainly via β2."],["Skin and gut vessels squeeze","symp","α1 sends blood to the muscles instead."],["Stomach acid increases","para","Digestion is rest and digest."]]},
+{name:"Contraindications and hold signs",goal:"Which drug class does each warning belong to?",
+ bins:[["antichol","Anticholinergics"],["bb","Beta blockers"],["a1b","Alpha-1 blockers"],["chol","Cholinergic agonists and -stigmines"],["press","Vasopressors such as norepinephrine"]],
+ cards:[["Narrow-angle glaucoma","antichol","Wide pupils can block fluid drainage from the eye."],["Enlarged prostate with urinary retention","antichol","Blocking M stops the bladder from squeezing."],["Older adult who becomes confused","antichol","M block in the brain causes delirium; they are on the list to avoid in older adults."],
+  ["Asthma (nonselective drugs worst)","bb","Blocking β2 tightens the airways."],["Apical pulse below 60 (hold per order)","bb","They slow the heart further."],["Insulin user: low sugar warning signs hidden","bb","They mask the fast heart rate and tremor of hypoglycemia."],["Must not be stopped suddenly","bb","Rebound fast heart rate, high blood pressure and chest pain."],
+  ["Dizzy or faint on standing after the first dose","a1b","Vessels cannot squeeze on standing: give the first dose at bedtime."],
+  ["Bowel or urinary obstruction","chol","Squeezing against a blockage can cause damage or rupture."],["Slow heart rate or asthma (more ACh)","chol","Extra M activity slows the heart and narrows airways."],
+  ["Pale, cool skin at a peripheral IV site","press","Extravasation: the α1 squeeze starves the tissue of blood."],["Low blood volume not yet replaced","press","Fill the tank before squeezing the pipes: fluids come first."]]},
+{name:"Antidotes and reversal",goal:"Match each situation with the antidote that reverses it.",
+ bins:[["atro","Atropine"],["pam","Pralidoxime"],["phent","Phentolamine"],["physo","Physostigmine"]],
+ cards:[["Cholinergic crisis: drooling and a slow pulse","atro","Blocks M receptors to dry secretions and lift the vagal brake."],["Organophosphate: wet, wheezy lungs","atro","Titrated until the airway secretions dry."],["Symptomatic slow heart rate","atro","It blocks the vagus nerve's M receptors in the SA node."],
+  ["Organophosphate: twitching and weakness, early","pam","Reactivates acetylcholinesterase before the bond ages."],
+  ["Norepinephrine leaked into the tissue","phent","An α blocker that reverses the local squeeze."],["Phenylephrine extravasation","phent","Any α1 pressor leak is treated the same way, per protocol."],
+  ["Severe anticholinergic delirium (specialist use)","physo","A cholinesterase inhibitor that reaches the brain and raises ACh."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const cup=(x,col,o)=>`<path d="M${x-9} 18 V33 Q${x-9} 37 ${x-5} 37 H${x+5} Q${x+9} 37 ${x+9} 33 V18 H${x+4} V28 H${x-4} V18 Z" fill="${col}" stroke="var(--ink)" stroke-opacity=".45"/>`;
+  const mem=`<rect x="2" y="30" width="52" height="5" fill="var(--gold)" opacity=".45"/>`;
+  const hexg=(x,y)=>`<polygon points="${x-5},${y} ${x-2.5},${y-4.5} ${x+2.5},${y-4.5} ${x+5},${y} ${x+2.5},${y+4.5} ${x-2.5},${y+4.5}" fill="var(--drug)" stroke="var(--ink)" stroke-opacity=".5"/>`;
+  const plug=(x,y)=>`<rect x="${x-4.5}" y="${y-4.5}" width="9" height="9" rx="1.5" fill="var(--drug)"/><path d="M${x-3} ${y-3} L${x+3} ${y+3} M${x+3} ${y-3} L${x-3} ${y+3}" stroke="var(--panel)" stroke-width="1.4"/>`;
+  const on=(col,t)=>s(mem+cup(28,col)+hexg(28,22)+`<text x="50" y="12" font-size="11" font-weight="700" text-anchor="end" fill="var(--ink)">${t}</text>`);
+  const off=(col,t)=>s(mem+cup(28,"var(--blocked)")+plug(28,22)+`<rect x="4" y="4" width="10" height="8" rx="2" fill="${col}"/><text x="50" y="12" font-size="11" font-weight="700" text-anchor="end" fill="var(--ink)">${t}</text>`);
+  const syr=(col,t)=>s(`<rect x="8" y="17" width="30" height="12" rx="2" fill="var(--water)" stroke="var(--glass-edge)"/><rect x="18" y="19" width="18" height="8" fill="${col}"/><path d="M38 23 H52 M8 15 V31 M2 23 H8" stroke="var(--glass-edge)" stroke-width="2"/><text x="28" y="42" font-size="10" font-weight="700" text-anchor="middle" fill="var(--ink)">${t}</text>`);
+  switch(k){
+    case "a1on":return on("var(--a1)","α1");case "b1on":return on("var(--b1)","β1");case "b2on":return on("var(--b2)","β2");case "a2on":return on("var(--a2)","α2");
+    case "mix":return s(mem+cup(12,"var(--a1)")+cup(28,"var(--b1)")+cup(44,"var(--b2)")+`<path d="M28 4 L32 10 L28 16 L24 10 Z" fill="var(--epi)"/>`);
+    case "a1off":return off("var(--a1)","α1");case "boff":return off("var(--b1)","β");
+    case "mago":return on("var(--mus)","M");case "mblock":case "antichol":return off("var(--mus)","M");
+    case "achei":return s(`<path d="M20 23 L34 14 A16 16 0 1 0 34 32 Z" fill="var(--ache)" opacity=".55"/><rect x="30" y="18" width="9" height="9" fill="var(--drug)"/>`+[0,1,2].map(i=>`<circle cx="${44+i*0}" cy="${10+i*12}" r="3.6" fill="var(--ach)"/>`).join(""));
+    case "react":return s(`<path d="M24 23 L38 14 A16 16 0 1 0 38 32 Z" fill="var(--ache)"/><polygon points="48,8 54,18 42,18" fill="var(--op)"/><path d="M44 22 L50 30" stroke="var(--ink)" stroke-width="1.6"/>`);
+    case "symp":return s(`<path d="M18 40 C2 28 6 12 18 18 C30 12 34 28 18 40 Z" fill="var(--myo)" stroke="var(--myo-edge)"/><path d="M42 36 V8 M35 15 L42 8 L49 15" stroke="var(--symp)" stroke-width="3" fill="none"/>`);
+    case "para":return s(`<path d="M6 30 Q14 18 22 30 T38 30 T54 30" fill="none" stroke="var(--gut-edge)" stroke-width="6"/><path d="M6 30 Q14 18 22 30 T38 30 T54 30" fill="none" stroke="var(--gut)" stroke-width="3"/><path d="M40 6 C52 6 52 18 40 18" fill="none" stroke="var(--para)" stroke-width="3"/>`);
+    case "bb":return off("var(--b1)","β");case "a1b":return off("var(--a1)","α1");case "chol":return on("var(--mus)","M+");
+    case "press":return s(`<rect x="6" y="6" width="18" height="24" rx="3" fill="var(--water)" stroke="var(--glass-edge)"/><rect x="6" y="18" width="18" height="12" rx="3" fill="var(--ne)" opacity=".6"/><path d="M15 30 V38 H34" stroke="var(--glass-edge)" stroke-width="2" fill="none"/><ellipse cx="44" cy="36" rx="10" ry="6" fill="var(--panel)" stroke="var(--bad)" stroke-width="1.6"/>`);
+    case "atro":return syr("var(--mus)","blocks M");case "pam":return syr("var(--ache)","frees AChE");case "phent":return syr("var(--a1)","blocks α");case "physo":return syr("var(--ach)","more ACh");
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI()}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Hint: ${c[2].split(":")[0].split(".")[0]}.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+/* drag: a ghost follows the pointer; drop on a bin */
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+const A11Y={sim:{cv:"#cvSim",f:simA11y},rec:{cv:"#cvRec",f:recA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="sim";
+const TABS=["sim","rec","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="sim"){simStep(dt);drawSim(now)}else if(curTab==="rec")drawRec(now);else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__cl={tab:k=>showTab(k),sim:o=>{if(o.drugs){SIM.on=new Set(o.drugs);SIM.order=o.drugs.slice()}if(o.dose)SIM.dose=o.dose;["asthma","old","stand"].forEach(k=>{if(o[k]!=null)SIM[k]=o[k]});
+    $("#simDose").value=SIM.dose;$("#simAsthma").setAttribute("aria-pressed",SIM.asthma);$("#simOld").setAttribute("aria-pressed",SIM.old);$("#simStand").setAttribute("aria-pressed",SIM.stand);
+    document.querySelectorAll("#simDrugs button").forEach(b=>b.setAttribute("aria-pressed",String(SIM.on.has(b.dataset.id))));simChanged();SIM.disp=SIM.tgt.st;Object.assign(SIM.dispV,{hr:SIM.tgt.hr,sys:SIM.tgt.sys,dia:SIM.tgt.dia,sp:SIM.tgt.sp});
+    const r=SIM.tgt;return {hr:Math.round(r.hr),bp:Math.round(r.sys)+"/"+Math.round(r.dia),map:Math.round(r.map),sp:Math.round(r.sp),temp:+r.temp.toFixed(1),pupil:+r.st.pupil.toFixed(2),airway:+r.st.airway.toFixed(2),mucus:+r.st.mucus.toFixed(2),gut:+r.st.gut.toFixed(2),bflow:r.st.bflow,bfill:r.st.bfill,saliva:+r.st.saliva.toFixed(2),confuse:+r.st.confuse.toFixed(2),twitch:+r.st.twitch.toFixed(2),weak:+r.weak.toFixed(2),tremor:+r.st.tremor.toFixed(2),done:[...SIM.done],warn:simWarnings(r).map(w=>w[1].slice(0,40))}},
+  recGo:i=>{RC.i=i;recUI()},recShow:()=>$("#recShow").click(),caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),
+  sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order}),n:()=>({rec:RECS.length,cases:CASES.length,rounds:SROUNDS.length})};
+readColors();simDrugsUI();simChanged();recUI();caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>

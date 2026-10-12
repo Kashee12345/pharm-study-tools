@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Psychiatric and Sleep Drugs Lab</title>
+<meta name="description" content="Hands-on lab for psychiatric and sleep drugs: a synapse simulator with interaction warnings, a lithium level simulator, nursing case files and sorting games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2D3A8C;--accent-wash:#E4E7F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#7B5CC9;--act2:#2E8A7A;--act3:#C4644F;--act4:#D98A1C;--act5:#2F7FC1;--act6:#A04E8C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  /* psychiatric drugs palette */
+  --ecf:#EEF0F6;--cleft:#DFE5F2;--grid:#D3D9E6;
+  --neuron:#E9DCCB;--neuron-edge:#A88B6A;--post:#E4DAEE;--post-edge:#9A7FB0;
+  --drug:#5B3FC4;--drug2:#A0307A;--receptor:#1F8A8A;--transporter:#4F6F94;--blocked:#8B9094;
+  --ser:#D0457A;--ne:#D98A1C;--da:#3E8E41;--gaba:#2F7FC1;--glu:#C4382F;--cl:#5E7F1A;--mao:#A8782A;
+  --na:#2F6FD0;--li:#A04E8C;--water:#CFE5F1;--alc:#B4632A;--opioid:#8A5A9E;--tyr:#9A6A12;
+  --kidney:#C4644F;--kidney-edge:#8A3E2E;--fat:#E8B86A;--wbc:#6B3FA0;--heat:#E0563A;--cold:#2F7FC1;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--brain:#EED7DC;--brain-edge:#B98A94;--glow:#F2B33B;--scr:#0F1A1F;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5CC4B0;--act3:#E08A74;--act4:#F2A93B;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#12171F;--cleft:#1A2232;--grid:#252F40;
+  --neuron:#3E3528;--neuron-edge:#B39773;--post:#30283C;--post-edge:#B79BD0;
+  --drug:#B4A2F5;--drug2:#E58FC9;--receptor:#5CC4C4;--transporter:#8FB1D9;--blocked:#6F767B;
+  --ser:#F08AB0;--ne:#F2A93B;--da:#6BC26E;--gaba:#5AA9E6;--glu:#F27A6E;--cl:#A3C95A;--mao:#D9AE5E;
+  --na:#6FA3F0;--li:#D186C0;--water:#1F3A4A;--alc:#E39A5B;--opioid:#C29AD6;--tyr:#E0B050;
+  --kidney:#E08A74;--kidney-edge:#F0A894;--fat:#9A7A40;--wbc:#B08AE8;--heat:#F27A5E;--cold:#5AA9E6;
+  --skin:#5A4434;--skin-edge:#B9937A;--brain:#3E2C32;--brain-edge:#C99AA4;--glow:#F2B33B;--scr:#081014;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1D2347;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#A98BEF;--act2:#5CC4B0;--act3:#E08A74;--act4:#F2A93B;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#12171F;--cleft:#1A2232;--grid:#252F40;
+  --neuron:#3E3528;--neuron-edge:#B39773;--post:#30283C;--post-edge:#B79BD0;
+  --drug:#B4A2F5;--drug2:#E58FC9;--receptor:#5CC4C4;--transporter:#8FB1D9;--blocked:#6F767B;
+  --ser:#F08AB0;--ne:#F2A93B;--da:#6BC26E;--gaba:#5AA9E6;--glu:#F27A6E;--cl:#A3C95A;--mao:#D9AE5E;
+  --na:#6FA3F0;--li:#D186C0;--water:#1F3A4A;--alc:#E39A5B;--opioid:#C29AD6;--tyr:#E0B050;
+  --kidney:#E08A74;--kidney-edge:#F0A894;--fat:#9A7A40;--wbc:#B08AE8;--heat:#F27A5E;--cold:#5AA9E6;
+  --skin:#5A4434;--skin-edge:#B9937A;--brain:#3E2C32;--brain-edge:#C99AA4;--glow:#F2B33B;--scr:#081014;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:9px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;cursor:pointer;font-size:14.5px}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn:disabled{opacity:.45;cursor:default}
+.tbtn[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:10px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid,.grid2{grid-template-columns:1fr}}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%;touch-action:manipulation}
+.stagebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2)}
+.legend i.s{border-radius:2px}
+.legend i.ln{width:20px;height:0;border-radius:0;border:0;border-top:3px solid}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.rounds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.round{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 13px;cursor:pointer;font-size:14px}
+.round[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.round .ok{color:var(--gold-ink);margin-left:4px}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft)}
+.mode input{accent-color:var(--accent);width:18px;height:18px}
+.lvl-n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.lvl-t{font-family:var(--serif);font-size:22px;font-weight:600;margin:4px 0 8px;line-height:1.25}
+.goal{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:0 0 10px;font-size:15px}
+.goal b.h{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.msg{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);font-size:15px;display:none}
+.msg.show{display:block}
+.msg.good{background:var(--good-wash);color:var(--ink);border:1px solid var(--good)}
+.msg.warn{background:var(--warn-wash);color:var(--ink);border:1px solid var(--warn)}
+.msg.info{background:var(--panel-2);color:var(--ink);border:1px solid var(--rule)}
+.stars{font-size:22px;letter-spacing:2px;color:var(--gold-ink)}
+.side h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:14px 0 6px}
+.side p,.side li{font-size:14.5px}
+.side ul{padding-left:18px;margin:6px 0}
+.small{font-size:13px;color:var(--ink-soft)}
+.typebtns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.typebtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 0;cursor:pointer;font-family:var(--mono);font-weight:600;font-size:15px}
+.typebtn:hover{border-color:var(--accent)}
+.typebtn.right{border-color:var(--good);background:var(--good-wash)}
+.typebtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.typebtn:disabled{cursor:default}
+.prog{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{font-family:var(--mono);font-size:18px;font-weight:600}
+/* bags */
+.bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.bag{position:relative;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:6px 4px 4px;cursor:grab;touch-action:none;user-select:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--mono);font-weight:700;font-size:14px}
+.bag svg{width:34px;height:44px;display:block}
+.bag.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.bag.ok{border-color:var(--good);background:var(--good-wash)}
+.bag.no{border-color:var(--warn);background:var(--warn-wash)}
+.bag .mk{position:absolute;top:3px;right:5px;font-size:13px}
+.bag.ghost{position:fixed;z-index:50;pointer-events:none;opacity:.9;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.droptarget{outline:3px dashed var(--accent);outline-offset:-3px}
+.abbox{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;margin-top:10px}
+/* sim */
+.ctl{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+.ctl label{font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--accent-ink)}
+.ctl input[type=range]{accent-color:var(--accent);width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+.readouts{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+.readouts th{text-align:left;font-weight:500;color:var(--ink-soft);padding:5px 6px 5px 0;border-top:1px solid var(--rule-soft)}
+.srhead th,.srhead td,.readouts caption.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0;border:0}
+.readouts td{padding:5px 0;border-top:1px solid var(--rule-soft);font-family:var(--mono);font-size:13.5px;text-align:right;white-space:nowrap}
+.chal{list-style:none;padding:0;margin:6px 0}
+.chal li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14px}
+.chal .ck{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-size:13px;font-family:var(--mono)}
+.chal li.done .ck{background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.status{font-size:14.5px;padding:8px 10px;border-radius:var(--r);margin-top:8px;border:1px solid var(--rule);background:var(--panel-2)}
+.status.warn{background:var(--warn-wash);border-color:var(--warn)}
+.status.bad{background:var(--bad-wash);border-color:var(--bad)}
+.status.good{background:var(--good-wash);border-color:var(--good)}
+/* sequencer */
+ol.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--rule);border-left:6px solid var(--act4);border-radius:var(--r);padding:7px 8px 7px 10px;touch-action:none;user-select:none;cursor:grab;transition:background .15s,border-color .15s}
+.item.drag{box-shadow:0 10px 24px -8px rgba(0,0,0,.4);cursor:grabbing;border-color:var(--accent);z-index:2;position:relative}
+.item .pos{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:20px;text-align:right;flex:0 0 auto}
+.item .grip{color:var(--ink-faint);font-size:18px;line-height:1;flex:0 0 auto}
+.item .txt{flex:1;font-size:15px;line-height:1.35}
+.item .mv{display:flex;flex-direction:column;gap:2px}
+.mv button{width:30px;height:24px;border:1px solid var(--rule);background:var(--panel-2);border-radius:4px;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.mv button:hover{border-color:var(--accent)}
+.item.right{background:var(--good-wash);border-color:var(--good)}
+.item.off{background:var(--warn-wash);border-color:var(--warn)}
+.item.hinted{box-shadow:0 0 0 3px var(--gold)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sc-n{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sc-title{font-family:var(--serif);font-size:22px;font-weight:600;margin:2px 0 6px}
+.qlab{font-weight:600;margin:12px 0 8px}
+.opts{display:grid;grid-template-columns:1fr;gap:7px}
+.opt{text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;cursor:pointer;font-size:14.5px;line-height:1.35}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:8px 0 0;font-size:14.5px;padding:8px 10px;border-radius:4px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-wash);border-left:4px solid var(--good)}
+.fb.no{background:var(--warn-wash);border-left:4px solid var(--warn)}
+.explain{margin-top:14px;padding:12px 14px;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;display:none}
+.explain.show{display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;background:var(--panel-2);cursor:pointer;padding:0}
+.chip.cur{border-color:var(--accent);background:var(--accent);color:var(--on-accent)}
+.chip.done{border-color:var(--good);background:var(--good-wash);color:var(--good)}
+.chip.done.cur{background:var(--accent);color:var(--on-accent)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.subtabs{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+footer{max-width:1180px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel-2)}
+sub,sup{line-height:0}
+[hidden]{display:none!important}
+/* heart lab */
+.sbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.sbtn{background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;cursor:pointer;font-size:14px;text-align:left;line-height:1.25}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.done{border-color:var(--good);background:var(--good-wash)}
+.sbtn.no{border-color:var(--warn);background:var(--warn-wash)}
+.sbtn.hint{box-shadow:0 0 0 3px var(--gold)}
+.paint{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.paint button{display:inline-flex;align-items:center;gap:8px}
+.paint i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+.rhythms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0}
+.rhythms .tbtn{text-align:left;font-size:14px;line-height:1.25}
+.mopts{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0}
+.slwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 4px 0}
+.slwrap input[type=range]{flex:1 1 260px;accent-color:var(--accent)}
+.slwrap output{font-family:var(--mono);font-weight:600;min-width:72px}
+.qcard{margin-top:12px;border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--panel-2)}
+.qcard h3{margin-top:0}
+.scen{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.big{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1.1}
+select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:var(--r);padding:4px 6px}
+/* genetics case lab */
+.gtgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.gtgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gbtn{font-family:var(--mono);font-weight:600;font-size:15px;padding:8px 4px;text-align:center}
+.gbtn sup{font-size:10.5px;line-height:0}
+.modes{display:grid;grid-template-columns:1fr;gap:6px}
+.modes .tbtn{text-align:left;line-height:1.3}
+.modes .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.modes .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.kidbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0}
+.kidbtns .btn{padding:10px 6px;font-size:14.5px}
+.readouts td.l{font-family:var(--sans);text-align:left;white-space:normal}
+.readouts thead th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.case{grid-template-columns:1fr}}
+.casechips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.casechip{border:1.5px solid var(--rule);background:var(--panel-2);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:14px}
+.casechip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash);color:var(--accent-ink);font-weight:600}
+.casechip .ok{color:var(--good);margin-left:4px;font-weight:700}
+.story{font-size:15.5px;margin:0 0 8px}
+.qblock{border-top:1px solid var(--rule-soft);padding-top:8px;margin-top:10px}
+.hintbox{margin:8px 0 0;padding:8px 10px;border-radius:4px;background:var(--gold-wash);border-left:4px solid var(--gold);font-size:14.5px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.meter b{color:var(--ink);font-family:var(--mono)}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--rule);border-radius:var(--r);background:var(--panel-2);margin:8px 0 12px}
+.scard{background:var(--panel);border:1.5px solid var(--rule);border-left:5px solid var(--accent);border-radius:var(--r);padding:8px 10px;cursor:grab;font-size:14.5px;line-height:1.3;text-align:left;touch-action:none;user-select:none;max-width:100%}
+.scard:hover{border-color:var(--accent)}
+.scard[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+.scard.ghost{position:fixed;z-index:60;pointer-events:none;opacity:.92;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+.scard.placed{cursor:default;border-left-color:var(--good);background:var(--good-wash);font-size:13.5px;padding:6px 8px}
+.scard.hinted{box-shadow:0 0 0 3px var(--gold)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.bin{border:1.5px solid var(--rule);border-radius:var(--r);background:var(--panel);padding:8px;display:flex;flex-direction:column;gap:6px;min-height:150px}
+.bin.over{outline:3px dashed var(--accent);outline-offset:-3px}
+.bin.hintbin{box-shadow:0 0 0 3px var(--gold)}
+.binhead{display:flex;align-items:center;gap:8px;width:100%;background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:6px;cursor:pointer;font-weight:600;font-size:14.5px;text-align:left;line-height:1.25}
+.binhead:hover{border-color:var(--accent)}
+.binhead svg{width:56px;height:46px;flex:0 0 auto}
+.binitems{display:flex;flex-direction:column;gap:5px}
+.sortbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 8px}
+.sorthead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2.sec{font-family:var(--serif);font-size:21px;margin:2px 0 6px;font-weight:600}
+.sim-note{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0}
+.readouts td{padding-left:10px}
+.diskgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.diskgrid .tbtn{text-align:left;font-size:13.5px;line-height:1.25;padding:7px 8px}
+.diskgrid .tbtn b{font-family:var(--mono);display:inline-block;min-width:34px}
+.readouts.chart td{text-align:center;padding-left:4px}
+.readouts.chart th,.readouts.chart td{font-size:13px}
+.readouts thead th{color:var(--ink-soft)}
+.scen .tbtn{font-family:var(--mono);font-size:13.5px}
+.seg3 .tbtn.right,.scen .tbtn.right{border-color:var(--good);background:var(--good-wash)}
+.seg3 .tbtn.wrong,.scen .tbtn.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.ok-ic{color:var(--good);font-weight:700}
+.no-ic{color:var(--warn-ink);font-weight:700}
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.methods .tbtn{text-align:left;line-height:1.25;font-size:14px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 .tbtn,.seg4 .tbtn{font-size:13.5px;line-height:1.2;padding:8px 6px}
+.seg4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.verdict{font-weight:700}
+
+.drugbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.drugbtns .tbtn{text-align:left;line-height:1.25;font-size:14px;padding:7px 9px}
+.drugbtns .tbtn small{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.drugbtns .tbtn[aria-pressed="true"] small{color:var(--accent-ink)}
+.drugbtns .tbtn[aria-pressed="true"]::before{content:"✓ ";font-weight:700}
+.lights{display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px}
+.light{display:flex;gap:8px;align-items:flex-start;border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;font-size:14px;background:var(--panel-2)}
+.light b{display:block}
+.light .dot{flex:0 0 14px;height:14px;border-radius:50%;margin-top:3px;background:var(--sunk);border:1px solid var(--rule)}
+.light.amber{border-color:var(--warn);background:var(--warn-wash)}
+.light.amber .dot{background:var(--warn);border-color:var(--warn)}
+.light.red{border-color:var(--bad);background:var(--bad-wash)}
+.light.red .dot{background:var(--bad);border-color:var(--bad)}
+.binhead{flex-direction:column;align-items:flex-start;gap:4px}
+.binhead span{overflow-wrap:anywhere;min-width:0}
+.light .lv{font-family:var(--mono);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 4 &middot; Psychiatric and sleep drugs</div>
+    <h1>Psychiatric and Sleep Drugs Lab</h1>
+    <p class="sub">Put drugs into a working synapse, keep a lithium level in its window, work through nursing case files, and sort drugs, side effects and checks. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" aria-label="Lab parts">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="tab-syn" data-tab="syn" id="tabbtn-syn" type="button">Part 1 &middot; Synapse Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-li" data-tab="li" id="tabbtn-li" type="button" tabindex="-1">Part 2 &middot; Lithium Level Simulator</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-cases" data-tab="cases" id="tabbtn-cases" type="button" tabindex="-1">Part 3 &middot; Case Files</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="tab-sort" data-tab="sort" id="tabbtn-sort" type="button" tabindex="-1">Part 4 &middot; Sort It Out</button>
+  </div>
+
+  <!-- PART 1: synapse simulator -->
+  <section id="tab-syn" role="tabpanel" aria-labelledby="tabbtn-syn">
+    <h2 class="gk-sr">Part 1: Synapse Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvSyn" role="img" aria-label="Synapse simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="synCap"></span></div>
+        <div class="legend" id="synLegend"></div>
+        <p class="sim-note">A teaching model. Levels are relative (100 = normal), not real measurements. Drugs are shown by class with one example; no doses.</p>
+      </div>
+      <aside class="card side" aria-label="Simulator controls">
+        <h3 id="ntLab">1. Messenger to watch</h3>
+        <div class="seg4" id="synNT" role="group" aria-labelledby="ntLab"></div>
+        <h3 id="drugLab">2. Drugs on board (tap to add or remove)</h3>
+        <div class="drugbtns" id="synDrugs" role="group" aria-labelledby="drugLab"></div>
+        <h3 id="xLab">3. Also on board</h3>
+        <div class="drugbtns" id="synExtra" role="group" aria-labelledby="xLab"></div>
+        <div class="bar"><button class="tbtn" type="button" id="synClear">Remove all drugs</button></div>
+        <table class="readouts" id="synRead"><caption class="sr">Simulator readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <h3>Warning lights</h3>
+        <div class="lights" id="synLights" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="synChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 2: lithium -->
+  <section id="tab-li" role="tabpanel" aria-labelledby="tabbtn-li" hidden>
+    <h2 class="gk-sr">Part 2: Lithium Level Simulator</h2>
+    <div class="grid">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvLi" role="img" aria-label="Lithium level simulator."></canvas></div>
+        <div class="stagebar"><span class="caption" id="liCap"></span></div>
+        <div class="legend">
+          <span><i class="ln" style="border-top-color:var(--li)"></i>Lithium level</span>
+          <span><i class="s" style="background:var(--good-wash);border-color:var(--good)"></i>Usual target 0.6 to 1.2</span>
+          <span><i class="s" style="background:var(--bad-wash);border-color:var(--bad)"></i>Toxic above 1.5</span>
+          <span><i style="background:var(--na)"></i>Na<sup>+</sup></span>
+          <span><i style="background:var(--li)"></i>Li<sup>+</sup></span>
+        </div>
+        <p class="sim-note">A teaching model of one adult on lithium. The clock runs one day about every two seconds. The dose is a made-up teaching scale, not a real dose. Level ranges are common textbook values; each lab and prescriber sets the actual target.</p>
+      </div>
+      <aside class="card side" aria-label="Lithium controls">
+        <div class="ctl"><label for="liDose">Dose (teaching units) <output id="liDoseOut" for="liDose"></output></label>
+          <input type="range" id="liDose" min="1" max="5" step="1" value="3"><div class="ticks" aria-hidden="true"><span>low</span><span>usual</span><span>high</span></div></div>
+        <h3 id="naLab">Sodium (salt) intake</h3>
+        <div class="seg3" id="liNa" role="group" aria-labelledby="naLab"></div>
+        <h3 id="h2oLab">Fluids and hydration</h3>
+        <div class="seg3" id="liH2O" role="group" aria-labelledby="h2oLab"></div>
+        <h3 id="liDrugLab">Other medicines</h3>
+        <div class="drugbtns" id="liDrugs" role="group" aria-labelledby="liDrugLab"></div>
+        <div class="bar">
+          <button class="tbtn" type="button" id="liPause">Pause clock</button>
+          <button class="tbtn" type="button" id="liHold">Hold lithium</button>
+          <button class="tbtn" type="button" id="liReset">Reset</button>
+        </div>
+        <table class="readouts" id="liRead"><caption class="sr">Lithium readouts</caption><thead class="srhead"><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody></tbody></table>
+        <div class="status" id="liStatus" role="status"></div>
+        <h3>Challenges</h3>
+        <ul class="chal" id="liChal"></ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PART 3: cases -->
+  <section id="tab-cases" role="tabpanel" aria-labelledby="tabbtn-cases" hidden>
+    <h2 class="gk-sr">Part 3: Case Files</h2>
+    <div class="casechips" id="caseChips" role="group" aria-label="Choose a case"></div>
+    <div class="meter"><span>Case <b id="cN">1</b> of <b id="cT">7</b></span><span>Questions solved <b id="cSolved">0</b></span><span>First try <b id="cFirst">0</b></span></div>
+    <div class="case">
+      <div class="card stage">
+        <div class="canvas-holder"><canvas id="cvCase" role="img" aria-label="Case chart."></canvas></div>
+        <div class="legend" id="caseLegend"></div>
+      </div>
+      <div class="card">
+        <div class="sc-n" id="cWho"></div>
+        <h2 class="sc-title" id="cTitle"></h2>
+        <p class="story" id="cStory"></p>
+        <div id="cQs"></div>
+        <div class="bar" style="margin-top:12px">
+          <button class="tbtn" id="cHint" type="button">Hint</button>
+          <button class="tbtn" id="cShow" type="button">Show answer</button>
+          <button class="tbtn" id="cPrev" type="button">&larr; Previous</button>
+          <button class="btn" id="cNext" type="button">Next case &rarr;</button>
+        </div>
+        <div class="hintbox" id="cHintBox" role="status" hidden></div>
+        <div class="explain" id="cExp"></div>
+        <p class="calm">Wrong answers are fine here. Each one tells you why.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART 4: sorting -->
+  <section id="tab-sort" role="tabpanel" aria-labelledby="tabbtn-sort" hidden>
+    <h2 class="gk-sr">Part 4: Sort It Out</h2>
+    <div class="rounds" id="sRounds" role="group" aria-label="Rounds"></div>
+    <div class="card">
+      <div class="sorthead">
+        <div><div class="lvl-n" id="sN"></div><h2 class="sec" id="sTitle"></h2></div>
+        <div class="sortbar">
+          <label class="mode"><input type="checkbox" id="sRelaxed" checked> Relaxed mode (no timer)</label>
+          <span class="timer" id="sTimer" hidden>0:00</span>
+          <span class="stars" id="sStars" role="img" aria-label="Stars appear when the round is done"></span>
+        </div>
+      </div>
+      <p class="goal"><b class="h">Your job</b><span id="sGoal"></span></p>
+      <p class="small">Drag a card onto a box, or tap a card and then tap the box's name. Cards are buttons, so Tab and Enter work too.</p>
+      <div class="pool" id="sPool" aria-label="Cards to sort"></div>
+      <div class="bins" id="sBins"></div>
+      <div class="bar">
+        <button class="tbtn" id="sHint" type="button">Hint</button>
+        <button class="tbtn" id="sShow" type="button">Show answer</button>
+        <button class="tbtn" id="sShuffle" type="button">Start round over</button>
+        <button class="btn" id="sNext" type="button">Next round &rarr;</button>
+      </div>
+      <div class="msg" id="sMsg" role="status"></div>
+      <p class="small" id="sBest"></p>
+    </div>
+  </section>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Pair with the <a href="Psych-Walkthrough.html">Psychiatric and Sleep Drugs Walkthrough</a>. Patients are fictional. Synapse levels are relative teaching values, the lithium dose scale is made up, and drugs are named by generic name and class only. Always follow the prescriber, the label and your facility's protocols.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "cleft", "grid", "neuron", "neuron-edge", "post", "post-edge", "drug", "drug2", "receptor", "transporter", "blocked", "ser", "ne", "da", "gaba", "glu", "cl", "mao", "na", "li", "water", "alc", "opioid", "tyr", "kidney", "kidney-edge", "fat", "wbc", "heat", "cold", "skin", "skin-edge", "brain", "brain-edge", "glow", "scr"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+
+/* ================= pharmacology drawing helpers ================= */
+function ngon(x,y,r,n,rot){ctx.beginPath();for(let k=0;k<=n;k++){const a=k/n*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.4;ctx.stroke()}}
+function starPath(x,y,r,n){n=n||5;ctx.beginPath();for(let k=0;k<=2*n;k++){const a=-Math.PI/2+k*Math.PI/n;const rad=k%2?r*.45:r;const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+const NTN={ser:"Serotonin",ne:"Norepinephrine",da:"Dopamine",gaba:"GABA",glu:"Glutamate",tyr:"Tyramine"};
+/* neurotransmitter tokens: each messenger has its own shape so colour is never the only signal */
+function nt(kind,x,y,s,o){o=o||{};s=s||5;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);const col=o.dead?C.blocked:(C[kind]||C.ser);const ed=hexA(C.ink,.5);
+  if(kind==="ser"){circ(x,y,s,col,ed,1)}
+  else if(kind==="ne"){ngon(x,y+s*.15,s*1.3,3,-Math.PI/2);fillStroke(col,ed,1)}
+  else if(kind==="da"){ngon(x,y,s*1.3,4,0);fillStroke(col,ed,1)}
+  else if(kind==="gaba"){ngon(x,y,s*1.15,6,0);fillStroke(col,ed,1)}
+  else if(kind==="glu"){rr(x-s,y-s,2*s,2*s,1.5);fillStroke(col,ed,1)}
+  else if(kind==="tyr"){starPath(x,y,s*1.4);fillStroke(col,ed,1)}
+  else circ(x,y,s,col,ed,1);
+  ctx.restore()}
+/* drug token: a pentagon with a pale core. o.col colour, o.lab short label */
+function drugTok(x,y,s,o){o=o||{};s=s||7;ctx.save();ctx.globalAlpha*=o.a==null?1:clamp(o.a,0,1);ctx.translate(x,y);ctx.rotate(o.rot||0);
+  const col=o.col||C.drug;ngon(0,0,s*1.25,5,-Math.PI/2);fillStroke(col,hexA(C.ink,.55),1.3);circ(0,0,s*.38,hexA(C.panel,.85));ctx.restore();
+  if(o.lab)txt(x,y-s*2.1,o.lab,{size:11.5,weight:700,mono:true,align:"center",color:o.labCol||C.ink})}
+function blockedX(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,2.6);line(x-s,y+s,x+s,y-s,col||C.bad,2.6)}
+function crossMark(x,y,s,col){line(x-s,y-s,x+s,y+s,col||C.bad,3);line(x-s,y+s,x+s,y-s,col||C.bad,3)}
+function checkMark(x,y,s,col){poly([[x-s,y],[x-s*.3,y+s*.7],[x+s,y-s*.7]],col||C.good,3)}
+function capsulePill(x,y,s,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.fillStyle=C.panel;ctx.fill();ctx.save();rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.clip();ctx.fillStyle=col;ctx.fillRect(-s,-s,s,2*s);ctx.restore();ctx.strokeStyle=hexA(C.ink,.5);ctx.lineWidth=1.2;rr(-s,-s*.42,s*2,s*.84,s*.42);ctx.stroke();ctx.restore()}
+/* receptor cup on a membrane; opening points away from the cell (up unless o.down) */
+function receptor(x,y,s,o){o=o||{};const col=o.col||C.receptor;ctx.save();ctx.translate(x,y);if(o.down)ctx.scale(1,-1);
+  rr(-s*.32,-s*.1,s*.64,s*1.1,2);ctx.fillStyle=mix(col,C.ink,.15);ctx.fill();
+  ctx.beginPath();ctx.moveTo(-s,-s*1.35);ctx.lineTo(-s,-s*.15);ctx.quadraticCurveTo(-s,s*.3,-s*.45,s*.3);ctx.lineTo(s*.45,s*.3);ctx.quadraticCurveTo(s,s*.3,s,-s*.15);ctx.lineTo(s,-s*1.35);
+  ctx.lineTo(s*.52,-s*1.35);ctx.lineTo(s*.52,-s*.25);ctx.lineTo(-s*.52,-s*.25);ctx.lineTo(-s*.52,-s*1.35);ctx.closePath();fillStroke(o.dim?mix(col,C.blocked,.6):col,hexA(C.ink,.45),1.2);
+  if(o.glow){ctx.globalAlpha*=clamp(o.glow,0,1);circ(0,-s*.7,s*1.5,null,C.glow,2.5)}
+  ctx.restore()}
+function recSlot(x,y,s,down){return [x,down?y+s*.75:y-s*.75]}
+/* reuptake transporter in the presynaptic membrane (membrane at y). o.blocked draws the drug plug. o.rev reverses arrows */
+function transporter(x,y,s,o,T){o=o||{};const col=o.col||C.transporter;
+  [-1,1].forEach(d=>{rr(x+d*s*.62-s*.32,y-s*1.25,s*.64,s*1.9,s*.3);fillStroke(o.blocked?mix(col,C.blocked,.35):col,hexA(C.ink,.45),1.2)});
+  if(o.blocked){drugTok(x,y-s*.05,s*.62,{col:o.drugCol});}
+  else if(T!=null){for(let k=0;k<2;k++){const f=P(T*.9+k*.5,1);const yy=o.rev?lerp(y-s*1.1,y+s*.9,f):lerp(y+s*.9,y-s*1.1,f);ctx.save();ctx.globalAlpha*=Math.sin(f*Math.PI)*.8;
+    const d=o.rev?1:-1;poly([[x-s*.22,yy-d*s*.18],[x,yy+d*s*.05],[x+s*.22,yy-d*s*.18]],C["ink-soft"],1.6);ctx.restore()}}
+  if(o.lab)txt(x,y+s*1.35,o.lab,{size:11.5,mono:true,weight:700,align:"center",color:C["ink-soft"]})}
+/* MAO enzyme: a chomping mouth inside the terminal. o.blocked: drug jammed in the mouth */
+function maoEnz(x,y,s,T,o){o=o||{};const blocked=o.blocked;const open=blocked?.42:.12+.32*Math.abs(Math.sin((T||0)*4));
+  ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,s,open,TAU-open);ctx.closePath();fillStroke(blocked?mix(C.mao,C.blocked,.55):C.mao,hexA(C.ink,.5),1.3);
+  circ(x-s*.15,y-s*.5,s*.12,hexA(C.ink,.7));
+  if(blocked)drugTok(x+s*.62,y,s*.42,{col:o.drugCol});
+  if(o.lab!==false)txt(x-s*.1,y+s*1.45,"MAO",{size:11.5,mono:true,weight:700,align:"center",color:C["ink-soft"]})}
+function vesicle(x,y,r,kind,n,o){o=o||{};circ(x,y,r,hexA(C.panel,.75),C["neuron-edge"],1.4);for(let k=0;k<n;k++){const a=k/n*TAU+(o.rot||0),d=n>1?r*.48:0;nt(kind,x+Math.cos(a)*d,y+Math.sin(a)*d,Math.max(2.2,r*.22))}}
+/* presynaptic terminal: axon from the top widening into a bulb whose flat membrane sits at mY */
+function terminal(cx,top,w,mY,o){o=o||{};const hw=w/2,hh=mY-top;ctx.beginPath();ctx.moveTo(cx-w*.09,top);
+  ctx.bezierCurveTo(cx-w*.1,top+hh*.4,cx-hw,top+hh*.25,cx-hw,mY-20);ctx.quadraticCurveTo(cx-hw,mY,cx-hw+20,mY);ctx.lineTo(cx+hw-20,mY);ctx.quadraticCurveTo(cx+hw,mY,cx+hw,mY-20);
+  ctx.bezierCurveTo(cx+hw,top+hh*.25,cx+w*.1,top+hh*.4,cx+w*.09,top);ctx.closePath();fillStroke(o.fill||C.neuron,C["neuron-edge"],2.4)}
+function postCell(cx,pY,w,bot,o){o=o||{};rr(cx-w/2,pY,w,bot-pY+30,18);fillStroke(o.fill||C.post,C["post-edge"],2.4)}
+/* ----- a living synapse. Returns how many messenger molecules are free in the cleft right now. -----
+ o: nt or nts[], n, release, L, reup (number or {kind:0..1}), mao (0..1 working), trans:[{dx,kind,lab,blocked}], nrec, recBlock (0..1),
+    partial (receptor partially activated by drug), auto (draw presynaptic autoreceptor), autoBlock, reverse, drugFloat, labels, drugCol */
+function synapse(cx,top,w,h,T,o){o=o||{};const mY=top+h*.44,pY=top+h*.66,bot=top+h;const hw=w/2;const s=11;
+  rr(cx-hw-6,mY,w+12,pY-mY,4);ctx.fillStyle=C.cleft;ctx.fill();
+  terminal(cx,top,w*.94,mY,o);postCell(cx,pY,w,bot);
+  const nts=o.nts||[o.nt||"ser"];
+  const trans=o.trans||[{dx:-.36,kind:nts[0],lab:o.tlab||null,blocked:!!o.transBlocked}];
+  const tpos=trans.map(t=>[cx+t.dx*w,mY]);
+  const mx=cx-w*.18,my=mY-h*.2;const maoOn=o.mao==null?1:o.mao;const showMao=o.showMao!==false;
+  const nrec=o.nrec||4;const rx=k=>cx-w*.12+k*(w*.5/Math.max(1,nrec-1));
+  const nBlockRec=Math.round(nrec*(o.recBlock||0));
+  // vesicles
+  const vfull=o.vfull||3;[[cx+w*.08,mY-h*.14],[cx+w*.22,mY-h*.22],[cx-w*.02,mY-h*.27],[cx+w*.3,mY-h*.09]].forEach((v,i)=>vesicle(v[0],v[1],11,nts[i%nts.length],vfull,{rot:i}));
+  if(showMao)maoEnz(mx,my,13,T,{blocked:maoOn<.5,drugCol:o.maoDrugCol||o.drugCol});
+  if(o.auto){const ax=cx+w*.4;receptor(ax,mY,s*.85,{down:true,col:C.receptor,dim:o.autoBlock});if(o.autoBlock)drugTok(ax,mY+s*.7,s*.5,{col:o.drugCol});}
+  // receptors
+  let bound=0;
+  for(let k=0;k<nrec;k++){const X=rx(k);receptor(X,pY,s,{dim:k<nBlockRec&&!o.partial,col:o.recCols?C[o.recCols[k%o.recCols.length]]:null});if(k<nBlockRec){const q=recSlot(X,pY,s);drugTok(q[0],q[1],s*.55,{col:o.recDrugCol||o.drugCol})}if(o.recLabs)txt(X,pY+s*1.75,o.recLabs[k%o.recLabs.length],{size:11,mono:true,weight:700,align:"center",color:C["ink-soft"]})}
+  trans.forEach((t,i)=>transporter(tpos[i][0],tpos[i][1],s,{blocked:t.blocked,lab:t.lab,rev:o.reverse,drugCol:o.drugCol},T));
+  const rp=k=>{const r=o.reup;if(r==null)return 1;if(typeof r==="number")return r;return r[k]==null?1:r[k]};
+  const N=Math.round((o.n||14)*(o.release||1));const L=o.L||4;let free=0;const recBusy={};
+  for(let i=0;i<N;i++){const kind=nts[i%nts.length];const ti=Math.max(0,trans.findIndex(t=>t.kind===kind));const tp=tpos[ti];
+    const ph=P(T/L+rnd(i*7+1),1);
+    const v0=[cx+w*.1+(rnd(i+1)-.5)*w*.3,mY-h*.08-rnd(i+2)*h*.14];
+    const r0=[cx+w*.1+(rnd(i+3)-.5)*w*.25,mY+5];
+    const c0=[cx+(rnd(i+4)-.5)*w*.85,lerp(mY+9,pY-12,rnd(i+5))];
+    const wob=(t)=>[Math.sin(T*1.6+i*1.7)*6,Math.cos(T*1.3+i*2.3)*3.5];
+    const rev=o.reverse&&i%2===0;const reupOK=!rev&&rnd(i+9)<rp(kind);
+    const goRec=rnd(i+8)<(o.bindFrac||.45);const k=i%nrec;const blockedRec=k<nBlockRec&&!o.partial;
+    let x,y,a=1,inCleft=false;
+    if(ph<.1){const f=smooth(ph/.1);if(rev){x=tp[0];y=lerp(mY-h*.12,mY+6,f)}else{x=lerp(v0[0],r0[0],f);y=lerp(v0[1],r0[1],f)}a=seg(ph,0,.03);}
+    else if(ph<.28){const f=smooth((ph-.1)/.18);const st=rev?[tp[0],mY+6]:r0;x=lerp(st[0],c0[0],f);y=lerp(st[1],c0[1],f);inCleft=true}
+    else if(ph<.55){inCleft=true;const W_=wob();if(goRec){const q=recSlot(rx(k),pY,s);const f=seg(ph,.28,.4),back=seg(ph,.47,.55);
+        if(blockedRec){const b=Math.sin(seg(ph,.28,.46)*Math.PI);x=lerp(c0[0],q[0],b*.85);y=lerp(c0[1],q[1]-s*1.2,b*.9)}
+        else{x=lerp(lerp(c0[0],q[0],smooth(f)),c0[0],smooth(back));y=lerp(lerp(c0[1],q[1],smooth(f)),c0[1],smooth(back));if(f>=1&&back<=0){bound++;recBusy[k]=1}}}
+      else{x=c0[0]+W_[0];y=c0[1]+W_[1]}}
+    else{const W_=wob();
+      if(reupOK){if(ph<.8){inCleft=true;const f=smooth((ph-.55)/.25);x=lerp(c0[0],tp[0],f);y=lerp(c0[1],tp[1]+8,f)}
+        else{const f=smooth((ph-.8)/.2);x=tp[0];y=lerp(tp[1]+8,tp[1]-h*.1,f);const toMao=maoOn>=.5&&rnd(i+10)<.55;
+          if(toMao&&f>.5){const g=(f-.5)/.5;x=lerp(tp[0],mx+8,g);y=lerp(tp[1]-h*.1,my,g);a=1-g}else if(f>.6)a=1-(f-.6)/.4}}
+      else{inCleft=true;x=c0[0]+W_[0]+Math.sin(ph*9+i)*8;y=clamp(c0[1]+W_[1],mY+8,pY-10);a=ph>.94?1-(ph-.94)/.06:1}}
+    if(inCleft&&y>mY&&y<pY+2)free++;
+    nt(kind,x,y,4.6,{a})}
+  // drug molecules drifting in the cleft
+  for(let d=0;d<(o.drugFloat||0);d++){const X=cx+(rnd(d+60)-.5)*w*.8+Math.sin(T*.9+d)*14,Y=lerp(mY+12,pY-14,rnd(d+61))+Math.cos(T*1.1+d)*5;drugTok(X,Y,5,{col:o.drugCol,rot:T+d})}
+  // signal in the next cell
+  const sig=o.signal!=null?o.signal:bound;const sp=P(T*1.2,1);
+  if(sig>0){ctx.save();ctx.globalAlpha*=clamp(sig/3,0,1)*(1-sp);arrow(cx+w*.13,pY+22+sp*30,cx+w*.13,pY+40+sp*34,C.glow,3);ctx.restore()}
+  if(o.labels){txt(cx-hw+4,top+12,o.preLab||"Presynaptic neuron",{size:12,weight:700,color:C["ink-soft"]});txt(cx-hw+4,bot-8,o.postLab||"Postsynaptic neuron",{size:12,weight:700,color:C["ink-soft"]});
+    txt(cx+hw-4,(mY+pY)/2,"cleft",{size:11.5,mono:true,weight:600,align:"right",color:C["ink-soft"]})}
+  return {free,bound,mY,pY,tpos,mx,my,rx}}
+/* GABA-A chloride channel in a membrane at y (outside above). o.freq opening rate multiplier, o.benzo, o.gaba, o.flum, o.barb */
+function gabaChannel(x,y,s,T,o){o=o||{};const freq=o.freq||1;const ph=P(T*.6*freq,1);const openAmt=o.gaba?smooth(seg(ph,0,.08))*(1-smooth(seg(ph,o.long?.6:.35,o.long?.68:.43))):0;
+  const gap=s*.12+openAmt*s*.32;
+  [-1,1].forEach(d=>{rr(x+d*(gap+s*.42)-s*.42,y-s*1.05,s*.84,s*2.1,s*.25);fillStroke(C.receptor,hexA(C.ink,.45),1.3)});
+  if(o.gaba){nt("gaba",x-gap-s*.84,y-s*1.25,5)}
+  if(o.benzo)drugTok(x+gap+s*.95,y-s*.55,6,{col:o.flum?C.blocked:o.drugCol});
+  if(o.flum){drugTok(x+gap+s*.95,y-s*.55,6,{col:C.drug2})}
+  // chloride ions flowing in while open
+  const n=6;for(let i=0;i<n;i++){const f=P(T*1.4+i/n,1);if(openAmt>.4){const yy=lerp(y-s*1.6,y+s*1.6,f);ctx.save();ctx.globalAlpha*=Math.sin(f*Math.PI);ionDot(x+Math.sin(i*2+f*6)*gap*.4,yy,"cl");ctx.restore()}}
+  return openAmt}
+function ionDot(x,y,kind,r){r=r||5.5;const col=kind==="cl"?C.cl:kind==="na"?C.na:kind==="li"?C.li:C.ink;circ(x,y,r,col,hexA(C.ink,.45),1);
+  const sym=kind==="cl"?"−":"+";txt(x,y+.5,sym,{size:10,weight:700,align:"center",color:onFill()})}
+/* membrane voltage trace */
+function vmTrace(x,y,w,h,fn,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.panel,.95)});
+  const v0=o.v0==null?-90:o.v0,v1=o.v1==null?-40:o.v1;const Y=v=>y+h-10-(v-v0)/(v1-v0)*(h-30);
+  line(x+38,Y(-70),x+w-8,Y(-70),hexA(C["ink-soft"],.7),1,[4,3]);txt(x+34,Y(-70),"−70",{size:11,mono:true,align:"right",color:C["ink-soft"]});
+  if(o.thr){line(x+38,Y(-55),x+w-8,Y(-55),hexA(C.bad,.7),1,[2,3]);txt(x+34,Y(-55),"−55",{size:11,mono:true,align:"right",color:C["ink-soft"]})}
+  ctx.beginPath();const N=w-50;for(let i=0;i<=N;i++){const v=fn(i/N);const X=x+40+i,YY=Y(clamp(v,v0,v1));i?ctx.lineTo(X,YY):ctx.moveTo(X,YY)}ctx.strokeStyle=o.col||C.accent;ctx.lineWidth=2.2;ctx.stroke();
+  if(o.title)txt(x+10,y+12,o.title,{size:11.5,mono:true,weight:700,color:C["ink-soft"]})}
+/* a simple person. o.face happy|sad|flat|sleep|distress|calm, o.shirt colour, o.tremor, o.t */
+function person(x,y,s,o){o=o||{};const t=o.t||0;const tr=o.tremor?Math.sin(t*(o.coarse?14:40))*o.tremor:0;ctx.save();ctx.translate(x+tr,y);
+  rr(-s*.55,s*.1,s*1.1,s*1.25,s*.4);fillStroke(o.shirt||C.act5,hexA(C.ink,.4),1.2);
+  circ(0,-s*.35,s*.42,o.flush?mix(C.skin,C.heat,.45):C.skin,C["skin-edge"],1.4);
+  const f=o.face||"flat";const ey=-s*.42;
+  if(f==="sleep"){poly([[-s*.2,ey],[-s*.08,ey]],C.ink,1.6);poly([[s*.08,ey],[s*.2,ey]],C.ink,1.6)}
+  else{circ(-s*.14,ey,s*.045,C.ink);circ(s*.14,ey,s*.045,C.ink)}
+  const my=-s*.2;ctx.beginPath();if(f==="happy"||f==="calm"){ctx.arc(0,my-s*.08,s*.14,.2*Math.PI,.8*Math.PI)}else if(f==="sad"||f==="distress"){ctx.arc(0,my+s*.08,s*.14,1.2*Math.PI,1.8*Math.PI)}else{ctx.moveTo(-s*.12,my);ctx.lineTo(s*.12,my)}
+  ctx.strokeStyle=C.ink;ctx.lineWidth=1.6;ctx.stroke();
+  if(f==="distress"){for(let k=0;k<3;k++){const yy=-s*.9-k*4;circ(s*.5+k*3,yy+Math.sin(t*5+k)*2,1.8,C.cold)}}
+  if(f==="sleep"){txt(s*.45,-s*.85-Math.sin(t*2)*3,"z",{size:13,weight:700,color:C.accent});txt(s*.62,-s*1.05-Math.sin(t*2+1)*3,"z",{size:11,weight:700,color:C.accent})}
+  ctx.restore()}
+/* sagittal brain outline; returns key points used for dopamine pathways */
+function brainSide(x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  ctx.beginPath();ctx.moveTo(-120,20);ctx.bezierCurveTo(-140,-40,-90,-100,-10,-104);ctx.bezierCurveTo(70,-108,128,-70,132,-10);ctx.bezierCurveTo(134,22,118,40,96,44);
+  ctx.bezierCurveTo(80,46,70,40,58,42);ctx.lineTo(40,48);ctx.bezierCurveTo(10,52,-30,58,-60,56);ctx.bezierCurveTo(-95,54,-115,44,-120,20);ctx.closePath();ctx.restore();
+  fillStroke(C.brain,C["brain-edge"],2.2);
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.ellipse(86,60,40,24,-.15,0,TAU);ctx.restore();fillStroke(mix(C.brain,C["brain-edge"],.2),C["brain-edge"],2);
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(26,40);ctx.bezierCurveTo(30,70,34,100,30,130);ctx.lineTo(56,130);ctx.bezierCurveTo(54,100,52,70,52,40);ctx.closePath();ctx.restore();fillStroke(mix(C.brain,C["brain-edge"],.25),C["brain-edge"],2);
+  // gyri hints
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=hexA(C["brain-edge"],.55);ctx.lineWidth=1.6/s;[[-90,-40,-60,-70],[-40,-80,0,-60],[30,-88,60,-60],[80,-60,110,-30],[-70,10,-30,-10],[10,-30,50,-10]].forEach(q=>{ctx.beginPath();ctx.moveTo(q[0],q[1]);ctx.quadraticCurveTo((q[0]+q[2])/2+10,(q[1]+q[3])/2-12,q[2],q[3]);ctx.stroke()});ctx.restore();
+  const pt=(a,b)=>[x+a*s,y+b*s];
+  return {vta:pt(30,30),sn:pt(44,22),nac:pt(-50,10),pfc:pt(-105,-30),str:pt(-10,-12),hyp:pt(-18,36),pit:pt(-22,58)}}
+/* bedside monitor (screen colours are fixed dark in both themes) */
+function ecgWave(t){const p=P(t,1);return Math.exp(-Math.pow((p-.12)/.025,2))*.15+(p>.28&&p<.31?-(p-.28)/.03*.12:0)+Math.exp(-Math.pow((p-.33)/.012,2))*1-Math.exp(-Math.pow((p-.36)/.012,2))*.25+Math.exp(-Math.pow((p-.6)/.05,2))*.3}
+function monitor(x,y,w,h,o,T){rr(x,y,w,h,10);ctx.fillStyle=C.scr;ctx.fill();ctx.strokeStyle=C.rule;ctx.lineWidth=1.5;ctx.stroke();
+  const ex=x+12,ew=w*.56,ey=y+16,eh=h*.32;ctx.save();rr(ex,ey,ew,eh,4);ctx.clip();ctx.beginPath();const hr=o.hr||75;
+  for(let i=0;i<=ew;i++){const tt=(T||0)*hr/60-(ew-i)/ew*2.5;const v=ecgWave(tt)+(o.wide?Math.exp(-Math.pow((P(tt,1)-.39)/.03,2))*.35:0);i?ctx.lineTo(ex+i,ey+eh*.7-v*eh*.55):ctx.moveTo(ex+i,ey+eh*.7-v*eh*.55)}ctx.strokeStyle="#4FD08A";ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const vx=x+w*.62;const item=(lx,ly,lab,val,col,unit)=>{txt(lx,ly,lab,{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(lx,ly+22,val,{size:22,mono:true,weight:700,color:col});if(unit)txt(lx,ly+42,unit,{size:11,mono:true,color:"#A3B2BA"})};
+  item(vx,y+16,"HR",String(Math.round(hr)),"#4FD08A","beats/min");
+  if(o.sbp)item(vx,y+16+h*.31,"BP",Math.round(o.sbp)+"/"+Math.round(o.dbp),"#F2A3C9","mm Hg");
+  const by=y+h*.5;[["SpO₂",o.spo2!=null?o.spo2+"%":"--","#6FC3F0"],["RR",o.rr!=null?String(o.rr):"--","#E8EEF1"],["Temp",o.temp||"--","#F2B33B"]].forEach((it,i)=>{const lx=x+12+i*(w*.56/3);txt(lx,by+6,it[0],{size:11,mono:true,weight:600,color:"#A3B2BA"});txt(lx,by+28,it[1],{size:17,mono:true,weight:700,color:it[2]})});
+  if(o.lab)o.lab.forEach((l,i)=>txt(x+12,y+h*.5+56+i*17,l,{size:11.5,mono:true,color:"#E8EEF1"}))}
+/* vertical level gauge. bands: [[lo,hi,colour,label]] */
+function vgauge(x,y,w,h,val,lo,hi,bands,o){o=o||{};const Y=v=>y+h-(clamp(v,lo,hi)-lo)/(hi-lo)*h;rr(x,y,w,h,6);fillStroke(C.panel,C["ink-soft"],1.4);
+  bands.forEach(b=>{ctx.fillStyle=hexA(b[2],.28);ctx.fillRect(x+2,Y(b[1]),w-4,Y(b[0])-Y(b[1]));if(b[3])txt(x+w+8,(Y(b[0])+Y(b[1]))/2,b[3],{size:11.5,weight:700,color:o.labCol||C.ink})});
+  const yy=Y(val);rr(x+w*.32,yy,w*.36,y+h-yy-3,4);ctx.fillStyle=o.fill||C.li;ctx.fill();line(x-6,yy,x+w+4,yy,C.ink,2.2);
+  if(o.ticks)o.ticks.forEach(v=>{line(x-5,Y(v),x,Y(v),C["ink-soft"],1.2);txt(x-8,Y(v),String(v),{size:11,mono:true,align:"right",color:C["ink-soft"]})})}
+/* small graph frame. returns mapping helpers */
+function graphFrame(x,y,w,h,o){o=o||{};panelBox(x,y,w,h,{fill:hexA(C.panel,.95)});const gx=x+(o.padL||40),gy=y+(o.padT||26),gw=w-(o.padL||40)-12,gh=h-(o.padT||26)-(o.padB||30);
+  line(gx,gy,gx,gy+gh,C["ink-soft"],1.2);line(gx,gy+gh,gx+gw,gy+gh,C["ink-soft"],1.2);if(o.title)txt(x+10,y+13,o.title,{size:11.5,mono:true,weight:700,color:C["ink-soft"]});
+  if(o.xlab)txt(gx+gw,gy+gh+18,o.xlab,{size:11.5,align:"right",color:C["ink-soft"]});if(o.ylab){ctx.save();ctx.translate(x+12,gy+gh/2);ctx.rotate(-Math.PI/2);txt(0,0,o.ylab,{size:11.5,align:"center",color:C["ink-soft"]});ctx.restore()}
+  const X0=o.x0||0,X1=o.x1||1,Y0=o.y0||0,Y1=o.y1||1;return {gx,gy,gw,gh,X:v=>gx+(v-X0)/(X1-X0)*gw,Y:v=>gy+gh-(clamp(v,Y0,Y1)-Y0)/(Y1-Y0)*gh}}
+/* kidney tubule segment, horizontal, lumen in middle */
+function tubule(x,y,w,h){rr(x,y,w,h,h/2);fillStroke(hexA(C.kidney,.18),C["kidney-edge"],2);rr(x+10,y+h*.3,w-20,h*.4,h*.2);fillStroke(hexA(C.water,.9),hexA(C["kidney-edge"],.6),1.2)}
+
+/* ---------------- lab helpers ---------------- */
+const $=s=>document.querySelector(s);
+function makeStage(id,W,H){const cv=document.getElementById(id);const st={cv,ctx:cv.getContext("2d"),W,H,K:1};
+  st.fit=()=>{const w=cv.parentElement.clientWidth;if(!w)return;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);st.K=cv.width/W};return st}
+function use(st){ctx=st.ctx;ctx.setTransform(st.K,0,0,st.K,0,0);ctx.clearRect(0,0,st.W,st.H);ctx.globalAlpha=1;bg(C.ecf)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmt(s){s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+const store={get:k=>{try{return localStorage.getItem("psych-lab-"+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem("psych-lab-"+k,v)}catch(e){}}};
+/* single-choice button row */
+function segBtns(el,items,cur,onPick){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.innerHTML=it[1];b.setAttribute("aria-pressed",String(it[0]===cur()));b.onclick=()=>{onPick(it[0]);el.querySelectorAll("button").forEach((x,i)=>x.setAttribute("aria-pressed",String(items[i][0]===cur())))};el.appendChild(b)})}
+/* multi-select toggles: items [key, label, small] ; set is a Set */
+function toggleBtns(el,items,set,onChange){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.type="button";b.className="tbtn";b.dataset.k=it[0];
+  b.innerHTML=it[1]+(it[2]?`<small>${it[2]}</small>`:"");b.setAttribute("aria-pressed",String(set.has(it[0])));
+  b.onclick=()=>{if(set.has(it[0]))set.delete(it[0]);else set.add(it[0]);b.setAttribute("aria-pressed",String(set.has(it[0])));onChange(it[0])};el.appendChild(b)})}
+function syncToggles(el,set){el.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(set.has(b.dataset.k))))}
+function chalUI(el,list,done){el.innerHTML=list.map((c,i)=>`<li class="${done.has(i)?"done":""}"><span class="ck" aria-hidden="true">${done.has(i)?"✓":i+1}</span><span>${c}${done.has(i)?'<span class="gk-sr"> (done)</span>':""}</span></li>`).join("")}
+function readRows(el,rows){el.querySelector("tbody").innerHTML=rows.map(r=>`<tr><th scope="row">${r[0]}</th><td>${r[1]}</td></tr>`).join("")}
+/* horizontal meter bar on canvas: value v (0..max), normal mark at nm */
+function hMeter(x,y,w,h,v,max,col,o){o=o||{};rr(x,y,w,h,h/2);ctx.fillStyle=C.sunk;ctx.fill();const f=clamp(v/max,0,1);if(f>0){rr(x,y,Math.max(h,w*f),h,h/2);ctx.fillStyle=col;ctx.fill()}
+  if(o.nm!=null){const nx=x+w*clamp(o.nm/max,0,1);line(nx,y-4,nx,y+h+4,C.ink,2);if(o.nmLab)txt(nx,y+h+12,o.nmLab,{size:11,mono:true,align:"center",color:C["ink-soft"]})}}
+/* small traffic light on canvas: level 0 off,1 amber,2 red */
+function lamp(x,y,r,level,t){const col=level===2?C.bad:level===1?C.warn:C.sunk;if(level>0)glow(x,y,r*2.4,col,level===2?.35+.25*Math.sin(t*6):.3);circ(x,y,r,col,hexA(C.ink,.45),1.4);
+  if(level===0){ctx.save();ctx.globalAlpha*=.5;circ(x,y,r*.45,null,C["ink-soft"],1.2);ctx.restore()}}
+
+/* ================= PART 1: synapse simulator ================= */
+const S1=makeStage("cvSyn",800,480);
+const NTS=[["ser","Serotonin"],["ne","Norepinephrine"],["da","Dopamine"],["gaba","GABA"]];
+const SDRUGS=[["ssri","SSRI","sertraline"],["maoi","MAOI","phenelzine"],["tca","TCA","amitriptyline"],["benzo","Benzodiazepine","lorazepam"],["apsy","Antipsychotic","haloperidol (D2 blocker)"],["stim","Stimulant","amphetamine"]];
+const SEXTRA=[["alc","Alcohol","a CNS depressant"],["cheese","Aged cheese","rich in tyramine"],["sjw","St. John's wort","herbal, raises serotonin"],["tram","Tramadol","pain drug, raises serotonin"]];
+const SY={nt:"ser",drugs:new Set(),extra:new Set(),lev:100,sig:100,hist:[],acc:0,done:new Set(),lastKey:""};
+const SY_CHAL=["Raise serotonin in the gap to more than double normal using just one drug.",
+  "Light the serotonin syndrome warning red.",
+  "Lower the dopamine receptor signal while the dopamine level in the gap stays normal.",
+  "Make GABA receptors signal more strongly without adding any extra GABA.",
+  "Make the dopamine pump run backwards.",
+  "Light the blood pressure crisis warning red.",
+  "Light the breathing warning red."];
+function has(k){return SY.drugs.has(k)||SY.extra.has(k)}
+/* the model: returns targets plus what to draw */
+function synModel(nt){nt=nt||SY.nt;let release=1,reup=1,mao=1,recBlock=0,boost=1,reverse=false;const notes=[];
+  if(nt==="ser"){
+    if(has("ssri")){reup=Math.min(reup,.15);notes.push("SSRI blocks the serotonin pump (SERT)")}
+    if(has("tca")){reup=Math.min(reup,.3);notes.push("TCA blocks the serotonin pump")}
+    if(has("sjw")){reup=Math.min(reup,.6);notes.push("St. John's wort raises serotonin")}
+    if(has("tram")){reup=Math.min(reup,.65);notes.push("Tramadol slows serotonin reuptake")}
+    if(has("maoi")){release*=1.6;mao=0;notes.push("MAOI jams MAO, so more serotonin is stored and released")}
+  }else if(nt==="ne"){
+    if(has("tca")){reup=Math.min(reup,.3);notes.push("TCA blocks the norepinephrine pump (NET)")}
+    if(has("stim")){reup=Math.min(reup,.3);release*=1.8;reverse=true;notes.push("Amphetamine pushes norepinephrine out through the pump")}
+    if(has("maoi")){release*=1.6;mao=0;notes.push("MAOI jams MAO")}
+    if(has("cheese")&&has("maoi")){release*=1.9;notes.push("Tyramine floods out stored norepinephrine")}
+    else if(has("cheese"))notes.push("Tyramine is broken down in the gut by MAO, so little reaches the nerve")
+  }else if(nt==="da"){
+    if(has("stim")){reup=Math.min(reup,.3);release*=1.8;reverse=true;notes.push("Amphetamine releases dopamine and runs the pump (DAT) backwards")}
+    if(has("maoi")){release*=1.3;mao=0;notes.push("MAOI jams MAO")}
+    if(has("apsy")){recBlock=.75;notes.push("Haloperidol sits in D2 receptors")}
+  }else{ // gaba
+    if(has("benzo")){boost*=1.9;notes.push("Benzodiazepine makes the GABA-A channel open more often")}
+    if(has("alc")){boost*=1.45;notes.push("Alcohol also boosts GABA-A and dampens the brain")}
+  }
+  const level=100*release*(1+2.2*(1-reup));const signal=level*(1-recBlock)*boost;
+  return {release,reup,mao,recBlock,boost,reverse,level,signal,notes}}
+function synWarn(){const sero=["ssri","tca","sjw","tram","maoi"].filter(has).length;const L={};
+  L.sero=has("maoi")&&sero>=2?2:sero>=2?1:0;
+  L.bp=has("maoi")&&(has("stim")||has("cheese"))?2:has("maoi")?1:0;
+  L.resp=has("benzo")&&has("alc")?2:(has("benzo")||has("alc"))?1:0;
+  L.eps=has("apsy")?1:0;return L}
+const LIGHTS=[["sero","Serotonin syndrome",["Off","Watch: two serotonin drugs. Teach the signs.","Danger: an MAOI plus another serotonin drug is contraindicated. Watch for agitation, fever, sweating, clonus."]],
+  ["bp","Blood pressure crisis",["Off","MAOI on board: low-tyramine diet; avoid stimulants and decongestants.","Danger: hypertensive crisis risk (severe headache, very high BP). Do not combine."]],
+  ["resp","Breathing and sedation",["Off","One CNS depressant: drowsiness and fall risk.","Danger: stacked CNS depressants can slow breathing. Check RR and SpO2; avoid the combination."]],
+  ["eps","Movement side effects",["Off","D2 blocked in the movement pathway: watch for EPS and, rarely, NMS.",""]]];
+function synChanged(){const m=synModel();const L=synWarn();
+  readRows($("#synRead"),[["Messenger",NTS.find(n=>n[0]===SY.nt)[1]],["Level in the gap",Math.round(m.level)+" (normal 100)"],["Receptor signal",Math.round(m.signal)+" (normal 100)"],["Drugs acting here",m.notes.length?String(m.notes.length):"none"]]);
+  $("#synLights").innerHTML=LIGHTS.map(l=>{const v=L[l[0]];return `<div class="light ${v===2?"red":v===1?"amber":""}"><span class="dot" aria-hidden="true"></span><span><b>${l[1]} <span class="lv">${v===2?"red":v===1?"amber":"off"}</span></b>${v?l[2][v]:"No warning."}</span></div>`}).join("");
+  const any=[...SY.drugs,...SY.extra].length;
+  $("#synCap").textContent=m.notes.length?m.notes.join(". ")+".":(any?"None of the drugs on board acts directly on this messenger. Try another messenger.":"No drugs: release, binding, reuptake and breakdown are in balance.");
+  $("#synLegend").innerHTML=`<span>${ntShapeSVG(SY.nt)}${NTS.find(n=>n[0]===SY.nt)[1]}</span><span>${drugSVG()}Drug molecule</span><span><i class="s" style="background:var(--receptor)"></i>Receptor</span><span><i class="s" style="background:var(--transporter)"></i>Reuptake pump</span>`+(SY.nt!=="gaba"?`<span><i style="background:var(--mao)"></i>MAO enzyme</span>`:"")+`<span><i class="ln" style="border-top-color:var(--accent)"></i>Receptor signal</span>`;
+  // challenges
+  if(m.notes.length===1&&SY.nt==="ser"&&m.level>200&&SY.drugs.size+SY.extra.size===1)SY.done.add(0);
+  if(L.sero===2)SY.done.add(1);
+  if(SY.nt==="da"&&m.recBlock>0&&Math.abs(m.level-100)<1)SY.done.add(2);
+  if(SY.nt==="gaba"&&m.boost>1)SY.done.add(3);
+  if(SY.nt==="da"&&m.reverse)SY.done.add(4);
+  if(L.bp===2)SY.done.add(5);
+  if(L.resp===2)SY.done.add(6);
+  chalUI($("#synChal"),SY_CHAL,SY.done)}
+function ntShapeSVG(k){const c=`var(--${k})`;const s=b=>`<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false" style="vertical-align:-2px">${b}</svg>`;
+  if(k==="ser")return s(`<circle cx="7" cy="7" r="5.5" fill="${c}" stroke="var(--ink)" stroke-opacity=".5"/>`);
+  if(k==="ne")return s(`<polygon points="7,1 13,12 1,12" fill="${c}" stroke="var(--ink)" stroke-opacity=".5"/>`);
+  if(k==="da")return s(`<polygon points="7,0.5 13.5,7 7,13.5 0.5,7" fill="${c}" stroke="var(--ink)" stroke-opacity=".5"/>`);
+  return s(`<polygon points="13,7 10,12.2 4,12.2 1,7 4,1.8 10,1.8" fill="${c}" stroke="var(--ink)" stroke-opacity=".5"/>`)}
+function drugSVG(){return `<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false" style="vertical-align:-2px"><polygon points="7,0.8 13.2,5.3 10.8,12.6 3.2,12.6 0.8,5.3" fill="var(--drug)" stroke="var(--ink)" stroke-opacity=".5"/></svg>`}
+function synStep(dt){const m=synModel();const k=1-Math.exp(-dt*1.6);SY.lev+=(m.level-SY.lev)*k;SY.sig+=(m.signal-SY.sig)*k;
+  SY.acc+=dt;if(SY.acc>=.1){SY.acc=0;SY.hist.push([SY.lev,SY.sig]);if(SY.hist.length>200)SY.hist.shift()}}
+function membraneStrip(x,y,w){ctx.fillStyle=hexA(C.gold,.5);ctx.fillRect(x,y-6,w,12);for(let i=0;i<w;i+=9){circ(x+i+4,y-6,3,C.gold);circ(x+i+4,y+6,3,C.gold)}}
+function drawSyn(now){use(S1);const t=now/1000;const m=synModel();const nt=SY.nt;const L=synWarn();
+  // ---- left: the synapse ----
+  const cx=232,top=38,w=396,h=396;
+  title(14,18,NTS.find(n=>n[0]===nt)[1]+" synapse"+(m.notes.length?" with drugs":""));
+  const mY=top+h*.44,pY=top+h*.66;
+  const showMao=nt!=="gaba";
+  const res=synapse(cx,top,w,h,t,{nt,n:14,release:Math.min(m.release,2.2),reup:m.reup,mao:m.mao,recBlock:m.recBlock,reverse:m.reverse,labels:true,showMao,
+    trans:[{dx:-.36,kind:nt,lab:{ser:"SERT",ne:"NET",da:"DAT",gaba:"GAT"}[nt],blocked:m.reup<.5&&!m.reverse}],drugCol:C.drug,maoDrugCol:C.drug2,
+    drugFloat:m.notes.length?2:0,signal:0});
+  // labels for drug sites
+  const px=cx-.36*w;
+  if(m.reup<.5&&!m.reverse)lead(px+8,mY-4,px+40,mY-44,"pump blocked",{size:12,border:C.drug});
+  if(m.reverse)lead(px+8,mY+6,px+60,mY+40,"pump runs backwards",{size:12,border:C.drug});
+  if(showMao&&m.mao<.5)lead(cx-w*.18+10,mY-h*.2-6,cx-w*.18+70,mY-h*.2-34,"MAO blocked",{size:12,border:C.drug2});
+  if(m.recBlock>0)lead(cx-w*.12,pY+12,cx-w*.12-40,pY+60,"D2 receptors blocked",{size:12,border:C.drug,align:"right"});
+  if(nt==="gaba"&&m.boost>1)lead(cx+w*.05,pY-6,cx-60,pY-34,"channels open more often",{size:12,border:C.drug,align:"right"});
+  // signal inside the receiving cell
+  const sg=SY.sig/100;const amp=clamp(sg,0,4.5)*5;const word=sg<.6?"weak":sg<1.4?"normal":sg<2.6?"strong":"very strong";
+  txt(cx-w/2+16,pY+58,(nt==="gaba"?"Calming (inhibitory) signal: ":"Signal in the receiving cell: ")+word,{size:12.5,weight:700,color:sg>2.6||sg<.6?C["warn-ink"]:C.ink});
+  ctx.save();ctx.beginPath();for(let i=0;i<=w-40;i+=2){const X=cx-w/2+20+i,Y=pY+94+Math.sin(i*.07-t*5)*amp;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.accent;ctx.lineWidth=2.6;ctx.stroke();ctx.restore();
+  // ---- right: meters ----
+  const rx=470,rw=318;panelBox(rx-8,10,rw+4,132);title(rx+4,26,"Levels (100 = normal)");
+  txt(rx+4,48,"Messenger in the gap",{size:13,weight:600});txt(rx+rw-10,48,String(Math.round(SY.lev)),{size:14,weight:700,mono:true,align:"right",color:SY.lev>250?C["warn-ink"]:C.ink});
+  hMeter(rx+4,58,rw-14,13,SY.lev,500,C[nt],{nm:100});
+  txt(rx+4,96,"Receptor signal",{size:13,weight:600});txt(rx+rw-10,96,String(Math.round(SY.sig)),{size:14,weight:700,mono:true,align:"right",color:(SY.sig>250||SY.sig<50)?C["warn-ink"]:C.ink});
+  hMeter(rx+4,106,rw-14,13,SY.sig,500,C.accent,{nm:100,nmLab:"normal"});
+  // trace
+  const g=graphFrame(rx-8,150,rw+4,150,{title:"LAST 20 SECONDS",padL:40,padT:24,padB:22,y0:0,y1:500});
+  [0,100,250,500].forEach(v=>{line(g.gx,g.Y(v),g.gx+g.gw,g.Y(v),hexA(C["ink-soft"],v===100?.6:.18),1,v===100?[4,3]:[]);txt(g.gx-5,g.Y(v),String(v),{size:11,mono:true,align:"right",color:C["ink-soft"]})});
+  const H_=SY.hist;if(H_.length>1){[0,1].forEach(j=>{ctx.beginPath();H_.forEach((p,i)=>{const X=g.gx+g.gw-(H_.length-1-i)/199*g.gw,Y=g.Y(p[j]);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.strokeStyle=j?C.accent:C[nt];ctx.lineWidth=2.4;ctx.setLineDash(j?[6,4]:[]);ctx.stroke();ctx.setLineDash([])})}
+  line(rx+130,163,rx+152,163,C[nt],2.4);txt(rx+156,163,"level",{size:11.5,color:C["ink-soft"]});line(rx+200,163,rx+222,163,C.accent,2.4,[6,4]);txt(rx+226,163,"signal",{size:11.5,color:C["ink-soft"]});
+  // lamps
+  panelBox(rx-8,308,rw+4,74);title(rx+4,324,"Warning lights");
+  const LL=[["sero","Serotonin"],["bp","BP crisis"],["resp","Breathing"],["eps","Movement"]];
+  LL.forEach((l,i)=>{const x=rx+34+i*78;lamp(x,346,9,L[l[0]],t);txt(x,368,l[1],{size:11.5,weight:600,align:"center"});const v=L[l[0]];if(v)txt(x+13,338,v===2?"!!":"!",{size:12,weight:700,color:v===2?C.bad:C["warn-ink"]})});
+  // inset
+  panelBox(rx-8,390,rw+4,82);
+  if(nt==="gaba"){title(rx+4,405,"GABA-A channel"+(m.boost>1?": opens more often":""));membraneStrip(rx+4,440,rw-14);
+    gabaChannel(rx+90,440,11,t,{gaba:true,freq:1});txt(rx+36,424,"normal",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+    gabaChannel(rx+230,440,11,t,{gaba:true,freq:m.boost,benzo:has("benzo"),drugCol:C.drug,long:has("alc")});txt(rx+rw-14,424,m.boost>1?"with drug":"no drug",{size:11.5,weight:600,align:"right",color:C["ink-soft"]});
+    txt(rx+4,464,"Cl− flows in when open; more often = calmer",{size:11.5,color:C["ink-soft"]})}
+  else{title(rx+4,405,"Where the drugs act");const nts=m.notes.length?m.notes:["No drug is acting on "+NTS.find(n=>n[0]===nt)[1].toLowerCase()+" right now."];
+    let yy=426;nts.slice(0,3).forEach(s=>{if(yy>466)return;if(m.notes.length)drugTok(rx+12,yy,4.5,{col:/MAO|Tyramine/.test(s)?C.drug2:C.drug});yy=wrapText(s,rx+(m.notes.length?24:4),yy,rw-30,13,{size:11.5})+15})}
+}
+function synA11y(){const m=synModel();const L=synWarn();const nm=NTS.find(n=>n[0]===SY.nt)[1];const lit=LIGHTS.filter(l=>L[l[0]]).map(l=>l[1]+" "+(L[l[0]]===2?"red":"amber"));
+  const lab=`Synapse simulator: ${nm}. Level in the gap ${Math.round(m.level)}, receptor signal ${Math.round(m.signal)}, where 100 is normal.`+(lit.length?" Warnings: "+lit.join(", ")+".":" No warnings.");
+  let d=`On the left, a tan nerve ending sits above a pale gap and a lavender receiving cell with four teal receptor cups. ${nm} molecules are released from round vesicles, cross the gap, sit in the receptors, and are pulled back up through a slate-blue pump on the left`+(SY.nt!=="gaba"?", where a brown MAO enzyme breaks some down.":".");
+  if(m.notes.length)d+=" With the drugs on board: "+m.notes.join("; ")+".";
+  if(m.reup<.5&&!m.reverse)d+=" A violet drug pentagon plugs the pump, so molecules pile up in the gap.";
+  if(m.reverse)d+=" The pump arrows point down, pushing messenger out into the gap.";
+  if(m.recBlock)d+=" Three of the four receptor cups are grey with a drug pentagon sitting in them, and messengers bounce off.";
+  d+=` On the right, two bars and a moving graph show the level at ${Math.round(m.level)} and the receptor signal at ${Math.round(m.signal)} against a normal mark of 100. Below are four warning lamps: `+LIGHTS.map(l=>l[1]+" "+(["off","amber","red"][L[l[0]]])).join(", ")+".";
+  return [lab,d]}
+segBtns($("#synNT"),NTS.map(n=>[n[0],n[1]]),()=>SY.nt,v=>{SY.nt=v;SY.hist=[];SY.lev=100;SY.sig=100;synChanged()});
+toggleBtns($("#synDrugs"),SDRUGS,SY.drugs,synChanged);
+toggleBtns($("#synExtra"),SEXTRA,SY.extra,synChanged);
+$("#synClear").onclick=()=>{SY.drugs.clear();SY.extra.clear();syncToggles($("#synDrugs"),SY.drugs);syncToggles($("#synExtra"),SY.extra);synChanged()};
+
+/* ================= PART 2: lithium level simulator ================= */
+const S2=makeStage("cvLi",800,480);
+const LI={dose:3,na:"norm",h2o:"norm",drugs:new Set(),held:false,running:true,day:0,L:.85,hist:[],acc:0,inWin:0,done:new Set(),wasTox:false,lastZone:""};
+const LI_DRUGS=[["nsaid","NSAID","such as ibuprofen"],["thz","Thiazide diuretic","such as hydrochlorothiazide"],["acei","ACE inhibitor","names ending in -pril"]];
+const LI_CHAL=["Keep the level inside the 0.6 to 1.2 window for 5 days in a row.",
+  "With the usual dose and no other changes, push the level above 1.2 just by making the patient dehydrated.",
+  "Show that a low-salt diet raises the lithium level (above 1.05).",
+  "Add an NSAID and watch the level climb above 1.0.",
+  "Show that a high-salt intake lowers the level (below 0.8).",
+  "Reach the toxic zone (above 1.5) and read the warning signs.",
+  "After a toxic level, hold lithium and bring the level back below 1.2."];
+function liClear(){const na={low:.75,norm:1,high:1.15}[LI.na],h={dry:.68,norm:1,well:1.05}[LI.h2o];let c=na*h;if(LI.drugs.has("nsaid"))c*=.8;if(LI.drugs.has("thz"))c*=.75;if(LI.drugs.has("acei"))c*=.85;return c}
+function liTarget(){return LI.held?0:.85*(LI.dose/3)/liClear()}
+function liZone(L){return L<.6?["low","Below the usual range"]:L<=1.2?["ok","Usual target range"]:L<=1.5?["edge","Upper edge"]:L<=2?["tox","Early toxicity"]:["severe","Moderate to severe toxicity"]}
+function liStep(dt){if(!LI.running)return;const dd=dt/2;LI.day+=dd;const cl=liClear();const k=Math.LN2/1.1*cl;const tgt=liTarget();LI.L+=(tgt-LI.L)*(1-Math.exp(-k*dd));
+  LI.acc+=dd;if(LI.acc>=.05){LI.acc=0;LI.hist.push([LI.day,LI.L]);if(LI.hist.length>440)LI.hist.shift()}
+  const z=liZone(LI.L)[0];
+  if(z==="ok")LI.inWin+=dd;else LI.inWin=0;
+  const n0=LI.done.size;
+  if(LI.inWin>=5)LI.done.add(0);
+  if(LI.h2o==="dry"&&LI.dose===3&&LI.na==="norm"&&!LI.drugs.size&&!LI.held&&LI.L>1.2)LI.done.add(1);
+  if(LI.na==="low"&&LI.L>1.05&&!LI.held)LI.done.add(2);
+  if(LI.drugs.has("nsaid")&&LI.L>1.0&&!LI.held)LI.done.add(3);
+  if(LI.na==="high"&&LI.L<.8&&!LI.held&&LI.L>.3)LI.done.add(4);
+  if(LI.L>1.5){LI.done.add(5);LI.wasTox=true}
+  if(LI.wasTox&&LI.held&&LI.L<1.2)LI.done.add(6);
+  if(LI.done.size!==n0)chalUI($("#liChal"),LI_CHAL,LI.done);
+  if(z!==LI.lastZone){LI.lastZone=z;liStatus()}}
+function liStatus(){const z=liZone(LI.L);const st=$("#liStatus");
+  const T={low:["","Below the usual range. Ask about missed doses; the prescriber decides on any change."],
+    ok:["good","In the usual target range. Keep salt and fluid intake steady, and draw levels as ordered (a trough, about 12 hours after the last dose)."],
+    edge:["warn","Upper edge of the range. Look for the cause (fluids, salt, new drugs) and report it."],
+    tox:["bad","Early toxicity. Hold the next dose and notify the prescriber per protocol. Expect a stat level, fluids, and kidney and electrolyte labs."],
+    severe:["bad","Moderate to severe toxicity: an emergency. Notify the prescriber or rapid response right away; protect from falls and seizures. Treatment may include IV fluids and sometimes dialysis."]}[z[0]];
+  st.className="status "+T[0];st.textContent=z[1]+": "+T[1]+(LI.held?" Lithium is on hold.":"")}
+function liRead(){const cl=liClear();readRows($("#liRead"),[["Day",String(Math.floor(LI.day))],["Lithium level",LI.L.toFixed(2)+" mEq/L"],["Zone",liZone(LI.L)[1]],["Kidney lithium clearance",Math.round(cl*100)+"% of normal"],["Heading toward",liTarget().toFixed(2)+" mEq/L"]]);
+  $("#liCap").textContent=liCaption()}
+function liFactors(){const f=[];if(LI.na==="low")f.push("Low salt: the kidney holds on to sodium, and lithium with it");if(LI.na==="high")f.push("High salt: more sodium and lithium are lost in the urine");
+  if(LI.h2o==="dry")f.push("Dehydrated (heat, vomiting, diarrhea, poor intake): the kidney holds lithium");if(LI.h2o==="well")f.push("Steady fluids: normal lithium loss");
+  if(LI.drugs.has("nsaid"))f.push("NSAID: less kidney blood flow, less lithium cleared");if(LI.drugs.has("thz"))f.push("Thiazide: sodium loss makes the kidney hold lithium");if(LI.drugs.has("acei"))f.push("ACE inhibitor: less lithium cleared");
+  if(LI.held)f.push("Lithium on hold: no new lithium coming in");return f}
+function liCaption(){const f=liFactors();return `Level ${LI.L.toFixed(2)} mEq/L, heading toward ${liTarget().toFixed(2)}. `+(f.length?f[0]+".":"Usual dose, normal salt and fluids: steady state in about 5 days.")}
+function drawLi(now){use(S2);const t=now/1000;
+  // graph
+  const gx0=10,gy0=10,gw0=516,gh0=278;const D0=Math.max(0,LI.day-21),D1=D0+21;
+  const g=graphFrame(gx0,gy0,gw0,gh0,{title:"LITHIUM LEVEL (mEq/L)",padL:44,padT:26,padB:30,x0:D0,x1:D1,y0:0,y1:2.5,xlab:"days"});
+  const band=(a,b,col,a2)=>{ctx.fillStyle=hexA(col,a2);ctx.fillRect(g.gx+1,g.Y(b),g.gw-1,g.Y(a)-g.Y(b))};
+  band(.6,1.2,C.good,.16);band(1.5,2.5,C.bad,.13);band(2,2.5,C.bad,.12);
+  [0,.5,1,1.5,2,2.5].forEach(v=>{line(g.gx-4,g.Y(v),g.gx,g.Y(v),C["ink-soft"],1.2);txt(g.gx-7,g.Y(v),v.toFixed(1),{size:11,mono:true,align:"right",color:C["ink-soft"]})});
+  line(g.gx,g.Y(1.5),g.gx+g.gw,g.Y(1.5),hexA(C.bad,.8),1.4,[5,4]);
+  txt(g.gx+g.gw-6,g.Y(2.25),"toxic",{size:12,weight:700,align:"right",color:C.bad});txt(g.gx+g.gw-6,g.Y(.9),"usual target 0.6 to 1.2",{size:12,weight:700,align:"right",color:C.good});
+  for(let d=Math.ceil(D0);d<=D1-1.5;d+=3){const X=g.X(d);line(X,g.gy+g.gh,X,g.gy+g.gh+4,C["ink-soft"],1);txt(X,g.gy+g.gh+14,String(d),{size:11,mono:true,align:"center",color:C["ink-soft"]})}
+  const H_=LI.hist;if(H_.length>1){ctx.save();ctx.beginPath();ctx.rect(g.gx,g.gy-4,g.gw,g.gh+4);ctx.clip();ctx.beginPath();H_.forEach((p,i)=>{const X=g.X(p[0]),Y=g.Y(p[1]);i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});
+    ctx.strokeStyle=C.li;ctx.lineWidth=2.6;ctx.stroke();ctx.restore()}
+  const cX=g.X(LI.day),cY=g.Y(LI.L);circ(cX,cY,5.5,C.li,C.panel,2);
+  const z=liZone(LI.L);label(clamp(cX-6,g.gx+60,g.gx+g.gw-60),clamp(cY-18,g.gy+10,g.gy+g.gh-10),LI.L.toFixed(2),{size:13,weight:700,mono:true,align:"center",border:LI.L>1.5?C.bad:C.li});
+  // patient and signs
+  const px=534,pw=256;panelBox(px,10,pw,278);title(px+12,26,"The patient today");
+  const sev=LI.L>2?2:LI.L>1.5?1:0;
+  person(px+44,68,32,{face:sev===2?"distress":sev===1?"sad":"calm",shirt:C.act4,tremor:sev===2?3:sev===1?2.2:.6,coarse:sev>=1,t,flush:false});
+  const hx_=px+44+28+Math.sin(t*(sev?13:38))*(sev?3:1),hy=96;ell(hx_,hy,6,4.5,0,C.skin,C["skin-edge"],1.2);
+  txt(px+44,124,sev===0?"fine tremor":"coarse tremor",{size:11.5,weight:600,align:"center",color:C["ink-soft"]});
+  txt(px+100,52,sev===2?"Severe signs":sev===1?"Early toxicity":"Side effects only",{size:13,weight:700,color:sev===2?C.bad:sev===1?C["warn-ink"]:C.good});
+  wrapText("Signs appear in order as the level climbs.",px+100,74,pw-108,15,{size:11.5,color:C["ink-soft"]});
+  const S=[[0,"Fine tremor, thirst, more urine"],[1,"Nausea, vomiting, diarrhea"],[1,"Coarse tremor, twitching"],[1,"Drowsiness, weakness"],[2,"Confusion, unsteady walk"],[2,"Slurred speech"],[2,"Seizures, rhythm changes"]];
+  const heads={0:"Common, level in range",1:"Early toxicity, above 1.5",2:"Severe, above about 2"};let yy=144,lastG=-1;
+  S.forEach(s=>{if(s[0]!==lastG){lastG=s[0];txt(px+12,yy,heads[s[0]],{size:11,mono:true,weight:700,color:C["ink-soft"]});yy+=14}
+    const on=LI.L>(s[0]===0?.3:s[0]===1?1.5:2);const col=s[0]===0?C.good:s[0]===1?C.warn:C.bad;
+    withA(on?1:.45,()=>{circ(px+18,yy,4.5,on?col:null,col,1.5);txt(px+30,yy,s[1]+(on?"":" (not yet)"),{size:12,weight:on?600:500})});yy+=15});
+  // kidney tubule
+  panelBox(10,296,780,176);title(22,312,"In the kidney: lithium rides with sodium");
+  const tx=26,ty=380,tw=500,th=46;
+  rr(tx,330,tw,30,8);ctx.fillStyle=hexA(C.bad,.12);ctx.fill();txt(tx+8,345,"blood (reabsorbed back to the body)",{size:11.5,weight:600,color:C["ink-soft"]});
+  tubule(tx,ty,tw,th);txt(tx+tw+8,ty+th/2,"urine",{size:12,weight:700,color:C["ink-soft"]});arrow(tx+tw-30,ty+th/2,tx+tw+2,ty+th/2,C["ink-soft"],1.6);
+  const cl=liClear();const reab=clamp(.72/cl,.45,.97);
+  for(let i=0;i<18;i++){const kind=i%3===0?"li":"na";const ph=P(t*.18+rnd(i*3+1),1);const stopX=tx+40+rnd(i+5)*(tw-140);const goesUp=rnd(i*7+2)<reab;
+    let x=tx+10+ph*(tw-10),y=ty+th/2+(rnd(i+9)-.5)*th*.25;let a=1;
+    if(goesUp&&x>stopX){const f=clamp((x-stopX)/70,0,1);x=stopX+Math.min(x-stopX,20);y=lerp(y,345,smooth(f));a=f>=1?0:1}
+    if(x>tx+tw-6)a=0;withA(a,()=>ionDot(x,y,kind,kind==="li"?6:5))}
+  // up arrows
+  for(let k=0;k<4;k++){const ax=tx+90+k*130;arrow(ax,ty-2,ax,366,hexA(C.li,.5+reab*.5),1.4+reab*2.5)}
+  // factor chips
+  const f=liFactors();const fx=596;txt(fx,330,"What is changing",{size:12,weight:700});let fy=350;
+  (f.length?f:["Nothing unusual: normal salt and fluids"]).slice(0,3).forEach(s=>{if(fy>440)return;fy=wrapText(s,fx,fy,186,13,{size:11.5})+18});
+  txt(fx,462,"Reabsorbed: "+Math.round(reab*100)+"%",{size:12,weight:700,mono:true,color:reab>.8?C.bad:C.ink});
+}
+function liA11y(){const z=liZone(LI.L);const f=liFactors();const lab=`Lithium simulator: day ${Math.floor(LI.day)}, level ${LI.L.toFixed(1)} mEq/L, ${z[1]}.`;
+  const d=`Top left, a graph of lithium level over the last 21 days rises or falls as a purple line, with a green band for the usual target of 0.6 to 1.2 and a red band labelled toxic above 1.5. The current level is ${LI.L.toFixed(1)}, heading toward ${liTarget().toFixed(1)}. Top right, a patient figure shows ${LI.L>2?"a distressed face with a large coarse tremor; severe signs are lit: confusion, unsteady walk, slurred speech, seizures":LI.L>1.5?"an unhappy face with a coarse tremor; early toxicity signs are lit: nausea, vomiting, diarrhea, coarse tremor, drowsiness":"a calm face with a fine hand tremor; only common side effects are lit"}. Along the bottom, a kidney tubule carries blue sodium ions and purple lithium ions toward the urine, and about ${Math.round(clamp(.72/liClear(),.45,.97)*100)} percent are pulled back up into the blood. `+(f.length?"Changes: "+f.join("; ")+".":"");
+  return [lab,d]}
+function liUI(){$("#liDoseOut").textContent=LI.dose+" units "+(LI.dose===3?"(usual)":LI.dose<3?"(lower)":"(higher)");
+  segBtns($("#liNa"),[["low","Low salt"],["norm","Normal"],["high","High salt"]],()=>LI.na,v=>{LI.na=v;liChanged()});
+  segBtns($("#liH2O"),[["dry","Dehydrated"],["norm","Normal"],["well","Steady, good"]],()=>LI.h2o,v=>{LI.h2o=v;liChanged()});
+  toggleBtns($("#liDrugs"),LI_DRUGS,LI.drugs,liChanged)}
+function liChanged(){$("#liDoseOut").textContent=LI.dose+" units "+(LI.dose===3?"(usual)":LI.dose<3?"(lower)":"(higher)");$("#liHold").textContent=LI.held?"Restart lithium":"Hold lithium";$("#liHold").setAttribute("aria-pressed",String(LI.held));
+  $("#liPause").textContent=LI.running?"Pause clock":"Run clock";liRead();liStatus()}
+$("#liDose").oninput=e=>{LI.dose=+e.target.value;liChanged()};
+$("#liHold").onclick=()=>{LI.held=!LI.held;liChanged()};
+$("#liPause").onclick=()=>{LI.running=!LI.running;liChanged()};
+$("#liReset").onclick=()=>{Object.assign(LI,{dose:3,na:"norm",h2o:"norm",held:false,running:true,day:0,L:.85,hist:[],inWin:0,wasTox:false,lastZone:""});LI.drugs.clear();$("#liDose").value=3;liUI();liChanged();chalUI($("#liChal"),LI_CHAL,LI.done)};
+
+/* ================= PART 3: case files ================= */
+const S3=makeStage("cvCase",800,480);
+/* MAR codes per time slot: "g" given, "d" due now, "h" held, "" none */
+const CASES=[
+{name:"Two serotonin drugs",who:"Dana, 34",title:"Restless, sweaty and twitching after surgery",
+ story:"Dana takes sertraline every morning for depression. After a dental surgery yesterday she was prescribed tramadol for pain and has taken three doses. Over the last few hours she has become restless and confused, is sweating, has diarrhea, and her legs jerk rhythmically when the nurse flexes her ankle.",
+ mar:[["sertraline","PO daily",["g","",""]],["tramadol","PO every 6 h as needed",["g","g","d"]]],
+ vit:{hr:124,sbp:158,dbp:94,spo2:97,rr:22,temp:"38.9°C"},
+ labs:[["Sodium","139","","135-145 mEq/L"],["Potassium","4.1","","3.5-5.0 mEq/L"],["Glucose","104","","70-110 mg/dL"],["CK (muscle)","310","H","about 30-200 U/L"]],
+ find:["Agitation, confusion","Heavy sweating","Ankle clonus","Diarrhea","Dilated pupils"],face:"distress",tremor:1.6,flush:true,
+ qs:[{q:"Which explanation best fits Dana's findings?",hint:"Count the drugs that raise serotonin, and look at how fast this started.",opts:[
+   ["Serotonin syndrome from combining sertraline with tramadol",1,"Yes. Sertraline blocks serotonin reuptake and tramadol also raises serotonin. Within hours of stacking them she has the classic triad: mental changes (agitation, confusion), autonomic signs (fever, sweating, fast pulse, diarrhea) and neuromuscular signs (clonus)."],
+   ["Neuroleptic malignant syndrome",0,"NMS follows dopamine-blocking drugs, develops over days, and causes stiff, slow, lead-pipe muscles, not jerky clonus. Dana is not on an antipsychotic."],
+   ["A normal side effect of starting an SSRI",0,"She has taken sertraline for a long time. Fever, clonus and confusion are not normal SSRI side effects; they signal too much serotonin."],
+   ["An allergic reaction to tramadol",0,"Allergy brings hives, itching, swelling or wheeze. Clonus and hyperthermia point to serotonin excess."]]},
+  {q:"Tramadol is due now. What should the nurse do first?",hint:"Which drug is adding to the problem right now?",opts:[
+   ["Hold the tramadol (and the next sertraline dose) and notify the prescriber right away",1,"Yes. Stopping the serotonin drugs is the core treatment. Report now; the prescriber may order cooling, fluids, a benzodiazepine for agitation, or cyproheptadine, a serotonin blocker."],
+   ["Give the tramadol because her pain must be controlled",0,"More tramadol adds more serotonin and worsens the syndrome. Pain needs a different plan from the prescriber."],
+   ["Give acetaminophen for the fever and recheck in 4 hours",0,"This fever comes from muscle activity, not an infection, so antipyretics help little. Waiting 4 hours while the cause continues is unsafe."],
+   ["Encourage her to walk to burn off the restlessness",0,"Activity raises body heat and the risk of falls. She needs the drugs stopped and close monitoring."]]},
+  {q:"Before discharge, what is the most important teaching?",hint:"How could this happen again with a different drug?",opts:[
+   ["Tell every prescriber and pharmacist that you take an SSRI, and ask before adding pain, migraine, cough or herbal products",1,"Yes. Tramadol, triptans, dextromethorphan, linezolid, St. John's wort and MAOIs all add serotonin. A complete medicine list prevents repeats."],
+   ["Stop sertraline suddenly if you feel sweaty",0,"Stopping suddenly can cause discontinuation syndrome. Any change should go through the prescriber."],
+   ["Double the sertraline if the tramadol is stopped",0,"That would raise serotonin again and is never self-directed."],
+   ["Serotonin syndrome only happens with MAOIs, so she is safe now",0,"MAOI combinations are the most dangerous, but any two serotonin drugs can cause it, as this case shows."]]}],
+ exp:"Serotonin syndrome is a drug interaction you can predict: two or more serotonin drugs, onset within hours, and clonus, fever and agitation. Stop the drugs, cool and support, and teach the patient to share the full medicine list."},
+
+{name:"Lithium and a stomach bug",who:"Marcus, 52",title:"Shaky, confused and unsteady after a stomach virus",
+ story:"Marcus has taken lithium for bipolar disorder for years with steady levels. For three days he has had vomiting and diarrhea and has barely been drinking. He took ibuprofen for body aches. Today his hands shake coarsely, he slurs his words, and he cannot walk a straight line.",
+ mar:[["lithium carbonate","PO twice daily",["g","","d"]],["ibuprofen (home)","PO as needed",["g","g",""]]],
+ vit:{hr:58,sbp:104,dbp:62,spo2:97,rr:16,temp:"37.1°C"},
+ labs:[["Lithium","2.1","H","0.6-1.2 mEq/L (usual target)"],["Sodium","132","L","135-145 mEq/L"],["Creatinine","1.6","H","about 0.6-1.2 mg/dL"],["BUN","32","H","about 7-20 mg/dL"]],
+ find:["Coarse hand tremor","Slurred speech","Unsteady walk","Vomiting, diarrhea","Dry mouth, poor intake"],face:"sad",tremor:2.6,coarse:true,
+ qs:[{q:"Why did his lithium level climb when his dose did not change?",hint:"The kidney handles lithium like another ion. Which one, and what happens when that ion is low?",opts:[
+   ["Fluid and sodium loss made the kidney hold on to sodium and lithium with it, and the NSAID cut lithium clearance further",1,"Yes. With dehydration and low sodium, the kidney reabsorbs more sodium, and lithium rides along. NSAIDs lower kidney blood flow and lithium clearance. The same dose now builds up."],
+   ["Vomiting made him absorb more lithium",0,"Vomiting, if anything, loses some of a dose. The rise comes from the kidney clearing less lithium."],
+   ["Ibuprofen contains lithium",0,"It does not. NSAIDs raise lithium levels by reducing how much the kidney clears."],
+   ["His bipolar disorder became worse",0,"The illness does not raise the blood level. Fluid, sodium and drug interactions do."]]},
+  {q:"His evening lithium dose is due. What should the nurse do?",hint:"Look at the level and the neuro signs together.",opts:[
+   ["Hold the dose and notify the prescriber immediately; this is toxicity with neurologic signs",1,"Yes. A level above the toxic line plus confusion, slurred speech and ataxia needs urgent treatment, often IV fluids, frequent levels and sometimes dialysis. Protect him from falls and watch for seizures."],
+   ["Give the dose with extra water",0,"Any new lithium adds to a toxic level. Fluids are part of treatment, but the dose must be held."],
+   ["Give half the dose",0,"Nurses do not change the dose; and any lithium now is unsafe. Hold and report."],
+   ["Give the dose and recheck the level next week",0,"A week is far too long. Moderate toxicity can progress to seizures and arrhythmias."]]},
+  {q:"Which teaching best prevents this from happening again?",hint:"Think about salt, water and over-the-counter drugs.",opts:[
+   ["Keep salt and fluids steady, call the prescriber when vomiting, diarrhea or heavy sweating happen, and avoid NSAIDs unless the prescriber approves",1,"Yes. Steady sodium and water keep lithium clearance steady. Illness, heat and new drugs (NSAIDs, thiazides, ACE inhibitors) are the classic triggers."],
+   ["Start a low-salt diet to protect the heart",0,"A low-salt diet makes the kidney hold more lithium and raises the level."],
+   ["Drink as little as possible to avoid frequent urination",0,"Lithium often causes thirst and more urine. Limiting fluids leads to dehydration and toxicity."],
+   ["Skip level checks once you feel well",0,"Regular levels, kidney and thyroid tests are part of safe lithium use."]]}],
+ exp:"Lithium has a narrow therapeutic index and follows sodium in the kidney. Dehydration, low salt, NSAIDs, thiazides and ACE inhibitors all raise the level. Early toxicity is GI upset and coarse tremor; later comes confusion, ataxia, slurred speech and seizures."},
+
+{name:"NMS or serotonin syndrome?",who:"Elena, 41",title:"Fever and rigid muscles four days after starting an antipsychotic",
+ story:"Elena was admitted with acute psychosis and started on haloperidol four days ago. Today she is confused, sweating, and has a high fever. Her arms are stiff and resist bending evenly through the whole movement, like a lead pipe. Reflexes are slow. Her blood pressure keeps swinging up and down.",
+ mar:[["haloperidol","PO twice daily",["g","","d"]],["haloperidol","IM as needed for agitation",["","g",""]]],
+ vit:{hr:126,sbp:172,dbp:98,spo2:95,rr:24,temp:"40.1°C"},
+ labs:[["CK (muscle)","9,800","H","about 30-200 U/L"],["WBC","14.2","H","about 4.5-11 x10³/µL"],["Creatinine","1.4","H","about 0.6-1.2 mg/dL"],["Potassium","4.9","","3.5-5.0 mEq/L"]],
+ find:["Lead-pipe rigidity","Very high fever","Confusion","Heavy sweating","Unstable BP"],face:"distress",rigid:true,flush:true,
+ qs:[{q:"Which condition fits Elena best?",hint:"Compare onset (hours or days), muscle type (jerky or stiff) and the drug class.",opts:[
+   ["Neuroleptic malignant syndrome from dopamine blockade",1,"Yes. NMS follows dopamine-blocking drugs, builds over days, and causes lead-pipe rigidity, slow reflexes, very high fever, unstable blood pressure and a very high CK."],
+   ["Serotonin syndrome",0,"Serotonin syndrome comes on within hours of a serotonin drug combination and causes clonus and brisk reflexes, not slow reflexes and lead-pipe rigidity."],
+   ["Acute dystonia",0,"Dystonia is a sudden muscle spasm (neck, eyes, tongue) without high fever or very high CK."],
+   ["A simple viral infection",0,"Infection can raise WBC, but it does not explain lead-pipe rigidity and a CK near 10,000 right after starting haloperidol."]]},
+  {q:"What should the nurse do first?",hint:"Remove the cause, then support the body.",opts:[
+   ["Hold the haloperidol and notify the prescriber or rapid response immediately; begin cooling and expect IV fluids",1,"Yes. NMS is an emergency. Stop the dopamine blocker, cool, hydrate and monitor closely. The prescriber may order dantrolene (a muscle relaxant) or bromocriptine (a dopamine agonist)."],
+   ["Give the as-needed haloperidol for her confusion",0,"More dopamine blockade worsens NMS."],
+   ["Give benztropine and continue haloperidol",0,"Benztropine helps acute EPS, not NMS. The antipsychotic must be stopped."],
+   ["Recheck the temperature in 4 hours",0,"A temperature over 40°C with rigidity needs action now, not later."]]},
+  {q:"Why does the very high CK matter for her kidneys?",hint:"What is CK released from?",opts:[
+   ["Breaking-down muscle releases myoglobin, which can injure the kidneys, so watch urine output and color",1,"Yes. Rigid, overheated muscle breaks down (rhabdomyolysis). Myoglobin can block the kidney tubules; her creatinine is already rising. Fluids and urine output monitoring protect the kidneys."],
+   ["CK means she has had a heart attack",0,"CK is mostly from skeletal muscle here. Heart-specific tests like troponin are used for heart attacks."],
+   ["CK is a sign of liver damage",0,"CK comes from muscle, not liver."],
+   ["It does not matter; CK is always high in psychosis",0,"A CK near 10,000 is a serious finding that needs action."]]}],
+ exp:"NMS versus serotonin syndrome: NMS follows a dopamine blocker, builds over days, with lead-pipe rigidity, slow reflexes and very high CK. Serotonin syndrome follows serotonin drug combinations within hours, with clonus and brisk reflexes. Both need the drug stopped, cooling and urgent care."},
+
+{name:"Twisted neck on day one",who:"Tyler, 22",title:"A sudden neck spasm the day after starting haloperidol",
+ story:"Tyler started haloperidol yesterday for a first episode of psychosis. This morning his neck suddenly twisted hard to one side and his eyes rolled upward. He is frightened and says his tongue feels thick. His temperature is normal.",
+ mar:[["haloperidol","PO twice daily",["g","","d"]],["benztropine","IM or PO as needed for EPS",["","",""]]],
+ vit:{hr:104,sbp:132,dbp:84,spo2:98,rr:18,temp:"37.0°C"},
+ labs:[["CK (muscle)","180","","about 30-200 U/L"],["Sodium","140","","135-145 mEq/L"],["Glucose","96","","70-110 mg/dL"],["WBC","7.8","","about 4.5-11 x10³/µL"]],
+ find:["Neck twisted to one side","Eyes rolled upward","Thick tongue","Frightened","No fever"],face:"distress",tilt:true,
+ qs:[{q:"What is happening to Tyler?",hint:"Which pathway does dopamine blockade upset, and how soon after starting?",opts:[
+   ["Acute dystonia, an extrapyramidal symptom (EPS) from D2 blockade in the movement pathway",1,"Yes. Blocking D2 receptors in the nigrostriatal pathway tips the dopamine and acetylcholine balance. Acute dystonia appears in hours to days, most often in young men on high-potency drugs like haloperidol."],
+   ["Tardive dyskinesia",0,"Tardive dyskinesia appears after months to years and causes repetitive lip, tongue and face movements, not a sudden spasm on day one."],
+   ["Neuroleptic malignant syndrome",0,"NMS brings high fever, rigidity and a very high CK. Tyler has no fever and a normal CK."],
+   ["A panic attack",0,"Fear is understandable, but a fixed neck twist with eyes rolled up is a drug-induced dystonia."]]},
+  {q:"Which order should the nurse expect to give, and what must be watched?",hint:"Restore the balance by blocking the other side.",opts:[
+   ["An anticholinergic such as benztropine or diphenhydramine as ordered, while watching the airway",1,"Yes. Blocking acetylcholine rebalances the movement pathway and the spasm usually eases within minutes. A spasm of the throat (laryngeal dystonia) can threaten the airway, so watch breathing closely."],
+   ["An extra dose of haloperidol",0,"More dopamine blockade makes EPS worse."],
+   ["A dopamine-raising stimulant",0,"That is not how acute dystonia is treated and could worsen psychosis."],
+   ["Nothing; it will pass and needs no treatment",0,"Acute dystonia is painful and frightening and can affect the airway. It is treated promptly."]]},
+  {q:"Months later, which finding should the nurse screen for at each visit?",hint:"Think of the late, possibly permanent movement disorder.",opts:[
+   ["Repetitive lip smacking, tongue movements or grimacing (tardive dyskinesia), using a scale such as AIMS",1,"Yes. Tardive dyskinesia may be permanent, so it is screened for regularly. Early detection lets the prescriber change treatment."],
+   ["Hair loss",0,"Not a key antipsychotic effect to screen at every visit."],
+   ["Ringing in the ears",0,"That is linked to aspirin and some other drugs, not antipsychotics."],
+   ["Low blood sugar",0,"Second-generation antipsychotics tend to raise glucose, and the key movement screen is for tardive dyskinesia."]]}],
+ exp:"EPS follow dopamine blockade in the movement pathway, in a typical order: acute dystonia (hours to days), akathisia and parkinsonism (days to weeks), and tardive dyskinesia (months to years). Acute dystonia responds to anticholinergics; tardive dyskinesia is screened for because it may be permanent."},
+
+{name:"Benzodiazepine plus alcohol",who:"Robert, 58",title:"Hard to wake after a party",
+ story:"Robert takes lorazepam for anxiety. His family brought him in after a party where he drank several drinks and took an extra tablet to calm down. He snores loudly, opens his eyes only to a firm shake, and his breaths are slow and shallow.",
+ mar:[["lorazepam (home)","PO as needed for anxiety",["g","","g"]],["alcohol","reported by family",["","","g"]]],
+ vit:{hr:62,sbp:98,dbp:58,spo2:86,rr:8,temp:"36.4°C"},
+ labs:[["Blood alcohol","0.16","H","0 g/dL"],["Glucose","92","","70-110 mg/dL"],["pCO₂","58","H","35-45 mm Hg"],["pH","7.29","L","7.35-7.45"]],
+ find:["Very drowsy, hard to wake","Slow, shallow breaths","Snoring (airway)","Low oxygen","Smell of alcohol"],face:"sleep",
+ qs:[{q:"Why is Robert breathing so slowly?",hint:"Both substances act on the same receptor.",opts:[
+   ["Lorazepam and alcohol both enhance GABA-A, so their CNS and breathing depression add together",1,"Yes. Each makes the brake stronger. Together they push down the brainstem breathing center. His high CO₂ and low pH show he is not breathing off enough CO₂."],
+   ["Alcohol blocks lorazepam from working",0,"The opposite: they add together."],
+   ["Lorazepam stimulates the breathing center",0,"Benzodiazepines depress, not stimulate, the CNS."],
+   ["He is just sleeping off a normal night",0,"RR 8, SpO2 86% and rising CO₂ are dangerous, not normal sleep."]]},
+  {q:"What is the nurse's first priority?",hint:"Use the ABCs.",opts:[
+   ["Open and support the airway and breathing (position, oxygen, ventilation support) and call for help",1,"Yes. Airway and breathing come first. The prescriber may order flumazenil, used with caution because it can trigger seizures in long-term benzodiazepine users, and its effect can wear off before the drug does."],
+   ["Give flumazenil and then leave him to sleep",0,"Flumazenil can wear off before the benzodiazepine does, so sedation can return. He needs continued monitoring of breathing."],
+   ["Give naloxone because it reverses all sedatives",0,"Naloxone reverses opioids. It does not reverse benzodiazepines or alcohol."],
+   ["Give him coffee to wake him up",0,"Nothing by mouth for a patient who cannot protect his airway."]]},
+  {q:"Robert has taken lorazepam daily for months. What should he be taught?",hint:"Think about alcohol and about stopping.",opts:[
+   ["Avoid alcohol and other sedatives with it, and never stop suddenly; any reduction is a slow taper with the prescriber",1,"Yes. Stacking depressants is the main danger. After regular use the brain adapts, so a sudden stop can cause rebound anxiety, insomnia, tremor and even seizures."],
+   ["Stop lorazepam today because of this event",0,"After months of daily use, a sudden stop can cause dangerous withdrawal. A supervised taper is needed."],
+   ["Alcohol is fine if he skips that day's dose",0,"Lorazepam stays in the body; any alcohol adds to the depression."],
+   ["Take an extra tablet whenever anxiety is high",0,"Extra doses increase sedation, falls and breathing risk. Follow the prescribed plan."]]}],
+ exp:"Benzodiazepines enhance GABA-A, opening the chloride channel more often. Alone they are fairly safe, but with alcohol, opioids or other sedatives the depression adds up and breathing can stop. ABCs first; flumazenil is a cautious reversal. Long-term users taper, never stop suddenly."},
+
+{name:"Clozapine and a sore throat",who:"Priya, 29",title:"Fever and sore throat ten weeks into clozapine",
+ story:"Priya started clozapine ten weeks ago for schizophrenia that did not respond to other drugs. Her symptoms are the best they have been in years. Today she has a sore throat, chills and a fever. Her absolute neutrophil count (ANC) is back from the lab.",
+ mar:[["clozapine","PO twice daily",["g","","d"]],["docusate","PO daily (constipation)",["g","",""]]],
+ vit:{hr:112,sbp:118,dbp:70,spo2:97,rr:20,temp:"38.6°C"},
+ labs:[["ANC","400","L","about 1500-8000 /µL"],["WBC","1.9","L","about 4.5-11 x10³/µL"],["Hemoglobin","12.8","","12-16 g/dL"],["Platelets","210","","150-400 x10³/µL"]],
+ find:["Sore throat","Fever and chills","Fast pulse","Otherwise feels well mentally"],face:"sad",flush:true,
+ qs:[{q:"What explains Priya's findings?",hint:"Which blood cell is very low, and which drug is known for it?",opts:[
+   ["Clozapine-induced severe neutropenia (agranulocytosis), leaving her open to serious infection",1,"Yes. Clozapine can rarely cause a sharp drop in neutrophils, most often in the first months. With an ANC of 400, a sore throat and fever can become a life-threatening infection."],
+   ["A simple cold that needs rest",0,"A fever with an ANC of 400 is never treated as a simple cold."],
+   ["Neuroleptic malignant syndrome",0,"NMS brings rigidity and a very high CK. Priya's key finding is a very low neutrophil count."],
+   ["Low hemoglobin from iron deficiency",0,"Her hemoglobin is normal; the problem is white cells."]]},
+  {q:"Her evening clozapine dose is due. What should the nurse do?",hint:"Remove the cause and protect her from infection.",opts:[
+   ["Hold the clozapine, notify the prescriber immediately, and start infection precautions and ordered cultures",1,"Yes. The drug is stopped for severe neutropenia and the fever is treated as an emergency. The prescriber will guide what happens next with her antipsychotic treatment."],
+   ["Give the dose; her psychosis is finally controlled",0,"Her symptom control matters, but a very low ANC with fever is a medical emergency."],
+   ["Give the dose with acetaminophen",0,"Masking the fever does not fix the neutropenia, and the drug must be held."],
+   ["Recheck the ANC next month",0,"This needs action today."]]},
+  {q:"What should every patient on clozapine be taught?",hint:"Infection signs and lab checks.",opts:[
+   ["Report fever, sore throat, mouth sores or flu-like illness right away, and keep every ANC blood test appointment",1,"Yes. ANC is checked on a set schedule, weekly at first. Early reporting of infection signs is the safety net. Also teach about constipation, drooling, drowsiness and the rare heart inflammation (myocarditis)."],
+   ["Blood tests are only needed if you feel sick",0,"ANC is checked on a schedule even when the patient feels fine."],
+   ["Double the dose if a dose is missed",0,"Never double. After missed days, restarting may need a slower plan from the prescriber."],
+   ["Clozapine has no important side effects",0,"It has several serious ones: severe neutropenia, seizures, myocarditis, constipation and metabolic effects."]]}],
+ exp:"Clozapine works when other antipsychotics fail, but it can cause severe neutropenia. ANC monitoring on a schedule, and fast reporting of fever or sore throat, make it safe to use."},
+
+{name:"MAOI and a cheese plate",who:"Walter, 66",title:"A pounding headache at a wine tasting",
+ story:"Walter takes phenelzine, an MAOI, for depression that did not respond to other drugs. At a wine tasting he ate aged cheese and dry-cured salami and drank red wine. Within an hour he had a severe pounding headache at the back of his head, a stiff neck, sweating and a racing heart.",
+ mar:[["phenelzine","PO three times daily",["g","g","d"]],["tyramine foods","aged cheese, cured meat, wine (reported)",["","g",""]]],
+ vit:{hr:112,sbp:212,dbp:118,spo2:98,rr:20,temp:"37.4°C"},
+ labs:[["Glucose","110","","70-110 mg/dL"],["Sodium","138","","135-145 mEq/L"],["Troponin","normal","","normal"],["Creatinine","1.0","","about 0.6-1.2 mg/dL"]],
+ find:["Severe occipital headache","Stiff neck","Sweating","Palpitations","Very high BP"],face:"distress",flush:true,
+ qs:[{q:"Why did these foods cause this reaction?",hint:"What normally destroys tyramine in the gut?",opts:[
+   ["MAO normally breaks down tyramine; with MAO blocked, tyramine reaches nerve endings and floods out norepinephrine",1,"Yes. Aged, cured and fermented foods are rich in tyramine. With MAO blocked, tyramine is absorbed and pushes out large amounts of stored norepinephrine, which squeezes blood vessels: a hypertensive crisis."],
+   ["He is allergic to cheese",0,"Allergy causes hives, swelling or wheeze. Severe hypertension with headache is the tyramine reaction."],
+   ["Wine lowers the level of phenelzine",0,"This is not about the drug level. It is about tyramine and norepinephrine."],
+   ["Serotonin syndrome from the cheese",0,"The food acts through norepinephrine release. The key sign here is extreme blood pressure."]]},
+  {q:"What should the nurse do?",hint:"This blood pressure can cause a stroke.",opts:[
+   ["Notify the prescriber immediately, monitor BP closely, and prepare for a fast-acting IV antihypertensive as ordered",1,"Yes. A hypertensive crisis is an emergency that can cause a brain bleed. Hold the next MAOI dose and follow the prescriber's orders."],
+   ["Give an over-the-counter decongestant for the headache",0,"Decongestants raise blood pressure and are dangerous with MAOIs."],
+   ["Let him sleep it off",0,"A BP over 200 with severe headache needs urgent treatment."],
+   ["Give the next phenelzine dose on time",0,"Hold the MAOI and report."]]},
+  {q:"Which teaching is most important for Walter?",hint:"Foods, medicines and switching.",opts:[
+   ["Avoid tyramine-rich foods (aged cheese, cured meats, tap beer, soy sauce, sauerkraut) and decongestants or stimulants, and keep the diet for about 2 weeks after stopping",1,"Yes. The MAO enzyme takes about 2 weeks to rebuild, so the diet and the washout before starting another antidepressant both last that long."],
+   ["The diet only matters on days he takes a dose",0,"MAOIs block the enzyme for a long time; the diet is needed every day."],
+   ["Fresh foods are also dangerous; he should fast",0,"Fresh foods are generally fine. The risk comes from aged, cured and fermented foods."],
+   ["He can switch to an SSRI tomorrow if he wants",0,"Switching needs a washout of about 2 weeks to avoid serotonin syndrome."]]}],
+ exp:"MAOIs block the enzyme that breaks down monoamines and dietary tyramine. Tyramine-rich foods, stimulants and decongestants can cause a hypertensive crisis, and other serotonin drugs can cause serotonin syndrome. The enzyme takes about 2 weeks to recover."}
+];
+const CS={i:0,solved:{},first:{},wrong:{},shown:{}};
+function csKey(i,q){return i+"-"+q}
+function caseMeta(){const c=CASES[CS.i];
+  $("#cSolved").textContent=Object.keys(CS.solved).length+" of "+CASES.reduce((s,k)=>s+k.qs.length,0);$("#cFirst").textContent=Object.keys(CS.first).length;
+  $("#caseChips").querySelectorAll("button").forEach((b,i)=>{const done=CASES[i].qs.every((q,j)=>CS.solved[csKey(i,j)]);if(done&&!b.querySelector(".ok"))b.insertAdjacentHTML("beforeend",'<span class="ok" aria-label="solved">✓</span>')});
+  const all=c.qs.every((q,j)=>CS.solved[csKey(CS.i,j)]);const ex=$("#cExp");ex.className="explain"+(all?" show":"");ex.innerHTML=all?`<b>Lesson.</b> ${c.exp}`:""}
+function caseUI(){const c=CASES[CS.i];
+  $("#caseChips").innerHTML=CASES.map((k,i)=>`<button type="button" class="casechip" aria-pressed="${i===CS.i}" data-i="${i}">${i+1}. ${k.name}${k.qs.every((q,j)=>CS.solved[csKey(i,j)])?'<span class="ok" aria-label="solved">✓</span>':""}</button>`).join("");
+  $("#caseChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{CS.i=+b.dataset.i;caseUI();a11yKey=""});
+  $("#cN").textContent=CS.i+1;$("#cT").textContent=CASES.length;
+  $("#cWho").textContent=`Case ${CS.i+1} · ${c.who}`;$("#cTitle").textContent=c.title;$("#cStory").textContent=c.story;
+  $("#caseLegend").innerHTML=`<span><i class="s" style="background:var(--good)"></i>✓ given</span><span><i class="s" style="background:var(--warn)"></i>due now</span><span><i class="s" style="background:var(--bad)"></i>H or L = outside the range</span>`;
+  const box=$("#cQs");box.innerHTML="";let open=true;
+  c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);const d=document.createElement("div");d.className="qblock";if(!open)d.hidden=true;
+    d.innerHTML=`<p class="qlab">${j+1}. ${q.q}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const ob=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    q.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      if(CS.solved[k]&&o[1])b.classList.add("right");
+      b.onclick=()=>{if(o[1]){b.classList.add("right");fb.className="fb show ok";fb.textContent="✓ "+o[2];if(!CS.solved[k]){CS.solved[k]=1;if(!CS.wrong[k]&&!CS.shown[k])CS.first[k]=1}
+          $("#cHintBox").hidden=true;const nx=d.nextElementSibling;if(nx)nx.hidden=false;caseMeta()}
+        else{b.classList.add("wrong");CS.wrong[k]=1;fb.className="fb show no";fb.textContent="Not quite. "+o[2]}};
+      ob.appendChild(b)});
+    box.appendChild(d);if(!CS.solved[k])open=false});
+  caseMeta();
+  $("#cPrev").disabled=CS.i===0;$("#cNext").textContent=CS.i===CASES.length-1?"Back to case 1 →":"Next case →";$("#cHintBox").hidden=true}
+$("#cHint").onclick=()=>{const c=CASES[CS.i];const j=c.qs.findIndex((q,j)=>!CS.solved[csKey(CS.i,j)]);const hb=$("#cHintBox");hb.hidden=false;hb.textContent=j<0?"All questions here are solved. Try the next case.":"Hint for question "+(j+1)+": "+c.qs[j].hint};
+$("#cShow").onclick=()=>{const c=CASES[CS.i];c.qs.forEach((q,j)=>{const k=csKey(CS.i,j);if(!CS.solved[k]){CS.shown[k]=1;CS.solved[k]=1}});caseUI();
+  $("#cQs").querySelectorAll(".qblock").forEach((d,j)=>{const fb=d.querySelector(".fb");fb.className="fb show ok";fb.textContent="✓ "+c.qs[j].opts.find(o=>o[1])[2]})};
+$("#cPrev").onclick=()=>{if(CS.i>0){CS.i--;caseUI()}};$("#cNext").onclick=()=>{CS.i=(CS.i+1)%CASES.length;caseUI()};
+
+/* drawing: MAR strip, bedside monitor, lab panel, bedside findings */
+function marCell(x,y,code){if(code==="g"){rr(x-26,y-11,52,22,5);ctx.fillStyle=hexA(C.good,.18);ctx.fill();checkMark(x-14,y,5,C.good);txt(x-4,y,"given",{size:11.5,weight:600})}
+  else if(code==="d"){rr(x-26,y-11,52,22,5);ctx.strokeStyle=C.warn;ctx.lineWidth=2;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);txt(x,y,"due",{size:11.5,weight:700,align:"center",color:C["warn-ink"]})}
+  else txt(x,y,"–",{size:12,align:"center",color:C["ink-faint"]})}
+function drawCase(now){use(S3);const c=CASES[CS.i];const t=now/1000;
+  // MAR
+  panelBox(10,10,780,124);title(22,26,"Medication administration record · "+c.who);
+  const cols=[520,610,700];["08:00","14:00","20:00"].forEach((h,i)=>txt(cols[i],48,h,{size:12,mono:true,weight:700,align:"center",color:C["ink-soft"]}));
+  txt(22,48,"Medication (generic)",{size:12,weight:700,color:C["ink-soft"]});txt(250,48,"Route and timing",{size:12,weight:700,color:C["ink-soft"]});
+  line(18,58,782,58,C.rule,1);
+  c.mar.forEach((m,i)=>{const y=76+i*28;txt(22,y,m[0],{size:13,weight:700,mono:true});txt(250,y,m[1],{size:12.5});m[2].forEach((code,j)=>marCell(cols[j],y,code));line(18,y+14,782,y+14,C["rule-soft"],1)});
+  // monitor
+  monitor(10,142,396,232,c.vit,t);
+  // labs
+  panelBox(414,142,376,232);title(426,158,"Labs");
+  txt(426,180,"Test",{size:11.5,weight:700,color:C["ink-soft"]});txt(600,180,"Result",{size:11.5,weight:700,color:C["ink-soft"],align:"right"});txt(620,180,"Reference (teaching)",{size:11.5,weight:700,color:C["ink-soft"]});
+  c.labs.forEach((l,i)=>{const y=206+i*40;const fl=l[2];if(fl){rr(420,y-16,364,32,5);ctx.fillStyle=hexA(C.bad,.12);ctx.fill();ctx.strokeStyle=hexA(C.bad,.7);ctx.lineWidth=1.2;ctx.stroke()}
+    txt(426,y,l[0],{size:13,weight:600});txt(590,y,l[1],{size:14,weight:700,mono:true,align:"right",color:fl?C.bad:C.ink});if(fl)chipText(608,y,fl,C.bad);
+    wrapText(l[3],624,y,160,13,{size:11.5,color:C["ink-soft"]})});
+  // findings
+  panelBox(10,382,780,90);title(22,398,"At the bedside");
+  const px=74,py=438;
+  ctx.save();if(c.tilt){ctx.translate(px,py-18);ctx.rotate(-.35+.04*Math.sin(t*3));ctx.translate(-px,-(py-18))}
+  person(px,py,24,{face:c.face,shirt:C.act3,tremor:c.tremor||0,coarse:c.coarse,t,flush:c.flush});ctx.restore();
+  if(c.rigid){line(px+16,py+8,px+40,py+8,C["skin-edge"],5);txt(px+44,py+8,"stiff",{size:11,weight:700,color:C.bad})}
+  if(c.tilt){txt(px-16,py-14,"eyes up",{size:11,weight:700,color:C.bad,align:"right"})}
+  if(c.face==="sleep"){txt(px+20,py+20,"RR "+c.vit.rr,{size:11,weight:700,mono:true,color:C.bad})}
+  let fx=124,fy=420;c.find.forEach((f,i)=>{ctx.font=`600 12px ${FONT}`;const w=ctx.measureText(f).width+30;if(fx+w>780){fx=124;fy+=28}
+    rr(fx,fy-11,w,22,11);ctx.fillStyle=hexA(C.warn,.14);ctx.fill();ctx.strokeStyle=hexA(C.warn,.8);ctx.lineWidth=1.2;ctx.stroke();txt(fx+10,fy,"!",{size:12,weight:700,color:C["warn-ink"]});txt(fx+20,fy,f,{size:12,weight:600});fx+=w+8})}
+function caseA11y(){const c=CASES[CS.i];const v=c.vit;
+  const lab=`Case ${CS.i+1}: ${c.title}.`;
+  const d=`Case ${CS.i+1}, ${c.who}. The medication record lists `+c.mar.map(m=>`${m[0]}, ${m[1]}: `+["08:00","14:00","20:00"].map((h,i)=>m[2][i]==="g"?`given at ${h}`:m[2][i]==="d"?`due at ${h}`:"").filter(Boolean).join(", ")).join("; ")+
+    `. The bedside monitor shows heart rate ${v.hr}, blood pressure ${v.sbp} over ${v.dbp}, oxygen saturation ${v.spo2} percent, respiratory rate ${v.rr}, temperature ${v.temp}. Labs: `+c.labs.map(l=>`${l[0]} ${l[1]}${l[2]==="H"?" high":l[2]==="L"?" low":""}`).join(", ")+`. At the bedside: `+c.find.join(", ")+".";
+  return [lab,d]}
+
+/* ================= PART 4: sort it out ================= */
+const SROUNDS=[
+{name:"Calm, sleep and mood",goal:"Put each generic drug into its class. Name stems help: -azepam and -azolam are benzodiazepines; -triptyline is a tricyclic.",
+ bins:[["benzo","Benzodiazepine"],["sleep","Other sleep or anxiety drug"],["ssri","SSRI"],["snri","SNRI"],["tca","Tricyclic (TCA)"],["maoi","MAOI"]],
+ cards:[["lorazepam","benzo","The -azepam stem: a benzodiazepine that enhances GABA-A."],["alprazolam","benzo","The -azolam stem: a short-acting benzodiazepine."],["diazepam","benzo","The -azepam stem: a long-acting benzodiazepine."],
+  ["zolpidem","sleep","A z-drug hypnotic: same GABA-A site, mainly for sleep."],["ramelteon","sleep","A melatonin receptor agonist for falling asleep."],["buspirone","sleep","A non-sedating anxiety drug that takes weeks, with no dependence."],
+  ["sertraline","ssri","An SSRI: blocks the serotonin pump."],["fluoxetine","ssri","An SSRI with a very long half-life."],["escitalopram","ssri","An SSRI."],
+  ["venlafaxine","snri","An SNRI: blocks serotonin and norepinephrine pumps."],["duloxetine","snri","An SNRI also used for nerve pain."],
+  ["amitriptyline","tca","The -triptyline stem: a tricyclic."],["nortriptyline","tca","The -triptyline stem: a tricyclic."],
+  ["phenelzine","maoi","An MAOI: blocks monoamine oxidase."],["tranylcypromine","maoi","An MAOI."]]},
+{name:"Mood stabilizers, psychosis and ADHD",goal:"Put each generic drug into its class.",
+ bins:[["mood","Mood stabilizer"],["fga","First-generation antipsychotic"],["sga","Second-generation antipsychotic"],["atyp","Other antidepressant"],["stim","ADHD stimulant"],["nonstim","ADHD non-stimulant"]],
+ cards:[["lithium","mood","The classic mood stabilizer for bipolar disorder."],["valproate","mood","An antiseizure drug also used as a mood stabilizer."],["lamotrigine","mood","An antiseizure mood stabilizer; watch for serious rash."],
+  ["haloperidol","fga","A high-potency first-generation D2 blocker."],["chlorpromazine","fga","A low-potency first-generation antipsychotic."],
+  ["risperidone","sga","Blocks D2 and 5-HT2A."],["olanzapine","sga","Second generation; high metabolic risk."],["quetiapine","sga","Second generation; quite sedating."],["clozapine","sga","Second generation; needs ANC monitoring."],
+  ["bupropion","atyp","Blocks dopamine and norepinephrine reuptake; lowers the seizure threshold."],["mirtazapine","atyp","Blocks alpha-2 brakes; sedation and appetite gain."],
+  ["methylphenidate","stim","Blocks dopamine and norepinephrine reuptake."],["amphetamine","stim","Releases dopamine and norepinephrine and blocks reuptake."],
+  ["atomoxetine","nonstim","Blocks only the norepinephrine pump; not a controlled substance."]]},
+{name:"Which class causes it?",goal:"Match each adverse effect to the class it best fits. Think about the mechanism.",
+ bins:[["benzo","Benzodiazepines"],["ssri","SSRIs"],["tca","Tricyclics"],["maoi","MAOIs"],["lith","Lithium"],["apsy","Antipsychotics"]],
+ cards:[["Slow breathing when combined with alcohol","benzo","Both enhance GABA-A, so the depression adds up."],["Seizures if stopped suddenly after long use","benzo","The brain adapted to the extra brake, so it rebounds: taper slowly."],
+  ["Nausea at the start and sexual side effects","ssri","Serotonin acts in the gut and on sexual function."],["Dizziness and 'brain zaps' after missing doses","ssri","Discontinuation syndrome; taper rather than stop."],
+  ["Dry mouth, constipation, urinary retention","tca","They also block muscarinic receptors: anticholinergic effects."],["Wide QRS and arrhythmias in overdose","tca","They block heart sodium channels."],
+  ["Hypertensive crisis after aged cheese","maoi","Tyramine is not broken down, so norepinephrine floods out."],["Must wait about 2 weeks before switching drugs","maoi","The blocked enzyme takes about 2 weeks to rebuild."],
+  ["Coarse tremor, vomiting and confusion when the level climbs","lith","A narrow therapeutic index: signs of toxicity."],["Low thyroid and kidney changes over years","lith","Long-term lithium affects the thyroid and kidney."],
+  ["Acute dystonia, akathisia, tardive dyskinesia","apsy","D2 blockade in the movement pathway causes EPS."],["Weight gain, high glucose and lipids","apsy","Mostly second-generation drugs: metabolic syndrome."]]},
+{name:"What do you monitor?",goal:"Match each monitoring step or teaching point to the drug it belongs with.",
+ bins:[["lith","Lithium"],["cloz","Clozapine"],["olz","Olanzapine"],["mph","Methylphenidate"],["sert","Sertraline in a 19-year-old"],["lor","Lorazepam"]],
+ cards:[["Trough blood level about 12 hours after a dose","lith","Levels are drawn as troughs to compare with the target range."],["Steady salt and fluids; kidney and thyroid tests","lith","Sodium and water change lithium clearance."],
+  ["ANC on a set schedule, weekly at first","cloz","Clozapine can cause severe neutropenia."],["Report fever or sore throat right away","cloz","Possible sign of infection with a low ANC."],
+  ["Weight, waist size, glucose or A1C, lipids","olz","Second-generation antipsychotics cause metabolic syndrome."],["Screen for abnormal mouth and face movements","olz","Antipsychotics can cause tardive dyskinesia."],
+  ["Height, weight and appetite in children","mph","Stimulants reduce appetite and can slow growth."],["Heart rate and blood pressure; give doses in the morning","mph","Stimulants raise HR and BP and disturb sleep."],
+  ["New suicidal thoughts in the first weeks or after dose changes","sert","The antidepressant black box warning for people under about 25."],["Ask before adding tramadol or St. John's wort","sert","Extra serotonin drugs raise the risk of serotonin syndrome."],
+  ["Respiratory rate, sedation and fall precautions","lor","CNS depression, especially in older adults."],["Taper slowly after long-term use","lor","Sudden stops can cause withdrawal and seizures."]]},
+{name:"Reversal and treatment",goal:"Match each antidote or treatment to the problem it is used for.",
+ bins:[["od","Benzodiazepine overdose"],["dyst","Acute dystonia (EPS)"],["ss","Serotonin syndrome"],["nms","Neuroleptic malignant syndrome"],["litox","Lithium toxicity"],["htn","MAOI hypertensive crisis"]],
+ cards:[["Flumazenil, used with seizure caution","od","Blocks the benzodiazepine site on GABA-A."],["Support breathing and watch for sedation returning","od","Flumazenil can wear off before the benzodiazepine does."],
+  ["Benztropine","dyst","An anticholinergic that rebalances the movement pathway."],["Diphenhydramine IM or IV","dyst","Its anticholinergic effect eases the spasm."],
+  ["Cyproheptadine, a serotonin blocker","ss","Blocks serotonin receptors."],["Stop serotonin drugs, cool, sedate if agitated","ss","Remove the cause and support the body."],
+  ["Dantrolene, a muscle relaxant","nms","Relaxes rigid muscle that is making heat."],["Bromocriptine, a dopamine agonist","nms","Replaces the blocked dopamine signal."],
+  ["IV fluids; dialysis if severe","litox","Restores clearance or removes lithium directly."],["Hold lithium and draw a stat level","litox","Stop new lithium and measure."],
+  ["Fast-acting IV antihypertensive","htn","Brings down a dangerous blood pressure."],["Hold the MAOI; no tyramine foods or decongestants","htn","Remove the triggers."]]}];
+function binSVG(k){const s=b=>`<svg viewBox="0 0 56 46" aria-hidden="true" focusable="false">${b}</svg>`;
+  const pent=(x,y,r,c)=>{const p=[0,1,2,3,4].map(i=>{const a=-Math.PI/2+i*Math.PI*2/5;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ");return `<polygon points="${p}" fill="${c||"var(--drug)"}" stroke="var(--ink)" stroke-opacity=".5"/>`};
+  const hex=(x,y,r,c)=>{const p=[0,1,2,3,4,5].map(i=>{const a=i*Math.PI/3;return (x+Math.cos(a)*r).toFixed(1)+","+(y+Math.sin(a)*r).toFixed(1)}).join(" ");return `<polygon points="${p}" fill="${c}" stroke="var(--ink)" stroke-opacity=".5"/>`};
+  const mem=`<rect x="2" y="30" width="52" height="7" fill="var(--gold)" opacity=".55"/>`;
+  const pump=(x,c)=>`<rect x="${x-7}" y="20" width="6" height="20" rx="3" fill="${c||"var(--transporter)"}"/><rect x="${x+1}" y="20" width="6" height="20" rx="3" fill="${c||"var(--transporter)"}"/>`;
+  const cup=(x,c)=>`<path d="M${x-8} 14 L${x-8} 26 Q${x-8} 31 ${x-3} 31 L${x+3} 31 Q${x+8} 31 ${x+8} 26 L${x+8} 14 L${x+4} 14 L${x+4} 24 L${x-4} 24 L${x-4} 14 Z" fill="${c||"var(--receptor)"}"/>`;
+  const therm=`<rect x="8" y="6" width="7" height="28" rx="3.5" fill="var(--panel)" stroke="var(--ink-soft)"/><circle cx="11.5" cy="37" r="6" fill="var(--heat)"/><rect x="9.5" y="14" width="4" height="22" fill="var(--heat)"/>`;
+  switch(k){
+    case "benzo":return s(`${mem}<rect x="18" y="14" width="8" height="28" rx="3" fill="var(--receptor)"/><rect x="30" y="14" width="8" height="28" rx="3" fill="var(--receptor)"/>${hex(12,12,5,"var(--gaba)")}${pent(44,14,6)}`);
+    case "sleep":return s(`<path d="M24 8 A14 14 0 1 0 38 30 A11 11 0 1 1 24 8 Z" fill="var(--gold)"/><text x="40" y="16" font-size="12" font-weight="700" fill="var(--accent)" font-family="monospace">z</text><text x="46" y="9" font-size="9" font-weight="700" fill="var(--accent)" font-family="monospace">z</text>`);
+    case "ssri":return s(`${mem}${pump(20)}${pent(20,30,5)}<circle cx="38" cy="16" r="4" fill="var(--ser)"/><circle cx="46" cy="22" r="4" fill="var(--ser)"/><circle cx="36" cy="26" r="4" fill="var(--ser)"/>`);
+    case "snri":return s(`${mem}${pump(16)}${pump(40)}${pent(16,30,5)}${pent(40,30,5)}<circle cx="28" cy="14" r="4" fill="var(--ser)"/><polygon points="28,4 32,11 24,11" fill="var(--ne)"/>`);
+    case "tca":return s(`${hex(14,24,8,"var(--drug2)")}${hex(28,24,8,"var(--drug2)")}${hex(42,24,8,"var(--drug2)")}`);
+    case "maoi":return s(`<path d="M26 23 L42 12 A19 19 0 1 0 42 34 Z" fill="var(--mao)" stroke="var(--ink)" stroke-opacity=".4"/>${pent(40,23,6,"var(--drug2)")}`);
+    case "mood":case "lith":return s(`<line x1="8" y1="32" x2="48" y2="32" stroke="var(--ink-soft)" stroke-width="2"/><polygon points="28,32 23,42 33,42" fill="var(--ink-soft)"/><circle cx="14" cy="24" r="8" fill="var(--li)"/><text x="14" y="28" font-size="10" font-weight="700" text-anchor="middle" fill="var(--panel)" font-family="monospace">Li</text><circle cx="42" cy="24" r="8" fill="var(--na)"/><text x="42" y="28" font-size="10" font-weight="700" text-anchor="middle" fill="var(--panel)" font-family="monospace">Na</text>`);
+    case "fga":return s(`${mem}${cup(28)}${pent(28,18,6)}`);
+    case "sga":return s(`${mem}${cup(16)}${cup(40,"var(--ser)")}${pent(16,18,5)}${pent(40,18,5)}`);
+    case "atyp":return s(`<path d="M6 30 L24 30 L36 14 M24 30 L38 38" stroke="var(--accent)" stroke-width="3" fill="none"/><polygon points="36,8 42,14 34,18" fill="var(--accent)"/><polygon points="40,34 44,42 34,40" fill="var(--accent)"/>`);
+    case "stim":return s(`<polygon points="30,4 14,26 26,26 22,42 42,18 30,18 34,4" fill="var(--gold)" stroke="var(--ink)" stroke-opacity=".5"/>`);
+    case "nonstim":return s(`${mem}${pump(28)}${pent(28,30,5)}<polygon points="14,10 19,19 9,19" fill="var(--ne)"/><polygon points="44,10 49,19 39,19" fill="var(--ne)"/>`);
+    case "apsy":return s(`${mem}${cup(28,"var(--blocked)")}${pent(28,18,6)}<path d="M8 10 L16 18 M16 10 L8 18" stroke="var(--bad)" stroke-width="2.5"/>`);
+    case "cloz":return s(`<circle cx="28" cy="23" r="17" fill="var(--wbc)" fill-opacity=".25" stroke="var(--wbc)" stroke-width="2"/><circle cx="22" cy="20" r="4.5" fill="var(--wbc)"/><circle cx="31" cy="17" r="4.5" fill="var(--wbc)"/><circle cx="32" cy="27" r="4.5" fill="var(--wbc)"/>`);
+    case "olz":return s(`<rect x="8" y="26" width="40" height="14" rx="3" fill="var(--panel)" stroke="var(--ink-soft)"/><path d="M14 26 A14 14 0 0 1 42 26" fill="none" stroke="var(--ink-soft)" stroke-width="2"/><line x1="28" y1="26" x2="38" y2="16" stroke="var(--bad)" stroke-width="2.5"/>`);
+    case "mph":return s(`<line x1="8" y1="40" x2="50" y2="40" stroke="var(--ink-soft)" stroke-width="2"/><line x1="8" y1="40" x2="8" y2="6" stroke="var(--ink-soft)" stroke-width="2"/><polyline points="10,36 20,30 30,22 40,16 48,12" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`);
+    case "sert":return s(`<rect x="6" y="8" width="44" height="32" rx="4" fill="var(--panel)" stroke="var(--ink-soft)"/><line x1="6" y1="16" x2="50" y2="16" stroke="var(--ink-soft)"/>${[0,1,2,3].map(i=>`<rect x="${11+i*10}" y="22" width="7" height="6" fill="${i<2?"var(--warn)":"var(--sunk)"}"/>`).join("")}<rect x="11" y="31" width="7" height="6" fill="var(--sunk)"/>`);
+    case "lor":case "od":return s(`<path d="M27 8 L27 20 M27 20 Q18 18 14 26 Q10 38 18 40 Q26 40 26 30 Z M29 20 Q38 18 42 26 Q46 38 38 40 Q30 40 30 30 Z" fill="var(--brain)" stroke="var(--brain-edge)" stroke-width="1.5"/><polyline points="4,44 14,44 18,40 22,44 52,44" fill="none" stroke="var(--accent)" stroke-width="1.5"/>`);
+    case "dyst":return s(`<g transform="rotate(-25 28 26)"><circle cx="28" cy="16" r="9" fill="var(--skin)" stroke="var(--skin-edge)"/><rect x="24" y="24" width="8" height="10" fill="var(--skin)"/></g><circle cx="24" cy="12" r="1.6" fill="var(--ink)"/><circle cx="30" cy="10" r="1.6" fill="var(--ink)"/><path d="M12 40 Q28 30 44 40" stroke="var(--act3)" stroke-width="5" fill="none"/>`);
+    case "ss":return s(`${therm}<polyline points="22,30 27,20 31,32 35,18 39,30 44,22 50,28" fill="none" stroke="var(--ser)" stroke-width="2.5"/>`);
+    case "nms":return s(`${therm}<rect x="22" y="20" width="28" height="7" rx="3" fill="var(--skin-edge)"/><line x1="24" y1="34" x2="48" y2="34" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="3 2"/>`);
+    case "litox":return s(`<path d="M22 6 C8 6 6 22 10 32 C14 42 26 42 28 32 C30 26 24 24 26 18 C28 12 34 6 22 6 Z" fill="var(--kidney)" stroke="var(--kidney-edge)"/><circle cx="40" cy="16" r="7" fill="var(--li)"/><text x="40" y="19.5" font-size="8.5" font-weight="700" text-anchor="middle" fill="var(--panel)" font-family="monospace">Li</text><path d="M40 26 L40 40 M35 35 L40 40 L45 35" stroke="var(--bad)" stroke-width="2" fill="none"/>`);
+    case "htn":return s(`<path d="M8 38 A20 20 0 0 1 48 38" fill="none" stroke="var(--sunk)" stroke-width="7"/><path d="M38 21 A20 20 0 0 1 48 38" fill="none" stroke="var(--bad)" stroke-width="7"/><line x1="28" y1="38" x2="44" y2="24" stroke="var(--ink)" stroke-width="2.5"/><circle cx="28" cy="38" r="3" fill="var(--ink)"/>`);
+  }return s("")}
+const SG={r:0,placed:{},mist:0,sel:null,t0:0,timer:null,hint:null,doneRounds:{}};
+function sRoundsUI(){$("#sRounds").innerHTML=SROUNDS.map((r,i)=>`<button type="button" class="round" aria-pressed="${i===SG.r}" data-i="${i}">Round ${i+1}: ${r.name}${SG.doneRounds[i]?`<span class="ok" aria-label="${SG.doneRounds[i]} stars">${"★".repeat(SG.doneRounds[i])}</span>`:""}</button>`).join("");
+  $("#sRounds").querySelectorAll("button").forEach(b=>b.onclick=()=>sLoad(+b.dataset.i))}
+function sLoad(i){SG.r=i;SG.placed={};SG.mist=0;SG.sel=null;SG.hint=null;SG.t0=Date.now();const R=SROUNDS[i];SG.order=shuffle(R.cards.map((c,k)=>k));
+  $("#sN").textContent=`Round ${i+1} of ${SROUNDS.length}`;$("#sTitle").textContent=R.name;$("#sGoal").textContent=R.goal;
+  const bins=$("#sBins");bins.innerHTML="";R.bins.forEach(b=>{const d=document.createElement("div");d.className="bin";d.dataset.k=b[0];
+    d.innerHTML=`<button type="button" class="binhead" data-k="${b[0]}">${binSVG(b[0])}<span>${b[1]}</span></button><div class="binitems"></div>`;
+    d.querySelector(".binhead").onclick=()=>{if(SG.sel!=null)sDrop(SG.sel,b[0]);else sMsg("info","Pick a card first, then tap a box.")};bins.appendChild(d)});
+  const best=store.get("best-"+i);$("#sBest").textContent=best?`Best for this round: ${"★".repeat(+best)}`:"";
+  $("#sMsg").className="msg";sRoundsUI();sRender();sTimerUI();a11yKey=""}
+function sRender(){const R=SROUNDS[SG.r];const pool=$("#sPool");pool.innerHTML="";
+  SG.order.forEach(k=>{if(SG.placed[k])return;const c=R.cards[k];const b=document.createElement("button");b.type="button";b.className="scard"+(SG.hint===k?" hinted":"");b.textContent=c[0];b.dataset.k=k;
+    b.setAttribute("aria-pressed",SG.sel===k);b.onclick=e=>{if(b.dataset.dragged){delete b.dataset.dragged;return}SG.sel=SG.sel===k?null:k;sRender();const nb=pool.querySelector(`[data-k="${k}"]`);if(nb)nb.focus()};
+    b.addEventListener("pointerdown",e=>sDragStart(e,b,k));pool.appendChild(b)});
+  if(!pool.children.length)pool.innerHTML='<span class="small">All cards sorted.</span>';
+  document.querySelectorAll("#sBins .bin").forEach(d=>{const items=d.querySelector(".binitems");items.innerHTML="";d.classList.toggle("hintbin",SG.hint!=null&&R.cards[SG.hint][1]===d.dataset.k);
+    R.cards.forEach((c,k)=>{if(SG.placed[k]&&c[1]===d.dataset.k){const s=document.createElement("div");s.className="scard placed";s.textContent="✓ "+c[0];items.appendChild(s)}})});
+  const n=Object.keys(SG.placed).length,tot=R.cards.length;$("#sStars").textContent=n===tot?"★".repeat(sStars())+"☆".repeat(3-sStars()):"";$("#sStars").setAttribute("aria-label",n===tot?sStars()+" of 3 stars":"Stars appear when the round is done")}
+function sStars(){return SG.mist===0?3:SG.mist<=2?2:1}
+function sMsg(cls,t){const m=$("#sMsg");m.className="msg show "+cls;m.textContent=t}
+function sDrop(k,bin){const R=SROUNDS[SG.r];const c=R.cards[k];SG.sel=null;SG.hint=null;
+  if(c[1]===bin){SG.placed[k]=1;sMsg("good","✓ "+c[0]+": "+c[2])}else{SG.mist++;const nm=R.bins.find(b=>b[0]===bin)[1];sMsg("warn",`Not quite. "${c[0]}" does not go in ${nm}. Think again about how it works, or press Hint.`)}
+  sRender();if(Object.keys(SG.placed).length===R.cards.length)sFinish();else{const f=$("#sPool .scard");if(f&&document.activeElement===document.body)f.focus()}}
+function sFinish(){const st=sStars();SG.doneRounds[SG.r]=Math.max(SG.doneRounds[SG.r]||0,st);const best=+(store.get("best-"+SG.r)||0);if(st>best)store.set("best-"+SG.r,st);
+  const tm=!$("#sRelaxed").checked?` Time: ${fmt((Date.now()-SG.t0)/1000)}.`:"";sMsg("good",`Round complete with ${SG.mist} ${SG.mist===1?"mistake":"mistakes"}: ${st} of 3 stars.${tm} `+(SG.r<SROUNDS.length-1?"Press Next round when you are ready.":"That was the last round. Well done."));sRoundsUI();sRender()}
+let drag=null;
+function sDragStart(e,b,k){if(e.button>0)return;const r=b.getBoundingClientRect();drag={k,b,sx:e.clientX,sy:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top,g:null,over:null,id:e.pointerId};
+  window.addEventListener("pointermove",sDragMove);window.addEventListener("pointerup",sDragEnd);window.addEventListener("pointercancel",sDragEnd)}
+function sDragMove(e){if(!drag||e.pointerId!==drag.id)return;if(!drag.g){if(Math.hypot(e.clientX-drag.sx,e.clientY-drag.sy)<6)return;const g=drag.b.cloneNode(true);g.classList.add("ghost");g.removeAttribute("id");g.setAttribute("aria-hidden","true");g.tabIndex=-1;g.style.width=drag.b.offsetWidth+"px";document.body.appendChild(g);drag.g=g;drag.b.style.opacity=".35"}
+  e.preventDefault();drag.g.style.left=(e.clientX-drag.dx)+"px";drag.g.style.top=(e.clientY-drag.dy)+"px";
+  const el=document.elementFromPoint(e.clientX,e.clientY);const bin=el&&el.closest?el.closest(".bin"):null;document.querySelectorAll(".bin.over").forEach(x=>x!==bin&&x.classList.remove("over"));if(bin)bin.classList.add("over");drag.over=bin}
+function sDragEnd(e){if(!drag)return;window.removeEventListener("pointermove",sDragMove);window.removeEventListener("pointerup",sDragEnd);window.removeEventListener("pointercancel",sDragEnd);
+  const d=drag;drag=null;document.querySelectorAll(".bin.over").forEach(x=>x.classList.remove("over"));if(!d.g)return;d.g.remove();d.b.style.opacity="";d.b.dataset.dragged="1";
+  if(d.over)sDrop(d.k,d.over.dataset.k);else sRender()}
+$("#sHint").onclick=()=>{const R=SROUNDS[SG.r];const k=SG.sel!=null?SG.sel:SG.order.find(k=>!SG.placed[k]);if(k==null){sMsg("info","Everything is sorted.");return}SG.hint=k;
+  const bn=R.bins.find(b=>b[0]===R.cards[k][1])[1];sMsg("info",`Hint: "${R.cards[k][0]}" goes in the glowing box (${bn}).`);sRender()};
+$("#sShow").onclick=()=>{const R=SROUNDS[SG.r];R.cards.forEach((c,k)=>SG.placed[k]=1);SG.mist=Math.max(SG.mist,3);sMsg("info","All cards placed. Read each box to see why they belong there.");sRender();sFinish()};
+$("#sShuffle").onclick=()=>sLoad(SG.r);$("#sNext").onclick=()=>sLoad((SG.r+1)%SROUNDS.length);
+function sTimerUI(){const relaxed=$("#sRelaxed").checked;$("#sTimer").hidden=relaxed;clearInterval(SG.timer);if(!relaxed){SG.timer=setInterval(()=>{if(Object.keys(SG.placed).length<SROUNDS[SG.r].cards.length)$("#sTimer").textContent=fmt((Date.now()-SG.t0)/1000)},500)}}
+$("#sRelaxed").onchange=()=>{SG.t0=Date.now();sTimerUI()};
+function sortA11y(){const R=SROUNDS[SG.r];const n=Object.keys(SG.placed).length;
+  return [null,`Round ${SG.r+1}, ${R.name}. ${n} of ${R.cards.length} cards sorted. Each box has a small drawing: `+R.bins.map(b=>b[1]).join(", ")+`. Cards still to sort: `+(SG.order.filter(k=>!SG.placed[k]).map(k=>R.cards[k][0]).join(", ")||"none")+"."]}
+
+/* ---------------- accessibility: live labels and picture descriptions ---------------- */
+const A11Y={syn:{cv:"#cvSyn",f:synA11y},li:{cv:"#cvLi",f:liA11y},cases:{cv:"#cvCase",f:caseA11y},sort:{cv:null,f:sortA11y}};
+let a11yKey="",a11yT=0;
+function a11yTick(){if((++a11yT)%20)return;const a=A11Y[curTab];const [lab,d]=a.f();const key=curTab+"|"+lab+"|"+d;if(key===a11yKey)return;a11yKey=key;
+  if(a.cv&&lab)$(a.cv).setAttribute("aria-label",lab);if(window.gkDescribe)window.gkDescribe(d);
+  const box=document.getElementById("gk-desc");if(box){const host=a.cv?$(a.cv).closest(".canvas-holder"):$("#sPool");if(host&&host.nextElementSibling!==box)host.after(box);if(a.cv)$(a.cv).setAttribute("aria-describedby","gk-desc")}}
+
+/* ---------------- tabs / theme / loop ---------------- */
+let curTab="syn";
+const TABS=["syn","li","cases","sort"];
+function showTab(k,focus){curTab=k;document.querySelectorAll(".tab").forEach(x=>{const on=x.dataset.tab===k;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;if(on&&focus)x.focus()});
+  TABS.forEach(t=>$("#tab-"+t).hidden=t!==k);fitAll();a11yKey="";a11yT=19}
+document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>showTab(t.dataset.tab);t.onkeydown=e=>{const i=TABS.indexOf(t.dataset.tab);
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();showTab(TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length],true)}
+  if(e.key==="Home"){e.preventDefault();showTab(TABS[0],true)}if(e.key==="End"){e.preventDefault();showTab(TABS[TABS.length-1],true)}}});
+function fitAll(){[S1,S2,S3].forEach(s=>s.fit())}
+window.addEventListener("resize",fitAll);
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+let last=performance.now(),rdT=0;
+function frame(now){const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  try{if(curTab==="syn"){synStep(dt);drawSyn(now)}
+    else if(curTab==="li"){liStep(dt);drawLi(now);rdT+=dt;if(rdT>.25){rdT=0;liRead()}}
+    else if(curTab==="cases")drawCase(now)}catch(err){console.error(err)}
+  try{a11yTick()}catch(err){console.error(err)}
+  requestAnimationFrame(frame)}
+/* test hooks */
+window.__pl={tab:k=>showTab(k),
+  syn:o=>{if(o.nt)SY.nt=o.nt;if(o.drugs){SY.drugs.clear();o.drugs.forEach(d=>SY.drugs.add(d))}if(o.extra){SY.extra.clear();o.extra.forEach(d=>SY.extra.add(d))}
+    syncToggles($("#synDrugs"),SY.drugs);syncToggles($("#synExtra"),SY.extra);segBtns($("#synNT"),NTS.map(n=>[n[0],n[1]]),()=>SY.nt,v=>{SY.nt=v;SY.hist=[];SY.lev=100;SY.sig=100;synChanged()});synChanged();
+    for(let i=0;i<80;i++)synStep(.05);return {model:synModel(),warn:synWarn(),done:[...SY.done]}},
+  li:o=>{Object.assign(LI,o);if(o.drugs)LI.drugs=new Set(o.drugs);$("#liDose").value=LI.dose;liUI();liChanged();return liTarget()},
+  liRun:days=>{const was=LI.running;LI.running=true;for(let i=0;i<days*40;i++)liStep(.05);LI.running=was;liRead();return {L:LI.L,done:[...LI.done]}},
+  caseGo:i=>{CS.i=i;caseUI()},caseShow:()=>$("#cShow").click(),
+  sortGo:i=>sLoad(i),sortShow:()=>$("#sShow").click(),sortDrop:(k,b)=>sDrop(k,b),sortState:()=>({r:SG.r,placed:Object.keys(SG.placed).length,mist:SG.mist,order:SG.order}),
+  round:()=>SROUNDS[SG.r],n:()=>({cases:CASES.length,rounds:SROUNDS.length})};
+readColors();synChanged();chalUI($("#synChal"),SY_CHAL,SY.done);liUI();liChanged();chalUI($("#liChal"),LI_CHAL,LI.done);caseUI();sLoad(0);fitAll();requestAnimationFrame(frame);
+
+
+})();
+</script>
+</body>
+</html>

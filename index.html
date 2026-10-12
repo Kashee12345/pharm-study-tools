@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pharmacology Study Tools</title>
+<meta name="description" content="Animated walkthroughs, simulators and patient cases for pharmacology, Modules 1 to 15. Dr. Akash Garg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet">
+<script src="pharm-kit.js"></script>
+<style>
+:root{--ground:#E6E8F2;--panel:#F8F9FC;--panel-2:#EDEFF7;--ink:#12152A;--ink-soft:#50566F;--rule:#C8CDE0;--accent:#34429A;--accent-wash:#E1E5F8;--shadow:0 1px 2px rgba(18,21,42,.08),0 6px 18px -8px rgba(18,21,42,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0E1519;--panel:#181C30;--panel-2:#1F2440;--ink:#ECEEF7;--ink-soft:#B3B9D3;--rule:#2F3554;--accent:#A9B4F5;--accent-wash:#1A2350;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{--ground:#0E1519;--panel:#181C30;--panel-2:#1F2440;--ink:#ECEEF7;--ink-soft:#B3B9D3;--rule:#2F3554;--accent:#A9B4F5;--accent-wash:#1A2350}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+header{background:var(--panel);border-bottom:1px solid var(--rule)}
+.in{max-width:1040px;margin:0 auto;padding:22px 16px}
+.k{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:"IBM Plex Serif",Georgia,serif;font-size:32px;margin:4px 0 6px;line-height:1.15}
+.lead{margin:0;color:var(--ink-soft);font-size:16.5px;max-width:740px}
+h2{font-family:"IBM Plex Serif",Georgia,serif;font-size:22px;margin:30px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;scroll-margin-top:12px}
+h2 i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.sub{margin:0 0 8px;color:var(--ink-soft)}
+.ch{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft);font-weight:500}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}.jump a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;padding:5px 9px;border:1px solid var(--rule);border-radius:99px;background:var(--panel);color:var(--ink);text-decoration:none}.jump a:hover,.jump a:focus-visible{border-color:var(--accent)}
+.find{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.find label{font-weight:600}
+.find input{font:inherit;padding:8px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 260px;max-width:440px}
+.find input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+#count{color:var(--ink-soft);font-size:14px}
+.dz{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:5px}
+.dz li{font-size:13px;padding:2px 9px;border-radius:99px;background:var(--panel-2);border:1px solid var(--rule);color:var(--ink)}
+.dz li.hit{background:var(--accent-wash);border-color:var(--accent);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+a.card{display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover,a.card:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.type{font-family:"IBM Plex Mono",monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.card b{font-size:18px}
+.card span.d{color:var(--ink-soft);font-size:14.5px}
+.tip{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:12px 14px;margin-top:22px;font-size:15px}
+footer{max-width:1040px;margin:0 auto;padding:24px 16px 36px;font-size:13px;color:var(--ink-soft)}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <div class="k">Pharmacology &middot; Modules 1 to 15</div>
+  <h1>Pharmacology Study Tools</h1>
+  <p class="lead">See how drugs work. Each module has an animated walkthrough that shows each drug class acting at its target, so the effects, side effects and nursing checks make sense instead of being memorized, plus a Lab with simulators, patient cases and sorting games. Everything runs in your browser on a computer, tablet or phone. No login, nothing graded.</p>
+</div></header>
+<main class="in" id="top" style="padding-top:4px">
+  <div class="find" role="search">
+    <label for="q">Find a drug or topic</label>
+    <input id="q" type="search" placeholder="Try: warfarin, -olol, insulin, naloxone" autocomplete="off">
+    <span id="count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Jump to module"><a href="#m1">M1</a><a href="#m2">M2</a><a href="#m3">M3</a><a href="#m4">M4</a><a href="#m5">M5</a><a href="#m6">M6</a><a href="#m7">M7</a><a href="#m8">M8</a><a href="#m9">M9</a><a href="#m10">M10</a><a href="#m11">M11</a><a href="#m12">M12</a><a href="#m13">M13</a><a href="#m14">M14</a><a href="#m15">M15</a></nav>
+  <p class="tip"><b>How to use this:</b> open the walkthrough first and go at your own pace with the arrow keys or Next. Then open the Lab: move the sliders, give the drugs, and work the patient cases. Use the tools bar at the top of each page to pause the animations, slow them down, have the text read aloud, or get a written description of each picture. <b>For learning only.</b> Not medical advice and not a dosing reference.</p>
+  <section class="mod" id="m1" data-search="pharmacokinetics: how the body handles drugs routes and onset first-pass effect protein binding cyp450 inducers / inhibitors kidney excretion half-life steady state loading dose peak and trough narrow therapeutic index">
+  <h2><i style="background:#2F7FC1" aria-hidden="true"></i><span class="ch">Module 1</span> Pharmacokinetics: how the body handles drugs</h2>
+  <p class="sub">Absorption, distribution, metabolism and excretion, half-life, and why drug levels rise and fall.</p>
+  <ul class="dz" aria-label="Topics in module 1"><li>Routes and onset</li><li>First-pass effect</li><li>Protein binding</li><li>CYP450 inducers / inhibitors</li><li>Kidney excretion</li><li>Half-life</li><li>Steady state</li><li>Loading dose</li><li>Peak and trough</li><li>Narrow therapeutic index</li></ul>
+  <div class="grid">
+    <a class="card" href="PK-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Pharmacokinetics Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="PK-Lab.html"><span class="type">Simulators + cases</span><b>Module 1 Lab</b><span class="d">Drug level simulator, 7 case files, sorting rounds, and a time-the-blood-draw tab.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m2" data-search="pharmacodynamics: how drugs act on the body receptor types agonist / antagonist partial agonist potency vs efficacy therapeutic index tolerance / rebound drug interactions allergy vs side effect pharmacogenomics black box warnings">
+  <h2><i style="background:#7B5CC9" aria-hidden="true"></i><span class="ch">Module 2</span> Pharmacodynamics: how drugs act on the body</h2>
+  <p class="sub">Receptors, agonists and antagonists, dose-response curves, tolerance, interactions and adverse reactions.</p>
+  <ul class="dz" aria-label="Topics in module 2"><li>Receptor types</li><li>Agonist / antagonist</li><li>Partial agonist</li><li>Potency vs efficacy</li><li>Therapeutic index</li><li>Tolerance / rebound</li><li>Drug interactions</li><li>Allergy vs side effect</li><li>Pharmacogenomics</li><li>Black box warnings</li></ul>
+  <div class="grid">
+    <a class="card" href="PD-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Pharmacodynamics Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="PD-Lab.html"><span class="type">Simulators + cases</span><b>Module 2 Lab</b><span class="d">Receptor bench, therapeutic index explorer, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m3" data-search="autonomic nervous system drugs cholinergic agonists cholinesterase inhibitors anticholinergics organophosphate poisoning epinephrine / norepinephrine dopamine / dobutamine albuterol alpha-1 blockers beta blockers (-olol) clonidine">
+  <h2><i style="background:#C2407A" aria-hidden="true"></i><span class="ch">Module 3</span> Autonomic nervous system drugs</h2>
+  <p class="sub">Drugs that push or block the sympathetic and parasympathetic systems, receptor by receptor.</p>
+  <ul class="dz" aria-label="Topics in module 3"><li>Cholinergic agonists</li><li>Cholinesterase inhibitors</li><li>Anticholinergics</li><li>Organophosphate poisoning</li><li>Epinephrine / norepinephrine</li><li>Dopamine / dobutamine</li><li>Albuterol</li><li>Alpha-1 blockers</li><li>Beta blockers (-olol)</li><li>Clonidine</li></ul>
+  <div class="grid">
+    <a class="card" href="Autonomic-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Autonomic nervous system drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Autonomic-Lab.html"><span class="type">Simulators + cases</span><b>Module 3 Lab</b><span class="d">Receptor control-panel simulator, name-the-receptor game, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m4" data-search="psychiatric and sleep drugs benzodiazepines z-drugs / buspirone ssris / snris tcas / maois serotonin syndrome lithium antipsychotics eps / nms clozapine adhd stimulants">
+  <h2><i style="background:#5A6FB0" aria-hidden="true"></i><span class="ch">Module 4</span> Psychiatric and sleep drugs</h2>
+  <p class="sub">Anxiety, sleep, depression, bipolar disorder, psychosis and ADHD drugs, seen at the synapse.</p>
+  <ul class="dz" aria-label="Topics in module 4"><li>Benzodiazepines</li><li>Z-drugs / buspirone</li><li>SSRIs / SNRIs</li><li>TCAs / MAOIs</li><li>Serotonin syndrome</li><li>Lithium</li><li>Antipsychotics</li><li>EPS / NMS</li><li>Clozapine</li><li>ADHD stimulants</li></ul>
+  <div class="grid">
+    <a class="card" href="Psych-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Psychiatric and sleep drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Psych-Lab.html"><span class="type">Simulators + cases</span><b>Module 4 Lab</b><span class="d">Synapse simulator, lithium level simulator, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m5" data-search="neurologic drugs and anesthesia phenytoin / carbamazepine valproate / levetiracetam status epilepticus levodopa-carbidopa donepezil / memantine triptans dantrolene local anesthetics propofol neuromuscular blockers">
+  <h2><i style="background:#2E8B7A" aria-hidden="true"></i><span class="ch">Module 5</span> Neurologic drugs and anesthesia</h2>
+  <p class="sub">Seizures, Parkinson and Alzheimer disease, migraine, muscle relaxants and anesthesia.</p>
+  <ul class="dz" aria-label="Topics in module 5"><li>Phenytoin / carbamazepine</li><li>Valproate / levetiracetam</li><li>Status epilepticus</li><li>Levodopa-carbidopa</li><li>Donepezil / memantine</li><li>Triptans</li><li>Dantrolene</li><li>Local anesthetics</li><li>Propofol</li><li>Neuromuscular blockers</li></ul>
+  <div class="grid">
+    <a class="card" href="Neuro-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Neurologic drugs and anesthesia Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Neuro-Lab.html"><span class="type">Simulators + cases</span><b>Module 5 Lab</b><span class="d">Seizure drug level, Parkinson balance and anesthesia bench simulators, 8 cases, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m6" data-search="pain, inflammation and immune-modifying drugs opioids / naloxone buprenorphine nsaids / cox-2 aspirin acetaminophen / acetylcysteine corticosteroids colchicine / allopurinol methotrexate tnf inhibitors">
+  <h2><i style="background:#C0392B" aria-hidden="true"></i><span class="ch">Module 6</span> Pain, inflammation and immune-modifying drugs</h2>
+  <p class="sub">Opioids and naloxone, NSAIDs and acetaminophen, steroids, gout and arthritis drugs.</p>
+  <ul class="dz" aria-label="Topics in module 6"><li>Opioids / naloxone</li><li>Buprenorphine</li><li>NSAIDs / COX-2</li><li>Aspirin</li><li>Acetaminophen / acetylcysteine</li><li>Corticosteroids</li><li>Colchicine / allopurinol</li><li>Methotrexate</li><li>TNF inhibitors</li></ul>
+  <div class="grid">
+    <a class="card" href="Pain-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Pain, inflammation and immune-modifying drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Pain-Lab.html"><span class="type">Simulators + cases</span><b>Module 6 Lab</b><span class="d">Prostaglandin bench, opioid safety monitor, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m7" data-search="diuretics and antihypertensives loop diuretics thiazides spironolactone ace inhibitors (-pril) arbs (-sartan) calcium channel blockers beta blockers clonidine rebound hydralazine orthostatic hypotension">
+  <h2><i style="background:#1B6E88" aria-hidden="true"></i><span class="ch">Module 7</span> Diuretics and antihypertensives</h2>
+  <p class="sub">How drugs lower blood pressure through the heart, the vessels and the kidneys.</p>
+  <ul class="dz" aria-label="Topics in module 7"><li>Loop diuretics</li><li>Thiazides</li><li>Spironolactone</li><li>ACE inhibitors (-pril)</li><li>ARBs (-sartan)</li><li>Calcium channel blockers</li><li>Beta blockers</li><li>Clonidine rebound</li><li>Hydralazine</li><li>Orthostatic hypotension</li></ul>
+  <div class="grid">
+    <a class="card" href="HTN-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Diuretics and antihypertensives Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="HTN-Lab.html"><span class="type">Simulators + cases</span><b>Module 7 Lab</b><span class="d">Blood pressure simulator, nephron diuretic bench, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m8" data-search="heart failure, angina, arrhythmia and lipid drugs digoxin / digoxin immune fab hf drug therapy nitroglycerin antiarrhythmic classes amiodarone adenosine statins ezetimibe / pcsk9 niacin / fibrates">
+  <h2><i style="background:#A52A3A" aria-hidden="true"></i><span class="ch">Module 8</span> Heart failure, angina, arrhythmia and lipid drugs</h2>
+  <p class="sub">Drugs for a weak heart, chest pain, abnormal rhythms and high cholesterol.</p>
+  <ul class="dz" aria-label="Topics in module 8"><li>Digoxin / digoxin immune fab</li><li>HF drug therapy</li><li>Nitroglycerin</li><li>Antiarrhythmic classes</li><li>Amiodarone</li><li>Adenosine</li><li>Statins</li><li>Ezetimibe / PCSK9</li><li>Niacin / fibrates</li></ul>
+  <div class="grid">
+    <a class="card" href="Heart-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Heart failure, angina, arrhythmia and lipid drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Heart-Lab.html"><span class="type">Simulators + cases</span><b>Module 8 Lab</b><span class="d">Heart failure and digoxin simulators, rhythm strip lab, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m9" data-search="anticoagulants, antiplatelets and blood drugs heparin / protamine hit enoxaparin warfarin / inr / vitamin k doacs (-xaban) reversal agents aspirin / clopidogrel alteplase iron / b12 / folic acid epoetin / filgrastim">
+  <h2><i style="background:#9C2F4F" aria-hidden="true"></i><span class="ch">Module 9</span> Anticoagulants, antiplatelets and blood drugs</h2>
+  <p class="sub">Heparins, warfarin, DOACs, antiplatelets, clot busters, and drugs that build blood.</p>
+  <ul class="dz" aria-label="Topics in module 9"><li>Heparin / protamine</li><li>HIT</li><li>Enoxaparin</li><li>Warfarin / INR / vitamin K</li><li>DOACs (-xaban)</li><li>Reversal agents</li><li>Aspirin / clopidogrel</li><li>Alteplase</li><li>Iron / B12 / folic acid</li><li>Epoetin / filgrastim</li></ul>
+  <div class="grid">
+    <a class="card" href="Blood-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Anticoagulants, antiplatelets and blood drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Blood-Lab.html"><span class="type">Simulators + cases</span><b>Module 9 Lab</b><span class="d">Clotting drug bench, warfarin INR simulator, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m10" data-search="respiratory and allergy drugs albuterol (saba) labas ipratropium / tiotropium inhaled corticosteroids montelukast theophylline inhaler technique antihistamines decongestants cough and mucus drugs">
+  <h2><i style="background:#2F6F4F" aria-hidden="true"></i><span class="ch">Module 10</span> Respiratory and allergy drugs</h2>
+  <p class="sub">Rescue and controller inhalers, steroids, allergy, cold and cough drugs, and inhaler technique.</p>
+  <ul class="dz" aria-label="Topics in module 10"><li>Albuterol (SABA)</li><li>LABAs</li><li>Ipratropium / tiotropium</li><li>Inhaled corticosteroids</li><li>Montelukast</li><li>Theophylline</li><li>Inhaler technique</li><li>Antihistamines</li><li>Decongestants</li><li>Cough and mucus drugs</li></ul>
+  <div class="grid">
+    <a class="card" href="Resp-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Respiratory and allergy drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Resp-Lab.html"><span class="type">Simulators + cases</span><b>Module 10 Lab</b><span class="d">Airway simulator, inhaler technique trainer, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m11" data-search="gastrointestinal drugs ppis (-prazole) h2 blockers (-tidine) antacids / sucralfate misoprostol ondansetron metoclopramide laxatives loperamide ibd drugs">
+  <h2><i style="background:#6B8E23" aria-hidden="true"></i><span class="ch">Module 11</span> Gastrointestinal drugs</h2>
+  <p class="sub">Acid reducers, stomach protectors, antiemetics, laxatives and antidiarrheals.</p>
+  <ul class="dz" aria-label="Topics in module 11"><li>PPIs (-prazole)</li><li>H2 blockers (-tidine)</li><li>Antacids / sucralfate</li><li>Misoprostol</li><li>Ondansetron</li><li>Metoclopramide</li><li>Laxatives</li><li>Loperamide</li><li>IBD drugs</li></ul>
+  <div class="grid">
+    <a class="card" href="GI-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Gastrointestinal drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="GI-Lab.html"><span class="type">Simulators + cases</span><b>Module 11 Lab</b><span class="d">Stomach acid simulator, nausea control room, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m12" data-search="endocrine and reproductive drugs insulin types hypoglycemia metformin sulfonylureas glp-1 agonists / dpp-4 sglt2 inhibitors levothyroxine methimazole / ptu bisphosphonates hormonal contraceptives">
+  <h2><i style="background:#B5651D" aria-hidden="true"></i><span class="ch">Module 12</span> Endocrine and reproductive drugs</h2>
+  <p class="sub">Insulin and diabetes drugs, thyroid, adrenal, bone and reproductive hormones.</p>
+  <ul class="dz" aria-label="Topics in module 12"><li>Insulin types</li><li>Hypoglycemia</li><li>Metformin</li><li>Sulfonylureas</li><li>GLP-1 agonists / DPP-4</li><li>SGLT2 inhibitors</li><li>Levothyroxine</li><li>Methimazole / PTU</li><li>Bisphosphonates</li><li>Hormonal contraceptives</li></ul>
+  <div class="grid">
+    <a class="card" href="Endocrine-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Endocrine and reproductive drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Endocrine-Lab.html"><span class="type">Simulators + cases</span><b>Module 12 Lab</b><span class="d">Insulin day simulator, thyroid loop simulator, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m13" data-search="anti-infective drugs penicillins / cephalosporins vancomycin aminoglycosides tetracyclines macrolides fluoroquinolones smx-tmp / metronidazole tb drugs antifungals antivirals">
+  <h2><i style="background:#C9A227" aria-hidden="true"></i><span class="ch">Module 13</span> Anti-infective drugs</h2>
+  <p class="sub">Antibiotics, TB drugs, antifungals and antivirals, with what the nurse monitors and teaches.</p>
+  <ul class="dz" aria-label="Topics in module 13"><li>Penicillins / cephalosporins</li><li>Vancomycin</li><li>Aminoglycosides</li><li>Tetracyclines</li><li>Macrolides</li><li>Fluoroquinolones</li><li>SMX-TMP / metronidazole</li><li>TB drugs</li><li>Antifungals</li><li>Antivirals</li></ul>
+  <div class="grid">
+    <a class="card" href="Anti-infectives-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Anti-infective drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Anti-infectives-Lab.html"><span class="type">Simulators + cases</span><b>Module 13 Lab</b><span class="d">Infection treatment simulator, peak and trough timing, 7 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m14" data-search="cancer and immunosuppressant drugs cell cycle and chemo alkylating agents antimetabolites doxorubicin vincristine / cisplatin -nib / -mab drugs checkpoint inhibitors neutropenia tumor lysis tacrolimus / cyclosporine">
+  <h2><i style="background:#8A2E62" aria-hidden="true"></i><span class="ch">Module 14</span> Cancer and immunosuppressant drugs</h2>
+  <p class="sub">How chemotherapy, targeted and immune therapies work, and managing their side effects.</p>
+  <ul class="dz" aria-label="Topics in module 14"><li>Cell cycle and chemo</li><li>Alkylating agents</li><li>Antimetabolites</li><li>Doxorubicin</li><li>Vincristine / cisplatin</li><li>-nib / -mab drugs</li><li>Checkpoint inhibitors</li><li>Neutropenia</li><li>Tumor lysis</li><li>Tacrolimus / cyclosporine</li></ul>
+  <div class="grid">
+    <a class="card" href="Cancer-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Cancer and immunosuppressant drugs Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Cancer-Lab.html"><span class="type">Simulators + cases</span><b>Module 14 Lab</b><span class="d">Chemo cycle simulator, cell-cycle drug bench, 8 case files, and sorting rounds.</span></a>
+  </div>
+  </section>
+  <section class="mod" id="m15" data-search="medication safety, dosage calculation and toxicology rights of administration high-alert medications do-not-use abbreviations older adults / pregnancy dimensional analysis weight-based doses iv flow rates antidotes poison control">
+  <h2><i style="background:#3A49A8" aria-hidden="true"></i><span class="ch">Module 15</span> Medication safety, dosage calculation and toxicology</h2>
+  <p class="sub">Giving medicines safely, doing the math, and reversing poisonings with antidotes.</p>
+  <ul class="dz" aria-label="Topics in module 15"><li>Rights of administration</li><li>High-alert medications</li><li>Do-not-use abbreviations</li><li>Older adults / pregnancy</li><li>Dimensional analysis</li><li>Weight-based doses</li><li>IV flow rates</li><li>Antidotes</li><li>Poison control</li></ul>
+  <div class="grid">
+    <a class="card" href="Safety-Walkthrough.html"><span class="type">Start here · Animated walkthrough</span><b>Medication safety, dosage calculation and toxicology Walkthrough</b><span class="d">See each drug class work at its target, then why its side effects, cautions and nursing checks follow.</span></a>
+    <a class="card" href="Safety-Lab.html"><span class="type">Simulators + cases</span><b>Module 15 Lab</b><span class="d">Dosage calculation trainer, IV pump simulator, spot-the-error records, toxidrome match, and sorting rounds.</span></a>
+  </div>
+  </section>
+</main>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. Licensed <a href="LICENSE">CC BY-NC-SA 4.0</a>.</footer>
+<script>
+(function(){
+  var q=document.getElementById('q'),count=document.getElementById('count'),mods=[].slice.call(document.querySelectorAll('.mod'));
+  function run(){
+    var v=q.value.trim().toLowerCase(),shown=0;
+    mods.forEach(function(m){
+      var ok=!v||m.getAttribute('data-search').indexOf(v)>=0;
+      m.hidden=!ok; if(ok)shown++;
+      [].forEach.call(m.querySelectorAll('.dz li'),function(li){li.classList.toggle('hit',!!v&&li.textContent.toLowerCase().indexOf(v)>=0);});
+    });
+    count.textContent=v?(shown?shown+(shown===1?' module matches':' modules match'):'No match. Try a shorter word.'):'';
+  }
+  q.addEventListener('input',run);
+})();
+</script>
+</body>
+</html>

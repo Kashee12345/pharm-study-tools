@@ -1,0 +1,1432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Autonomic Drugs Walkthrough</title>
+<meta name="description" content="Step-by-step animated walkthrough of autonomic nervous system drugs: receptors, cholinergic drugs and cholinesterase inhibitors, anticholinergics, adrenergic agonists and alpha and beta blockers, with the nursing considerations that follow from each mechanism.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#E3E7EA;--panel:#F7F9FA;--panel-2:#EDF1F3;--sunk:#D5DBDF;
+  --ink:#10161A;--ink-soft:#57666F;--ink-faint:#566570;--rule:#C4CDD3;--rule-soft:#D9E0E4;
+  --accent:#3A49A8;--accent-ink:#2B3787;--accent-wash:#E3E6F7;
+  --warn:#B4632A;--warn-wash:#F6E7D8;--bad:#A9372F;--bad-wash:#F7DFDC;--good:#2F6F4F;--good-wash:#DEEDE4;--on-accent:#fff;--warn-ink:#8A4A1C;
+  --act1:#5B6BC9;--act2:#2E8A5A;--act3:#B4632A;--act4:#C4382F;--act5:#2F7FC1;--act6:#A04E8C;
+  --gold:#C9A227;--gold-wash:#F6EFD3;--gold-ink:#8A6D12;
+  --ecf:#EEF0F6;--glass:#DCE8EE;--glass-edge:#7F99A6;--water:#CFE5F1;
+  --drug:#6A3FB5;--drug2:#3A49A8;--rec:#1B7F86;--ach:#C98512;--ne:#C4382F;--epi:#B03A8C;--blocked:#8B9094;--ache:#2F7FC1;--op:#7E5A1A;
+  --symp:#C4502F;--para:#2E8A5A;--somatic:#7B5CC9;
+  --a1:#C4644F;--a2:#A04E8C;--b1:#2F7FC1;--b2:#1E8C74;--mus:#5E7F1A;--nic:#D98A1C;--dop:#7B5CC9;
+  --skin:#EAC9A8;--skin-edge:#B9937A;--body:#E9DCCB;--body-edge:#A88B6A;
+  --myo:#D9786A;--myo-edge:#9A3F33;--lung:#F0B8B0;--lung-edge:#B5675C;--vessel:#C4382F;--vwall:#E7A59C;--blood:#B5301F;
+  --gut:#E3B07E;--gut-edge:#A8733F;--bladder:#EBD889;--bladder-edge:#A99232;--urine:#E8CB3A;--iris:#5E86A8;--iris-edge:#2F5778;--muscle:#C9786A;--brain:#E6B7C1;--brain-edge:#A8707E;--mucus:#B9D7A0;--sweat:#5AA9E6;--prostate:#D7A3B8;--glow:#F2B33B;
+  --mon:#0F1A20;--mon-grid:#1C2E36;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(16,22,26,.08),0 6px 18px -8px rgba(16,22,26,.18);
+  --r:6px;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#F27A6E;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B9A0F0;--drug2:#A9B4F5;--rec:#5CC4C8;--ach:#F2B33B;--ne:#F27A6E;--epi:#E07AC4;--blocked:#7A8288;--ache:#5AA9E6;--op:#D9AE5E;
+  --symp:#F08A6E;--para:#6BC293;--somatic:#A98BEF;
+  --a1:#E08A74;--a2:#D186C0;--b1:#5AA9E6;--b2:#4FD0A8;--mus:#A3C95A;--nic:#F2A93B;--dop:#A98BEF;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;
+  --myo:#8A3A33;--myo-edge:#E08A74;--lung:#5A3434;--lung-edge:#D98A80;--vessel:#F27A6E;--vwall:#6A2E2A;--blood:#E0574A;
+  --gut:#6A4A2A;--gut-edge:#D9A06A;--bladder:#5A5226;--bladder-edge:#E0CC6A;--urine:#E8CC3A;--iris:#4A6A88;--iris-edge:#9AC0E0;--muscle:#7A4038;--brain:#5A3A44;--brain-edge:#D9A0B0;--mucus:#4A6A3A;--sweat:#8FC0EC;--prostate:#6A3A4E;--glow:#F2B33B;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0E1519;--panel:#172026;--panel-2:#1D282F;--sunk:#0A1014;
+  --ink:#E8EEF1;--ink-soft:#A3B2BA;--ink-faint:#8D9EA7;--rule:#2C3A42;--rule-soft:#24313A;
+  --accent:#A9B4F5;--accent-ink:#C9D0FA;--accent-wash:#1C2246;
+  --warn:#E39A5B;--warn-wash:#3A2717;--bad:#E07067;--bad-wash:#3B1E1B;--good:#6BC293;--good-wash:#17301F;--on-accent:#0B1A20;--warn-ink:#E39A5B;
+  --act1:#9AA6F2;--act2:#6BC293;--act3:#E39A5B;--act4:#F27A6E;--act5:#5AA9E6;--act6:#D186C0;
+  --gold:#E0BE48;--gold-wash:#352E14;--gold-ink:#E0BE48;
+  --ecf:#131A22;--glass:#1E2C34;--glass-edge:#7F99A6;--water:#1F3A4A;
+  --drug:#B9A0F0;--drug2:#A9B4F5;--rec:#5CC4C8;--ach:#F2B33B;--ne:#F27A6E;--epi:#E07AC4;--blocked:#7A8288;--ache:#5AA9E6;--op:#D9AE5E;
+  --symp:#F08A6E;--para:#6BC293;--somatic:#A98BEF;
+  --a1:#E08A74;--a2:#D186C0;--b1:#5AA9E6;--b2:#4FD0A8;--mus:#A3C95A;--nic:#F2A93B;--dop:#A98BEF;
+  --skin:#5A4434;--skin-edge:#B9937A;--body:#3A3128;--body-edge:#B39773;
+  --myo:#8A3A33;--myo-edge:#E08A74;--lung:#5A3434;--lung-edge:#D98A80;--vessel:#F27A6E;--vwall:#6A2E2A;--blood:#E0574A;
+  --gut:#6A4A2A;--gut-edge:#D9A06A;--bladder:#5A5226;--bladder-edge:#E0CC6A;--urine:#E8CC3A;--iris:#4A6A88;--iris-edge:#9AC0E0;--muscle:#7A4038;--brain:#5A3A44;--brain-edge:#D9A0B0;--mucus:#4A6A3A;--sweat:#8FC0EC;--prostate:#6A3A4E;--glow:#F2B33B;
+  --mon:#0A1216;--mon-grid:#18282F;--mon-hr:#5BD17A;--mon-bp:#F2787A;--mon-sp:#62C0F2;--mon-rr:#F2D45B;--mon-ink:#E8EEF1;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.topbar{background:var(--panel);border-bottom:1px solid var(--rule)}
+.topbar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.2}
+.sub{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+.tbtn{background:var(--panel-2);border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;cursor:pointer;font-size:14px}
+.tbtn:hover{border-color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.chain{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.actgrp{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;display:flex;flex-direction:column;gap:6px;flex:1 1 150px}
+.actgrp .an{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.actgrp .an i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dot{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel-2);font-family:var(--mono);font-size:13px;cursor:pointer;display:grid;place-items:center;padding:0}
+.dot:hover{border-color:var(--accent)}
+.dot.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.dot.done:not(.cur){background:var(--good-wash);border-color:var(--good);color:var(--good)}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
+.stage{padding:10px}
+.canvas-holder{width:100%;border-radius:4px;overflow:hidden;border:1px solid var(--rule-soft);background:var(--ecf)}
+canvas{display:block;width:100%}
+.stagebar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 4px 2px;font-size:14px;color:var(--ink-soft)}
+.stagebar input[type=range]{accent-color:var(--accent);width:110px}
+.caption{flex:1 1 220px;font-size:14px;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 2px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.2);flex:0 0 auto}
+.legend i.s{border-radius:2px}
+.legend i.d{border-radius:1px;transform:rotate(45deg);width:9px;height:9px}
+.legend i.r{border-radius:3px;width:14px}
+.legend i.l{width:18px;height:4px;border-radius:2px;border:0}
+.legend i.t{width:0;height:0;border-radius:0;border:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid;background:none!important}
+.legend i.dl{width:18px;height:0;border-radius:0;border:0;border-top:2px dashed;background:none!important}
+.legend i.y{width:12px;height:12px;border:0;border-radius:0;background:none!important;position:relative}
+.legend i.y::before{content:"Y";position:absolute;left:0;top:-4px;font:700 14px var(--sans);color:var(--yc)}
+.explain{padding:18px 20px}
+.stepno{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.actchip{padding:1px 8px 1px 6px;border-radius:99px;color:var(--ink);font-size:11px;border:1.5px solid var(--c,var(--accent));background:var(--panel);display:inline-flex;align-items:center;gap:5px}.actchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 10px}
+.body p{margin:0 0 10px}
+.body ol,.body ul{margin:0 0 10px;padding-left:22px}
+.body li{margin-bottom:4px}
+.body .tx{border-left:3px solid var(--accent);padding:2px 0 2px 10px;color:var(--ink)}
+.analogy{background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:4px;padding:10px 12px;margin:12px 0}
+.analogy b{display:block;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink);margin-bottom:2px}
+.analogy p{margin:0}
+.terms{margin:12px 0 0;padding:0}
+.terms div{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule-soft);font-size:14.5px}
+.terms dt{font-weight:600}
+.terms dd{margin:0;color:var(--ink-soft)}
+.check{margin-top:16px;border:1px solid var(--rule);border-radius:var(--r);padding:14px;background:var(--panel-2)}
+.check h3{margin:0 0 6px;font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.check .q{font-weight:600;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--rule);border-radius:var(--r);padding:9px 12px;margin:0 0 8px;cursor:pointer;font-size:15px;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--good-wash)}
+.opt.wrong{border-color:var(--warn);background:var(--warn-wash)}
+.fb{margin:6px 0 0;font-size:14.5px}
+.fb.ok{color:var(--good)}
+.fb.no{color:var(--warn-ink)}
+.calm{font-size:13px;color:var(--ink-faint);margin:8px 0 0}
+.nav{display:flex;align-items:center;gap:12px;margin-top:14px}
+.navbtn{background:var(--accent);color:var(--on-accent);border:0;border-radius:var(--r);padding:11px 18px;font-weight:600;cursor:pointer;font-size:15px}
+.navbtn.sec{background:var(--panel);color:var(--ink);border:1px solid var(--rule)}
+.navbtn:disabled{opacity:.4;cursor:default}
+.prog{flex:1;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+footer{max-width:1240px;margin:0 auto;padding:6px 16px 28px;font-size:13px;color:var(--ink-faint)}
+footer a{color:var(--ink-soft)}
+sub,sup{line-height:0}
+</style>
+</style>
+<script src="pharm-kit.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+  <div>
+    <div class="kicker">Pharmacology &middot; Module 3 &middot; Autonomic nervous system drugs</div>
+    <h1>Autonomic Drugs Walkthrough</h1>
+    <p class="sub">See how drugs turn the body's automatic controls up or down at each receptor, so the effects, side effects and nursing checks make sense instead of being memorized. Go at your own pace. Nothing here is graded.</p>
+  </div>
+  <button class="tbtn" id="themeBtn" type="button">Light / dark</button>
+</div></header>
+
+<div class="wrap">
+  <nav class="chain" id="chain" aria-label="Steps"></nav>
+  <div class="grid">
+    <section class="card stage" aria-label="Animation">
+      <div class="canvas-holder"><canvas id="stage" role="img" aria-label=""></canvas></div>
+      <div class="stagebar">
+        <button class="tbtn" id="pauseBtn" type="button">Pause</button>
+        <button class="tbtn" id="replayBtn" type="button">Replay</button>
+        <label>Speed <input type="range" id="speed" min="0.25" max="1.75" step="0.25" value="1"></label>
+        <span class="caption" id="caption"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="card explain" aria-live="polite">
+      <div class="stepno" id="stepno"></div>
+      <h2 id="title"></h2>
+      <div class="body" id="body"></div>
+      <div class="analogy" id="analogy"><b>Think of it like this</b><p></p></div>
+      <dl class="terms" id="terms"></dl>
+      <div class="check" id="check">
+        <h3>Quick check</h3>
+        <p class="q" id="q"></p>
+        <div id="opts"></div>
+        <p class="fb" id="fb"></p>
+        <p class="calm">Wrong answers are fine here. Read why, then try again.</p>
+      </div>
+      <div class="nav">
+        <button class="navbtn sec" id="prev" type="button">&larr; Back</button>
+        <div class="prog"><i id="progbar"></i></div>
+        <button class="navbtn" id="next" type="button">Next &rarr;</button>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>Dr. Akash Garg &middot; Pharmacology Study Tools &middot; Diagrams are simplified and not to scale. For learning only. Not medical advice and not a dosing reference. CC BY-NC-SA 4.0<br>Use the left and right arrow keys to move between steps. Practice next in the <a href="Autonomic-Lab.html">Autonomic Drugs Lab</a>. Drugs are named by generic name and class only; this page gives no doses. Receptors and molecules are drawn as simple shapes, and heart rates and pressures on the monitors are rounded teaching numbers. Always follow the prescriber, the label and your facility's protocol.</footer>
+<script>
+(function(){
+"use strict";
+const KEYS=["ground", "panel", "panel-2", "sunk", "ink", "ink-soft", "ink-faint", "rule", "rule-soft", "accent", "accent-ink", "accent-wash", "warn", "warn-wash", "bad", "bad-wash", "good", "good-wash", "on-accent", "warn-ink", "act1", "act2", "act3", "act4", "act5", "act6", "gold", "gold-wash", "gold-ink", "ecf", "glass", "glass-edge", "water", "drug", "drug2", "rec", "ach", "ne", "epi", "blocked", "ache", "op", "symp", "para", "somatic", "a1", "a2", "b1", "b2", "mus", "nic", "dop", "skin", "skin-edge", "body", "body-edge", "myo", "myo-edge", "lung", "lung-edge", "vessel", "vwall", "blood", "gut", "gut-edge", "bladder", "bladder-edge", "urine", "iris", "iris-edge", "muscle", "brain", "brain-edge", "mucus", "sweat", "prostate", "glow", "mon", "mon-grid", "mon-hr", "mon-bp", "mon-sp", "mon-rr", "mon-ink"];
+/* ================= drawing kit (shared by both pages) ================= */
+let ctx=null;
+const C={};
+function readColors(){const s=getComputedStyle(document.documentElement);KEYS.forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a),0,1);
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const TAU=Math.PI*2;
+const gauss=(t,m,s)=>Math.exp(-((t-m)*(t-m))/(2*s*s));
+const FONT='"IBM Plex Sans",system-ui,sans-serif',MONO='"IBM Plex Mono",ui-monospace,monospace';
+function hx(c){let h=(c||"#888").trim();if(h[0]!=="#"){const m=h.match(/\d+/g);return m&&m.length>=3?[+m[0],+m[1],+m[2]]:[136,136,136]}h=h.slice(1);if(h.length===3)h=h.split("").map(x=>x+x).join("");const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]}
+function isDark(){return hx(C.ground)[0]<60}
+function onFill(){return isDark()?"#0E1519":"#fff"}
+function P(T,L){return ((T%L)+L)%L/L}
+function mix(a,b,t){const A=hx(a),B=hx(b);t=clamp(t,0,1);return "rgb("+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")+")"}
+function hexA(c,a){const A=hx(c);return `rgba(${A[0]},${A[1]},${A[2]},${clamp(a,0,1)})`}
+function rr(x,y,w,h,r){r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function circ(x,y,r,fill,stroke,lw){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function ell(x,y,rx,ry,rot,fill,stroke,lw){ctx.beginPath();ctx.ellipse(x,y,Math.max(0,rx),Math.max(0,ry),rot||0,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function glow(x,y,r,col,a){if(r<=0)return;const A=hx(col);const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(${A},${clamp(a==null?1:a,0,1)})`);g.addColorStop(1,`rgba(${A},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function label(x,y,t,o){o=o||{};if(o.a!=null){if(o.a<=0)return 0;ctx.save();ctx.globalAlpha*=clamp(o.a,0,1);const w=label(x,y,t,Object.assign({},o,{a:null}));ctx.restore();return w}const size=o.size||13;ctx.font=`${o.weight||500} ${size}px ${o.mono?MONO:FONT}`;
+  ctx.textAlign=o.align||"center";ctx.textBaseline="middle";
+  const w=ctx.measureText(t).width;let x0=x;if(ctx.textAlign==="center")x0=x-w/2;if(ctx.textAlign==="right")x0=x-w;
+  const a0=ctx.globalAlpha;
+  if(o.pill!==false){ctx.globalAlpha=a0*(o.bga==null?.9:o.bga);ctx.fillStyle=o.bg||C.panel;rr(x0-5,y-size*.75,w+10,size*1.5,4);ctx.fill();ctx.globalAlpha=a0;
+    if(o.border){ctx.strokeStyle=o.border;ctx.lineWidth=1.5;ctx.stroke()}}
+  ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y+.5);return w}
+function txt(x,y,t,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;ctx.fillText(t,x,y)}
+function line(x1,y1,x2,y2,col,lw,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=col;ctx.lineWidth=lw||1.2;ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,lw,dash){line(x1,y1,x2,y2,col,lw||2,dash);const a=Math.atan2(y2-y1,x2-x1),h=7+(lw||2);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));ctx.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));ctx.closePath();ctx.fillStyle=col;ctx.fill()}
+function chipText(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";const w=ctx.measureText(t).width;
+  ctx.fillStyle=col;rr(x-w/2-6,y-9.5,w+12,19,9.5);ctx.fill();ctx.fillStyle=fg||onFill();ctx.fillText(t,x,y+.5);return w+12}
+function chipL(x,y,t,col,fg){ctx.font=`600 11.5px ${MONO}`;const w=ctx.measureText(t).width;return chipText(x+w/2+6,y,t,col,fg)}
+function badge(x,y,n,col,r){r=r||10;circ(x,y,r,col||C.ink,C.panel,1.5);ctx.font=`700 ${r>10?13:11.5}px ${MONO}`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=onFill();ctx.fillText(String(n),x,y+.5)}
+function rnd(i){const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+function along(P_,p){let L=0;const ls=[];for(let i=0;i<P_.length-1;i++){const l=Math.hypot(P_[i+1][0]-P_[i][0],P_[i+1][1]-P_[i][1]);ls.push(l);L+=l}
+  let d=clamp(p,0,1)*L;for(let i=0;i<ls.length;i++){if(d<=ls[i]||i===ls.length-1){const f=ls[i]?Math.min(1,d/ls[i]):0;return [lerp(P_[i][0],P_[i+1][0],f),lerp(P_[i][1],P_[i+1][1],f)]}d-=ls[i]}return P_[P_.length-1]}
+function poly(pts,col,lw,dash){ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.strokeStyle=col;ctx.lineWidth=lw||1.5;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.lineCap="round";ctx.stroke();ctx.setLineDash([]);ctx.lineCap="butt"}
+function panelBox(x,y,w,h,o){o=o||{};rr(x,y,w,h,o.r||8);ctx.fillStyle=o.fill||hexA(C.panel,.85);ctx.fill();ctx.strokeStyle=o.stroke||C.rule;ctx.lineWidth=o.lw||1.2;ctx.stroke()}
+function wrapText(t,x,y,w,lh,o){o=o||{};ctx.font=`${o.weight||500} ${o.size||12}px ${o.mono?MONO:FONT}`;ctx.textAlign=o.align||"left";ctx.textBaseline="middle";ctx.fillStyle=o.color||C.ink;
+  const words=t.split(" ");let ln="";let yy=y;words.forEach(wd=>{const test=ln?ln+" "+wd:wd;if(ctx.measureText(test).width>w&&ln){ctx.fillText(ln,x,yy);ln=wd;yy+=lh}else ln=test});if(ln)ctx.fillText(ln,x,yy);return yy}
+function blobPath(x,y,r,seed,t,amp){amp=amp==null?.06:amp;ctx.beginPath();const N=44;for(let i=0;i<=N;i++){const a=i/N*TAU;const rad=r*(1+amp*Math.sin(a*3+seed+(t||0)*1.7)+amp*.7*Math.sin(a*5+seed*2.3-(t||0)*1.1));const X=x+Math.cos(a)*rad,Y=y+Math.sin(a)*rad;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function withA(a,fn){ctx.save();ctx.globalAlpha*=clamp(a==null?1:a,0,1);fn();ctx.restore()}
+function title(x,y,t,col,align){txt(x,y,t.toUpperCase().replace(/Μ/g,"µ").replace(/µM/g,"µm"),{size:12,mono:true,weight:700,color:col||C["ink-soft"],align:align||"left"})}
+function lead(px,py,lx,ly,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;line(px,py,lx,ly,o.lc||C["ink-soft"],1.2);circ(px,py,2.6,o.lc||C["ink-soft"]);
+  label(lx,ly,t,{size:o.size||12.5,weight:o.weight||600,align:o.align||(lx<px?"right":"left"),border:o.border,color:o.color});ctx.restore()}
+function pulseRing(x,y,r,col,p){ctx.save();ctx.globalAlpha*=(1-p);ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(x,y,r*(.4+p),0,TAU);ctx.stroke();ctx.restore()}
+function plotFn(fn,t0,t1,x,y,w,h,v0,v1,col,lw,dash,upto){ctx.beginPath();const N=Math.max(40,Math.round(w));let started=false;for(let i=0;i<=N;i++){const t=lerp(t0,t1,i/N);if(upto!=null&&t>upto)break;const v=fn(t);const X=x+w*i/N,Y=y+h-(clamp(v,v0,v1)-v0)/(v1-v0)*h;started?ctx.lineTo(X,Y):(ctx.moveTo(X,Y),started=true)}
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.setLineDash(dash||[]);ctx.lineJoin="round";ctx.stroke();ctx.setLineDash([])}
+function bg(col){ctx.fillStyle=col||C.ecf;ctx.fillRect(0,0,4000,4000)}
+
+/* ================= autonomic drawing helpers ================= */
+const RCOL={a1:"a1",a2:"a2",b1:"b1",b2:"b2",M:"mus",N:"nic",D:"dop"};
+const RNAME={a1:"α1",a2:"α2",b1:"β1",b2:"β2",M:"M",N:"N",D:"D1"};
+function fillStroke(f,s,lw){if(f){ctx.fillStyle=f;ctx.fill()}if(s){ctx.strokeStyle=s;ctx.lineWidth=lw||1.5;ctx.stroke()}}
+function diamond(x,y,r){ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath()}
+function hexPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<6;k++){const a=k/6*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+function triPath(x,y,r,rot){ctx.beginPath();for(let k=0;k<3;k++){const a=-Math.PI/2+k/3*TAU+(rot||0);const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath()}
+/* ligands: ACh circle (amber), NE diamond (red), Epi diamond with dot (magenta), agonist drug hexagon (violet), antagonist plug (violet square), OP triangle */
+function lig(type,x,y,r,a){r=r||7;withA(a==null?1:a,()=>{
+  if(type==="ach"){circ(x,y,r,C.ach,hexA(C.ink,.45),1.1)}
+  else if(type==="ne"){diamond(x,y,r*1.15);fillStroke(C.ne,hexA(C.ink,.45),1.1)}
+  else if(type==="epi"){diamond(x,y,r*1.15);fillStroke(C.epi,hexA(C.ink,.45),1.1);circ(x,y,r*.32,C.panel)}
+  else if(type==="ago"){hexPath(x,y,r*1.1,0);fillStroke(C.drug,hexA(C.ink,.45),1.1)}
+  else if(type==="ant"){rr(x-r,y-r,r*2,r*2,2.5);fillStroke(C.drug,hexA(C.ink,.5),1.1);line(x-r*.55,y-r*.55,x+r*.55,y+r*.55,C.panel,1.6);line(x+r*.55,y-r*.55,x-r*.55,y+r*.55,C.panel,1.6)}
+  else if(type==="op"){triPath(x,y,r*1.25,0);fillStroke(C.op,hexA(C.ink,.5),1.1)}
+  else if(type==="dop"){circ(x,y,r,C.dop,hexA(C.ink,.45),1.1);circ(x,y,r*.35,C.panel)}
+  else if(type==="glu"){hexPath(x,y,r,Math.PI/6);fillStroke(C.gold,hexA(C.ink,.4),1)}
+})}
+function membrane(x1,x2,y,o){o=o||{};const h=o.h||14;ctx.fillStyle=hexA(C.gold,.18);ctx.fillRect(x1,y-h/2,x2-x1,h);
+  for(let x=x1+3;x<x2;x+=7){circ(x,y-h/2+2,2.6,hexA(C.gold,.85));circ(x,y+h/2-2,2.6,hexA(C.gold,.85))}}
+/* receptor cup in a membrane, opening upward (dir=1) or downward (dir=-1) */
+function receptor(x,y,kind,o){o=o||{};const s=o.s||1,dir=o.dir||1;const col=o.blocked?C.blocked:C[RCOL[kind]||"rec"];
+  ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.scale(s,s*dir);
+  if(o.active){glow(0,-4,26,col,.45)}
+  ctx.beginPath();ctx.moveTo(-14,-16);ctx.lineTo(-14,10);ctx.quadraticCurveTo(-14,16,-8,16);ctx.lineTo(8,16);ctx.quadraticCurveTo(14,16,14,10);ctx.lineTo(14,-16);ctx.lineTo(7,-16);ctx.lineTo(7,2);ctx.lineTo(-7,2);ctx.lineTo(-7,-16);ctx.closePath();
+  fillStroke(col,hexA(C.ink,.5),1.2);ctx.restore();
+  if(o.label!==false){const ly=o.rot?y+(o.labDy||24)*s:y+dir*(o.labDy||27)*s;label(o.rot?x+(o.labDx||0):x,ly,o.text||RNAME[kind]||kind,{size:o.fs||12,weight:700,color:C.ink,bg:C.panel,border:o.blocked?C.blocked:C[RCOL[kind]]})}
+  if(o.blocked&&o.x!==false){const yy=y-dir*4*s;line(x-12*s,yy-10*s,x+12*s,yy+10*s,C.bad,2.6);line(x+12*s,yy-10*s,x-12*s,yy+10*s,C.bad,2.6)}}
+/* place ligand in a receptor's pocket */
+function inPocket(x,y,dir,s){return [x,y-dir*7*(s||1)]}
+/* presynaptic terminal knob (top) with vesicles */
+function terminal(x,y,w,h,col,o){o=o||{};ctx.beginPath();ctx.moveTo(x-w*.18,y-h);ctx.lineTo(x-w*.18,y-h*.55);ctx.bezierCurveTo(x-w*.62,y-h*.5,x-w*.55,y,x,y);ctx.bezierCurveTo(x+w*.55,y,x+w*.62,y-h*.5,x+w*.18,y-h*.55);ctx.lineTo(x+w*.18,y-h);ctx.closePath();
+  fillStroke(hexA(col,.22),col,2);
+  const n=o.ves==null?6:o.ves;for(let i=0;i<n;i++){const vx=x-w*.3+(i%3)*w*.3,vy=y-h*.18-Math.floor(i/3)*16;circ(vx,vy,6.5,hexA(C.panel,.85),col,1.3);if(o.lig)lig(o.lig,vx,vy,2.8)}}
+/* acetylcholinesterase: blue pac-man */
+function ache(x,y,r,mouth,o){o=o||{};const m=(mouth==null?.5:mouth)*0.8;ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,r,m+(o.rot||0),TAU-m+(o.rot||0));ctx.closePath();fillStroke(o.dead?C.blocked:C.ache,hexA(C.ink,.5),1.2);
+  circ(x+Math.cos((o.rot||0)-1.6)*r*.45,y+Math.sin((o.rot||0)-1.6)*r*.45,r*.12,C.panel)}
+/* heart */
+function heartPath(x,y,s){ctx.beginPath();ctx.moveTo(x,y+s*.95);ctx.bezierCurveTo(x-s*1.25,y+s*.15,x-s*1.0,y-s*.95,x,y-s*.42);ctx.bezierCurveTo(x+s*1.0,y-s*.95,x+s*1.25,y+s*.15,x,y+s*.95);ctx.closePath()}
+function heart(x,y,s,T,hr,o){o=o||{};const ph=(T*(hr||70)/60)%1;const sq=gauss(ph,.12,.05)*(o.force==null?1:o.force);const k=1-.09*sq;
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);heartPath(0,0,s);fillStroke(C.myo,C["myo-edge"],2);
+  ctx.beginPath();ctx.moveTo(-s*.2,-s*.45);ctx.quadraticCurveTo(-s*.1,s*.2,s*.15,s*.55);ctx.strokeStyle=hexA(C["myo-edge"],.6);ctx.lineWidth=1.5;ctx.stroke();
+  ctx.restore();if(sq>.4&&o.ring!==false)pulseRing(x,y,s*.9,C.myo,clamp(1-sq,0,1))}
+/* bronchiole cross-section: ring of smooth muscle; open=0..1 lumen size */
+function bronchiole(x,y,R,open,o){o=o||{};const lum=R*(.2+.42*clamp(open,0,1));
+  circ(x,y,R,hexA(C.lung,.8),C["lung-edge"],2);
+  const n=18;for(let i=0;i<n;i++){const a=i/n*TAU;const r1=Math.min(lum+4,R-6),r2=R-3;ctx.beginPath();ctx.ellipse(x+Math.cos(a)*(r1+r2)/2,y+Math.sin(a)*(r1+r2)/2,Math.max(1,(r2-r1)/2*.9+1),3.4,a,0,TAU);ctx.fillStyle=hexA(C.muscle,.7);ctx.fill()}
+  ctx.beginPath();for(let i=0;i<=40;i++){const a=i/40*TAU;const rr_=lum*(1+.08*Math.sin(a*8));const X=x+Math.cos(a)*rr_,Y=y+Math.sin(a)*rr_;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath();fillStroke(C.panel,C["lung-edge"],1.6);
+  if(o.mucus){const m=clamp(o.mucus,0,1);ctx.save();ctx.beginPath();ctx.arc(x,y,lum,0,TAU);ctx.clip();ctx.fillStyle=hexA(C.mucus,.85);ctx.fillRect(x-lum,y+lum*(1-1.6*m),lum*2,lum*2);ctx.restore()}}
+/* eye with iris and pupil (pupil 0..1 relative) */
+function eye(x,y,r,pupil,o){o=o||{};ctx.beginPath();ctx.moveTo(x-r*1.6,y);ctx.quadraticCurveTo(x,y-r*1.35,x+r*1.6,y);ctx.quadraticCurveTo(x,y+r*1.35,x-r*1.6,y);ctx.closePath();fillStroke("#F5F7F8",hexA(C.ink,.6),1.6);
+  ctx.save();ctx.clip();circ(x,y,r*.82,C.iris,C["iris-edge"],1.5);for(let k=0;k<16;k++){const a=k/16*TAU;line(x+Math.cos(a)*r*.32,y+Math.sin(a)*r*.32,x+Math.cos(a)*r*.78,y+Math.sin(a)*r*.78,hexA(C["iris-edge"],.5),1)}
+  circ(x,y,r*(.12+.55*clamp(pupil,0,1)),"#0B0F12");circ(x-r*.25,y-r*.25,r*.1,"rgba(255,255,255,.8)");ctx.restore()}
+/* vessel cross-section; constrict 0..1 */
+function vesselX(x,y,R,constrict,o){o=o||{};const wall=R*(.18+.32*clamp(constrict,0,1));circ(x,y,R,C.vwall,C.vessel,2);circ(x,y,R-wall,C.blood,hexA(C.ink,.35),1);
+  for(let k=0;k<5;k++){const a=k/5*TAU+(o.t||0)*.6;circ(x+Math.cos(a)*(R-wall)*.5,y+Math.sin(a)*(R-wall)*.5,Math.max(1.5,(R-wall)*.18),hexA("#fff",.25))}}
+/* long vessel segment with flowing cells; width w0 */
+function vesselTube(x1,x2,y,w,T,o){o=o||{};rr(x1,y-w/2-6,x2-x1,w+12,6);ctx.fillStyle=C.vwall;ctx.fill();rr(x1,y-w/2,x2-x1,w,w/2);ctx.fillStyle=C.blood;ctx.fill();
+  const sp=o.speed==null?40:o.speed;for(let i=0;i<14;i++){const xx=x1+((i*37+T*sp)%(x2-x1));ell(xx,y+Math.sin(i*2.1)*w*.25,Math.min(6,w*.3),Math.min(4,w*.2),0,hexA("#fff",.28))}}
+/* bladder */
+function bladder(x,y,s,fill,squeeze,o){o=o||{};const sq=clamp(squeeze||0,0,1);const w=s*(1-.18*sq),h=s*.9*(1-.2*sq);
+  ctx.beginPath();ctx.moveTo(x-w*.18,y+h*.55);ctx.bezierCurveTo(x-w*.9,y+h*.4,x-w*.85,y-h*.75,x,y-h*.7);ctx.bezierCurveTo(x+w*.85,y-h*.75,x+w*.9,y+h*.4,x+w*.18,y+h*.55);ctx.closePath();fillStroke(C.bladder,C["bladder-edge"],2.4);
+  ctx.save();ctx.clip();ctx.fillStyle=hexA(C.urine,.75);const lv=y+h*.55-(h*1.25)*clamp(fill,0,1);ctx.fillRect(x-s,lv,s*2,s*2);ctx.restore();
+  rr(x-w*.12,y+h*.52,w*.24,s*.35,3);ctx.fillStyle=o.closed?C["bladder-edge"]:hexA(C.urine,.8);ctx.fill();ctx.strokeStyle=C["bladder-edge"];ctx.lineWidth=1.5;ctx.stroke();
+  if(o.flow){const f=o.flow;for(let i=0;i<5;i++){const yy=y+h*.55+s*.35+((i*9+(o.t||0)*40)%40);circ(x,yy,2.4*f,hexA(C.urine,.9))}}}
+/* gut segment with peristalsis; rate 0..2 */
+function gut(x,y,w,T,rate,o){o=o||{};const amp=6,ph=T*2.2*rate;ctx.beginPath();for(let i=0;i<=60;i++){const X=x+i/60*w;const sq=Math.max(0,Math.sin(i/60*TAU*2-ph))*amp*Math.min(1,rate);const Y=y-14+sq;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}
+  for(let i=60;i>=0;i--){const X=x+i/60*w;const sq=Math.max(0,Math.sin(i/60*TAU*2-ph))*amp*Math.min(1,rate);ctx.lineTo(X,y+14-sq)}ctx.closePath();fillStroke(C.gut,C["gut-edge"],2);
+  const pos=(T*18*rate)%w;ell(x+pos,y,7,5,0,hexA(C["gut-edge"],.8))}
+/* simple human figure (front), standing; o.pose: stand, lie, slump */
+function person(x,y,s,o){o=o||{};const col=o.col||C.skin,ed=o.edge||C["skin-edge"];ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);ctx.scale(s,s);
+  circ(0,-62,13,col,ed,1.6);rr(-15,-47,30,46,10);fillStroke(o.shirt||hexA(C.accent,.55),ed,1.4);
+  line(-14,-42,-24,-10,ed,6);line(14,-42,24,-10,ed,6);line(-8,-2,-10,38,ed,7);line(8,-2,10,38,ed,7);ctx.restore()}
+/* syringe / pill / IV bag icons */
+function pill(x,y,r,col,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-r*1.6,-r*.7,r*3.2,r*1.4,r*.7);fillStroke(col,hexA(C.ink,.5),1.2);ctx.fillStyle=hexA(C.panel,.6);ctx.fillRect(0,-r*.7,r*1.6-r*.7,r*1.4);ctx.restore()}
+function ivBag(x,y,s,lab,col){rr(x-s*.45,y-s*.7,s*.9,s*1.2,s*.15);fillStroke(hexA(C.water,.8),C["glass-edge"],1.6);rr(x-s*.45,y-s*.1,s*.9,s*.6,s*.12);ctx.fillStyle=hexA(col||C.drug,.35);ctx.fill();
+  line(x,y+s*.5,x,y+s*.75,C["glass-edge"],2);if(lab)txt(x,y-s*.38,lab,{size:11.5,weight:700,align:"center"})}
+function syringe(x,y,s,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);rr(-s,-s*.22,s*1.5,s*.44,3);fillStroke(hexA(C.water,.9),C["glass-edge"],1.4);ctx.fillStyle=hexA(col||C.drug,.6);ctx.fillRect(-s*.2,-s*.18,s*.66,s*.36);
+  line(s*.5,0,s*1.1,0,C["glass-edge"],1.6);line(-s,-s*.3,-s,s*.3,C["glass-edge"],2.5);line(-s*1.35,0,-s,0,C["glass-edge"],2.5);ctx.restore()}
+/* bold X */
+function bigX(x,y,s,col,lw){line(x-s,y-s,x+s,y+s,col||C.bad,lw||3);line(x+s,y-s,x-s,y+s,col||C.bad,lw||3)}
+/* ECG wave value for a phase 0..1 */
+function pqrst(ph){return .12*gauss(ph,.12,.025)-.12*gauss(ph,.215,.008)+1*gauss(ph,.24,.012)-.25*gauss(ph,.265,.01)+.25*gauss(ph,.45,.04)}
+function ecg(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;const v=pqrst(ph);const Y=y+h*.62-v*h*.55;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-hr"];ctx.lineWidth=o.lw||1.8;ctx.lineJoin="round";ctx.stroke()}
+function artWave(x,y,w,h,hr,T,col,o){o=o||{};const pps=o.pps||90;ctx.beginPath();for(let i=0;i<=w;i+=1.5){const tt=T-(w-i)/pps;const ph=((tt*hr/60)%1+1)%1;const v=ph<.12?ph/.12:(ph<.2?1-(ph-.12)*1.5:Math.max(0,.88-(ph-.2)*1.1)+.12*gauss(ph,.3,.03));const Y=y+h-v*h;i?ctx.lineTo(x+i,Y):ctx.moveTo(x+i,Y)}
+  ctx.strokeStyle=col||C["mon-bp"];ctx.lineWidth=o.lw||1.6;ctx.stroke()}
+/* bedside monitor: v={hr,sys,dia,sp,rr,t} flags: v.hrF etc ('hi'|'lo') */
+function monitor(x,y,w,h,v,T,o){o=o||{};rr(x,y,w,h,8);ctx.fillStyle=C.mon;ctx.fill();ctx.strokeStyle=hexA(C.ink,.4);ctx.lineWidth=1.5;ctx.stroke();
+  const gw=w-112;ctx.save();ctx.beginPath();rr(x+6,y+6,gw,h-12,4);ctx.clip();ctx.strokeStyle=C["mon-grid"];ctx.lineWidth=1;for(let gx=x+6;gx<x+6+gw;gx+=16){line(gx,y,gx,y+h,C["mon-grid"],1)}
+  const hr=Math.max(1,v.hr);const rows=o.art===false?1:2;const rh=(h-12)/rows;
+  if(v.hr>0)ecg(x+6,y+6,gw,rh,hr,T,C["mon-hr"]);else line(x+6,y+6+rh*.62,x+6+gw,y+6+rh*.62,C["mon-hr"],1.6);
+  if(rows>1)artWave(x+6,y+6+rh+4,gw,rh-14,hr,T,C["mon-bp"]);ctx.restore();
+  const nx=x+gw+14;const items=[["HR",Math.round(v.hr),"mon-hr",v.hrF],["BP",Math.round(v.sys)+"/"+Math.round(v.dia),"mon-bp",v.bpF],["SpO₂",Math.round(v.sp)+"%","mon-sp",v.spF]];
+  if(v.rr!=null)items.push(["RR",Math.round(v.rr),"mon-rr",v.rrF]);
+  const ih=(h-8)/items.length;items.forEach((it,i)=>{const yy=y+4+i*ih+ih/2;txt(nx,yy,it[0],{size:11,mono:true,weight:600,color:C[it[2]]});
+    txt(x+w-8,yy,String(it[1])+(it[3]==="hi"?"▲":it[3]==="lo"?"▼":""),{size:it[0]==="BP"?13.5:16,mono:true,weight:700,color:C[it[2]],align:"right"})})}
+/* body silhouette outline for maps */
+function bodyShape(cx,top,s,o){o=o||{};ctx.save();ctx.translate(cx,top);ctx.scale(s,s);
+  ctx.beginPath();ctx.arc(0,30,26,0,TAU);fillStroke(o.fill||hexA(C.body,.9),C["body-edge"],2/s);
+  ctx.beginPath();ctx.moveTo(-12,54);ctx.lineTo(-12,62);ctx.bezierCurveTo(-60,66,-66,80,-68,110);ctx.lineTo(-80,230);ctx.lineTo(-64,234);ctx.lineTo(-50,128);ctx.lineTo(-48,240);ctx.lineTo(-44,380);ctx.lineTo(-14,380);ctx.lineTo(-6,256);ctx.lineTo(6,256);ctx.lineTo(14,380);ctx.lineTo(44,380);ctx.lineTo(48,240);ctx.lineTo(50,128);ctx.lineTo(64,234);ctx.lineTo(80,230);ctx.lineTo(68,110);ctx.bezierCurveTo(66,80,60,66,12,62);ctx.lineTo(12,54);ctx.closePath();
+  fillStroke(o.fill||hexA(C.body,.9),C["body-edge"],2/s);ctx.restore()}
+/* small drops (saliva / sweat) */
+function drops(x,y,n,T,col,spread,size){for(let i=0;i<n;i++){const p=((T*.8+i/n)%1);const xx=x+(rnd(i+3)-.5)*(spread||20);const yy=y+p*24;const r=(size||3)*(1-p*.3);ctx.beginPath();ctx.moveTo(xx,yy-r*1.8);ctx.quadraticCurveTo(xx+r,yy,xx,yy+r);ctx.quadraticCurveTo(xx-r,yy,xx,yy-r*1.8);ctx.fillStyle=hexA(col,1-p*.6);ctx.fill()}}
+/* gauge bar (vertical) */
+function vbar(x,y,w,h,v,col,lab,o){o=o||{};rr(x,y,w,h,4);ctx.fillStyle=hexA(C.sunk,.7);ctx.fill();const f=clamp(v,0,1);rr(x,y+h*(1-f),w,h*f,4);ctx.fillStyle=col;ctx.fill();if(lab)txt(x+w/2,y+h+12,lab,{size:o.fs||11.5,weight:600,align:"center",color:o.lc||C.ink})}
+function hbar(x,y,w,h,v,col){rr(x,y,w,h,h/2);ctx.fillStyle=hexA(C.sunk,.8);ctx.fill();rr(x,y,Math.max(h,w*clamp(v,0,1)),h,h/2);ctx.fillStyle=col;ctx.fill()}
+/* neuron line with axon and a ganglion bulb */
+function neuron(x1,y1,x2,y2,col,lw){circ(x1,y1,7,hexA(col,.3),col,2);line(x1+7,y1,x2-6,y2,col,lw||3);circ(x2,y2,5,col)}
+function dotsAlong(x1,y1,x2,y2,T,col,n,sp){for(let i=0;i<(n||3);i++){const p=((T*(sp||.5))+i/(n||3))%1;circ(lerp(x1,x2,p),lerp(y1,y2,p),3.2,col)}}
+function sweatDrop(x,y,r,col){ctx.beginPath();ctx.moveTo(x,y-r*1.8);ctx.quadraticCurveTo(x+r,y,x,y+r);ctx.quadraticCurveTo(x-r,y,x,y-r*1.8);ctx.fillStyle=col;ctx.fill()}
+function thermo(x,y,h,v,col){rr(x-5,y,10,h,5);fillStroke(C.panel,C["ink-soft"],1.4);circ(x,y+h+4,8,col,C["ink-soft"],1.4);rr(x-2.5,y+h*(1-clamp(v,0,1)),5,h*clamp(v,0,1)+4,2.5);ctx.fillStyle=col;ctx.fill()}
+function brain(x,y,s,col,ed){ctx.beginPath();ctx.ellipse(x,y,s,s*.72,0,0,TAU);fillStroke(col||C.brain,ed||C["brain-edge"],2);
+  for(let k=0;k<5;k++){ctx.beginPath();ctx.arc(x-s*.6+k*s*.3,y+Math.sin(k)*s*.15,s*.22,Math.PI*.1,Math.PI*.9);ctx.strokeStyle=hexA(ed||C["brain-edge"],.7);ctx.lineWidth=1.4;ctx.stroke()}}
+function mouthIcon(x,y,s,wet,T){ell(x,y,s,s*.45,0,C.skin,C["skin-edge"],1.6);ell(x,y,s*.7,s*.18,0,hexA(C.myo,.8));if(wet>0)drops(x,y+s*.35,Math.round(1+wet*3),T,C.sweat,s,2.6);else{txt(x,y+s*.8,"dry",{size:11,align:"center",color:C["ink-soft"]})}}
+function prostateIcon(x,y,s,relax){ell(x,y,s,s*.8,0,C.prostate,hexA(C.ink,.4),1.6);const w=s*(.12+.18*clamp(relax,0,1));rr(x-w,y-s*1.1,w*2,s*2.2,w);ctx.fillStyle=hexA(C.urine,.8);ctx.fill()}
+
+/* ================= body map with organ callouts (walkthrough + lab) ================= */
+const ORG_DEF={
+  brain:{name:"Brain",ax:0,ay:16,side:-1,row:0},eye:{name:"Pupil",ax:-8,ay:30,side:-1,row:1},airway:{name:"Airway",ax:-16,ay:96,side:-1,row:2},gut:{name:"Gut",ax:-6,ay:172,side:-1,row:3},muscle:{name:"Skeletal muscle",ax:-28,ay:300,side:-1,row:4},
+  mouth:{name:"Saliva",ax:0,ay:44,side:1,row:0},heart:{name:"Heart",ax:12,ay:104,side:1,row:1},vessel:{name:"Vessels",ax:60,ay:150,side:1,row:2},bladder:{name:"Bladder",ax:0,ay:226,side:1,row:3},skin:{name:"Skin and sweat",ax:56,ay:200,side:1,row:4}};
+const BODY_BASE={pupil:.45,hr:72,force:1,airway:.6,mucus:0,constrict:.45,gut:1,bfill:.45,bsq:0,bflow:0,bclosed:true,saliva:.35,sweat:.25,red:0,twitch:0,weak:0,confuse:0,sleepy:0,tremor:0};
+function bodyState(o){return Object.assign({},BODY_BASE,o||{})}
+function mixState(a,b,t){const o={};for(const k in BODY_BASE){const A=a[k],B=b[k];o[k]=typeof A==="number"?lerp(A,B,t):(t<.5?A:B)}return o}
+function calloutPos(k,cx,y0,o){o=o||{};const d=ORG_DEF[k];const gap=o.gap||74,dx=o.dx||142;return [cx+d.side*dx,y0+34+d.row*gap]}
+function organIcon(k,x,y,R,st,T){
+  if(k==="brain"){brain(x,y-2,R*.62);if(st.confuse>.05){ctx.save();ctx.globalAlpha*=clamp(st.confuse,0,1);for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x,y-2,R*(.25+i*.14),T*3+i*2,T*3+i*2+3.6);ctx.strokeStyle=C.bad;ctx.lineWidth=1.6;ctx.stroke()}ctx.restore()}
+    if(st.sleepy>.05)txt(x+R*.45,y-R*.55,"z z",{size:11.5,weight:700,color:C.accent,align:"center"})}
+  else if(k==="eye")eye(x,y,R*.52,st.pupil);
+  else if(k==="mouth")mouthIcon(x,y-4,R*.6,st.saliva>.5?(st.saliva-.4)*1.6:0,T);
+  else if(k==="airway"){bronchiole(x,y,R*.82,st.airway,{mucus:st.mucus})}
+  else if(k==="heart"){heart(x,y-2,R*.5,T,st.hr,{force:st.force,ring:false})}
+  else if(k==="vessel")vesselX(x,y,R*.78,st.constrict,{t:T});
+  else if(k==="gut"){ctx.save();ctx.translate(x,y);ctx.scale(.85,.85);gut(-R*.95,0,R*1.9,T,st.gut);ctx.restore()}
+  else if(k==="bladder")bladder(x,y-3,R*.62,st.bfill,st.bsq,{closed:st.bclosed,flow:st.bflow,t:T});
+  else if(k==="muscle"){const tw=st.twitch>0?Math.sin(T*40)*2*st.twitch*(rnd(Math.floor(T*6))>.4?1:0):0;const tr=st.tremor>0?Math.sin(T*55)*1.8*st.tremor:0;
+    ctx.save();ctx.translate(x+tr,y+tw);rr(-R*.72,-R*.32,R*1.44,R*.64,R*.3);fillStroke(mix(C.muscle,C.blocked,st.weak*.7),hexA(C.ink,.45),1.4);for(let i=-3;i<=3;i++)line(i*R*.18,-R*.28,i*R*.18,R*.28,hexA(C.panel,.45),1.2);ctx.restore()}
+  else if(k==="skin"){rr(x-R*.7,y-R*.42,R*1.4,R*.84,6);fillStroke(mix(C.skin,"#D8402F",st.red*.75),C["skin-edge"],1.4);
+    const n=Math.round(st.sweat*5);for(let i=0;i<n;i++){const p=((T*.5+i*.23)%1);sweatDrop(x-R*.5+i*R*.25,y-R*.2+p*R*.4,3,hexA(C.sweat,1-p*.5))}
+    if(st.red>.4){ctx.save();ctx.globalAlpha*=clamp((st.red-.4)*1.6,0,1);for(let i=0;i<3;i++){const yy=y-R*.7-((T*14+i*8)%20);ctx.beginPath();ctx.moveTo(x-8+i*8,yy+8);ctx.quadraticCurveTo(x-12+i*8,yy+3,x-8+i*8,yy-2);ctx.strokeStyle=C.bad;ctx.lineWidth=1.5;ctx.stroke()}ctx.restore()}}
+}
+/* bodyMap: o.hl = {key:colorKey}, o.only = keys to draw, o.dim = alpha for unhighlighted, o.vals = {key:text}, o.scale */
+function bodyMap(cx,y0,st,T,o){o=o||{};const s=o.scale||.95;const R=o.R||29;
+  bodyShape(cx,y0,s,{fill:mix(C.body,"#E0573F",(st.red||0)*.35)});
+  const keys=o.only||Object.keys(ORG_DEF);
+  keys.forEach(k=>{const d=ORG_DEF[k];const [px,py]=calloutPos(k,cx,y0,o);const ax=cx+d.ax*s,ay=y0+d.ay*s;const hk=o.hl&&o.hl[k];
+    const a=(o.hl&&!hk&&o.dim!=null)?o.dim:1;
+    withA(a,()=>{line(ax,ay,px-d.side*R,py,hexA(hk?C[hk]:C["ink-soft"],hk?.95:.6),hk?2:1.1);circ(ax,ay,3,hk?C[hk]:C["ink-soft"]);
+      circ(px,py,R+2,C.panel,hk?C[hk]:C.rule,hk?3:1.4);if(hk)pulseRing(px,py,R+2,C[hk],P(T,1.4));
+      ctx.save();ctx.beginPath();ctx.arc(px,py,R,0,TAU);ctx.clip();organIcon(k,px,py,R,st,T);ctx.restore();
+      const lab=(o.vals&&o.vals[k])||d.name;txt(px,py+R+11,lab,{size:11.5,weight:hk?700:600,align:"center",color:C.ink})})})}
+
+/* ---------------- step content ---------------- */
+const ACTS={1:{name:"Part 1 · The autonomic system",col:"act1"},
+            2:{name:"Part 2 · Cholinergic drugs",col:"act2"},
+            3:{name:"Part 3 · Anticholinergic drugs",col:"act3"},
+            4:{name:"Part 4 · Adrenergic agonists",col:"act4"},
+            5:{name:"Part 5 · Adrenergic blockers",col:"act5"}};
+const NACT=5;
+const STEPS=[
+{act:0,scene:"map",desc:"On the left, a body outline holds a simple eye, heart, airway ring, gut tube and bladder. Every few seconds the whole body switches mode. In red fight-or-flight mode the pupil is wide, the heart beats fast, the airway ring is wide open, the gut barely moves and the bladder holds its urine. In green rest-and-digest mode the pupil is small, the heart beats slowly, the airway is narrower, the gut ripples and the bladder empties. A label at the top names the mode. On the right, five numbered cards for the five parts of this walkthrough light up one at a time.",
+ title:"The big picture: two pedals, many receptors",
+ body:`<p>The <b>autonomic nervous system</b> runs the body's automatic jobs: heart rate, blood pressure, airway size, pupils, digestion and bladder. It has two branches that usually work against each other, like a gas pedal and a brake.</p>
+ <p>Autonomic drugs either <b>copy</b> one branch's chemical messenger or <b>block</b> its receptor. Learn the <b>receptor</b> and what it does in each organ, and almost every effect, side effect and nursing check in this module follows on its own.</p>
+ <p>This walkthrough has five parts:</p>
+ <ol><li><b>The autonomic system:</b> two branches, two messengers, seven receptor types.</li><li><b>Cholinergic drugs:</b> more acetylcholine action, poisoning and antidotes.</li><li><b>Anticholinergic drugs:</b> blocking muscarinic receptors.</li><li><b>Adrenergic agonists:</b> epinephrine and its cousins.</li><li><b>Adrenergic blockers:</b> alpha blockers and beta blockers.</li></ol>`,
+ analogy:"A car with a gas pedal and a brake. The sympathetic branch presses the gas, the parasympathetic branch presses the brake, and drugs either push a pedal for you or tape one so it cannot be pressed.",
+ terms:[["Autonomic nervous system","The part of the nervous system that controls organs without conscious thought."],["Receptor","A protein on a cell that a messenger (or drug) binds to, which switches on a response."],["Agonist / antagonist","An agonist turns a receptor on; an antagonist (blocker) sits in it and stops it being turned on."]],
+ check:{q:"A drug makes the pupils small, slows the heart and speeds up the gut. Which branch is it acting like?",opts:[
+  ["The parasympathetic branch (rest and digest)",1,"Yes. Small pupils, slow heart and an active gut are all rest-and-digest effects."],
+  ["The sympathetic branch (fight or flight)",0,"Fight or flight does the opposite: big pupils, fast heart and a quiet gut."],
+  ["The somatic nervous system",0,"The somatic system controls skeletal muscles you move on purpose, not pupils, heart rate or the gut."],
+  ["Neither; these effects are random",0,"They are not random. They are a matched set of parasympathetic effects, which is why learning the pattern helps."]]},
+ caption:"One body, two modes: fight or flight (red) and rest and digest (green).",
+ legend:[["symp","Sympathetic: fight or flight"],["para","Parasympathetic: rest and digest"],["accent","Current part","s"]]},
+
+/* ---------- Part 1 ---------- */
+{act:1,scene:"branches",desc:"Two panels side by side. The left panel has a red header that says fight or flight. It shows a fast green heart tracing, a wide pupil, a wide-open airway ring, a still gut tube, and a bladder with a closed outlet. The right panel has a green header that says rest and digest. It shows a slow heart tracing, a small pupil, a narrower airway ring, a gut tube with ripples moving along it, drops of saliva, and a bladder squeezing urine out. Small heart rate numbers sit above each tracing.",
+ title:"Fight or flight versus rest and digest",
+ body:`<p>The <b>sympathetic</b> branch is <b>fight or flight</b>. It gets you ready for an emergency: the heart beats faster and harder, blood pressure rises, airways open, pupils widen, blood sugar rises, and digestion and bladder emptying are put on hold.</p>
+ <p>The <b>parasympathetic</b> branch is <b>rest and digest</b>. It slows the heart, narrows the airways a little, makes the pupils small, and turns on saliva, stomach juices, gut movement and bladder emptying.</p>
+ <p>Most organs get input from both. The balance between them sets the organ's level, so a drug can raise heart rate either by pressing the sympathetic gas <b>or</b> by blocking the parasympathetic brake.</p>`,
+ analogy:"A dimmer switch with two hands on it. One hand pushes the light up, the other pulls it down. You can brighten the room by pushing harder or by letting go with the other hand.",
+ terms:[["Sympathetic","Fight-or-flight branch; raises heart rate, blood pressure and blood sugar, opens airways, widens pupils."],["Parasympathetic","Rest-and-digest branch; slows the heart, makes pupils small, turns on digestion and bladder emptying."],["Dual innervation","Most organs receive both branches, and the balance sets the response."]],
+ check:{q:"Which finding fits strong sympathetic activity?",opts:[
+  ["Fast heart rate and dilated pupils",1,"Right. Fight or flight speeds the heart and widens the pupils to let in more light."],
+  ["Increased saliva and active bowel sounds",0,"Those are rest-and-digest (parasympathetic) effects."],
+  ["Small pupils and a slow pulse",0,"Those are parasympathetic effects, the opposite of fight or flight."],
+  ["Bladder contracting to empty",0,"Bladder emptying is parasympathetic. Sympathetic activity tends to hold urine in."]]},
+ caption:"Left: fight or flight. Right: rest and digest. Same organs, opposite settings.",
+ legend:[["symp","Sympathetic"],["para","Parasympathetic"],["mon-hr","Heart tracing","l"]]},
+
+{act:1,scene:"wiring",desc:"Four rows of nerve pathways run from the spinal cord on the left to a target on the right. Row one, parasympathetic in green: a long first neuron reaches a ganglion near the organ, where amber acetylcholine dots cross to a nicotinic receptor, then a short second neuron releases acetylcholine onto a muscarinic receptor on the organ. Row two, sympathetic in red: a short first neuron uses acetylcholine at a nicotinic receptor in a ganglion near the spine, then a long second neuron releases red norepinephrine diamonds onto alpha and beta receptors. Row three: a sympathetic neuron reaches the adrenal gland, which releases magenta epinephrine diamonds into a blood vessel. Row four, in purple: one somatic motor neuron releases acetylcholine onto nicotinic receptors on a striped skeletal muscle, which twitches. Dots flow along every neuron from left to right.",
+ title:"Two messengers and where they act",
+ body:`<p>The autonomic system uses <b>two-neuron chains</b>. The first neuron always releases <b>acetylcholine (ACh)</b> onto <b>nicotinic (N)</b> receptors in a <b>ganglion</b>, a relay station.</p>
+ <p>At the organ: <b>parasympathetic</b> nerves release <b>ACh</b> onto <b>muscarinic (M)</b> receptors. <b>Sympathetic</b> nerves release <b>norepinephrine (NE)</b> onto <b>adrenergic</b> receptors: <b>alpha (α)</b> and <b>beta (β)</b>. The <b>adrenal medulla</b> acts like a sympathetic ganglion and releases mostly <b>epinephrine</b> into the blood.</p>
+ <p>Somatic motor nerves to skeletal muscle are not autonomic, but they also use <b>ACh on nicotinic receptors</b>. That matters for poisons and antidotes later. (One exception: sweat glands are sympathetic but use ACh on muscarinic receptors.)</p>`,
+ analogy:"A relay race. The first runner always hands off the same baton (ACh). The second runner hands the finish line a green baton (ACh) on the rest side or a red one (norepinephrine) on the fight side.",
+ terms:[["Acetylcholine (ACh)","Messenger at all ganglia, parasympathetic endings, sweat glands and skeletal muscle."],["Norepinephrine (NE)","Messenger at most sympathetic nerve endings; acts on alpha and beta receptors."],["Cholinergic / adrenergic","Cholinergic means acting through ACh; adrenergic means acting through norepinephrine or epinephrine."]],
+ check:{q:"Which receptor does ACh act on at the heart when the parasympathetic branch slows it?",opts:[
+  ["Muscarinic",1,"Yes. Parasympathetic endings release ACh onto muscarinic receptors on the heart's pacemaker, slowing it."],
+  ["Nicotinic",0,"Nicotinic receptors are in the ganglia and on skeletal muscle, not on the heart's pacemaker cells."],
+  ["Beta-1",0,"Beta-1 receptors on the heart respond to norepinephrine and epinephrine and speed the heart up."],
+  ["Alpha-1",0,"Alpha-1 receptors mainly squeeze blood vessels; they are adrenergic, not cholinergic."]]},
+ caption:"ACh at every ganglion and at parasympathetic endings; norepinephrine at sympathetic endings; epinephrine from the adrenal gland.",
+ legend:[["para","Parasympathetic"],["symp","Sympathetic"],["somatic","Somatic motor"],["ach","Acetylcholine"],["ne","Norepinephrine","d"],["epi","Epinephrine","d"]]},
+
+{act:1,scene:"receptors",desc:"A body outline sits on the left with an eye, a heart, an airway, blood vessels, a gut tube, a bladder and a leg muscle drawn on it. Every few seconds one receptor type is highlighted: alpha-1, alpha-2, beta-1, beta-2, dopamine, muscarinic or nicotinic. The organs that carry that receptor glow and animate: for alpha-1 the vessel squeezes and the pupil widens; for beta-1 the heart beats faster; for beta-2 the airway opens; for muscarinic the pupil shrinks, the gut ripples and the bladder squeezes; for nicotinic the leg muscle twitches. A card on the right names the receptor in its own colour and lists what it does.",
+ title:"Seven receptors, one body map",
+ body:`<p>Learn this map once and you can predict most drugs in the module:</p>
+ <ul><li><b>Alpha-1 (α1):</b> squeezes blood vessels (blood pressure up), widens the pupil, tightens the bladder neck and prostate.</li>
+ <li><b>Alpha-2 (α2):</b> a <b>brake</b> on nerve endings and in the brainstem; less norepinephrine is released.</li>
+ <li><b>Beta-1 (β1):</b> heart faster and stronger; kidney releases renin. Memory tool: <b>one heart</b>.</li>
+ <li><b>Beta-2 (β2):</b> opens airways, relaxes the uterus, raises blood sugar, can cause tremor. <b>Two lungs</b>.</li>
+ <li><b>Dopamine (D1):</b> widens kidney and gut blood vessels.</li>
+ <li><b>Muscarinic (M):</b> slows the heart, small pupils, saliva and secretions, gut movement, bladder squeezing, sweat.</li>
+ <li><b>Nicotinic (N):</b> fires ganglia and the adrenal gland, and makes skeletal muscle contract.</li></ul>`,
+ analogy:"Different locks on different doors. The same key (norepinephrine) opens an alpha-1 lock on a vessel and a beta-1 lock on the heart, and each door leads to a different room with a different job.",
+ terms:[["Alpha-1","Vasoconstriction, pupil dilation, bladder-neck and prostate tightening."],["Beta-1 / beta-2","β1: heart rate and force. β2: airway opening, uterine relaxation, blood sugar rise."],["Muscarinic","ACh receptor on organs: slows heart, increases secretions, gut and bladder activity, small pupils."]],
+ check:{q:"A drug that stimulates beta-2 receptors would be most useful for which problem?",opts:[
+  ["Narrowed airways during an asthma attack",1,"Yes. Beta-2 receptors on airway smooth muscle relax it, opening the airways."],
+  ["A slow heart rate",0,"Heart rate is mainly a beta-1 job. Beta-2 drugs can raise the heart rate a little, but that is a side effect."],
+  ["Low blood pressure from wide vessels",0,"Squeezing vessels to raise blood pressure is an alpha-1 effect. Beta-2 can actually widen some vessels."],
+  ["Urinary retention",0,"Bladder squeezing is a muscarinic effect, not a beta-2 effect."]]},
+ caption:"Each receptor type, where it is and what it does.",
+ legend:[["a1","α1"],["a2","α2"],["b1","β1"],["b2","β2"],["dop","D1"],["mus","Muscarinic"],["nic","Nicotinic"]]},
+
+{act:1,scene:"agonist",desc:"Three lanes side by side, each with a nerve ending at the top and a cell surface at the bottom carrying a receptor. In the left lane, labelled natural signal, red norepinephrine diamonds fall from the nerve, settle in the receptor, and the receptor glows. In the middle lane, labelled agonist, violet hexagon drug shapes settle into the receptor and it glows the same way. In the right lane, labelled antagonist, a violet square plug with a white X sits in the receptor; red diamonds fall, bounce off and drift away, and the receptor stays grey with a red X. Below the lanes, two strips show how signals end: a blue pac-man shaped enzyme chops amber acetylcholine dots in the gap, and a pump on the nerve ending pulls red norepinephrine diamonds back up.",
+ title:"Agonists copy, antagonists block",
+ body:`<p>An <b>agonist</b> binds a receptor and turns it on, like the body's own messenger. An <b>antagonist</b> (blocker) binds and just sits there, so the natural messenger cannot get in. The effect of a blocker is the <b>opposite</b> of that receptor's normal job.</p>
+ <p>Drug names follow this: <b>cholinergic</b> or <b>parasympathomimetic</b> drugs copy ACh; <b>anticholinergic</b> or <b>parasympatholytic</b> drugs block it. <b>Adrenergic</b> or <b>sympathomimetic</b> drugs copy norepinephrine or epinephrine; <b>adrenergic blockers</b> block them.</p>
+ <p>Signals are switched off fast. The enzyme <b>acetylcholinesterase (AChE)</b> chops ACh in the gap. Norepinephrine is mostly pumped back into the nerve (<b>reuptake</b>). Some drugs work by blocking these off switches.</p>`,
+ analogy:"A key and a broken key. The right key (agonist) turns the lock. A broken-off key stuck in the lock (antagonist) does not turn it, and no other key can get in while it is there.",
+ terms:[["Agonist","Binds and activates a receptor."],["Antagonist (blocker)","Binds a receptor without activating it, so the natural messenger cannot act."],["Acetylcholinesterase","The enzyme that breaks down ACh within milliseconds."]],
+ check:{q:"Muscarinic receptors slow the heart. What would a muscarinic antagonist do to the heart rate?",opts:[
+  ["Raise it",1,"Yes. Blocking the parasympathetic brake lets the heart rate rise. That is why atropine treats slow heart rates."],
+  ["Lower it",0,"Lowering it would be a muscarinic agonist's effect. A blocker does the opposite of the receptor's job."],
+  ["No change, because blockers have no effect",0,"Blockers have an effect: they remove the normal signal, so you see the opposite of what that receptor does."],
+  ["Stop the heart",0,"Blocking the brake does not stop the heart; it speeds it up."]]},
+ caption:"Natural messenger, agonist and antagonist at the same receptor, and how signals are switched off.",
+ legend:[["ne","Norepinephrine","d"],["drug","Drug: agonist (hexagon), blocker (square)"],["blocked","Blocked receptor","s"],["ache","AChE enzyme"],["ach","ACh"]]},
+
+/* ---------- Part 2 ---------- */
+{act:2,scene:"bethanechol",desc:"On the left, a close-up of the bladder wall shows a smooth muscle cell with green muscarinic receptors along its top edge. Violet hexagon bethanechol molecules drift down and settle in the receptors, which glow, and the muscle cell shortens. On the right, a large bladder starts full of yellow urine with its outlet tube. As the drug arrives, the bladder wall squeezes inward, yellow drops stream out of the outlet and the urine level falls. A small timeline under the bladder marks drug given, bladder squeezes, bladder empties. A warning tag reads check for blockage first.",
+ title:"Direct muscarinic agonist: bethanechol",
+ body:`<p><b>What it is for:</b> <b>urinary retention</b> that is <b>not</b> caused by a blockage, for example after surgery or from a weak bladder muscle.</p>
+ <p><b>Mechanism:</b> <b>bethanechol</b> binds <b>muscarinic</b> receptors directly. On the bladder's <b>detrusor</b> muscle this squeezes the bladder and relaxes its outlet, so urine flows. It also acts on the gut, which can be used to restart sluggish bowels.</p>
+ <p><b>Adverse effects</b> come from muscarinic activation elsewhere: sweating, drooling, cramps, diarrhea, urgency, slow pulse, low blood pressure and narrowed airways. So it is avoided in <b>asthma</b>, <b>slow heart rate</b>, and <b>bladder or bowel obstruction</b> (squeezing against a blockage can cause damage).</p>
+ <p><b>Nursing:</b> confirm no obstruction, keep a bedpan or bathroom close, monitor intake and output, pulse and blood pressure. Giving it on an empty stomach reduces nausea. <b>Atropine</b> reverses an excess effect.</p>`,
+ analogy:"Squeezing a water balloon. The drug is a hand squeezing the bladder. If the neck of the balloon is tied off (an obstruction), squeezing harder does not help and can burst it.",
+ terms:[["Bethanechol","A direct-acting muscarinic agonist used for non-obstructive urinary retention."],["Detrusor muscle","The smooth muscle of the bladder wall that squeezes to empty it."],["Urinary retention","Being unable to empty the bladder fully."]],
+ check:{q:"Before giving bethanechol for urinary retention, what should the nurse confirm?",opts:[
+  ["That the retention is not caused by a mechanical obstruction",1,"Yes. The drug squeezes the bladder; against a blockage it cannot work and may cause harm."],
+  ["That the patient has asthma",0,"Asthma is a reason to avoid it, because muscarinic activation narrows the airways."],
+  ["That the heart rate is below 50",0,"A slow heart rate is a reason to hold it, since muscarinic activation slows the heart further."],
+  ["That the patient has eaten a large meal",0,"It is usually given on an empty stomach to reduce nausea and cramping."]]},
+ caption:"Bethanechol switches on muscarinic receptors on the bladder muscle, which squeezes and empties.",
+ legend:[["mus","Muscarinic receptor"],["drug","Bethanechol"],["urine","Urine"],["bladder","Bladder wall"]]},
+
+{act:2,scene:"mg",desc:"Two side-by-side views of the junction between a nerve and a skeletal muscle. In both, a nerve ending at the top releases amber acetylcholine dots into a gap above the muscle surface. Several orange nicotinic receptors on the muscle are covered by grey Y-shaped antibodies, showing myasthenia gravis. In the left view, labelled no drug, blue pac-man enzymes in the gap chop most of the dots before they reach a free receptor, and a muscle strength bar stays low. In the right view, labelled with pyridostigmine, violet drug caps sit on the enzymes' mouths, popping on and off. More acetylcholine dots survive, more free receptors glow, and the strength bar rises higher. A note at the bottom says donepezil uses the same idea in the brain.",
+ title:"Cholinesterase inhibitors: more ACh for longer",
+ body:`<p><b>Mechanism:</b> <b>cholinesterase inhibitors</b> (stem <b>-stigmine</b>) block <b>acetylcholinesterase</b>. ACh is not broken down as fast, so it builds up and acts on <b>both</b> muscarinic and nicotinic receptors. <b>Neostigmine</b> and <b>pyridostigmine</b> are <b>reversible</b>: they let go after a few hours.</p>
+ <p><b>Myasthenia gravis</b> is an autoimmune disease where antibodies block and destroy nicotinic receptors on skeletal muscle. The result is weakness that gets worse with use: drooping eyelids, double vision, trouble chewing, swallowing and breathing. Extra ACh gives the remaining receptors a better chance of firing, so strength improves.</p>
+ <p><b>Nursing:</b> give pyridostigmine <b>on time</b> (late doses mean weakness), often before meals so chewing and swallowing are easier. Watch for muscarinic side effects (cramps, diarrhea, drooling, slow pulse). <b>Donepezil</b> is a cholinesterase inhibitor that enters the brain, used for Alzheimer disease.</p>`,
+ analogy:"Fewer working doorbells, so the visitor keeps ringing longer. Stopping the cleaner (the enzyme) from sweeping the doorstep lets the message stay long enough for the few working bells to ring.",
+ terms:[["Cholinesterase inhibitor","Blocks the enzyme that breaks down ACh, so ACh lasts longer."],["Myasthenia gravis","Autoimmune loss of nicotinic receptors on muscle, causing fatigable weakness."],["Pyridostigmine","Reversible cholinesterase inhibitor taken by mouth for myasthenia gravis."]],
+ check:{q:"A patient with myasthenia gravis takes pyridostigmine. What timing advice should the nurse give?",opts:[
+  ["Take it on schedule, about 30 to 60 minutes before meals",1,"Yes. Strength peaks after the dose, which helps chewing and swallowing; late doses bring back weakness."],
+  ["Take it only when feeling very weak",0,"Waiting until weak lets the disease get ahead of the drug. Regular timing keeps ACh levels steady."],
+  ["Take it at bedtime only",0,"Daytime activity, chewing and swallowing need the effect most; it is dosed through the day."],
+  ["Double the next dose if one is missed",0,"Too much can cause a cholinergic crisis. Follow the prescriber's plan for missed doses."]]},
+ caption:"Blocking the enzyme lets ACh linger, so more of the remaining nicotinic receptors fire.",
+ legend:[["nic","Nicotinic receptor"],["blocked","Antibody-blocked receptor","s"],["ach","ACh"],["ache","Cholinesterase"],["drug","Pyridostigmine"]]},
+
+{act:2,scene:"sludge",desc:"A body outline sits in the centre with an eye, mouth, airway, heart, stomach, gut and bladder. Down the left side, the letters S L U D G E light up one at a time with words: salivation, lacrimation, urination, defecation, GI upset, emesis. Down the right side, the letters D U M B E L S light up in the same rhythm: diarrhea, urination, miosis, bradycardia and bronchospasm, emesis, lacrimation, salivation and sweating. As each letter lights, a line connects it to its organ, which animates: drops fall from the mouth and eye, the bladder squeezes, the gut ripples fast, the pupil shrinks, the heart slows and the airway narrows and fills with green mucus.",
+ title:"SLUDGE and DUMBELS: too much muscarinic action",
+ body:`<p>When ACh (or a muscarinic drug) overstimulates <b>muscarinic</b> receptors, the rest-and-digest effects all turn up at once. Two memory tools list them.</p>
+ <p><b>SLUDGE:</b> <b>S</b>alivation, <b>L</b>acrimation (tears), <b>U</b>rination, <b>D</b>efecation, <b>G</b>I upset (cramps), <b>E</b>mesis (vomiting).</p>
+ <p><b>DUMBELS:</b> <b>D</b>iarrhea, <b>U</b>rination, <b>M</b>iosis (pinpoint pupils), <b>B</b>radycardia, <b>B</b>ronchospasm and <b>B</b>ronchorrhea (airways flooded with secretions), <b>E</b>mesis, <b>L</b>acrimation, <b>S</b>alivation and <b>S</b>weating.</p>
+ <p>The dangerous ones are the <b>"killer Bs"</b>: <b>bradycardia, bronchospasm and bronchorrhea</b>. They threaten breathing and circulation, so they guide treatment.</p>`,
+ analogy:"Every tap in the house opened at once. Mouth, eyes, lungs, gut and bladder all run, and the one that floods the lungs is the emergency.",
+ terms:[["SLUDGE / DUMBELS","Memory tools for muscarinic excess: secretions, gut and bladder activity, pinpoint pupils, slow heart."],["Miosis","Pupil constriction."],["Bronchorrhea","Excess secretions in the airways."]],
+ check:{q:"In a patient with muscarinic excess, which finding is the highest priority?",opts:[
+  ["Wheezing with heavy airway secretions",1,"Yes. Bronchospasm and bronchorrhea are killer Bs that threaten the airway; airway comes first."],
+  ["Watery eyes",0,"Tears are uncomfortable but not life-threatening."],
+  ["Diarrhea",0,"Fluid loss matters, but airway and breathing come first."],
+  ["Increased saliva",0,"Saliva can be suctioned; the airway secretions and bronchospasm deeper in the lungs are the bigger threat."]]},
+ caption:"SLUDGE and DUMBELS: every muscarinic organ turned up at once.",
+ legend:[["mus","Muscarinic effect"],["sweat","Secretions"],["mucus","Airway mucus"],["accent","Highlighted letter","s"]]},
+
+{act:2,scene:"op",desc:"A large synapse fills the left side. Brown triangle organophosphate molecules drift into the gap and lock onto the blue pac-man enzymes, which turn grey; after a while a tag on them reads aged, permanent. Amber acetylcholine dots pile up in the gap, and both the green muscarinic receptors and the orange nicotinic receptors glow constantly. A counter shows ACh in the gap climbing. On the right, a dark bedside monitor shows the heart rate falling into the 40s and the oxygen level dropping. Below it, an eye with a pinpoint pupil, an airway ring filling with green mucus, and a muscle that twitches and then weakens.",
+ title:"Irreversible inhibitors: organophosphate poisoning",
+ body:`<p><b>Organophosphates</b> (many insecticides, and nerve agents) are <b>irreversible</b> cholinesterase inhibitors. They bind the enzyme and, over time, the bond <b>ages</b> and becomes permanent. The body must make new enzyme, which takes weeks.</p>
+ <p>ACh floods every cholinergic site, producing a <b>cholinergic crisis</b>:</p>
+ <ul><li><b>Muscarinic:</b> SLUDGE and DUMBELS, including the killer Bs.</li><li><b>Nicotinic (muscle):</b> twitching (<b>fasciculations</b>), then weakness and <b>paralysis</b>, including the breathing muscles.</li><li><b>Brain:</b> confusion, seizures, coma.</li></ul>
+ <p><b>Nursing priorities:</b> protect yourself (gloves, gown), remove the patient's clothing and wash the skin to stop more absorption, support airway and breathing (suction, oxygen), and prepare the antidotes.</p>`,
+ analogy:"Gluing the drain shut. With the sink's drain (the enzyme) sealed for good, the tap keeps running and water spills everywhere until a new drain is built.",
+ terms:[["Organophosphate","Irreversible cholinesterase inhibitor found in some insecticides and nerve agents."],["Aging","The chemical change that makes the poison-enzyme bond permanent."],["Cholinergic crisis","Life-threatening ACh excess: muscarinic signs, muscle weakness or paralysis, CNS effects."]],
+ check:{q:"A farm worker arrives drooling and wheezing with pinpoint pupils after spraying insecticide. What should the nurse do first?",opts:[
+  ["Wear protective gear, remove contaminated clothing and support the airway",1,"Yes. Stop further exposure (for the patient and staff) and secure breathing; the poison is still on the skin and clothes."],
+  ["Give an anticholinergic eye drop to widen the pupils",0,"The pupils are a clue, not the problem. Airway and decontamination come first, then systemic antidotes."],
+  ["Encourage oral fluids to dilute the poison",0,"He may not protect his airway; oral fluids risk choking and do not remove skin contamination."],
+  ["Give a beta-2 agonist inhaler and discharge",0,"This is a life-threatening poisoning; the airway is flooded by muscarinic secretions that need atropine, not just a bronchodilator."]]},
+ caption:"Organophosphates permanently disable the enzyme, so ACh floods muscarinic and nicotinic receptors.",
+ legend:[["op","Organophosphate","t"],["ache","Cholinesterase"],["ach","ACh"],["mus","Muscarinic"],["nic","Nicotinic"]]},
+
+{act:2,scene:"antidote",desc:"The same flooded synapse as before, shown in two phases with a timeline along the bottom. In phase one, labelled atropine, violet square plugs fill the green muscarinic receptors, which turn grey; to the right, the airway ring drains of green mucus and widens, and the heart rate number rises. But the orange nicotinic receptors keep glowing and the muscle still twitches. In phase two, labelled pralidoxime, violet hook shapes pull the brown triangles off the grey enzymes, the enzymes turn blue again and start chopping acetylcholine, the pile of dots shrinks and the nicotinic receptors calm down. The muscle stops twitching.",
+ title:"The antidotes: atropine and pralidoxime",
+ body:`<p><b>Atropine</b> is a muscarinic <b>antagonist</b>. It blocks the receptors where the flood of ACh is landing, so secretions dry, airways open and the heart rate comes up. It is repeated until the <b>airway secretions dry</b> (that is the usual endpoint, not the pupil size). Atropine does <b>nothing at nicotinic receptors</b>, so muscle weakness is not fixed by it.</p>
+ <p><b>Pralidoxime</b> pulls the organophosphate off the enzyme and <b>reactivates</b> it, which helps the nicotinic (muscle) problem too. It must be given <b>early</b>, before the bond ages.</p>
+ <p>Seizures are treated with a <b>benzodiazepine</b>. Patients often need breathing support.</p>`,
+ analogy:"A flood and a plumber. Atropine is sandbags at the doors of the house (muscarinic receptors). Pralidoxime is the plumber who unglues the drain, but only if he arrives before the glue sets.",
+ terms:[["Atropine","Muscarinic blocker; dries secretions and raises heart rate; does not reverse muscle weakness."],["Pralidoxime","Reactivates cholinesterase if given before aging."],["Titrate to secretions","Repeat atropine until the lungs are dry, per protocol."]],
+ check:{q:"After several doses of atropine, the patient's lungs are clear but he still has muscle twitching and weakness. Why?",opts:[
+  ["Atropine blocks muscarinic receptors only, not nicotinic receptors on muscle",1,"Yes. Muscle effects are nicotinic, so pralidoxime (which restores the enzyme) and breathing support are needed."],
+  ["He needs much more atropine",0,"Clear lungs show the muscarinic effects are controlled. More atropine will not help the muscles and may cause anticholinergic toxicity."],
+  ["Atropine causes muscle twitching",0,"Atropine does not cause twitching; the excess ACh at nicotinic receptors does."],
+  ["The poison has worn off",0,"Organophosphates bind for a long time; ongoing twitching shows ACh is still in excess."]]},
+ caption:"Atropine blocks the muscarinic flood; pralidoxime frees the enzyme so ACh can be cleared again.",
+ legend:[["drug","Atropine (square) and pralidoxime (hook)"],["op","Organophosphate","t"],["ache","Cholinesterase"],["mus","Muscarinic"],["nic","Nicotinic"]]},
+
+{act:2,scene:"crisis",desc:"Along the top, a long horizontal bar runs from too little acetylcholine on the left, through a green middle zone labelled just right, to too much on the right. A marker slides back and forth along it. When the marker is in the left zone, the left patient card lights: a face with droopy eyelids, normal pupils and dry mouth, labelled myasthenic crisis, under-treated. When the marker is in the right zone, the right patient card lights: a face with pinpoint pupils, drooling and sweat drops, a slow heart tracing and twitching muscles, labelled cholinergic crisis, too much drug. Both cards show a lung icon with a breathing alert. A banner at the bottom says airway first in both.",
+ title:"Myasthenic crisis or cholinergic crisis?",
+ body:`<p>A person with myasthenia gravis can become dangerously weak for two opposite reasons:</p>
+ <ul><li><b>Myasthenic crisis:</b> too little ACh effect, for example a missed dose, an infection or surgery. Weakness, drooping eyelids, trouble swallowing and breathing. <b>No</b> SLUDGE signs.</li>
+ <li><b>Cholinergic crisis:</b> too much cholinesterase inhibitor. ACh overloads nicotinic receptors until muscles stop responding, so the patient is also weak. But there are <b>muscarinic clues</b>: pinpoint pupils, drooling, sweating, cramps, diarrhea, slow pulse, plus muscle twitching.</li></ul>
+ <p><b>Both are emergencies of breathing.</b> Support the airway and ventilation first. Then the team sorts out the cause (in the past a short-acting test dose was used to tell them apart). Cholinergic crisis means <b>holding</b> the inhibitor and giving <b>atropine</b> for muscarinic effects; myasthenic crisis needs more treatment, not less.</p>`,
+ analogy:"A radio that is silent because it is too quiet or because the speaker is blown from too much volume. Both give no sound, but the knob goes opposite ways, so you look for clues before you turn it.",
+ terms:[["Myasthenic crisis","Severe weakness from under-treated myasthenia gravis; no muscarinic signs."],["Cholinergic crisis","Weakness plus SLUDGE signs from too much cholinesterase inhibitor."],["Fasciculations","Small visible muscle twitches from nicotinic overstimulation."]],
+ check:{q:"A patient on pyridostigmine is weak, drooling, sweating, with pinpoint pupils and a pulse of 48. Which is most likely?",opts:[
+  ["Cholinergic crisis from too much drug",1,"Yes. The muscarinic signs (drooling, sweating, miosis, bradycardia) point to ACh excess, not under-treatment."],
+  ["Myasthenic crisis from too little drug",0,"Myasthenic crisis causes weakness without muscarinic signs like drooling, sweating and pinpoint pupils."],
+  ["An allergic reaction",0,"Allergy causes hives, swelling and low blood pressure with a fast pulse, not this muscarinic pattern."],
+  ["Normal expected effect",0,"Weakness with a slow pulse and heavy secretions is not expected; it is an emergency."]]},
+ caption:"Too little ACh and too much ACh both cause weakness. The muscarinic signs tell them apart.",
+ legend:[["blocked","Too little ACh"],["good","Just right"],["bad","Too much ACh"],["sweat","Secretions"]]},
+
+/* ---------- Part 3 ---------- */
+{act:3,scene:"antimusc",desc:"Four panels in a two by two grid, each with a small green muscarinic receptor plugged by a violet square drug. Top left, atropine: a heart tracing that was slow speeds up and the heart rate number rises from about 40 to about 70. Top right, scopolamine: a patch behind an ear, and wavy nausea lines from a swaying boat fade away. Bottom left, oxybutynin: a bladder that was twitching with small spasms settles and fills calmly. Bottom right, ipratropium: an inhaler puff reaches an airway ring, which widens while green mucus thins.",
+ title:"Muscarinic blockers: four uses, one mechanism",
+ body:`<p><b>Anticholinergic</b> drugs here are <b>muscarinic antagonists</b>. They sit in muscarinic receptors and block ACh, so the rest-and-digest brake is released in the organ they reach.</p>
+ <ul><li><b>Atropine</b> (IV): raises the heart rate in <b>symptomatic bradycardia</b>; dries secretions before some procedures; antidote for cholinergic poisoning; eye drops dilate the pupil.</li>
+ <li><b>Scopolamine</b> (skin patch behind the ear): prevents <b>motion sickness</b> and nausea. It enters the brain, so drowsiness and confusion are common.</li>
+ <li><b>Oxybutynin</b> (by mouth or patch): calms bladder spasms in <b>overactive bladder</b>.</li>
+ <li><b>Ipratropium</b> (inhaled, stem <b>-tropium</b>): opens airways and reduces mucus in <b>COPD</b>. Little reaches the blood, so the main side effect is a dry mouth.</li></ul>`,
+ analogy:"Taping down one brake pedal in one room of the house. Which room you tape (heart, ear, bladder, lungs) depends on where the drug goes.",
+ terms:[["Anticholinergic","A drug that blocks ACh, usually at muscarinic receptors."],["Atropine","Prototype muscarinic blocker; raises heart rate and dries secretions."],["Ipratropium","Inhaled muscarinic blocker that opens the airways in COPD."]],
+ check:{q:"A patient's heart rate is 38 and he is dizzy and pale. Which drug works by removing the parasympathetic brake on the heart?",opts:[
+  ["Atropine",1,"Yes. Atropine blocks muscarinic receptors on the pacemaker, so the vagal brake is released and the rate rises."],
+  ["Oxybutynin",0,"Oxybutynin is a muscarinic blocker used for the bladder, not for bradycardia emergencies."],
+  ["Bethanechol",0,"Bethanechol is a muscarinic agonist; it would slow the heart further."],
+  ["Pyridostigmine",0,"Pyridostigmine increases ACh, which would slow the heart more."]]},
+ caption:"Blocking muscarinic receptors in four different organs gives four different uses.",
+ legend:[["mus","Muscarinic receptor"],["drug","Muscarinic blocker"],["mon-hr","Heart tracing","l"],["mucus","Mucus"]]},
+
+{act:3,scene:"anticholfx",desc:"A body outline stands in the centre. Around it, labels appear one at a time with lines to the organ they describe: can't see (a pupil widening and blurring), can't spit (a dry mouth), can't pee (a bladder filling with a closed outlet), can't poop (a still gut), hot as a hare (a thermometer rising), dry as a bone (skin with no sweat drops), red as a beet (the face turning red), mad as a hatter (a brain with swirling lines), and a fast heart tracing. The body's colour slowly shifts toward red as the effects stack up.",
+ title:"Anticholinergic effects: dry, hot, red, fast, confused",
+ body:`<p>Block muscarinic receptors everywhere and every rest-and-digest job slows. The classic list:</p>
+ <ul><li><b>Can't see:</b> dilated pupils and blurred near vision (the lens cannot focus up close).</li><li><b>Can't spit:</b> dry mouth.</li><li><b>Can't pee:</b> urinary retention.</li><li><b>Can't poop:</b> constipation.</li><li><b>Hot as a hare, dry as a bone:</b> no sweating, so body heat builds up.</li><li><b>Red as a beet:</b> flushed skin as vessels in the skin widen to lose heat.</li><li><b>Mad as a hatter:</b> confusion, agitation, hallucinations (drugs that enter the brain).</li><li>And a <b>fast heart rate</b>.</li></ul>
+ <p><b>Avoid or use with caution in:</b> narrow-angle <b>glaucoma</b> (a wide pupil can block eye fluid drainage), enlarged prostate or urinary retention, bowel obstruction, and fast heart rhythms. <b>Teach:</b> sugar-free candy and sips for dry mouth, fiber and fluids, sunglasses, avoid overheating, empty the bladder before a dose.</p>`,
+ analogy:"Turning off the house's plumbing and cooling system at once. No water from the taps (dry), the drains back up (retention, constipation), and with no sweat-cooling the house overheats.",
+ terms:[["Anticholinergic toxicity","Dry, hot, flushed skin, dilated pupils, fast pulse, retention and confusion."],["Mydriasis","Dilated pupil."],["Narrow-angle glaucoma","Eye condition where pupil dilation can block fluid drainage and raise eye pressure suddenly."]],
+ check:{q:"Which patient should the nurse question an order for an anticholinergic drug?",opts:[
+  ["A man with an enlarged prostate who already has trouble starting his urine stream",1,"Yes. Blocking the bladder's squeeze can tip him into full urinary retention."],
+  ["A woman with diarrhea",0,"Anticholinergics slow the gut, so diarrhea is not a reason to avoid them."],
+  ["A patient with a slow heart rate",0,"A slow heart rate is a reason to use atropine, not to avoid it."],
+  ["A patient with heavy secretions before surgery",0,"Drying secretions is one of the intended uses."]]},
+ caption:"Blocking muscarinic receptors everywhere: can't see, can't spit, can't pee, can't poop, hot, dry, red, mad.",
+ legend:[["mus","Muscarinic effect blocked"],["bad","Rising heat"],["urine","Retained urine"],["mon-hr","Heart tracing","l"]]},
+
+{act:3,scene:"elderly",desc:"On the left, an older adult figure stands beside a stacked tower of medicine blocks: a bladder pill, an allergy and sleep pill, and an older antidepressant. Each block that drops onto the stack raises a burden bar next to it. When the bar crosses a red line, warning tags appear around the figure: confusion, fall risk, urinary retention, constipation. On the right, a synapse shows violet square blockers sitting in green muscarinic receptors. Then violet hexagon physostigmine molecules cap the blue enzymes, amber acetylcholine dots build up and push the blockers out of some receptors, which glow again. A brain icon above clears from swirling to calm.",
+ title:"Older adults, anticholinergic burden and physostigmine",
+ body:`<p>Older adults are more sensitive to anticholinergic drugs: less ACh activity in the brain to begin with, slower kidney and liver clearance, and more medicines at once. Many common drugs add up to a high <b>anticholinergic burden</b>: some bladder drugs, older allergy and sleep aids such as <b>diphenhydramine</b>, older antidepressants and some antipsychotics.</p>
+ <p>The risks are <b>confusion or delirium</b>, <b>falls</b>, urinary retention, constipation and overheating. The <b>Beers Criteria</b>, a widely used list of medicines to avoid or use carefully in older adults, includes strongly anticholinergic drugs for this reason.</p>
+ <p><b>Antidote:</b> for severe anticholinergic toxicity the prescriber may order <b>physostigmine</b>, a cholinesterase inhibitor that <b>enters the brain</b>. Extra ACh outcompetes the blocker. It can slow the heart and cause seizures, so the patient is on a monitor with atropine available.</p>`,
+ analogy:"Several small weights on one shelf. Each pill seems light, but stacked together the shelf gives way, and in an older adult the shelf was weaker to start with.",
+ terms:[["Anticholinergic burden","The combined anticholinergic effect of all a person's medicines."],["Beers Criteria","A list of potentially inappropriate medicines for older adults."],["Physostigmine","Cholinesterase inhibitor that crosses into the brain; reverses severe anticholinergic toxicity."]],
+ check:{q:"An 82-year-old started oxybutynin and an over-the-counter sleep aid with diphenhydramine. She is now confused and has not voided in 10 hours. What should the nurse suspect first?",opts:[
+  ["Anticholinergic effects from the combined medicines",1,"Yes. Both drugs block muscarinic receptors; together they can cause delirium and urinary retention in an older adult."],
+  ["Normal ageing",0,"New confusion is never just normal ageing; it needs to be investigated, and medicines are a common cause."],
+  ["Dehydration from the sleep aid's diuretic effect",0,"Diphenhydramine is not a diuretic. The retention and confusion fit anticholinergic action."],
+  ["A cholinergic crisis",0,"Cholinergic crisis causes drooling, urination and pinpoint pupils, the opposite of this picture."]]},
+ caption:"Small anticholinergic doses stack up in older adults; physostigmine adds ACh to push the blockers out.",
+ legend:[["drug","Anticholinergic blockers and physostigmine"],["bad","Burden over the safe line","s"],["mus","Muscarinic receptor"],["ach","ACh"],["ache","Cholinesterase"]]}
+];
+
+STEPS.push(
+/* ---------- Part 4 ---------- */
+{act:4,scene:"selectivity",desc:"A table is drawn on the canvas. Across the top are three receptor columns with small icons: alpha-1 with a squeezing vessel, beta-1 with a beating heart, beta-2 with an opening airway. Down the left are six drugs: epinephrine, norepinephrine, dopamine, dobutamine, phenylephrine and albuterol. Coloured bars grow in each cell to show how strongly each drug hits each receptor: epinephrine fills all three, norepinephrine fills alpha-1 and beta-1, dobutamine fills beta-1, phenylephrine fills alpha-1 only, albuterol fills beta-2. In the dopamine row, a dose marker slides from low to high; at low dose a separate dopamine-receptor bar fills, at medium the beta-1 bar fills, and at high the alpha-1 bar fills too.",
+ title:"Adrenergic agonists: which receptor explains which effect",
+ body:`<p><b>Adrenergic agonists</b> (sympathomimetics) copy norepinephrine or epinephrine. What each drug does depends on <b>which receptors it hits</b>:</p>
+ <ul><li><b>Epinephrine:</b> α1, β1 and β2. Squeezes vessels, speeds and strengthens the heart, opens airways.</li>
+ <li><b>Norepinephrine:</b> mostly α1 and β1. A strong vessel squeezer.</li>
+ <li><b>Dopamine:</b> depends on the infusion rate: low rates mainly dopamine receptors, middle rates add β1, high rates add α1.</li>
+ <li><b>Dobutamine:</b> mainly β1. Stronger heartbeat.</li>
+ <li><b>Phenylephrine:</b> α1 only. Vessels squeeze.</li>
+ <li><b>Albuterol:</b> mainly β2 (stem <b>-terol</b>). Airways open.</li></ul>
+ <p>Selectivity is <b>relative</b>. At higher doses a "selective" drug spills onto other receptors, which is why albuterol can still make the heart race.</p>`,
+ analogy:"A set of keys on a ring. Epinephrine is the master key that opens three doors. Phenylephrine and albuterol are single keys that open one door each, mostly.",
+ terms:[["Sympathomimetic","A drug that copies the sympathetic messengers."],["Receptor selectivity","How much a drug prefers one receptor type over others; it fades at higher doses."],["Inotrope / vasopressor","Inotrope: strengthens heart contraction (β1). Vasopressor: squeezes vessels to raise blood pressure (α1)."]],
+ check:{q:"Which drug would raise blood pressure mostly by squeezing blood vessels, with little direct effect on the heart?",opts:[
+  ["Phenylephrine",1,"Yes. Phenylephrine is a selective alpha-1 agonist: vessels constrict, blood pressure rises."],
+  ["Dobutamine",0,"Dobutamine mainly stimulates beta-1 on the heart, increasing the force of contraction."],
+  ["Albuterol",0,"Albuterol mainly targets beta-2 on the airways; it does not squeeze vessels."],
+  ["Epinephrine",0,"Epinephrine squeezes vessels but also strongly stimulates the heart (beta-1) and airways (beta-2)."]]},
+ caption:"Which receptors each adrenergic agonist hits explains what it does.",
+ legend:[["a1","α1: vessels"],["b1","β1: heart"],["b2","β2: airways"],["dop","Dopamine receptor"]]},
+
+{act:4,scene:"epi",desc:"A person on the left has red blotchy hives and swollen lips. An auto-injector presses into the outer thigh and a violet drug cloud spreads. Three panels on the right respond in turn. A blood vessel cross-section, which was wide and leaky, squeezes narrower as alpha-1 receptors glow. A heart beats harder and faster as beta-1 receptors glow. An airway ring that was tight opens wider as beta-2 receptors glow. A bedside monitor at the bottom shows the blood pressure rising from about 72 over 40 toward 110 over 70, and the oxygen level rising, while the heart rate stays fast.",
+ title:"Epinephrine: anaphylaxis and cardiac arrest",
+ body:`<p><b>Anaphylaxis</b> is a severe allergic reaction: vessels widen and leak (blood pressure falls, swelling), and airways tighten. <b>Epinephrine</b> reverses each part through a different receptor:</p>
+ <ul><li><b>α1:</b> squeezes vessels, raising blood pressure and reducing swelling.</li><li><b>β1:</b> stronger, faster heartbeat.</li><li><b>β2:</b> opens the airways and calms the allergic cells.</li></ul>
+ <p>It is the <b>first drug</b> for anaphylaxis, given into the <b>outer thigh muscle</b> (an auto-injector at home). Antihistamines and steroids are add-ons, not substitutes. In <b>cardiac arrest</b>, epinephrine is given IV or into the bone to raise pressure in the heart's own arteries.</p>
+ <p><b>Adverse effects</b> follow the same receptors: fast heart, palpitations, chest pain, high blood pressure, anxiety, tremor and high blood sugar. <b>Nursing:</b> monitor heart rate and rhythm, blood pressure and breathing; call for help; teach patients when and how to use the auto-injector and to seek emergency care afterwards.</p>`,
+ analogy:"A three-in-one emergency kit: a clamp for the leaking pipes, a booster for the pump and a pry bar for the jammed airway door, all in one syringe.",
+ terms:[["Anaphylaxis","Severe allergic reaction with low blood pressure and/or airway swelling and narrowing."],["Epinephrine","α and β agonist; first-line drug for anaphylaxis."],["Auto-injector","A spring-loaded pen for injecting epinephrine into the thigh muscle."]],
+ check:{q:"A patient with a peanut allergy has throat tightness, wheezing and a blood pressure of 76/44. What should the nurse give first, as ordered?",opts:[
+  ["Intramuscular epinephrine into the outer thigh",1,"Yes. Epinephrine treats the low pressure (α1) and the airway narrowing (β2) at once; it comes first."],
+  ["An oral antihistamine",0,"Antihistamines help itching and hives but act too slowly and do not fix low blood pressure or airway narrowing."],
+  ["A beta blocker",0,"A beta blocker would block epinephrine's helpful β effects and can make anaphylaxis harder to treat."],
+  ["Wait to see if symptoms pass",0,"Anaphylaxis can kill within minutes. Delay in epinephrine is a key cause of death."]]},
+ caption:"Epinephrine reverses anaphylaxis through three receptors: α1 vessels, β1 heart, β2 airways.",
+ legend:[["a1","α1"],["b1","β1"],["b2","β2"],["drug","Epinephrine"],["mon-bp","Pressure tracing","l"]]},
+
+{act:4,scene:"shock",desc:"Three columns. Left column, norepinephrine: a vessel tube with alpha-1 receptors squeezes narrower and a pressure gauge needle rises from the red zone into the green zone above a line marked a common target. Middle column, dobutamine: a heart with beta-1 receptors pumps harder, and a stroke volume bar grows taller with each beat. Right column, dopamine: a dial sweeps from low to medium to high rate; at low the kidney vessel widens, at medium the heart beats harder, at high the vessel squeezes. An IV bag and pump sit above each column.",
+ title:"Shock: norepinephrine, dopamine and dobutamine",
+ body:`<p>In <b>shock</b>, blood pressure is too low to feed the organs. IV adrenergic drugs given by continuous infusion help in different ways:</p>
+ <ul><li><b>Norepinephrine</b> (α1 more than β1) is a <b>vasopressor</b>: it squeezes vessels to raise pressure. It is commonly the first choice in septic shock.</li>
+ <li><b>Dobutamine</b> (β1) is an <b>inotrope</b>: it makes a weak heart pump harder, as in cardiogenic shock or severe heart failure.</li>
+ <li><b>Dopamine</b> changes with the rate: low rates widen kidney and gut vessels, middle rates add β1 heart effects, and high rates add α1 squeezing.</li></ul>
+ <p><b>Nursing:</b> use an infusion pump, a <b>central line</b> when possible, continuous heart monitoring and frequent blood pressure (often an arterial line), urine output, and the limbs and skin for poor blood flow. Correct low fluid volume first, as ordered. Watch for fast or irregular rhythms and chest pain.</p>`,
+ analogy:"Low water pressure in a hose. You can pinch the hose (norepinephrine), turn up the pump (dobutamine), or use a dial that does a bit of each as you turn it (dopamine).",
+ terms:[["Shock","Blood flow too low to meet the tissues' needs."],["Vasopressor","A drug that raises blood pressure by squeezing vessels, mainly via α1."],["Mean arterial pressure (MAP)","Average pressure pushing blood into the organs; often targeted around 65 or higher, per order."]],
+ check:{q:"A patient in cardiogenic shock has a weak heart and cool, pale limbs. Which drug strengthens the heart's squeeze through beta-1?",opts:[
+  ["Dobutamine",1,"Yes. Dobutamine is a beta-1 agonist inotrope; it increases the force of contraction."],
+  ["Phenylephrine",0,"Phenylephrine only squeezes vessels (α1); that adds work for a weak heart without helping it pump."],
+  ["Albuterol",0,"Albuterol is a beta-2 drug for the airways."],
+  ["Prazosin",0,"Prazosin blocks alpha-1 and would lower the blood pressure further."]]},
+ caption:"Squeeze the vessels (norepinephrine), strengthen the pump (dobutamine), or both by rate (dopamine).",
+ legend:[["a1","α1 squeeze"],["b1","β1 pump"],["dop","Dopamine receptor"],["good","Target zone","s"]]},
+
+{act:4,scene:"extrav",desc:"An arm lies across the canvas with an IV cannula in a vein near the wrist and tubing from a violet IV bag labelled vasopressor. At first violet drug flows smoothly along the vein. Then the cannula slips and the violet drug leaks out into the surrounding tissue as a spreading cloud. Small vessels in the cloud squeeze shut as their alpha-1 receptors glow, and the skin over the area turns pale and then grey-white, with a label saying pale, cool, hard. In the next phase the infusion stops with a red stop sign, and small violet square phentolamine plugs are injected around the area. They fill the alpha-1 receptors, the vessels open again and the skin returns to a pink colour.",
+ title:"Extravasation of a vasopressor and phentolamine",
+ body:`<p><b>Extravasation</b> means an IV drug leaks out of the vein into the tissue. With a <b>vasopressor</b> such as norepinephrine this is dangerous: the drug activates <b>α1</b> receptors on all the tiny vessels around it, they clamp down, and the tissue loses its blood supply. Skin turns pale, cold and hard, and can die (<b>necrosis</b>).</p>
+ <p><b>What to do</b> (per protocol): stop the infusion, leave the cannula in place and try to draw back the drug, notify the prescriber, and prepare <b>phentolamine</b>. Phentolamine is an <b>alpha blocker</b> injected into the area: it pushes the drug out of the α1 receptors so the vessels relax and blood returns.</p>
+ <p><b>Prevention:</b> use a central line when possible, check the IV site often for pain, swelling, coolness or blanching, and use a large, secure vein for any peripheral infusion.</p>`,
+ analogy:"A tourniquet that escaped. The drug that was meant to tighten vessels in the whole body is now tightening every tiny vessel in one patch of skin. Phentolamine cuts the tourniquet loose.",
+ terms:[["Extravasation","Leak of a damaging IV drug from the vein into the tissue."],["Necrosis","Tissue death from lack of blood supply."],["Phentolamine","Alpha-adrenergic blocker injected locally to reverse vasopressor extravasation."]],
+ check:{q:"The skin around a peripheral IV running norepinephrine is pale, cool and swollen. What is the nurse's first action?",opts:[
+  ["Stop the infusion at that site and notify the prescriber, preparing phentolamine per protocol",1,"Yes. Stopping more drug from leaking comes first; phentolamine then blocks the α1 vasoconstriction in the tissue."],
+  ["Apply heat and keep the infusion running",0,"Running more drug into the tissue makes the damage worse. Follow the facility's extravasation protocol."],
+  ["Remove the cannula immediately before doing anything else",0,"Protocols usually leave it in briefly to try to aspirate drug, and sometimes to give the antidote."],
+  ["Give more norepinephrine to raise the blood pressure",0,"More drug through that site would worsen the injury."]]},
+ caption:"Leaked vasopressor clamps the tissue's tiny vessels through α1; phentolamine blocks α1 and lets blood back in.",
+ legend:[["drug","Norepinephrine (cloud) and phentolamine (squares)"],["a1","α1 receptor"],["vessel","Small vessels"],["skin","Skin colour"]]},
+
+{act:4,scene:"phenyalb",desc:"Two halves. On the left, phenylephrine: a nose cross-section with swollen, red blood vessels in the lining shrinks as alpha-1 receptors glow, and the airway passage widens. Under it, an IV version: a vessel squeezes, the blood pressure number rises and a curved arrow labelled reflex points to the heart, whose rate number falls. On the right, albuterol: an inhaler puff reaches an airway ring with beta-2 receptors, which widens from narrow to open. Under it, a hand shakes with small tremor lines and a heart rate number rises from about 80 to about 105.",
+ title:"Phenylephrine (α1) and albuterol (β2)",
+ body:`<p><b>Phenylephrine</b> is a selective <b>α1 agonist</b>. In nasal sprays it shrinks swollen vessels in the nose, relieving congestion. Used too long, the nose swells back worse when it wears off (<b>rebound congestion</b>), so sprays are limited to a few days. IV, it raises blood pressure; the body senses the jump and slows the heart by reflex (<b>reflex bradycardia</b>). Eye drops widen the pupil.</p>
+ <p><b>Albuterol</b> is a short-acting <b>β2 agonist</b> (stem <b>-terol</b>) inhaled as the <b>rescue</b> drug for asthma attacks. It relaxes airway smooth muscle within minutes. Because selectivity is not perfect, and because β2 also acts on skeletal muscle and some heart tissue, it causes <b>tremor</b>, a <b>fast heart rate</b>, nervousness, and can lower potassium.</p>
+ <p><b>Nursing:</b> phenylephrine: watch blood pressure and heart rate, avoid in severe hypertension. Albuterol: listen to breath sounds, check heart rate, teach inhaler technique and to report needing it more often (a sign asthma is poorly controlled).</p>`,
+ analogy:"Two single keys. Phenylephrine only opens the vessel-squeeze door; albuterol mostly opens the airway door, but jiggles the heart door a little too.",
+ terms:[["Alpha-1 agonist","Squeezes vessels: decongestant, raises blood pressure."],["Beta-2 agonist","Relaxes airway smooth muscle: bronchodilator."],["Reflex bradycardia","Heart slowing triggered by a sudden rise in blood pressure."]],
+ check:{q:"After using albuterol, a patient says her hands are shaky and her heart is racing. What should the nurse explain?",opts:[
+  ["These are expected beta-receptor side effects that usually pass; report chest pain or if they are severe",1,"Yes. Tremor and a fast pulse come from β2 effects on muscle and some heart stimulation; they are common and usually short-lived."],
+  ["She is allergic to albuterol and must never use it again",0,"Tremor and palpitations are predictable receptor effects, not an allergy."],
+  ["This means the drug did not reach the lungs",0,"These effects show some drug reached the blood; they do not mean the lungs got none."],
+  ["She should take a second inhaler right away to stop the shaking",0,"More beta agonist would worsen the tremor and fast heart rate."]]},
+ caption:"Phenylephrine squeezes vessels (α1); albuterol opens airways (β2) with tremor and a faster pulse as side effects.",
+ legend:[["a1","α1"],["b2","β2"],["drug","Drug"],["vessel","Swollen nasal vessels"]]},
+
+{act:4,scene:"clonidine",desc:"On the left, a large nerve ending in the brainstem releases red norepinephrine diamonds from vesicles into a gap. On its own surface sits a purple alpha-2 receptor that works as a brake. Violet hexagon clonidine molecules settle into the alpha-2 receptor, which glows, and fewer vesicles release their diamonds; a release meter drops. On the right, a graph of blood pressure over time shows a high line falling after clonidine starts. Then two paths branch off: a dashed red line labelled stopped suddenly spikes upward to very high, and a green line labelled tapered slowly returns gently. A small dry-mouth and sleepy face icon sits under the graph.",
+ title:"Alpha-2 agonists: clonidine turns down the sympathetic output",
+ body:`<p><b>Alpha-2</b> receptors are a <b>brake</b> on nerve endings and in the brainstem: when they are activated, less norepinephrine is released. <b>Clonidine</b> is an <b>α2 agonist</b> that acts mainly in the brain, so the whole sympathetic outflow drops. Vessels relax and the heart slows, lowering blood pressure.</p>
+ <p><b>Adverse effects:</b> dry mouth, drowsiness, dizziness, slow pulse and low blood pressure.</p>
+ <p><b>Do not stop it suddenly.</b> The body adapts to the brake, so sudden withdrawal causes a <b>rebound</b> surge of norepinephrine: very high blood pressure, fast pulse, anxiety and headache. It is <b>tapered</b> under the prescriber's direction. <b>Teach:</b> rise slowly, avoid alcohol and other sedating drugs, do not skip doses, and if using a patch, rotate sites and remove the old patch.</p>`,
+ analogy:"A thermostat that turns the furnace down. Clonidine sets the sympathetic furnace lower; pull the thermostat out of the wall suddenly and the furnace roars back to full.",
+ terms:[["Alpha-2 agonist","Activates the brake on norepinephrine release; lowers sympathetic outflow."],["Clonidine","Central α2 agonist used for high blood pressure (also other uses)."],["Rebound hypertension","A sharp rise in blood pressure after a drug is stopped suddenly."]],
+ check:{q:"A patient on clonidine says he ran out of tablets two days ago and now has a pounding headache. What should the nurse suspect?",opts:[
+  ["Rebound hypertension from stopping clonidine suddenly",1,"Yes. Without the α2 brake, norepinephrine release surges and blood pressure can spike dangerously."],
+  ["Clonidine toxicity",0,"He has been off the drug for two days, so this is withdrawal, not excess."],
+  ["Low blood pressure from the drug",0,"Low blood pressure would be expected while taking it, not after stopping it."],
+  ["An allergic reaction",0,"A pounding headache after stopping fits rebound hypertension, not allergy."]]},
+ caption:"Clonidine presses the α2 brake, so less norepinephrine is released; stopping suddenly causes a rebound surge.",
+ legend:[["a2","α2 brake"],["ne","Norepinephrine","d"],["drug","Clonidine"],["bad","Rebound if stopped suddenly","dl"]]},
+
+/* ---------- Part 5 ---------- */
+{act:5,scene:"alphablock",desc:"Three panels. Left: a blood vessel with red alpha-1 receptors in its wall; violet square prazosin plugs fill them, red norepinephrine diamonds bounce off, and the vessel widens; a blood pressure number falls. Middle: a prostate gland wrapped around the urethra; tamsulosin plugs relax the smooth muscle, the channel through the prostate widens, and a stronger stream of yellow urine flows. Right: a person lying in bed sits up and stands; a blood pressure trace drops sharply on standing, the figure tilts and a fall warning appears. Then a moon icon with the words first dose at bedtime and rise slowly appears.",
+ title:"Alpha-1 blockers: the -zosin and -osin drugs",
+ body:`<p><b>Alpha-1 blockers</b> (stem <b>-zosin</b>, or <b>-osin</b>) sit in α1 receptors so norepinephrine cannot squeeze smooth muscle.</p>
+ <ul><li><b>Prazosin</b> (also doxazosin, terazosin): vessels relax, so <b>blood pressure falls</b>. Some are also used for an enlarged prostate.</li>
+ <li><b>Tamsulosin</b>: prefers the α1 receptors in the <b>prostate and bladder neck</b>. In <b>benign prostatic hyperplasia (BPH)</b> the muscle there relaxes, the urine stream improves, and blood pressure changes less.</li></ul>
+ <p><b>Key adverse effect: first-dose orthostatic hypotension.</b> Standing normally triggers α1 squeezing to keep blood in the head. With α1 blocked, blood pools in the legs and the person can faint or fall. Also dizziness, nasal stuffiness and a faster pulse (reflex).</p>
+ <p><b>Nursing:</b> give the <b>first dose at bedtime</b>, start low, check lying and standing blood pressure, teach to <b>rise slowly</b> and sit if dizzy, and use fall precautions, especially in older adults.</p>`,
+ analogy:"Taking the hand off the hose clamp. Vessels and the prostate's muscle loosen; but when you stand, the clamp that should tighten to push blood up to your head is not there.",
+ terms:[["Alpha-1 blocker","Blocks α1: relaxes vessels and prostate smooth muscle."],["Benign prostatic hyperplasia (BPH)","Non-cancer enlargement of the prostate that squeezes the urethra."],["Orthostatic hypotension","A drop in blood pressure on standing, causing dizziness or fainting."]],
+ check:{q:"A patient is starting prazosin tonight. Which instruction is most important?",opts:[
+  ["Take the first dose at bedtime and get up slowly, sitting first",1,"Yes. The first-dose effect can cause a sharp drop in blood pressure on standing and a fall."],
+  ["Take it with a large glass of grapefruit juice",0,"That is not a standard instruction here. The key safety issue is the first-dose drop in blood pressure."],
+  ["Stop it if the nose feels stuffy",0,"Nasal stuffiness is a common, minor effect; do not stop without the prescriber."],
+  ["Exercise hard right after the first dose",0,"Hard exercise and heat widen vessels further and add to the risk of fainting."]]},
+ caption:"Blocking α1 relaxes vessels and the prostate; standing up after the first dose can drop blood pressure fast.",
+ legend:[["a1","α1 receptor"],["drug","Alpha-1 blocker"],["ne","Norepinephrine","d"],["urine","Urine"],["mon-bp","Blood pressure","l"]]},
+
+{act:5,scene:"beta",desc:"On the left, two heart rate tracings are stacked: the top one, labelled no drug, shows fast beats with red and magenta diamonds landing in blue beta-1 receptors on a heart cell, which glow. The bottom one, labelled with metoprolol, shows violet square plugs filling the beta-1 receptors; the diamonds bounce off and the tracing shows slower, more widely spaced beats, with the rate number falling from about 100 to about 64. On the right, a comparison: a heart and an airway ring side by side. Propranolol, labelled nonselective, plugs both the heart's beta-1 and the airway's beta-2 receptors, and the airway ring narrows. Metoprolol and atenolol, labelled cardioselective, plug only the heart's beta-1, and the airway stays open.",
+ title:"Beta blockers: the -olol drugs",
+ body:`<p><b>Beta blockers</b> (stem <b>-olol</b>) sit in β receptors so epinephrine and norepinephrine cannot act. Blocking <b>β1</b> on the heart slows the rate, softens each beat, slows conduction through the AV node, and lowers renin release from the kidney. Uses include <b>high blood pressure, angina, after a heart attack, some heart failure, and fast heart rhythms</b>.</p>
+ <ul><li><b>Cardioselective</b> (β1 mostly): <b>metoprolol, atenolol</b>. Memory tool: many β1-selective names start with A to M.</li>
+ <li><b>Nonselective</b> (β1 and β2): <b>propranolol</b>. Also used for tremor, migraine prevention and symptoms of an overactive thyroid.</li></ul>
+ <p>Selectivity fades at higher doses, so even cardioselective drugs are used with care in lung disease.</p>`,
+ analogy:"Earplugs for the heart. The alarm (epinephrine) still rings, but the heart cannot hear it as well, so it stays calm. A nonselective blocker puts earplugs in the lungs too.",
+ terms:[["Beta blocker","Blocks β receptors; slows and softens the heartbeat and lowers blood pressure."],["Cardioselective","Blocks mainly β1 (heart), with less effect on β2 (airways)."],["Nonselective","Blocks both β1 and β2."]],
+ check:{q:"Why is metoprolol often preferred over propranolol for a patient with mild COPD who needs a beta blocker?",opts:[
+  ["Metoprolol is cardioselective, so it blocks the airways' β2 receptors less",1,"Yes. Sparing β2 lowers the risk of narrowing the airways, though caution is still needed."],
+  ["Metoprolol opens the airways",0,"It does not open airways; it just blocks β2 less than propranolol does."],
+  ["Propranolol does not slow the heart",0,"Propranolol slows the heart well; the problem is that it also blocks β2 in the lungs."],
+  ["Metoprolol is an alpha blocker",0,"Metoprolol is a β1-selective beta blocker, not an alpha blocker."]]},
+ caption:"Beta blockers keep epinephrine and norepinephrine out of β1, so the heart slows; nonselective ones block β2 in the lungs too.",
+ legend:[["b1","β1 receptor"],["b2","β2 receptor"],["drug","Beta blocker"],["ne","Norepinephrine","d"],["epi","Epinephrine","d"]]},
+
+{act:5,scene:"betacare",desc:"Four tiles. Top left, asthma: an airway ring with beta-2 receptors plugged by a nonselective blocker narrows, and wheeze lines appear. Top right, diabetes: a glucose meter shows a low number in red, while a heart rate tracing stays flat and slow and a tremor hand stays still, with a bell icon crossed out; a few sweat drops still appear. Bottom left, hold parameters: a stethoscope on the chest counts an apical pulse of 52 for one full minute and a tag says hold and report, per order. Bottom right, do not stop suddenly: a graph shows heart rate and blood pressure jumping up with a chest pain icon after an abrupt stop, compared with a smooth taper line.",
+ title:"Beta blocker safety: lungs, sugar, pulse and stopping",
+ body:`<ul><li><b>Asthma and bronchospasm:</b> blocking β2 can tighten the airways. Nonselective blockers are generally avoided in asthma; report wheezing or shortness of breath.</li>
+ <li><b>Masks low blood sugar:</b> the warning signs of hypoglycemia that come from epinephrine (fast pulse, tremor, anxiety) are blunted. <b>Sweating</b> is cholinergic, so it still appears. Teach people with diabetes to check glucose more often and to treat sweating, confusion or hunger as possible lows.</li>
+ <li><b>Hold parameters:</b> check the <b>apical pulse for a full minute</b> and the blood pressure before each dose. A common order is to hold and report if the pulse is <b>below 60</b> or the systolic pressure is below about 90 to 100; follow the specific order or protocol. Watch for dizziness, fatigue and signs of worsening heart failure (weight gain, swelling, breathlessness).</li>
+ <li><b>Do not stop abruptly:</b> with long use the heart makes extra β receptors. Sudden stopping lets epinephrine hit all of them: <b>rebound</b> fast heart rate, high blood pressure, angina and even a heart attack. Doses are <b>tapered</b>.</li></ul>
+ <p>For beta-blocker overdose, the prescriber may order <b>glucagon</b>, which strengthens the heart through a non-beta pathway.</p>`,
+ analogy:"Earplugs for the whole body's alarm system. You stay calm, but you may not hear the low-sugar alarm, and if you rip the earplugs out after weeks, every alarm sounds deafening.",
+ terms:[["Apical pulse","Heart rate counted with a stethoscope at the apex of the heart for one full minute."],["Masked hypoglycemia","Low blood sugar without the usual fast pulse and tremor warnings."],["Taper","Lowering a dose gradually instead of stopping all at once."]],
+ check:{q:"Before giving metoprolol, the nurse counts an apical pulse of 52. The order says to hold for a pulse below 60. What should the nurse do?",opts:[
+  ["Hold the dose and report the pulse to the prescriber",1,"Yes. The beta blocker would slow the heart further. Hold, document and report, following the order."],
+  ["Give the dose; 52 is close enough",0,"The order sets a clear limit to protect the patient from bradycardia. Follow it."],
+  ["Give half the dose",0,"Nurses do not change doses on their own. Hold and report."],
+  ["Give the dose and recheck the pulse tomorrow",0,"Giving it could slow the heart dangerously; reassess and report now."]]},
+ caption:"Four beta-blocker safety points: airways, hidden lows, hold parameters, and never stopping suddenly.",
+ legend:[["b2","β2 blocked in airways"],["bad","Warning sign"],["good","Taper","l"],["mon-hr","Heart tracing","l"]]},
+
+{act:0,scene:"recap",desc:"A summary board with four coloured quadrants around a central receptor key. Top left, green, cholinergic drugs: bethanechol and the stigmine drugs, with a small dripping drop and a slow heart icon. Top right, orange, anticholinergic drugs: atropine, scopolamine, oxybutynin, ipratropium, with a thermometer and a dry mouth icon. Bottom left, red, adrenergic agonists: epinephrine, norepinephrine, dopamine, dobutamine, phenylephrine, albuterol, clonidine, with a squeezing vessel and an open airway. Bottom right, blue, adrenergic blockers: prazosin, tamsulosin, propranolol, metoprolol, atenolol, with a slowing heart tracing. Each quadrant lights up in turn and shows its antidote or key nursing check at the bottom.",
+ title:"Recap: predict it from the receptor",
+ body:`<p>You now have one map for the whole module:</p>
+ <ul><li><b>Cholinergic</b> (bethanechol, the <b>-stigmine</b> drugs): more muscarinic action. Too much is SLUDGE with the killer Bs. Antidote: <b>atropine</b>, plus <b>pralidoxime</b> for organophosphates.</li>
+ <li><b>Anticholinergic</b> (atropine, scopolamine, oxybutynin, ipratropium): dry, hot, red, fast, retained, confused. Careful in older adults and in glaucoma and BPH. Antidote: <b>physostigmine</b>.</li>
+ <li><b>Adrenergic agonists:</b> α1 squeezes vessels, β1 drives the heart, β2 opens airways. Epinephrine first for anaphylaxis; pressors through a central line; <b>phentolamine</b> for extravasation. Clonidine (α2) lowers sympathetic output; taper it.</li>
+ <li><b>Adrenergic blockers:</b> <b>-zosin</b> drops blood pressure on standing (first dose at bedtime); <b>-olol</b> slows the heart, can tighten airways, masks lows, has hold parameters and must be tapered.</li></ul>
+ <p>Practise next in the lab: give drugs to a virtual body, name receptors, work through patient cases and sort it all out.</p>`,
+ analogy:"A switchboard with seven switches. Once you know what each switch controls, any drug is just a finger pressing or taping one of them.",
+ terms:[["Mimetic / lytic","Mimetic drugs copy a branch; lytic drugs (blockers) stop it."],["Antidote pairs","Atropine and pralidoxime for cholinergic poisoning; physostigmine for anticholinergic toxicity; phentolamine for vasopressor extravasation."],["Stems","-stigmine, -tropium, -terol, -zosin or -osin, -olol."]],
+ check:{q:"A patient has a hot, dry, flushed skin, dilated pupils, a fast pulse and confusion. Which drug group most likely caused this?",opts:[
+  ["An anticholinergic (muscarinic blocker)",1,"Yes. Hot, dry, red, dilated pupils, fast heart and confusion is the anticholinergic picture."],
+  ["A cholinesterase inhibitor",0,"That would cause drooling, sweating, pinpoint pupils and a slow pulse, the opposite."],
+  ["A beta blocker",0,"A beta blocker would slow the pulse, not speed it up."],
+  ["An alpha-1 blocker",0,"An alpha-1 blocker mainly lowers blood pressure; it does not cause dry, hot skin or confusion."]]},
+ caption:"Four drug families, one receptor map.",
+ legend:[["act2","Cholinergic"],["act3","Anticholinergic"],["act4","Adrenergic agonists"],["act5","Adrenergic blockers"]]}
+);
+/* ---------------- DOM ---------------- */
+const $=s=>document.querySelector(s);
+const chainEl=$("#chain");
+const done=new Set();
+let cur=0;
+function buildChain(){
+  chainEl.innerHTML="";
+  const groups=[[0,"Start","accent",[0]]];
+  for(let a=1;a<=NACT;a++)groups.push([a,ACTS[a].name,ACTS[a].col,[]]);
+  groups.push([NACT+1,"Finish","accent",[STEPS.length-1]]);
+  STEPS.forEach((s,i)=>{if(s.act>0)groups[s.act][3].push(i)});
+  groups.forEach(g=>{
+    const d=document.createElement("div");d.className="actgrp";
+    if(g[0]===0||g[0]===NACT+1)d.style.flex="0 0 auto";
+    d.innerHTML=`<div class="an"><i style="background:var(--${g[2]})"></i>${g[1]}</div>`;
+    const dots=document.createElement("div");dots.className="dots";
+    g[3].forEach(i=>{const b=document.createElement("button");b.type="button";b.className="dot";b.textContent=i===0?"★":(i===STEPS.length-1?"✓":i);
+      b.setAttribute("aria-label",(i===0?"Start":i===STEPS.length-1?"Finish":"Step "+i)+": "+STEPS[i].title);b.onclick=()=>go(i);b.dataset.i=i;dots.appendChild(b)});
+    d.appendChild(dots);chainEl.appendChild(d);
+  });
+}
+function refreshDots(){document.querySelectorAll(".dot").forEach(b=>{const i=+b.dataset.i;b.classList.toggle("cur",i===cur);b.classList.toggle("done",done.has(i));if(i===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")})}
+function legendHTML(l){const v="--"+l[0];const sh=l[2]||"c";
+  if(sh==="dl")return `<span><i class="dl" style="border-top-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="t")return `<span><i class="t" style="border-bottom-color:var(${v})"></i>${l[1]}</span>`;
+  if(sh==="y")return `<span><i class="y" style="--yc:var(${v})"></i>${l[1]}</span>`;
+  return `<span><i class="${sh}" style="background:var(${v})"></i>${l[1]}</span>`}
+function render(){
+  const s=STEPS[cur];
+  const a=ACTS[s.act];
+  $("#stepno").innerHTML=(s.act?`<span class="actchip" style="--c:var(--${a.col})">${a.name}</span>`:"")+
+    (cur>0&&cur<STEPS.length-1?`<span>Step ${cur} of ${STEPS.length-2}</span>`:"");
+  $("#title").textContent=s.title;
+  $("#body").innerHTML=s.body;
+  $("#analogy p").textContent=s.analogy;
+  $("#terms").innerHTML=s.terms.map(t=>`<div><dt>${t[0]}</dt><dd>${t[1]}</dd></div>`).join("");
+  $("#caption").textContent=s.caption;
+  cv.setAttribute("aria-label","Animation: "+s.caption);if(window.gkDescribe)window.gkDescribe(s.desc);
+  $("#legend").innerHTML=(s.legend||[]).map(legendHTML).join("");
+  const ck=$("#check");
+  if(!s.check){ck.style.display="none"}else{
+    ck.style.display="";
+    $("#q").textContent=s.check.q;
+    const fb=$("#fb");fb.textContent="";fb.className="fb";
+    const box=$("#opts");box.innerHTML="";
+    s.check.opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=o[0];
+      b.onclick=()=>{box.querySelectorAll(".opt").forEach(x=>x.classList.remove("wrong"));
+        if(o[1]){b.classList.add("right");fb.className="fb ok";fb.textContent="✓ "+o[2];done.add(cur);refreshDots()}
+        else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. "+o[2]}};
+      box.appendChild(b)});
+  }
+  $("#prev").disabled=cur===0;
+  $("#next").textContent=cur===STEPS.length-1?"Start over":"Next →";
+  $("#progbar").style.width=(cur/(STEPS.length-1)*100)+"%";
+  refreshDots();
+}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));T=0;render();}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur===STEPS.length-1?0:cur+1);
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT"||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let paused=false;
+$("#pauseBtn").onclick=()=>{paused=!paused;$("#pauseBtn").textContent=paused?"Play":"Pause"};
+$("#replayBtn").onclick=()=>{T=0};
+let speed=1;$("#speed").oninput=e=>speed=+e.target.value;
+$("#themeBtn").onclick=()=>{const r=document.documentElement;const dark=getComputedStyle(r).getPropertyValue("--ground").trim().toLowerCase()==="#0e1519";
+  r.setAttribute("data-theme",dark?"light":"dark");readColors()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>setTimeout(readColors,30));
+
+/* ---------------- canvas ---------------- */
+const W=800,H=480;
+const cv=document.getElementById("stage");ctx=cv.getContext("2d");
+let K=1;
+function fit(){const w=cv.parentElement.clientWidth;const dpr=window.devicePixelRatio||1;cv.style.height=(w*H/W)+"px";cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);K=cv.width/W}
+window.addEventListener("resize",fit);
+
+/* ================= mode states ================= */
+const SYMP=bodyState({pupil:.85,hr:118,force:1.4,airway:.95,constrict:.75,gut:.15,bfill:.6,bsq:0,bclosed:true,saliva:.1,sweat:.6});
+const PARA=bodyState({pupil:.12,hr:56,force:.8,airway:.35,mucus:.15,constrict:.4,gut:1.9,bfill:.25,bsq:.8,bflow:1,bclosed:false,saliva:.9,sweat:.1});
+function partCards(T,parts,litFn){parts.forEach((pt,i)=>{const n=parts.length,x=412,gap=8,h=(456-gap*(n-1))/n,y=12+i*(h+gap),w=376;const l=litFn(i);
+  panelBox(x,y,w,h,{stroke:l?C[pt[1]]:C.rule,lw:l?2.6:1.2,fill:hexA(C.panel,l?.98:.7)});
+  badge(x+24,y+h/2,i+1,C[pt[1]],12);txt(x+46,y+h/2-11,pt[0],{size:14.5,weight:700});wrapText(pt[2],x+46,y+h/2+10,w-58,16,{size:12.5,color:C["ink-soft"]})})}
+
+/* ================= start map ================= */
+function sceneMap(T){
+  panelBox(12,12,392,456);
+  const L=4.5,ph=P(T,2*L);const symp=ph<.5;const m=symp?smooth(seg(ph,0,.12)):1-smooth(seg(ph,.5,.62));
+  const st=mixState(PARA,SYMP,m);
+  const col=symp?C.symp:C.para;rr(118,20,180,26,13);ctx.fillStyle=hexA(col,.18);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();
+  txt(208,33,symp?"FIGHT OR FLIGHT":"REST AND DIGEST",{size:13,mono:true,weight:700,align:"center",color:C.ink});
+  ctx.save();ctx.translate(208,58);ctx.scale(.98,.98);ctx.translate(-208,-58);
+  bodyMap(208,56,st,T,{only:["eye","airway","gut","mouth","heart","bladder"],gap:96,dx:138,R:31,vals:{eye:"Pupil "+(st.pupil>.5?"wide":"small"),heart:"Heart "+Math.round(st.hr)+"/min",airway:"Airway "+(st.airway>.6?"open":"narrower"),gut:"Gut "+(st.gut>1?"active":"quiet"),bladder:"Bladder "+(st.bsq>.4?"empties":"holds"),mouth:"Saliva "+(st.saliva>.5?"flows":"dry")}});
+  ctx.restore();
+  const parts=[["The autonomic system","act1","Two branches, ACh and norepinephrine, seven receptors"],["Cholinergic drugs","act2","Bethanechol, -stigmines, poisoning, antidotes"],["Anticholinergic drugs","act3","Atropine, scopolamine, oxybutynin, ipratropium"],["Adrenergic agonists","act4","Epinephrine, pressors, phenylephrine, albuterol, clonidine"],["Adrenergic blockers","act5","-zosin alpha blockers and -olol beta blockers"]];
+  const lit=Math.floor(P(T,15)*5);partCards(T,parts,i=>i===lit);
+}
+
+/* ================= Part 1 ================= */
+function iconRow(x,y,items,T,st){items.forEach((it,i)=>{const X=x+i*88;circ(X,y,29,C.panel,C.rule,1.3);ctx.save();ctx.beginPath();ctx.arc(X,y,27,0,TAU);ctx.clip();organIcon(it[0],X,y,27,st,T);ctx.restore();
+  txt(X,y+40,it[1],{size:11.5,weight:600,align:"center"})})}
+function sceneBranches(T){
+  [[12,"FIGHT OR FLIGHT","Sympathetic",SYMP,"symp"],[404,"REST AND DIGEST","Parasympathetic",PARA,"para"]].forEach((c,i)=>{const x=c[0],st=c[3],col=C[c[4]];
+    panelBox(x,12,384,456,{stroke:col,lw:2});rr(x,12,384,40,8);ctx.fillStyle=hexA(col,.18);ctx.fill();
+    txt(x+16,32,c[1],{size:14,mono:true,weight:700});txt(x+368,32,c[2],{size:12.5,weight:600,align:"right",color:C["ink-soft"]});
+    rr(x+16,64,352,84,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+20,68,240,76,st.hr,T,C["mon-hr"]);
+    txt(x+272,86,"HR",{size:11.5,mono:true,weight:600,color:C["mon-hr"]});txt(x+272,116,Math.round(st.hr)+"",{size:26,mono:true,weight:700,color:C["mon-hr"]});txt(x+324,118,"/min",{size:11.5,mono:true,color:C["mon-hr"]});
+    const items=i===0?[["eye","Pupil wide"],["airway","Airway open"],["vessel","Vessels tight"],["gut","Gut quiet"]]:[["eye","Pupil small"],["airway","Airway narrow"],["mouth","Saliva flows"],["gut","Gut active"]];
+    iconRow(x+60,196,items,T,st);
+    rr(x+16,256,352,108,6);ctx.fillStyle=hexA(C["panel-2"],.9);ctx.fill();
+    const facts=i===0?["Blood pressure rises","Blood sugar rises (fuel for muscles)","Bladder holds urine, outlet tight","Sweat for cooling"]:["Heart slows, saves energy","Stomach acid and digestion on","Bladder squeezes and empties","Tears and saliva flow"];
+    facts.forEach((f,j)=>{circ(x+30,276+j*24,4,col);txt(x+42,276+j*24,f,{size:12.5,weight:500})});
+    ctx.save();ctx.beginPath();rr(x+16,376,352,84,6);ctx.clip();ctx.fillStyle=hexA(col,.08);ctx.fillRect(x+16,376,352,84);
+    if(i===0){bladder(x+80,416,30,.75,0,{closed:true});txt(x+130,402,"Outlet held shut",{size:12.5,weight:600});txt(x+130,422,"urine stays in",{size:12,color:C["ink-soft"]})}
+    else{const sq=.5+.5*Math.sin(T*2);bladder(x+80,412,30,.4-.15*sq,sq,{closed:false,flow:1,t:T});txt(x+130,402,"Detrusor squeezes",{size:12.5,weight:600});txt(x+130,422,"urine flows out",{size:12,color:C["ink-soft"]})}
+    ctx.restore()});
+}
+function junction(x,y,ligType,rec,T,o){o=o||{};const p=P(T+(o.off||0),1.6);const col=o.col||C.ink;
+  circ(x,y,9,hexA(col,.3),col,2);const act=p>.45&&p<.85;receptor(x+30,y,rec,{s:.62,rot:-Math.PI/2,labDy:30,fs:11.5,active:act});
+  const f=smooth(seg(p,.05,.45));if(p<.9){lig(ligType,lerp(x+8,x+22,f),y-5,4,1-seg(p,.75,.9));lig(ligType,lerp(x+8,x+22,f),y+5,4,1-seg(p,.75,.9))}}
+function sceneWiring(T){
+  rr(14,40,40,420,12);ctx.fillStyle=hexA(C.accent,.18);ctx.fill();ctx.strokeStyle=C.accent;ctx.lineWidth=1.5;ctx.stroke();
+  ctx.save();ctx.translate(34,250);ctx.rotate(-Math.PI/2);txt(0,0,"BRAIN AND SPINAL CORD",{size:12,mono:true,weight:700,align:"center"});ctx.restore();
+  const rows=[{y:84,name:"Parasympathetic",col:C.para},{y:192,name:"Sympathetic",col:C.symp},{y:300,name:"Sympathetic to adrenal gland",col:C.symp},{y:404,name:"Somatic motor (not autonomic)",col:C.somatic}];
+  rows.forEach(r=>{rr(62,r.y-48,10,10,2);ctx.fillStyle=r.col;ctx.fill();txt(78,r.y-43,r.name.toUpperCase(),{size:12,mono:true,weight:700,color:C.ink})});
+  let y=84;neuron(60,y,440,y,C.para);dotsAlong(70,y,436,y,T,C.para,4,.6);junction(448,y,"ach","N",T,{col:C.para});txt(468,y-26,"ganglion",{size:11.5,align:"center",color:C["ink-soft"]});
+  neuron(488,y,600,y,C.para);dotsAlong(494,y,598,y,T+.3,C.para,2,.8);junction(608,y,"ach","M",T+.4,{col:C.para});txt(628,y-26,"ACh",{size:12,weight:700,align:"center"});
+  heart(716,y,24,T,60);txt(716,y+38,"heart, gut, glands",{size:11.5,align:"center",color:C["ink-soft"]});
+  y=192;neuron(60,y,160,y,C.symp);dotsAlong(70,y,158,y,T,C.symp,2,.8);junction(168,y,"ach","N",T+.2,{col:C.symp});txt(188,y-26,"ganglion",{size:11.5,align:"center",color:C["ink-soft"]});
+  neuron(208,y,600,y,C.symp);dotsAlong(214,y,598,y,T+.1,C.symp,4,.6);
+  {const p=P(T+.5,1.6);circ(608,y,9,hexA(C.symp,.3),C.symp,2);receptor(640,y-14,"a1",{s:.55,rot:-Math.PI/2,labDy:-30,fs:11});receptor(640,y+14,"b1",{s:.55,rot:-Math.PI/2,labDy:30,fs:11});
+   const f=smooth(seg(p,.05,.45));if(p<.9){lig("ne",lerp(616,630,f),lerp(y-2,y-12,f),4.5,1-seg(p,.75,.9));lig("ne",lerp(616,630,f),lerp(y+2,y+12,f),4.5,1-seg(p,.75,.9))}}
+  vesselX(716,y,22,.5+.2*Math.sin(T*2),{t:T});txt(716,y+38,"vessels, heart",{size:11.5,align:"center",color:C["ink-soft"]});txt(400,y-20,"then norepinephrine at the organ",{size:12,weight:700,align:"center"});
+  y=300;neuron(60,y,300,y,C.symp);dotsAlong(70,y,296,y,T,C.symp,3,.6);junction(308,y,"ach","N",T+.6,{col:C.symp});
+  ell(388,y,30,20,0,hexA(C.gold,.45),C["gold-ink"],2);txt(388,y,"adrenal",{size:11.5,weight:700,align:"center"});
+  vesselTube(424,690,y,18,T,{speed:60});for(let i=0;i<5;i++){const xx=430+((T*60+i*52)%256);lig("epi",xx,y,5.5)}
+  receptor(712,y,"b2",{s:.6,rot:-Math.PI/2,labDy:30,fs:11});txt(556,y-26,"epinephrine travels in the blood",{size:12,weight:700,align:"center"});
+  y=404;neuron(60,y,600,y,C.somatic);dotsAlong(70,y,596,y,T,C.somatic,5,.7);junction(608,y,"ach","N",T+.8,{col:C.somatic});
+  const tw=Math.max(0,Math.sin(P(T+.8,1.6)*TAU))*4;rr(668,y-16+tw/2,104,32-tw,10);fillStroke(C.muscle,hexA(C.ink,.4),1.4);for(let i=0;i<8;i++)line(678+i*12,y-12+tw/2,678+i*12,y+12-tw/2,hexA(C.panel,.5),1.2);
+  txt(720,y+30,"skeletal muscle",{size:11.5,align:"center",color:C["ink-soft"]});
+}
+/* ---- receptor tour ---- */
+const RTOUR=[
+ {short:"Vessels squeeze",k:"a1",name:"Alpha-1 (α1)",hl:{vessel:"a1",eye:"a1",bladder:"a1"},st:{constrict:.9,pupil:.85,bclosed:true,bfill:.7},lines:["Vessels squeeze: blood pressure up","Radial iris muscle: pupil widens","Bladder neck and prostate tighten"]},
+ {short:"Brake on release",k:"a2",name:"Alpha-2 (α2)",hl:{brain:"a2",vessel:"a2",heart:"a2"},st:{constrict:.3,hr:60,sleepy:1},lines:["A brake on nerve endings and brainstem","Less norepinephrine released","Blood pressure and heart rate fall"]},
+ {short:"Heart faster, stronger",k:"b1",name:"Beta-1 (β1)",hl:{heart:"b1"},st:{hr:120,force:1.5},lines:["Heart rate up","Stronger contraction","Kidney releases renin"]},
+ {short:"Airways open",k:"b2",name:"Beta-2 (β2)",hl:{airway:"b2",muscle:"b2"},st:{airway:1,tremor:1},lines:["Airways open (bronchodilation)","Uterus relaxes; blood sugar rises","Skeletal muscle: tremor"]},
+ {short:"Kidney vessels widen",k:"dop",name:"Dopamine (D1)",hl:{vessel:"dop"},st:{constrict:.15},lines:["Kidney and gut vessels widen","More blood flow to those organs","Seen with low-rate dopamine"]},
+ {short:"Rest and digest",k:"mus",name:"Muscarinic (M)",hl:{eye:"mus",mouth:"mus",heart:"mus",gut:"mus",bladder:"mus",skin:"mus"},st:{pupil:.1,saliva:1,hr:52,gut:2,bsq:.9,bflow:1,bclosed:false,sweat:.9,bfill:.3},lines:["Heart slows; pupil small","Saliva, tears, sweat, airway mucus","Gut moves; bladder squeezes"]},
+ {short:"Muscle, ganglia",k:"nic",name:"Nicotinic (N)",hl:{muscle:"nic",brain:"nic"},st:{twitch:1},lines:["Skeletal muscle contracts","Fires every autonomic ganglion","Adrenal gland releases epinephrine"]}];
+function sceneReceptors(T){
+  const L=3.2,i=Math.floor(T/L)%RTOUR.length,p=P(T,L),r=RTOUR[i];const st=bodyState(r.st);
+  panelBox(12,12,392,456);title(26,32,"Receptor body map");
+  bodyMap(208,48,st,T,{hl:r.hl,dim:.45,R:28,gap:76,dx:140});
+  panelBox(416,12,372,456);title(430,32,"Now showing");
+  const col=C[r.k];rr(430,48,344,56,8);ctx.fillStyle=hexA(col,.2);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.stroke();
+  receptor(462,82,r.k==="mus"?"M":r.k==="nic"?"N":r.k==="dop"?"D":r.k,{s:.8,label:false,active:true});txt(492,76,r.name,{size:19,weight:700,font:"serif"});
+  r.lines.forEach((l,j)=>{const a=smooth(seg(p,.05+j*.1,.2+j*.1));withA(a,()=>{circ(444,132+j*34,5,col);wrapText(l,458,132+j*34,310,16,{size:14,weight:600})})});
+  // mini list of all seven
+  title(430,250,"All seven");RTOUR.forEach((q,j)=>{const y=276+j*26,on=j===i;rr(430,y-11,344,22,5);ctx.fillStyle=on?hexA(C[q.k],.22):hexA(C["panel-2"],.7);ctx.fill();
+    circ(444,y,6,C[q.k]);txt(458,y,q.name,{size:12.5,weight:on?700:500});txt(764,y,q.short,{size:11.5,align:"right",color:C["ink-soft"]})});
+}
+/* ---- agonist / antagonist ---- */
+function lane(x,w,T,kind,lab){panelBox(x,12,w,300);title(x+12,32,lab);const cx=x+w/2;const p=P(T,3);
+  terminal(cx,104,90,56,C.symp,{ves:6,lig:"ne"});membrane(x+10,x+w-10,214,{h:14});
+  const blocked=kind==="ant";const drugIn=kind==="ago";
+  if(blocked){receptor(cx,216,"b1",{s:1.1,blocked:true,labDy:30});lig("ant",cx,208,8)}
+  else{const bind=p>.42&&p<.85;receptor(cx,216,"b1",{s:1.1,active:bind,labDy:30})}
+  // falling ligands
+  const typ=drugIn?"ago":"ne";const f=smooth(seg(p,.08,.42));
+  if(blocked){const yb=lerp(114,190,f);const bounce=seg(p,.42,.8);lig("ne",cx-6+bounce*50,yb-Math.sin(bounce*Math.PI)*60+bounce*0,7,1-seg(p,.75,.9));lig("ne",cx+14-bounce*60,lerp(114,182,f)-Math.sin(bounce*Math.PI)*40,6,1-seg(p,.75,.9))}
+  else{if(p<.9){lig(typ,lerp(cx-30,cx,f),lerp(drugIn?60:114,204,f),7.5,1-seg(p,.8,.9))}}
+  const on=!blocked&&p>.42&&p<.85;rr(x+14,268,w-28,30,6);ctx.fillStyle=on?hexA(C.good,.22):hexA(C.blocked,.15);ctx.fill();
+  txt(cx,283,blocked?"receptor blocked: no signal":(on?"receptor ON: heart speeds up":"waiting for a signal"),{size:12,weight:700,align:"center"});
+}
+function sceneAgonist(T){
+  lane(12,252,T,"nat","Natural signal");lane(274,252,T,"ago","Agonist (drug copies it)");lane(536,252,T,"ant","Antagonist (blocker)");
+  // off switches
+  panelBox(12,324,382,144);title(26,344,"How ACh is switched off");
+  membrane(30,376,450,{h:12});terminal(200,404,120,36,C.para,{ves:3,lig:"ach"});
+  const q=P(T,2.2);for(let i=0;i<5;i++){const x=120+i*40,yy=lerp(410,438,seg(q,i*.05,.3+i*.05));const eaten=q>.45+i*.08;if(!eaten)lig("ach",x,yy,5)}
+  const ex=lerp(90,330,seg(q,.35,.95));ache(ex,432,12,.5+.5*Math.sin(T*14),{rot:0});txt(296,376,"AChE chops ACh",{size:12,weight:700});
+  panelBox(406,324,382,144);title(420,344,"How norepinephrine is switched off");
+  membrane(424,770,450,{h:12});terminal(596,404,120,36,C.symp,{ves:3,lig:"ne"});
+  rr(640,378,22,28,5);fillStroke(hexA(C.rec,.4),C.rec,1.6);txt(672,386,"reuptake pump",{size:12,weight:700,align:"left"});
+  for(let i=0;i<4;i++){const pp=(q+i*.25)%1;const x=lerp(520+i*30,651,smooth(seg(pp,.3,.9)));const yy=pp<.3?lerp(410,436,pp/.3):lerp(436,392,smooth(seg(pp,.3,.9)));lig("ne",x,yy,5,1-seg(pp,.9,1))}
+}
+
+/* ================= Part 2 and 3 helpers ================= */
+function antibody(x,y,s,col){col=col||C.blocked;line(x,y,x,y-s,col,3);line(x,y-s,x-s*.6,y-s*1.6,col,3);line(x,y-s,x+s*.6,y-s*1.6,col,3)}
+function face(x,y,r,o){o=o||{};const sk=mix(C.skin,"#D8402F",(o.red||0)*.7);circ(x,y,r,sk,C["skin-edge"],2);
+  [-1,1].forEach(sd=>{const ex=x+sd*r*.36,ey=y-r*.12;ell(ex,ey,r*.2,r*.13,0,"#F5F7F8",hexA(C.ink,.5),1.2);circ(ex,ey,r*(.03+.09*clamp(o.pupil==null?.5:o.pupil,0,1)),"#0B0F12");
+    if(o.ptosis){ctx.save();ctx.beginPath();ctx.ellipse(ex,ey,r*.21,r*.14,0,0,TAU);ctx.clip();ctx.fillStyle=sk;ctx.fillRect(ex-r*.25,ey-r*.2,r*.5,r*.2*(.4+o.ptosis*.9));ctx.restore();line(ex-r*.21,ey-r*.14+r*.2*o.ptosis*.6,ex+r*.21,ey-r*.14+r*.2*o.ptosis*.6,C["skin-edge"],1.6)}
+    if(o.tears){drops(ex+sd*r*.1,ey+r*.12,2,o.t||0,C.sweat,4,2.2)}});
+  ctx.beginPath();ctx.arc(x,y+r*.32,r*.26,.15*Math.PI,.85*Math.PI);ctx.strokeStyle=hexA(C.ink,.6);ctx.lineWidth=2;ctx.stroke();
+  if(o.drool)drops(x+r*.12,y+r*.5,2,o.t||0,C.sweat,6,2.6);
+  if(o.sweat){for(let i=0;i<3;i++){const p=((o.t||0)*.6+i*.33)%1;sweatDrop(x-r*.7+i*r*.7,y-r*.6+p*r*.5,3,hexA(C.sweat,1-p*.5))}}}
+/* big cholinergic synapse used by several scenes */
+function cholSynapse(x0,w,T,st){const cx=x0+w/2;const top=60,mem=330;
+  terminal(cx,top+80,170,80,st.col||C.para,{ves:6,lig:"ach"});
+  membrane(x0+14,x0+w-14,mem,{h:14});
+  const recs=st.recs||[["M",x0+w*.16],["M",x0+w*.36],["N",x0+w*.64],["N",x0+w*.84]];
+  // ACh in the gap
+  const n=Math.round(st.ach*26);for(let i=0;i<n;i++){const xx=x0+30+rnd(i+11)*(w-60)+Math.sin(T*1.5+i)*5;const yy=top+100+rnd(i+31)*(mem-top-130)+Math.cos(T*1.3+i*2)*4;lig("ach",xx,yy,4.6)}
+  // enzymes
+  const ez=st.ez||[[x0+w*.25,top+150],[x0+w*.5,top+178],[x0+w*.75,top+150]];
+  ez.forEach((e,i)=>{const dead=st.opBound>i/3+.05&&st.pam<(i+1)/3;ache(e[0],e[1],14,dead?.15:.5+.5*Math.sin(T*10+i),{dead});
+    if(dead){lig("op",e[0]+13,e[1]-4,5.5);if(st.aged)txt(e[0],e[1]+24,"aged",{size:11.5,weight:700,align:"center",color:C["ink-soft"]})}
+    const pr=clamp(st.pam*3-i,0,1);if(pr>0&&pr<1){const hx_=e[0]+13+pr*40,hy=e[1]-4-pr*50;lig("op",hx_,hy,5.5,1-pr);ctx.beginPath();ctx.arc(hx_+6,hy-6,7,Math.PI*.2,Math.PI*1.4);ctx.strokeStyle=C.drug;ctx.lineWidth=3;ctx.stroke()}});
+  recs.forEach((r,i)=>{const plug=r[0]==="M"&&st.atro>i/2+.05;const on=!plug&&st.ach>.45;receptor(r[1],mem+2,r[0],{s:1,active:on,blocked:plug,x:false,labDy:30});
+    if(plug)lig("ant",r[1],mem-6,7.5);else if(on)lig("ach",r[1],mem-6,4.6)});
+}
+
+/* ================= Part 2 ================= */
+function sceneBethanechol(T){
+  const p=P(T,9);
+  panelBox(12,12,392,456);title(26,32,"Bladder wall, close up");
+  membrane(26,390,200,{h:14});
+  const bound=smooth(seg(p,.25,.4))*(1-smooth(seg(p,.85,.97)));
+  const sh=bound;ell(208,300,150*(1-.22*sh),46*(1+.35*sh),0,hexA(C.muscle,.55),C.muscle,2);
+  for(let i=-4;i<=4;i++)line(208+i*28*(1-.22*sh),300-30*(1+.3*sh),208+i*28*(1-.22*sh),300+30*(1+.3*sh),hexA(C.panel,.35),1.4);
+  txt(208,300,"detrusor smooth muscle cell",{size:12.5,weight:700,align:"center"});
+  [70,160,256,346].forEach((x,i)=>{receptor(x,202,"M",{s:.95,active:bound>.4,labDy:-26});
+    const f=smooth(seg(p,.02+i*.04,.25+i*.04));const y=lerp(52,190,f);const a=1-smooth(seg(p,.85,.97));if(f<1||bound>0)lig("ago",x+(1-f)*20,y,8,a)});
+  txt(208,420,sh>.4?"Bound: the muscle shortens and squeezes":"Bethanechol drifts toward the receptors",{size:13,weight:700,align:"center"});
+  txt(208,444,"Direct muscarinic agonist",{size:12,align:"center",color:C["ink-soft"]});
+  panelBox(416,12,372,456);title(430,32,"The whole bladder");
+  const empt=smooth(seg(p,.38,.85));const fill=.9-.7*empt;const sq=bound;
+  bladder(602,208,112,fill,sq*.9,{closed:sq<.2,flow:sq>.2?1:0,t:T});
+  rr(612,46,160,26,6);ctx.fillStyle=hexA(C.warn,.18);ctx.fill();ctx.strokeStyle=C.warn;ctx.lineWidth=1.4;ctx.stroke();txt(692,59,"Check for blockage first",{size:12,weight:700,align:"center",color:C["warn-ink"]});
+  const tl=[["Drug given",.1],["Bladder squeezes",.4],["Bladder empties",.8]];line(450,404,760,404,C.rule,3);
+  tl.forEach((q,i)=>{const x=lerp(460,750,q[1]);const on=p>=q[1]-.05;circ(x,404,8,on?C.mus:C.panel,C.mus,2);txt(x,i%2?446:426,q[0],{size:12,weight:on?700:500,align:"center"})});
+  circ(lerp(460,750,p),404,4,C.ink);
+}
+function nmjHalf(x0,T,drug,lab){const w=380,cx=x0+w/2;panelBox(x0,12,w,456);title(x0+14,32,lab);
+  terminal(cx,140,150,90,C.somatic,{ves:6,lig:"ach"});membrane(x0+12,x0+w-12,300,{h:14});
+  const recX=[x0+50,x0+120,x0+190,x0+260,x0+330];const anti=[1,3];
+  const ez=[[x0+95,232],[x0+190,252],[x0+285,232]];
+  const q=P(T,2.4);let hits=0;
+  for(let i=0;i<10;i++){const tx=recX[i%5]+(rnd(i)-.5)*16;const f=seg(q,.02+i*.02,.5+i*.02);const sx=cx+(rnd(i+5)-.5)*60;const y=lerp(150,288,f);const x=lerp(sx,tx,f);
+    const eaten=rnd(i+(drug?40:20))<(drug?.22:.7);const cut=eaten&&f>.5;const blockedR=anti.includes(i%5);
+    if(f>0&&!cut&&f<1)lig("ach",x,y,4.6);if(!eaten&&!blockedR&&f>=1&&q<.92)hits++}
+  recX.forEach((x,i)=>{const bl=anti.includes(i);receptor(x,302,"N",{s:.9,blocked:bl,x:false,active:!bl&&hits>(drug?2:5)&&(i%2===0||drug),labDy:28});if(bl)antibody(x,292,10)});
+  ez.forEach((e,i)=>{const capped=drug&&Math.sin(T*1.7+i*2)>-.35;ache(e[0],e[1],13,capped?.1:.5+.5*Math.sin(T*12+i));if(capped)lig("ago",e[0]+12,e[1]-3,6)});
+  const strength=drug?.72+.05*Math.sin(T*2):.3+.04*Math.sin(T*2);
+  const tw=Math.max(0,Math.sin(q*TAU))*strength*5;rr(x0+30,344+tw*0,w-60,40-tw,12);fillStroke(C.muscle,hexA(C.ink,.4),1.4);for(let i=0;i<14;i++)line(x0+44+i*22,348,x0+44+i*22,380-tw,hexA(C.panel,.45),1.2);
+  txt(x0+30,404,"Muscle strength",{size:12.5,weight:700});hbar(x0+150,397,w-180,14,strength,drug?C.good:C.warn);
+  txt(x0+30,432,drug?"Enzyme slowed: ACh lasts longer":"Enzyme chops most ACh first",{size:12.5,color:C["ink-soft"]});
+  if(drug)txt(x0+30,452,"Donepezil: same idea in the brain",{size:12.5,weight:600,color:C.ink})}
+function sceneMG(T){nmjHalf(12,T,false,"Myasthenia gravis, no drug");nmjHalf(408,T,true,"With pyridostigmine")}
+const SLUDGE=[["S","Salivation",["mouth"]],["L","Lacrimation (tears)",["eye"]],["U","Urination",["bladder"]],["D","Defecation",["gut"]],["G","GI cramps",["gut"]],["E","Emesis (vomiting)",["gut"]]];
+const DUMBELS=[["D","Diarrhea",["gut"]],["U","Urination",["bladder"]],["M","Miosis",["eye"]],["B","Bradycardia, bronchospasm, bronchorrhea",["heart","airway"]],["E","Emesis",["gut"]],["L","Lacrimation",["eye"]],["S","Salivation, sweating",["mouth","skin"]]];
+function sceneSludge(T){
+  const k=Math.floor(T/1.5)%13;const isS=k<6;const item=isS?SLUDGE[k]:DUMBELS[k-6];
+  const st=bodyState({pupil:.06,hr:46,airway:.3,mucus:.6,gut:2.2,bsq:.9,bflow:1,bclosed:false,bfill:.3,saliva:1,sweat:1});
+  const hl={};item[2].forEach(o=>hl[o]="mus");
+  bodyMap(400,40,st,T,{hl,dim:.5,dx:118,gap:78,R:28});
+  const [ex,ey]=calloutPos("eye",400,40,{dx:118,gap:78});if(item[2].includes("eye")&&item[0]==="L")drops(ex+10,ey+8,3,T,C.sweat,10,2.6);
+  const col=(arr,x,lab,on)=>{panelBox(x,12,212,456);title(x+14,32,lab);arr.forEach((r,i)=>{const y=70+i*(arr.length===6?62:54);const lit=on===i;
+    rr(x+10,y-22,192,44,8);ctx.fillStyle=lit?hexA(C.mus,.22):hexA(C["panel-2"],.7);ctx.fill();if(lit){ctx.strokeStyle=C.mus;ctx.lineWidth=2;ctx.stroke()}
+    txt(x+30,y,r[0],{size:24,weight:700,align:"center",color:lit?C.ink:C["ink-soft"]});wrapText(r[1],x+50,r[1].length>24?y-8:y,146,16,{size:12.5,weight:lit?700:500})})};
+  col(SLUDGE,12,"SLUDGE",isS?k:-1);col(DUMBELS,576,"DUMBELS",isS?-1:k-6);
+  const yL=70+(isS?k*62:(k-6)*54);const [tx,ty]=calloutPos(item[2][0],400,40,{dx:118,gap:78});
+  withA(.8,()=>line(isS?224:576,yL,tx+(isS?-30:30),ty,C.mus,2,[5,4]));
+}
+function sceneOP(T){
+  const p=clamp(T/12,0,1);const st={ach:.15+.85*smooth(seg(p,.15,.6)),opBound:smooth(seg(p,.05,.35))*1.05,aged:p>.65,atro:0,pam:0,col:C.para};
+  panelBox(12,12,476,456);title(26,32,"Synapse flooded with ACh");
+  for(let i=0;i<3;i++){const f=smooth(seg(p,.02+i*.08,.15+i*.08));if(f<1)lig("op",lerp(20,[131,250,369][i],f),lerp(120,[206,234,206][i],f),6)}
+  cholSynapse(12,476,T,st);
+  txt(26,440,"ACh in the gap",{size:12.5,weight:700});hbar(140,433,200,14,st.ach,C.ach);txt(352,440,st.ach>.7?"very high":"rising",{size:12.5,weight:600});
+  panelBox(500,12,288,456);title(514,32,"The patient");
+  const hr=lerp(78,44,smooth(seg(p,.25,.8))),sp=lerp(97,86,smooth(seg(p,.3,.85)));
+  monitor(512,46,264,110,{hr,sys:lerp(122,94,seg(p,.3,.9)),dia:lerp(78,56,seg(p,.3,.9)),sp,hrF:hr<60?"lo":"",spF:sp<92?"lo":"",bpF:p>.7?"lo":""},T,{art:false});
+  eye(560,214,26,lerp(.45,.03,smooth(seg(p,.2,.5))));txt(560,252,"pinpoint pupils",{size:12,align:"center",weight:600});
+  bronchiole(712,214,40,lerp(.6,.25,seg(p,.3,.8)),{mucus:smooth(seg(p,.3,.85))*.8});txt(706,266,"spasm and mucus",{size:12,align:"center",weight:600});
+  const tw=p<.6?1:0,weak=smooth(seg(p,.6,.9));const jit=tw?Math.sin(T*40)*2*(rnd(Math.floor(T*7))>.4?1:0):0;
+  rr(530+jit,308,140,36,12);fillStroke(mix(C.muscle,C.blocked,weak*.7),hexA(C.ink,.4),1.4);for(let i=0;i<9;i++)line(544+i*14+jit,312,544+i*14+jit,340,hexA(C.panel,.45),1.2);
+  txt(600,362,weak>.5?"muscles weak":"muscles twitch",{size:12,weight:600,align:"center"});
+  rr(512,388,264,66,8);ctx.fillStyle=hexA(C.bad,.12);ctx.fill();ctx.strokeStyle=C.bad;ctx.lineWidth=1.4;ctx.stroke();
+  txt(526,406,"Killer Bs",{size:13,weight:700,color:C.bad});txt(526,426,"Bradycardia, bronchospasm,",{size:12.5});txt(526,444,"bronchorrhea",{size:12.5});
+}
+function sceneAntidote(T){
+  const p=clamp(T/16,0,1);const atro=smooth(seg(p,.05,.35))*1.05,pam=smooth(seg(p,.5,.85))*1.02;
+  const st={ach:lerp(1,.2,smooth(seg(p,.55,.95))),opBound:1.05,aged:false,atro,pam,col:C.para};
+  panelBox(12,12,476,456);title(26,32,p<.47?"Phase 1: atropine":"Phase 2: pralidoxime");
+  cholSynapse(12,476,T,st);
+  const tl=[["Atropine blocks M",.05],["Secretions dry",.3],["Pralidoxime frees AChE",.6],["ACh cleared",.9]];line(40,440,460,440,C.rule,3);
+  tl.forEach((q,i)=>{const x=lerp(50,450,q[1]);const on=p>=q[1];circ(x,440,6,on?C.drug:C.panel,C.drug,2);txt(x,i%2?460:422,q[0],{size:11,weight:on?700:500,align:"center"})});circ(lerp(50,450,p),440,3.5,C.ink);
+  panelBox(500,12,288,456);title(514,32,"The patient");
+  const hr=lerp(44,84,smooth(seg(p,.1,.4)));const sp=lerp(86,95,smooth(seg(p,.15,.45)));
+  monitor(512,46,264,110,{hr,sys:lerp(94,118,seg(p,.1,.45)),dia:lerp(56,74,seg(p,.1,.45)),sp,hrF:hr<60?"lo":"",spF:sp<92?"lo":""},T,{art:false});
+  bronchiole(580,220,42,lerp(.25,.75,smooth(seg(p,.1,.4))),{mucus:.8*(1-smooth(seg(p,.1,.4)))});txt(580,276,"secretions dry",{size:12,weight:600,align:"center"});
+  const twitch=1-smooth(seg(p,.6,.9));const jit=Math.sin(T*40)*2*twitch*(rnd(Math.floor(T*7))>.4?1:0);
+  rr(660+jit,200,100,36,12);fillStroke(C.muscle,hexA(C.ink,.4),1.4);for(let i=0;i<6;i++)line(672+i*15+jit,204,672+i*15+jit,232,hexA(C.panel,.45),1.2);
+  txt(710,256,twitch>.5?"still twitching":"muscle calm",{size:12,weight:600,align:"center"});txt(710,274,"(nicotinic)",{size:11.5,align:"center",color:C["ink-soft"]});
+  rr(512,302,264,152,8);ctx.fillStyle=hexA(C["panel-2"],.9);ctx.fill();
+  wrapText("Atropine: blocks muscarinic receptors. Give until the lungs are dry. No effect on nicotinic muscle receptors.",524,322,240,17,{size:12.5,weight:p<.47?700:500});
+  wrapText("Pralidoxime: pulls the poison off the enzyme. Works only before the bond ages.",524,394,240,17,{size:12.5,weight:p>=.47?700:500});
+}
+function sceneCrisis(T){
+  const m=.5+.46*Math.sin(T*.6);
+  panelBox(12,12,776,96);title(26,32,"How much ACh action?");
+  const x0=40,x1=760,y=70;[[0,.33,"blocked","Too little"],[.33,.67,"good","Just right"],[.67,1,"bad","Too much"]].forEach(z=>{rr(lerp(x0,x1,z[0]),y-12,(x1-x0)*(z[1]-z[0]),24,4);ctx.fillStyle=hexA(C[z[1]===.67?"good":z[2]],.3);ctx.fill();txt(lerp(x0,x1,(z[0]+z[1])/2),y,z[3],{size:12.5,weight:700,align:"center"})});
+  const mx=lerp(x0,x1,m);triPath(mx,y-20,8,Math.PI);ctx.fillStyle=C.ink;ctx.fill();
+  const left=m<.33,right=m>.67;
+  const card=(x,on,lab,sub,o)=>{panelBox(x,120,380,292,{stroke:on?C[o.col]:C.rule,lw:on?3:1.2});title(x+14,140,lab,on?C.ink:C["ink-soft"]);txt(x+14,160,sub,{size:12.5,color:C["ink-soft"]});
+    face(x+90,240,52,Object.assign({t:T},o.face));
+    const fx=o.facts;fx.forEach((f,i)=>{circ(x+178,196+i*26,4,C[o.col]);txt(x+190,196+i*26,f,{size:12.5,weight:on?600:500})});
+    rr(x+14,330,240,46,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+18,332,232,42,o.hr,T,C["mon-hr"]);txt(x+262,354,o.hr+"/min",{size:13,mono:true,weight:700});
+    bronchiole(x+340,354,22,.4,{mucus:o.mucus});txt(x+300,394,"breathing at risk",{size:12,weight:700,color:C.bad,align:"center"})};
+  card(12,left,"Myasthenic crisis","Too little drug or a trigger such as infection",{col:"blocked",hr:96,mucus:0,face:{ptosis:.9,pupil:.45},facts:["Drooping eyelids","Weak chewing, swallowing","Normal pupils","No SLUDGE signs","Needs more treatment"]});
+  card(408,right,"Cholinergic crisis","Too much cholinesterase inhibitor",{col:"bad",hr:48,mucus:.6,face:{pupil:.02,drool:1,sweat:1,tears:1},facts:["Pinpoint pupils","Drooling, sweating","Twitching, then weak","Slow pulse, cramps","Hold drug, atropine"]});
+  rr(12,424,776,44,8);ctx.fillStyle=hexA(C.accent,.16);ctx.fill();ctx.strokeStyle=C.accent;ctx.lineWidth=1.5;ctx.stroke();
+  txt(400,446,"Both: airway and breathing first. Then sort out the cause.",{size:14,weight:700,align:"center"});
+}
+
+/* ================= Part 3 ================= */
+function plugRec(x,y,s){receptor(x,y,"M",{s:s||.8,blocked:true,x:false,labDy:-26});lig("ant",x,y-6*(s||.8),6.5*(s||.8))}
+function sceneAntimusc(T){
+  const p=smooth(seg(P(T,8),.1,.55));const tiles=[[12,12],[404,12],[12,246],[404,246]];
+  const labs=[["Atropine","Symptomatic slow heart"],["Scopolamine","Motion sickness patch"],["Oxybutynin","Overactive bladder"],["Ipratropium","COPD inhaler"]];
+  tiles.forEach((t,i)=>{panelBox(t[0],t[1],384,222);title(t[0]+14,t[1]+20,labs[i][0]);txt(t[0]+14,t[1]+40,labs[i][1],{size:12.5,color:C["ink-soft"]});
+    rr(t[0]+14,t[1]+60,74,92,8);ctx.fillStyle=hexA(C["panel-2"],.9);ctx.fill();membrane(t[0]+18,t[0]+84,t[1]+134,{h:10});
+    if(p>.05){receptor(t[0]+51,t[1]+136,"M",{s:.75,blocked:true,x:false,labDy:24});lig("ant",t[0]+51,lerp(t[1]+70,t[1]+130,smooth(seg(p,0,.5))),5.5)}else receptor(t[0]+51,t[1]+136,"M",{s:.75,active:true,labDy:24})});
+  // atropine: ECG
+  {const x=12,y=12;const hr=lerp(38,74,p);rr(x+104,y+64,264,80,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+108,y+66,190,76,hr,T,C["mon-hr"]);txt(x+306,y+90,"HR",{size:11.5,mono:true,color:C["mon-hr"],weight:600});txt(x+306,y+118,Math.round(hr)+"",{size:22,mono:true,weight:700,color:C["mon-hr"]});
+   txt(x+104,y+170,p>.5?"Brake released: rate rises":"Vagal brake: rate too slow",{size:12.5,weight:700});txt(x+104,y+192,"Also dries secretions; dilates pupil",{size:12,color:C["ink-soft"]})}
+  // scopolamine
+  {const x=404,y=12;circ(x+170,y+110,36,C.skin,C["skin-edge"],2);ell(x+204,y+112,8,13,0,C.skin,C["skin-edge"],1.6);rr(x+212,y+120,18,14,3);fillStroke(hexA(C.drug,.6),C.drug,1.4);txt(x+221,y+148,"patch",{size:11.5,align:"center",weight:600});
+   const rock=Math.sin(T*1.6)*.15*(1-p);ctx.save();ctx.translate(x+300,y+120);ctx.rotate(rock);ctx.beginPath();ctx.moveTo(-34,0);ctx.lineTo(34,0);ctx.lineTo(24,16);ctx.lineTo(-24,16);ctx.closePath();fillStroke(C.panel,C["ink-soft"],1.6);line(0,0,0,-30,C["ink-soft"],2);ctx.restore();
+   for(let i=0;i<3;i++){const yy=y+150+i*7;ctx.beginPath();for(let k=0;k<=40;k++){const X=x+260+k*2;const Y=yy+Math.sin(k*.5+T*3)*3;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.sweat;ctx.lineWidth=1.4;ctx.stroke()}
+   withA(1-p,()=>{for(let i=0;i<3;i++){ctx.beginPath();for(let k=0;k<=14;k++){const X=x+130+k*3,Y=y+62+i*8+Math.sin(k*.9+T*4+i)*3;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.mus;ctx.lineWidth=2;ctx.stroke()}});
+   txt(x+104,y+192,p>.5?"Nausea blocked; drowsy":"Motion triggers nausea",{size:12.5,weight:700})}
+  // oxybutynin
+  {const x=12,y=246;const sp=(1-p)*Math.max(0,Math.sin(T*7))*.6;bladder(x+200,y+108,52,.55,sp,{closed:true});
+   if(p<.5){for(let i=0;i<3;i++){const a=i*2.1+T;line(x+200+Math.cos(a)*62,y+100+Math.sin(a)*50,x+200+Math.cos(a)*72,y+100+Math.sin(a)*58,C.bad,2)}}
+   txt(x+290,y+90,p>.5?"calm":"spasms",{size:13,weight:700,color:p>.5?C.good:C.bad});
+   txt(x+104,y+192,p>.5?"Detrusor relaxed: fewer urgent trips":"Bladder squeezes too often",{size:12.5,weight:700})}
+  // ipratropium
+  {const x=404,y=246;rr(x+110,y+80,26,52,6);fillStroke(hexA(C.drug,.4),C.drug,1.6);rr(x+136,y+96,24,16,3);fillStroke(hexA(C.drug,.3),C.drug,1.4);
+   for(let i=0;i<8;i++){const q=(T*.8+i/8)%1;circ(x+164+q*90,y+104+Math.sin(i*2)*q*14,2.5,hexA(C.drug,1-q))}
+   bronchiole(x+300,y+110,44,lerp(.3,.8,p),{mucus:.7*(1-p)});
+   txt(x+104,y+192,p>.5?"Airway open, less mucus":"Airway narrowed with mucus",{size:12.5,weight:700});txt(x+104,y+210,"Main side effect: dry mouth",{size:12,color:C["ink-soft"]})}
+}
+const ACFX=[["eye","Can't see",""],["mouth","Can't spit",""],["bladder","Can't pee",""],["gut","Can't poop",""],["skin","Dry as a bone","no sweat"],["heart","Fast heart",""],["vessel","Red as a beet","skin vessels widen"],["brain","Mad as a hatter","confusion"]];
+function sceneAnticholFx(T){
+  const p=P(T,20);const n=Math.min(ACFX.length,Math.floor(p*10));const f=clamp(n/ACFX.length,0,1);
+  const st=bodyState({pupil:lerp(.45,.95,f),saliva:lerp(.35,0,f),bfill:lerp(.45,.95,f),bclosed:true,gut:lerp(1,.05,f),sweat:lerp(.25,0,f),red:f,hr:lerp(76,124,f),confuse:n>=8?1:0,airway:.75});
+  const hl={},vals={};ACFX.forEach((a,i)=>{if(i<n){hl[a[0]]="act3";vals[a[0]]=a[1]}});
+  bodyMap(400,40,st,T,{hl,vals,dx:150,gap:78,R:28,only:["brain","eye","gut","mouth","heart","vessel","bladder","skin","airway"]});
+  panelBox(12,12,170,456);title(24,32,"The list");ACFX.forEach((a,i)=>{const y=62+i*48;const on=i<n;rr(22,y-18,150,38,6);ctx.fillStyle=on?hexA(C.act3,.2):hexA(C["panel-2"],.6);ctx.fill();
+    txt(32,y-3,a[1],{size:13,weight:700,color:on?C.ink:C["ink-soft"]});if(a[2])txt(32,y+13,a[2],{size:11.5,color:C["ink-soft"]})});
+  panelBox(618,12,170,456);title(630,32,"Hot as a hare");
+  const temp=lerp(37,39.2,f);thermo(703,70,230,lerp(.35,.9,f),C.bad);txt(703,336,temp.toFixed(1)+" °C",{size:18,mono:true,weight:700,align:"center"});
+  wrapText("No sweating means heat cannot escape.",630,372,150,17,{size:12.5});
+  rr(630,412,146,44,6);ctx.fillStyle=C.mon;ctx.fill();ecg(634,414,138,40,st.hr,T,C["mon-hr"]);
+}
+function sceneElderly(T){
+  const p=P(T,16);
+  panelBox(12,12,392,456);title(26,32,"Anticholinergic burden adds up");
+  // older adult with cane
+  person(84,300,1.3,{shirt:hexA(C.act3,.45)});circ(84,214,18,null,"#B9BEC2",5);line(120,292,128,352,C["ink-soft"],3);
+  const blocks=[["Bladder drug","oxybutynin"],["Sleep aid","diphenhydramine"],["Older antidepressant","amitriptyline"]];
+  let total=0;blocks.forEach((b,i)=>{const d=smooth(seg(p,.08+i*.16,.2+i*.16));if(d<=0)return;total+=d;const y=lerp(60,390-i*54,d);
+    rr(170,y-22,150,46,6);fillStroke(hexA(C.drug,.25),C.drug,1.8);txt(245,y-7,b[0],{size:12.5,weight:700,align:"center"});txt(245,y+11,b[1],{size:12,align:"center",color:C["ink-soft"]})});
+  line(166,416,324,416,C["ink-soft"],3);
+  const bar=total/3;vbar(352,80,26,320,bar,bar>.8?C.bad:C.warn,"burden",{fs:11.5});line(344,80+320*(1-.8),386,80+320*(1-.8),C.bad,2,[4,3]);txt(342,80+320*(1-.8)-12,"risk",{size:11.5,weight:700,color:C.bad,align:"right"});
+  if(bar>.8){const tags=["confusion","fall risk","retention","constipation"];tags.forEach((t,i)=>{const a=smooth(seg(p,.6+i*.04,.66+i*.04));label([40,128,40,128][i],[120,136,440,456][i],t,{size:12,weight:700,a,border:C.bad})})}
+  panelBox(416,12,372,456);title(430,32,"Physostigmine pushes the blocker out");
+  brain(602,86,34,C.brain,C["brain-edge"]);const calm=smooth(seg(p,.55,.9));
+  withA(1-calm,()=>{for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(602,86,14+i*9,T*3+i*2,T*3+i*2+3.6);ctx.strokeStyle=C.bad;ctx.lineWidth=1.8;ctx.stroke()}});
+  txt(690,86,calm>.5?"clearer":"delirium",{size:12.5,weight:700});
+  membrane(430,774,380,{h:14});terminal(602,210,150,70,C.para,{ves:6,lig:"ach"});
+  const ach=lerp(.2,1,calm);const nA=Math.round(ach*18);for(let i=0;i<nA;i++){lig("ach",450+rnd(i+3)*300+Math.sin(T+i)*4,240+rnd(i+9)*110,4.4)}
+  [[500,285],[602,300],[704,285]].forEach((e,i)=>{const cap=smooth(seg(p,.5+i*.05,.6+i*.05));ache(e[0],e[1],13,cap>.5?.1:.5+.5*Math.sin(T*10+i));if(cap>0)lig("ago",lerp(e[0]+40,e[0]+12,cap),lerp(e[1]-60,e[1]-3,cap),6,cap)});
+  [470,550,654,734].forEach((x,i)=>{const freed=calm>(i+1)/5;receptor(x,382,"M",{s:.9,blocked:!freed,x:false,active:freed,labDy:28});if(!freed)lig("ant",x,375,6.5);else lig("ach",x,375,4.4)});
+  txt(602,446,calm>.5?"More ACh wins back the receptors":"Blockers fill the muscarinic receptors",{size:12.5,weight:700,align:"center"});
+}
+
+/* ================= Part 4 and 5 helpers ================= */
+function kidney(x,y,s,col){ctx.beginPath();ctx.moveTo(x+s*.2,y-s);ctx.bezierCurveTo(x-s*1.2,y-s*1.1,x-s*1.2,y+s*1.1,x+s*.2,y+s);ctx.bezierCurveTo(x+s*.7,y+s*.9,x+s*.25,y+s*.2,x+s*.3,y);ctx.bezierCurveTo(x+s*.25,y-s*.2,x+s*.7,y-s*.9,x+s*.2,y-s);ctx.closePath();fillStroke(col||"#C4644F",hexA(C.ink,.45),1.4)}
+function gauge(x,y,r,v,mn,mx,tgt,lab){ctx.beginPath();ctx.arc(x,y,r,Math.PI,TAU);ctx.lineWidth=12;ctx.strokeStyle=hexA(C.bad,.35);ctx.stroke();
+  const ta=Math.PI+Math.PI*clamp((tgt-mn)/(mx-mn),0,1);ctx.beginPath();ctx.arc(x,y,r,ta,TAU);ctx.strokeStyle=hexA(C.good,.55);ctx.stroke();
+  const a=Math.PI+Math.PI*clamp((v-mn)/(mx-mn),0,1);line(x,y,x+Math.cos(a)*(r-4),y+Math.sin(a)*(r-4),C.ink,3);circ(x,y,5,C.ink);
+  txt(x,y+18,lab+" "+Math.round(v),{size:13,mono:true,weight:700,align:"center"})}
+function hand(x,y,s,shake,T){const j=shake?Math.sin(T*50)*2.2*shake:0;ctx.save();ctx.translate(x+j,y);rr(-s*.5,-s*.2,s,s*.9,s*.25);fillStroke(C.skin,C["skin-edge"],1.6);
+  for(let i=0;i<4;i++){rr(-s*.46+i*s*.25,-s*.85,s*.2,s*.7,s*.1);fillStroke(C.skin,C["skin-edge"],1.4)}rr(s*.42,-s*.05,s*.42,s*.2,s*.1);fillStroke(C.skin,C["skin-edge"],1.4);ctx.restore();
+  if(shake){for(let i=0;i<3;i++){line(x-s*.95-i*5,y-s*.4+i*8,x-s*.75-i*5,y-s*.4+i*8,C["ink-soft"],1.5);line(x+s*.95+i*5,y-s*.4+i*8,x+s*1.15+i*5,y-s*.4+i*8,C["ink-soft"],1.5)}}}
+function stopSign(x,y,r){ctx.beginPath();for(let k=0;k<8;k++){const a=Math.PI/8+k*TAU/8;const X=x+Math.cos(a)*r,Y=y+Math.sin(a)*r;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.closePath();fillStroke("#C4382F","#fff",2);txt(x,y+.5,"STOP",{size:Math.round(r*.55),weight:700,align:"center",color:"#fff"})}
+function graphAxes(x,y,w,h,xl,yl){line(x,y,x,y+h,C["ink-soft"],1.4);line(x,y+h,x+w,y+h,C["ink-soft"],1.4);txt(x+w,y+h+14,xl,{size:11.5,align:"right",color:C["ink-soft"]});
+  ctx.save();ctx.translate(x-12,y+h/2);ctx.rotate(-Math.PI/2);txt(0,0,yl,{size:11.5,align:"center",color:C["ink-soft"]});ctx.restore()}
+function moon(x,y,r){circ(x,y,r,C.gold);circ(x+r*.45,y-r*.3,r*.85,C.panel)}
+
+/* ================= Part 4 ================= */
+const SEL=[["Epinephrine",{a1:.9,b1:.9,b2:.9,dop:0}],["Norepinephrine",{a1:1,b1:.7,b2:.08,dop:0}],["Dopamine",null],["Dobutamine",{a1:.1,b1:1,b2:.2,dop:0}],["Phenylephrine",{a1:1,b1:0,b2:0,dop:0}],["Albuterol",{a1:0,b1:.2,b2:1,dop:0}]];
+function sceneSelectivity(T){
+  panelBox(12,12,776,456);const cols=[["a1","α1","vessels squeeze"],["b1","β1","heart faster, stronger"],["b2","β2","airways open"],["dop","D1","kidney vessels widen"]];
+  const cx=k=>214+k*144;
+  cols.forEach((c,k)=>{const x=cx(k);rr(x-6,22,136,82,8);ctx.fillStyle=hexA(C[c[0]],.16);ctx.fill();
+    if(k===0)vesselX(x+28,58,20,.5+.3*Math.sin(T*2),{t:T});if(k===1)heart(x+28,58,17,T,90,{ring:false});if(k===2)bronchiole(x+28,58,21,.6+.3*Math.sin(T*2));if(k===3)kidney(x+28,58,17,C.a1);
+    txt(x+58,48,c[1],{size:20,weight:700});wrapText(c[2],x+58,70,72,14,{size:11.5,color:C["ink-soft"]})});
+  const dz=P(T,9);const dl=dz<.33?0:dz<.66?1:2;
+  SEL.forEach((r,i)=>{const y=134+i*56;rr(22,y-24,756,48,6);ctx.fillStyle=i%2?hexA(C["panel-2"],.5):hexA(C["panel-2"],.9);ctx.fill();
+    txt(34,y-(r[1]?0:8),r[0],{size:15,weight:700});
+    let lv=r[1];if(!lv){lv={dop:1,b1:dl>=1?.85:.05,a1:dl>=2?.9:0,b2:0};txt(34,y+12,["low rate","medium rate","high rate"][dl],{size:12,weight:600,color:C.dop});
+}
+    const grow=smooth(clamp(T/2,0,1));
+    cols.forEach((c,k)=>{const v=lv[c[0]]*grow;hbar(cx(k),y-8,124,16,v,C[c[0]]);})});
+}
+function sceneEpi(T){
+  const p=clamp((T%14)/12,0,1);const inj=smooth(seg(p,.06,.18));const e1=smooth(seg(p,.22,.45)),e2=smooth(seg(p,.3,.55)),e3=smooth(seg(p,.38,.65));
+  panelBox(12,12,250,456);title(26,32,"Anaphylaxis");
+  person(137,250,2.1,{shirt:hexA(C.accent,.35)});
+  const sw=1-e1*.8;for(let i=0;i<14;i++){circ(137+(rnd(i)-.5)*54,180+rnd(i+3)*70,3+rnd(i+5)*2.5,hexA(C.bad,.55*sw))}
+  ell(137,134,9+5*sw,4+3*sw,0,hexA(C.bad,.6));txt(137,56,sw>.5?"hives, swollen lips":"swelling easing",{size:12,weight:600,align:"center"});
+  const ix=lerp(60,108,inj),iy=lerp(330,312,inj);syringe(ix,iy,22,.9,C.drug);txt(137,454,"IM into outer thigh",{size:12.5,weight:700,align:"center"});
+  if(inj>.5){for(let i=0;i<10;i++){const a=i/10*TAU+T,d=10+inj*16+Math.sin(T*2+i)*3;circ(112+Math.cos(a)*d,326+Math.sin(a)*d,2.6,hexA(C.drug,.6))}}
+  const tiles=[["a1","α1: vessels squeeze",e1],["b1","β1: heart pumps harder",e2],["b2","β2: airways open",e3]];
+  tiles.forEach((t,i)=>{const x=274+i*172;panelBox(x,12,164,270,{stroke:t[2]>.5?C[t[0]]:C.rule,lw:t[2]>.5?2.4:1.2});wrapText(t[1],x+12,32,140,16,{size:12.5,weight:700});
+    receptor(x+82,250,t[0],{s:.8,active:t[2]>.5,labDy:-26});if(t[2]>.3)lig("epi",x+82,244,6,t[2]);
+    if(i===0){vesselX(x+82,140,52,lerp(.1,.75,t[2]),{t:T});txt(x+82,206,t[2]>.5?"pressure up":"wide and leaky",{size:12,align:"center"})}
+    if(i===1){heart(x+82,140,40,T,lerp(124,118,t[2]),{force:1+t[2]*.6});txt(x+82,206,t[2]>.5?"stronger beat":"weak output",{size:12,align:"center"})}
+    if(i===2){bronchiole(x+82,140,52,lerp(.2,.9,t[2]));txt(x+82,206,t[2]>.5?"wheeze easing":"tight, wheezing",{size:12,align:"center"})}});
+  const sys=lerp(72,112,e1),dia=lerp(40,70,e1),hr=lerp(128,118,e2),sp=lerp(88,96,e3);
+  monitor(274,294,514,174,{hr,sys,dia,sp,hrF:"hi",bpF:sys<90?"lo":"",spF:sp<92?"lo":""},T);
+}
+function sceneShock(T){
+  const cols=[["Norepinephrine","vasopressor (α1 > β1)"],["Dobutamine","inotrope (β1)"],["Dopamine","effect depends on rate"]];
+  cols.forEach((c,i)=>{const x=12+i*262;panelBox(x,12,252,456);title(x+14,32,c[0]);txt(x+14,52,c[1],{size:12.5,color:C["ink-soft"]});ivBag(x+214,92,40,"",C.drug);line(x+214,122,x+214,150,C["glass-edge"],2)});
+  const p=smooth(seg(P(T,10),.05,.5));
+  // NE
+  {const x=12;const w=lerp(40,22,p);vesselTube(x+20,x+232,170,w,T,{speed:30+p*40});
+   [70,126,182].forEach(xx=>{receptor(x+xx,170-w/2-8,"a1",{s:.6,active:p>.3,label:false,dir:-1})});
+   txt(x+126,222,"vessels squeeze",{size:12.5,weight:600,align:"center"});gauge(x+126,330,72,lerp(52,74,p),40,100,65,"MAP");
+   txt(x+126,382,"green zone = a common",{size:12,align:"center",color:C["ink-soft"]});txt(x+126,398,"target (65 or more)",{size:12,align:"center",color:C["ink-soft"]})}
+  // dobutamine
+  {const x=274;heart(x+126,190,48,T,96,{force:1+p});const ph=(T*96/60)%1;
+   receptor(x+60,262,"b1",{s:.7,active:p>.3,labDy:26});receptor(x+192,262,"b1",{s:.7,active:p>.3,labDy:26});
+   vbar(x+96,310,60,110,lerp(.3,.75,p)*(.8+.2*gauss(ph,.15,.08)),C.b1,"",{});txt(x+126,438,"stroke volume",{size:12.5,weight:600,align:"center"});
+   txt(x+126,456,p>.5?"weak heart pumps harder":"weak, failing pump",{size:12,align:"center",color:C["ink-soft"]})}
+  // dopamine dial
+  {const x=536;const d=P(T,9);const lvl=d<.33?0:d<.66?1:2;const cx=x+126,cy=230;
+   [["low","dop"],["medium","b1"],["high","a1"]].forEach((z,k)=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,74,Math.PI+k*Math.PI/3,Math.PI+(k+1)*Math.PI/3);ctx.closePath();ctx.fillStyle=hexA(C[z[1]],k===lvl?.55:.18);ctx.fill();
+     const a=Math.PI+(k+.5)*Math.PI/3;txt(cx+Math.cos(a)*52,cy+Math.sin(a)*52,z[0],{size:12,weight:700,align:"center"})});
+   const na=Math.PI+lerp(.1,2.9,d)*Math.PI/3;line(cx,cy,cx+Math.cos(na)*70,cy+Math.sin(na)*70,C.ink,3);circ(cx,cy,6,C.ink);
+   const lab=[["Kidney and gut vessels widen","dop"],["+ heart: β1, stronger beat","b1"],["+ vessels squeeze: α1","a1"]];
+   lab.forEach((l,k)=>{const on=k<=lvl;rr(x+16,264+k*52,220,42,6);ctx.fillStyle=on?hexA(C[l[1]],.22):hexA(C["panel-2"],.6);ctx.fill();
+     if(k===0)kidney(x+40,285+k*52,12,on?C.dop:C.blocked);if(k===1)heart(x+40,285+k*52,12,T,on?100:70,{ring:false});if(k===2)vesselX(x+40,285+k*52,13,on?.8:.3);
+     wrapText(l[0],x+60,285+k*52-(l[0].length>26?8:0),168,15,{size:12,weight:on?700:500,color:on?C.ink:C["ink-soft"]})})}
+}
+function sceneExtrav(T){
+  const p=P(T,18);const leak=smooth(seg(p,.2,.45)),stop=p>.5,phen=smooth(seg(p,.6,.85));const pale=leak*(1-phen);
+  panelBox(12,12,776,456);
+  ivBag(380,78,64,"vasopressor",C.drug);line(380,118,380,236,C["glass-edge"],2);line(380,236,420,268,C["glass-edge"],2);
+  if(stop)stopSign(420,170,22);
+  // arm
+  rr(30,236,740,130,60);fillStroke(C.skin,C["skin-edge"],2);
+  ctx.save();ctx.beginPath();rr(30,236,740,130,60);ctx.clip();
+  const g=ctx.createRadialGradient(440,300,10,440,300,150);g.addColorStop(0,hexA(mix(C.skin,"#E8ECEE",.85),pale));g.addColorStop(1,hexA(mix(C.skin,"#E8ECEE",.85),0));ctx.fillStyle=g;ctx.fillRect(280,236,320,130);
+  vesselTube(30,770,306,18,T,{speed:stop?0:40});
+  if(!stop)for(let i=0;i<8;i++){const xx=430+((T*40+i*45)%340);circ(xx,306,3,hexA(C.drug,.9))}
+  // small vessels around site
+  for(let i=0;i<9;i++){const a=i/9*TAU;const vx=440+Math.cos(a)*86,vy=300+Math.sin(a)*40;const wv=lerp(5,1.2,pale);line(vx-14,vy,vx+14,vy,C.vessel,wv)}
+  // leak cloud
+  if(leak>0){for(let i=0;i<40;i++){const a=rnd(i)*TAU,d=Math.sqrt(rnd(i+7))*90*leak;circ(430+Math.cos(a)*d*1.2,300+Math.sin(a)*d*.55,3,hexA(C.drug,.35*(1-phen*.6)))}}
+  if(phen>0){for(let i=0;i<8;i++){const a=i/8*TAU;lig("ant",440+Math.cos(a)*70,300+Math.sin(a)*34,5,phen)}}
+  ctx.restore();
+  rr(410,262,40,12,4);fillStroke(C.panel,C["ink-soft"],1.4);
+  if(phen>0&&phen<1)syringe(520,250,24,2.4,C.drug);
+  if(pale>.4)label(560,226,"pale, cool, hard",{size:12.5,weight:700,border:C.bad});
+  // zoom inset
+  circ(690,120,78,C.panel,C.rule,2);title(626,32,"Close up");vesselX(690,124,46,lerp(.35,.95,pale),{t:T});
+  [0,1,2,3].forEach(k=>{const a=-Math.PI/2+k*Math.PI/2;const rx=690+Math.cos(a)*58,ry=124+Math.sin(a)*58;circ(rx,ry,9,hexA(C.a1,phen>.5?.25:.6),phen>.5?C.blocked:C.a1,2);if(phen>.5)lig("ant",rx,ry,5);else if(leak>.3)lig("ago",rx,ry,4.5)});
+  txt(690,214,phen>.5?"α1 blocked: vessel reopens":leak>.3?"α1 on: vessel clamps":"normal small vessel",{size:12,weight:700,align:"center"});
+  const st=[["Running in the vein",0],["Leaks into tissue",.22],["Stop the infusion",.5],["Phentolamine around site",.62],["Colour returns",.85]];
+  st.forEach((s,i)=>{const x=40+i*150,on=p>=s[1];rr(x,396,140,52,6);ctx.fillStyle=on?hexA(C.accent,.18):hexA(C["panel-2"],.7);ctx.fill();if(on){ctx.strokeStyle=C.accent;ctx.lineWidth=1.5;ctx.stroke()}
+    badge(x+16,422,i+1,on?C.accent:C.blocked,10);wrapText(s[0],x+32,s[0].length>18?414:422,104,15,{size:12,weight:on?700:500})});
+}
+function scenePhenyAlb(T){
+  const p=smooth(seg(P(T,9),.08,.5));
+  panelBox(12,12,384,456);title(26,32,"Phenylephrine (α1)");
+  // nose cross-section
+  const sw=lerp(1,.25,p);rr(60,56,280,130,18);fillStroke(hexA(C.skin,.6),C["skin-edge"],1.6);
+  [[140,121],[260,121]].forEach(c=>{ell(c[0],c[1],46,52,0,hexA(C.myo,.25+.4*sw),C.vessel,2);ell(c[0],c[1],46-28*sw,52-30*sw,0,C.panel,hexA(C.ink,.3),1.2)});
+  receptor(200,94,"a1",{s:.6,active:p>.3,label:false});txt(200,202,p>.5?"lining shrinks: air flows":"swollen lining: stuffy",{size:12,weight:700,align:"center"});
+  txt(26,228,"Nose spray: decongestant",{size:12.5,weight:700});txt(26,246,"Limit to a few days (rebound congestion)",{size:12,color:C["ink-soft"]});
+  // IV: BP up, reflex HR down
+  vesselX(66,318,30,lerp(.35,.85,p),{t:T});const sys=lerp(100,138,p),hr=lerp(78,60,smooth(seg(P(T,9),.3,.65)));
+  txt(104,318,"BP "+Math.round(sys)+"/"+Math.round(lerp(60,84,p)),{size:16,mono:true,weight:700});heart(320,318,26,T,hr,{ring:false});txt(320,358,"HR "+Math.round(hr),{size:15,mono:true,weight:700,align:"center"});
+  ctx.beginPath();ctx.moveTo(236,306);ctx.quadraticCurveTo(266,270,296,300);ctx.strokeStyle=C.ink;ctx.lineWidth=1.8;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);txt(266,272,"reflex",{size:12,weight:700,align:"center"});
+  txt(26,392,"IV: raises blood pressure;",{size:12.5,weight:700});txt(26,410,"the body slows the heart by reflex",{size:12.5});
+  panelBox(404,12,384,456);title(418,32,"Albuterol (β2)");
+  rr(436,80,30,60,6);fillStroke(hexA(C.drug,.4),C.drug,1.6);rr(466,98,26,18,3);fillStroke(hexA(C.drug,.3),C.drug,1.4);
+  for(let i=0;i<8;i++){const q=(T*.8+i/8)%1;circ(496+q*110,107+Math.sin(i*2)*q*16,2.6,hexA(C.drug,1-q))}
+  bronchiole(680,120,64,lerp(.2,.9,p));receptor(680,206,"b2",{s:.7,active:p>.3,labDy:-24});
+  txt(596,240,p>.5?"Airway opens in minutes":"Tight airway: asthma attack",{size:12.5,weight:700,align:"center"});
+  hand(500,350,52,p,T);txt(500,420,p>.5?"tremor":"steady",{size:12.5,weight:700,align:"center"});
+  const hr2=lerp(80,104,p);rr(600,300,170,70,6);ctx.fillStyle=C.mon;ctx.fill();ecg(604,302,110,66,hr2,T,C["mon-hr"]);txt(722,322,"HR",{size:11,mono:true,color:C["mon-hr"],weight:600});txt(722,348,Math.round(hr2)+"",{size:20,mono:true,weight:700,color:C["mon-hr"]});
+  txt(685,392,"faster pulse",{size:12.5,weight:700,align:"center"});txt(596,446,"Side effects: tremor, fast pulse, nervousness",{size:12,align:"center",color:C["ink-soft"]});
+}
+function sceneClonidine(T){
+  const p=P(T,16);const on=smooth(seg(p,.08,.22));
+  panelBox(12,12,388,456);title(26,32,"Brainstem nerve ending");
+  terminal(206,210,240,150,C.symp,{ves:6,lig:"ne"});membrane(26,386,350,{h:14});
+  receptor(310,196,"a2",{s:.85,dir:1,active:on>.5,labDy:-28,rot:-Math.PI/2});
+  if(on>0)lig("ago",lerp(380,322,on),lerp(120,196,on),7);
+  const rate=lerp(1,.3,on);const n=Math.round(lerp(8,2,on));const q=P(T,1.8);
+  for(let i=0;i<n;i++){const f=seg(q,i*.06,.5+i*.06);if(f>0&&f<1)lig("ne",150+i*16,lerp(220,340,f),5)}
+  [110,206,302].forEach(x=>receptor(x,352,"a1",{s:.8,active:rate>.6,labDy:28}));
+  txt(36,420,"NE released",{size:12.5,weight:700});hbar(140,413,200,14,rate,C.ne);txt(36,446,on>.5?"α2 brake on: less norepinephrine":"normal norepinephrine release",{size:12.5,color:C["ink-soft"]});
+  panelBox(412,12,376,456);title(426,32,"Blood pressure over time");
+  const gx=456,gy=60,gw=316,gh=220;graphAxes(gx,gy,gw,gh,"time","systolic pressure");
+  const Y=v=>gy+gh-(v-100)/(220-100)*gh;line(gx,Y(140),gx+gw,Y(140),hexA(C.good,.5),1,[3,4]);txt(gx+gw,Y(140)-10,"goal",{size:11.5,align:"right",color:C.good});
+  const base=t=>t<.2?168:t<.5?lerp(168,132,smooth(seg(t,.2,.45))):132;
+  const cur=clamp(p/.9,0,1);plotFn(base,0,.5,gx,gy,gw*.5,gh,100,220,C.ink,2.5,null,cur*1);
+  if(cur>.5){plotFn(t=>t<.55?132:lerp(132,206,smooth(seg(t,.55,.7)))-lerp(0,10,seg(t,.75,1)),.5,1,gx+gw*.5,gy,gw*.5,gh,100,220,C.bad,2.5,[6,4],cur);
+    plotFn(t=>lerp(132,160,smooth(seg(t,.55,1))),.5,1,gx+gw*.5,gy,gw*.5,gh,100,220,C.good,2.5,null,cur)}
+  line(gx+gw*.2,gy,gx+gw*.2,gy+gh,C.drug,1.4,[3,3]);txt(gx+gw*.2+4,gy+10,"clonidine starts",{size:11.5,weight:600,color:C.ink});
+  line(gx+gw*.55,gy,gx+gw*.55,gy+gh,C["ink-soft"],1.4,[3,3]);txt(gx+gw*.55+4,gy+gh-10,"stop",{size:11.5,weight:600});
+  if(cur>.7){label(gx+gw*.82,Y(212),"stopped suddenly",{size:12,weight:700,border:C.bad});label(gx+gw*.84,Y(150)+18,"tapered",{size:12,weight:700,border:C.good})}
+  face(476,380,36,{t:T});ell(476,393,9,4,0,hexA(C.panel,.9));txt(500,346,"z z",{size:13,weight:700,color:C.accent});
+  txt(530,372,"Side effects: dry mouth,",{size:12.5,weight:700});txt(530,392,"drowsiness, dizziness",{size:12.5,weight:700});txt(530,414,"Taper; never stop suddenly",{size:12.5,color:C.bad,weight:700});
+}
+
+/* ================= Part 5 ================= */
+function sceneAlphaBlock(T){
+  const p=smooth(seg(P(T,12),.06,.4));
+  panelBox(12,12,254,456);title(26,32,"Prazosin: vessels");
+  const w=lerp(18,36,p);vesselTube(26,252,170,w,T,{speed:40});
+  [70,139,208].forEach((x,i)=>{receptor(x,170-w/2-8,"a1",{s:.6,dir:-1,label:false,blocked:p>.3,x:false});if(p>.3)lig("ant",x,170-w/2-2,5);
+    const q=P(T+i*.4,1.8);if(q<.6){const by=p>.3?lerp(80,150-w/2,seg(q,0,.3))-Math.sin(seg(q,.3,.6)*Math.PI)*30:lerp(80,150-w/2,seg(q,0,.4));lig("ne",x+(p>.3?seg(q,.3,.6)*30:0),by,5)}});
+  txt(139,232,p>.5?"vessel relaxes":"α1 squeezes the vessel",{size:12.5,weight:700,align:"center"});
+  txt(139,280,"BP "+Math.round(lerp(158,132,p))+"/"+Math.round(lerp(96,82,p)),{size:20,mono:true,weight:700,align:"center"});
+  wrapText("Also: dizziness, stuffy nose, faster pulse (reflex)",26,330,226,17,{size:12.5,color:C["ink-soft"]});
+  panelBox(278,12,254,456);title(292,32,"Tamsulosin: prostate");
+  bladder(405,130,58,.6,p*.3,{closed:false,flow:lerp(.4,1.2,p),t:T});prostateIcon(405,226,56,p);
+  txt(405,300,p>.5?"channel opens: better stream":"BPH squeezes the urethra",{size:12.5,weight:700,align:"center"});
+  wrapText("Prefers α1 receptors in the prostate and bladder neck, so blood pressure changes less.",292,338,226,17,{size:12.5,color:C["ink-soft"]});
+  panelBox(544,12,244,456);title(558,32,"First-dose effect");
+  const q=P(T,12);const stand=smooth(seg(q,.25,.4)),fall=smooth(seg(q,.45,.6))*(1-smooth(seg(q,.75,.8)));
+  if(q<.75){if(stand<1){person(666,lerp(150,170,stand),1.05,{rot:lerp(-Math.PI/2,0,stand)})}else{person(666+fall*20,170,1.05,{rot:fall*.9})}
+    if(fall>.2){for(let i=0;i<4;i++){const a=T*3+i*1.6;txt(650+Math.cos(a)*24,90+Math.sin(a)*8,"*",{size:16,weight:700,color:C.gold})}}}
+  else{moon(626,106,22);wrapText("First dose at bedtime. Sit, then stand slowly.",590,160,180,18,{size:13,weight:700})}
+  const gx=566,gy=260,gw=200,gh=110;graphAxes(gx,gy,gw,gh,"time","BP");
+  plotFn(t=>t<.3?120:t<.45?lerp(120,82,smooth(seg(t,.3,.42))):lerp(82,112,smooth(seg(t,.55,.9))),0,1,gx,gy,gw,gh,60,140,C["mon-bp"],2.5,null,q);
+  txt(gx+gw*.38,gy+gh+30,"stands up",{size:12,weight:600,align:"center"});
+  if(fall>.3)label(666,420,"fall risk",{size:13,weight:700,border:C.bad});
+}
+function betaRow(x,y,w,T,drug,lab){const hr=drug?64:100;panelBox(x,y,w,214);title(x+14,y+20,lab);
+  membrane(x+14,x+210,y+130,{h:12});[54,112,170].forEach((dx,i)=>{const rx=x+dx;receptor(rx,y+132,"b1",{s:.75,active:!drug,blocked:drug,x:false,labDy:26});
+    if(drug)lig("ant",rx,y+126,6);const q=P(T+i*.5,1.4);const typ=i===1?"epi":"ne";
+    if(!drug){if(q<.85)lig(typ,rx,lerp(y+40,y+124,smooth(seg(q,0,.4))),5.5)}else{const f=seg(q,0,.35),b=seg(q,.35,.7);if(q<.75)lig(typ,rx+b*28,lerp(y+40,y+112,f)-Math.sin(b*Math.PI)*36,5.5,1-seg(q,.6,.75))}});
+  rr(x+228,y+40,w-244,100,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+232,y+42,w-252,96,hr,T,C["mon-hr"]);
+  txt(x+228,y+168,"HR "+hr,{size:20,mono:true,weight:700});txt(x+330,y+168,drug?"slower, softer beats":"fast, forceful beats",{size:12.5,weight:600})}
+function sceneBeta(T){
+  betaRow(12,12,456,T,false,"No drug: β1 receptors open");betaRow(12,254,456,T,true,"With metoprolol: β1 blocked");
+  panelBox(480,12,308,456);title(494,32,"Selective or not?");
+  const rows=[["Propranolol","nonselective: β1 + β2",true],["Metoprolol, atenolol","cardioselective: β1",false]];
+  rows.forEach((r,i)=>{const y=66+i*204;txt(494,y,r[0],{size:15,weight:700});txt(494,y+20,r[1],{size:12.5,color:C["ink-soft"]});
+    heart(552,y+92,30,T,64,{ring:false});receptor(552,y+150,"b1",{s:.7,blocked:true,x:false,labDy:24});lig("ant",552,y+145,5.5);
+    const tight=r[2];bronchiole(704,y+92,40,tight?.18+.04*Math.sin(T*3):.75);receptor(704,y+150,"b2",{s:.7,blocked:tight,x:false,active:!tight,labDy:24});if(tight)lig("ant",704,y+145,5.5);
+    txt(704,y+40,tight?"airway narrows":"airway stays open",{size:12,weight:700,align:"center",color:tight?C.bad:C.good})});
+}
+function sceneBetaCare(T){
+  const tiles=[[12,12,"Asthma: bronchospasm"],[404,12,"Diabetes: hidden lows"],[12,246,"Hold parameters"],[404,246,"Do not stop suddenly"]];
+  tiles.forEach(t=>{panelBox(t[0],t[1],384,222);title(t[0]+14,t[1]+20,t[2])});
+  {const x=12,y=12,p=smooth(seg(P(T,6),.1,.6));bronchiole(x+110,y+116,56,lerp(.7,.12,p));receptor(x+110,y+200,"b2",{s:.65,blocked:true,x:false,labDy:-22});lig("ant",x+110,y+196,5);
+   if(p>.4){for(let i=0;i<3;i++){ctx.beginPath();for(let k=0;k<=16;k++){const X=x+196+k*5,Y=y+100+i*16+Math.sin(k*1.2+T*6)*4;k?ctx.lineTo(X,Y):ctx.moveTo(X,Y)}ctx.strokeStyle=C.bad;ctx.lineWidth=2;ctx.stroke()}txt(x+236,y+160,"wheeze",{size:13,weight:700,color:C.bad,align:"center"})}
+   wrapText("Nonselective blockers are generally avoided in asthma.",x+196,y+186,176,15,{size:12})}
+  {const x=404,y=12;rr(x+20,y+44,100,140,12);fillStroke(C.panel,C["ink-soft"],1.6);rr(x+30,y+56,80,50,6);ctx.fillStyle=hexA(C.bad,.15);ctx.fill();txt(x+70,y+76,"54",{size:24,mono:true,weight:700,align:"center",color:C.bad});txt(x+70,y+96,"mg/dL LOW",{size:11,mono:true,weight:700,align:"center",color:C.bad});
+   rr(x+136,y+44,232,56,6);ctx.fillStyle=C.mon;ctx.fill();ecg(x+140,y+46,170,52,58,T,C["mon-hr"]);txt(x+356,y+72,"58",{size:16,mono:true,weight:700,color:C["mon-hr"],align:"right"});
+   txt(x+136,y+116,"no racing pulse warning",{size:12,weight:600});hand(x+180,y+168,34,0,T);txt(x+222,y+168,"no tremor",{size:12,weight:600});
+   for(let i=0;i<3;i++){const p2=(T*.6+i*.33)%1;sweatDrop(x+300+i*16,y+150+p2*20,3.4,hexA(C.sweat,1-p2*.5))}txt(x+310,y+196,"sweat still shows",{size:12,weight:700,align:"center"})}
+  {const x=12,y=246;const q=P(T,8);circ(x+80,y+120,46,C.skin,C["skin-edge"],2);heart(x+80,y+120,20,T,52,{ring:false});
+   line(x+110,y+90,x+170,y+70,C["ink-soft"],3);circ(x+110,y+92,10,C.steel||C["ink-soft"],C["ink-soft"],2);
+   ctx.beginPath();ctx.arc(x+230,y+120,40,-Math.PI/2,-Math.PI/2+TAU*q);ctx.strokeStyle=C.accent;ctx.lineWidth=6;ctx.stroke();circ(x+230,y+120,40,null,hexA(C.accent,.25),6);
+   txt(x+230,y+112,Math.round(q*60)+" s",{size:15,mono:true,weight:700,align:"center"});txt(x+230,y+132,"full minute",{size:11.5,align:"center",color:C["ink-soft"]});
+   txt(x+300,y+100,"Apical",{size:12.5,weight:600});txt(x+300,y+124,"52",{size:24,mono:true,weight:700,color:C.bad});
+   label(x+192,y+194,"Pulse below 60: hold and report, per order",{size:12.5,weight:700,border:C.bad})}
+  {const x=404,y=246;const gx=x+44,gy=y+44,gw=310,gh=128;graphAxes(gx,gy,gw,gh,"days","heart rate and BP");const q=P(T,9);
+   line(gx+gw*.4,gy,gx+gw*.4,gy+gh,C["ink-soft"],1.2,[3,3]);txt(gx+gw*.4+4,gy+gh-8,"stop",{size:11.5,weight:600});
+   plotFn(t=>t<.4?.35:lerp(.35,.95,smooth(seg(t,.4,.55)))-.1*seg(t,.7,1),0,1,gx,gy,gw,gh,0,1,C.bad,2.5,[6,4],q);
+   plotFn(t=>t<.4?.35:lerp(.35,.5,smooth(seg(t,.4,1))),0,1,gx,gy,gw,gh,0,1,C.good,2.5,null,q);
+   if(q>.6){label(gx+gw*.8,gy+38,"abrupt stop: rebound",{size:12,weight:700,border:C.bad});label(gx+gw*.82,gy+gh*.78,"taper",{size:12,weight:700,border:C.good});
+     heartPath(gx+gw*.5,gy+gh+28,9);fillStroke(C.bad);txt(gx+gw*.5+16,gy+gh+28,"chest pain, fast heart",{size:12,weight:700,color:C.bad})}}
+}
+function sceneRecap(T){
+  const L=3,lit=Math.floor(T/L)%4;
+  const Q=[["Cholinergic","act2",["bethanechol","neostigmine, pyridostigmine","donepezil"],"Too much: SLUDGE, killer Bs","Antidote: atropine (+ pralidoxime for organophosphates)"],
+           ["Anticholinergic","act3",["atropine, scopolamine","oxybutynin","ipratropium"],"Dry, hot, red, fast, retained, confused","Antidote: physostigmine; caution in older adults"],
+           ["Adrenergic agonists","act4",["epinephrine, norepinephrine","dopamine, dobutamine","phenylephrine, albuterol, clonidine"],"α1 squeeze, β1 heart, β2 airways","Extravasation: phentolamine; taper clonidine"],
+           ["Adrenergic blockers","act5",["prazosin, tamsulosin","propranolol","metoprolol, atenolol"],"-zosin: first-dose fall; -olol: slow heart","Hold if pulse below 60 (per order); taper"]];
+  Q.forEach((q,i)=>{const x=12+(i%2)*394,y=12+Math.floor(i/2)*234,on=i===lit;panelBox(x,y,382,222,{stroke:on?C[q[1]]:C.rule,lw:on?3:1.2,fill:hexA(C.panel,on?.98:.75)});
+    rr(x,y,382,34,8);ctx.fillStyle=hexA(C[q[1]],on?.3:.14);ctx.fill();txt(x+14,y+17,q[0].toUpperCase(),{size:13,mono:true,weight:700});
+    q[2].forEach((d,j)=>{circ(x+22,y+54+j*22,4,C[q[1]]);txt(x+32,y+54+j*22,d,{size:13,weight:600})});
+    txt(x+14,y+136,q[3],{size:12.5,weight:700});wrapText(q[4],x+14,y+160,250,16,{size:12.5,color:C["ink-soft"]});
+    const ix=x+322,iy=y+86;
+    if(i===0){heart(ix,iy-6,22,T,50,{ring:false});drops(ix,iy+20,3,T,C.sweat,20,3)}
+    if(i===1){thermo(ix,iy-36,60,.85,C.bad);mouthIcon(ix-40,iy+36,14,0,T)}
+    if(i===2){vesselX(ix-26,iy,20,.8,{t:T});bronchiole(ix+22,iy+30,20,.9)}
+    if(i===3){rr(ix-46,iy-14,92,40,5);ctx.fillStyle=C.mon;ctx.fill();ecg(ix-44,iy-12,88,36,58,T,C["mon-hr"])}});
+}
+
+/* ---------------- loop ---------------- */
+let T=0,last=performance.now();
+const SCENES={map:sceneMap,branches:sceneBranches,wiring:sceneWiring,receptors:sceneReceptors,agonist:sceneAgonist,
+  bethanechol:sceneBethanechol,mg:sceneMG,sludge:sceneSludge,op:sceneOP,antidote:sceneAntidote,crisis:sceneCrisis,
+  antimusc:sceneAntimusc,anticholfx:sceneAnticholFx,elderly:sceneElderly,
+  selectivity:sceneSelectivity,epi:sceneEpi,shock:sceneShock,extrav:sceneExtrav,phenyalb:scenePhenyAlb,clonidine:sceneClonidine,
+  alphablock:sceneAlphaBlock,beta:sceneBeta,betacare:sceneBetaCare,recap:sceneRecap};
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);ctx.clearRect(0,0,W,H);ctx.globalAlpha=1;bg(C.ecf);
+  const s=STEPS[cur];
+  try{(SCENES[s.scene]||sceneRecap)(T)}catch(e){console.error(e)}
+  ctx.globalAlpha=1;
+}
+function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;if(!paused)T+=dt*speed;
+  draw();
+  requestAnimationFrame(frame);
+}
+window.__setT=v=>{T=v;paused=true;draw()};
+window.__go=i=>go(i);
+window.__n=()=>STEPS.length;
+readColors();buildChain();fit();render();requestAnimationFrame(frame);
+
+})();
+</script>
+</body>
+</html>
